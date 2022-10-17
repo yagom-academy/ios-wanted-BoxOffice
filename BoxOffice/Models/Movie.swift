@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Movie: Decodable {
+struct Movie: Decodable, Hashable {
 
     // MARK: Properties
 

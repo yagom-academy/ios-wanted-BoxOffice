@@ -17,7 +17,7 @@ final class MovieListViewController: UIViewController {
     // MARK: Properties
 
     private let movieSearchService = MovieSearchService()
-    private var movieList: [Movie] = []
+    private var movies: [Movie] = []
 
     // MARK: View Life Cycle
 
@@ -27,8 +27,19 @@ final class MovieListViewController: UIViewController {
         // TODO: 데이터요청
     }
 
+    // MARK: - Navigation
 
-    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destination = segue.destination as? MovieDetailViewController,
+              let indexPath = tableView.indexPathForSelectedRow else { return }
+        let movie = movies[indexPath.row]
+        destination.movie = movie
+    }
+
+    // MARK: Action Handler
+
+    @IBAction
+    private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         Logger.ui.debug("\(#function) \(sender.selectedSegmentIndex)")
 
         guard let selectedDuration = DurationUnit(rawValue: sender.selectedSegmentIndex) else { return }
@@ -40,14 +51,14 @@ final class MovieListViewController: UIViewController {
 extension MovieListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        movieList.count
+        movies.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieListTableViewCell.reuseIdentifier, for: indexPath) as? MovieListTableViewCell else {
             return UITableViewCell()
         }
-        let movie = movieList[indexPath.row]
+        let movie = movies[indexPath.row]
         cell.rankingLabel.text = movie.ranking.string
         cell.nameLabel.text = movie.name
         cell.openDateLabel.text = "\(movie.openDate.dateString()) 개봉"
@@ -65,13 +76,4 @@ extension MovieListViewController: UITableViewDataSource {
         return cell
     }
 
-}
-
-extension MovieListViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let movie = movieList[indexPath.row]
-        // TODO: 두번째화면으로 이동
-    }
-    
 }

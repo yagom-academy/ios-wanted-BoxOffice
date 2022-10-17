@@ -133,12 +133,12 @@
                                             <outlet property="numberOfMoviegoersLabel" destination="FEm-Jj-P7d" id="bqD-aT-qkp"/>
                                             <outlet property="openDateLabel" destination="Vs0-xc-Wc7" id="EDQ-Y2-Dde"/>
                                             <outlet property="rankingLabel" destination="FEF-Wq-ttP" id="prD-A4-yVJ"/>
+                                            <segue destination="adE-dr-H6b" kind="show" id="84B-Vn-PZN"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="dkJ-hd-WQv"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="s3f-Cp-efY"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -171,6 +171,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="976.92307692307691" y="-2.1327014218009479"/>
+        </scene>
+        <!--Movie Detail View Controller-->
+        <scene sceneID="owN-xA-2H0">
+            <objects>
+                <viewController id="adE-dr-H6b" customClass="MovieDetailViewController" customModule="BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YBn-Uu-MCj">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oPz-96-hbh">
+                                <rect key="frame" x="0.0" y="91" width="390" height="719"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ldk-JM-dei">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="adE-dr-H6b" id="GgJ-eJ-vc1"/>
+                                    <outlet property="delegate" destination="adE-dr-H6b" id="672-0V-e32"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="H3F-lW-fuw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="oPz-96-hbh" firstAttribute="top" secondItem="H3F-lW-fuw" secondAttribute="top" id="NUG-7X-qDs"/>
+                            <constraint firstItem="H3F-lW-fuw" firstAttribute="bottom" secondItem="oPz-96-hbh" secondAttribute="bottom" id="Y37-pY-64I"/>
+                            <constraint firstItem="H3F-lW-fuw" firstAttribute="trailing" secondItem="oPz-96-hbh" secondAttribute="trailing" id="dB2-ct-8QC"/>
+                            <constraint firstItem="oPz-96-hbh" firstAttribute="leading" secondItem="H3F-lW-fuw" secondAttribute="leading" id="tM7-pq-bWP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="qWB-Kn-6hW"/>
+                    <connections>
+                        <outlet property="collectionView" destination="oPz-96-hbh" id="wrX-18-FfP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gnr-t1-Q99" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1845" y="-2"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5RQ-yg-Hye">
