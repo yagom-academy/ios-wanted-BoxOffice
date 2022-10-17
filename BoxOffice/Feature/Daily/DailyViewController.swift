@@ -22,7 +22,15 @@ final class DailyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        apiService.getRequestData(type: .daily)
+        apiService.getRequestData(
+            type: DailyBoxOfficeResultResponse.self,
+            path: "searchDailyBoxOfficeList.json",
+            parameters: [
+                "key": "f5eef3421c602c6cb7ea224104795888",
+                "targetDt": "20120101",
+                "wideAreaCd": "0105001"
+            ]
+        )
     }
     
     func setupUI() {

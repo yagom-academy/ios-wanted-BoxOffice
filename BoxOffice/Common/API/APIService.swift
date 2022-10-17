@@ -9,17 +9,20 @@ import Foundation
 
 final class ApiService {
     
-    func getRequestData(type: ListType) {
-        let url = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/"
-        let key = "12429f4fc25fcfcef21b71215d8dabc1"
-        let targetDt = Date().dateString
-        let wideAreaCd = "0105001"  // 서울코드
+    func getRequestData<T: Codable>(type: T.Type, path: String, parameters: [String: Any]? = nil) {
+        let baseURL = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/"
+        let urlString = baseURL + path
         
-        let urlString = "\(url)search\(type.rawValue)BoxOfficeList.json?key=\(key)&targetDt=\(targetDt)&wideAreaCd=\(wideAreaCd)"
+        guard var urlComponents = URLComponents(string: urlString) else { return }
+        if let parameters = parameters {
+            let urlQueryItemList = parameters.compactMap { URLQueryItem(name: $0.key, value: String(describing: $0.value)) }
+            
+            urlComponents.queryItems = urlQueryItemList
+        }
         
-        guard let url = URL(string: urlString) else { return }
+        guard let url = urlComponents.url else { return }
         let session = URLSession(configuration: .default)
-        
+        print(#function, url)
         session.dataTask(with: url) { data, response, error in
             if let error = error {
                 print(error.localizedDescription)
@@ -29,8 +32,13 @@ final class ApiService {
             if let data = data,
                let httpResponse = response as? HTTPURLResponse,
                httpResponse.statusCode.isSuccessCode {
-                // TODO: data decording
-                print(#function, data)
+                do {
+                    let list = try JSONDecoder().decode(type.self, from: data)
+                    print(#function, list)
+                } catch(let error) {
+                    print(String(describing: error))
+                    return
+                }
             }
         }.resume()
     }
