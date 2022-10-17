@@ -11,10 +11,18 @@ final class DailyViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    let apiService = ApiService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        apiService.getRequestData(type: .daily)
     }
     
     func setupUI() {
