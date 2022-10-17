@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import OSLog
 
 final class MovieListViewController: UIViewController {
 
@@ -22,6 +23,16 @@ final class MovieListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        // TODO: 데이터요청
+    }
+
+
+    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        Logger.ui.debug("\(#function) \(sender.selectedSegmentIndex)")
+
+        guard let selectedDuration = DurationUnit(rawValue: sender.selectedSegmentIndex) else { return }
+        // TODO: 데이터요청
     }
 
 }

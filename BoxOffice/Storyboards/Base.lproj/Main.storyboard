@@ -159,6 +159,9 @@
                                 <segment title="일별"/>
                                 <segment title="주간/주말"/>
                             </segments>
+                            <connections>
+                                <action selector="segmentedControlValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="aml-qz-x4S"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
                     <connections>
