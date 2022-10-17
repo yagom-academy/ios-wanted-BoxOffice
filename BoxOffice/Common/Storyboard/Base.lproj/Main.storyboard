@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OMU-bB-lr7">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,23 +9,157 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Tab Bar Controller-->
+        <scene sceneID="c8s-s0-mg2">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <tabBarController id="OMU-bB-lr7" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="lHx-vM-Lh8"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="p9a-fj-KrA">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="wTx-56-BVV" kind="relationship" relationship="viewControllers" id="rSa-3d-JXo"/>
+                        <segue destination="mjC-ho-42E" kind="relationship" relationship="viewControllers" id="rfU-Rl-lEm"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PX6-39-f89" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1318" y="1353"/>
+        </scene>
+        <!--Daily-->
+        <scene sceneID="yT9-Gt-Vka">
+            <objects>
+                <navigationController id="wTx-56-BVV" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Daily" image="list.number" catalog="system" id="acl-72-fSp"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Thi-7D-zda">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="LAW-m4-Rfo" kind="relationship" relationship="rootViewController" id="B20-as-Kl9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rx6-p9-Xoy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-169" y="946"/>
+        </scene>
+        <!--Daily-->
+        <scene sceneID="buu-Pg-94C">
+            <objects>
+                <viewController id="LAW-m4-Rfo" customClass="DailyViewController" customModule="BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="15v-TW-qm2">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uGZ-GH-34g">
+                                <rect key="frame" x="0.0" y="91" width="390" height="670"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uXZ-n5-Gso">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="9SE-Dz-1bN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uGZ-GH-34g" firstAttribute="top" secondItem="9SE-Dz-1bN" secondAttribute="top" id="UD5-yN-krj"/>
+                            <constraint firstItem="9SE-Dz-1bN" firstAttribute="trailing" secondItem="uGZ-GH-34g" secondAttribute="trailing" id="h7R-2f-jZp"/>
+                            <constraint firstItem="uGZ-GH-34g" firstAttribute="leading" secondItem="9SE-Dz-1bN" secondAttribute="leading" id="phB-gl-dqF"/>
+                            <constraint firstItem="9SE-Dz-1bN" firstAttribute="bottom" secondItem="uGZ-GH-34g" secondAttribute="bottom" id="rpK-cX-Gqm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Daily" id="ozI-IK-8xt"/>
+                    <connections>
+                        <segue destination="Arw-ko-DA3" kind="show" identifier="" id="9PJ-wt-PsC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rhV-Vn-pbH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="852" y="945"/>
+        </scene>
+        <!--Weekly-->
+        <scene sceneID="wWD-qI-mxL">
+            <objects>
+                <navigationController id="mjC-ho-42E" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Weekly" image="list.number" catalog="system" id="rZZ-7O-Rta"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="npk-Q3-uta">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ihQ-ai-FUz" kind="relationship" relationship="rootViewController" id="r9l-mc-krX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dVe-Pp-11e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-169" y="1762"/>
+        </scene>
+        <!--Weekly-->
+        <scene sceneID="8l6-2D-NQ3">
+            <objects>
+                <viewController id="ihQ-ai-FUz" customClass="WeeklyViewController" customModule="BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="10t-Lq-b5F">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="V9l-KI-05y">
+                                <rect key="frame" x="0.0" y="91" width="390" height="670"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6ZC-9G-4sT">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wsa-t1-jS6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="V9l-KI-05y" firstAttribute="top" secondItem="wsa-t1-jS6" secondAttribute="top" id="3En-1F-bwo"/>
+                            <constraint firstItem="V9l-KI-05y" firstAttribute="leading" secondItem="wsa-t1-jS6" secondAttribute="leading" id="ONJ-Gx-dee"/>
+                            <constraint firstItem="wsa-t1-jS6" firstAttribute="trailing" secondItem="V9l-KI-05y" secondAttribute="trailing" id="daL-H4-A51"/>
+                            <constraint firstItem="wsa-t1-jS6" firstAttribute="bottom" secondItem="V9l-KI-05y" secondAttribute="bottom" id="msZ-88-tkX"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Weekly" id="fbE-nl-Xlo"/>
+                    <connections>
+                        <segue destination="Arw-ko-DA3" kind="show" identifier="" id="xpL-oE-EF6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Jc-Cj-cme" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="851" y="1762"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="fqo-v9-BXZ">
+            <objects>
+                <viewController id="Arw-ko-DA3" customClass="DetailViewController" customModule="BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ifo-W7-b2A">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="m3l-Cd-JpW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="OIP-8q-HqX"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ar3-yM-EdT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="128" y="-2"/>
+            <point key="canvasLocation" x="1975" y="1353"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="xpL-oE-EF6"/>
+    </inferredMetricsTieBreakers>
     <resources>
+        <image name="list.number" catalog="system" width="128" height="97"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
