@@ -299,6 +299,22 @@
             </objects>
             <point key="canvasLocation" x="976.92307692307691" y="-2.1327014218009479"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="Ngd-sT-pZP">
+            <objects>
+                <viewController id="rnt-ZA-tD7" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="66F-5z-VfY">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Oos-CO-leH"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="QX3-Ay-Vrs"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r2H-VN-Lb0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2015.3846153846152" y="786.96682464454977"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="qWV-CG-21T">
             <objects>
@@ -310,14 +326,35 @@
                     </tabBar>
                     <connections>
                         <segue destination="exB-en-rLv" kind="relationship" relationship="viewControllers" id="lmf-ZP-6OG"/>
+                        <segue destination="6rh-qs-ggK" kind="relationship" relationship="viewControllers" id="cef-9o-DdM"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ubh-04-mK9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="47.692307692307693" y="-2.1327014218009479"/>
         </scene>
+        <!--테스트용-->
+        <scene sceneID="Vty-9T-mcK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6rh-qs-ggK" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="테스트용" image="pencil.circle" catalog="system" id="eAR-AA-jrA"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0in-e7-5fj">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rnt-ZA-tD7" kind="relationship" relationship="rootViewController" id="nZj-0C-6GL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gPu-TR-JAu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1086.1538461538462" y="786.96682464454977"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="pencil.circle" catalog="system" width="128" height="123"/>
         <image name="ticket" catalog="system" width="128" height="86"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
