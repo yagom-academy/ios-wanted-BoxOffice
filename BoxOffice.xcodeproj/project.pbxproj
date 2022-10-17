@@ -56,15 +56,39 @@
 		635A19E628F9603900197BCC /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
+				D38B417C28FD23CC00EF4A3A /* Storyboard */,
+				D38B417A28FD236C00EF4A3A /* MainViewController */,
+				D38B417B28FD237400EF4A3A /* Etc */,
+			);
+			path = BoxOffice;
+			sourceTree = "<group>";
+		};
+		D38B417A28FD236C00EF4A3A /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				635A19EB28F9603900197BCC /* ViewController.swift */,
+			);
+			path = MainViewController;
+			sourceTree = "<group>";
+		};
+		D38B417B28FD237400EF4A3A /* Etc */ = {
+			isa = PBXGroup;
+			children = (
 				635A19E728F9603900197BCC /* AppDelegate.swift */,
 				635A19E928F9603900197BCC /* SceneDelegate.swift */,
-				635A19EB28F9603900197BCC /* ViewController.swift */,
-				635A19ED28F9603900197BCC /* Main.storyboard */,
 				635A19F028F9603A00197BCC /* Assets.xcassets */,
 				635A19F228F9603A00197BCC /* LaunchScreen.storyboard */,
 				635A19F528F9603A00197BCC /* Info.plist */,
 			);
-			path = BoxOffice;
+			name = Etc;
+			sourceTree = "<group>";
+		};
+		D38B417C28FD23CC00EF4A3A /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				635A19ED28F9603900197BCC /* Main.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
