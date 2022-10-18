@@ -9,6 +9,11 @@ import UIKit
 
 class MovieListViewController: UIViewController {
 
+  private var networkManager = NetworkManager()
+  private var dailyList = [DailyListObject?](repeating: nil, count: 10)
+  private var movieInfoList = [MovieInfo?](repeating: nil, count: 10)
+  private var movieCount = 0
+
   let segmentedControl: UISegmentedControl = {
     let sc = UISegmentedControl(items: ["일별", "주간"])
     sc.selectedSegmentIndex = 0
@@ -38,10 +43,12 @@ class MovieListViewController: UIViewController {
 
     tableView.delegate = self
     tableView.dataSource = self
+    networkManager.delegate = self
 
     addViews()
     addTargets()
     setConstraints()
+    networkManager.fetchBoxOffice(targetDate: "20221018", type: .daily)
   }
 }
 
@@ -81,10 +88,11 @@ extension MovieListViewController {
   }
 }
 
+// MARK: - TableView Delegate, Datasource
 extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 5
+    return movieCount
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -93,6 +101,27 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     else { return UITableViewCell() }
 
     return cell
+  }
+}
+
+extension MovieListViewController: NetworkDelegate {
+  func didUpdateBoxOfficeList(_ _dailyList: [DailyListObject]) {
+    movieCount = _dailyList.count
+
+    _dailyList.forEach {
+      let i = Int($0.rank)! - 1
+      dailyList[i] = $0
+    }
+
+    for i in 0 ..< 10 {
+      guard let movieCode = dailyList[i]?.movieCd else { break }
+
+      networkManager.fetchMovieInfo(movieCode: movieCode, index: i)
+    }
+  }
+
+  func didUpdateMovieInfo(_ _movieInfo: MovieInfo, _ index: Int) {
+    movieInfoList[index] = _movieInfo
   }
 }
 

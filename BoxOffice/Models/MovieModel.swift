@@ -9,13 +9,17 @@ import Foundation
 
 // MARK: - Kobis API JSON Response
 
-struct DailyBoxOfficeResult {
-  let boxofficeType: String
-  let showRange: String
-  let daliyBoxOfficeList: [DailyListObject]
+struct DailyBoxOfficeResult: Codable {
+  let boxOfficeResult: DailyResult
 }
 
-struct DailyListObject {
+struct DailyResult: Codable {
+  let boxofficeType: String
+  let showRange: String
+  let dailyBoxOfficeList: [DailyListObject]
+}
+
+struct DailyListObject: Codable {
   let rank: String
   let rankInten: String
   let rankOldAndNew: String
@@ -25,38 +29,43 @@ struct DailyListObject {
   let audiCnt: String
 }
 
-struct MovieDetailResult {
-  let movieInfoResult: MovieInfo
+struct MovieDetailResult: Codable {
+  let movieInfoResult: MovieInfoObject
 }
 
-struct MovieInfo {
-  let prdYear: String
+struct MovieInfoObject: Codable {
+  let movieInfo: MovieInfo
+}
+
+struct MovieInfo: Codable {
+  let movieNmEn: String
+  let prdtYear: String
   let showTm: String
-  let genres: Genre
+  let genres: [Genre]
   let directors: [Director]
   let actors: [Actor]
-  let audits: Audit
+  let audits: [Audit]
 }
 
-struct Genre {
+struct Genre: Codable {
   let genreNm: String
 }
 
-struct Director {
+struct Director: Codable {
   let peopleNm: String
 }
 
-struct Actor {
+struct Actor: Codable {
   let peopleNm: String
   let cast: String
 }
 
-struct Audit {
+struct Audit: Codable {
   let watchGradeNm: String
 }
 
 // MARK: - OMDb API JSON Response
 
-struct OMDbResult {
+struct OMDbResult: Codable {
   let Poster: String
 }
