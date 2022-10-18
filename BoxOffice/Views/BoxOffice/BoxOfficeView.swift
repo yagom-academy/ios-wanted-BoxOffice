@@ -59,7 +59,7 @@ extension BoxOfficeView: UITableViewDelegate, UITableViewDataSource {
         cell.posterImageView.image = UIImage(named: "image")
         cell.rankOldAndNew.text = "New"
         cell.movieName.text = "영화이름"
-        cell.openDate.text = "2022-10-12"
+        cell.openDate.text = "2022-10-13"
         cell.boxOfficeRank.text = "1"
         cell.rankInten.text = "-1"
         cell.audiAcc.text = "820만"
