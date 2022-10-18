@@ -7,11 +7,6 @@
 
 import UIKit
 
-enum RankNewStatus: String {
-    case new = "NEW"
-    case old = "OLD"
-}
-
 final class MovieListCell: UICollectionViewCell {
     private let boxOfficeRank: UILabel = {
         let label = UILabel()
@@ -25,7 +20,7 @@ final class MovieListCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .semibold)
         label.textAlignment = .center
-        label.text = RankNewStatus.new.rawValue
+        label.text = RankOldAndNew.new.rawValue
         return label
     }()
     
@@ -77,12 +72,21 @@ final class MovieListCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(_ data: MovieListModel) {
+        self.boxOfficeRank.text = data.rank
+        self.rankOldAndNew.text = data.rankOldAndNew
+        self.rankInten.text = data.audienceInten
+        self.movieTitle.text = data.movieName
+        self.openDate.text = data.openDate
+        self.audienceCount.text = data.audienceCount
+    }
+    
+    // MARK: - private
     private func configureUI() {
         self.contentView.layer.cornerRadius = 10 //안먹음
         self.contentView.clipsToBounds = true
         self.backgroundColor = .systemGray6
     }
-    
    
     private func setupLayouts() {
         [self.boxOfficeRank, self.rankOldAndNew, self.rankInten].forEach {
