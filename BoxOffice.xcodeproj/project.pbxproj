@@ -18,6 +18,12 @@
 		367520EB28FE7F1A0010437F /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520EA28FE7F1A0010437F /* UIImage+Extension.swift */; };
 		367520ED28FE7F5B0010437F /* CacheImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520EC28FE7F5B0010437F /* CacheImageView.swift */; };
 		367520F028FE801F0010437F /* MovieEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520EF28FE801F0010437F /* MovieEntity.swift */; };
+		367520F228FE8C060010437F /* FirstContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520F128FE8C050010437F /* FirstContentView.swift */; };
+		367520F428FE8C180010437F /* FirstContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520F328FE8C180010437F /* FirstContentViewModel.swift */; };
+		367520F828FE8CF40010437F /* FirstMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520F728FE8CF40010437F /* FirstMovieCell.swift */; };
+		367520FA28FE8E980010437F /* FirstMovieCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520F928FE8E980010437F /* FirstMovieCellModel.swift */; };
+		367520FC28FE8FA20010437F /* MovieCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520FB28FE8FA20010437F /* MovieCellView.swift */; };
+		367520FE28FE948D0010437F /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520FD28FE948D0010437F /* UIFont+Extension.swift */; };
 		4CEA381E28FD570F007B86EE /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEA381D28FD570F007B86EE /* SecondViewController.swift */; };
 		4CEA382028FD571B007B86EE /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEA381F28FD571B007B86EE /* ThirdViewController.swift */; };
 		4CEA382528FD5746007B86EE /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEA382428FD5746007B86EE /* Routable.swift */; };
@@ -57,6 +63,12 @@
 		367520EA28FE7F1A0010437F /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		367520EC28FE7F5B0010437F /* CacheImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImageView.swift; sourceTree = "<group>"; };
 		367520EF28FE801F0010437F /* MovieEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieEntity.swift; sourceTree = "<group>"; };
+		367520F128FE8C050010437F /* FirstContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstContentView.swift; sourceTree = "<group>"; };
+		367520F328FE8C180010437F /* FirstContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstContentViewModel.swift; sourceTree = "<group>"; };
+		367520F728FE8CF40010437F /* FirstMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMovieCell.swift; sourceTree = "<group>"; };
+		367520F928FE8E980010437F /* FirstMovieCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMovieCellModel.swift; sourceTree = "<group>"; };
+		367520FB28FE8FA20010437F /* MovieCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellView.swift; sourceTree = "<group>"; };
+		367520FD28FE948D0010437F /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		4CEA381D28FD570F007B86EE /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		4CEA381F28FD571B007B86EE /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		4CEA382428FD5746007B86EE /* Routable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
@@ -118,6 +130,14 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		367520FF28FE94B50010437F /* FirstVCRelated */ = {
+			isa = PBXGroup;
+			children = (
+				4CEA384C28FD5C7B007B86EE /* FirstViewStyling.swift */,
+			);
+			path = FirstVCRelated;
+			sourceTree = "<group>";
+		};
 		4CEA381C28FD56EE007B86EE /* AppRelated */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,9 +150,9 @@
 		4CEA382128FD5721007B86EE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4CEA382B28FD5826007B86EE /* FirstVCRelated */,
 				4CEA382D28FD5835007B86EE /* ThirdVCRelated */,
 				4CEA382C28FD582E007B86EE /* SecondVCRelated */,
-				4CEA382B28FD5826007B86EE /* FirstVCRelated */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -159,7 +179,7 @@
 			children = (
 				4CEA384828FD5C48007B86EE /* Presentable.swift */,
 				4CEA384A28FD5C64007B86EE /* Styling.swift */,
-				4CEA384C28FD5C7B007B86EE /* FirstViewStyling.swift */,
+				367520FF28FE94B50010437F /* FirstVCRelated */,
 			);
 			path = ViewDraw;
 			sourceTree = "<group>";
@@ -167,9 +187,9 @@
 		4CEA382A28FD581D007B86EE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4CEA382E28FD583E007B86EE /* FirstVCRelated */,
 				4CEA383028FD5849007B86EE /* ThirdVCRelated */,
 				4CEA382F28FD5844007B86EE /* SecondVCRelated */,
-				4CEA382E28FD583E007B86EE /* FirstVCRelated */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -178,6 +198,9 @@
 			isa = PBXGroup;
 			children = (
 				635A19EB28F9603900197BCC /* FirstViewController.swift */,
+				367520F128FE8C050010437F /* FirstContentView.swift */,
+				367520F728FE8CF40010437F /* FirstMovieCell.swift */,
+				367520FB28FE8FA20010437F /* MovieCellView.swift */,
 			);
 			path = FirstVCRelated;
 			sourceTree = "<group>";
@@ -202,6 +225,8 @@
 			isa = PBXGroup;
 			children = (
 				4CEA383128FD5855007B86EE /* FirstModel.swift */,
+				367520F328FE8C180010437F /* FirstContentViewModel.swift */,
+				367520F928FE8E980010437F /* FirstMovieCellModel.swift */,
 			);
 			path = FirstVCRelated;
 			sourceTree = "<group>";
@@ -238,6 +263,7 @@
 				367520E628FE7EDA0010437F /* NSCache+Extenstion.swift */,
 				367520E828FE7F010010437F /* Sequence+Extension.swift */,
 				367520EA28FE7F1A0010437F /* UIImage+Extension.swift */,
+				367520FD28FE948D0010437F /* UIFont+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -348,6 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CEA383A28FD59F9007B86EE /* AlertFactory.swift in Sources */,
+				367520F428FE8C180010437F /* FirstContentViewModel.swift in Sources */,
 				4CEA383E28FD5A31007B86EE /* SecondViewControllerRoutable.swift in Sources */,
 				367520DB28FE7E1C0010437F /* HTTPClient.swift in Sources */,
 				4CEA382928FD57F2007B86EE /* SceneContext.swift in Sources */,
@@ -361,25 +388,30 @@
 				4CEA384D28FD5C7B007B86EE /* FirstViewStyling.swift in Sources */,
 				4CEA382528FD5746007B86EE /* Routable.swift in Sources */,
 				367520E528FE7EB90010437F /* CacheHandler.swift in Sources */,
+				367520FA28FE8E980010437F /* FirstMovieCellModel.swift in Sources */,
 				367520E728FE7EDA0010437F /* NSCache+Extenstion.swift in Sources */,
 				4CEA384B28FD5C64007B86EE /* Styling.swift in Sources */,
 				635A19EC28F9603900197BCC /* FirstViewController.swift in Sources */,
 				4CEA384728FD5C2D007B86EE /* BasicNavigationController.swift in Sources */,
 				367520E128FE7E780010437F /* ParkBenchTimer.swift in Sources */,
+				367520F828FE8CF40010437F /* FirstMovieCell.swift in Sources */,
 				4CEA382028FD571B007B86EE /* ThirdViewController.swift in Sources */,
 				367520E328FE7E9B0010437F /* MainThreadActor.swift in Sources */,
+				367520F228FE8C060010437F /* FirstContentView.swift in Sources */,
 				367520ED28FE7F5B0010437F /* CacheImageView.swift in Sources */,
 				4CEA383C28FD5A16007B86EE /* FirstViewControllerRoutable.swift in Sources */,
 				4CEA384928FD5C48007B86EE /* Presentable.swift in Sources */,
 				367520E928FE7F010010437F /* Sequence+Extension.swift in Sources */,
 				367520F028FE801F0010437F /* MovieEntity.swift in Sources */,
 				4CEA383628FD586E007B86EE /* ThirdModel.swift in Sources */,
+				367520FC28FE8FA20010437F /* MovieCellView.swift in Sources */,
 				4CEA384028FD5A90007B86EE /* ThirdViewControllerRoutable.swift in Sources */,
 				4CEA383828FD58C6007B86EE /* SceneDelegateRoutable.swift in Sources */,
 				367520EB28FE7F1A0010437F /* UIImage+Extension.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 				4CEA385028FD5CC1007B86EE /* UIColor+Extensions.swift in Sources */,
+				367520FE28FE948D0010437F /* UIFont+Extension.swift in Sources */,
 				4CEA384228FD5B21007B86EE /* SceneAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
