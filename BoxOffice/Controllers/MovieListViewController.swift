@@ -36,6 +36,9 @@ class MovieListViewController: UIViewController {
     self.navigationItem.title = "Box Office"
     self.view.backgroundColor = .white
 
+    tableView.delegate = self
+    tableView.dataSource = self
+
     addViews()
     addTargets()
     setConstraints()
@@ -47,6 +50,8 @@ extension MovieListViewController {
     paddedStack.addArrangedSubview(segmentedControl)
     [paddedStack, tableView].forEach { verticalStack.addArrangedSubview($0) }
     view.addSubview(verticalStack)
+
+    tableView.register(MovieListCell.self, forCellReuseIdentifier: MovieListCell.id)
   }
 
   func setConstraints() {
@@ -83,7 +88,9 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = UITableViewCell()
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieListCell.id,
+                                                   for: indexPath) as? MovieListCell
+    else { return UITableViewCell() }
 
     return cell
   }
@@ -91,26 +98,6 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
 
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
-extension UIViewController {
-  struct ViewControllerPreview: UIViewControllerRepresentable {
-    let viewController: UIViewController
-
-    func makeUIViewController(context: Context) -> UIViewController {
-      return viewController
-    }
-
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-
-    }
-  }
-
-  func showPreview() -> some View {
-    ViewControllerPreview(viewController: self)
-  }
-}
-#endif
-
-#if canImport(SwiftUI) && DEBUG
 struct MovieListVC_Preview: PreviewProvider {
   static var previews: some View {
     MovieListViewController().showPreview()

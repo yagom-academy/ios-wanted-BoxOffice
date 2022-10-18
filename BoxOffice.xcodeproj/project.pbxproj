@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		406FFBFA28FDD364004C85D4 /* SecretInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 406FFBF928FDD364004C85D4 /* SecretInfo.plist */; };
 		406FFBFC28FDD3E4004C85D4 /* Extension+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FFBFB28FDD3E4004C85D4 /* Extension+Bundle.swift */; };
+		406FFC0328FEA2D4004C85D4 /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FFC0228FEA2D4004C85D4 /* MovieListCell.swift */; };
+		406FFC0528FEA356004C85D4 /* UIPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FFC0428FEA356004C85D4 /* UIPreview.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19EC28F9603900197BCC /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* MovieListViewController.swift */; };
@@ -19,6 +21,8 @@
 /* Begin PBXFileReference section */
 		406FFBF928FDD364004C85D4 /* SecretInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SecretInfo.plist; sourceTree = "<group>"; };
 		406FFBFB28FDD3E4004C85D4 /* Extension+Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Bundle.swift"; sourceTree = "<group>"; };
+		406FFC0228FEA2D4004C85D4 /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
+		406FFC0428FEA356004C85D4 /* UIPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPreview.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +47,7 @@
 			isa = PBXGroup;
 			children = (
 				406FFBFB28FDD3E4004C85D4 /* Extension+Bundle.swift */,
+				406FFC0428FEA356004C85D4 /* UIPreview.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -61,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				635A19F228F9603A00197BCC /* LaunchScreen.storyboard */,
+				406FFC0228FEA2D4004C85D4 /* MovieListCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -181,9 +187,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				406FFC0328FEA2D4004C85D4 /* MovieListCell.swift in Sources */,
 				635A19EC28F9603900197BCC /* MovieListViewController.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
+				406FFC0528FEA356004C85D4 /* UIPreview.swift in Sources */,
 				406FFBFC28FDD3E4004C85D4 /* Extension+Bundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
