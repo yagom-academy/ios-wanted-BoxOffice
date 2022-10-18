@@ -62,7 +62,7 @@ extension BoxOfficeView: UITableViewDelegate, UITableViewDataSource {
         cell.openDate.text = "2022-10-13"
         cell.boxOfficeRank.text = "1"
         cell.rankInten.text = "-1"
-        cell.audiAcc.text = "620만"
+        cell.audiAcc.text = "520만"
     
         return cell
     }
