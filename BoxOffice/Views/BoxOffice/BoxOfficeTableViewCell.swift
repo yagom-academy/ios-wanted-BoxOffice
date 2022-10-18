@@ -128,9 +128,7 @@ class BoxOfficeTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        print("\(self.frame.width - 110)")
-        
+    
         [boxOfficeRank, boxOfficeLabel].forEach {
             self.boxOfficeRankStackView.addArrangedSubview($0)
         }
