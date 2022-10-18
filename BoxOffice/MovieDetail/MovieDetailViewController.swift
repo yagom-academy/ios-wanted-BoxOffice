@@ -63,6 +63,7 @@ final class MovieDetailViewController: UIViewController {
         return tableView
     }()
     
+    private let viewModel: MovieDetailViewModel = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,7 +82,6 @@ final class MovieDetailViewController: UIViewController {
         [boxOfficeRank,movieTitle,movieTitleEngAndproductYear].forEach {
             self.mainInfoStackView.addArrangedSubview($0)
         }
-        
         
         self.view.addSubViewsAndtranslatesFalse(
             mainInfoStackView,lineView,movieDetailTableView
@@ -110,11 +110,12 @@ final class MovieDetailViewController: UIViewController {
 
 extension MovieDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return viewModel.detailTitle.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieDetailCell", for: indexPath) as? MovieDetailCell else { return UITableViewCell() }
+        
         return cell
     }
 }

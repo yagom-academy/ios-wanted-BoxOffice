@@ -1,5 +1,5 @@
 //
-//  MovieEntity.swift
+//  MovieListEntity.swift
 //  BoxOffice
 //
 //  Created by Julia on 2022/10/18.
@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Welcome
-struct MovieEntity: Codable {
+struct MovieListEntity: Codable {
     let boxOfficeResult: BoxOfficeResult
 }
 
