@@ -10,6 +10,7 @@ import Foundation
 enum KobisAPI: TargetType {
     case dailyBoxOfficeList(BoxOfficeListRequest)
     case weeklyBoxOfficeList(BoxOfficeListRequest)
+    case movieDetail(MovieDetailRequest)
     
     var baseURL: String {
         return "https://kobis.or.kr/kobisopenapi/webservice/rest/"
@@ -21,21 +22,19 @@ enum KobisAPI: TargetType {
             return "boxoffice/searchDailyBoxOfficeList.json"
         case .weeklyBoxOfficeList:
             return "boxoffice/searchWeeklyBoxOfficeList.json"
+        case .movieDetail:
+            return "movie/searchMovieInfo.json"
         }
     }
     
     var request: URLRequest? {
         switch self {
         case .dailyBoxOfficeList(let param):
-            var components = URLComponents(string: fullPath)
-            components?.queryItems = try? param.asURLQuerys()
-            guard let url = components?.url else { return nil }
-            return URLRequest(url: url)
+            return request(with: param)
         case .weeklyBoxOfficeList(let param):
-            var components = URLComponents(string: fullPath)
-            components?.queryItems = try? param.asURLQuerys()
-            guard let url = components?.url else { return nil }
-            return URLRequest(url: url)
+            return request(with: param)
+        case .movieDetail(let param):
+            return request(with: param)
         }
     }
 }
@@ -51,6 +50,11 @@ struct BoxOfficeListRequest: Codable {
         case weekend = "1"
         case weekday = "2"
     }
+}
+
+struct MovieDetailRequest: Codable {
+    var key: String
+    var movieCd: String
 }
 
 // MARK: Response
@@ -96,6 +100,43 @@ struct WeeklyBoxOfficeListResponse: Codable {
             let audiInten: String
             let audiChange: String
             let audiAcc: String
+        }
+    }
+}
+
+struct MovieDetailResponse: Codable {
+    let movieInfoResult: MovieInfoResult
+    
+    struct MovieInfoResult: Codable {
+        let movieInfo: MovieInfo
+        
+        struct MovieInfo: Codable {
+            let movieCd: String
+            let movieNm: String
+            let movieNmEn: String
+            let showTm: String
+            let prdtYear: String
+            let openDt: String
+            let genres: [Genre]
+            let directors: [Director]
+            let actors: [Actor]
+            let audits: [Audit]
+            
+            struct Genre: Codable {
+                let genreNm: String
+            }
+            
+            struct Director: Codable {
+                let peopleNm: String
+            }
+            
+            struct Actor: Codable {
+                let peopleNm: String
+            }
+            
+            struct Audit: Codable {
+                let watchGradeNm: String
+            }
         }
     }
 }

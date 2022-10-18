@@ -24,7 +24,7 @@ class RepositoryTests: XCTestCase {
     
     func test_dailyBoxOffice() {
         // given
-        var result: [BoxOffice]?
+        var result: [Movie]?
         let expectation = self.expectation(description: "Wait for API")
         
         // when
@@ -43,7 +43,7 @@ class RepositoryTests: XCTestCase {
     
     func test_weeklyBoxOffice() {
         // given
-        var result: [BoxOffice]?
+        var result: [Movie]?
         let expectation = self.expectation(description: "Wait for API")
         
         // when

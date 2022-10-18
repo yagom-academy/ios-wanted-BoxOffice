@@ -8,63 +8,86 @@
 import Foundation
 
 enum Translator {
-    static func translate(_ response: DailyBoxOfficeListResponse) -> [BoxOffice] {
+    static func translate(_ response: DailyBoxOfficeListResponse) -> [Movie] {
         let boxOfficeList = response.boxOfficeResult.dailyBoxOfficeList
-        var result = [BoxOffice]()
+        var result = [Movie]()
         boxOfficeList.forEach {
             guard
                 let rank = Int($0.rank),
                 let rankInten = Int($0.rankInten),
-                let rankOldAndNew = BoxOffice.RankType(rawValue: $0.rankOldAndNew),
+                let rankOldAndNew = BoxOfficeInfo.RankType(rawValue: $0.rankOldAndNew),
                 let audienceCount = Int($0.audiCnt),
                 let audienceInten = Int($0.audiInten),
                 let audienceChange = Int($0.audiChange),
                 let audienceAccumulation = Int($0.audiAcc)
             else { return }
             result.append(
-                BoxOffice(
-                    rank: rank,
-                    rankInten: rankInten,
-                    rankOldAndNew: rankOldAndNew,
+                Movie(
                     movieCode: $0.movieCd,
                     movieName: $0.movieNm,
                     openDate: $0.openDt,
-                    audienceCount: audienceCount,
-                    audienceInten: audienceInten,
-                    audienceChange: audienceChange,
-                    audienceAccumulation: audienceAccumulation)
+                    boxOfficeInfo: BoxOfficeInfo(
+                        rank: rank,
+                        rankInten: rankInten,
+                        rankOldAndNew: rankOldAndNew,
+                        audienceCount: audienceCount,
+                        audienceInten: audienceInten,
+                        audienceChange: audienceChange,
+                        audienceAccumulation: audienceAccumulation))
             )
         }
         return result
     }
     
-    static func translate(_ response: WeeklyBoxOfficeListResponse) -> [BoxOffice] {
+    static func translate(_ response: WeeklyBoxOfficeListResponse) -> [Movie] {
         let boxOfficeList = response.boxOfficeResult.weeklyBoxOfficeList
-        var result = [BoxOffice]()
+        var result = [Movie]()
         boxOfficeList.forEach {
             guard
                 let rank = Int($0.rank),
                 let rankInten = Int($0.rankInten),
-                let rankOldAndNew = BoxOffice.RankType(rawValue: $0.rankOldAndNew),
+                let rankOldAndNew = BoxOfficeInfo.RankType(rawValue: $0.rankOldAndNew),
                 let audienceCount = Int($0.audiCnt),
                 let audienceInten = Int($0.audiInten),
                 let audienceChange = Int($0.audiChange),
                 let audienceAccumulation = Int($0.audiAcc)
             else { return }
             result.append(
-                BoxOffice(
-                    rank: rank,
-                    rankInten: rankInten,
-                    rankOldAndNew: rankOldAndNew,
+                Movie(
                     movieCode: $0.movieCd,
                     movieName: $0.movieNm,
                     openDate: $0.openDt,
-                    audienceCount: audienceCount,
-                    audienceInten: audienceInten,
-                    audienceChange: audienceChange,
-                    audienceAccumulation: audienceAccumulation)
+                    boxOfficeInfo: BoxOfficeInfo(
+                        rank: rank,
+                        rankInten: rankInten,
+                        rankOldAndNew: rankOldAndNew,
+                        audienceCount: audienceCount,
+                        audienceInten: audienceInten,
+                        audienceChange: audienceChange,
+                        audienceAccumulation: audienceAccumulation))
             )
         }
         return result
+    }
+    
+    static func translate(_ response: MovieDetailResponse) throws -> MovieDetailInfo {
+        let info = response.movieInfoResult.movieInfo
+        guard
+            let showTime = Int(info.showTm),
+            let audit = info.audits.first?.watchGradeNm
+        else { throw TranslatorError.castingError }
+        return MovieDetailInfo(
+            movieNameEnglish: info.movieNmEn,
+            showTime: showTime,
+            productionYear: info.prdtYear,
+            genres: info.genres.map { $0.genreNm },
+            directors: info.directors.map { $0.peopleNm },
+            actors: info.actors.map { $0.peopleNm },
+            audit: audit)
+    }
+    
+    static func translate(_ response: MoviePosterResponse) throws -> String {
+        guard let poster = response.poster else { throw TranslatorError.zeroByteData }
+        return poster
     }
 }

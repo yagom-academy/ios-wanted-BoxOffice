@@ -19,4 +19,17 @@ extension TargetType {
     var fullPath: String {
         return "\(baseURL)\(path)"
     }
+    
+    func url(with param: Codable) -> URL? {
+        var components = URLComponents(string: fullPath)
+        components?.queryItems = try? param.asURLQuerys()
+        return components?.url
+    }
+    
+    func request(with param: Codable) -> URLRequest? {
+        var components = URLComponents(string: fullPath)
+        components?.queryItems = try? param.asURLQuerys()
+        guard let url = components?.url else { return nil }
+        return URLRequest(url: url)
+    }
 }

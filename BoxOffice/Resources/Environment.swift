@@ -9,4 +9,5 @@ import Foundation
 
 struct Environment {
     static let kobisKey = Bundle.main.object(forInfoDictionaryKey: "KOBIS_KEY") as! String
+    static let omdbKey = Bundle.main.object(forInfoDictionaryKey: "OMDB_KEY") as! String
 }
