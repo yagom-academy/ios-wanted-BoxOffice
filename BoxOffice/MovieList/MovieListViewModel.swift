@@ -9,7 +9,7 @@ import Foundation
 
 final class MovieListViewModel {
     private let repository: MovieListReqeustable
-    private let targetDate = "20221017"
+    let targetDate = "20221017"
     var movieList: [MovieListModel] = .init([])
     var boxofficeType: String = ""
     var showRange: String = ""

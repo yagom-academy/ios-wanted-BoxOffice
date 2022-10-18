@@ -41,10 +41,20 @@ final class MovieListCell: UICollectionViewCell {
         return stackView
     }()
     
+    private let movieInfoStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 7
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .leading
+        return stackView
+    }()
+    
     private let movieTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
-        label.text = "스파이더맨"
+        label.text = "극장판 짱구는 못말려: 수수께끼! 꽃피는 천하떡잎학교"
+        label.numberOfLines = 0
         return label
     }()
     
@@ -92,26 +102,31 @@ final class MovieListCell: UICollectionViewCell {
         [self.boxOfficeRank, self.rankOldAndNew, self.rankInten].forEach {
             self.rankStateStackView.addArrangedSubview($0)
         }
+        [self.movieTitle, self.openDate, self.audienceCount].forEach {
+            self.movieInfoStackView.addArrangedSubview($0)
+        }
         self.contentView.addSubViewsAndtranslatesFalse(
             self.rankStateStackView,
-            self.movieTitle,
-            self.openDate,
-            self.audienceCount)
-           
+            self.movieInfoStackView)
         
         NSLayoutConstraint.activate([
             //rank
-            self.rankStateStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 50),
-            self.rankStateStackView.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor),
-            //title
-            self.movieTitle.topAnchor.constraint(equalTo: self.rankStateStackView.topAnchor),
-            self.movieTitle.leadingAnchor.constraint(equalTo: self.rankStateStackView.leadingAnchor, constant: 80),
-            self.openDate.leadingAnchor.constraint(equalTo: self.movieTitle.leadingAnchor),
-            self.openDate.topAnchor.constraint(equalTo: self.movieTitle.topAnchor, constant: 30),
-            self.audienceCount.leadingAnchor.constraint(equalTo: self.movieTitle.leadingAnchor),
-            self.audienceCount.topAnchor.constraint(equalTo: self.openDate.topAnchor, constant: 20)
-            
+            self.rankStateStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 40),
+            self.rankStateStackView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            self.movieInfoStackView.leadingAnchor.constraint(equalTo: self.rankStateStackView.trailingAnchor, constant: 30),
+            self.movieInfoStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
+            self.movieInfoStackView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
         ])
+    }
+    // TODO: Dynamic height 구현중
+    func fittingSize(width: CGFloat, item: MovieListModel) -> CGSize {
+        let cell = MovieListCell()
+        cell.configure(item)
+        let targetSize = CGSize(width: width
+                                , height: UIView.layoutFittingCompressedSize.height)
+        return self.contentView.systemLayoutSizeFitting(targetSize,
+                                                            withHorizontalFittingPriority:.fittingSizeLevel,
+                                                            verticalFittingPriority:.required)
     }
 }
 

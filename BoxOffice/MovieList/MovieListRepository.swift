@@ -83,7 +83,6 @@ private extension MovieListRepository {
             URLQueryItem(name: "korNm", value: "Seoul"),
             URLQueryItem(name: "key", value: apiKey)
         ]
-        print("😙 \(components.url)")
         return components
     }
 }

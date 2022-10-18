@@ -16,7 +16,7 @@ final class MovieListViewController: UIViewController {
             frame: .zero,
             collectionViewLayout: layout
         )
-        collectionView.backgroundColor = .clear
+        collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -24,18 +24,26 @@ final class MovieListViewController: UIViewController {
     private let indicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.style = .large
-        indicator.color = .blue
+        indicator.color = .lightGray
         return indicator
     }()
     
     private let viewModel: MovieListViewModel = .init()
-
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
+        self.settingNavigation()
         self.setupLayouts()
         self.configure(movieListCollectionView)
         self.setupViewModel()
+        
+    }
+    
+    private func settingNavigation() {
+        self.navigationItem.title = "\(viewModel.targetDate) 순위"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func setupViewModel() {
@@ -69,7 +77,7 @@ final class MovieListViewController: UIViewController {
             indicator.heightAnchor.constraint(equalToConstant: 40)
         ])
         self.view.bringSubviewToFront(self.indicator)
-
+        
     }
     
     private func configure(_ colletionView: UICollectionView) {
@@ -77,6 +85,7 @@ final class MovieListViewController: UIViewController {
         colletionView.dataSource = self
         colletionView.delegate = self
     }
+    
 }
 
 extension MovieListViewController: UICollectionViewDataSource {
@@ -99,6 +108,7 @@ extension MovieListViewController: UICollectionViewDelegate {
 
 extension MovieListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // TODO: dynamic height ~ing
         return CGSize(width: self.view.frame.width, height: 120)
     }
 }
