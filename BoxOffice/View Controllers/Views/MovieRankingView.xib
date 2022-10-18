@@ -28,10 +28,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Vj4-L3-O6J">
-                    <rect key="frame" x="12" y="4" width="279" height="75"/>
+                    <rect key="frame" x="12" y="8" width="279" height="67"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="RVc-fZ-Gbv">
-                            <rect key="frame" x="0.0" y="0.0" width="55.666666666666664" height="75"/>
+                            <rect key="frame" x="0.0" y="0.0" width="55.666666666666664" height="67"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93n-ZO-oQx">
                                     <rect key="frame" x="24" y="0.0" width="8" height="20.333333333333332"/>
@@ -40,10 +40,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="A7e-2k-3Ml">
-                                    <rect key="frame" x="14" y="21.333333333333332" width="28" height="53.666666666666671"/>
+                                    <rect key="frame" x="14" y="21.333333333333332" width="28" height="45.666666666666671"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="HU2-aM-kMc">
-                                            <rect key="frame" x="0.0" y="0.0" width="28" height="26.333333333333332"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="28" height="22.333333333333332"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AEZ-ll-i24">
                                                     <rect key="frame" x="0.0" y="3.9999999999999991" width="14" height="12.666666666666664"/>
@@ -62,7 +62,7 @@
                                             </constraints>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="oCC-uD-rfj">
-                                            <rect key="frame" x="0.0" y="27.333333333333336" width="28" height="26.333333333333336"/>
+                                            <rect key="frame" x="0.0" y="23.333333333333336" width="28" height="22.333333333333336"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="NEW" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUH-yg-KTY">
                                                     <rect key="frame" x="0.0" y="0.0" width="28" height="14.333333333333334"/>
@@ -76,8 +76,8 @@
                                 </stackView>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="sxN-OT-sqK">
-                            <rect key="frame" x="63.666666666666671" y="0.0" width="215.33333333333331" height="75"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="sxN-OT-sqK">
+                            <rect key="frame" x="63.666666666666671" y="0.0" width="215.33333333333331" height="67"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="미션임파서블:고스트프로토콜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uWX-vl-VXv">
                                     <rect key="frame" x="0.0" y="0.0" width="215.33333333333334" height="20.333333333333332"/>
@@ -86,7 +86,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="iCx-CP-Zkg">
-                                    <rect key="frame" x="0.0" y="21.333333333333332" width="215.33333333333334" height="53.666666666666671"/>
+                                    <rect key="frame" x="0.0" y="22.333333333333332" width="215.33333333333334" height="44.666666666666671"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2011년 12월 15일 개봉" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLf-CX-4x3">
                                             <rect key="frame" x="0.0" y="0.0" width="215.33333333333334" height="14.333333333333334"/>
@@ -95,7 +95,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="F53-aP-1QW">
-                                            <rect key="frame" x="0.0" y="15.333333333333332" width="215.33333333333334" height="38.333333333333343"/>
+                                            <rect key="frame" x="0.0" y="15.333333333333334" width="215.33333333333334" height="29.333333333333329"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="누적관객 532만명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rav-kE-GxW">
                                                     <rect key="frame" x="0.0" y="0.0" width="215.33333333333334" height="14.333333333333334"/>
@@ -118,8 +118,8 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="Vj4-L3-O6J" secondAttribute="bottom" constant="4" id="d1k-e6-Wqk"/>
-                <constraint firstItem="Vj4-L3-O6J" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="gzY-AP-Vfp"/>
+                <constraint firstAttribute="bottom" secondItem="Vj4-L3-O6J" secondAttribute="bottom" constant="8" id="d1k-e6-Wqk"/>
+                <constraint firstItem="Vj4-L3-O6J" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="gzY-AP-Vfp"/>
                 <constraint firstItem="Vj4-L3-O6J" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="uSX-4c-tCq"/>
                 <constraint firstAttribute="trailing" secondItem="Vj4-L3-O6J" secondAttribute="trailing" constant="12" id="zFB-m1-n2q"/>
             </constraints>

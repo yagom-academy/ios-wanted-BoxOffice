@@ -59,29 +59,14 @@ extension MovieListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieListTableViewCell.reuseIdentifier, for: indexPath) as? MovieListTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: MovieListTableViewCell.reuseIdentifier,
+            for: indexPath
+        ) as? MovieListTableViewCell else {
             return UITableViewCell()
         }
         let movie = movies[indexPath.row]
-        cell.rankingLabel.text = movie.ranking.string
-        cell.nameLabel.text = movie.name
-        cell.openDateLabel.text = "\(movie.openDate.dateString()) 개봉"
-        cell.numberOfMoviegoersLabel.text = "누적관객 \(movie.numberOfMoviegoers.string)명"
-        cell.isNewRankingLabel.text = movie.isNewRanking ? "NEW" : nil
-        if !movie.isNewRanking {
-            cell.isNewRankingLabel.removeFromSuperview()
-        } else {
-            cell.isNewRankingLabel.text = "NEW"
-        }
-        if movie.changeRanking == 0 {
-            cell.changeRankingInfoView.removeFromSuperview()
-        } else {
-            let up = movie.changeRanking > 0
-            cell.changeRankingLabel.text = movie.changeRanking.string
-            cell.changeRankingImageView.image = up ? UIImage(systemName: "arrowtriangle.up.fill") : UIImage(systemName: "arrowtriangle.down.fill")
-            cell.changeRankingLabel.textColor = up ? .systemPink : .systemBlue
-            cell.changeRankingImageView.tintColor = up ? .systemPink : .systemBlue
-        }
+        cell.movieRankingView.configure(with: movie)
         return cell
     }
 

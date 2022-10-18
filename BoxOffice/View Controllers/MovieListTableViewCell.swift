@@ -10,16 +10,7 @@ import UIKit
 final class MovieListTableViewCell: UITableViewCell {
 
     // MARK: UI
-
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var openDateLabel: UILabel!
-    @IBOutlet var numberOfMoviegoersLabel: UILabel!
-
-    // Ranking Info
-    @IBOutlet var rankingLabel: UILabel!
-    @IBOutlet var isNewRankingLabel: UILabel!
-    @IBOutlet var changeRankingInfoView: UIStackView!
-    @IBOutlet var changeRankingImageView: UIImageView!
-    @IBOutlet var changeRankingLabel: UILabel!
+    
+    @IBOutlet var movieRankingView: MovieRankingView!
 
 }

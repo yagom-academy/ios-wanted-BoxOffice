@@ -72,4 +72,5 @@ final class MovieRankingView: UIView {
             changeRankingImageView.tintColor = up ? .systemPink : .systemBlue
         }
     }
+
 }
