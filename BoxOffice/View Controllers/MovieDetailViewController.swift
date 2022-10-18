@@ -9,16 +9,24 @@ import UIKit
 
 final class MovieDetailViewController: UIViewController {
 
+    // MARK: Constants
+
+    static let reuseIdentifier = "reuse-identifier"
+
     // MARK: Types
 
-    private struct Section: Hashable {
-        let title: String?
-        let items: [Item]
-    }
+    private enum Section: Int, CaseIterable {
+        case info
+        case crew
+        case review
 
-    private enum Item: Hashable {
-        case movie(Movie)
-        case review(Review)
+        var title: String? {
+            switch self {
+            case .crew: return "감독 및 출연진"
+            case .info: return "정보"
+            case .review: return "평가 및 리뷰"
+            }
+        }
     }
 
     // MARK: UI
@@ -27,9 +35,9 @@ final class MovieDetailViewController: UIViewController {
 
     // MARK: Properties
 
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
-
     var movie: MovieRanking!
+    private var movieDetail: MovieDetail!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>!
 
     // MARK: View Life Cycle
 
@@ -40,82 +48,219 @@ final class MovieDetailViewController: UIViewController {
         configureDataSource()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // TODO: 데이터요청
+        MovieSearchService().searchMovieDetail(for: movie.identifier) { movieDetail in
+            var snapshot = self.dataSource.snapshot()
+            snapshot.appendItems(movieDetail.crew, toSection: .crew)
+            snapshot.appendItems(movieDetail.info, toSection: .info)
+            self.dataSource.apply(snapshot, animatingDifferences: false)
+        }
+    }
+
+    // MARK: Configure
+
     private func configureCollectionView() {
-        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
-                                                            layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-            let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerFooterSize, elementKind: TitleSupplementaryView.reuseIdentifier, alignment: .top)
-            section.boundarySupplementaryItems = [sectionHeader]
-            return section
-                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
-                    layoutSize: headerFooterSize,
-                    elementKind: RankingSupplementaryView.reuseIdentifier,
-                    alignment: .top
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            guard let sectionIndex = Section(rawValue: sectionIndex) else { return nil }
+
+            let sectionContentInset = NSDirectionalEdgeInsets(
+                top: 0,
+                leading: 0,
+                bottom: 12,
+                trailing: 00
+            )
+            let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44)),
+                elementKind: Self.reuseIdentifier,
+                alignment: .topLeading
+            )
+
+            switch sectionIndex {
+            case .info:
+                let section = NSCollectionLayoutSection.list(
+                    using: .init(appearance: .plain),
+                    layoutEnvironment: layoutEnvironment
                 )
+                section.contentInsets = sectionContentInset
                 section.boundarySupplementaryItems = [sectionHeader]
                 return section
+            case .crew:
+                let itemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .fractionalHeight(1.0)
+                )
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(0.28),
+                    heightDimension: .fractionalWidth(0.28)
+                )
+                let group = NSCollectionLayoutGroup
+                    .horizontal(
+                        layoutSize: groupSize,
+                        subitems: [item]
+                    )
+                let section = NSCollectionLayoutSection(group: group)
+                section.interGroupSpacing = 10
+                section.orthogonalScrollingBehavior = .groupPaging
+                let sectionContentInset = NSDirectionalEdgeInsets(
+                    top: 0,
+                    leading: 12,
+                    bottom: 12,
+                    trailing: 0
+                )
+                section.contentInsets = sectionContentInset
+                section.boundarySupplementaryItems = [sectionHeader]
+                return section
+            case .review:
+                let section = NSCollectionLayoutSection.list(
+                    using: .init(appearance: .plain),
+                    layoutEnvironment: layoutEnvironment
+                )
+                section.contentInsets = sectionContentInset
+                section.boundarySupplementaryItems = [sectionHeader]
+                return section
+            }
         }
         collectionView.collectionViewLayout = layout
-        collectionView.register(
-            RankingSupplementaryView.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: RankingSupplementaryView.reuseIdentifier
-        )
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Self.reuseIdentifier)
     }
 
     func configureDataSource()  {
-        // TODO: MovieCell
-        let movieItemRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, item in
-        }
-
-        // TODO: ReviewCell
-        let reviewItemRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, item in
-            if case .review(let review) = item {
-                var content = cell.defaultContentConfiguration()
-                content.text = review.nickname
+        // Cell Registration
+        let infoItemRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, AnyHashable> { cell, indexPath, item in
+            if let info = item as? MovieDetailInfo {
+                var content = UIListContentConfiguration.valueCell()
+                content.text = info.title
+                content.textProperties.font = .preferredFont(forTextStyle: .footnote)
+                content.secondaryText = info.value
+                content.secondaryTextProperties.font = .preferredFont(forTextStyle: .footnote)
+                content.directionalLayoutMargins = .zero
                 cell.contentConfiguration = content
             }
         }
 
-        let headerRegistration = UICollectionView.SupplementaryRegistration<RankingSupplementaryView>(elementKind: RankingSupplementaryView.reuseIdentifier) {
-            supplementaryView, string, indexPath in
-            supplementaryView.nameLabel.text = self.movie.name
-            supplementaryView.numberOfMoviegoersLabel.text = "누적관객 \(self.movie.numberOfMoviegoers.string)명"
-            supplementaryView.rankingLabel.text = self.movie.ranking.string
-            if self.movie.isNewRanking {
-                supplementaryView.isNewRankingLabel.text = "NEW"
-            } else {
-                supplementaryView.isNewRankingInfoView.removeFromSuperview()
-            }
-            if self.movie.changeRanking == 0 {
-                supplementaryView.changeRankingInfoView.removeFromSuperview()
-            } else {
-                let up = self.movie.changeRanking > 0
-                supplementaryView.changeRankingLabel.text = self.movie.changeRanking.string
-                supplementaryView.changeRankingImageView.image = up ? UIImage(systemName: "arrowtriangle.up.fill") : UIImage(systemName: "arrowtriangle.down.fill")
-                supplementaryView.changeRankingLabel.textColor = up ? .systemPink : .systemBlue
-                supplementaryView.changeRankingImageView.tintColor = up ? .systemPink : .systemBlue
+        let crewItemRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, AnyHashable> { cell, indexPath, item in
+            if let crew = item as? Crew {
+                var content = UIListContentConfiguration.cell()
+                content.text = crew.name
+                content.textProperties.alignment = .center
+                content.textProperties.font = .preferredFont(forTextStyle: .footnote)
+                content.secondaryText = crew.role
+                content.secondaryTextProperties.alignment = .center
+                content.secondaryTextProperties.font = .preferredFont(forTextStyle: .footnote)
+                content.directionalLayoutMargins = .zero
+                cell.contentConfiguration = content
+
+                var background = UIBackgroundConfiguration.listPlainCell()
+                background.backgroundColor = .systemGroupedBackground
+                background.cornerRadius = 8
+                background.strokeColor = .systemGray3
+                background.strokeWidth = 1.0 / cell.traitCollection.displayScale
+                cell.backgroundConfiguration = background
             }
         }
 
-        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) {
+        let reviewItemRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, AnyHashable> { cell, indexPath, item in
+            if let review = item as? MovieReview {
+                var content = UIListContentConfiguration.subtitleCell()
+                content.text = review.nickname
+                content.textProperties.font = .preferredFont(forTextStyle: .footnote)
+                content.secondaryText = review.content
+                content.secondaryTextProperties.font = .preferredFont(forTextStyle: .footnote)
+                content.secondaryTextProperties.numberOfLines = 0
+                content.image = UIImage(systemName: "person.fill")
+                cell.contentConfiguration = content
+            }
+        }
+
+        // HeaderRegistraion
+        let headerRegistration = UICollectionView.SupplementaryRegistration<UICollectionViewCell>(elementKind: Self.reuseIdentifier) { supplementaryView, elementKind, indexPath in
+            var config = UIListContentConfiguration.plainHeader()
+            config.text = self.dataSource.snapshot().sectionIdentifiers[indexPath.section].title
+            supplementaryView.contentConfiguration = config
+        }
+
+        dataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>(collectionView: collectionView) {
             (collectionView, indexPath, identifier) -> UICollectionViewCell? in
-            return indexPath.section == 0 ?
-            collectionView.dequeueConfiguredReusableCell(using: movieItemRegistration, for: indexPath, item: identifier) :
-            collectionView.dequeueConfiguredReusableCell(using: reviewItemRegistration, for: indexPath, item: identifier)
+            guard let section = Section(rawValue: indexPath.section) else { return nil }
+            switch section {
+            case .crew:
+                return collectionView.dequeueConfiguredReusableCell(
+                    using: crewItemRegistration,
+                    for: indexPath,
+                    item: identifier
+                )
+            case .info:
+                return collectionView.dequeueConfiguredReusableCell(
+                    using: infoItemRegistration,
+                    for: indexPath,
+                    item: identifier
+                )
+            case .review:
+                return collectionView.dequeueConfiguredReusableCell(
+                    using: reviewItemRegistration,
+                    for: indexPath,
+                    item: identifier
+                )
+            }
         }
 
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-                return collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
+            return collectionView.dequeueConfiguredReusableSupplementary(
+                using: headerRegistration,
+                for: indexPath
+            )
         }
 
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-        let movieSection = Section(title: "Movie", items: [])
-        let reviews = Review.sampleData.map { Item.review($0) }
-        let reviewSection = Section(title: "Review", items: reviews)
-        snapshot.appendSections([movieSection, reviewSection])
-        snapshot.appendItems(movieSection.items, toSection: movieSection)
-        snapshot.appendItems(reviewSection.items, toSection: reviewSection)
+        var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
+        snapshot.appendSections(Section.allCases)
+        snapshot.appendItems([], toSection: .crew)
+        snapshot.appendItems([], toSection: .info)
+        snapshot.appendItems(MovieReview.sampleData, toSection: .review)
         dataSource.apply(snapshot, animatingDifferences: false)
     }
+
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension MovieDetailViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return indexPath.section == Section.review.rawValue
+    }
+
+}
+
+// MARK: - MovieDetail
+
+fileprivate extension MovieDetail {
+
+    /// 감독 및 출연진
+    var crew: [Crew] {
+        directors + actors
+    }
+
+    /// 영화 상세정보
+    var info: [MovieDetailInfo] {
+        [
+            .init(title: "개봉", value: openDate.dateString()),
+            .init(title: "제작", value: productionDate),
+            .init(title: "장르", value: genres.joined()),
+            .init(title: "관람등급", value: watchGrade),
+        ]
+    }
+
+}
+
+// MARK: - MovieDetailInfo
+
+fileprivate struct MovieDetailInfo: Hashable {
+
+    let title: String
+    let value: String
 
 }
