@@ -77,7 +77,7 @@ class RankGroupView : UIView{
     }
     
     func setInfo(isNew:Bool, rank:String, isUp:Bool, rankDiff:String ){
-        newLabel.isHidden = isNew ? false : true
+        newLabel.text = isNew ? "New" : "  "
         rankLabel.text = rank
         if isUp{
             rankDiffImage.image = UIImage(systemName: "arrowtriangle.up.fill")

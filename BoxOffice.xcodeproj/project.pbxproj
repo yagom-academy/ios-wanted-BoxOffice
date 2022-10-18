@@ -15,6 +15,10 @@
 		331AC1BD28FDA6DA0060AD4A /* RankGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331AC1BC28FDA6DA0060AD4A /* RankGroupView.swift */; };
 		331AC1BF28FDADD20060AD4A /* CustomHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331AC1BE28FDADD20060AD4A /* CustomHeader.swift */; };
 		331AC1C228FDDC1D0060AD4A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331AC1C128FDDC1D0060AD4A /* DetailViewController.swift */; };
+		3360895128FE88CC00BDFCE0 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3360895028FE88CC00BDFCE0 /* DetailView.swift */; };
+		3360895628FE9EE500BDFCE0 /* RankGroupViewForDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3360895528FE9EE500BDFCE0 /* RankGroupViewForDetailView.swift */; };
+		3360895A28FEA31200BDFCE0 /* TableInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3360895928FEA31200BDFCE0 /* TableInfoView.swift */; };
+		3360895C28FEAAEB00BDFCE0 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3360895B28FEAAEB00BDFCE0 /* PaddingLabel.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19EC28F9603900197BCC /* RankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* RankViewController.swift */; };
@@ -31,6 +35,10 @@
 		331AC1BC28FDA6DA0060AD4A /* RankGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankGroupView.swift; sourceTree = "<group>"; };
 		331AC1BE28FDADD20060AD4A /* CustomHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeader.swift; sourceTree = "<group>"; };
 		331AC1C128FDDC1D0060AD4A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		3360895028FE88CC00BDFCE0 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		3360895528FE9EE500BDFCE0 /* RankGroupViewForDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankGroupViewForDetailView.swift; sourceTree = "<group>"; };
+		3360895928FEA31200BDFCE0 /* TableInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableInfoView.swift; sourceTree = "<group>"; };
+		3360895B28FEAAEB00BDFCE0 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +85,10 @@
 			isa = PBXGroup;
 			children = (
 				331AC1C128FDDC1D0060AD4A /* DetailViewController.swift */,
+				3360895028FE88CC00BDFCE0 /* DetailView.swift */,
+				3360895528FE9EE500BDFCE0 /* RankGroupViewForDetailView.swift */,
+				3360895928FEA31200BDFCE0 /* TableInfoView.swift */,
+				3360895B28FEAAEB00BDFCE0 /* PaddingLabel.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -183,14 +195,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				331AC1C228FDDC1D0060AD4A /* DetailViewController.swift in Sources */,
+				3360895128FE88CC00BDFCE0 /* DetailView.swift in Sources */,
 				331AC1B128FD9C900060AD4A /* RankView.swift in Sources */,
 				635A19EC28F9603900197BCC /* RankViewController.swift in Sources */,
 				331AC1BB28FDA5270060AD4A /* InfoGroupView.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
+				3360895C28FEAAEB00BDFCE0 /* PaddingLabel.swift in Sources */,
+				3360895628FE9EE500BDFCE0 /* RankGroupViewForDetailView.swift in Sources */,
 				331AC1B428FD9E860060AD4A /* RankInfo.swift in Sources */,
 				331AC1B628FDA0D00060AD4A /* CustomCell.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 				331AC1BD28FDA6DA0060AD4A /* RankGroupView.swift in Sources */,
+				3360895A28FEA31200BDFCE0 /* TableInfoView.swift in Sources */,
 				331AC1B828FDA2BA0060AD4A /* Extensions.swift in Sources */,
 				331AC1BF28FDADD20060AD4A /* CustomHeader.swift in Sources */,
 			);

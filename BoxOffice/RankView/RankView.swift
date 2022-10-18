@@ -62,6 +62,8 @@ extension RankView : UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.presentDetailView()
+        tableView.cellForRow(at: indexPath)?.isSelected = false
+
     }
     //시각적인 설정
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
