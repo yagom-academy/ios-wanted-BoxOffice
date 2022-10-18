@@ -17,7 +17,11 @@ class RankView : UIView {
     
     let tableView = UITableView(frame: .zero, style: .grouped) //plain으로 하면 헤더가 사라지지 않음
     
-    var movieInfo : [RankInfo] = []
+    var boxOfficeResponse : BoxOfficeResponse?
+    
+    var boxOfficeInfo : [BoxOfficeInfo]?
+    
+    var range : String?
     
     var delegate : RankViewProtocol?
 
@@ -55,6 +59,20 @@ class RankView : UIView {
         tableView.separatorStyle = .none
     }
     
+    func setInfo(){
+        boxOfficeInfo = boxOfficeResponse?.boxOfficeResult.dailyBoxOfficeList
+        range = boxOfficeResponse?.boxOfficeResult.showRange
+    }
+    
+    func urlToImage(url:String) -> UIImage? {
+        let url = URL(string: url)
+        guard let url = url else { return nil}
+        if let data = try? Data(contentsOf:url), let image = UIImage(data: data){
+            return image
+        }
+        return nil
+    }
+    
 }
 
 
@@ -72,7 +90,7 @@ extension RankView : UITableViewDelegate{
     //텍스트만 설정
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: CustomHeader.id) as? CustomHeader else { return UITableViewHeaderFooterView() }
-        header.dateLabel.text = "2022년 10월 22일 기준"
+        header.dateLabel.text = range
         return header
         
 //        if section == 0{
@@ -86,18 +104,14 @@ extension RankView : UITableViewDelegate{
 
 extension RankView : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        30
+        return boxOfficeInfo?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.id, for: indexPath) as? CustomCell else { return UITableViewCell()}
-        if indexPath.row % 2 == 0{
-            cell.rankGroupView.setInfo(isNew: false, rank: "1", isUp: true, rankDiff: "4")
-            cell.infoGroupView.setInfo(posterImage: UIImage(named:"James") ,title: "아이언맨", releaseDate: "2012", numOfAudience: "123")
-        }else{
-            cell.rankGroupView.setInfo(isNew: true, rank: "2", isUp: false, rankDiff: "2")
-            cell.infoGroupView.setInfo(posterImage: UIImage(named:"James") ,title: "아이언맨", releaseDate: "2012", numOfAudience: "123")
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.id, for: indexPath) as? CustomCell, let boxOfficeInfo = boxOfficeInfo?[indexPath.row] else { return UITableViewCell()}
+        let isNew = boxOfficeInfo.rankOldAndNew == "NEW" ? true : false
+        cell.rankGroupView.setInfo(isNew: isNew, rank: boxOfficeInfo.rank, upAndDown: boxOfficeInfo.rankInten)
+        cell.infoGroupView.setInfo(posterImage: UIImage(named:"James"), title: boxOfficeInfo.movieNm, releaseDate: boxOfficeInfo.openDt, numOfAudience: boxOfficeInfo.audiAcc)
         return cell
     }
     

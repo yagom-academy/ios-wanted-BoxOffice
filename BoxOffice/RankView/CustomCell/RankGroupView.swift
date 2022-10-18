@@ -76,18 +76,26 @@ class RankGroupView : UIView{
         ])
     }
     
-    func setInfo(isNew:Bool, rank:String, isUp:Bool, rankDiff:String ){
+    func setInfo(isNew:Bool, rank:String, upAndDown:String){
         newLabel.text = isNew ? "New" : "  "
         rankLabel.text = rank
-        if isUp{
+        if let upAndDown = Int(upAndDown), upAndDown == 0{
+            rankDiffImage.image = UIImage(systemName: "equal")
+            rankDiffImage.tintColor = .label
+            rankDiffLabel.textColor = .label
+            rankDiffLabel.text = ""
+            return
+        }else if let upAndDown = Int(upAndDown), upAndDown > 0{
             rankDiffImage.image = UIImage(systemName: "arrowtriangle.up.fill")
             rankDiffImage.tintColor = .green
             rankDiffLabel.textColor = .green
-        }else{
+            rankDiffLabel.text = String(upAndDown)
+        }else if let upAndDown = Int(upAndDown), upAndDown < 0{
             rankDiffImage.image = UIImage(systemName: "arrowtriangle.down.fill")
             rankDiffImage.tintColor = .red
             rankDiffLabel.textColor = .red
+            let positive = String(upAndDown * -1)
+            rankDiffLabel.text = positive
         }
-        rankDiffLabel.text = rankDiff
     }
 }

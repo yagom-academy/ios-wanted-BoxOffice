@@ -12,3 +12,10 @@ extension NSLayoutConstraint {
         return NSLayoutConstraint(item: firstItem!, attribute: firstAttribute, relatedBy: relation, toItem: secondItem, attribute: secondAttribute, multiplier: multiplier, constant: constant)
     }
 }
+
+extension String{
+    func extractYear() -> Self{
+        let idx = index(startIndex, offsetBy: 3)
+        return String(self[...idx])
+    }
+}

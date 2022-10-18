@@ -18,6 +18,8 @@ class InfoGroupView : UIView{
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.font = .boldSystemFont(ofSize: 36)
+        lbl.adjustsFontSizeToFitWidth = true
+        lbl.minimumScaleFactor =  10 / lbl.font.pointSize
         return lbl
     }()
     let releaseDateLabel : UILabel = {
@@ -36,7 +38,7 @@ class InfoGroupView : UIView{
         let stackView = UIStackView(arrangedSubviews: [titleLabel,releaseDateLabel,numOfAudienceLabel])
         stackView.distribution = .fillProportionally
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = 20
+        stackView.spacing = 15
         stackView.axis = .vertical
         stackView.alignment = .center
         return stackView
@@ -69,7 +71,8 @@ class InfoGroupView : UIView{
             posterImageView.widthAnchor.constraint(equalTo:posterImageView.heightAnchor,multiplier: 2 / 3),
             posterImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             posterImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 10),
-            posterImageView.trailingAnchor.constraint(equalTo: stackViewV.leadingAnchor)
+            posterImageView.trailingAnchor.constraint(equalTo: stackViewV.leadingAnchor),
+            numOfAudienceLabel.heightAnchor.constraint(equalTo: releaseDateLabel.heightAnchor)
         ])
     }
     
@@ -77,7 +80,7 @@ class InfoGroupView : UIView{
         posterImageView.image = posterImage
         titleLabel.text = title
         releaseDateLabel.text = releaseDate
-        numOfAudienceLabel.text = numOfAudience
+        numOfAudienceLabel.text = "\(numOfAudience)명"
     }
 }
 

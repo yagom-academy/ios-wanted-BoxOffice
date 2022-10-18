@@ -13,11 +13,27 @@ class RankViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetch()
         addSubViews()
         setConstraints()
         rankView.delegate = self
     }
     
+    func fetch(){
+        MovieService().getMovieInfo { result in
+            switch result{
+            case .success(let response):
+                DispatchQueue.main.async {
+                    self.rankView.boxOfficeResponse = response
+                    self.rankView.setInfo()
+                    self.rankView.tableView.reloadData()
+                }
+            case .failure(let error) :
+                print(error.localizedDescription)
+            }
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true

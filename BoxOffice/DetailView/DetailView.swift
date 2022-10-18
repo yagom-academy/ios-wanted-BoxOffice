@@ -52,7 +52,7 @@ class DetailView : UIView {
         setConstraints()
         scrollView.backgroundColor = .systemBackground
         posterView.image = UIImage(named: "James")
-        rankGroudView.setInfo(isNew: true, rank: "3", isUp: true, rankDiff: "2")
+        //rankGroudView.setInfo(isNew: true, rank: "3", isUp: true, rankDiff: "2")
         tableInfoView.setInfo(releaseDate: "2012/12/28", filmYear: "2010", playTime: "120분", genre: "액션", director: "루소 형제", actor: "로버트 다우니 주니어", rate: "12세", numOfAudience: "120M")
       //  scrollView.contentInsetAdjustmentBehavior = .never
     }
