@@ -20,23 +20,56 @@ final class MovieListViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
+    
+    private let indicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.style = .large
+        indicator.color = .blue
+        return indicator
+    }()
+    
+    private let viewModel: MovieListViewModel = .init()
 
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupLayouts()
         self.configure(movieListCollectionView)
+        self.setupViewModel()
+    }
+    
+    private func setupViewModel() {
+        self.viewModel.loadingStart = { [weak self] in
+            self?.indicator.startAnimating()
+        }
+        
+        self.viewModel.updateMovieList = { [weak self] in
+            self?.movieListCollectionView.reloadData()
+        }
+        
+        self.viewModel.loadingEnd = { [weak self] in
+            self?.indicator.stopAnimating()
+        }
+        self.viewModel.requestMovieList(target: "20221017")
+        print("🍎 \(viewModel.movieList)")
     }
     
     // MARK: - Private func
     private func setupLayouts() {
-        self.view.addSubViewsAndtranslatesFalse(movieListCollectionView)
+        self.view.addSubViewsAndtranslatesFalse(movieListCollectionView,
+                                                indicator)
         NSLayoutConstraint.activate([
             movieListCollectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
             movieListCollectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             movieListCollectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            movieListCollectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+            movieListCollectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            indicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            indicator.widthAnchor.constraint(equalToConstant: 40),
+            indicator.heightAnchor.constraint(equalToConstant: 40)
         ])
+        self.view.bringSubviewToFront(self.indicator)
+
     }
     
     private func configure(_ colletionView: UICollectionView) {
