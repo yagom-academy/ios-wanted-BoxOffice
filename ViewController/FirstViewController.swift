@@ -10,8 +10,9 @@ import UIKit
 class FirstViewController: UIViewController {
     @IBOutlet weak var firstTableView: UITableView!
     let targetDay = "20190201"
-    var office: [MovieInfo] = []
     
+    var office: [MovieInfost] = []
+    var detailMovie: [MovieInfo] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,5 +38,17 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let secondViewController = storyboard?.instantiateViewController(withIdentifier: "SecondViewController") as? SecondViewController else { return }
+        
+//        let respone = detailMovie[indexPath.row]
+//        secondViewController.detai
+        
+        
+        
+        
+        self.navigationController?.pushViewController(secondViewController, animated: true)
+    }
     
 }

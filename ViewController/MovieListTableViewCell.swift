@@ -18,7 +18,7 @@ class MovieListTableViewCell: UITableViewCell {
     
     
     
-    func setModel(model: MovieInfo) {
+    func setModel(model: MovieInfost) {
         rankingLabel.text = model.rank       //랭킹
         movieTitleLabel.text = "영화: \(model.movieNm)"     // 제목
         audienceLabel.text = "관객수: \(model.audiAcc)"     //관객수
