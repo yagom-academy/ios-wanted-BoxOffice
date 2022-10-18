@@ -12,6 +12,7 @@
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
 		635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F228F9603A00197BCC /* LaunchScreen.storyboard */; };
 		640A8D6728FF16B700918B14 /* MoviesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640A8D6628FF16B700918B14 /* MoviesListViewController.swift */; };
+		640A8D6A28FF179A00918B14 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640A8D6928FF179A00918B14 /* Observable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		635A19F328F9603A00197BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		635A19F528F9603A00197BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		640A8D6628FF16B700918B14 /* MoviesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewController.swift; sourceTree = "<group>"; };
+		640A8D6928FF179A00918B14 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				640A8D6328FF167B00918B14 /* MoviesList */,
+				640A8D6828FF178500918B14 /* Utils */,
 			);
 			path = MoviesScene;
 			sourceTree = "<group>";
@@ -118,6 +121,14 @@
 			children = (
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		640A8D6828FF178500918B14 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				640A8D6928FF179A00918B14 /* Observable.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,6 +201,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				640A8D6A28FF179A00918B14 /* Observable.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 				640A8D6728FF16B700918B14 /* MoviesListViewController.swift in Sources */,
