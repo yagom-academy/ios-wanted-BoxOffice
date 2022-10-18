@@ -43,10 +43,8 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
         guard let secondViewController = storyboard?.instantiateViewController(withIdentifier: "SecondViewController") as? SecondViewController else { return }
         
 //        let respone = detailMovie[indexPath.row]
-//        secondViewController.detai
-        
-        
-        
+//        secondViewController.movieInfo = MovieInfo.init(movieNm: "1", showTm: "12", prdtYear: "123", openDt: "1234", genres: [Genre(genreNm: "1")], directors: [Director(peopleNm: "2")], actors: [Actor(peopleNm: "2")], audits: [Audit(watchGradeNm: "1")])
+       
         
         self.navigationController?.pushViewController(secondViewController, animated: true)
     }

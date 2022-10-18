@@ -23,10 +23,21 @@ class SecondViewController: UIViewController {
     @IBOutlet weak var comparedToYesterdayLabel: UILabel!
     @IBOutlet weak var newRankingLabel: UILabel!
     
-    var detailMovie: MovieInfo?
+    var movieInFost: MovieInfost?
+    var movieInfo: MovieInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let movieInfo = movieInfo {
+            rankingLabel.text = movieInfo.movieNm
+            movieTitleLabel.text = movieInFost?.movieNm
+        }
+        
+        if let movieInfo = movieInFost {
+            rankingLabel.text = movieInfo.movieNm
+            movieTitleLabel.text = movieInFost?.movieNm
+        }
         
       
     }
