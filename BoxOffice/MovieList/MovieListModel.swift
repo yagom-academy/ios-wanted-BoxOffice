@@ -24,10 +24,7 @@ struct MovieListModel {
     
     var audienceCount: String {
         guard let strToInt = Int(movieEntity.audiCnt) else { return "0" }
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        guard let commaAudience = formatter.string(from: NSNumber(value: strToInt)) else { return "" }
-        return commaAudience + "명"
+        return commaFormatter(strToInt) + "명"
     }
     
     var rankOldAndNew: String {
@@ -36,10 +33,17 @@ struct MovieListModel {
     
     var audienceInten: String {
         guard let strToInt = Int(movieEntity.audiInten) else { return "0" }
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        guard let commaAudience = formatter.string(from: NSNumber(value: strToInt)) else { return "" }
-        return commaAudience + "명"
+        return commaFormatter(strToInt) + "명"
     }
     
+    var movieCode: String {
+        return movieEntity.movieCD
+    }
+}
+
+func commaFormatter(_ num: Int) -> String {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    guard let commaValue = formatter.string(from: NSNumber(value: num)) else { return "" }
+    return commaValue
 }

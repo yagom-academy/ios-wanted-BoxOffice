@@ -9,8 +9,13 @@ import Foundation
 
 final class MovieDetailViewModel {
     
-    var movieDetail: MovieInfo?
-    let detailTitle = ["개요", "감독", "출연", "관객수", "관람등급", "랭킹"]
+    var movieDetail: MovieDetailModel?
+    var movieListModel: MovieListModel? {
+        didSet {
+            guard let data = movieListModel else { return }
+            requestMovieDetail(data: data)
+        }
+    }
 
     private let repository: MovieReqeustable
     
@@ -22,13 +27,15 @@ final class MovieDetailViewModel {
         self.repository = MovieRepository()
     }
     
-    func requestMovieDetail(code: String) {
+    func requestMovieDetail(data: MovieListModel) {
+        print("🥶 \(data)")
         self.loadingStart()
-        repository.fetchMovieDetail(movieCode: code) { [weak self] result in
+        repository.fetchMovieDetail(movieCode: data.movieCode) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let entity):
-                self.movieDetail = entity.movieInfoResult.movieInfo
+                self.movieDetail = MovieDetailModel(movieModel: data,
+                                                    detailEntity: entity.movieInfoResult.movieInfo)
                 self.updateMovieDetail()
                 self.loadingEnd()
             case .failure(let error):

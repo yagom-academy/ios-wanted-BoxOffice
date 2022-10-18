@@ -64,7 +64,7 @@ final class MovieRepository: MovieReqeustable {
             completion(.failure(.noURL))
             return
         }
-        
+        print("url \(url)")
         let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let httpResponse = response as? HTTPURLResponse else {
                 completion(.failure(.unknownError))
@@ -112,7 +112,7 @@ private extension MovieRepository {
     }
     
     struct MovieDetailAPI {
-        static let path = "/kobisopenapi/webservice/rest/boxoffice/searchMovieInfo.json"
+        static let path = "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
     }
     
     private func makeListComponents(targetDate: String) -> URLComponents {

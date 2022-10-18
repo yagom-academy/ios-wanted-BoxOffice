@@ -8,11 +8,11 @@
 import Foundation
 
 struct MovieDetailModel {
-    let movieEntity: DailyBoxOfficeList
+    let movieModel: MovieListModel
     let detailEntity: MovieInfo
     
     var rank: String {
-        return movieEntity.rank
+        return movieModel.rank
     }
     
     var movieName: String {
@@ -28,16 +28,16 @@ struct MovieDetailModel {
     }
     
     var audienceCount: String {
-        guard let strToInt = Int(movieEntity.audiCnt) else { return "0" }
+        guard let strToInt = Int(movieModel.audienceCount) else { return "0" }
         return commaFormatter(strToInt) + "명"
     }
     
     var rankOldAndNew: String {
-        return movieEntity.rankOldAndNew.rawValue
+        return movieModel.rankOldAndNew
     }
     
     var audienceInten: String {
-        guard let strToInt = Int(movieEntity.audiInten) else { return "0" }
+        guard let strToInt = Int(movieModel.audienceInten) else { return "0" }
         return commaFormatter(strToInt) + "명"
     }
     

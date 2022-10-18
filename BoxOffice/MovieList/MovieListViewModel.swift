@@ -8,18 +8,20 @@
 import Foundation
 
 final class MovieListViewModel {
-    private let repository: MovieListReqeustable
+    
+    private let repository: MovieReqeustable
     let targetDate = "20221017"
     var movieList: [MovieListModel] = .init([])
     var boxofficeType: String = ""
     var showRange: String = ""
-    
+    var movieCode: String = ""
+   
     var loadingStart: (() -> Void) = {}
     var loadingEnd: (() -> Void) = {}
     var updateMovieList: (() -> Void) = {}
     
     init() {
-        self.repository = MovieListRepository()
+        self.repository = MovieRepository()
     }
     
     func requestMovieList(target: String) {

@@ -63,10 +63,11 @@ final class MovieDetailViewController: UIViewController {
         return tableView
     }()
     
-    private let viewModel: MovieDetailViewModel = .init()
+    let viewModel: MovieDetailViewModel = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
         self.setupLayouts()
         self.configure(movieDetailTableView)
     }
@@ -110,7 +111,7 @@ final class MovieDetailViewController: UIViewController {
 
 extension MovieDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.detailTitle.count
+        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -126,19 +127,3 @@ extension MovieDetailViewController: UITableViewDelegate {
     }
 }
 
-struct MovieDetailViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        Container().edgesIgnoringSafeArea(.all)
-    }
-    
-    struct Container: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> UIViewController {
-            let vc = MovieDetailViewController()
-            return UINavigationController(rootViewController: vc)
-        }
-        
-        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) { }
-        
-        typealias UIViewControllerType = UIViewController
-    }
-}

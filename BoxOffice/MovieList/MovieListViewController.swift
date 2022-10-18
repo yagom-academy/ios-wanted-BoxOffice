@@ -43,7 +43,6 @@ final class MovieListViewController: UIViewController {
     
     private func settingNavigation() {
         self.navigationItem.title = "\(viewModel.targetDate) 순위"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func setupViewModel() {
@@ -103,7 +102,11 @@ extension MovieListViewController: UICollectionViewDataSource {
 }
 
 extension MovieListViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = MovieDetailViewController()
+        vc.viewModel.movieListModel = viewModel.movieList[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension MovieListViewController: UICollectionViewDelegateFlowLayout {
