@@ -41,6 +41,7 @@ class BoxOfficeTableViewCell: UITableViewCell {
     
     let lineView: UIView = {
         let view = UIView()
+        view.backgroundColor = .systemGray5
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -116,9 +117,19 @@ class BoxOfficeTableViewCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    let movieInfoStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 15
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        print("\(self.frame.width - 110)")
         
         [boxOfficeRank, boxOfficeLabel].forEach {
             self.boxOfficeRankStackView.addArrangedSubview($0)
@@ -130,6 +141,10 @@ class BoxOfficeTableViewCell: UITableViewCell {
         
         [rankInten, rankIntenLabel].forEach {
             self.rankIntenStackView.addArrangedSubview($0)
+        }
+        
+        [boxOfficeRankStackView, rankIntenStackView, audiAccStackView].forEach {
+            self.movieInfoStackView.addArrangedSubview($0)
         }
 
         addView()
@@ -145,9 +160,7 @@ class BoxOfficeTableViewCell: UITableViewCell {
         addSubview(movieName)
         addSubview(openDate)
         addSubview(lineView)
-        addSubview(boxOfficeRankStackView)
-        addSubview(audiAccStackView)
-        addSubview(rankIntenStackView)
+        addSubview(movieInfoStackView)
     }
     
     func configure() {
@@ -155,7 +168,7 @@ class BoxOfficeTableViewCell: UITableViewCell {
             posterImageView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             posterImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             posterImageView.heightAnchor.constraint(equalToConstant: 100),
-            posterImageView.widthAnchor.constraint(equalToConstant: 80),
+            posterImageView.widthAnchor.constraint(equalToConstant: 70),
             
             rankOldAndNew.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             rankOldAndNew.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
@@ -169,15 +182,11 @@ class BoxOfficeTableViewCell: UITableViewCell {
             lineView.topAnchor.constraint(equalTo: openDate.bottomAnchor, constant: 10),
             lineView.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
             lineView.heightAnchor.constraint(equalToConstant: 1),
+            lineView.widthAnchor.constraint(equalToConstant: 250),
             
-            boxOfficeRankStackView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: 10),
-            boxOfficeRankStackView.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
-            
-            rankIntenStackView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: 10),
-            rankIntenStackView.leadingAnchor.constraint(equalTo: boxOfficeRankStackView.trailingAnchor, constant: 20),
-            
-            audiAccStackView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: 10),
-            audiAccStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            movieInfoStackView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: 10),
+            movieInfoStackView.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
+            movieInfoStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
         ])
     }
 }

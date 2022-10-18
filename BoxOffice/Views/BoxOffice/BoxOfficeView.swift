@@ -56,7 +56,7 @@ extension BoxOfficeView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = boxOfficeTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BoxOfficeTableViewCell
-        cell.posterImageView.image = UIImage(named: "image")
+        cell.posterImageView.image = UIImage(named: "poster")
         cell.rankOldAndNew.text = "New"
         cell.movieName.text = "영화이름"
         cell.openDate.text = "2022-10-13"
