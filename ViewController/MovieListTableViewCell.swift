@@ -20,11 +20,11 @@ class MovieListTableViewCell: UITableViewCell {
     
     func setModel(model: MovieInfo) {
         rankingLabel.text = model.rank       //랭킹
-        movieTitleLabel.text = model.movieNm     // 제목
-        audienceLabel.text = model.audiAcc     //관객수
-        openingDateLabel.text = model.openDt    //개봉일
-        newRankingLabel.text = model.rankOldAndNew    // 신규 진입
-        comparedToYesterdayLabel.text = model.rankInten  //전일대비 순위변동
+        movieTitleLabel.text = "영화: \(model.movieNm)"     // 제목
+        audienceLabel.text = "관객수: \(model.audiAcc)"     //관객수
+        openingDateLabel.text = "개봉일: \(model.openDt)"    //개봉일
+        newRankingLabel.text = "신규 판별 - \(model.rankOldAndNew)"    // 신규 진입
+        comparedToYesterdayLabel.text = "순위변동 : \(model.rankInten)"  //전일대비 순위변동
     }
   
     

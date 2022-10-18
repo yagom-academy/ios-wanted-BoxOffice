@@ -11,7 +11,7 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var firstTableView: UITableView!
     let targetDay = "20190201"
     var office: [MovieInfo] = []
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,18 +25,14 @@ class FirstViewController: UIViewController {
 
 extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//                return 5
-        
         return office.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieListTableViewCell", for: indexPath) as? MovieListTableViewCell else { return UITableViewCell() }
         
-            let test = office[indexPath.row]
-            cell.setModel(model: test)
-
-//        cell.rankingLabel.text = "1"
+        let test = office[indexPath.row]
+        cell.setModel(model: test)
         return cell
         
     }
