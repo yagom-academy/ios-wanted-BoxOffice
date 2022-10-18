@@ -26,12 +26,14 @@ class MovieTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    func dataModel(_ model: Model) {
-        rankingLabel.text = model.rank
-        openingDateLabel.text = model.openDt
-        newRankingLabel.text = model.rankInten
-        movieNameLabel.text = model.moviNm
-       
+    func dataModel(_ model: MovieModel) {
+        rankingLabel.text = "영화순위: \(model.순위)"
+        openingDateLabel.text = "개봉 날짜: \(model.오픈날짜)"
+        newRankingLabel.text = "신규진입: \(model.신규진입)"
+        movieNameLabel.text = "영화명: \(model.영화제목)"
+        audienceLabel.text = "관객수: \(model.관객수)"
+        increaseRanking.text = "전날대비순위: \(model.순위증감)"
+        
     }
 }
     

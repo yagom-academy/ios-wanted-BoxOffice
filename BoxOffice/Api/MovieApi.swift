@@ -8,9 +8,9 @@
 import Foundation
 
 class MovieApi {
-   class func getData(todays: String, completion: @escaping (movieCodable) -> Void) {
+    class func getData(todays: String,itemPerPage:String, completion: @escaping (MovieCodable) -> Void) {
         let defaultSession = URLSession(configuration: .default)
-        guard let url = URL(string: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=\(todays)") else {
+        guard let url = URL(string: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=\(todays)&itemPerPage=\(itemPerPage)&wideAreaCd=0105001") else {
             print("URL is nil")
             return
         }
@@ -25,10 +25,10 @@ class MovieApi {
             }
             let decoder = JSONDecoder()
             do {
-                let result = try decoder.decode(movieCodable.self, from: data)
+                let result = try decoder.decode(MovieCodable.self, from: data)
                 DispatchQueue.main.async {
                     completion(result)
-                    print(result)
+                  
                 }
             } catch {
                 print(error)
