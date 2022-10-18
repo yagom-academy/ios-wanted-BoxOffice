@@ -12,6 +12,7 @@ class BoxOfficeView: UIView {
     let boxOfficeTableView: UITableView = {
         let view = UITableView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.separatorStyle = .none
         return view
     }()
     

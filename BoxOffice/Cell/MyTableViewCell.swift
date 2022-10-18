@@ -8,5 +8,5 @@
 import Foundation
 
 protocol MyTableViewCell {
-    let identifier: String { get set }
+    static var identifier: String { get set }
 }
