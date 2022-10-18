@@ -9,9 +9,9 @@ import Foundation
 
 extension KeyedDecodingContainer {
 
-    func decodeStringAsDate(forKey key: Key) -> Date? {
+    func decodeStringAsDate(forKey key: Key, withFormat format: String = "yyyy-MM-dd") -> Date? {
         guard let stringValue = try? decode(String.self, forKey: key),
-              let dateValue = stringValue.date else {
+              let dateValue = stringValue.date(withFormat: format) else {
             return nil
         }
         return dateValue

@@ -17,7 +17,7 @@ final class MovieListViewController: UIViewController {
     // MARK: Properties
 
     private let movieSearchService = MovieSearchService()
-    private var movies: [Movie] = []
+    private var movies: [MovieRanking] = []
 
     // MARK: View Life Cycle
 
@@ -25,7 +25,7 @@ final class MovieListViewController: UIViewController {
         super.viewWillAppear(animated)
 
         // TODO: 데이터요청
-        movieSearchService.searchBoxOffice(for: .daily) { movies in
+        movieSearchService.searchMovieRanking(for: .daily) { movies in
             self.movies = movies
             self.tableView.reloadData()
         }

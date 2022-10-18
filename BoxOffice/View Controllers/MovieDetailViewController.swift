@@ -29,7 +29,7 @@ final class MovieDetailViewController: UIViewController {
 
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
 
-    var movie: Movie!
+    var movie: MovieRanking!
 
     // MARK: View Life Cycle
 
@@ -43,32 +43,23 @@ final class MovieDetailViewController: UIViewController {
     private func configureCollectionView() {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
                                                             layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-            //            let columns = sectionIndex == 0 ? 4 : 1
-            let columns = 1
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                  heightDimension: .fractionalHeight(1.0))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
-
-            let groupHeight = columns == 1 ?
-            NSCollectionLayoutDimension.absolute(44) :
-            NSCollectionLayoutDimension.fractionalWidth(0.2)
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                   heightDimension: groupHeight)
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: columns)
-
-            let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
-
-            let headerFooterSize = sectionIndex == 0 ?
-            NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(88)) :
-            NSCollectionLayoutSize(widthDimension: .absolute(.zero), heightDimension: .absolute(.zero))
             let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerFooterSize, elementKind: TitleSupplementaryView.reuseIdentifier, alignment: .top)
             section.boundarySupplementaryItems = [sectionHeader]
             return section
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: headerFooterSize,
+                    elementKind: RankingSupplementaryView.reuseIdentifier,
+                    alignment: .top
+                )
+                section.boundarySupplementaryItems = [sectionHeader]
+                return section
         }
         collectionView.collectionViewLayout = layout
-        collectionView.register(TitleSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TitleSupplementaryView.reuseIdentifier)
+        collectionView.register(
+            RankingSupplementaryView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: RankingSupplementaryView.reuseIdentifier
+        )
     }
 
     func configureDataSource()  {
@@ -85,7 +76,7 @@ final class MovieDetailViewController: UIViewController {
             }
         }
 
-        let headerRegistration = UICollectionView.SupplementaryRegistration<TitleSupplementaryView>(elementKind: TitleSupplementaryView.reuseIdentifier) {
+        let headerRegistration = UICollectionView.SupplementaryRegistration<RankingSupplementaryView>(elementKind: RankingSupplementaryView.reuseIdentifier) {
             supplementaryView, string, indexPath in
             supplementaryView.nameLabel.text = self.movie.name
             supplementaryView.numberOfMoviegoersLabel.text = "누적관객 \(self.movie.numberOfMoviegoers.string)명"
@@ -114,7 +105,7 @@ final class MovieDetailViewController: UIViewController {
         }
 
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-            return collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
+                return collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
         }
 
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()

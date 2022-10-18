@@ -9,11 +9,10 @@ import Foundation
 
 extension String {
 
-    var date: Date? {
-        let formatter = DateFormatter()
-        formatter.timeZone = TimeZone.current
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.date(from: self)
+    func date(withFormat format: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.date(from: self)
     }
 
     var int: Int? {

@@ -1,5 +1,5 @@
 //
-//  MovieResponse.swift
+//  MovieRankingResponse.swift
 //  BoxOffice
 //
 //  Created by 홍다희 on 2022/10/17.
@@ -7,24 +7,24 @@
 
 import Foundation
 
-struct MovieResponse: Decodable {
+struct MovieRankingResponse: Decodable {
 
     // MARK: Properties
 
-    let movies: [Movie]
+    let rankingList: [MovieRanking]
 
     // MARK: Decodable
 
     enum CodingKeys: String, CodingKey {
         case nestedContainer = "boxOfficeResult"
-        case movies = "dailyBoxOfficeList"
+        case rankingList = "dailyBoxOfficeList"
     }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.movies = try container
+        rankingList = try container
             .nestedContainer(keyedBy: CodingKeys.self, forKey: .nestedContainer)
-            .decode([Movie].self, forKey: .movies)
+            .decode([MovieRanking].self, forKey: .rankingList)
     }
     
 }
