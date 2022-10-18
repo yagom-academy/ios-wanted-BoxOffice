@@ -22,6 +22,8 @@
 		5DEE036D28FDC9B7007B71AB /* MovieReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEE036C28FDC9B7007B71AB /* MovieReview.swift */; };
 		5DEE037328FE3F0D007B71AB /* movie.detail.json in Resources */ = {isa = PBXBuildFile; fileRef = 5DEE037228FE3F0D007B71AB /* movie.detail.json */; };
 		5DEE037528FE45AF007B71AB /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEE037428FE45AF007B71AB /* MovieDetail.swift */; };
+		5DFB655428FEF19A00DC2443 /* MovieRankingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DFB655328FEF19A00DC2443 /* MovieRankingView.xib */; };
+		5DFB655628FEF36000DC2443 /* MovieRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFB655528FEF36000DC2443 /* MovieRankingView.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19EC28F9603900197BCC /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* MovieListViewController.swift */; };
@@ -46,6 +48,8 @@
 		5DEE036C28FDC9B7007B71AB /* MovieReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReview.swift; sourceTree = "<group>"; };
 		5DEE037228FE3F0D007B71AB /* movie.detail.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = movie.detail.json; sourceTree = "<group>"; };
 		5DEE037428FE45AF007B71AB /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
+		5DFB655328FEF19A00DC2443 /* MovieRankingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieRankingView.xib; sourceTree = "<group>"; };
+		5DFB655528FEF36000DC2443 /* MovieRankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRankingView.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +86,7 @@
 				635A19EB28F9603900197BCC /* MovieListViewController.swift */,
 				5DAF347C28FD38A700A31BB7 /* MovieListTableViewCell.swift */,
 				5DEE036A28FDB996007B71AB /* MovieDetailViewController.swift */,
+				5DFB655528FEF36000DC2443 /* MovieRankingView.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -91,6 +96,7 @@
 			children = (
 				635A19ED28F9603900197BCC /* Main.storyboard */,
 				635A19F228F9603A00197BCC /* LaunchScreen.storyboard */,
+				5DFB655328FEF19A00DC2443 /* MovieRankingView.xib */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -230,6 +236,7 @@
 				5DEE037328FE3F0D007B71AB /* movie.detail.json in Resources */,
 				635A19F128F9603A00197BCC /* Assets.xcassets in Resources */,
 				5DEE035E28FD7F0F007B71AB /* movie.ranking.json in Resources */,
+				5DFB655428FEF19A00DC2443 /* MovieRankingView.xib in Resources */,
 				635A19EF28F9603900197BCC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,6 +261,7 @@
 				5DEE036D28FDC9B7007B71AB /* MovieReview.swift in Sources */,
 				5DEE036928FDAF52007B71AB /* Logger+.swift in Sources */,
 				5DAF348728FD454B00A31BB7 /* Date+.swift in Sources */,
+				5DFB655628FEF36000DC2443 /* MovieRankingView.swift in Sources */,
 				5DEE036728FD9DB2007B71AB /* DurationUnit.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 				5DAF348028FD38EA00A31BB7 /* Reusable+.swift in Sources */,

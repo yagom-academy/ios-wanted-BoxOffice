@@ -46,6 +46,7 @@ final class MovieDetailViewController: UIViewController {
 
         configureCollectionView()
         configureDataSource()
+        configureMovieRankingView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -128,7 +129,7 @@ final class MovieDetailViewController: UIViewController {
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Self.reuseIdentifier)
     }
 
-    func configureDataSource()  {
+    private func configureDataSource()  {
         // Cell Registration
         let infoItemRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, AnyHashable> { cell, indexPath, item in
             if let info = item as? MovieDetailInfo {
@@ -223,6 +224,22 @@ final class MovieDetailViewController: UIViewController {
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 
+    private func configureMovieRankingView() {
+        let movieRankingView = MovieRankingView(frame: .zero)
+        movieRankingView.translatesAutoresizingMaskIntoConstraints = false
+
+        let height: CGFloat = 88
+        collectionView.addSubview(movieRankingView)
+        NSLayoutConstraint.activate([
+            movieRankingView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: -height),
+            movieRankingView.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
+            movieRankingView.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
+            movieRankingView.heightAnchor.constraint(equalToConstant: height),
+        ])
+        collectionView.contentInset = UIEdgeInsets(top: height, left: 0, bottom: 0, right: 0)
+        movieRankingView.configure(with: movie)
+    }
+    
 }
 
 // MARK: - UICollectionViewDelegate
