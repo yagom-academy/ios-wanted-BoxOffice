@@ -25,6 +25,10 @@ final class MovieListViewController: UIViewController {
         super.viewWillAppear(animated)
 
         // TODO: 데이터요청
+        movieSearchService.searchBoxOffice(for: .daily) { movies in
+            self.movies = movies
+            self.tableView.reloadData()
+        }
     }
 
     // MARK: - Navigation
@@ -64,6 +68,11 @@ extension MovieListViewController: UITableViewDataSource {
         cell.openDateLabel.text = "\(movie.openDate.dateString()) 개봉"
         cell.numberOfMoviegoersLabel.text = "누적관객 \(movie.numberOfMoviegoers.string)명"
         cell.isNewRankingLabel.text = movie.isNewRanking ? "NEW" : nil
+        if !movie.isNewRanking {
+            cell.isNewRankingLabel.removeFromSuperview()
+        } else {
+            cell.isNewRankingLabel.text = "NEW"
+        }
         if movie.changeRanking == 0 {
             cell.changeRankingInfoView.removeFromSuperview()
         } else {

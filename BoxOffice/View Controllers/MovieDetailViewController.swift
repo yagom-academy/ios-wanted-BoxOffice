@@ -29,7 +29,7 @@ final class MovieDetailViewController: UIViewController {
 
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
 
-    var movie: Movie?
+    var movie: Movie!
 
     // MARK: View Life Cycle
 
@@ -43,8 +43,8 @@ final class MovieDetailViewController: UIViewController {
     private func configureCollectionView() {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
                                                             layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-            let columns = sectionIndex == 0 ? 4 : 1
-
+            //            let columns = sectionIndex == 0 ? 4 : 1
+            let columns = 1
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                   heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -59,19 +59,21 @@ final class MovieDetailViewController: UIViewController {
 
             let section = NSCollectionLayoutSection(group: group)
             section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+
+            let headerFooterSize = sectionIndex == 0 ?
+            NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(88)) :
+            NSCollectionLayoutSize(widthDimension: .absolute(.zero), heightDimension: .absolute(.zero))
+            let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerFooterSize, elementKind: TitleSupplementaryView.reuseIdentifier, alignment: .top)
+            section.boundarySupplementaryItems = [sectionHeader]
             return section
         }
         collectionView.collectionViewLayout = layout
+        collectionView.register(TitleSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TitleSupplementaryView.reuseIdentifier)
     }
 
     func configureDataSource()  {
         // TODO: MovieCell
         let movieItemRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, item in
-            if case .movie(let movie) = item {
-                var content = cell.defaultContentConfiguration()
-                content.text = movie.name
-                cell.contentConfiguration = content
-            }
         }
 
         // TODO: ReviewCell
@@ -83,6 +85,27 @@ final class MovieDetailViewController: UIViewController {
             }
         }
 
+        let headerRegistration = UICollectionView.SupplementaryRegistration<TitleSupplementaryView>(elementKind: TitleSupplementaryView.reuseIdentifier) {
+            supplementaryView, string, indexPath in
+            supplementaryView.nameLabel.text = self.movie.name
+            supplementaryView.numberOfMoviegoersLabel.text = "누적관객 \(self.movie.numberOfMoviegoers.string)명"
+            supplementaryView.rankingLabel.text = self.movie.ranking.string
+            if self.movie.isNewRanking {
+                supplementaryView.isNewRankingLabel.text = "NEW"
+            } else {
+                supplementaryView.isNewRankingInfoView.removeFromSuperview()
+            }
+            if self.movie.changeRanking == 0 {
+                supplementaryView.changeRankingInfoView.removeFromSuperview()
+            } else {
+                let up = self.movie.changeRanking > 0
+                supplementaryView.changeRankingLabel.text = self.movie.changeRanking.string
+                supplementaryView.changeRankingImageView.image = up ? UIImage(systemName: "arrowtriangle.up.fill") : UIImage(systemName: "arrowtriangle.down.fill")
+                supplementaryView.changeRankingLabel.textColor = up ? .systemPink : .systemBlue
+                supplementaryView.changeRankingImageView.tintColor = up ? .systemPink : .systemBlue
+            }
+        }
+
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) {
             (collectionView, indexPath, identifier) -> UICollectionViewCell? in
             return indexPath.section == 0 ?
@@ -90,8 +113,12 @@ final class MovieDetailViewController: UIViewController {
             collectionView.dequeueConfiguredReusableCell(using: reviewItemRegistration, for: indexPath, item: identifier)
         }
 
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            return collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
+        }
+
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-        let movieSection = Section(title: "Movie", items: [Item.movie(movie!)])
+        let movieSection = Section(title: "Movie", items: [])
         let reviews = Review.sampleData.map { Item.review($0) }
         let reviewSection = Section(title: "Review", items: reviews)
         snapshot.appendSections([movieSection, reviewSection])

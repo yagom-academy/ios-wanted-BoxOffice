@@ -1,5 +1,5 @@
 //
-//  UITableViewCell+Reusable.swift
+//  Reusable+.swift
 //  BoxOffice
 //
 //  Created by 홍다희 on 2022/10/17.
@@ -22,3 +22,4 @@ extension Reusable {
 }
 
 extension UITableViewCell: Reusable { }
+extension UICollectionReusableView: Reusable { }
