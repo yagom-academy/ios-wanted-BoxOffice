@@ -18,14 +18,15 @@ class MovieListTableViewCell: UITableViewCell {
     
     
     
-    func setModel(model: Movie) {
-        rankingLabel.text = "\(model.ranking)"
-        movieTitleLabel.text = model.movieTitle
-        audienceLabel.text = "\(model.audience)"
-        openingDateLabel.text = "\(model.openingDate)"
-        newRankingLabel.text = "\(model.newRanking)"
-        comparedToYesterdayLabel.text = "\(model.comparedToYesterday)"
+    func setModel(model: MovieInfo) {
+        rankingLabel.text = model.rank       //랭킹
+        movieTitleLabel.text = model.movieNm     // 제목
+        audienceLabel.text = model.audiAcc     //관객수
+        openingDateLabel.text = model.openDt    //개봉일
+        newRankingLabel.text = model.rankOldAndNew    // 신규 진입
+        comparedToYesterdayLabel.text = model.rankInten  //전일대비 순위변동
     }
+  
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -9,30 +9,23 @@ import UIKit
 
 class FirstViewController: UIViewController {
     @IBOutlet weak var firstTableView: UITableView!
+    let targetDay = "20190201"
+    var office: [MovieInfo] = []
+
     
-    
-    var office: [Movie] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        //코다블 을 불러오는문제     코다블 코딩키 검색  코다블
+        OfficeApi.callAPI(targetDay: targetDay) { data in
+            self.office = data.boxOfficeResult.dailyBoxOfficeList
+            self.firstTableView.reloadData()
+        }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //        return 5
+//                return 5
         
         return office.count
     }

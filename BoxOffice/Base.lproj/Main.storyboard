@@ -299,7 +299,7 @@
             </objects>
             <point key="canvasLocation" x="976.92307692307691" y="-2.1327014218009479"/>
         </scene>
-        <!--View Controller-->
+        <!--주간-->
         <scene sceneID="Ngd-sT-pZP">
             <objects>
                 <viewController id="rnt-ZA-tD7" sceneMemberID="viewController">
@@ -309,7 +309,7 @@
                         <viewLayoutGuide key="safeArea" id="Oos-CO-leH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="QX3-Ay-Vrs"/>
+                    <navigationItem key="navigationItem" title="주간" id="QX3-Ay-Vrs"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r2H-VN-Lb0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -321,6 +321,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="BdR-2l-WQk" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xSc-At-2Yd">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -333,11 +334,11 @@
             </objects>
             <point key="canvasLocation" x="47.692307692307693" y="-2.1327014218009479"/>
         </scene>
-        <!--테스트용-->
+        <!--주간-->
         <scene sceneID="Vty-9T-mcK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6rh-qs-ggK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="테스트용" image="pencil.circle" catalog="system" id="eAR-AA-jrA"/>
+                    <tabBarItem key="tabBarItem" title="주간" image="pencil.circle" catalog="system" id="eAR-AA-jrA"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0in-e7-5fj">
                         <rect key="frame" x="0.0" y="47" width="390" height="44"/>
