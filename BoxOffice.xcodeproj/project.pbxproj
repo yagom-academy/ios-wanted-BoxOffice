@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0B87453028FE724200E5155E /* BoxOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87452F28FE724200E5155E /* BoxOfficeViewController.swift */; };
+		0B87453628FE730200E5155E /* BoxOfficeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87453528FE730200E5155E /* BoxOfficeView.swift */; };
+		0B87453A28FE78D000E5155E /* BoxOfficeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87453928FE78D000E5155E /* BoxOfficeTableViewCell.swift */; };
+		0B87453C28FE794D00E5155E /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87453B28FE794D00E5155E /* MyTableViewCell.swift */; };
+		0B87454428FE80DA00E5155E /* BoxOfficeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87454328FE80DA00E5155E /* BoxOfficeModel.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
@@ -16,6 +20,10 @@
 
 /* Begin PBXFileReference section */
 		0B87452F28FE724200E5155E /* BoxOfficeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeViewController.swift; sourceTree = "<group>"; };
+		0B87453528FE730200E5155E /* BoxOfficeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeView.swift; sourceTree = "<group>"; };
+		0B87453928FE78D000E5155E /* BoxOfficeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeTableViewCell.swift; sourceTree = "<group>"; };
+		0B87453B28FE794D00E5155E /* MyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
+		0B87454328FE80DA00E5155E /* BoxOfficeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeModel.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,6 +43,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B87453328FE72B900E5155E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0B87453528FE730200E5155E /* BoxOfficeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0B87453428FE72C700E5155E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0B87452F28FE724200E5155E /* BoxOfficeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		0B87453828FE77BD00E5155E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0B87453B28FE794D00E5155E /* MyTableViewCell.swift */,
+				0B87453928FE78D000E5155E /* BoxOfficeTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		0B87454228FE80C200E5155E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0B87454328FE80DA00E5155E /* BoxOfficeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		635A19DB28F9603900197BCC = {
 			isa = PBXGroup;
 			children = (
@@ -56,7 +97,10 @@
 			children = (
 				635A19E728F9603900197BCC /* AppDelegate.swift */,
 				635A19E928F9603900197BCC /* SceneDelegate.swift */,
-				0B87452F28FE724200E5155E /* BoxOfficeViewController.swift */,
+				0B87453428FE72C700E5155E /* Controller */,
+				0B87453328FE72B900E5155E /* View */,
+				0B87453828FE77BD00E5155E /* Cell */,
+				0B87454228FE80C200E5155E /* Model */,
 				635A19F028F9603A00197BCC /* Assets.xcassets */,
 				635A19F228F9603A00197BCC /* LaunchScreen.storyboard */,
 				635A19F528F9603A00197BCC /* Info.plist */,
@@ -135,8 +179,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B87453028FE724200E5155E /* BoxOfficeViewController.swift in Sources */,
+				0B87453A28FE78D000E5155E /* BoxOfficeTableViewCell.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
+				0B87454428FE80DA00E5155E /* BoxOfficeModel.swift in Sources */,
+				0B87453628FE730200E5155E /* BoxOfficeView.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
+				0B87453C28FE794D00E5155E /* MyTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
