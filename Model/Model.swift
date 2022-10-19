@@ -8,6 +8,7 @@
 import Foundation
 
 
+
 struct MovieInfost: Codable {
     let rank: String // 랭킹
     let rankInten: String // 전일대비 순위변동 순위증감
@@ -15,7 +16,10 @@ struct MovieInfost: Codable {
     let audiAcc: String // 누적관객
     let movieNm: String // 영화제목
     let openDt: String  // 개봉일
+    /// 영화코드
+    let movieCd: String
 }
+
 
 struct MainBoxOfficeList: Codable {
     let boxofficeType: String
@@ -26,6 +30,7 @@ struct MainBoxOfficeList: Codable {
 struct BoxOffice: Codable {
     let boxOfficeResult: MainBoxOfficeList
 }
+
 
 //1111111111111111
 //-------------------------------------------

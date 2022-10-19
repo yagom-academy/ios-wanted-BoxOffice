@@ -7,6 +7,13 @@
 
 import UIKit
 
+struct SecondViewModel {
+    let rank: String
+    let movieTitle: String
+    let openingDate: String
+    let genre: String
+}
+
 class SecondViewController: UIViewController {
     @IBOutlet weak var rankingLabel: UILabel!
     @IBOutlet weak var movieTitleLabel: UILabel!
@@ -22,37 +29,35 @@ class SecondViewController: UIViewController {
     @IBOutlet weak var yearOfManufactureLabel: UILabel!  //제작연도
     @IBOutlet weak var comparedToYesterdayLabel: UILabel!  //전일대비
     @IBOutlet weak var newRankingLabel: UILabel!    ///신규랭킹
-    
-    var movieInFost: MovieInfost?
-    var movieInfo: MovieInfo?
+
+    private var secondViewModel: SecondViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setModel()
-        loadLabel()
+        setLabels()
     }
-   
     ///1 api
-    func setModel() {
-        if let movieInfost = movieInFost {
-            rankingLabel.text = movieInfost.rank
-            movieTitleLabel.text = movieInfost.movieNm
-            openingDateLabel.text = "개봉일 :\(movieInfost.openDt)"
-            audienceLabel.text = "관객수: \(movieInfost.audiAcc)명"
-            comparedToYesterdayLabel.text = "순위변동 : \(movieInfost.rankInten)"
-            newRankingLabel.text = "신규 판별 : \(movieInfost.rankOldAndNew)"
-        }
+    func setModel(_ secondViewModel: SecondViewModel) {
+        self.secondViewModel = secondViewModel
     }
-  ///2 api
-    func loadLabel() {
-        if let movieInfo = movieInfo {
-            genreLabel.text = "\(movieInfo.genres[0].genreNm)"
-            viewingLevelLabel.text = "\(movieInfo.audits[0].watchGradeNm)"
-            runTimeLabel.text = movieInfo.showTm
-            directorName.text = "감독:\(movieInfo.directors[0].peopleNm)님"
-            actorName.text = "배우:\(movieInfo.actors[0].peopleNm)님"
-            yearOfReleaseLabel.text = movieInfo.openDt
-            yearOfManufactureLabel.text = movieInfo.prdtYear
-        }
+    
+    func setLabels() {
+        guard let secondViewModel else { return }
+        rankingLabel.text = secondViewModel.rank
+        movieTitleLabel.text = secondViewModel.movieTitle
+        openingDateLabel.text = "개봉일: \(secondViewModel.openingDate)"
+        genreLabel.text = secondViewModel.genre
     }
+//  ///2 api
+//    func loadLabel() {
+//        if let movieInfo = movieInfo {
+//            genreLabel.text = "\(movieInfo.genres[0].genreNm)"
+//            viewingLevelLabel.text = "\(movieInfo.audits[0].watchGradeNm)"
+//            runTimeLabel.text = "\(movieInfo.showTm)분"
+//            directorName.text = "감독:\(movieInfo.directors[0].peopleNm)님"
+//            actorName.text = "배우:\(movieInfo.actors[0].peopleNm)님"
+//            yearOfReleaseLabel.text = movieInfo.openDt
+//            yearOfManufactureLabel.text = movieInfo.prdtYear
+//        }
+//    }
 }

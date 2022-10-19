@@ -10,15 +10,13 @@ import UIKit
 class FirstViewController: UIViewController {
     @IBOutlet weak var firstTableView: UITableView!
     let targetDay = "20190201"
-    let targetData = "20124079"
     var office: [MovieInfost] = []
-    var detailMovie: [MovieInfo] = []
+//    var detailMovie: [MovieInfo] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         officeapi()
-        detailapi()
         
     }
     ///첫번째화면 API
@@ -30,10 +28,12 @@ class FirstViewController: UIViewController {
         }
     }
     ///두번째화면 API
-    func detailapi() {
+    func detailapi(targetData: String, completion: @escaping (MovieInfo) -> Void) {
         MovieApi.callApiDetail(targetData: targetData) { data in
-            self.detailMovie.append(MovieInfo(movieNm: data.movieInfoResult.movieInfo.movieNm, showTm: data.movieInfoResult.movieInfo.showTm, prdtYear: data.movieInfoResult.movieInfo.prdtYear, openDt: data.movieInfoResult.movieInfo.openDt, genres: data.movieInfoResult.movieInfo.genres, directors: data.movieInfoResult.movieInfo.directors, actors: data.movieInfoResult.movieInfo.actors, audits: data.movieInfoResult.movieInfo.audits))
-            self.firstTableView.reloadData()
+            completion(data.movieInfoResult.movieInfo)
+            
+            //            self.detailMovie.append(MovieInfo(movieNm: data.movieInfoResult.movieInfo.movieNm, showTm: data.movieInfoResult.movieInfo.showTm, prdtYear: data.movieInfoResult.movieInfo.prdtYear, openDt: data.movieInfoResult.movieInfo.openDt, genres: data.movieInfoResult.movieInfo.genres, directors: data.movieInfoResult.movieInfo.directors, actors: data.movieInfoResult.movieInfo.actors, audits: data.movieInfoResult.movieInfo.audits))
+            //            self.firstTableView.reloadData()
         }
     }
 }
@@ -56,16 +56,12 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let secondViewController = storyboard?.instantiateViewController(withIdentifier: "SecondViewController") as? SecondViewController else { return }
         
-        let respone = detailMovie[indexPath.row]
-        secondViewController.loadLabel()  //2api
-        secondViewController.movieInfo = MovieInfo.init(movieNm: respone.movieNm, showTm: respone.showTm, prdtYear: respone.prdtYear, openDt: respone.openDt, genres: respone.genres, directors: respone.directors, actors: respone.actors, audits: respone.audits)
-        
-        let movie = office[indexPath.row]
-        secondViewController.setModel()   //1 api
-        secondViewController.movieInFost = MovieInfost.init(rank: movie.rank, rankInten: movie.rankInten, rankOldAndNew: movie.rankOldAndNew, audiAcc: movie.audiAcc, movieNm: movie.movieNm, openDt: movie.openDt)
-
-        
-        self.navigationController?.pushViewController(secondViewController, animated: true)
+        let selectOffice = office[indexPath.row]
+        detailapi(targetData: selectOffice.movieCd) { movieInfo in
+            let secondViewModel = SecondViewModel.init(rank: selectOffice.rank, movieTitle: selectOffice.movieNm, openingDate: selectOffice.openDt, genre: movieInfo.genres.first?.genreNm ?? "")
+            secondViewController.setModel(secondViewModel)
+            self.navigationController?.pushViewController(secondViewController, animated: true)
+        }
     }
     
 }

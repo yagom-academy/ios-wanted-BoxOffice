@@ -10,8 +10,8 @@ import Foundation
 
 class MovieApi {
     class func callApiDetail(targetData: String, completion: @escaping (Empty) -> Void ) {
+//        let target = MovieInfost.shared.movieCd
         let key = "9a03d4e2eafea3c2e79c80e98ac2919c"
-        let targetData = "20124079"
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         let urlString = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=\(key)&movieCd=\(targetData)"
@@ -25,7 +25,7 @@ class MovieApi {
 //            print("나타나\(resultData)")
             let decoder = JSONDecoder()
             guard let decodedData = try? decoder.decode(Empty.self, from: resultData) else { return }
-//            print("나타나라\(decodedData)")
+            print("나타나라\(decodedData)")
             DispatchQueue.main.async {
                 completion(decodedData)
             }
