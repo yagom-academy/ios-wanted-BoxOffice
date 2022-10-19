@@ -13,7 +13,7 @@ class FirstViewController: UIViewController {
     let targetData = "20124079"
     var office: [MovieInfost] = []
     var detailMovie: [MovieInfo] = []
-    var test : [MovieInfo] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,7 @@ class FirstViewController: UIViewController {
     ///두번째화면 API
     func detailapi() {
         MovieApi.callApiDetail(targetData: targetData) { data in
-            self.detailMovie = data.movieInfoResult.movieInfo
+            self.detailMovie.append(MovieInfo(movieNm: data.movieInfoResult.movieInfo.movieNm, showTm: data.movieInfoResult.movieInfo.showTm, prdtYear: data.movieInfoResult.movieInfo.prdtYear, openDt: data.movieInfoResult.movieInfo.openDt, genres: data.movieInfoResult.movieInfo.genres, directors: data.movieInfoResult.movieInfo.directors, actors: data.movieInfoResult.movieInfo.actors, audits: data.movieInfoResult.movieInfo.audits))
             self.firstTableView.reloadData()
         }
     }
@@ -56,16 +56,17 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let secondViewController = storyboard?.instantiateViewController(withIdentifier: "SecondViewController") as? SecondViewController else { return }
         
-//        let respone = detailMovie
-        secondViewController.loadLabel()
-        secondViewController.movieInfo = MovieInfo.init(movieNm: "영제화목", showTm: "1시간", prdtYear: "2000", openDt: "2000", genres: [Genre(genreNm: "장르")], directors: [Director(peopleNm: "2-감독")], actors: [Actor(peopleNm: "2-배우")], audits: [Audit(watchGradeNm: "2-관람")])
+        let respone = detailMovie[indexPath.row]
+        secondViewController.loadLabel()  //2api
+        secondViewController.movieInfo = MovieInfo.init(movieNm: respone.movieNm, showTm: respone.showTm, prdtYear: respone.prdtYear, openDt: respone.openDt, genres: respone.genres, directors: respone.directors, actors: respone.actors, audits: respone.audits)
         
-//        let movie = office[indexPath.row]
-        secondViewController.setModel()
-        secondViewController.movieInFost = MovieInfost.init(rank: "1-1등", rankInten: "1-몰라", rankOldAndNew: "1-인아웃", audiAcc: "1-1억", movieNm: "1-제목", openDt: "1-담주수요일")
+        let movie = office[indexPath.row]
+        secondViewController.setModel()   //1 api
+        secondViewController.movieInFost = MovieInfost.init(rank: movie.rank, rankInten: movie.rankInten, rankOldAndNew: movie.rankOldAndNew, audiAcc: movie.audiAcc, movieNm: movie.movieNm, openDt: movie.openDt)
 
         
         self.navigationController?.pushViewController(secondViewController, animated: true)
     }
     
 }
+

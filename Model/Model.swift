@@ -58,20 +58,97 @@ struct MovieInfo: Codable {
     let audits: [Audit]  //관람등급
 }
 
-struct Actor: Codable {  // 50번배우명
+struct Actor: Codable {  // 57번배우명
     let peopleNm : String    // peopleNm배우명  같다?
 }
 
-struct Audit: Codable {  //51번 관람등급
+struct Audit: Codable {  //58번 관람등급
     let watchGradeNm: String   //watchGradeNm 관람등급
 }
 
-struct Director: Codable { //49번
+struct Director: Codable { //56번
     let peopleNm: String   // peopleNm 감독명
 }
 
 
-struct Genre: Codable { //48번
+struct Genre: Codable { //5번
     let genreNm: String  //장르
 }
 
+
+//// MARK: - Empty
+//struct Empty: Codable {
+//    let movieInfoResult: MovieInfoResult
+//}
+//
+//// MARK: - MovieInfoResult
+//struct MovieInfoResult: Codable {
+//    let movieInfo: MovieInfo
+//    let source: String
+//}
+//
+//
+//// MARK: - MovieInfo
+//struct MovieInfo: Codable {
+//    let movieCD, movieNm, movieNmEn, movieNmOg: String
+//    let showTm, prdtYear, openDt, prdtStatNm: String
+//    let typeNm: String
+//    let nations: [Nation]
+//    let genres: [Genre]
+//    let directors: [Director]
+//    let actors: [Actor]
+//    let showTypes: [ShowType]
+//    let companys: [Company]
+//    let audits: [Audit]
+//    let staffs: [Staff]
+//
+//    enum CodingKeys: String, CodingKey {
+//        case movieCD = "movieCd"
+//        case movieNm, movieNmEn, movieNmOg, showTm, prdtYear, openDt, prdtStatNm, typeNm, nations, genres, directors, actors, showTypes, companys, audits, staffs
+//    }
+//}
+//
+//// MARK: - Actor
+//struct Actor: Codable {
+//    let peopleNm, peopleNmEn, cast, castEn: String
+//}
+//
+//// MARK: - Audit
+//struct Audit: Codable {
+//    let auditNo, watchGradeNm: String
+//}
+//
+//// MARK: - Company
+//struct Company: Codable {
+//    let companyCD, companyNm, companyNmEn, companyPartNm: String
+//
+//    enum CodingKeys: String, CodingKey {
+//        case companyCD = "companyCd"
+//        case companyNm, companyNmEn, companyPartNm
+//    }
+//}
+//
+//// MARK: - Director
+//struct Director: Codable {
+//    let peopleNm, peopleNmEn: String
+//}
+//
+//// MARK: - Genre
+//struct Genre: Codable {
+//    let genreNm: String
+//}
+//
+//// MARK: - Nation
+//struct Nation: Codable {
+//    let nationNm: String
+//}
+//
+//// MARK: - ShowType
+//struct ShowType: Codable {
+//    let showTypeGroupNm, showTypeNm: String
+//}
+//
+//// MARK: - Staff
+//struct Staff: Codable {
+//    let peopleNm, peopleNmEn, staffRoleNm: String
+//}
