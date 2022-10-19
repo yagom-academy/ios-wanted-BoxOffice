@@ -63,6 +63,13 @@ final class MovieDetailViewController: UIViewController {
         return tableView
     }()
     
+    private let indicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.style = .large
+        indicator.color = .lightGray
+        return indicator
+    }()
+    
     let viewModel: MovieDetailViewModel = .init()
     
     override func viewDidLoad() {
@@ -105,6 +112,16 @@ final class MovieDetailViewController: UIViewController {
             self.movieDetailTableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             self.movieDetailTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
+        
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            indicator.widthAnchor.constraint(equalToConstant: 40),
+            indicator.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        self.view.bringSubviewToFront(self.indicator)
+
     }
     
 }
