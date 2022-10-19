@@ -51,22 +51,19 @@ class MovieListViewController: UIViewController {
         segment.layer.cornerRadius = 30
         segment.layer.masksToBounds = true
     }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
 }
 
 extension MovieListViewController: DefaultViewSetupProtocol {
     
     func setupView() {
-        
+        movieListTableView.addSubview(loadingIndicator)
     }
     
     func setConstraints() {
-        movieListTableView.addSubview(loadingIndicator)
-        loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
     
     func configureView() {
@@ -83,6 +80,10 @@ extension MovieListViewController {
 }
 
 extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
     
     // Section을 2개 설정하는 이유는 페이징 로딩 시 로딩 셀을 표시해주기 위해서입니다.
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -118,27 +119,6 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         }
-    }
-    
-    func changeDateStringFormat(_ string: String) -> String {
-        let toDateFormatter = DateFormatter()
-        toDateFormatter.dateFormat = "yyyy-MM-dd"
-        toDateFormatter.timeZone = NSTimeZone(name: "GMT") as TimeZone?
-        let date = toDateFormatter.date(from: string)
-        let toStringFormatter = DateFormatter()
-        toStringFormatter.dateFormat = "yy.MM.dd"
-        let result = toStringFormatter.string(from: date!)
-        return result
-    }
-    
-    func changeToDecimal(_ string: String) -> String? {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        let result = numberFormatter.string(from: NSNumber(value: UInt(string)!))
-        guard let result = result else {
-            return "-"
-        }
-        return result
     }
 }
 
