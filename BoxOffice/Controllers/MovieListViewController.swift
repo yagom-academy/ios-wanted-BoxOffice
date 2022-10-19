@@ -12,6 +12,7 @@ class MovieListViewController: UIViewController {
   private var networkManager = NetworkManager()
   private var dailyList = [DailyListObject?](repeating: nil, count: 10)
   private var movieInfoList = [MovieInfo?](repeating: nil, count: 10)
+  private var posterList = [String](repeating: "", count: 10)
   private var movieCount = 0
 
   let segmentedControl: UISegmentedControl = {
@@ -45,10 +46,13 @@ class MovieListViewController: UIViewController {
     tableView.dataSource = self
     networkManager.delegate = self
 
+    DispatchQueue.global().async {
+      self.networkManager.fetchMovie(targetDate: "20221018", type: .daily)
+    }
+
     addViews()
     addTargets()
     setConstraints()
-    networkManager.fetchBoxOffice(targetDate: "20221018", type: .daily)
   }
 }
 
@@ -100,8 +104,25 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
                                                    for: indexPath) as? MovieListCell
     else { return UITableViewCell() }
 
+    let i = indexPath.row
+
+    guard let movie = dailyList[i] else { return UITableViewCell() }
+
+    cell.setLabels(rank: movie.rank,
+                   title: movie.movieNm,
+                   date: movie.openDt,
+                   audiCnt: movie.audiCnt,
+                   diff: movie.rankInten)
+    cell.setPoster(PosterCache.loadPoster(movie.movieCd))
+
     return cell
   }
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    print("select cell \(indexPath.row), \(dailyList[indexPath.row]!.movieCd)",
+          posterList[indexPath.row])
+  }
+
 }
 
 extension MovieListViewController: NetworkDelegate {
@@ -116,12 +137,34 @@ extension MovieListViewController: NetworkDelegate {
     for i in 0 ..< 10 {
       guard let movieCode = dailyList[i]?.movieCd else { break }
 
-      networkManager.fetchMovieInfo(movieCode: movieCode, index: i)
+      DispatchQueue.global().async {
+        self.networkManager.fetchMovie(movieCode: movieCode, index: i)
+      }
     }
   }
 
   func didUpdateMovieInfo(_ _movieInfo: MovieInfo, _ index: Int) {
     movieInfoList[index] = _movieInfo
+
+    guard let openDate = dailyList[index]?.openDt else { return }
+    guard let movieCode = dailyList[index]?.movieCd else { return }
+
+    let year = openDate.split(separator: "-").map { String($0) }.first!
+
+    DispatchQueue.global().async {
+      self.networkManager.fetchMovie(movieName: _movieInfo.movieNmEn,
+                                year: year,
+                                movieCode: movieCode,
+                                index: index)
+    }
+  }
+
+  func didUpdatePosterInfo(_ _imagePath: String, _ index: Int) {
+    posterList[index] = _imagePath
+    DispatchQueue.main.async {
+      self.tableView.reloadData()
+    }
+//    tableView.reloadData()
   }
 }
 

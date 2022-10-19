@@ -13,6 +13,7 @@
 		406FFC0528FEA356004C85D4 /* UIPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FFC0428FEA356004C85D4 /* UIPreview.swift */; };
 		406FFC0928FF0759004C85D4 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FFC0828FF0759004C85D4 /* MovieModel.swift */; };
 		406FFC0B28FF1144004C85D4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FFC0A28FF1144004C85D4 /* NetworkManager.swift */; };
+		4090C82928FFBCFB00B807C5 /* PosterCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4090C82828FFBCFB00B807C5 /* PosterCache.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19EC28F9603900197BCC /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* MovieListViewController.swift */; };
@@ -27,6 +28,7 @@
 		406FFC0428FEA356004C85D4 /* UIPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPreview.swift; sourceTree = "<group>"; };
 		406FFC0828FF0759004C85D4 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		406FFC0A28FF1144004C85D4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		4090C82828FFBCFB00B807C5 /* PosterCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCache.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			children = (
 				406FFC0828FF0759004C85D4 /* MovieModel.swift */,
 				406FFC0A28FF1144004C85D4 /* NetworkManager.swift */,
+				4090C82828FFBCFB00B807C5 /* PosterCache.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				406FFC0B28FF1144004C85D4 /* NetworkManager.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
+				4090C82928FFBCFB00B807C5 /* PosterCache.swift in Sources */,
 				406FFC0528FEA356004C85D4 /* UIPreview.swift in Sources */,
 				406FFBFC28FDD3E4004C85D4 /* Extension+Bundle.swift in Sources */,
 			);

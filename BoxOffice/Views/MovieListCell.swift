@@ -22,6 +22,7 @@ class MovieListCell: UITableViewCell {
     let label = UILabel()
     label.font = UIFont.preferredFont(forTextStyle: .title1)
     label.text = "1"
+    label.adjustsFontForContentSizeCategory = true
 
     return label
   }()
@@ -30,6 +31,8 @@ class MovieListCell: UITableViewCell {
     let label = UILabel()
     label.font = UIFont.preferredFont(forTextStyle: .title2)
     label.text = "영화제목"
+    label.numberOfLines = 0
+    label.adjustsFontForContentSizeCategory = true
 
     return label
   }()
@@ -38,6 +41,8 @@ class MovieListCell: UITableViewCell {
     let label = UILabel()
     label.font = UIFont.preferredFont(forTextStyle: .body)
     label.text = "개봉일"
+    label.numberOfLines = 0
+    label.adjustsFontForContentSizeCategory = true
 
     return label
   }()
@@ -46,6 +51,8 @@ class MovieListCell: UITableViewCell {
     let label = UILabel()
     label.font = UIFont.preferredFont(forTextStyle: .body)
     label.text = "관객수"
+    label.numberOfLines = 0
+    label.adjustsFontForContentSizeCategory = true
 
     return label
   }()
@@ -53,6 +60,7 @@ class MovieListCell: UITableViewCell {
   let labelStack: UIStackView = {
     let sv = UIStackView()
     sv.axis = .vertical
+    sv.distribution = .fill
 
     return sv
   }()
@@ -69,6 +77,7 @@ class MovieListCell: UITableViewCell {
     let label = UILabel()
     label.font = UIFont.preferredFont(forTextStyle: .body)
     label.text = "0"
+    label.adjustsFontForContentSizeCategory = true
 
     return label
   }()
@@ -94,31 +103,37 @@ class MovieListCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
 
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    poster.image = nil
+  }
 }
 
 extension MovieListCell {
   func addViews() {
-    [movieTitle, openDate, audienceCount].forEach { labelStack.addArrangedSubview($0) }
-    [poster, ranking, labelStack, newTag, rankDiff, rankUpDown, ].forEach {
+    [ranking, movieTitle, openDate, audienceCount].forEach { labelStack.addArrangedSubview($0) }
+    [labelStack, poster, newTag, rankDiff, rankUpDown, ].forEach {
       contentView.addSubview($0)
     }
   }
 
   func setConstraints() {
-    [poster, ranking, labelStack, newTag, rankDiff, rankUpDown, ].forEach {
+    [poster, labelStack, newTag, rankDiff, rankUpDown, ].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
+    // TODO: - Poster 높이 제약 수정하기
     NSLayoutConstraint.activate([
+      labelStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
+      labelStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
+      labelStack.leadingAnchor.constraint(equalTo: poster.trailingAnchor, constant: 10),
+      labelStack.trailingAnchor.constraint(lessThanOrEqualTo: newTag.leadingAnchor),
       poster.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
       poster.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
       poster.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
       poster.widthAnchor.constraint(equalToConstant: 100),
-      poster.heightAnchor.constraint(equalToConstant: 144),
-      ranking.topAnchor.constraint(equalTo: poster.topAnchor, constant: 12),
-      ranking.leadingAnchor.constraint(equalTo: poster.leadingAnchor, constant: 12),
-      labelStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-      labelStack.leadingAnchor.constraint(equalTo: poster.trailingAnchor, constant: 10),
+      poster.heightAnchor.constraint(equalTo: poster.widthAnchor, multiplier: 1.4),
+//      poster.heightAnchor.constraint(equalToConstant: 144),
       rankUpDown.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
       rankUpDown.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -6),
       rankDiff.centerYAnchor.constraint(equalTo: rankUpDown.centerYAnchor),
@@ -134,10 +149,11 @@ extension MovieListCell {
     self.poster.image = img
   }
 
-  func setLabels(title: String, date: String, audiCnt: String, diff: String) {
+  func setLabels(rank: String, title: String, date: String, audiCnt: String, diff: String) {
+    self.ranking.text = "\(rank)위"
     self.movieTitle.text = title
     self.openDate.text = date
-    self.audienceCount.text = "\(audiCnt) 명 관람"
+    self.audienceCount.text = "\(audiCnt)명 관람"
     self.rankDiff.text = diff
   }
 

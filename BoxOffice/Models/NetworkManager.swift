@@ -10,6 +10,7 @@ import Foundation
 protocol NetworkDelegate {
   func didUpdateBoxOfficeList(_ _dailyList: [DailyListObject])
   func didUpdateMovieInfo(_ _movieInfo: MovieInfo, _ index: Int)
+  func didUpdatePosterInfo(_ _imagePath: String, _ index: Int)
 }
 
 enum BoxOfficeType: String {
@@ -26,7 +27,8 @@ struct NetworkManager {
 
   // MARK: - Fetch Data
 
-  func fetchBoxOffice(targetDate: String, type: BoxOfficeType) {
+  // Fetch Daily Box Office
+  func fetchMovie(targetDate: String, type: BoxOfficeType) {
     var url = urlKobis
     let query = "?targetDt=\(targetDate)&wideAreaCd=0105001&key=\(Bundle.main.kobisKey)"
 
@@ -37,30 +39,33 @@ struct NetworkManager {
       url += type.rawValue + query
     }
 
-    self.performBoxOfficeRequest(urlString: url)
+    self.performRequest(urlString: url)
   }
 
-  func fetchMovieInfo(movieCode: String, index: Int) {
+  // Fetch Movie Detail Info
+  func fetchMovie(movieCode: String, index: Int) {
     var url = urlKobis + "movie/searchMovieInfo.json"
     let query = "?key=\(Bundle.main.kobisKey)&movieCd=\(movieCode)"
 
     url += query
 
-    performMovieInfoRequest(urlString: url, index: index)
+    performRequest(urlString: url, index: index)
   }
 
-  func fetchPosterInfo(movieName: String, year: String) {
+  // Fetch Movie Poster Info
+  func fetchMovie(movieName: String, year: String, movieCode: String, index: Int) {
     var url = urlOmdb
     let query = "?t=\(movieName.replacingOccurrences(of: " ", with: "+"))&y=\(year)&apikey=\(Bundle.main.omdbKey)"
 
     url += query
 
-    performPosterRequest(urlString: url)
+    performRequest(urlString: url, movieCode: movieCode, index: index)
   }
 
 // MARK: - Perform Request
 
-  func performBoxOfficeRequest(urlString: String) {
+  // Perform Daily Box Office Request
+  func performRequest(urlString: String) {
     if let url = URL(string: urlString) {
       let session = URLSession(configuration: .default)
 
@@ -80,7 +85,8 @@ struct NetworkManager {
     }
   }
 
-  func performMovieInfoRequest(urlString: String, index: Int) {
+  // Perform Movie Detail Info Request
+  func performRequest(urlString: String, index: Int) {
     if let url = URL(string: urlString) {
       let session = URLSession(configuration: .default)
 
@@ -98,15 +104,37 @@ struct NetworkManager {
 
       task.resume()
     }
-
   }
 
-  func performPosterRequest(urlString: String) {
+  // Perform Movie Poster Request
+  func performRequest(urlString: String, movieCode: String, index: Int) {
+    if let url = URL(string: urlString) {
+      let session = URLSession(configuration: .default)
 
+      let task = session.dataTask(with: url) { data, response, error in
+        if error != nil {
+          fatalError("poster session task error")
+        }
+
+        if let safeData = data {
+          if let posterInfo = self.parsePosterJSON(safeData) {
+
+            if posterInfo.Poster.contains("http") {
+              PosterCache.savePoster(URL(string: posterInfo.Poster)!, movieCode)
+            }
+
+            self.delegate?.didUpdatePosterInfo(posterInfo.Poster, index)
+          }
+        }
+      }
+
+      task.resume()
+    }
   }
 
   // MARK: - Parse JSON
 
+  // TODO: - 파싱결과 enum 만들어서 함수 하나로 줄이기
   func parseDaliyBoxOfficeJSON(_ resultData: Data) -> [DailyListObject]? {
     do {
       let decodedData = try decoder.decode(DailyBoxOfficeResult.self, from: resultData)
@@ -133,7 +161,14 @@ struct NetworkManager {
     }
   }
 
-//  func parsePosterJSON(_ resultData: Data) -> DailyBoxOfficeResult? {
-//
-//  }
+  func parsePosterJSON(_ resultData: Data) -> OMDbResult? {
+    do {
+      let decodedData = try decoder.decode(OMDbResult.self, from: resultData)
+
+      return decodedData
+    } catch {
+      print("parse posterInfo JSON error")
+      return nil
+    }
+  }
 }
