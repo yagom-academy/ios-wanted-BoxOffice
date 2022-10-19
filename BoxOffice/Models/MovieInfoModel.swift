@@ -5,24 +5,39 @@
 //  Created by 유영훈 on 2022/10/18.
 //
 
+/*
+ 박스오피스 순위
+ 영화명
+ 개봉일
+ 관객수
+ 전일대비 순위의 증감분
+ 랭킹에 신규 진입 여부
+ 제작연도
+ 개봉연도
+ 상영시간
+ 장르
+ 감독명
+ 배우명
+ 관람등급 명칭
+ */
 struct MovieInfoModel: Codable {
-    let movieCd: String   // 문자열    영화코드를 출력합니다.
+//    let movieCd: String   // 문자열    영화코드를 출력합니다.
     let movieNm: String   // 문자열    영화명(국문)을 출력합니다.
     let movieNmEn: String   // 문자열    영화명(영문)을 출력합니다.
     let movieNmOg: String   // 문자열    영화명(원문)을 출력합니다.
     let prdtYear: String   // 문자열    제작연도를 출력합니다.
     let showTm: String   // 문자열    상영시간을 출력합니다.
-    let showTypes: [ShowType]   // 문자열    상영형태 구분을 나타냅니다.
+//    let showTypes: [ShowType]   // 문자열    상영형태 구분을 나타냅니다.
     let openDt: String   // 문자열    개봉연도를 출력합니다.
-    let prdtStatNm: String   // 문자열    제작상태명을 출력합니다.
-    let typeNm: String   // 문자열    영화유형명을 출력합니다.
+//    let prdtStatNm: String   // 문자열    제작상태명을 출력합니다.
+//    let typeNm: String   // 문자열    영화유형명을 출력합니다.
     let nations: [Nation]   // 문자열    제작국가를 나타냅니다.
     let genres: [Genres]   // 문자열    장르명을 출력합니다.
     let directors: [Director]   // 문자열    감독을 나타냅니다.
     let actors: [Actor]   // 문자열    배우를 나타냅니다.
     let audits: [Audit]   // 문자열    심의정보를 나타냅니다.
-    let companys: [Company]   // 문자열    참여 영화사를 나타냅니다.
-    let staffs: [Staff]   // 문자열    스텝을 나타냅니다.
+//    let companys: [Company]   // 문자열    참여 영화사를 나타냅니다.
+//    let staffs: [Staff]   // 문자열    스텝을 나타냅니다.
     
 }
 
