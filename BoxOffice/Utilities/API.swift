@@ -79,20 +79,24 @@ enum API {
     private var getMethodQuerySet: [URLQueryItem] {
         switch self {
         case .kofic(.daily(let name)):
-            let targetDT = [URLQueryItem(name: "targetDt", value: "20221111")] //yyyymmdd
+            let targetDT = [URLQueryItem(name: "targetDt", value: "20221017")] //yyyymmdd
             let itemPerPage = [URLQueryItem(name: "itemPerPage", value: "10")] //default: 10, max: 10
-            let wideAreaCd = [URLQueryItem(name: "wideAreaCd", value: "???")] //TODO: 서울코드만 넣어야 함
+            let wideAreaCd = [URLQueryItem(name: "wideAreaCd", value: kofic_ComCode)]
             return targetDT + itemPerPage + wideAreaCd
         case .kofic(.weekly_weekEnd(_)):
-            let targetDT = [URLQueryItem(name: "targetDt", value: "20221111")] //yyyymmdd
+            let targetDT = [URLQueryItem(name: "targetDt", value: "20221017")] //yyyymmdd
             let weekGb = [URLQueryItem(name: "weekGb", value: "1")] //0주간, 1주말-디폴트, 2주중
             let itemPerPage = [URLQueryItem(name: "itemPerPage", value: "10")] //default: 10, max: 10
-            let wideAreaCd = [URLQueryItem(name: "wideAreaCd", value: "???")] //TODO: 서울코드만 넣어야 함
+            let wideAreaCd = [URLQueryItem(name: "wideAreaCd", value: kofic_ComCode)]
             
             return targetDT + weekGb + itemPerPage + wideAreaCd
         case .omdb(let movieName):
             let t = [URLQueryItem(name: "t", value: movieName)]
             return t
         }
+    }
+    
+    private var kofic_ComCode: String {
+        return "0105001" //seoul only
     }
 }
