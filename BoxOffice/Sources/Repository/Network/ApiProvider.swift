@@ -25,12 +25,12 @@ class ApiProvider: ApiProviderProtocol {
         else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
-        Logger.logRequest(request, target: target)
+        Logger.logRequest(request)
         
         if useCaching,
            let cached = URLCache.shared.cachedResponse(for: request) {
             print("💶💶💶Cached Response Returned💶💶💶")
-            Logger.logResponse((data: cached.data, response: cached.response), target: target)
+            Logger.logResponse((data: cached.data, response: cached.response))
             return Just((data: cached.data, response: cached.response))
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
@@ -39,16 +39,24 @@ class ApiProvider: ApiProviderProtocol {
         return URLSession.shared.dataTaskPublisher(for: request)
             .handleEvents(receiveOutput: { data, response in
                 URLCache.shared.storeCachedResponse(CachedURLResponse(response: response, data: data), for: request)
-                Logger.logResponse((data: data, response: response), target: target)
+                Logger.logResponse((data: data, response: response))
             }).mapError { $0 as Error }
             .eraseToAnyPublisher()
     }
     
     func request(image url: String) -> AnyPublisher<UIImage, Error> {
         guard let url = URL(string: url) else { return Empty().eraseToAnyPublisher() }
-        let strings = ["https://donnywals.com", "https://practicalcombine.com"]
+        Logger.logRequest(URLRequest(url: url))
+        if let cached = URLCache.shared.cachedResponse(for: URLRequest(url: url)),
+           let image = UIImage(data: cached.data) {
+            return Just(image)
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        }
         return URLSession.shared.dataTaskPublisher(for: url)
-            .tryMap { data, response in
+            .handleEvents(receiveOutput: { data, response in
+                URLCache.shared.storeCachedResponse(CachedURLResponse(response: response, data: data), for: URLRequest(url: url))
+            }).tryMap { data, response in
                 guard let image = UIImage(data: data) else { throw URLError(.cannotDecodeContentData) }
                 return image
             }.eraseToAnyPublisher()

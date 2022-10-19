@@ -28,6 +28,9 @@ class OverlayedImageView: UIImageView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
         overlayedLayer.frame = self.bounds
+        CATransaction.commit()
     }
 }

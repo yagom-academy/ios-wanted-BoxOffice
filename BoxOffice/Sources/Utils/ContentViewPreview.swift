@@ -24,4 +24,20 @@ struct ContentViewPreview<View: UIView>: UIViewRepresentable {
         
     }
 }
+
+struct ContentViewControllerPreview<View: UIViewController>: UIViewControllerRepresentable {
+    let view: View
+    
+    init(_ builder: @escaping () -> View) {
+        view = builder()
+    }
+
+    func makeUIViewController(context: Context) -> some UIViewController {
+        view
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        
+    }
+}
 #endif

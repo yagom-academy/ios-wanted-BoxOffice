@@ -29,18 +29,12 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .appleSDGothicNeo(weight: .semiBold, size: 52)
         label.textColor = .white
-        #if DEBUG
-        label.text = "10"
-        #endif
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     lazy var rankIntenImage: UIImageView = {
         let imageView = UIImageView()
-        #if DEBUG
-        imageView.image = UIImage(named: "rankIntenUp")
-        #endif
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -49,9 +43,6 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .appleSDGothicNeo(weight: .semiBold, size: 16)
         label.textColor = UIColor(hex:"#FFC700")
-        #if DEBUG
-        label.text = "3"
-        #endif
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -69,9 +60,6 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .appleSDGothicNeo(weight: .semiBold, size: 16)
         label.textColor = UIColor(hex: "#222222")
-        #if DEBUG
-        label.text = "영화명이 들어갑니다 영화명이 들어갑니다"
-        #endif
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -80,9 +68,6 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .appleSDGothicNeo(weight: .medium, size: 12)
         label.textColor = UIColor(hex: "#9A9A9A")
-        #if DEBUG
-        label.text = "2022.08.10 개봉"
-        #endif
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -91,9 +76,6 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .appleSDGothicNeo(weight: .medium, size: 12)
         label.textColor = UIColor(hex: "#9A9A9A")
-        #if DEBUG
-        label.text = "누적관객 88만"
-        #endif
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -132,8 +114,15 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
-        subscriptions = []
         super.prepareForReuse()
+        subscriptions = []
+        posterImageView.image = nil
+        rankLabel.text = ""
+        rankIntenImage.isHidden = true
+        rankIntenLabel.isHidden = true
+        titleLabel.text = ""
+        openDateLabel.text = ""
+        audienceCountLabel.text = ""
     }
     
     // MARK: Setup Views
@@ -207,20 +196,20 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
     // MARK: Binding
     func bind(viewModel: ViewModel) {
         viewModel.$posterImage
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .assign(to: \.image, on: posterImageView)
             .store(in: &subscriptions)
         
         viewModel.$movie
             .compactMap { $0.boxOfficeInfo?.rank }
             .map { String($0) }
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .assign(to: \.text, on: rankLabel)
             .store(in: &subscriptions)
         
         viewModel.$movie
             .compactMap { $0.boxOfficeInfo }
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] info in
                 guard let self else { return }
                 if info.rankOldAndNew == .NEW {
@@ -240,7 +229,7 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
                     self.rankIntenLabel.isHidden = true
                 } else if info.rankInten < 0 {
                     self.rankIntenImage.image = UIImage(named: "rankIntenDown")
-                    self.rankIntenLabel.text = String(info.rankInten)
+                    self.rankIntenLabel.text = String(-info.rankInten)
                     self.rankIntenLabel.textColor = UIColor(hex: "#00E0FF")
                     self.rankIntenImage.isHidden = false
                     self.rankIntenLabel.isHidden = false
@@ -249,14 +238,14 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
         
         viewModel.$movie
             .map { $0.movieName }
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .assign(to: \.text, on: titleLabel)
             .store(in: &subscriptions)
         
         viewModel.$movie
             .map { $0.openDate }
             .map { "\($0) 개봉" }
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .assign(to: \.text, on: openDateLabel)
             .store(in: &subscriptions)
     }

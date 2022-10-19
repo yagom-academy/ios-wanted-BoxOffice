@@ -31,12 +31,13 @@ class BoxOfficeListCollectionViewCellModel {
     func bind() {
         $movie
             .filter { $0.detailInfo == nil }
-            .map(\.movieName)
             .prefix(1)
-            .flatMap { [weak self] movieName -> AnyPublisher<MovieDetailInfo, Error> in
+            .map(\.movieCode)
+            .flatMap { [weak self] movieCode -> AnyPublisher<MovieDetailInfo, Error> in
                 guard let self else { return Empty().eraseToAnyPublisher() }
-                return self.repository.movieDetail(movieName)
-            }.sink(receiveCompletion: { completion in
+                return self.repository.movieDetail(movieCode)
+            }
+            .sink(receiveCompletion: { completion in
                 if case .failure(let error) = completion {
                     debugPrint("😡Error Occured While Loading Movie Detail: \(error.localizedDescription)")
                 }
@@ -46,6 +47,7 @@ class BoxOfficeListCollectionViewCellModel {
             }).store(in: &subscriptions)
         
         $movie
+            .filter { $0.detailInfo?.poster == nil }
             .compactMap { $0.detailInfo?.movieNameEnglish }
             .prefix(1)
             .flatMap { [weak self] name -> AnyPublisher<String, Error> in
@@ -61,6 +63,7 @@ class BoxOfficeListCollectionViewCellModel {
             }).store(in: &subscriptions)
         
         $movie
+            .filter { _ in self.posterImage == nil }
             .compactMap { $0.detailInfo?.poster }
             .prefix(1)
             .flatMap { [weak self] url -> AnyPublisher<UIImage, Error> in

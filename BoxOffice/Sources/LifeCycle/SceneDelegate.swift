@@ -20,6 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         let vc = BoxOfficeListViewController()
         let navigationVC = UINavigationController(rootViewController: vc)
+        navigationVC.isNavigationBarHidden = true
         window?.rootViewController = navigationVC
         window?.makeKeyAndVisible()
     }
