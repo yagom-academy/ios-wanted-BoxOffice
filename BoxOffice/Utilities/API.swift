@@ -18,7 +18,7 @@ import Foundation
 //key: d591d06e
 
 // TODO: date등 기타 쿼리 넣는법 처리...
-// TODO: kofic에서 영문 영화타이틀 얻기 위한 api 구조 추가 --> kofic 박스오피스 기본 api --> movieCd 확인 --> movieCd + key로 영화 상세정보api 호출
+// TODO: kofic 박스오피스 기본 api --> movieCd 확인 --> movieCd + key로 영화 상세정보api 호출 --> 
 enum API {
     case kofic(koficBoxOffice)
     case omdb(movieName: String)
@@ -26,6 +26,7 @@ enum API {
     enum koficBoxOffice {
         case daily(date: String)
         case weekly_weekEnd(date: String)
+        case detailMovieInfo(movieCd: String)
     }
     
     var urlComponets: URLComponents? {
@@ -35,6 +36,10 @@ enum API {
             baseURLSet?.queryItems = [appIDSet] + getMethodQuerySet
             return baseURLSet
         case .kofic(.weekly_weekEnd(_)):
+            var baseURLSet = baseURLSet
+            baseURLSet?.queryItems = [appIDSet] + getMethodQuerySet
+            return baseURLSet
+        case .kofic(.detailMovieInfo(_)):
             var baseURLSet = baseURLSet
             baseURLSet?.queryItems = [appIDSet] + getMethodQuerySet
             return baseURLSet
@@ -51,6 +56,8 @@ enum API {
             return HTTPMethod.GET
         case .kofic(.weekly_weekEnd(_)):
             return HTTPMethod.GET
+        case .kofic(.detailMovieInfo(_)):
+            return HTTPMethod.GET
         case .omdb(_):
             return HTTPMethod.GET
         }
@@ -62,6 +69,8 @@ enum API {
             return URLComponents(string: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json")
         case .kofic(.weekly_weekEnd(_)):
             return URLComponents(string: " http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json")
+        case .kofic(.detailMovieInfo(_)):
+            return URLComponents(string: " http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json")
         case .omdb(_):
             return URLComponents(string: "http://www.omdbapi.com/")
         }
@@ -91,6 +100,9 @@ enum API {
             let wideAreaCd = [URLQueryItem(name: "wideAreaCd", value: kofic_ComCode)]
             
             return targetDT + weekGb + itemPerPage + wideAreaCd
+        case .kofic(.detailMovieInfo(let movieCd)):
+            let movieCd = [URLQueryItem(name: "movieCd", value: movieCd)]
+            return movieCd
         case .omdb(let movieName):
             let t = [URLQueryItem(name: "t", value: movieName)]
             return t
