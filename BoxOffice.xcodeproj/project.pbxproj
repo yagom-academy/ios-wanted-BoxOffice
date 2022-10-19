@@ -26,7 +26,8 @@
 		367520FE28FE948D0010437F /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520FD28FE948D0010437F /* UIFont+Extension.swift */; };
 		3675210328FFEC730010437F /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3675210228FFEC730010437F /* Date+Extension.swift */; };
 		3676D23D29004F8F00807845 /* SecondContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3676D23C29004F8F00807845 /* SecondContentViewModel.swift */; };
-		3676D23F2900556200807845 /* SecondContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3676D23E2900556200807845 /* SecondContentView.swift */; };
+		3676D23F2900556200807845 /* Temp_SecondContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3676D23E2900556200807845 /* Temp_SecondContentView.swift */; };
+		3676D24129005BE300807845 /* SecondContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3676D24029005BE300807845 /* SecondContentView.swift */; };
 		4CEA381E28FD570F007B86EE /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEA381D28FD570F007B86EE /* SecondViewController.swift */; };
 		4CEA382028FD571B007B86EE /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEA381F28FD571B007B86EE /* ThirdViewController.swift */; };
 		4CEA382528FD5746007B86EE /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEA382428FD5746007B86EE /* Routable.swift */; };
@@ -74,7 +75,8 @@
 		367520FD28FE948D0010437F /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		3675210228FFEC730010437F /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		3676D23C29004F8F00807845 /* SecondContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondContentViewModel.swift; sourceTree = "<group>"; };
-		3676D23E2900556200807845 /* SecondContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondContentView.swift; sourceTree = "<group>"; };
+		3676D23E2900556200807845 /* Temp_SecondContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp_SecondContentView.swift; sourceTree = "<group>"; };
+		3676D24029005BE300807845 /* SecondContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondContentView.swift; sourceTree = "<group>"; };
 		4CEA381D28FD570F007B86EE /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		4CEA381F28FD571B007B86EE /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		4CEA382428FD5746007B86EE /* Routable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
@@ -215,7 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				4CEA381D28FD570F007B86EE /* SecondViewController.swift */,
-				3676D23E2900556200807845 /* SecondContentView.swift */,
+				3676D24029005BE300807845 /* SecondContentView.swift */,
+				3676D23E2900556200807845 /* Temp_SecondContentView.swift */,
 			);
 			path = SecondVCRelated;
 			sourceTree = "<group>";
@@ -394,8 +397,9 @@
 				367520DD28FE7E3F0010437F /* Repository.swift in Sources */,
 				367520DF28FE7E540010437F /* API.swift in Sources */,
 				4CEA382728FD5785007B86EE /* SceneCategory.swift in Sources */,
+				3676D24129005BE300807845 /* SecondContentView.swift in Sources */,
 				4CEA384428FD5B33007B86EE /* FirstSceneAction.swift in Sources */,
-				3676D23F2900556200807845 /* SecondContentView.swift in Sources */,
+				3676D23F2900556200807845 /* Temp_SecondContentView.swift in Sources */,
 				3675210328FFEC730010437F /* Date+Extension.swift in Sources */,
 				4CEA384D28FD5C7B007B86EE /* FirstViewStyling.swift in Sources */,
 				4CEA382528FD5746007B86EE /* Routable.swift in Sources */,

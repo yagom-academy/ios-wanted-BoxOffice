@@ -30,7 +30,9 @@ class SecondModel: SceneActionReceiver {
     }
     
     func populateData() {
+        
         Task {
+            print("secondModel populate Data")
             guard let entity = await requestAPI() else { return }
             privateSecondContentViewModel.didReceiveEntity(entity)
         }
@@ -41,8 +43,11 @@ class SecondModel: SceneActionReceiver {
     }
     
     private func requestAPI() async -> KoficMovieDetailEntity? {
+        print("secondModel request api")
+        print("movie cd check : \(self.movieCd)")
         do {
             let entity: KoficMovieDetailEntity = try await repository.fetch(api: .kofic(.detailMovieInfo(movieCd: self.movieCd)))
+            print("secondModel entity check : \(entity)")
             return entity
         } catch let error {
             handleError(error: error)

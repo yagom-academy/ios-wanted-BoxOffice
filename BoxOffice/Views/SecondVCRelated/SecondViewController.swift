@@ -8,9 +8,9 @@
 import UIKit
 import SwiftUI
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, SecondViewControllerRoutable {
 
-    lazy var contentView = SecondContentView()
+    lazy var contentView = SecondContentView(viewModel: model.secondContentViewModel)
     
     var model: SecondModel
     
@@ -104,7 +104,10 @@ extension SecondViewController: Presentable {
     }
     
     func bind() {
-        
+        model.routeSubject = { [weak self] sceneCategory in
+            guard let self = self else { return }
+            self.route(to: sceneCategory)
+        }
     }
     
     

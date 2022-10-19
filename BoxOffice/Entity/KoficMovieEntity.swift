@@ -90,6 +90,26 @@ struct MovieInfo: Codable {
         case movieCd
         case movieNm, movieNmEn, movieNmOg, showTm, prdtYear, openDt, prdtStatNm, typeNm, nations, genres, directors, actors, showTypes, companys, audits
     }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.movieCd = try container.decode(String.self, forKey: .movieCd)
+        self.movieNm = try container.decode(String.self, forKey: .movieNm)
+        self.movieNmEn = try container.decode(String.self, forKey: .movieNmEn)
+        self.movieNmOg = try container.decode(String.self, forKey: .movieNmOg)
+        self.showTm = try container.decode(String.self, forKey: .showTm)
+        self.prdtYear = (try? container.decode(String.self, forKey: .prdtYear)) ?? ""
+        self.openDt = try container.decode(String.self, forKey: .openDt)
+        self.prdtStatNm = try container.decode(String.self, forKey: .prdtStatNm)
+        self.typeNm = try container.decode(String.self, forKey: .typeNm)
+        self.nations = try container.decode([Nation].self, forKey: .nations)
+        self.genres = try container.decode([Genre].self, forKey: .genres)
+        self.directors = try container.decode([Director].self, forKey: .directors)
+        self.actors = try container.decode([Actor].self, forKey: .actors)
+        self.showTypes = try container.decode([ShowType].self, forKey: .showTypes)
+        self.companys = try container.decode([Company].self, forKey: .companys)
+        self.audits = try container.decode([Audit].self, forKey: .audits)
+    }
 }
 
 // MARK: - Actor
@@ -104,10 +124,10 @@ struct Audit: Codable {
 
 // MARK: - Company
 struct Company: Codable {
-    let companyCD, companyNm, companyNmEn, companyPartNm: String
+    let companyCd, companyNm, companyNmEn, companyPartNm: String
 
     enum CodingKeys: String, CodingKey {
-        case companyCD
+        case companyCd
         case companyNm, companyNmEn, companyPartNm
     }
 }
