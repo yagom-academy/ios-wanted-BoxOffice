@@ -9,10 +9,9 @@ import Foundation
 
 extension Date {
     enum DateFormat: String {
-        case koficFormat = "yyyymmdd" //20221017
+        case koficFormat = "yyyyMMdd" //20221017
     }
     
-    //Date().asString(.koficFormat)
     func asString(_ format: DateFormat) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko")

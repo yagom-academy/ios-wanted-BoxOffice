@@ -16,8 +16,6 @@ extension ThirdViewControllerRoutable where Self: ThirdViewController {
     func buildScene(scene: SceneCategory) -> Scenable? {
         var nextScene: Scenable?
         switch scene {
-        case .alert(let context):
-            nextScene = buildAlert(context: context)
         default: break
         }
         return nextScene

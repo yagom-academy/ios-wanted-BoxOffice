@@ -18,7 +18,7 @@ import Foundation
 //key: d591d06e
 
 // TODO: date등 기타 쿼리 넣는법 처리...
-// TODO: kofic 박스오피스 기본 api --> movieCd 확인 --> movieCd + key로 영화 상세정보api 호출 --> 
+// TODO: kofic 박스오피스 기본 api --> movieCd 확인 --> movieCd + key로 영화 상세정보api 호출 --> movieNmEn 찾아서 omdb api로 이미지 가져오기?
 enum API {
     case kofic(koficBoxOffice)
     case omdb(movieName: String)

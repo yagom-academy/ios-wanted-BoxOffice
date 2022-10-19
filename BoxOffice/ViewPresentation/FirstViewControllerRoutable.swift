@@ -66,7 +66,7 @@ extension FirstViewControllerSceneBuildable {
             break
         case .closeWithAction(_):
             break
-        case .alert(let context):
+        case .alert(.networkAlert(.normalErrorAlert(let context))):
            nextScene = buildAlert(context: context)
         default: break
         }
