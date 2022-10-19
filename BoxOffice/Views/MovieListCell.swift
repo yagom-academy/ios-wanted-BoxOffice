@@ -31,7 +31,7 @@ class MovieListCell: UITableViewCell {
     let label = UILabel()
     label.font = UIFont.preferredFont(forTextStyle: .title2)
     label.text = "영화제목"
-    label.numberOfLines = 0
+    label.numberOfLines = 2
     label.adjustsFontForContentSizeCategory = true
 
     return label
@@ -105,43 +105,44 @@ class MovieListCell: UITableViewCell {
 
   override func prepareForReuse() {
     super.prepareForReuse()
-    poster.image = nil
+    self.poster.image = nil
+    self.newTag.isHidden = true
   }
 }
 
 extension MovieListCell {
   func addViews() {
-    [ranking, movieTitle, openDate, audienceCount].forEach { labelStack.addArrangedSubview($0) }
+    [ranking, movieTitle, openDate, audienceCount, ].forEach { labelStack.addArrangedSubview($0) }
     [labelStack, poster, newTag, rankDiff, rankUpDown, ].forEach {
       contentView.addSubview($0)
     }
   }
 
   func setConstraints() {
-    [poster, labelStack, newTag, rankDiff, rankUpDown, ].forEach {
+    [labelStack, poster, newTag, rankDiff, rankUpDown, ].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     // TODO: - Poster 높이 제약 수정하기
     NSLayoutConstraint.activate([
-      labelStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
-      labelStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
+      labelStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+      labelStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
       labelStack.leadingAnchor.constraint(equalTo: poster.trailingAnchor, constant: 10),
-      labelStack.trailingAnchor.constraint(lessThanOrEqualTo: newTag.leadingAnchor),
+      labelStack.trailingAnchor.constraint(lessThanOrEqualTo: rankDiff.leadingAnchor),
       poster.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
       poster.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
       poster.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-      poster.widthAnchor.constraint(equalToConstant: 100),
-      poster.heightAnchor.constraint(equalTo: poster.widthAnchor, multiplier: 1.4),
-//      poster.heightAnchor.constraint(equalToConstant: 144),
+      poster.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.25),
+      poster.heightAnchor.constraint(lessThanOrEqualTo: poster.widthAnchor, multiplier: 1.4),
       rankUpDown.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
       rankUpDown.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -6),
+      rankUpDown.widthAnchor.constraint(equalToConstant: 32),
+      rankUpDown.heightAnchor.constraint(equalToConstant: 32),
       rankDiff.centerYAnchor.constraint(equalTo: rankUpDown.centerYAnchor),
       rankDiff.trailingAnchor.constraint(equalTo: rankUpDown.leadingAnchor, constant: -6),
-      newTag.centerYAnchor.constraint(equalTo: rankDiff.centerYAnchor),
-      newTag.trailingAnchor.constraint(equalTo: rankDiff.leadingAnchor, constant: -6),
+      newTag.bottomAnchor.constraint(equalTo: rankUpDown.topAnchor, constant: -10),
+      newTag.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
       newTag.widthAnchor.constraint(equalToConstant: 40),
-
     ])
   }
 
@@ -152,7 +153,7 @@ extension MovieListCell {
   func setLabels(rank: String, title: String, date: String, audiCnt: String, diff: String) {
     self.ranking.text = "\(rank)위"
     self.movieTitle.text = title
-    self.openDate.text = date
+    self.openDate.text = "개봉일 : \(date)"
     self.audienceCount.text = "\(audiCnt)명 관람"
     self.rankDiff.text = diff
   }
@@ -164,6 +165,14 @@ extension MovieListCell {
     } else {
       self.rankUpDown.image = UIImage(systemName: "arrowtriangle.down.square.fill")
       self.rankUpDown.tintColor = .systemBlue
+    }
+  }
+
+  func toggleNewTag(_ on: Bool) {
+    if on {
+      self.newTag.isHidden = false
+    } else {
+      self.newTag.isHidden = true
     }
   }
 }
