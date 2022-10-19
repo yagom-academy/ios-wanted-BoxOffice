@@ -15,6 +15,13 @@ class MovieListViewController: UIViewController {
   private var posterList = [String](repeating: "", count: 10)
   private var movieCount = 0
 
+  let dateFormatter: DateFormatter = {
+    let df = DateFormatter()
+    df.dateFormat = "YYYYMMdd"
+
+    return df
+  }()
+
   let segmentedControl: UISegmentedControl = {
     let sc = UISegmentedControl(items: ["일별", "주간"])
     sc.selectedSegmentIndex = 0
@@ -46,8 +53,18 @@ class MovieListViewController: UIViewController {
     tableView.dataSource = self
     networkManager.delegate = self
 
-    DispatchQueue.global().async {
-      self.networkManager.fetchMovie(targetDate: "20221018", type: .daily)
+//    print(dailyList.first == nil)
+//    print(dailyList[0] == nil)
+
+    if dailyList[0] == nil {
+      let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+
+      print(dateFormatter.string(from: yesterday))
+
+      DispatchQueue.global().async {
+        self.networkManager.fetchMovie(targetDate: self.dateFormatter.string(from: yesterday),
+                                       type: .daily)
+      }
     }
 
     addViews()
