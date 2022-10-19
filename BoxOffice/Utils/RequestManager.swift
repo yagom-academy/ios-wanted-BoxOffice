@@ -65,7 +65,7 @@ class RequestManager {
                 completion([])
                 print(error.localizedDescription)
             }
-        }
+        }.resume()
     }
     
     func getDateForDaily(date: Date) -> String {
