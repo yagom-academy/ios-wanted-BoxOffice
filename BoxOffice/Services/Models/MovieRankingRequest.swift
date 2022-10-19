@@ -18,11 +18,25 @@ extension MovieRankingRequest: RequestType {
     typealias ResponseDataType = MovieRankingResponse
 
     var baseURL: String { "http://www.kobis.or.kr" }
-    var path: String { "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json" }
+    var path: String {
+        switch self {
+        case let .value(_, duration) where duration == .daily :
+            return "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
+        default:
+            return "/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json"
+        }
+    }
     var method: HTTPMethod  { .get }
     var parameters: HTTPParameters? {
         switch self {
-        case .value(let date, _):
+        case let .value(date, duration) where duration == .weekend:
+            return [
+                "key": "09f3b35d45fcb4b7d0d5ba56e49cdaa9",
+                "targetDt": date.string(),
+                "weekGb": "0",
+                "wideAreaCd": "0105001"
+            ]
+        case let .value(date, _):
             return [
                 "key": "09f3b35d45fcb4b7d0d5ba56e49cdaa9",
                 "targetDt": date.string(),

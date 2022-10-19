@@ -9,6 +9,16 @@ import Foundation
 
 extension Date {
 
+    var calendar: Calendar { Calendar.current }
+
+    var yesterday: Date {
+        return calendar.date(byAdding: .day, value: -1, to: self) ?? Date()
+    }
+
+    var lastWeek: Date {
+        return calendar.date(byAdding: .day, value: -7, to: self) ?? Date()
+    }
+
     func string(withFormat format: String = "yyyyMMdd") -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format

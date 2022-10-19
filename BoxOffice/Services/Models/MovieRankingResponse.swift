@@ -17,14 +17,15 @@ struct MovieRankingResponse: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case nestedContainer = "boxOfficeResult"
-        case rankingList = "dailyBoxOfficeList"
+        case dailyRankingList = "dailyBoxOfficeList"
+        case weeklyRankingList = "weeklyBoxOfficeList"
     }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        rankingList = try container
-            .nestedContainer(keyedBy: CodingKeys.self, forKey: .nestedContainer)
-            .decode([MovieRanking].self, forKey: .rankingList)
+        let nestedContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .nestedContainer)
+        rankingList = try nestedContainer.decodeIfPresent([MovieRanking].self, forKey: .dailyRankingList) ??
+        nestedContainer.decode([MovieRanking].self, forKey: .weeklyRankingList)
     }
     
 }

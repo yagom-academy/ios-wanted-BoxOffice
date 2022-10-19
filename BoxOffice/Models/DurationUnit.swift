@@ -11,5 +11,6 @@ enum DurationUnit: Int {
 
     case daily
     case weekly
+    case weekend
     
 }

@@ -33,7 +33,7 @@ final class MovieListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        fetchMovieRanking()
+        fetchMovieRanking(for: .daily)
     }
 
     // MARK: -
@@ -41,16 +41,16 @@ final class MovieListViewController: UIViewController {
     private func configureObserver() {
         $movies
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
+            .sink { [weak self] movies in
                 self?.tableView.reloadData()
             }
             .store(in: &cancellables)
     }
 
-    private func fetchMovieRanking() {
+    private func fetchMovieRanking(for duration: DurationUnit) {
         Task {
             do {
-                let movies = try await movieSearchService.searchMovieRanking(for: .daily)
+                let movies = try await movieSearchService.searchMovieRanking(for: duration)
                 self.movies = movies
             } catch let error {
                 print(error.localizedDescription)
@@ -74,7 +74,7 @@ final class MovieListViewController: UIViewController {
         Logger.ui.debug("\(#function) \(sender.selectedSegmentIndex)")
 
         guard let selectedDuration = DurationUnit(rawValue: sender.selectedSegmentIndex) else { return }
-        // TODO: 데이터요청
+        fetchMovieRanking(for: selectedDuration)
     }
 
 }

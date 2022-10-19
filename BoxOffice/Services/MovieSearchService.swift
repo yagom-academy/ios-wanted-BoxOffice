@@ -23,7 +23,9 @@ class MovieSearchService: MovieSearchAPI {
     }
 
     func searchMovieRanking(for duration: DurationUnit) async throws -> [MovieRanking] {
-        let request = MovieRankingRequest.value(atDate: Date().addingTimeInterval(-60 * 60 * 24), forDuration: duration)
+        let current = Date()
+        let targetDate = duration == .daily ? current.yesterday : current.lastWeek
+        let request = MovieRankingRequest.value(atDate: targetDate, forDuration: duration)
         let data = try await apiRequestLoader.execute(request)
         let result = try request.parseResponse(data: data)
         return result.rankingList
