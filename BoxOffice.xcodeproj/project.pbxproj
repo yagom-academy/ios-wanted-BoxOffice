@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D15CAF328FFE810001A3991 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D15CAF228FFE810001A3991 /* Date+Extension.swift */; };
+		2D15CAF729003AF4001A3991 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D15CAF629003AF4001A3991 /* ImageCacheManager.swift */; };
 		2D570F8D28FFA3C600900B65 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D570F8C28FFA3C600900B65 /* NetworkError.swift */; };
 		2D570F8F28FFA41E00900B65 /* DailyBoxOfficeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D570F8E28FFA41E00900B65 /* DailyBoxOfficeDTO.swift */; };
 		2D570F9128FFA8A100900B65 /* MovieInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D570F9028FFA8A100900B65 /* MovieInfoDTO.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		2D15CAF228FFE810001A3991 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		2D15CAF629003AF4001A3991 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		2D570F8C28FFA3C600900B65 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		2D570F8E28FFA41E00900B65 /* DailyBoxOfficeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeDTO.swift; sourceTree = "<group>"; };
 		2D570F9028FFA8A100900B65 /* MovieInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoDTO.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				2D570F9228FFA96E00900B65 /* MoviePosterInfoDTO.swift */,
 				2D570F9D28FFDF3000900B65 /* NetworkManager.swift */,
 				2D570F9F28FFDFEE00900B65 /* SimpleMovieInfo.swift */,
+				2D15CAF629003AF4001A3991 /* ImageCacheManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				2D570F9128FFA8A100900B65 /* MovieInfoDTO.swift in Sources */,
 				2D570F8F28FFA41E00900B65 /* DailyBoxOfficeDTO.swift in Sources */,
 				635A19EC28F9603900197BCC /* MovieRankViewController.swift in Sources */,
+				2D15CAF729003AF4001A3991 /* ImageCacheManager.swift in Sources */,
 				2D570FA028FFDFEE00900B65 /* SimpleMovieInfo.swift in Sources */,
 				2D15CAF328FFE810001A3991 /* Date+Extension.swift in Sources */,
 				2D570F8D28FFA3C600900B65 /* NetworkError.swift in Sources */,

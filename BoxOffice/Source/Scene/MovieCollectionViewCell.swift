@@ -78,7 +78,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = .systemGray
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 17)
+        label.font = .systemFont(ofSize: 14)
         return label
     }()
     
@@ -86,7 +86,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = .systemGray
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 17)
+        label.font = .systemFont(ofSize: 14)
         return label
     }()
     

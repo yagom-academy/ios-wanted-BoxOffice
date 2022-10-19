@@ -8,6 +8,8 @@
 import Foundation
 
 struct SimpleMovieInfo: Hashable {
+    var imageURL: String?
+    var englishName: String
     var rank: Int
     var name: String
     var inset: String
