@@ -10,8 +10,17 @@ import UIKit
 class BoxOfficeViewController: UIViewController {
     
     let mainView = BoxOfficeView()
-    var boxOfficeViewModel: BoxOfficeViewModel?
-    var posterUrlList: [Int:String] = [:]
+    let boxOfficeViewModel: BoxOfficeViewModel
+    
+    
+    init() {
+        self.boxOfficeViewModel = BoxOfficeViewModel()
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         self.view = mainView
@@ -24,45 +33,22 @@ class BoxOfficeViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    func configureImage() {
-        posterUrlList = [:]
-        guard let viewModel = self.boxOfficeViewModel else { return }
-        for (index, model) in viewModel.listModel.enumerated() {
-            
-            let url = "\(EndPoint.naverURL)?query=\(model.movieNm)"
-            APIService.shared.fetchImage(url: url) { (response: PosterModel?, error) in
-                guard let response = response
-                else {
-                    return
-                }
-                guard let imageList = response.items.first else { return }
-                self.posterUrlList[index] = imageList.image.replacingOccurrences(of: "mit110", with: "mit500")
-                print(response.items.first?.title)
-                self.mainView.boxOfficeTableView.reloadData()
-            }
-        }
-    }
-    
     func setup() {
-        let today = Date().todayToString()
-        //let url = "\(EndPoint.kdbDailyURL)?key=\(APIKey.KDB_KEY_ID)&targetDt=\(today)&wideAreaCd=0105001"
-        let url = "\(EndPoint.kdbDailyURL)?key=\(APIKey.KDB_KEY_ID)&targetDt=\(today)"
+        fetchData()
         mainView.boxOfficeTableView.delegate = self
         mainView.boxOfficeTableView.dataSource = self
-        mainView.boxOfficeTableView.register(BoxOfficeTableViewCell.self, forCellReuseIdentifier: BoxOfficeTableViewCell.identifier)
-        APIService.shared.fetchData(url: url) { (response: BoxOfficeModel?, error) in
-            guard let response = response else {
-                return
-            }
-
-            self.boxOfficeViewModel = BoxOfficeViewModel(viewModel: response)
-            self.configureImage()
+        mainView.boxOfficeTableView.register(BoxOfficeTableViewCell.self, forCellReuseIdentifier: BoxOfficeCellViewModel.identifier)
+    }
+    
+    func fetchData() {
+        boxOfficeViewModel.fetchAPIData {
+            self.mainView.boxOfficeTableView.reloadData()
             self.setupNavigation()
         }
     }
     
     func setupNavigation() {
-        navigationItem.title = boxOfficeViewModel?.boxofficeType
+        navigationItem.title = boxOfficeViewModel.BoxOfficeModel?.boxOfficeResult.boxofficeType
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -71,26 +57,20 @@ class BoxOfficeViewController: UIViewController {
 extension BoxOfficeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return boxOfficeViewModel?.listCount() ?? 0
+        return boxOfficeViewModel.cellViewModel.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: BoxOfficeTableViewCell.identifier, for: indexPath) as? BoxOfficeTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: BoxOfficeCellViewModel.identifier, for: indexPath) as? BoxOfficeTableViewCell
         else {
             return UITableViewCell()
         }
-        guard let viewModel = boxOfficeViewModel
-        else {
-            return UITableViewCell()
-        }
-        let data = viewModel.boxOffice(row: indexPath.row)
-        cell.rankLabel.text = "#\(data.rank)"
-        cell.movieNameLabel.text = data.movieNm
-        cell.audiAccLabel.text = data.audiAcc
-        cell.inputRankInten(value: viewModel.rankChange(row: indexPath.row))
-        cell.openDateLabel.text = data.openDt
-        if let imageURL = posterUrlList[indexPath.row] {
-            cell.posterView.setImageUrl(imageURL)
+        guard let viewModel = self.boxOfficeViewModel.cellViewModel[indexPath.row] else { return UITableViewCell() }
+        switch ( cell, viewModel ){
+        case let ( cell, viewModel) as (BoxOfficeTableViewCell, BoxOfficeCellViewModel):
+            cell.cellViewModel = viewModel
+        default:
+            fatalError()
         }
         return cell
     }

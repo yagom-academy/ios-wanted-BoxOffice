@@ -7,9 +7,24 @@
 
 import UIKit
 
-class BoxOfficeTableViewCell: UITableViewCell, MyTableViewCell {
+class BoxOfficeTableViewCell: UITableViewCell {
     
-    static var identifier: String = String(describing: BoxOfficeTableViewCell.self)
+    var cellViewModel: BoxOfficeCellViewModel? {
+        didSet {
+            guard let viewModel = cellViewModel else { return }
+            openDateLabel.text = viewModel.cellData.openDt
+            rankLabel.text = viewModel.cellData.rank
+            movieNameLabel.text = viewModel.cellData.movieNm
+            audiAccLabel.text = viewModel.cellData.audiAcc
+            posterView.setImageUrl(viewModel.posterURL)
+            if viewModel.cellData.rankOldAndNew == .new {
+                rankIntenLabel.textColor = .red
+                rankIntenLabel.text = RankOldAndNew.new.rawValue
+            } else {
+                rankIntenLabel.text = inputRankInten(value: viewModel.cellData.rankInten)
+            }
+        }
+    }
     
     lazy var openDateLabel: UILabel = {
         let view = UILabel()
@@ -173,21 +188,20 @@ class BoxOfficeTableViewCell: UITableViewCell, MyTableViewCell {
         ])
     }
     
-    func inputRankInten(value: String) {
+    func inputRankInten(value: String) -> String {
         guard let rankInten = Int(value)
         else {
-            rankIntenLabel.text = value
-            return
+            return value
         }
         if rankInten > 0 {
             rankIntenLabel.textColor = .red
-            rankIntenLabel.text = "▲ +\(rankInten)"
+            return "▲ +\(rankInten)"
         } else if rankInten < 0 {
             rankIntenLabel.textColor = .blue
-            rankIntenLabel.text = "▼ \(rankInten)"
+            return "▼ \(rankInten)"
         } else {
             rankIntenLabel.textColor = .gray
-            rankIntenLabel.text = "–"
+            return "–"
         }
     }
     

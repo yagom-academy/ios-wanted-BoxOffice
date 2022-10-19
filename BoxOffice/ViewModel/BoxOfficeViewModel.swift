@@ -7,31 +7,46 @@
 
 import Foundation
 
-struct BoxOfficeViewModel {
-    var viewModel: BoxOfficeModel
-    var boxofficeType: String
-    var showRange: String
-    var listModel: [DailyBoxOfficeList]
+class BoxOfficeViewModel {
     
-    init(viewModel: BoxOfficeModel) {
-        self.viewModel = viewModel
-        self.boxofficeType = viewModel.boxOfficeResult.boxofficeType
-        self.showRange = viewModel.boxOfficeResult.showRange
-        self.listModel = viewModel.boxOfficeResult.dailyBoxOfficeList
-    }
+    var cellViewModel = [Int : TableViewCellViewModel]()
+    var dd: [Int:Int] = [0:0]
+    var BoxOfficeModel: BoxOfficeModel?
     
-    func boxOffice(row: Int) -> DailyBoxOfficeList{
-        return self.listModel[row]
-    }
-    
-    func listCount() -> Int {
-        self.listModel.count
-    }
-    
-    func rankChange(row: Int) -> String {
-        if self.listModel[row].rankOldAndNew == .new {
-            return RankOldAndNew.new.rawValue
+    func requestBoxOfficeAPI(completion: @escaping ()->()) {
+        let today = Date().todayToString()
+        let url = "\(EndPoint.kdbDailyURL)?key=\(APIKey.KDB_KEY_ID)&targetDt=\(today)"
+        APIService.shared.fetchData(url: url) { (response: BoxOfficeModel?, error) in
+            guard let response = response else { return }
+            self.BoxOfficeModel = response
+            completion()
         }
-        return self.listModel[row].rankInten
+    }
+    
+    func requestPosterAPI(model: DailyBoxOfficeList, completion: @escaping (String)->()) {
+        let url = "\(EndPoint.naverURL)?query=\(model.movieNm)"
+        APIService.shared.fetchImage(url: url) { (response: PosterModel?, error) in
+            guard let response = response
+            else {
+                return
+            }
+            completion(response.items.first?.image ?? "")
+        }
+    }
+    
+    func fetchAPIData(completion: @escaping ()->()) {
+        requestBoxOfficeAPI {
+            
+            guard let boxOfficeModel = self.BoxOfficeModel else { return }
+            
+            for (index, model) in boxOfficeModel.boxOfficeResult.dailyBoxOfficeList.enumerated() {
+                
+                self.requestPosterAPI(model: model) { url in
+                    let imageURL = url.replacingOccurrences(of: "mit110", with: "mit500")
+                    self.cellViewModel[index] = BoxOfficeCellViewModel(cellData: model, posterURL: imageURL)
+                    completion()
+                }
+            }
+        }
     }
 }
