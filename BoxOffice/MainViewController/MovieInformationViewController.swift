@@ -22,35 +22,28 @@ class MovieInformationViewController: UIViewController {
     @IBOutlet weak var 관람등급: UILabel!
     @IBOutlet weak var 개봉연도: UILabel!
     
-    let myApiKey = "e1e395c6dd084d40f20882f0d2fb5da6"
-    var movis : MovieModel?
-    var info : MovieCodable?
-    var subinfo : InfomationCodable?
+    let mainVC = MainViewController()
+    var movieModel : MovieModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("\(String(describing: subinfo?.movieInfoResult.movieInfo.movieNm))😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈")
-        if let info = movis {
-            //            print(info.boxOfficeResult.dailyBoxOfficeList.count)
-            영화명.text = movis?.영화제목
-            print(movis?.영화제목)
-            영화순위.text = movis?.순위
+        
+        guard let movieModel = self.movieModel else {return}
+        movieInfomationApi.getData(myApiKey: mainVC.myApiKey, todays: mainVC.inquiryTime() ,itemPerPage: "\(mainVC.itemPerPageArry)", movieCd: movieModel.영화번호) { result in
+            self.영화명.text = "영화제목: \(movieModel.영화제목)"
+            self.영화순위.text = "영화 순위: \(movieModel.순위)"
+            self.랭킹신규진입.text = "신규진입: \(movieModel.신규진입)"
+            self.관객수.text = "관객수:\(movieModel.관객수)"
+            self.개봉일.text = "개봉일: \(movieModel.오픈날짜)"
+            self.전일대비.text = "전일대비: \(movieModel.순위증감)"
+            self.상영시간.text = "상영시간:\(result.movieInfoResult.movieInfo.showTm)분"
+            self.장르.text = "장르: \(result.movieInfoResult.movieInfo.genres[0].genreNm)"
+            self.관람등급.text = "관람등급: \(result.movieInfoResult.movieInfo.audits[0].watchGradeNm)"
+            self.개봉연도.text = "개봉연도: \(result.movieInfoResult.movieInfo.openDt)"
+            self.제작연도.text = "제작연도: \(result.movieInfoResult.movieInfo.prdtYear)"
+            self.배우명.text = "배우: \(result.movieInfoResult.movieInfo.actors[0].peopleNm),\(result.movieInfoResult.movieInfo.actors[1].peopleNm) "
+            self.감독명.text = "감독: \(result.movieInfoResult.movieInfo.directors[0].peopleNm)"
         }
-//            영화순위.text = info.boxOfficeResult.dailyBoxOfficeList[info.boxOfficeResult.dailyBoxOfficeList.count].rank
-        
-//            관객수.text = info.movieInfoResult.movieInfo
-//            전일대비.text = info.movieInfoResult.movieInfo
-//            랭킹신규진입.text =
-//            제작연도.text = info.movieInfoResult.movieInfo.prdtYear
-//            감독명.text = info.movieInfoResult.movieInfo.prdtStatNm
-//            배우명.text = info.movieInfoResult.movieInfo.actors[1].peopleNm
-//            상영시간.text = info.movieInfoResult.movieInfo.showTm
-//            장르.text = info.movieInfoResult.movieInfo.genres[1].genreNm
-//            관람등급.text = info.movieInfoResult.movieInfo.showTm
-//            개봉연도.text = info.movieInfoResult.movieInfo.openDt
-            
-
-        
     }
     
     

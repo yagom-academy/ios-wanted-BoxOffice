@@ -102,10 +102,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="m1X-3W-Q6C" secondAttribute="trailing" id="5c5-1F-OGh"/>
-                            <constraint firstItem="m1X-3W-Q6C" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7pD-gY-dzX"/>
-                            <constraint firstItem="m1X-3W-Q6C" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Eei-09-sqO"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="m1X-3W-Q6C" secondAttribute="bottom" id="v8U-wT-cXO"/>
+                            <constraint firstItem="m1X-3W-Q6C" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1xu-59-hYu"/>
+                            <constraint firstItem="m1X-3W-Q6C" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2Oi-jC-MO8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="m1X-3W-Q6C" secondAttribute="bottom" id="Hzf-NN-fF7"/>
+                            <constraint firstItem="m1X-3W-Q6C" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="TVU-33-Vxr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="오늘의영화" id="62f-TM-8y7"/>

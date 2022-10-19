@@ -18,7 +18,6 @@
 		D354E3E928FD439200D8F5FB /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354E3E828FD439200D8F5FB /* MovieModel.swift */; };
 		D354E3EC28FD4A4000D8F5FB /* MovieApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354E3EB28FD4A4000D8F5FB /* MovieApi.swift */; };
 		D354E40D28FE3CC700D8F5FB /* MovieInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354E40C28FE3CC700D8F5FB /* MovieInformationViewController.swift */; };
-		D354E40F28FE3E9E00D8F5FB /* InformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354E40E28FE3E9E00D8F5FB /* InformationModel.swift */; };
 		D354E41128FE3ED400D8F5FB /* InformationCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354E41028FE3ED400D8F5FB /* InformationCodable.swift */; };
 		D354E41328FE3FB600D8F5FB /* MovieInfomationApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354E41228FE3FB600D8F5FB /* MovieInfomationApi.swift */; };
 /* End PBXBuildFile section */
@@ -37,7 +36,6 @@
 		D354E3E828FD439200D8F5FB /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		D354E3EB28FD4A4000D8F5FB /* MovieApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieApi.swift; sourceTree = "<group>"; };
 		D354E40C28FE3CC700D8F5FB /* MovieInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInformationViewController.swift; sourceTree = "<group>"; };
-		D354E40E28FE3E9E00D8F5FB /* InformationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationModel.swift; sourceTree = "<group>"; };
 		D354E41028FE3ED400D8F5FB /* InformationCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationCodable.swift; sourceTree = "<group>"; };
 		D354E41228FE3FB600D8F5FB /* MovieInfomationApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfomationApi.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,9 +92,8 @@
 			isa = PBXGroup;
 			children = (
 				D354E3E628FD3F6000D8F5FB /* MovieCodable.swift */,
-				D354E3E828FD439200D8F5FB /* MovieModel.swift */,
-				D354E40E28FE3E9E00D8F5FB /* InformationModel.swift */,
 				D354E41028FE3ED400D8F5FB /* InformationCodable.swift */,
+				D354E3E828FD439200D8F5FB /* MovieModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -212,7 +209,6 @@
 			files = (
 				635A19EC28F9603900197BCC /* MainViewController.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
-				D354E40F28FE3E9E00D8F5FB /* InformationModel.swift in Sources */,
 				D354E41128FE3ED400D8F5FB /* InformationCodable.swift in Sources */,
 				D354E3E728FD3F6000D8F5FB /* MovieCodable.swift in Sources */,
 				D354E41328FE3FB600D8F5FB /* MovieInfomationApi.swift in Sources */,
