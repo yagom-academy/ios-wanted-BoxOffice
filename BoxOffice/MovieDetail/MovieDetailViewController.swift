@@ -77,6 +77,7 @@ final class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        self.settingNavigation()
         self.setupLayouts()
         self.setupViewModel()
         self.configure(movieDetailTableView)
@@ -105,6 +106,18 @@ final class MovieDetailViewController: UIViewController {
         tableView.register(MovieDetailCell.self, forCellReuseIdentifier: "MovieDetailCell")
         tableView.dataSource = self
         tableView.delegate = self
+    }
+    
+    private func settingNavigation() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"),
+                                                                       style: .plain,
+                                                                       target: self,
+                                                                       action: #selector(writeReview))
+        self.navigationItem.rightBarButtonItem?.tintColor = .black
+    }
+    
+    @objc func writeReview() {
+        self.navigationController?.pushViewController(MovieReviewViewController(), animated: true)
     }
     
     private func setupLayouts() {
