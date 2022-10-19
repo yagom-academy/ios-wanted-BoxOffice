@@ -13,7 +13,7 @@ class BoxOfficeListViewModel {
     // MARK: Input
     
     // MARK: Output
-    @Published var movies = [Movie]()
+    @Published var cellModels = [BoxOfficeListCollectionViewCellModel]()
     
     // MARK: Properties
     
@@ -22,9 +22,8 @@ class BoxOfficeListViewModel {
         bind()
     }
     
-    
     // MARK: Binding
     func bind() {
-
+        
     }
 }

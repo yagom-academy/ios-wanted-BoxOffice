@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 import SwiftUI
 
 // MARK: - View
@@ -108,6 +109,7 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
             bind(viewModel: viewModel)
         }
     }
+    var subscriptions = [AnyCancellable]()
     
     // MARK: Life Cycle
     override init(frame: CGRect) {
@@ -127,6 +129,11 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
             didSetupConstraints = true
         }
         super.updateConstraints()
+    }
+    
+    override func prepareForReuse() {
+        subscriptions = []
+        super.prepareForReuse()
     }
     
     // MARK: Setup Views
@@ -174,6 +181,7 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
         constraints += [
             rankIntenStackView.leadingAnchor.constraint(equalTo: rankLabel.trailingAnchor, constant: 4),
             rankIntenStackView.bottomAnchor.constraint(equalTo: posterImageView.bottomAnchor),
+            rankIntenStackView.heightAnchor.constraint(equalToConstant: 19),
         ]
         
         constraints += [
@@ -198,11 +206,59 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
     
     // MARK: Binding
     func bind(viewModel: ViewModel) {
-        // Action
+        viewModel.$posterImage
+            .receive(on: RunLoop.main)
+            .assign(to: \.image, on: posterImageView)
+            .store(in: &subscriptions)
         
-        // State
+        viewModel.$movie
+            .compactMap { $0.boxOfficeInfo?.rank }
+            .map { String($0) }
+            .receive(on: RunLoop.main)
+            .assign(to: \.text, on: rankLabel)
+            .store(in: &subscriptions)
         
-        // View
+        viewModel.$movie
+            .compactMap { $0.boxOfficeInfo }
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] info in
+                guard let self else { return }
+                if info.rankOldAndNew == .NEW {
+                    self.rankIntenLabel.text = "new"
+                    self.rankIntenLabel.textColor = UIColor(hex: "#05FF00")
+                    self.rankIntenLabel.isHidden = false
+                    self.rankIntenImage.isHidden = true
+                } else if info.rankInten > 0 {
+                    self.rankIntenImage.image = UIImage(named: "rankIntenUp")
+                    self.rankIntenLabel.text = String(info.rankInten)
+                    self.rankIntenLabel.textColor = UIColor(hex: "#FFC700")
+                    self.rankIntenImage.isHidden = false
+                    self.rankIntenLabel.isHidden = false
+                } else if info.rankInten == 0 {
+                    self.rankIntenImage.image = UIImage(named: "rankIntenKeep")
+                    self.rankIntenImage.isHidden = false
+                    self.rankIntenLabel.isHidden = true
+                } else if info.rankInten < 0 {
+                    self.rankIntenImage.image = UIImage(named: "rankIntenDown")
+                    self.rankIntenLabel.text = String(info.rankInten)
+                    self.rankIntenLabel.textColor = UIColor(hex: "#00E0FF")
+                    self.rankIntenImage.isHidden = false
+                    self.rankIntenLabel.isHidden = false
+                }
+            }).store(in: &subscriptions)
+        
+        viewModel.$movie
+            .map { $0.movieName }
+            .receive(on: RunLoop.main)
+            .assign(to: \.text, on: titleLabel)
+            .store(in: &subscriptions)
+        
+        viewModel.$movie
+            .map { $0.openDate }
+            .map { "\($0) 개봉" }
+            .receive(on: RunLoop.main)
+            .assign(to: \.text, on: openDateLabel)
+            .store(in: &subscriptions)
     }
     
     // MARK: Util
@@ -216,8 +272,11 @@ struct BoxOfficeListCollectionViewCellPreview: PreviewProvider {
     static var previews: some View {
         let width: CGFloat = 115
         let height = BoxOfficeListCollectionViewCell.calculateCellHeight(width: width)
+        let viewModel = BoxOfficeListCollectionViewCellModel(movie: Movie.dummyMovie)
         ContentViewPreview {
-            return BoxOfficeListCollectionViewCell(frame: .zero)
+            let cell = BoxOfficeListCollectionViewCell(frame: .zero)
+            cell.viewModel = viewModel
+            return cell
         }.previewLayout(.fixed(width: width, height: height))
     }
 }
