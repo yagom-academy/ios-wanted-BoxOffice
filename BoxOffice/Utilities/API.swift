@@ -23,8 +23,8 @@ enum API {
     case omdb(movieName: String)
     
     enum koficBoxOffice {
-        case daily(name: String)
-        case weekly_weekEnd(name: String)
+        case daily(date: String)
+        case weekly_weekEnd(date: String)
     }
     
     var urlComponets: URLComponents? {
@@ -78,13 +78,13 @@ enum API {
     // TODO: 쿼리 잘 넣는 방법 다시 생각좀...
     private var getMethodQuerySet: [URLQueryItem] {
         switch self {
-        case .kofic(.daily(let name)):
-            let targetDT = [URLQueryItem(name: "targetDt", value: "20221017")] //yyyymmdd
+        case .kofic(.daily(let date)):
+            let targetDT = [URLQueryItem(name: "targetDt", value: date)] //yyyymmdd
             let itemPerPage = [URLQueryItem(name: "itemPerPage", value: "10")] //default: 10, max: 10
             let wideAreaCd = [URLQueryItem(name: "wideAreaCd", value: kofic_ComCode)]
             return targetDT + itemPerPage + wideAreaCd
-        case .kofic(.weekly_weekEnd(_)):
-            let targetDT = [URLQueryItem(name: "targetDt", value: "20221017")] //yyyymmdd
+        case .kofic(.weekly_weekEnd(let date)):
+            let targetDT = [URLQueryItem(name: "targetDt", value: date)] //yyyymmdd
             let weekGb = [URLQueryItem(name: "weekGb", value: "1")] //0주간, 1주말-디폴트, 2주중
             let itemPerPage = [URLQueryItem(name: "itemPerPage", value: "10")] //default: 10, max: 10
             let wideAreaCd = [URLQueryItem(name: "wideAreaCd", value: kofic_ComCode)]

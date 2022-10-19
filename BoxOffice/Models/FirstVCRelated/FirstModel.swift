@@ -19,10 +19,12 @@ class FirstModel {
     //properties
     private var privateFirstContentViewModel: FirstContentViewModel
     
+    private var repository: RepositoryProtocol
+    
     // TODO: Repository
-    init() {
+    init(repository: RepositoryProtocol) {
         self.privateFirstContentViewModel = FirstContentViewModel()
-        
+        self.repository = repository
         bind()
     }
     
