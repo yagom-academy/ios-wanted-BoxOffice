@@ -82,7 +82,7 @@ extension FirstContentView: Presentable {
 
 extension FirstContentView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        viewModel.didSelectItemInTableView(indexPath)
     }
 }
 

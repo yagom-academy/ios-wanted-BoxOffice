@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SecondViewController: UIViewController {
 
+    lazy var contentView = SecondContentView()
+    
     var model: SecondModel
     
     init(viewModel: SecondModel) {
@@ -28,7 +31,7 @@ class SecondViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        model.populateData()
         // Do any additional setup after loading the view.
     }
     
@@ -48,7 +51,52 @@ class SecondViewController: UIViewController {
 extension SecondViewController: Presentable {
     func initViewHierarchy() {
         self.view = UIView()
+        
+        let hostingVC = UIHostingController(rootView: contentView)
+        
+        self.addChild(hostingVC)
+        hostingVC.view.frame = self.view.bounds
+        self.view.addSubview(hostingVC.view)
+        hostingVC.didMove(toParent: self)
+        
+        hostingVC.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        var constraint: [NSLayoutConstraint] = []
+        defer { NSLayoutConstraint.activate(constraint) }
+        
+        constraint += [
+            hostingVC.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            hostingVC.view.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            hostingVC.view.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            hostingVC.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ]
     }
+    
+    /* UIHostingVC and Add ChildVC
+     let childView = UIHostingController(rootView: SwiftUIView())
+             addChild(childView)
+             childView.view.frame = theContainer.bounds
+             theContainer.addSubview(childView.view)
+             childView.didMove(toParent: self)
+     */
+    
+    /* Adding a child view controller to a container
+     - (void) displayContentController: (UIViewController*) content {
+        [self addChildViewController:content];
+        content.view.frame = [self frameForContentController];
+        [self.view addSubview:self.currentClientView];
+        [content didMoveToParentViewController:self];
+     }
+     */
+    
+    /* Removing a child view controller from a container
+     - (void) hideContentController: (UIViewController*) content {
+        [content willMoveToParentViewController:nil];
+        [content.view removeFromSuperview];
+        [content removeFromParentViewController];
+     }
+
+     */
     
     func configureView() {
         self.title = "상세정보"
