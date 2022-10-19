@@ -87,15 +87,13 @@ final class MovieDetailViewController: UIViewController {
             self?.indicator.startAnimating()
         }
         
-        self.viewModel.updateMovieDetail = { model in
-            self.boxOfficeRank.text = model.rank
-            self.movieTitle.text = model.movieName
-            self.movieTitleEngAndproductYear.text = "\(model.movieNameEng), \(model.productYear)"
+        self.viewModel.updateMovieDetail = { [weak self] model in
+            self?.boxOfficeRank.text = model.rank
+            self?.movieTitle.text = model.movieName
+            self?.movieTitleEngAndproductYear.text = "\(model.movieNameEng), \(model.productYear)"
         }
-    
         
         self.viewModel.loadingEnd = { [weak self] in
-            print("로딩종료1!!")
             self?.movieDetailTableView.reloadData()
             self?.indicator.stopAnimating()
         }
@@ -150,19 +148,20 @@ final class MovieDetailViewController: UIViewController {
 
 extension MovieDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return viewModel.detailTitleList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieDetailCell", for: indexPath) as? MovieDetailCell else { return UITableViewCell() }
-        cell.configure(idx: indexPath.row, model: viewModel.movieDetailModel)
+        cell.configure(title: viewModel.detailTitleList[indexPath.row],
+                       model: viewModel.movieDetailModel)
         return cell
     }
 }
 
 extension MovieDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 50 //동적 높이 계산해야함
     }
 }
 

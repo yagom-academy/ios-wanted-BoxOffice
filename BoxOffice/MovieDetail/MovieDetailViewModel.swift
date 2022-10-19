@@ -9,6 +9,8 @@ import Foundation
 
 final class MovieDetailViewModel {
     
+    let detailTitleList = ["개요", "장르", "감독", "출연", "관객수", "관람등급", "랭크"]
+    
     var movieDetailModel: MovieDetailModel? {
         didSet {
             guard let data = movieDetailModel else { return }

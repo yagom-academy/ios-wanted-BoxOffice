@@ -28,17 +28,15 @@ struct MovieDetailModel {
     }
 
     var audienceCount: String {
-        guard let strToInt = Int(movieModel.audienceCount) else { return "0" }
-        return commaFormatter(strToInt) + "명"
+        return movieModel.audienceCount
     }
-
+    
     var rankOldAndNew: String {
         return movieModel.rankOldAndNew
     }
 
     var audienceInten: String {
-        guard let strToInt = Int(movieModel.audienceInten) else { return "0" }
-        return commaFormatter(strToInt) + "명"
+        return movieModel.audienceInten
     }
 
     var productYear: String {
@@ -49,8 +47,8 @@ struct MovieDetailModel {
         return detailEntity.showTm + "분"
     }
 
-    var genres: [String] {
-        return detailEntity.genres.map { $0.genreNm }
+    var genres: String {
+        return detailEntity.genres.map { $0.genreNm }.joined(separator: " | ")
     }
 
     var directors: String {

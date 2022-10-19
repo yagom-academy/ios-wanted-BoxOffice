@@ -35,24 +35,24 @@ final class MovieDetailCell: UITableViewCell {
     }
      
   
-    func configure(idx: Int, model: MovieDetailModel?) {
+    func configure(title: String, model: MovieDetailModel?) {
+        titleLabel.text = title
         guard let model = model else { return }
-        switch idx {
-        case 0:
-            titleLabel.text = "개요"
+        switch title {
+        case "개요":
             infoLabel.text = "\(model.showTime) | \(model.openDate)"
-        case 1:
-            titleLabel.text = "감독"
+        case "장르":
+            infoLabel.text = model.genres
+        case "감독":
             infoLabel.text = model.directors
-        case 2:
-            titleLabel.text = "출연"
+        case "출연":
             infoLabel.text = model.actors
-        case 3:
-            titleLabel.text = "관객수"
+        case "관객수":
             infoLabel.text = model.audienceCount
-        case 4:
-            titleLabel.text = "관람등급"
+        case "관람등급":
             infoLabel.text = model.watchGrade
+        case "랭크":
+            infoLabel.text = "\(model.rankOldAndNew) | \(model.audienceInten)"
         default:
             return
         }
