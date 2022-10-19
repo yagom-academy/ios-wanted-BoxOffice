@@ -38,6 +38,7 @@ class MovieInfoViewController: UIViewController {
         mainView.movieInfoTableView.delegate = self
         mainView.movieInfoTableView.dataSource = self
         mainView.movieInfoTableView.register(MovieInfoTableViewCell.self, forCellReuseIdentifier: MovieInfoCellViewModel.identifier)
+        mainView.movieInfoTableView.register(StarScoreCell.self, forCellReuseIdentifier: StarScoreCell.identifier)
     }
     
     func fetchData() {
@@ -56,24 +57,42 @@ class MovieInfoViewController: UIViewController {
 }
 
 extension MovieInfoViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movieInfoViewModel.cellViewModel.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let viewModel = self.movieInfoViewModel.cellViewModel[indexPath.row]
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: type(of: viewModel).identifier, for: indexPath) as? MovieInfoTableViewCell
-        else {
-            return UITableViewCell()
+        
+        if indexPath.section == 0 {
+            let viewModel = self.movieInfoViewModel.cellViewModel[indexPath.row]
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: type(of: viewModel).identifier, for: indexPath) as? MovieInfoTableViewCell
+            else {
+                return UITableViewCell()
+            }
+            switch ( cell, viewModel ){
+            case let ( cell, viewModel) as (MovieInfoTableViewCell, MovieInfoCellViewModel):
+                cell.cellViewModel = viewModel
+            default:
+                fatalError()
+            }
+            return cell
+            
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: StarScoreCell.identifier, for: indexPath) as? StarScoreCell
+            else {
+                return UITableViewCell()
+            }
+            cell.buttonAction = {
+                print("123")
+            }
+            return cell
         }
-        switch ( cell, viewModel ){
-        case let ( cell, viewModel) as (MovieInfoTableViewCell, MovieInfoCellViewModel):
-            cell.cellViewModel = viewModel
-        default:
-            fatalError()
-        }
-        return cell
+        
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
