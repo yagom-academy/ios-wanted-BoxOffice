@@ -7,6 +7,12 @@
 
 import UIKit
 
+enum UpDown {
+  case nothing
+  case up
+  case down
+}
+
 class MovieListCell: UITableViewCell {
   static let id = "movieCell"
 
@@ -158,11 +164,15 @@ extension MovieListCell {
     self.rankDiff.text = diff
   }
 
-  func changeRankUpDown(_ up: Bool) {
-    if up {
+  func changeRankUpDown(_ state: UpDown) {
+    switch state {
+    case .nothing:
+      self.rankUpDown.image = UIImage(systemName: "minus.square")
+      self.rankUpDown.tintColor = .black
+    case .up:
       self.rankUpDown.image = UIImage(systemName: "arrowtriangle.up.square.fill")
       self.rankUpDown.tintColor = .systemRed
-    } else {
+    case .down:
       self.rankUpDown.image = UIImage(systemName: "arrowtriangle.down.square.fill")
       self.rankUpDown.tintColor = .systemBlue
     }

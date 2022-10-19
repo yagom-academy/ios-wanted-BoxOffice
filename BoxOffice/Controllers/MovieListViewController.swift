@@ -59,8 +59,6 @@ class MovieListViewController: UIViewController {
     if dailyList[0] == nil {
       let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
 
-      print(dateFormatter.string(from: yesterday))
-
       DispatchQueue.global().async {
         self.networkManager.fetchMovie(targetDate: self.dateFormatter.string(from: yesterday),
                                        type: .daily)
@@ -131,6 +129,17 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
                    audiCnt: movie.audiCnt,
                    diff: movie.rankInten)
     cell.setPoster(PosterCache.loadPoster(movie.movieCd))
+
+    let updown = Int(movie.rankInten)!
+    if updown == 0 {
+      cell.changeRankUpDown(.nothing)
+    } else if updown > 0 {
+      cell.changeRankUpDown(.up)
+    } else {
+      cell.changeRankUpDown(.down)
+    }
+
+    cell.toggleNewTag(movie.rankOldAndNew == "NEW")
 
     return cell
   }
