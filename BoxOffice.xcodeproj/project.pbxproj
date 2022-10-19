@@ -12,6 +12,7 @@
 		635A19EF28F9603900197BCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19ED28F9603900197BCC /* Main.storyboard */; };
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
 		635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F228F9603A00197BCC /* LaunchScreen.storyboard */; };
+		F86D54B328FEA5F100BD04AC /* MovieListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D54B228FEA5F100BD04AC /* MovieListViewCell.swift */; };
 		F86D54BF28FEB51400BD04AC /* NotoSansMono-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F86D54B628FEB51300BD04AC /* NotoSansMono-SemiBold.ttf */; };
 		F86D54C028FEB51400BD04AC /* NotoSansMono-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F86D54B728FEB51300BD04AC /* NotoSansMono-Light.ttf */; };
 		F86D54C128FEB51400BD04AC /* NotoSansMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F86D54B828FEB51300BD04AC /* NotoSansMono-Regular.ttf */; };
@@ -38,6 +39,7 @@
 		635A19F028F9603A00197BCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		635A19F328F9603A00197BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		635A19F528F9603A00197BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F86D54B228FEA5F100BD04AC /* MovieListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewCell.swift; sourceTree = "<group>"; };
 		F86D54B628FEB51300BD04AC /* NotoSansMono-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansMono-SemiBold.ttf"; sourceTree = "<group>"; };
 		F86D54B728FEB51300BD04AC /* NotoSansMono-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansMono-Light.ttf"; sourceTree = "<group>"; };
 		F86D54B828FEB51300BD04AC /* NotoSansMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansMono-Regular.ttf"; sourceTree = "<group>"; };
@@ -101,6 +103,31 @@
 			path = BoxOffice;
 			sourceTree = "<group>";
 		};
+		F86D54AF28FEA5C200BD04AC /* MovieList */ = {
+			isa = PBXGroup;
+			children = (
+				F86D54B128FEA5E000BD04AC /* View */,
+				F86D54B028FEA5DC00BD04AC /* Cell */,
+			);
+			path = MovieList;
+			sourceTree = "<group>";
+		};
+		F86D54B028FEA5DC00BD04AC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F86D54B228FEA5F100BD04AC /* MovieListViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		F86D54B128FEA5E000BD04AC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F8C3346028FE94DB00C8574E /* MovieListViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F86D54B428FEB4BD00BD04AC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,7 +164,7 @@
 		F8C3345F28FE94B600C8574E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F8C3346028FE94DB00C8574E /* MovieListViewController.swift */,
+				F86D54AF28FEA5C200BD04AC /* MovieList */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -235,6 +262,7 @@
 			files = (
 				F8C3347128FE972B00C8574E /* MovieInfoModel.swift in Sources */,
 				F8C3346128FE94DB00C8574E /* MovieListViewController.swift in Sources */,
+				F86D54B328FEA5F100BD04AC /* MovieListViewCell.swift in Sources */,
 				F8C3346D28FE96EF00C8574E /* ++Bundle.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				F8C3346F28FE970300C8574E /* BoxOfficeModel.swift in Sources */,
