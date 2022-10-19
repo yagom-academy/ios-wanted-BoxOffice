@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		634C26ED290073F1006E6811 /* WeekAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C26EC290073F1006E6811 /* WeekAPI.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19EF28F9603900197BCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19ED28F9603900197BCC /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		634C26EC290073F1006E6811 /* WeekAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekAPI.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			children = (
 				636B6D5428FD4647002C16D8 /* BoxOfficeAPI.swift */,
 				636B6D7228FE81FC002C16D8 /* MovieDatailAPI.swift */,
+				634C26EC290073F1006E6811 /* WeekAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				636B6D7828FE82A7002C16D8 /* WeekTableViewCell.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
+				634C26ED290073F1006E6811 /* WeekAPI.swift in Sources */,
 				636B6D4728FD33A0002C16D8 /* Model.swift in Sources */,
 				636B6D4D28FD3496002C16D8 /* SecondViewController.swift in Sources */,
 				636B6D7528FE825E002C16D8 /* WeekViewController.swift in Sources */,

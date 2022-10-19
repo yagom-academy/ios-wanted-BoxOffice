@@ -13,6 +13,8 @@ struct SecondViewModel {
     let openingDate: String
     let genre: String
     let runTime: String
+    let viewingLevel: String
+    let audiAcc: String
     let audience: String
     let director: String
     let actiorName: String
@@ -26,7 +28,6 @@ class SecondViewController: UIViewController {
     @IBOutlet weak var rankingLabel: UILabel!
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
-    @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var viewingLevelLabel: UILabel! //관람등급
     @IBOutlet weak var openingDateLabel: UILabel!
     @IBOutlet weak var runTimeLabel: UILabel!
@@ -51,30 +52,19 @@ class SecondViewController: UIViewController {
     
     func setLabels() {
         guard let secondViewModel else { return }
-        rankingLabel.text = secondViewModel.rank
-        movieTitleLabel.text = secondViewModel.movieTitle
+        rankingLabel.text = "\(secondViewModel.rank)위"
+        movieTitleLabel.text = "영화: \(secondViewModel.movieTitle)"
         openingDateLabel.text = "개봉일: \(secondViewModel.openingDate)"
-        genreLabel.text = secondViewModel.genre
-        runTimeLabel.text = secondViewModel.runTime
-        viewingLevelLabel.text = secondViewModel.audience
-        directorName.text = secondViewModel.director
-        actorName.text = secondViewModel.actiorName
-        yearOfReleaseLabel.text = secondViewModel.yearOfRelease
-        yearOfManufactureLabel.text = secondViewModel.yearOfManufacture
-        comparedToYesterdayLabel.text = secondViewModel.comparedToYesterday
-        newRankingLabel.text = secondViewModel.newRankingLabel
+        genreLabel.text = "개요 - \(secondViewModel.genre)"
+        runTimeLabel.text = "상영시간: \(secondViewModel.runTime)분"
+        viewingLevelLabel.text = secondViewModel.viewingLevel //관람등급
+        directorName.text = "감독: \(secondViewModel.director)"
+        actorName.text = "배우: \(secondViewModel.actiorName)"
+        yearOfReleaseLabel.text = "개봉연도: \(secondViewModel.yearOfRelease)"
+        yearOfManufactureLabel.text = "제작연도: \(secondViewModel.yearOfManufacture)년"
+        comparedToYesterdayLabel.text = "순위변동: \(secondViewModel.comparedToYesterday)"
+        newRankingLabel.text = "신규 진입- \(secondViewModel.newRankingLabel)"
+        audienceLabel.text = "관객수: \(secondViewModel.audiAcc)명"
 
     }
-//  ///2 api
-//    func loadLabel() {
-//        if let movieInfo = movieInfo {
-//            genreLabel.text = "\(movieInfo.genres[0].genreNm)"
-//            viewingLevelLabel.text = "\(movieInfo.audits[0].watchGradeNm)"
-//            runTimeLabel.text = "\(movieInfo.showTm)분"
-//            directorName.text = "감독:\(movieInfo.directors[0].peopleNm)님"
-//            actorName.text = "배우:\(movieInfo.actors[0].peopleNm)님"
-//            yearOfReleaseLabel.text = movieInfo.openDt
-//            yearOfManufactureLabel.text = movieInfo.prdtYear
-//        }
-//    }
 }

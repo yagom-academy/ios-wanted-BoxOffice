@@ -9,7 +9,6 @@ import UIKit
 
 class MovieListTableViewCell: UITableViewCell {
     @IBOutlet weak var rankingLabel: UILabel!
-    @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var audienceLabel: UILabel!  // 관객
     @IBOutlet weak var openingDateLabel: UILabel!
