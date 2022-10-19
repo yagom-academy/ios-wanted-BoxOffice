@@ -21,8 +21,10 @@ final class MovieDetailViewModel {
     
     var loadingStart: (() -> Void) = {}
     var loadingEnd: (() -> Void) = {}
-    var updateMovieDetail: (() -> Void) = {}
-
+    var updateMovieDetail: ((MovieDetailModel) -> ()) = { _ in }
+    
+    
+    
     init() {
         self.repository = MovieRepository()
     }
@@ -34,9 +36,8 @@ final class MovieDetailViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let entity):
-                self.movieDetail = MovieDetailModel(movieModel: data,
-                                                    detailEntity: entity.movieInfoResult.movieInfo)
-                self.updateMovieDetail()
+                self.updateMovieDetail(MovieDetailModel(movieModel: data,
+                                                        detailEntity: entity.movieInfoResult.movieInfo))
                 self.loadingEnd()
             case .failure(let error):
                 fatalError("🚨Error: \(error)")

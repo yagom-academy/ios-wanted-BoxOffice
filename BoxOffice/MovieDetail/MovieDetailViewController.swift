@@ -76,7 +76,29 @@ final class MovieDetailViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.setupLayouts()
+        self.setupViewModel()
         self.configure(movieDetailTableView)
+    }
+    
+    private func setupViewModel() {
+        // TODO: 로딩시작이 안먹음!!!
+        self.viewModel.loadingStart = { [weak self] in
+            print("로딩시작")
+            self?.indicator.startAnimating()
+        }
+        
+        self.viewModel.updateMovieDetail = { model in
+            self.boxOfficeRank.text = model.rank
+            self.movieTitle.text = model.movieName
+            self.movieTitleEngAndproductYear.text = "\(model.movieNameEng), \(model.productYear)"
+        }
+    
+        
+        self.viewModel.loadingEnd = { [weak self] in
+            print("로딩종료1!!")
+            self?.movieDetailTableView.reloadData()
+            self?.indicator.stopAnimating()
+        }
     }
     
     private func configure(_ tableView: UITableView) {
@@ -92,7 +114,7 @@ final class MovieDetailViewController: UIViewController {
         }
         
         self.view.addSubViewsAndtranslatesFalse(
-            mainInfoStackView,lineView,movieDetailTableView
+            mainInfoStackView,lineView,movieDetailTableView,indicator
         )
         
         NSLayoutConstraint.activate([
@@ -133,7 +155,7 @@ extension MovieDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieDetailCell", for: indexPath) as? MovieDetailCell else { return UITableViewCell() }
-        
+        cell.configure(idx: indexPath.row)
         return cell
     }
 }
