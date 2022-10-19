@@ -17,7 +17,7 @@
 		367520E928FE7F010010437F /* Sequence+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520E828FE7F010010437F /* Sequence+Extension.swift */; };
 		367520EB28FE7F1A0010437F /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520EA28FE7F1A0010437F /* UIImage+Extension.swift */; };
 		367520ED28FE7F5B0010437F /* CacheImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520EC28FE7F5B0010437F /* CacheImageView.swift */; };
-		367520F028FE801F0010437F /* MovieEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520EF28FE801F0010437F /* MovieEntity.swift */; };
+		367520F028FE801F0010437F /* KoficMovieEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520EF28FE801F0010437F /* KoficMovieEntity.swift */; };
 		367520F228FE8C060010437F /* FirstContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520F128FE8C050010437F /* FirstContentView.swift */; };
 		367520F428FE8C180010437F /* FirstContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520F328FE8C180010437F /* FirstContentViewModel.swift */; };
 		367520F828FE8CF40010437F /* FirstMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520F728FE8CF40010437F /* FirstMovieCell.swift */; };
@@ -62,7 +62,7 @@
 		367520E828FE7F010010437F /* Sequence+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extension.swift"; sourceTree = "<group>"; };
 		367520EA28FE7F1A0010437F /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		367520EC28FE7F5B0010437F /* CacheImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImageView.swift; sourceTree = "<group>"; };
-		367520EF28FE801F0010437F /* MovieEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieEntity.swift; sourceTree = "<group>"; };
+		367520EF28FE801F0010437F /* KoficMovieEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoficMovieEntity.swift; sourceTree = "<group>"; };
 		367520F128FE8C050010437F /* FirstContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstContentView.swift; sourceTree = "<group>"; };
 		367520F328FE8C180010437F /* FirstContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstContentViewModel.swift; sourceTree = "<group>"; };
 		367520F728FE8CF40010437F /* FirstMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMovieCell.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 		367520EE28FE800A0010437F /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				367520EF28FE801F0010437F /* MovieEntity.swift */,
+				367520EF28FE801F0010437F /* KoficMovieEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -402,7 +402,7 @@
 				4CEA383C28FD5A16007B86EE /* FirstViewControllerRoutable.swift in Sources */,
 				4CEA384928FD5C48007B86EE /* Presentable.swift in Sources */,
 				367520E928FE7F010010437F /* Sequence+Extension.swift in Sources */,
-				367520F028FE801F0010437F /* MovieEntity.swift in Sources */,
+				367520F028FE801F0010437F /* KoficMovieEntity.swift in Sources */,
 				4CEA383628FD586E007B86EE /* ThirdModel.swift in Sources */,
 				367520FC28FE8FA20010437F /* MovieCellView.swift in Sources */,
 				4CEA384028FD5A90007B86EE /* ThirdViewControllerRoutable.swift in Sources */,

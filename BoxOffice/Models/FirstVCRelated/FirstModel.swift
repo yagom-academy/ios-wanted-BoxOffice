@@ -31,4 +31,8 @@ class FirstModel {
     private func bind() {
         
     }
+    
+    func populateData() {
+        
+    }
 }

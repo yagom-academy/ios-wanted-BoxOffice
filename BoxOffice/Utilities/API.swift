@@ -18,6 +18,7 @@ import Foundation
 //key: d591d06e
 
 // TODO: date등 기타 쿼리 넣는법 처리...
+// TODO: kofic에서 영문 영화타이틀 얻기 위한 api 구조 추가 --> kofic 박스오피스 기본 api --> movieCd 확인 --> movieCd + key로 영화 상세정보api 호출
 enum API {
     case kofic(koficBoxOffice)
     case omdb(movieName: String)
