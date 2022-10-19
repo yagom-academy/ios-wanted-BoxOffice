@@ -12,7 +12,7 @@ indirect enum SceneCategory {
     case detail(detailScene)
     case close //그냥 닫기
     case closeWithAction(SceneCategory)
-    case alert(AlertDependency)
+    case alert(alertScene)
     
     enum mainScene {
         case firstViewController(context: SceneContext<FirstModel>)
@@ -22,5 +22,17 @@ indirect enum SceneCategory {
     enum detailScene {
         case secondViewController(context: SceneContext<SecondModel>)
         case thirdViewController(context: SceneContext<ThirdModel>)
+    }
+    
+    enum alertScene {
+        case networkAlert(networkError)
+        
+        enum networkError {
+            case normalErrorAlert(AlertDependency)
+        }
+        
+        enum detailViewRelated {
+            case notDefinedYet
+        }
     }
 }

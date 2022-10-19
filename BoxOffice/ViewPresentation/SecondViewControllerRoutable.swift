@@ -48,7 +48,7 @@ extension SecondViewControllerSceneBuildable {
     func buildScene(scene: SceneCategory) -> Scenable? {
         var nextScene: Scenable?
         switch scene {
-        case .alert(let context):
+        case .alert(.networkAlert(.normalErrorAlert(let context))):
             nextScene = buildAlert(context: context)
         default: break
         }

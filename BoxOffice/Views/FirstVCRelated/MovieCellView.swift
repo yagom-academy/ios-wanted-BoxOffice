@@ -105,7 +105,15 @@ extension MovieCellView: Presentable {
     }
     
     func bind() {
-        
+        didReceiveViewModel = { [weak self] model in
+            guard let self = self else { return }
+            // TODO: 밸류들 정확한 의미 다시 확인...좀 헷갈리기 시작함
+            self.presentRankLabel.text = model.rank
+            self.movieNameLabel.text = model.movieNm
+            self.relesedDateLabel.text = model.openDt
+            self.watchedCustomerCountLabel.text = model.showCnt
+            self.rankIncrementLabel.text = model.scrnCnt
+        }
     }
     
     

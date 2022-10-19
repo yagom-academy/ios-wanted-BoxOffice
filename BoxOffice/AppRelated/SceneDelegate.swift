@@ -19,7 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SceneDelegateRoutable {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         self.windowScene = (scene as? UIWindowScene)
         
-        let model = FirstModel()
+        let httpClient = HTTPClient()
+        let repository = Repository(httpClient: httpClient)
+        let model = FirstModel(repository: repository)
         let context = SceneContext(dependency: model)
         route(to: .main(.firstViewController(context: context)))
     }
