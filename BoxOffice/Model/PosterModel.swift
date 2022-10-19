@@ -1,5 +1,5 @@
 //
-//  PosterViewModel.swift
+//  PosterModel.swift
 //  BoxOffice
 //
 //  Created by 신동원 on 2022/10/19.
