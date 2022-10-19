@@ -55,7 +55,9 @@ extension MainViewController: UITableViewDelegate {
         
         movieInfomationApi.getData(myApiKey: myApiKey, todays: date ,itemPerPage: "\(itemPerPageArry)", movieCd: movie[indexPath.row].영화번호) { result in
             let data = self.movie[indexPath.row]
-            
+            print(result.movieInfoResult.movieInfo.genres)
+            print(self.response.count)
+            print("관람등급: \(result.movieInfoResult.movieInfo.audits)")
             viewController.영화명.text = "영화제목: \(data.영화제목)"
             viewController.영화순위.text = "영화 순위: \(data.순위)"
             viewController.랭킹신규진입.text = "신규진입: \(data.신규진입)"
@@ -63,15 +65,13 @@ extension MainViewController: UITableViewDelegate {
             viewController.개봉일.text = "개봉일: \(data.오픈날짜)"
             viewController.전일대비.text = "전일대비: \(data.순위증감)"
             viewController.상영시간.text = "상영시간:\(result.movieInfoResult.movieInfo.showTm)분"
-            viewController.장르.text = "장르: \(result.movieInfoResult.movieInfo.genres[self.response.count].genreNm)"
-            viewController.관람등급.text = "관람등급: \(result.movieInfoResult.movieInfo.audits[self.response.count].watchGradeNm)"
+            viewController.장르.text = "장르: \(result.movieInfoResult.movieInfo.genres[0].genreNm)"
+            viewController.관람등급.text = "관람등급: \(result.movieInfoResult.movieInfo.audits[0].watchGradeNm)"
             viewController.개봉연도.text = "개봉연도: \(result.movieInfoResult.movieInfo.openDt)"
             viewController.제작연도.text = "제작연도: \(result.movieInfoResult.movieInfo.prdtYear)"
-            viewController.배우명.text = "배우: \(result.movieInfoResult.movieInfo.actors[self.response.count].peopleNm)"
-            viewController.감독명.text = "감독: \(result.movieInfoResult.movieInfo.directors[self.response.count].peopleNm)"
+            viewController.배우명.text = "배우: \(result.movieInfoResult.movieInfo.actors[0].peopleNm),\(result.movieInfoResult.movieInfo.actors[1].peopleNm) "
+            viewController.감독명.text = "감독: \(result.movieInfoResult.movieInfo.directors[0].peopleNm)"
             
-                self.response.append(result)
-      
             viewController.navigationItem.title = data.영화제목
         }
         navigationController?.pushViewController(viewController, animated: true)

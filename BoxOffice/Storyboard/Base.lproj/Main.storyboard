@@ -137,26 +137,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="관객수" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="POA-fa-FlE">
-                                <rect key="frame" x="303" y="337" width="52" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개봉일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="itL-6I-1C2">
                                 <rect key="frame" x="30" y="135" width="340" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="배우명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VQX-cv-0xb">
-                                <rect key="frame" x="303" y="298" width="52" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="배우명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VQX-cv-0xb">
+                                <rect key="frame" x="35" y="278" width="52" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="상영시간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="btP-u0-CbK">
-                                <rect key="frame" x="34.999999999999993" y="278" width="69.333333333333314" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="상영시간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="btP-u0-CbK">
+                                <rect key="frame" x="30.999999999999993" y="322" width="69.333333333333314" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -180,13 +174,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개봉연도" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OOE-RI-LIe">
-                                <rect key="frame" x="35" y="412.66666666666669" width="59" height="20.333333333333314"/>
+                                <rect key="frame" x="31" y="419.33333333333331" width="59" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="감독명" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="a2J-Fn-JyE">
-                                <rect key="frame" x="35" y="322" width="44.333333333333343" height="20.333333333333314"/>
+                                <rect key="frame" x="34" y="369" width="44.333333333333343" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -198,14 +192,20 @@
                                 <buttonConfiguration key="configuration" style="plain" title="공유하기버튼"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제작연도" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="W3X-h9-xAH">
-                                <rect key="frame" x="35" y="458" width="59" height="20.333333333333314"/>
+                                <rect key="frame" x="34" y="458.33333333333331" width="59" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="랭킹신규진입" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XbC-DZ-1ii">
-                                <rect key="frame" x="34.999999999999993" y="367.33333333333331" width="88.333333333333314" height="20.333333333333314"/>
+                                <rect key="frame" x="266.66666666666669" y="323" width="88.333333333333314" height="24.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="관객수" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="POA-fa-FlE">
+                                <rect key="frame" x="308" y="367.33333333333331" width="52" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -213,36 +213,40 @@
                         <viewLayoutGuide key="safeArea" id="2L4-me-pEk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="POA-fa-FlE" firstAttribute="top" secondItem="VQX-cv-0xb" secondAttribute="bottom" constant="15" id="17O-NC-a25"/>
+                            <constraint firstItem="VQX-cv-0xb" firstAttribute="top" secondItem="zcI-Z4-Q9I" secondAttribute="bottom" constant="15" id="1bQ-1w-QEO"/>
                             <constraint firstItem="2Fe-cc-wDg" firstAttribute="top" secondItem="2L4-me-pEk" secondAttribute="top" constant="20" id="1oC-vn-mDZ"/>
+                            <constraint firstItem="POA-fa-FlE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="a2J-Fn-JyE" secondAttribute="trailing" constant="100" id="2Eh-Iy-ehb"/>
                             <constraint firstItem="Zfs-DW-tfZ" firstAttribute="top" secondItem="dbD-Lk-ePJ" secondAttribute="top" id="4HC-Al-Pid"/>
-                            <constraint firstItem="2L4-me-pEk" firstAttribute="trailing" secondItem="POA-fa-FlE" secondAttribute="trailing" constant="35" id="4sK-ZC-GTJ"/>
-                            <constraint firstItem="OOE-RI-LIe" firstAttribute="leading" secondItem="2L4-me-pEk" secondAttribute="leading" constant="35" id="55B-nV-Luu"/>
+                            <constraint firstItem="OOE-RI-LIe" firstAttribute="leading" secondItem="2L4-me-pEk" secondAttribute="leading" constant="31" id="55B-nV-Luu"/>
                             <constraint firstItem="dbD-Lk-ePJ" firstAttribute="leading" secondItem="2L4-me-pEk" secondAttribute="leading" constant="35" id="5md-OK-1Dk"/>
+                            <constraint firstItem="btP-u0-CbK" firstAttribute="top" secondItem="VQX-cv-0xb" secondAttribute="bottom" constant="20" id="7av-ve-UPf"/>
                             <constraint firstItem="2L4-me-pEk" firstAttribute="trailing" secondItem="Zfs-DW-tfZ" secondAttribute="trailing" constant="35" id="9DF-gY-rbM"/>
                             <constraint firstItem="Zfs-DW-tfZ" firstAttribute="centerY" secondItem="dbD-Lk-ePJ" secondAttribute="centerY" id="9Fb-MC-jzX"/>
+                            <constraint firstItem="VQX-cv-0xb" firstAttribute="leading" secondItem="2L4-me-pEk" secondAttribute="leading" constant="35" id="AiO-gg-3qv"/>
+                            <constraint firstItem="vKt-rI-zFf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zcI-Z4-Q9I" secondAttribute="trailing" constant="20" id="Cku-ov-4id"/>
+                            <constraint firstItem="XbC-DZ-1ii" firstAttribute="top" secondItem="vKt-rI-zFf" secondAttribute="bottom" constant="65" id="Co3-d4-x8Q"/>
                             <constraint firstItem="2L4-me-pEk" firstAttribute="trailing" secondItem="2Fe-cc-wDg" secondAttribute="trailing" constant="20" id="Fx0-Qb-5Ae"/>
                             <constraint firstItem="itL-6I-1C2" firstAttribute="leading" secondItem="2L4-me-pEk" secondAttribute="leading" constant="30" id="IP8-SZ-0T6"/>
                             <constraint firstItem="zcI-Z4-Q9I" firstAttribute="leading" secondItem="2L4-me-pEk" secondAttribute="leading" constant="35" id="Jop-aF-uQJ"/>
                             <constraint firstItem="Zfs-DW-tfZ" firstAttribute="bottom" secondItem="dbD-Lk-ePJ" secondAttribute="bottom" id="KTr-jn-S0o"/>
-                            <constraint firstItem="btP-u0-CbK" firstAttribute="leading" secondItem="2L4-me-pEk" secondAttribute="leading" constant="35" id="M02-L3-CXt"/>
-                            <constraint firstItem="XbC-DZ-1ii" firstAttribute="leading" secondItem="2L4-me-pEk" secondAttribute="leading" constant="35" id="N1Z-sn-XoM"/>
+                            <constraint firstItem="btP-u0-CbK" firstAttribute="leading" secondItem="2L4-me-pEk" secondAttribute="leading" constant="31" id="M02-L3-CXt"/>
                             <constraint firstItem="2L4-me-pEk" firstAttribute="trailing" secondItem="vKt-rI-zFf" secondAttribute="trailing" constant="35" id="NMn-XQ-pvf"/>
-                            <constraint firstItem="W3X-h9-xAH" firstAttribute="leading" secondItem="2L4-me-pEk" secondAttribute="leading" constant="35" id="QDj-9o-eWq"/>
+                            <constraint firstItem="W3X-h9-xAH" firstAttribute="leading" secondItem="2L4-me-pEk" secondAttribute="leading" constant="34" id="QDj-9o-eWq"/>
+                            <constraint firstItem="2L4-me-pEk" firstAttribute="trailing" secondItem="POA-fa-FlE" secondAttribute="trailing" constant="30" id="QIa-Ti-mCd"/>
                             <constraint firstItem="vKt-rI-zFf" firstAttribute="top" secondItem="Zfs-DW-tfZ" secondAttribute="bottom" constant="25" id="QZK-aW-8I6"/>
-                            <constraint firstItem="2L4-me-pEk" firstAttribute="trailing" secondItem="VQX-cv-0xb" secondAttribute="trailing" constant="35" id="ScB-jT-Gps"/>
-                            <constraint firstItem="a2J-Fn-JyE" firstAttribute="leading" secondItem="2L4-me-pEk" secondAttribute="leading" constant="35" id="T1c-Kj-v64"/>
+                            <constraint firstItem="a2J-Fn-JyE" firstAttribute="leading" secondItem="2L4-me-pEk" secondAttribute="leading" constant="34" id="T1c-Kj-v64"/>
                             <constraint firstItem="2L4-me-pEk" firstAttribute="trailing" secondItem="itL-6I-1C2" secondAttribute="trailing" constant="20" id="TGN-gn-sHY"/>
-                            <constraint firstItem="btP-u0-CbK" firstAttribute="top" secondItem="zcI-Z4-Q9I" secondAttribute="bottom" constant="15" id="TtC-x8-nqN"/>
-                            <constraint firstItem="VQX-cv-0xb" firstAttribute="top" secondItem="vKt-rI-zFf" secondAttribute="bottom" constant="40" id="Wux-Xh-bX9"/>
-                            <constraint firstItem="XbC-DZ-1ii" firstAttribute="top" secondItem="a2J-Fn-JyE" secondAttribute="bottom" constant="25" id="chO-yj-hYX"/>
+                            <constraint firstItem="POA-fa-FlE" firstAttribute="top" secondItem="XbC-DZ-1ii" secondAttribute="bottom" constant="20" id="WRS-O1-Cbt"/>
+                            <constraint firstItem="2L4-me-pEk" firstAttribute="trailing" secondItem="XbC-DZ-1ii" secondAttribute="trailing" constant="35" id="cal-Nm-bas"/>
                             <constraint firstItem="dbD-Lk-ePJ" firstAttribute="top" secondItem="itL-6I-1C2" secondAttribute="bottom" constant="20" id="dF4-7T-UJU"/>
                             <constraint firstItem="zcI-Z4-Q9I" firstAttribute="top" secondItem="dbD-Lk-ePJ" secondAttribute="bottom" constant="20" id="fXY-ey-LXZ"/>
-                            <constraint firstItem="OOE-RI-LIe" firstAttribute="top" secondItem="XbC-DZ-1ii" secondAttribute="bottom" constant="25" id="kiX-A6-Sqg"/>
-                            <constraint firstItem="W3X-h9-xAH" firstAttribute="top" secondItem="OOE-RI-LIe" secondAttribute="bottom" constant="25" id="m8Y-j0-0aX"/>
+                            <constraint firstItem="POA-fa-FlE" firstAttribute="centerY" secondItem="a2J-Fn-JyE" secondAttribute="centerY" id="hWB-3J-VtG"/>
+                            <constraint firstItem="W3X-h9-xAH" firstAttribute="top" secondItem="OOE-RI-LIe" secondAttribute="bottom" constant="18.666666666666686" id="m8Y-j0-0aX"/>
+                            <constraint firstItem="OOE-RI-LIe" firstAttribute="top" secondItem="a2J-Fn-JyE" secondAttribute="bottom" constant="30" id="mVS-d9-cvG"/>
                             <constraint firstItem="2Fe-cc-wDg" firstAttribute="leading" secondItem="2L4-me-pEk" secondAttribute="leading" constant="20" id="nYA-AY-Xwr"/>
+                            <constraint firstItem="XbC-DZ-1ii" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="btP-u0-CbK" secondAttribute="trailing" constant="8" symbolic="YES" id="oCC-Y2-9vE"/>
                             <constraint firstItem="vKt-rI-zFf" firstAttribute="centerY" secondItem="zcI-Z4-Q9I" secondAttribute="centerY" id="psL-pX-nZz"/>
-                            <constraint firstItem="a2J-Fn-JyE" firstAttribute="top" secondItem="btP-u0-CbK" secondAttribute="bottom" constant="20" id="ssH-wV-Qec"/>
+                            <constraint firstItem="a2J-Fn-JyE" firstAttribute="top" secondItem="btP-u0-CbK" secondAttribute="bottom" constant="23" id="ssH-wV-Qec"/>
                             <constraint firstItem="itL-6I-1C2" firstAttribute="top" secondItem="2Fe-cc-wDg" secondAttribute="bottom" constant="20" id="w6h-o1-UVG"/>
                         </constraints>
                     </view>
