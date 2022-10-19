@@ -24,7 +24,7 @@ struct MovieDetailModel {
     }
 
     var openDate: String {
-        return detailEntity.openDt + " 개봉"
+        return movieModel.openDate
     }
 
     var audienceCount: String {

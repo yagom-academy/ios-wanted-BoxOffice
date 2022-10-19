@@ -18,6 +18,15 @@ final class MovieDetailViewController: UIViewController {
         return label
     }()
     
+    private let rankOldAndNewLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .semibold)
+        label.text = "NEW"
+        label.textColor = .systemBlue
+        label.numberOfLines = 0
+        return label
+    }()
+    
     private let movieTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
@@ -31,13 +40,6 @@ final class MovieDetailViewController: UIViewController {
         label.font = .systemFont(ofSize: 12, weight: .semibold)
         label.text = "Orphan: First Kill, 2022/01/23"
         label.numberOfLines = 0
-        return label
-    }()
-    
-    private let productYear: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .semibold)
-        label.text = "2022/01/23"
         return label
     }()
     
@@ -81,7 +83,7 @@ final class MovieDetailViewController: UIViewController {
     }
     
     private func setupViewModel() {
-        // TODO: 로딩시작이 안먹음!!!
+        // TODO: 인디케이터 동작 안함
         self.viewModel.loadingStart = { [weak self] in
             print("로딩시작")
             self?.indicator.startAnimating()
@@ -107,7 +109,7 @@ final class MovieDetailViewController: UIViewController {
     
     private func setupLayouts() {
         
-        [boxOfficeRank,movieTitle,movieTitleEngAndproductYear].forEach {
+        [boxOfficeRank,rankOldAndNewLabel,movieTitle,movieTitleEngAndproductYear].forEach {
             self.mainInfoStackView.addArrangedSubview($0)
         }
         
@@ -160,8 +162,25 @@ extension MovieDetailViewController: UITableViewDataSource {
 }
 
 extension MovieDetailViewController: UITableViewDelegate {
+    // TODO: 라벨 크기에 따른 동적 셀 구현해야됨
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50 //동적 높이 계산해야함
+        return 50
     }
 }
 
+struct MovieListViewController_Previews: PreviewProvider {
+    static var previews: some View {
+        Container().edgesIgnoringSafeArea(.all)
+    }
+
+    struct Container: UIViewControllerRepresentable {
+        func makeUIViewController(context: Context) -> UIViewController {
+            let vc = MovieDetailViewController()
+            return UINavigationController(rootViewController: vc)
+        }
+
+        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) { }
+
+        typealias UIViewControllerType = UIViewController
+    }
+}

@@ -9,7 +9,8 @@ import Foundation
 
 final class MovieDetailViewModel {
     
-    let detailTitleList = ["개요", "장르", "감독", "출연", "관객수", "관람등급", "랭크"]
+    let detailTitleList = ["개봉일", "상영시간", "장르", "관람등급", "감독", "출연", "누적관객", "전일대비"]
+
     
     var movieDetailModel: MovieDetailModel? {
         didSet {

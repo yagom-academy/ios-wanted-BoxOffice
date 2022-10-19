@@ -19,7 +19,10 @@ struct MovieListModel {
     }
     
     var openDate: String {
-        return movieEntity.openDt
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        let date = formatter.date(from: movieEntity.openDt)
+        return formatter.string(from: date!) + " 개봉"
     }
     
     var audienceCount: String {
