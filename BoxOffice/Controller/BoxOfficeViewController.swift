@@ -61,11 +61,11 @@ extension BoxOfficeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: BoxOfficeCellViewModel.identifier, for: indexPath) as? BoxOfficeTableViewCell
+        guard let viewModel = self.boxOfficeViewModel.cellViewModel[indexPath.row] else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: type(of: viewModel).identifier, for: indexPath) as? BoxOfficeTableViewCell
         else {
             return UITableViewCell()
         }
-        guard let viewModel = self.boxOfficeViewModel.cellViewModel[indexPath.row] else { return UITableViewCell() }
         switch ( cell, viewModel ){
         case let ( cell, viewModel) as (BoxOfficeTableViewCell, BoxOfficeCellViewModel):
             cell.cellViewModel = viewModel
