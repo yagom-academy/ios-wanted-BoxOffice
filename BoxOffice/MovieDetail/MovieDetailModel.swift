@@ -24,7 +24,7 @@ struct MovieDetailModel {
     }
 
     var openDate: String {
-        return detailEntity.openDt
+        return detailEntity.openDt + " 개봉"
     }
 
     var audienceCount: String {
@@ -46,19 +46,19 @@ struct MovieDetailModel {
     }
 
     var showTime: String {
-        return detailEntity.showTm
+        return detailEntity.showTm + "분"
     }
 
     var genres: [String] {
         return detailEntity.genres.map { $0.genreNm }
     }
 
-    var directors: [String] {
-        return detailEntity.directors.map { $0.peopleNm }
+    var directors: String {
+        return detailEntity.directors.map { $0.peopleNm }.joined(separator: ", ")
     }
 
-    var actors: [String] {
-        return detailEntity.actors.map { $0.peopleNm }
+    var actors: String {
+        return detailEntity.actors.map { $0.peopleNm }.joined(separator: ", ")
     }
 
     var watchGrade: String {
