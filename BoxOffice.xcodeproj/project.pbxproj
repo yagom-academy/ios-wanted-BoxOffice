@@ -90,15 +90,14 @@
 			path = "Application Delegate";
 			sourceTree = "<group>";
 		};
-		5DAF347928FD27AA00A31BB7 /* View Controllers */ = {
+		5DAF347928FD27AA00A31BB7 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
-				635A19EB28F9603900197BCC /* MovieListViewController.swift */,
-				5DAF347C28FD38A700A31BB7 /* MovieListTableViewCell.swift */,
-				5DEE036A28FDB996007B71AB /* MovieDetailViewController.swift */,
-				5DFB655828FEFD7200DC2443 /* Views */,
+				5DCFD17D2900470D00B74672 /* MovieRanking */,
+				5DCFD17E2900471900B74672 /* MovieDetail */,
+				5DFB655828FEFD7200DC2443 /* Common */,
 			);
-			path = "View Controllers";
+			path = Feature;
 			sourceTree = "<group>";
 		};
 		5DAF347A28FD27B600A31BB7 /* Storyboards */ = {
@@ -119,13 +118,13 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		5DAF347E28FD38B000A31BB7 /* Networking */ = {
+		5DAF347E28FD38B000A31BB7 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				5DCFD17328FF020600B74672 /* APIRequestLoader.swift */,
 				5DCFD17128FF018100B74672 /* RequestType.swift */,
 			);
-			path = Networking;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		5DAF348128FD3ABD00A31BB7 /* Models */ = {
@@ -146,10 +145,43 @@
 			isa = PBXGroup;
 			children = (
 				5DAF348428FD3D3800A31BB7 /* MovieSearchService.swift */,
+				5DCFD17F2900477000B74672 /* Models */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5DCFD17A2900419700B74672 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5DAF347E28FD38B000A31BB7 /* Network */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		5DCFD17D2900470D00B74672 /* MovieRanking */ = {
+			isa = PBXGroup;
+			children = (
+				635A19EB28F9603900197BCC /* MovieListViewController.swift */,
+				5DAF347C28FD38A700A31BB7 /* MovieListTableViewCell.swift */,
+			);
+			path = MovieRanking;
+			sourceTree = "<group>";
+		};
+		5DCFD17E2900471900B74672 /* MovieDetail */ = {
+			isa = PBXGroup;
+			children = (
+				5DEE036A28FDB996007B71AB /* MovieDetailViewController.swift */,
+			);
+			path = MovieDetail;
+			sourceTree = "<group>";
+		};
+		5DCFD17F2900477000B74672 /* Models */ = {
+			isa = PBXGroup;
+			children = (
 				5DCFD16F28FF010900B74672 /* MovieRankingRequest.swift */,
 				5DCFD17528FF05CE00B74672 /* MovieDetailRequest.swift */,
 			);
-			path = Services;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		5DEE036528FD9D27007B71AB /* Extensions */ = {
@@ -165,13 +197,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		5DFB655828FEFD7200DC2443 /* Views */ = {
+		5DFB655828FEFD7200DC2443 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				5DFB655528FEF36000DC2443 /* MovieRankingView.swift */,
 				5DCFD16A28FEFDC000B74672 /* MovieRankingView.xib */,
 			);
-			path = Views;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		635A19DB28F9603900197BCC = {
@@ -196,11 +228,11 @@
 				5DAF347828FD27A300A31BB7 /* Application Delegate */,
 				5DEE036528FD9D27007B71AB /* Extensions */,
 				5DAF348128FD3ABD00A31BB7 /* Models */,
-				5DAF347E28FD38B000A31BB7 /* Networking */,
 				5DCFD16C28FEFFA800B74672 /* Services */,
 				5DAF347A28FD27B600A31BB7 /* Storyboards */,
 				5DAF347B28FD27BD00A31BB7 /* Supporting Files */,
-				5DAF347928FD27AA00A31BB7 /* View Controllers */,
+				5DCFD17A2900419700B74672 /* Utils */,
+				5DAF347928FD27AA00A31BB7 /* Feature */,
 			);
 			path = BoxOffice;
 			sourceTree = "<group>";
