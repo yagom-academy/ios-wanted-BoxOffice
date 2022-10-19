@@ -39,7 +39,16 @@ class FirstModel: SceneActionReceiver {
     }
     
     private func bind() {
-        
+        privateFirstContentViewModel.propergateDidSelectItem = { [weak self] movieCode in
+            guard let self = self else { return }
+            
+            let httpClient = HTTPClient()
+            let repository = Repository(httpClient: httpClient)
+            let secondModel = SecondModel(repository: repository)
+            secondModel.movieCd = movieCode
+            let context = SceneContext(dependency: secondModel)
+            self.routeSubject?(.detail(.secondViewController(context: context)))
+        }
     }
     
     private func requestAPI() async -> KoficMovieEntity? {

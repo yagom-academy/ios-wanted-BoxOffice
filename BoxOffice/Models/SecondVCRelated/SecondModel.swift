@@ -14,24 +14,40 @@ class SecondModel: SceneActionReceiver {
     //output
     @MainThreadActor var routeSubject: ( (SceneCategory) -> () )?
     
+    var secondContentViewModel: SecondContentViewModel {
+        return privateSecondContentViewModel
+    }
+    
     //properties
+    private var privateSecondContentViewModel: SecondContentViewModel
+    
     private var repository: RepositoryProtocol
     
     init(repository: RepositoryProtocol) {
+        self.privateSecondContentViewModel = SecondContentViewModel()
         self.repository = repository
         bind()
     }
     
     func populateData() {
-        
+        Task {
+            guard let entity = await requestAPI() else { return }
+            privateSecondContentViewModel.didReceiveEntity(entity)
+        }
     }
     
     private func bind() {
         
     }
     
-    private func requestAPI() {
-        
+    private func requestAPI() async -> KoficMovieDetailEntity? {
+        do {
+            let entity: KoficMovieDetailEntity = try await repository.fetch(api: .kofic(.detailMovieInfo(movieCd: self.movieCd)))
+            return entity
+        } catch let error {
+            handleError(error: error)
+            return nil
+        }
     }
     
     private func handleError(error: Error) {

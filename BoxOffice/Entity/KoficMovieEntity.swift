@@ -63,7 +63,7 @@ enum RankOldAndNew: String, Codable {
 /*****************************************************************************/
 
 // MARK: - KopicMovieDetail
-struct KopicMovieDetail: Codable {
+struct KoficMovieDetailEntity: Codable {
     let movieInfoResult: MovieInfoResult
 }
 
@@ -75,7 +75,7 @@ struct MovieInfoResult: Codable {
 
 // MARK: - MovieInfo
 struct MovieInfo: Codable {
-    let movieCD, movieNm, movieNmEn, movieNmOg: String
+    let movieCd, movieNm, movieNmEn, movieNmOg: String
     let showTm, prdtYear, openDt, prdtStatNm: String
     let typeNm: String
     let nations: [Nation]
@@ -87,8 +87,8 @@ struct MovieInfo: Codable {
     let audits: [Audit]
 
     enum CodingKeys: String, CodingKey {
-        case movieCD
-        case movieNm, movieNmEn, movieNmOg, showTm, prdtYear, openDt, prdtStatNm, typeNm, nations, genres, directors, actors, showTypes, companys, audits, staffs
+        case movieCd
+        case movieNm, movieNmEn, movieNmOg, showTm, prdtYear, openDt, prdtStatNm, typeNm, nations, genres, directors, actors, showTypes, companys, audits
     }
 }
 

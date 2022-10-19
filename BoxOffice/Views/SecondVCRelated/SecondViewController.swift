@@ -20,6 +20,12 @@ class SecondViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func loadView() {
+        initViewHierarchy()
+        configureView()
+        bind()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,4 +43,21 @@ class SecondViewController: UIViewController {
     }
     */
 
+}
+
+extension SecondViewController: Presentable {
+    func initViewHierarchy() {
+        self.view = UIView()
+    }
+    
+    func configureView() {
+        self.title = "상세정보"
+        self.view.backgroundColor = .white
+    }
+    
+    func bind() {
+        
+    }
+    
+    
 }
