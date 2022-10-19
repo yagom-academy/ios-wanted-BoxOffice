@@ -25,7 +25,7 @@ class MovieApi {
 //            print("나타나\(resultData)")
             let decoder = JSONDecoder()
             guard let decodedData = try? decoder.decode(Empty.self, from: resultData) else { return }
-            print("나타나라\(decodedData)")
+//            print("나타나라\(decodedData)")
             DispatchQueue.main.async {
                 completion(decodedData)
             }

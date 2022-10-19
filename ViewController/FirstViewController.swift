@@ -58,7 +58,7 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
         
         let selectOffice = office[indexPath.row]
         detailapi(targetData: selectOffice.movieCd) { movieInfo in
-            let secondViewModel = SecondViewModel.init(rank: selectOffice.rank, movieTitle: selectOffice.movieNm, openingDate: selectOffice.openDt, genre: movieInfo.genres.first?.genreNm ?? "")
+            let secondViewModel = SecondViewModel.init(rank: selectOffice.rank, movieTitle: selectOffice.movieNm, openingDate: selectOffice.openDt, genre: movieInfo.genres.first?.genreNm ?? "", runTime: movieInfo.showTm, audience: selectOffice.audiAcc, director: movieInfo.directors.first?.peopleNm ?? "", actiorName: movieInfo.actors.first?.peopleNm ?? "", yearOfRelease: movieInfo.openDt, yearOfManufacture: movieInfo.prdtYear, comparedToYesterday: selectOffice.rankInten, newRankingLabel: selectOffice.rankOldAndNew)
             secondViewController.setModel(secondViewModel)
             self.navigationController?.pushViewController(secondViewController, animated: true)
         }

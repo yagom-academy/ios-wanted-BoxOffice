@@ -12,6 +12,14 @@ struct SecondViewModel {
     let movieTitle: String
     let openingDate: String
     let genre: String
+    let runTime: String
+    let audience: String
+    let director: String
+    let actiorName: String
+    let yearOfRelease: String
+    let yearOfManufacture: String
+    let comparedToYesterday: String
+    let newRankingLabel: String
 }
 
 class SecondViewController: UIViewController {
@@ -47,6 +55,15 @@ class SecondViewController: UIViewController {
         movieTitleLabel.text = secondViewModel.movieTitle
         openingDateLabel.text = "개봉일: \(secondViewModel.openingDate)"
         genreLabel.text = secondViewModel.genre
+        runTimeLabel.text = secondViewModel.runTime
+        viewingLevelLabel.text = secondViewModel.audience
+        directorName.text = secondViewModel.director
+        actorName.text = secondViewModel.actiorName
+        yearOfReleaseLabel.text = secondViewModel.yearOfRelease
+        yearOfManufactureLabel.text = secondViewModel.yearOfManufacture
+        comparedToYesterdayLabel.text = secondViewModel.comparedToYesterday
+        newRankingLabel.text = secondViewModel.newRankingLabel
+
     }
 //  ///2 api
 //    func loadLabel() {
