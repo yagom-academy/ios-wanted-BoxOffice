@@ -8,27 +8,13 @@
 import UIKit
 import Combine
 
+
+
 final class MovieDetailViewController: UIViewController {
 
     // MARK: Constants
 
     static let reuseIdentifier = "reuse-identifier"
-
-    // MARK: Types
-
-    private enum Section: Int, CaseIterable {
-        case info
-        case crew
-        case review
-
-        var title: String? {
-            switch self {
-            case .crew: return "감독 및 출연진"
-            case .info: return "정보"
-            case .review: return "평가 및 리뷰"
-            }
-        }
-    }
 
     // MARK: UI
 
@@ -42,7 +28,7 @@ final class MovieDetailViewController: UIViewController {
 
     @Published private var movieDetail: MovieDetail!
     private var cancellables: Set<AnyCancellable> = .init()
-    private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>!
+    private var dataSource: DataSource!
 
     // MARK: View Life Cycle
 
@@ -131,7 +117,7 @@ final class MovieDetailViewController: UIViewController {
 
     private func configureDataSource()  {
         // Cell Registration
-        let infoItemRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, AnyHashable> { cell, indexPath, item in
+        let infoItemRegistration = CellRegistration { cell, indexPath, item in
             if let info = item as? MovieDetailInfo {
                 var content = UIListContentConfiguration.valueCell()
                 content.text = info.title
@@ -143,7 +129,7 @@ final class MovieDetailViewController: UIViewController {
             }
         }
 
-        let crewItemRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, AnyHashable> { cell, indexPath, item in
+        let crewItemRegistration = CellRegistration { cell, indexPath, item in
             if let crew = item as? Crew {
                 var content = UIListContentConfiguration.cell()
                 content.text = crew.name
@@ -165,7 +151,7 @@ final class MovieDetailViewController: UIViewController {
             }
         }
 
-        let reviewItemRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, AnyHashable> { cell, indexPath, item in
+        let reviewItemRegistration = CellRegistration { cell, indexPath, item in
             if let review = item as? MovieReview {
                 var content = UIListContentConfiguration.subtitleCell()
                 content.text = review.nickname
@@ -179,13 +165,13 @@ final class MovieDetailViewController: UIViewController {
         }
 
         // HeaderRegistraion
-        let headerRegistration = UICollectionView.SupplementaryRegistration<UICollectionViewCell>(elementKind: Self.reuseIdentifier) { supplementaryView, elementKind, indexPath in
+        let headerRegistration = SupplementaryRegistration(elementKind: Self.reuseIdentifier) { supplementaryView, elementKind, indexPath in
             var config = UIListContentConfiguration.plainHeader()
             config.text = self.dataSource.snapshot().sectionIdentifiers[indexPath.section].title
             supplementaryView.contentConfiguration = config
         }
 
-        dataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>(collectionView: collectionView) {
+        dataSource = DataSource(collectionView: collectionView) {
             (collectionView, indexPath, identifier) -> UICollectionViewCell? in
             guard let section = Section(rawValue: indexPath.section) else { return nil }
             switch section {
@@ -217,7 +203,7 @@ final class MovieDetailViewController: UIViewController {
             )
         }
 
-        var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
+        var snapshot = Snapshot()
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems([], toSection: .crew)
         snapshot.appendItems([], toSection: .info)
@@ -281,7 +267,30 @@ extension MovieDetailViewController: UICollectionViewDelegate {
 
 }
 
-// MARK: - MovieDetail
+// MARK: - Types
+
+fileprivate typealias DataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>
+fileprivate typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>
+fileprivate typealias CellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, AnyHashable>
+fileprivate typealias SupplementaryRegistration = UICollectionView.SupplementaryRegistration<UICollectionViewCell>
+
+// MARK: Section
+
+fileprivate enum Section: Int, CaseIterable {
+    case info
+    case crew
+    case review
+
+    var title: String? {
+        switch self {
+        case .crew: return "감독 및 출연진"
+        case .info: return "정보"
+        case .review: return "평가 및 리뷰"
+        }
+    }
+}
+
+// MARK: MovieDetail
 
 fileprivate extension MovieDetail {
 
@@ -302,7 +311,7 @@ fileprivate extension MovieDetail {
 
 }
 
-// MARK: - MovieDetailInfo
+// MARK: MovieDetailInfo
 
 fileprivate struct MovieDetailInfo: Hashable {
 
