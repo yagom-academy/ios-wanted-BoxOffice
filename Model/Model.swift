@@ -27,6 +27,18 @@ struct BoxOffice: Codable {
     let boxOfficeResult: MainBoxOfficeList
 }
 
+//1111111111111111
+//-------------------------------------------
+//2222222222222222
+struct testInfo {
+    let movieNm: String   // movieNm 제목
+    let showTm, prdtYear, openDt: String   //showTm 상영시간, openDt 개봉연도, prdtYear 제작연도
+    let genres: [Genre]   //장르
+    let directors: [Director]  //감독
+    let actors: [Actor]  //배우
+    let audits: [Audit]  //관람등급
+}
+
 struct Empty: Codable {
     let movieInfoResult: MovieInfoResult
 }
@@ -36,7 +48,6 @@ struct MovieInfoResult: Codable {
     let movieInfo: MovieInfo
     let source: String
 }
-
 
 struct MovieInfo: Codable {
     let movieNm: String   // movieNm 제목

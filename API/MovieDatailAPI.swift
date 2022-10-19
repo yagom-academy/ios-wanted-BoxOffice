@@ -23,7 +23,7 @@ class MovieApi {
             
             guard let resultData = data else { return }
             let decoder = JSONDecoder()
-            let decodedData = try! decoder.decode(Empty.self, from: resultData)
+            guard let decodedData = try? decoder.decode(Empty.self, from: resultData) else { return }
             DispatchQueue.main.async {
                 completion(decodedData)
             }
