@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CQI-gw-og9">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -196,7 +197,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="박스오피스" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="63a-Uc-ksL">
-                                <rect key="frame" x="20.000000000000007" y="57" width="110.66666666666669" height="35"/>
+                                <rect key="frame" x="20" y="57" width="350" height="35"/>
                                 <fontDescription key="fontDescription" name="NotoSansKR-Bold" family="Noto Sans KR" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -219,6 +220,7 @@
                         <color key="backgroundColor" name="backgroundColorAsset"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tEx-vh-9AB" secondAttribute="trailing" constant="20" id="EHB-lM-Zmb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="63a-Uc-ksL" secondAttribute="trailing" constant="20" id="Hnd-ZB-e4p"/>
                             <constraint firstItem="63a-Uc-ksL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="O3b-4K-19R"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tEx-vh-9AB" secondAttribute="bottom" id="OeW-nA-5vo"/>
                             <constraint firstItem="CFX-TS-aK8" firstAttribute="top" secondItem="63a-Uc-ksL" secondAttribute="bottom" constant="20" id="ZNN-P3-t32"/>
@@ -249,6 +251,8 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iC0-qz-D2s">
                         <rect key="frame" x="0.0" y="47" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="backgroundColorAsset"/>
+                        <color key="barTintColor" name="backgroundColorAsset"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
