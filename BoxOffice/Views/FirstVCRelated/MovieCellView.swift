@@ -11,12 +11,15 @@ import SwiftUI
 class MovieCellView: UIView, FirstViewStyling {
 
     //input
+    var didReceiveViewModel: (FirstMovieCellModel) -> () = { model in }
     
     //output
     
     //properties
     var posterImageView = CacheImageView() //포스터
     var presentRankLabel = UILabel() //박스오피스 순위
+    
+    var verticalStackView = UIStackView()
     var movieNameLabel = UILabel() //영화명
     var relesedDateLabel = UILabel() //개봉일
     var watchedCustomerCountLabel = UILabel() //관객수
@@ -43,13 +46,20 @@ extension MovieCellView: Presentable {
     func initViewHierarchy() {
         self.addSubview(posterImageView)
         self.addSubview(presentRankLabel)
-        self.addSubview(movieNameLabel)
-        self.addSubview(relesedDateLabel)
-        self.addSubview(watchedCustomerCountLabel)
-        self.addSubview(rankIncrementLabel)
-        self.addSubview(approachedRankIndexLabel)
+        
+        self.addSubview(verticalStackView)
+        
+        verticalStackView.addArrangedSubview(movieNameLabel)
+        verticalStackView.addArrangedSubview(relesedDateLabel)
+        verticalStackView.addArrangedSubview(watchedCustomerCountLabel)
+        verticalStackView.addArrangedSubview(rankIncrementLabel)
+        verticalStackView.addArrangedSubview(approachedRankIndexLabel)
         
         self.subviews.forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        verticalStackView.arrangedSubviews.forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
@@ -60,14 +70,32 @@ extension MovieCellView: Presentable {
             posterImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
             posterImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             posterImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
-            posterImageView.heightAnchor.constraint(equalToConstant: 100)
+            posterImageView.heightAnchor.constraint(equalToConstant: 100),
+            posterImageView.widthAnchor.constraint(equalTo: posterImageView.heightAnchor, multiplier: 0.8)
         ]
+        
+        constraint += [
+            presentRankLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            presentRankLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 8),
+            presentRankLabel.widthAnchor.constraint(equalToConstant: 16)
+        ]
+        
+        constraint += [
+            verticalStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            verticalStackView.leadingAnchor.constraint(equalTo: presentRankLabel.trailingAnchor, constant: 8),
+            verticalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
+            verticalStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
+        ]
+        
         
         
         
     }
     
     func configureView() {
+        
+        verticalStackView.addStyles(style: cellVerticalStackViewStyling)
+        
         posterImageView.addStyles(style: cellPosterImageViewStyling)
         presentRankLabel.addStyles(style: cellPresentRankLabelStyling)
         movieNameLabel.addStyles(style: cellMovieNameLabelStyling)

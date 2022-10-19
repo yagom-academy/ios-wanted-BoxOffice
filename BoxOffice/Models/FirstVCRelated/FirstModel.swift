@@ -8,5 +8,25 @@
 import Foundation
 
 class FirstModel {
+    //input
     var didReceiveSceneAction: (SceneAction) -> () = { action in }
+    
+    //output
+    var firstContentViewModel: FirstContentViewModel {
+        return privateFirstContentViewModel
+    }
+    
+    //properties
+    private var privateFirstContentViewModel: FirstContentViewModel
+    
+    // TODO: Repository
+    init() {
+        self.privateFirstContentViewModel = FirstContentViewModel()
+        
+        bind()
+    }
+    
+    private func bind() {
+        
+    }
 }

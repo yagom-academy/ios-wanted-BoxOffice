@@ -18,7 +18,7 @@ class FirstMovieCell: UITableViewCell {
 
     var viewModel: FirstMovieCellModel = FirstMovieCellModel() {
         didSet {
-            // TODO: change cellViewContent as DidSetCall
+            cellView.didReceiveViewModel(viewModel)
         }
     }
     
@@ -47,7 +47,18 @@ class FirstMovieCell: UITableViewCell {
 
 extension FirstMovieCell: Presentable {
     func initViewHierarchy() {
+        self.contentView.addSubview(cellView)
+        cellView.translatesAutoresizingMaskIntoConstraints = false
         
+        var constraint: [NSLayoutConstraint] = []
+        defer { NSLayoutConstraint.activate(constraint) }
+        
+        constraint += [
+            cellView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ]
     }
     
     func configureView() {

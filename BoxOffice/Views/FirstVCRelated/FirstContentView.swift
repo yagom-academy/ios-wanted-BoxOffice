@@ -21,6 +21,7 @@ class FirstContentView: UIView {
     var viewModel: FirstContentViewModel
     
     init(viewModel: FirstContentViewModel) {
+        print(#function)
         self.viewModel = viewModel
         super.init(frame: .zero)
         initViewHierarchy()
@@ -68,7 +69,7 @@ extension FirstContentView: Presentable {
     }
     
     func bind() {
-        
+        tableView.reloadData()
     }
     
     

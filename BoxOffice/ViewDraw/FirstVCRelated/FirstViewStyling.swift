@@ -45,7 +45,7 @@ extension FirstViewStyling {
     
     var cellRelesedDateLabelStyling: (UILabel) -> () {
         {
-            $0.textColor = .grayThird
+            $0.textColor = .grayPrimary
             $0.font = .appleSDGothicNeo(weight: .regular, size: 12)
             $0.textAlignment = .left
             $0.text = "2022/09/08 14:50:43"
@@ -67,6 +67,15 @@ extension FirstViewStyling {
             $0.font = .appleSDGothicNeo(weight: .regular, size: 12)
             $0.textAlignment = .left
             $0.text = "100000000"
+        }
+    }
+    
+    var cellVerticalStackViewStyling: (UIStackView) -> () {
+        {
+            $0.axis = .vertical
+            $0.alignment = .fill
+            $0.spacing = 4.0
+            $0.backgroundColor = .yellow
         }
     }
     
