@@ -190,8 +190,8 @@
 			isa = PBXGroup;
 			children = (
 				4CEA382E28FD583E007B86EE /* FirstVCRelated */,
-				4CEA383028FD5849007B86EE /* ThirdVCRelated */,
 				4CEA382F28FD5844007B86EE /* SecondVCRelated */,
+				4CEA383028FD5849007B86EE /* ThirdVCRelated */,
 			);
 			path = Models;
 			sourceTree = "<group>";

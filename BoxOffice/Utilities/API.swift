@@ -70,7 +70,7 @@ enum API {
         case .kofic(.weekly_weekEnd(_)):
             return URLComponents(string: " http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json")
         case .kofic(.detailMovieInfo(_)):
-            return URLComponents(string: " http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json")
+            return URLComponents(string: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json")
         case .omdb(_):
             return URLComponents(string: "http://www.omdbapi.com/")
         }
