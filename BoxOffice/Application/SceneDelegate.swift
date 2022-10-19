@@ -15,6 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
+        UserDefaults.standard.setValue("35e301e07aec91b0a780eee5eb804f96", forKey: UserDefaultKey.BOX_OFFICE_KEY)
+        UserDefaults.standard.setValue("b1334363", forKey: UserDefaultKey.POSTER_KEY)
         window?.rootViewController = MovieRankViewController()
         window?.makeKeyAndVisible()
     }

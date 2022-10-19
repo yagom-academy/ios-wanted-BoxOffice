@@ -51,8 +51,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     let newButton: UIButton = {
         let button = UIButton()
-        button.tintColor = .label
-        button.titleLabel?.font = .systemFont(ofSize: 15)
+        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+        button.setTitleColor(.systemRed, for: .normal)
         button.setTitle("New", for: .normal)
         button.isHidden = true
         return button
@@ -70,9 +70,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = .label
         label.textAlignment = .left
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.font = .systemFont(ofSize: 19, weight: .bold)
+        label.font = .systemFont(ofSize: 18, weight: .bold)
         return label
     }()
     
@@ -80,8 +78,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = .systemGray
         label.textAlignment = .left
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
         label.font = .systemFont(ofSize: 17)
         return label
     }()
@@ -128,7 +124,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
 
     private func setViewHierarchy() {
         contentView.addSubviews(posterImageView, infoStackView)
-        posterImageView.addSubviews(darkBackgroundView)
+        posterImageView.addSubviews(darkBackgroundView, newButton)
         darkBackgroundView.addSubviews(rankStackView)
         rankStackView.addArrangedSubviews(
             rankingLabel,
@@ -141,7 +137,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
 
     private func setConstraints() {
-        [posterImageView, infoStackView, darkBackgroundView, rankStackView].forEach {
+        [posterImageView, infoStackView, darkBackgroundView, rankStackView, newButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
@@ -154,12 +150,15 @@ class MovieCollectionViewCell: UICollectionViewCell {
             darkBackgroundView.topAnchor.constraint(equalTo: posterImageView.topAnchor, constant: 5),
             darkBackgroundView.leadingAnchor.constraint(equalTo: posterImageView.leadingAnchor, constant: 5),
             
+            newButton.trailingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: -5),
+            newButton.bottomAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: -5),
+            
             rankStackView.topAnchor.constraint(equalTo: darkBackgroundView.topAnchor, constant: 5),
             rankStackView.leadingAnchor.constraint(equalTo: darkBackgroundView.leadingAnchor, constant: 5),
             rankStackView.trailingAnchor.constraint(equalTo: darkBackgroundView.trailingAnchor, constant: -5),
             rankStackView.bottomAnchor.constraint(equalTo: darkBackgroundView.bottomAnchor, constant: -5),
             
-            infoStackView.topAnchor.constraint(equalTo: posterImageView.bottomAnchor),
+            infoStackView.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 5),
             infoStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             infoStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             infoStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
