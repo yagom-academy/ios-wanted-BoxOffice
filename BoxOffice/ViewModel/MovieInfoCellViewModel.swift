@@ -10,9 +10,27 @@ import Foundation
 class MovieInfoCellViewModel: TableViewCellViewModel {
     static var identifier: String = String(describing: MovieInfoTableViewCell.self)
     let cellData: MovieInfo
+    let boxOfficeData: DailyBoxOfficeList
     
-    init(cellData: MovieInfo) {
+    init(cellData: MovieInfo, boxOfficeData: DailyBoxOfficeList) {
         self.cellData = cellData
+        self.boxOfficeData = boxOfficeData
+    }
+    
+    func actorList() -> String {
+        var list: [String] = []
+        cellData.actors.forEach { value in
+            list.append(value.peopleNm)
+        }
+        return list.joined(separator: ",")
+    }
+    
+    func directorList() -> String {
+        var list: [String] = []
+        cellData.directors.forEach { value in
+            list.append(value.peopleNm)
+        }
+        return list.joined(separator: ",")
     }
     
 }

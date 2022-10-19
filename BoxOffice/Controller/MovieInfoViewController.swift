@@ -13,8 +13,8 @@ class MovieInfoViewController: UIViewController {
     let movieInfoViewModel: MovieInfoViewModel
     
     
-    init() {
-        self.movieInfoViewModel = MovieInfoViewModel(movieCd: "20226798")
+    init(dailyBoxOffice: DailyBoxOfficeList) {
+        self.movieInfoViewModel = MovieInfoViewModel(dailyBoxOffice: dailyBoxOffice)
         super.init(nibName: nil, bundle: nil)
     }
     

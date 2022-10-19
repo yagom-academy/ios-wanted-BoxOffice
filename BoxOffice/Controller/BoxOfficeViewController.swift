@@ -79,6 +79,14 @@ extension BoxOfficeViewController: UITableViewDataSource, UITableViewDelegate {
         return UITableView.automaticDimension
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let viewModel = self.boxOfficeViewModel.cellViewModel[indexPath.row] else { return }
+        let dailyBoxOffice = viewModel as! BoxOfficeCellViewModel
+        let vc = MovieInfoViewController(dailyBoxOffice: dailyBoxOffice.cellData)
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
     
 }
 

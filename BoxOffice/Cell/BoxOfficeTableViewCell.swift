@@ -16,7 +16,7 @@ class BoxOfficeTableViewCell: UITableViewCell {
             rankLabel.text = viewModel.cellData.rank
             movieNameLabel.text = viewModel.cellData.movieNm
             audiAccLabel.text = viewModel.cellData.audiAcc
-            posterView.setImageUrl(viewModel.posterURL)
+            //posterView.setImageUrl(viewModel.posterURL)
             if viewModel.cellData.rankOldAndNew == .new {
                 rankIntenLabel.textColor = .red
                 rankIntenLabel.text = RankOldAndNew.new.rawValue
@@ -114,7 +114,6 @@ class BoxOfficeTableViewCell: UITableViewCell {
         stack.alignment = .fill
         stack.distribution = .fill
         stack.axis = .vertical
-        stack.backgroundColor = .blue
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -129,7 +128,7 @@ class BoxOfficeTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        //self.selectionStyle = .none
+        self.selectionStyle = .none
         setupConstraints()
     }
     
@@ -139,7 +138,6 @@ class BoxOfficeTableViewCell: UITableViewCell {
     
     
     func setupConstraints() {
-        selectionStyle = .none
         addSubview(openDateLabel)
         addSubview(rankLabel)
         addSubview(rankIntenLabel)
