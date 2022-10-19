@@ -12,6 +12,7 @@ final class MovieRankingView: UIView {
     // MARK: UI
 
     @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var openDateLabel: UILabel!
     @IBOutlet var numberOfMoviegoersLabel: UILabel!
     @IBOutlet var rankingLabel: UILabel!
     @IBOutlet var isNewRankingInfoView: UIStackView!
@@ -49,10 +50,11 @@ final class MovieRankingView: UIView {
         return nib.instantiate(withOwner: self, options: nil).first as? UIView
     }
 
-    // MARK:
+    // MARK: -
 
     func configure(with movieRanking: MovieRanking) {
         nameLabel.text = movieRanking.name
+        openDateLabel.text = "\(movieRanking.openDate.dateString()) 개봉"
         numberOfMoviegoersLabel.text = "누적관객 \(movieRanking.numberOfMoviegoers.string)명"
         rankingLabel.text = movieRanking.ranking.string
         if movieRanking.isNewRanking {

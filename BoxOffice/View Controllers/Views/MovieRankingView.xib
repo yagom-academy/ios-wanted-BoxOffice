@@ -19,6 +19,7 @@
                 <outlet property="isNewRankingLabel" destination="GUH-yg-KTY" id="QyM-V7-2XQ"/>
                 <outlet property="nameLabel" destination="uWX-vl-VXv" id="0Fe-yl-Os2"/>
                 <outlet property="numberOfMoviegoersLabel" destination="rav-kE-GxW" id="PND-Ap-vUM"/>
+                <outlet property="openDateLabel" destination="KLf-CX-4x3" id="p0P-SV-mjO"/>
                 <outlet property="rankingLabel" destination="93n-ZO-oQx" id="1cr-5s-QH2"/>
             </connections>
         </placeholder>
