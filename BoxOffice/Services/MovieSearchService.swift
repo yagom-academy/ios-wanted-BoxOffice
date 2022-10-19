@@ -33,7 +33,7 @@ class MovieSearchService: MovieSearchAPI {
         let request = MovieDetailRequest.value(forIdentifier: identifier)
         let data = try await apiRequestLoader.execute(request)
         let result = try request.parseResponse(data: data)
-        return result
+        return result.movieDetail
     }
     
 }

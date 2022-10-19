@@ -15,7 +15,7 @@ enum MovieDetailRequest {
 
 extension MovieDetailRequest: RequestType {
 
-    typealias ResponseDataType = MovieDetail
+    typealias ResponseDataType = MovieDetailResponse
 
     var baseURL: String { "http://www.kobis.or.kr" }
     var path: String { "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json" }

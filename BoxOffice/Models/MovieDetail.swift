@@ -31,11 +31,6 @@ struct MovieDetail: Decodable {
     // MARK: Decodable
 
     enum CodingKeys: String, CodingKey {
-        case rootContainer = "movieInfoResult"
-        case nestedContainer = "movieInfo"
-        case genresContainer = "genres"
-        case watchGradeContainer = "audits"
-
         case identifier = "movieCd"
         case runningTime = "showTm"
         case productionDate = "prdtYear"
@@ -43,10 +38,12 @@ struct MovieDetail: Decodable {
         case directors
         case actors
 
+        case genresContainer = "genres"
         enum GenresContainer: String, CodingKey {
             case genre = "genreNm"
         }
 
+        case watchGradeContainer = "audits"
         enum WatchGradeContainer: String, CodingKey {
             case watchGrade = "watchGradeNm"
         }
@@ -54,12 +51,13 @@ struct MovieDetail: Decodable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-            .nestedContainer(keyedBy: CodingKeys.self, forKey: .rootContainer)
-            .nestedContainer(keyedBy: CodingKeys.self, forKey: .nestedContainer)
         identifier = try container.decode(String.self, forKey: .identifier)
         runningTime = container.decodeStringAsInt(forKey: .runningTime)!
         productionDate = try container.decode(String.self, forKey: .productionDate)
         openDate = container.decodeStringAsDate(forKey: .openDate, withFormat: "yyyyMMdd")!
+        directors = try container.decode([Crew].self, forKey: .directors)
+        actors = try container.decode([Crew].self, forKey: .actors)
+
         var genresContainer = try container
             .nestedUnkeyedContainer(forKey: .genresContainer)
         if let count = genresContainer.count {
@@ -72,8 +70,7 @@ struct MovieDetail: Decodable {
                     .decode(String.self, forKey: .genre)
             )
         }
-        directors = try container.decode([Crew].self, forKey: .directors)
-        actors = try container.decode([Crew].self, forKey: .actors)
+
         var watchGradeContainer = try container.nestedUnkeyedContainer(forKey: .watchGradeContainer)
         watchGrade = try watchGradeContainer
             .nestedContainer(keyedBy: CodingKeys.WatchGradeContainer.self)
@@ -83,24 +80,25 @@ struct MovieDetail: Decodable {
 }
 
 struct Crew: Decodable, Hashable {
-    
+
+    // MARK: Properties
+
     /// 이름
     let name: String
     /// 역할
-    private let role: String?
-
-    var displayRole: String {
-        if let role = role {
-            return role.isEmpty ? role : role + "역"
-        }
-        return "감독"
-    }
+    let role: String
 
     // MARK: Decodable
 
     enum CodingKeys: String, CodingKey {
         case name = "peopleNm"
         case role = "cast"
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        role = try container.decodeIfPresent(String.self, forKey: .role) ?? "감독"
     }
 
 }

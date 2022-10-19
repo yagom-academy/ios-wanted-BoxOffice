@@ -149,7 +149,7 @@ final class MovieDetailViewController: UIViewController {
                 content.text = crew.name
                 content.textProperties.alignment = .center
                 content.textProperties.font = .preferredFont(forTextStyle: .caption1)
-                content.secondaryText = crew.displayRole
+                content.secondaryText = crew.role
                 content.secondaryTextProperties.alignment = .center
                 content.secondaryTextProperties.font = .preferredFont(forTextStyle: .caption2)
                 content.secondaryTextProperties.color = .secondaryLabel
