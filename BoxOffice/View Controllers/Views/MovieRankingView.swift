@@ -65,13 +65,15 @@ final class MovieRankingView: UIView {
         if movieRanking.changeRanking == 0 {
             changeRankingInfoView.removeFromSuperview()
         } else {
-            let up = movieRanking.changeRanking > 0
+            let isRankUp = movieRanking.changeRanking > 0
+            let upColor: UIColor = .systemPink
+            let downColor: UIColor = .systemBlue
+            let upIcon = UIImage(systemName: "arrowtriangle.up.fill")
+            let downIcon = UIImage(systemName: "arrowtriangle.down.fill")
             changeRankingLabel.text = movieRanking.changeRanking.string
-            changeRankingImageView.image = up ?
-            UIImage(systemName: "arrowtriangle.up.fill") :
-            UIImage(systemName: "arrowtriangle.down.fill")
-            changeRankingLabel.textColor = up ? .systemPink : .systemBlue
-            changeRankingImageView.tintColor = up ? .systemPink : .systemBlue
+            changeRankingImageView.image = isRankUp ? upIcon : downIcon
+            changeRankingLabel.textColor = isRankUp ? upColor : downColor
+            changeRankingImageView.tintColor = isRankUp ? upColor : downColor
         }
     }
 
