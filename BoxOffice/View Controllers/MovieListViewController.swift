@@ -6,32 +6,59 @@
 //
 
 import UIKit
+import Combine
 import OSLog
 
 final class MovieListViewController: UIViewController {
 
     // MARK: UI
 
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet private var tableView: UITableView!
 
     // MARK: Properties
 
     private let movieSearchService = MovieSearchService()
-    private var movies: [MovieRanking] = []
+
+    @Published private var movies: [MovieRanking] = []
+    private var cancellables: Set<AnyCancellable> = .init()
 
     // MARK: View Life Cycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        configureObserver()
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        // TODO: 데이터요청
-        movieSearchService.searchMovieRanking(for: .daily) { movies in
-            self.movies = movies
-            self.tableView.reloadData()
+        fetchMovieRanking()
+    }
+
+    // MARK: -
+
+    private func configureObserver() {
+        $movies
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.tableView.reloadData()
+            }
+            .store(in: &cancellables)
+    }
+
+    private func fetchMovieRanking() {
+        Task {
+            do {
+                let movies = try await movieSearchService.searchMovieRanking(for: .daily)
+                self.movies = movies
+            } catch let error {
+                print(error.localizedDescription)
+            }
         }
     }
 
-    // MARK: - Navigation
+    // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destination = segue.destination as? MovieDetailViewController,
@@ -51,6 +78,8 @@ final class MovieListViewController: UIViewController {
     }
 
 }
+
+// MARK: - UITableViewDataSource
 
 extension MovieListViewController: UITableViewDataSource {
 

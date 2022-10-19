@@ -83,13 +83,24 @@ struct MovieDetail: Decodable {
 }
 
 struct Crew: Decodable, Hashable {
+    
     /// 이름
     let name: String
     /// 역할
-    let role: String?
+    private let role: String?
+
+    var displayRole: String {
+        if let role = role {
+            return role.isEmpty ? role : role + "역"
+        }
+        return "감독"
+    }
+
+    // MARK: Decodable
 
     enum CodingKeys: String, CodingKey {
         case name = "peopleNm"
         case role = "cast"
     }
+
 }

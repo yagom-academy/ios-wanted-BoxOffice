@@ -9,6 +9,12 @@ import Foundation
 
 extension Date {
 
+    func string(withFormat format: String = "yyyyMMdd") -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
+    }
+
     func dateString(ofStyle style: DateFormatter.Style = .medium) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .none

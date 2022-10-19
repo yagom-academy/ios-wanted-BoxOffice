@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class MovieDetailViewController: UIViewController {
 
@@ -31,12 +32,16 @@ final class MovieDetailViewController: UIViewController {
 
     // MARK: UI
 
-    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet private var collectionView: UICollectionView!
 
     // MARK: Properties
 
+    private let movieSearchService = MovieSearchService()
+
     var movie: MovieRanking!
-    private var movieDetail: MovieDetail!
+
+    @Published private var movieDetail: MovieDetail!
+    private var cancellables: Set<AnyCancellable> = .init()
     private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>!
 
     // MARK: View Life Cycle
@@ -47,18 +52,13 @@ final class MovieDetailViewController: UIViewController {
         configureCollectionView()
         configureDataSource()
         configureMovieRankingView()
+        configureObserver()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        // TODO: 데이터요청
-        MovieSearchService().searchMovieDetail(for: movie.identifier) { movieDetail in
-            var snapshot = self.dataSource.snapshot()
-            snapshot.appendItems(movieDetail.crew, toSection: .crew)
-            snapshot.appendItems(movieDetail.info, toSection: .info)
-            self.dataSource.apply(snapshot, animatingDifferences: false)
-        }
+        fetchMovieDetail()
     }
 
     // MARK: Configure
@@ -148,10 +148,11 @@ final class MovieDetailViewController: UIViewController {
                 var content = UIListContentConfiguration.cell()
                 content.text = crew.name
                 content.textProperties.alignment = .center
-                content.textProperties.font = .preferredFont(forTextStyle: .footnote)
-                content.secondaryText = crew.role
+                content.textProperties.font = .preferredFont(forTextStyle: .caption1)
+                content.secondaryText = crew.displayRole
                 content.secondaryTextProperties.alignment = .center
-                content.secondaryTextProperties.font = .preferredFont(forTextStyle: .footnote)
+                content.secondaryTextProperties.font = .preferredFont(forTextStyle: .caption2)
+                content.secondaryTextProperties.color = .secondaryLabel
                 content.directionalLayoutMargins = .zero
                 cell.contentConfiguration = content
 
@@ -239,7 +240,35 @@ final class MovieDetailViewController: UIViewController {
         collectionView.contentInset = UIEdgeInsets(top: height, left: 0, bottom: 0, right: 0)
         movieRankingView.configure(with: movie)
     }
-    
+
+    private func configureObserver() {
+        $movieDetail
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] detail in
+                guard let detail = detail else { return }
+                self?.updateView(with: detail)
+            }
+            .store(in: &cancellables)
+    }
+
+    private func updateView(with detail: MovieDetail) {
+        var snapshot = dataSource.snapshot()
+        snapshot.appendItems(detail.crew, toSection: .crew)
+        snapshot.appendItems(detail.info, toSection: .info)
+        dataSource.apply(snapshot, animatingDifferences: false)
+    }
+
+    private func fetchMovieDetail() {
+        Task {
+            do {
+                let detail = try await movieSearchService.searchMovieDetail(for: movie.identifier)
+                self.movieDetail = detail
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
 }
 
 // MARK: - UICollectionViewDelegate
