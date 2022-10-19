@@ -69,7 +69,12 @@ extension FirstContentView: Presentable {
     }
     
     func bind() {
-        tableView.reloadData()
+        
+        viewModel.didReceiveViewModel = { [weak self] _ in
+            guard let self = self else { return }
+            print("didReceiveViewModel")
+            self.tableView.reloadData()
+        }
     }
     
     
@@ -88,14 +93,13 @@ extension FirstContentView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50
+        return viewModel.dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: movieCell_Identifier, for: indexPath) as? FirstMovieCell else { fatalError() }
         
-        // TODO: viewModel
-        
+        cell.configureCell(viewModel: viewModel.dataSource[indexPath.row])
         return cell
     }
     

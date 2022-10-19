@@ -35,19 +35,26 @@ class FirstModel {
     }
     
     func populateData() {
+        print(#function)
         Task {
-            await requestAPI()
+            guard let entity = await requestAPI() else { return }
+            privateFirstContentViewModel.didReceiveEntity(entity)
         }
     }
     
-    private func requestAPI() async {
+    private func requestAPI() async -> KoficMovieEntity? {
+        print(#function)
         do {
             //today check : 20221019 : 2022-10-19 08:37:18 +0000
-            let today = Date().asString(.koficFormat)
+            // TODO: 데이트피커 관련 뷰? 추가하고 해당 템프값 관련사항 수정
+            let today = Date().addingTimeInterval(TimeInterval(-86400))
+            let todayString = today.asString(.koficFormat)
             print("today check : \(today) : \(Date())")
-            let entity: KoficMovieEntity = try await repository.fetch(api: .kofic(.daily(date: today)))
+            let entity: KoficMovieEntity = try await repository.fetch(api: .kofic(.daily(date: todayString)))
+            return entity
         } catch let error {
             handleError(error: error)
+            return nil
         }
     }
     
