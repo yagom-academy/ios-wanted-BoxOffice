@@ -145,9 +145,13 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    print("select cell \(indexPath.row), \(dailyList[indexPath.row]!.movieCd)",
-          posterList[indexPath.row])
+    let nextVC = MovieDetailViewController()
+
+    nextVC.title = dailyList[indexPath.row]?.movieNm
+
+    navigationController?.pushViewController(nextVC, animated: true)
   }
+  
 
 }
 
