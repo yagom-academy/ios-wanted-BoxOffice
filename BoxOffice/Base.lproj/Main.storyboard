@@ -290,66 +290,83 @@
                                 <rect key="frame" x="0.0" y="91" width="390" height="670"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="120" id="Le8-MF-qPV">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="120" id="Le8-MF-qPV" customClass="WeekTableViewCell" customModule="BoxOffice" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="390" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Le8-MF-qPV" id="Dmc-Ya-9mH">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="순위" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8s-8M-wco">
-                                                    <rect key="frame" x="20" y="50" width="29.666666666666671" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="순위" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ibl-dM-Kv1">
+                                                    <rect key="frame" x="15.000000000000002" y="45" width="29.666666666666671" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="j6X-7O-7pD">
-                                                    <rect key="frame" x="100" y="35" width="41.333333333333336" height="77"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="Lbp-j1-du5">
+                                                    <rect key="frame" x="69.666666666666671" y="25" width="241.33333333333331" height="85"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LK8-Sg-iyx">
-                                                            <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="20.333333333333332"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOt-Jw-vZ3">
+                                                            <rect key="frame" x="0.0" y="0.0" width="29.666666666666668" height="22.333333333333332"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CjU-rL-Qg7">
-                                                            <rect key="frame" x="0.0" y="28.333333333333336" width="41.333333333333336" height="20.333333333333336"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="관객수" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ogb-fS-bi8">
+                                                            <rect key="frame" x="0.0" y="33.333333333333336" width="44.333333333333336" height="20.333333333333336"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tWW-Ci-HEu">
-                                                            <rect key="frame" x="0.0" y="56.666666666666664" width="41.333333333333336" height="20.333333333333336"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="개봉일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ir-hV-2ep">
+                                                            <rect key="frame" x="0.0" y="64.666666666666671" width="44.333333333333336" height="20.333333333333329"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="arq-MY-x1t">
-                                                    <rect key="frame" x="320" y="11" width="42" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="신규진입" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhn-mK-ajQ">
+                                                    <rect key="frame" x="321" y="9.9999999999999982" width="59" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uEP-N6-DsT">
-                                                    <rect key="frame" x="320" y="79" width="42" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전일대비" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hvi-cf-Wmm">
+                                                    <rect key="frame" x="321" y="89.666666666666671" width="59" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="w8s-8M-wco" firstAttribute="leading" secondItem="Dmc-Ya-9mH" secondAttribute="leading" constant="20" id="8ke-pU-3mf"/>
-                                                <constraint firstItem="w8s-8M-wco" firstAttribute="centerY" secondItem="Dmc-Ya-9mH" secondAttribute="centerY" id="8lK-dO-ntc"/>
-                                                <constraint firstItem="w8s-8M-wco" firstAttribute="top" secondItem="Dmc-Ya-9mH" secondAttribute="top" constant="50" id="M5k-hT-59k"/>
-                                                <constraint firstAttribute="bottom" secondItem="w8s-8M-wco" secondAttribute="bottom" constant="50" id="VwT-bS-VmA"/>
+                                                <constraint firstAttribute="bottom" secondItem="hvi-cf-Wmm" secondAttribute="bottom" constant="10" id="BZV-CD-xl0"/>
+                                                <constraint firstItem="Lbp-j1-du5" firstAttribute="leading" secondItem="Ibl-dM-Kv1" secondAttribute="trailing" constant="25" id="DN9-0n-Uac"/>
+                                                <constraint firstItem="Ibl-dM-Kv1" firstAttribute="centerY" secondItem="Dmc-Ya-9mH" secondAttribute="centerY" id="RRe-I1-lOY"/>
+                                                <constraint firstItem="Ibl-dM-Kv1" firstAttribute="leading" secondItem="Dmc-Ya-9mH" secondAttribute="leading" constant="15" id="Tkp-09-Akt"/>
+                                                <constraint firstItem="dhn-mK-ajQ" firstAttribute="top" secondItem="Dmc-Ya-9mH" secondAttribute="top" constant="10" id="UJa-gj-v2Q"/>
+                                                <constraint firstAttribute="trailing" secondItem="hvi-cf-Wmm" secondAttribute="trailing" constant="10" id="cTj-3s-nEE"/>
+                                                <constraint firstItem="hvi-cf-Wmm" firstAttribute="leading" secondItem="Lbp-j1-du5" secondAttribute="trailing" constant="10" id="fEW-zG-JTe"/>
+                                                <constraint firstItem="Ibl-dM-Kv1" firstAttribute="top" secondItem="Dmc-Ya-9mH" secondAttribute="top" constant="45" id="hrK-GJ-coc"/>
+                                                <constraint firstAttribute="trailing" secondItem="dhn-mK-ajQ" secondAttribute="trailing" constant="10" id="qLd-Lp-8O7"/>
+                                                <constraint firstItem="Lbp-j1-du5" firstAttribute="top" secondItem="Dmc-Ya-9mH" secondAttribute="top" constant="25" id="wEM-e7-HiU"/>
+                                                <constraint firstAttribute="bottom" secondItem="Lbp-j1-du5" secondAttribute="bottom" constant="10" id="xDv-2P-4md"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="weekAudienceLabel" destination="Ogb-fS-bi8" id="CvP-Uz-sYc"/>
+                                            <outlet property="weekComparedToYesterdayLabel" destination="hvi-cf-Wmm" id="yEn-EH-HbZ"/>
+                                            <outlet property="weekMovieTitleLabel" destination="QOt-Jw-vZ3" id="iLu-ci-uFN"/>
+                                            <outlet property="weekNewrankingLabel" destination="dhn-mK-ajQ" id="Yyj-ZS-Zdl"/>
+                                            <outlet property="weekOpeningDateLabel" destination="4Ir-hV-2ep" id="I7v-jS-mYm"/>
+                                            <outlet property="weekRankLabel" destination="Ibl-dM-Kv1" id="yiC-4z-CXM"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="rnt-ZA-tD7" id="zDA-sh-jkp"/>
+                                    <outlet property="delegate" destination="rnt-ZA-tD7" id="uE1-7m-0pv"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Oos-CO-leH"/>
@@ -362,10 +379,28 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="주간" id="QX3-Ay-Vrs"/>
+                    <connections>
+                        <outlet property="weekTableView" destination="NQx-oz-pC6" id="V70-Tc-Lew"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r2H-VN-Lb0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2015.3846153846152" y="786.96682464454977"/>
+            <point key="canvasLocation" x="1906" y="787"/>
+        </scene>
+        <!--Wekk Second View Controller-->
+        <scene sceneID="dl2-OS-IVp">
+            <objects>
+                <viewController id="VuU-hV-lPx" customClass="WekkSecondViewController" customModule="BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AAK-cN-hsl">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="v0x-H8-ttr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EaG-4V-V6r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2729" y="787"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="qWV-CG-21T">

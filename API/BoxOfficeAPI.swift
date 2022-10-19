@@ -7,9 +7,6 @@
 
 import Foundation
 
-
-
-
 class OfficeApi {
     class func callAPI(targetDay: String, completion: @escaping (BoxOffice) -> Void ) {
         let key = "9a03d4e2eafea3c2e79c80e98ac2919c"

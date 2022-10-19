@@ -11,7 +11,6 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var firstTableView: UITableView!
     let targetDay = "20190201"
     var office: [MovieInfost] = []
-//    var detailMovie: [MovieInfo] = []
     
     
     override func viewDidLoad() {
@@ -31,9 +30,6 @@ class FirstViewController: UIViewController {
     func detailapi(targetData: String, completion: @escaping (MovieInfo) -> Void) {
         MovieApi.callApiDetail(targetData: targetData) { data in
             completion(data.movieInfoResult.movieInfo)
-            
-            //            self.detailMovie.append(MovieInfo(movieNm: data.movieInfoResult.movieInfo.movieNm, showTm: data.movieInfoResult.movieInfo.showTm, prdtYear: data.movieInfoResult.movieInfo.prdtYear, openDt: data.movieInfoResult.movieInfo.openDt, genres: data.movieInfoResult.movieInfo.genres, directors: data.movieInfoResult.movieInfo.directors, actors: data.movieInfoResult.movieInfo.actors, audits: data.movieInfoResult.movieInfo.audits))
-            //            self.firstTableView.reloadData()
         }
     }
 }

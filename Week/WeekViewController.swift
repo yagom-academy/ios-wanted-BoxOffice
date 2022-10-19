@@ -9,21 +9,37 @@ import UIKit
 
 class WeekViewController: UIViewController {
 
+    @IBOutlet weak var weekTableView: UITableView!
+    let targetDay = "20190201"
+    var weekapi: [WeeklyBoxOfficeList] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        weekModelAPI()
+    }
 
-        // Do any additional setup after loading the view.
+    
+    func weekModelAPI() {
+        WeekApi.weekApi(targetDay: targetDay) { data in
+            self.weekapi = data.boxOfficeResult.weeklyBoxOfficeList
+            self.weekTableView.reloadData()
+        }
+    }
+}
+
+
+extension WeekViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return weekapi.count
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WeekTableViewCell else { return UITableViewCell() }
+        
+        
+        let movie = weekapi[indexPath.row]
+        cell.weekSetModel(model: movie)
+        
+        return cell
     }
-    */
-
 }

@@ -9,15 +9,32 @@ import UIKit
 
 class WeekTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var weekRankLabel: UILabel!
+    @IBOutlet weak var weekMovieTitleLabel: UILabel!
+    @IBOutlet weak var weekAudienceLabel: UILabel!
+    @IBOutlet weak var weekOpeningDateLabel: UILabel!
+    @IBOutlet weak var weekNewrankingLabel: UILabel!
+    @IBOutlet weak var weekComparedToYesterdayLabel: UILabel!
+    
+    func weekSetModel(model: WeeklyBoxOfficeList) {
+        weekRankLabel.text = model.rank
+        weekMovieTitleLabel.text = "영화: \(model.movieNm)"
+        weekAudienceLabel.text =  "관객수: \(model.audiAcc)명"
+        weekOpeningDateLabel.text = "개봉일: \(model.openDt)"    //개봉일
+        weekNewrankingLabel.text = "신규 판별 - \(model.rankOldAndNew)"    // 신규 진입
+        weekComparedToYesterdayLabel.text = "순위변동 : \(model.rankInten)"  //전일대비 순위변동
+    }
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+     
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
 }
