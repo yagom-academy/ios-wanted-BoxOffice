@@ -16,18 +16,19 @@ class MovieInformationViewController: UIViewController {
     @IBOutlet weak var 랭킹신규진입: UILabel!
     @IBOutlet weak var 제작연도: UILabel!
     @IBOutlet weak var 감독명: UILabel!
-    @IBOutlet weak var 배우명: UILabel!
+    @IBOutlet weak var 배우명: UILabel?
     @IBOutlet weak var 상영시간: UILabel!
     @IBOutlet weak var 장르: UILabel!
     @IBOutlet weak var 관람등급: UILabel!
     @IBOutlet weak var 개봉연도: UILabel!
+    @IBOutlet weak var 리뷰쓰기: UIButton!
     
     let mainVC = MainViewController()
     var movieModel : MovieModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        리뷰창()
         guard let movieModel = self.movieModel else {return}
         movieInfomationApi.getData(myApiKey: mainVC.myApiKey, todays: mainVC.inquiryTime() ,itemPerPage: "\(mainVC.itemPerPageArry)", movieCd: movieModel.영화번호) { result in
             self.영화명.text = "영화제목: \(movieModel.영화제목)"
@@ -41,11 +42,21 @@ class MovieInformationViewController: UIViewController {
             self.관람등급.text = "관람등급: \(result.movieInfoResult.movieInfo.audits[0].watchGradeNm)"
             self.개봉연도.text = "개봉연도: \(result.movieInfoResult.movieInfo.openDt)"
             self.제작연도.text = "제작연도: \(result.movieInfoResult.movieInfo.prdtYear)"
-            self.배우명.text = "배우: \(result.movieInfoResult.movieInfo.actors[0].peopleNm),\(result.movieInfoResult.movieInfo.actors[1].peopleNm) "
+            self.배우명?.text = "배우: \(result.movieInfoResult.movieInfo.actors[0].peopleNm),\(result.movieInfoResult.movieInfo.actors[1].peopleNm)"
             self.감독명.text = "감독: \(result.movieInfoResult.movieInfo.directors[0].peopleNm)"
+            print(result)
         }
     }
-    
+
+    func 리뷰창() {
+        리뷰쓰기.addTarget(self, action: #selector(클릭), for: .touchUpInside)
+        
+    }
+    @objc func 클릭() {
+        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "ReViewViewController") as? ReViewViewController else {return}
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
     
     /*
      // MARK: - Navigation
