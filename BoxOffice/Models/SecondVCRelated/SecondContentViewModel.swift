@@ -35,12 +35,10 @@ class SecondContentViewModel: ObservableObject {
     private var makedYear: String = "" //제작연도
     private var releasedYear: String = "" //개봉연도
     private var runningTime: String = "" //상영시간
-    private var genre: String = "" //장르
-    private var director: String = "" //감독명
-    
-    // TODO: 배열로 처리해야 할 것들 전부 확인 후 수정
-    private var actors: String = "" //배우명
-    private var restictionRate: String = "" //관람등급 명칭
+    private var genre: [String] = [] //장르
+    private var director: [String] = [] //감독명
+    private var actors: [String] = [] //배우명
+    private var restictionRate: [String] = [] //관람등급 명칭
     
     init() {
         bind()
@@ -71,10 +69,22 @@ class SecondContentViewModel: ObservableObject {
         makedYear = result.movieInfoResult.movieInfo.prdtYear
         releasedYear = result.movieInfoResult.movieInfo.openDt
         runningTime = result.movieInfoResult.movieInfo.showTm
-        genre = "genre??"
-        director = "director??"
-        actors = "actors??"
-        restictionRate = "watchGrade??"
+        
+        genre = result.movieInfoResult.movieInfo.genres.map { genre in
+            return genre.genreNm
+        }
+        
+        director = result.movieInfoResult.movieInfo.directors.map { director in
+            return director.peopleNm
+        }
+        
+        actors = result.movieInfoResult.movieInfo.actors.map { actorData in
+            actorData.peopleNm
+        }
+        
+        restictionRate = result.movieInfoResult.movieInfo.audits.map { audit in
+            audit.watchGradeNm
+        }
         
         let boxOfficeRankData = TempDataType(name: "박스오피스 랭크", data: boxOfficeRank)
         let movieNameData = TempDataType(name: "영화이름", data: movieName)
@@ -85,10 +95,11 @@ class SecondContentViewModel: ObservableObject {
         let makedYearData = TempDataType(name: "제작년도", data: makedYear)
         let releasedYearData = TempDataType(name: "개봉년도", data: releasedYear)
         let runningTimeData = TempDataType(name: "상영시간", data: runningTime)
-        let genreData = TempDataType(name: "장르", data: genre)
-        let directorData = TempDataType(name: "감독", data: director)
-        let actorsData = TempDataType(name: "배우", data: actors)
-        let restictionRateData = TempDataType(name: "관람등급", data: restictionRate)
+        // TODO: swiftUI 메인스레드 문제 고치면서 데이터 넣는 방법, LazyVstack 들어간 것도 다른 방식으로 수정...
+        let genreData = TempDataType(name: "장르", data: genre.first ?? "")
+        let directorData = TempDataType(name: "감독", data: director.first ?? "")
+        let actorsData = TempDataType(name: "배우", data: actors.first ?? "")
+        let restictionRateData = TempDataType(name: "관람등급", data: restictionRate.first ?? "")
         
         dataSource.append(boxOfficeRankData)
         dataSource.append(movieNameData)
