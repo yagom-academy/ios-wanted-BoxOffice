@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+struct Movie: Codable {
+    let rank: String
+    let movieNm: String
+    let openDt: String
+    let audiAcc: String
+    let rankInten: String
+    let rankOldAndNew: String
+}
