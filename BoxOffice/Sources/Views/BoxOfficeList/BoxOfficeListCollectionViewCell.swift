@@ -13,53 +13,16 @@ import SwiftUI
 // MARK: - View
 class BoxOfficeListCollectionViewCell: UICollectionViewCell {
     // MARK: View Components
-    lazy var posterImageView: OverlayedImageView = {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradientLayer.locations = [0.72 , 1]
-        let imageView = OverlayedImageView(layer: gradientLayer)
-        imageView.layer.cornerRadius = 12
-        imageView.clipsToBounds = true
-        imageView.backgroundColor = UIColor(hex: "#D9D9D9")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    lazy var rankLabel: UILabel = {
-        let label = UILabel()
-        label.font = .appleSDGothicNeo(weight: .semiBold, size: 52)
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var rankIntenImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    lazy var rankIntenLabel: UILabel = {
-        let label = UILabel()
-        label.font = .appleSDGothicNeo(weight: .semiBold, size: 16)
-        label.textColor = UIColor(hex:"#FFC700")
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var rankIntenStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 2
-        stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+    lazy var posterView: MoviePosterView = {
+        let view = MoviePosterView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .appleSDGothicNeo(weight: .semiBold, size: 16)
-        label.textColor = UIColor(hex: "#222222")
+        label.font = .appleSDGothicNeo(weight: .bold, size: 16)
+        label.textColor = UIColor(hex: "#DFDFDF")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -67,7 +30,7 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
     lazy var openDateLabel: UILabel = {
         let label = UILabel()
         label.font = .appleSDGothicNeo(weight: .medium, size: 12)
-        label.textColor = UIColor(hex: "#9A9A9A")
+        label.textColor = UIColor(hex: "#848484")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -75,7 +38,7 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
     lazy var audienceCountLabel: UILabel = {
         let label = UILabel()
         label.font = .appleSDGothicNeo(weight: .medium, size: 12)
-        label.textColor = UIColor(hex: "#9A9A9A")
+        label.textColor = UIColor(hex: "#848484")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -116,10 +79,7 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         subscriptions = []
-        posterImageView.image = nil
-        rankLabel.text = ""
-        rankIntenImage.isHidden = true
-        rankIntenLabel.isHidden = true
+        posterView.clearAll()
         titleLabel.text = ""
         openDateLabel.text = ""
         audienceCountLabel.text = ""
@@ -133,11 +93,7 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
     
     // MARK: Build View Hierarchy
     func buildViewHierarchy() {
-        self.contentView.addSubview(posterImageView)
-        self.contentView.addSubview(rankLabel)
-        self.contentView.addSubview(rankIntenStackView)
-        rankIntenStackView.addArrangedSubview(rankIntenImage)
-        rankIntenStackView.addArrangedSubview(rankIntenLabel)
+        self.contentView.addSubview(posterView)
         self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(openDateLabel)
         self.contentView.addSubview(audienceCountLabel)
@@ -151,30 +107,14 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
         defer { NSLayoutConstraint.activate(constraints) }
         
         constraints += [
-            posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            posterImageView.heightAnchor.constraint(equalTo: posterImageView.widthAnchor, multiplier: 15 / 11)
+            posterView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            posterView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            posterView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            posterView.heightAnchor.constraint(equalTo: posterView.widthAnchor, multiplier: 15 / 11),
         ]
         
         constraints += [
-            rankLabel.leadingAnchor.constraint(equalTo: posterImageView.leadingAnchor, constant: 12),
-            rankLabel.bottomAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 16),
-        ]
-        
-        constraints += [
-            rankIntenImage.widthAnchor.constraint(equalToConstant: 8),
-            rankIntenImage.heightAnchor.constraint(equalToConstant: 6)
-        ]
-        
-        constraints += [
-            rankIntenStackView.leadingAnchor.constraint(equalTo: rankLabel.trailingAnchor, constant: 4),
-            rankIntenStackView.bottomAnchor.constraint(equalTo: posterImageView.bottomAnchor),
-            rankIntenStackView.heightAnchor.constraint(equalToConstant: 19),
-        ]
-        
-        constraints += [
-            titleLabel.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 12),
+            titleLabel.topAnchor.constraint(equalTo: posterView.bottomAnchor, constant: 12),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
         ]
@@ -195,46 +135,10 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
     
     // MARK: Binding
     func bind(viewModel: ViewModel) {
-        viewModel.$posterImage
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.image, on: posterImageView)
+        viewModel.$posterModel
+            .compactMap { $0 }
+            .assign(to: \.viewModel, on: posterView)
             .store(in: &subscriptions)
-        
-        viewModel.$movie
-            .compactMap { $0.boxOfficeInfo?.rank }
-            .map { String($0) }
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.text, on: rankLabel)
-            .store(in: &subscriptions)
-        
-        viewModel.$movie
-            .compactMap { $0.boxOfficeInfo }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] info in
-                guard let self else { return }
-                if info.rankOldAndNew == .NEW {
-                    self.rankIntenLabel.text = "new"
-                    self.rankIntenLabel.textColor = UIColor(hex: "#05FF00")
-                    self.rankIntenLabel.isHidden = false
-                    self.rankIntenImage.isHidden = true
-                } else if info.rankInten > 0 {
-                    self.rankIntenImage.image = UIImage(named: "rankIntenUp")
-                    self.rankIntenLabel.text = String(info.rankInten)
-                    self.rankIntenLabel.textColor = UIColor(hex: "#FFC700")
-                    self.rankIntenImage.isHidden = false
-                    self.rankIntenLabel.isHidden = false
-                } else if info.rankInten == 0 {
-                    self.rankIntenImage.image = UIImage(named: "rankIntenKeep")
-                    self.rankIntenImage.isHidden = false
-                    self.rankIntenLabel.isHidden = true
-                } else if info.rankInten < 0 {
-                    self.rankIntenImage.image = UIImage(named: "rankIntenDown")
-                    self.rankIntenLabel.text = String(-info.rankInten)
-                    self.rankIntenLabel.textColor = UIColor(hex: "#00E0FF")
-                    self.rankIntenImage.isHidden = false
-                    self.rankIntenLabel.isHidden = false
-                }
-            }).store(in: &subscriptions)
         
         viewModel.$movie
             .map { $0.movieName }
@@ -247,6 +151,13 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
             .map { "\($0) 개봉" }
             .receive(on: DispatchQueue.main)
             .assign(to: \.text, on: openDateLabel)
+            .store(in: &subscriptions)
+        
+        viewModel.$movie
+            .compactMap { $0.boxOfficeInfo?.audienceAccumulation }
+            .map { "누적관객 \($0.formattedString(.audience))명  " }
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.text, on: audienceCountLabel)
             .store(in: &subscriptions)
     }
     

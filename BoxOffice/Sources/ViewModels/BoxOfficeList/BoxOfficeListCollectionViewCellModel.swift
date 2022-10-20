@@ -14,7 +14,7 @@ class BoxOfficeListCollectionViewCellModel {
     
     // MARK: Output
     @Published var movie: Movie
-    @Published var posterImage: UIImage?
+    @Published var posterModel: MoviePosterViewModel?
     
     // MARK: Properties
     let repository = Repository()
@@ -63,19 +63,9 @@ class BoxOfficeListCollectionViewCellModel {
             }).store(in: &subscriptions)
         
         $movie
-            .filter { _ in self.posterImage == nil }
-            .compactMap { $0.detailInfo?.poster }
-            .prefix(1)
-            .flatMap { [weak self] url -> AnyPublisher<UIImage, Error> in
-                guard let self else { return Empty().eraseToAnyPublisher() }
-                return self.repository.loadImage(url)
-            }.sink(receiveCompletion: { completion in
-                if case .failure(let error) = completion {
-                    debugPrint("😡Error Occured While Loading Movie Poster Image: \(error.localizedDescription)")
-                }
-            }, receiveValue: { [weak self] image in
+            .sink(receiveValue: { [weak self] movie in
                 guard let self else { return }
-                self.posterImage = image
+                self.posterModel = MoviePosterViewModel(movie: movie)
             }).store(in: &subscriptions)
     }
 }
