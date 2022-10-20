@@ -11,6 +11,9 @@ class MovieDetailViewController: UIViewController {
 
   let tableView = UITableView(frame: .zero, style: .plain)
 
+  var rankInfo: DailyListObject?
+  var movieInfo: MovieInfo?
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -73,8 +76,33 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
     switch indexPath.section {
     case 0:
       guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieDetailCell.id,
-                                                     for: indexPath) as? MovieDetailCell
+                                                     for: indexPath) as? MovieDetailCell,
+            let _rankInfo = rankInfo,
+            let movie = movieInfo
       else { return UITableViewCell() }
+
+      cell.setMovieInfo(poster: PosterCache.loadPoster(_rankInfo.movieCd),
+                        rank: _rankInfo.rank,
+                        rankInten: _rankInfo.rankInten,
+                        openDt: _rankInfo.openDt,
+                        audiCnt: _rankInfo.audiAcc,
+                        prdtYear: movie.prdtYear,
+                        genres: movie.genres.map { $0.genreNm }.joined(separator: ", "),
+                        directors: movie.directors.map { $0.peopleNm }.joined(separator: ", "),
+                        actors: movie.actors.map { $0.peopleNm }.joined(separator: ", "),
+                        showTm: movie.showTm,
+                        watchGradeNm: movie.audits[0].watchGradeNm)
+
+      let updown = Int(_rankInfo.rankInten)!
+      if updown == 0 {
+        cell.changeRankUpDown(.nothing)
+      } else if updown > 0 {
+        cell.changeRankUpDown(.up)
+      } else {
+        cell.changeRankUpDown(.down)
+      }
+
+      cell.toggleNewTag(_rankInfo.rankOldAndNew == "NEW")
 
       return cell
     case 1:
@@ -94,12 +122,14 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
       guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: ReviewCellHeaderView.id)
               as? ReviewCellHeaderView
       else {
-        return UITableViewHeaderFooterView()
+        return UIView()
       }
 
       return header
     } else {
-      return UITableViewHeaderFooterView()
+      // 왜 nil을 반환해도 빈 헤더뷰가 생길까
+//      return nil
+      return UIView()
     }
   }
 

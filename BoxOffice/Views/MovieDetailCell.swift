@@ -20,7 +20,7 @@ class MovieDetailCell: UITableViewCell {
 
   let ranking: UILabel = {
     let label = UILabel()
-    label.font = UIFont.systemFont(ofSize: 20)
+    label.font = UIFont.systemFont(ofSize: 30)
     label.text = "1"
     label.sizeToFit()
 
@@ -148,6 +148,7 @@ class MovieDetailCell: UITableViewCell {
     let sv = UIStackView()
     sv.axis = .vertical
     sv.distribution = .fill
+    sv.spacing = 10
 
     return sv
   }()
@@ -204,8 +205,10 @@ extension MovieDetailCell {
     NSLayoutConstraint.activate([
       poster.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
       poster.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-      poster.widthAnchor.constraint(equalToConstant: 100),
-      poster.heightAnchor.constraint(equalToConstant: 144),
+      poster.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5),
+//      poster.widthAnchor.constraint(equalToConstant: 100),
+      poster.heightAnchor.constraint(equalTo: poster.widthAnchor, multiplier: 1.4),
+//      poster.heightAnchor.constraint(equalToConstant: 144),
       ranking.topAnchor.constraint(equalTo: poster.bottomAnchor, constant: 10),
 //      ranking.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
       ranking.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -236,6 +239,45 @@ extension MovieDetailCell {
 
     ])
   }
+
+  func setMovieInfo(poster: UIImage, rank: String, rankInten: String, openDt: String, audiCnt: String,
+                    prdtYear: String, genres: String, directors: String, actors: String,
+                    showTm: String, watchGradeNm: String) {
+    self.poster.image = poster
+    self.ranking.text = "예매율 \(rank)위"
+    self.rankDiff.text = rankInten
+    self.openDate.text = "\(openDt) 개봉"
+    self.audienceCount.text = "누적관객 \(audiCnt)명"
+    self.productionYear.text = "\(prdtYear)년 제작"
+    self.genre.text = genres
+    self.director.text = "\(directors) 감독"
+    self.actors.text = "출연진\n\(actors)"
+    self.showTime.text = "\(showTm)분"
+    self.grade.text = watchGradeNm
+  }
+
+  func changeRankUpDown(_ state: UpDown) {
+    switch state {
+    case .nothing:
+      self.rankUpDown.image = UIImage(systemName: "minus.square")
+      self.rankUpDown.tintColor = .black
+    case .up:
+      self.rankUpDown.image = UIImage(systemName: "arrowtriangle.up.square.fill")
+      self.rankUpDown.tintColor = .systemRed
+    case .down:
+      self.rankUpDown.image = UIImage(systemName: "arrowtriangle.down.square.fill")
+      self.rankUpDown.tintColor = .systemBlue
+    }
+  }
+
+  func toggleNewTag(_ on: Bool) {
+    if on {
+      self.newTag.isHidden = false
+    } else {
+      self.newTag.isHidden = true
+    }
+  }
+  
 }
 
 #if canImport(SwiftUI) && DEBUG

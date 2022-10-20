@@ -126,7 +126,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     cell.setLabels(rank: movie.rank,
                    title: movie.movieNm,
                    date: movie.openDt,
-                   audiCnt: movie.audiCnt,
+                   audiCnt: movie.audiAcc,
                    diff: movie.rankInten)
     cell.setPoster(PosterCache.loadPoster(movie.movieCd))
 
@@ -148,6 +148,8 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     let nextVC = MovieDetailViewController()
 
     nextVC.title = dailyList[indexPath.row]?.movieNm
+    nextVC.rankInfo = dailyList[indexPath.row]
+    nextVC.movieInfo = movieInfoList[indexPath.row]
 
     navigationController?.pushViewController(nextVC, animated: true)
   }
