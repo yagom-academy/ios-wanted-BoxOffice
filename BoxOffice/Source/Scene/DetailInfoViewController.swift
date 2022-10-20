@@ -7,13 +7,15 @@
 
 import UIKit
 
+typealias SectionAndTitle = (title: String, section: SecondSection)
+
 class DetailInfoViewController: UIViewController {
     
     let detailInfoView = DetailInfoView()
     var simpleMovieInfo: SimpleMovieInfoEntity?
     var detailMovieInfo: DetailMovieInfoEntity?
     var standardInfoList: [StandardMovieInfoEntity] = []
-    var sectionList: [SecondSection] = [.main, .standard]
+    var sectionList: [SectionAndTitle] = [("", .main), ("기본 정보", .standard), ("출연", .actors)]
     
     override func loadView() {
         view = detailInfoView
@@ -29,6 +31,7 @@ class DetailInfoViewController: UIViewController {
         detailInfoView.collectionView.dataSource = self
         detailInfoView.collectionView.register(MainInfoCollectionViewCell.self, forCellWithReuseIdentifier: MainInfoCollectionViewCell.id)
         detailInfoView.collectionView.register(StandardInfoCollectionViewCell.self, forCellWithReuseIdentifier: StandardInfoCollectionViewCell.id)
+        detailInfoView.collectionView.register(ActorCollectionViewCell.self, forCellWithReuseIdentifier: ActorCollectionViewCell.id)
         detailInfoView.collectionView.register(SubjectReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SubjectReusableView.id)
         detailInfoView.collectionView.collectionViewLayout = createBasicListLayout()
     }
@@ -58,7 +61,7 @@ class DetailInfoViewController: UIViewController {
     
     private func createBasicListLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
-            let sectionName = self.sectionList[sectionIndex]
+            let sectionName = self.sectionList[sectionIndex].section
             switch sectionName {
             case .main:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -86,7 +89,23 @@ class DetailInfoViewController: UIViewController {
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .continuous
-                section.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
+                section.contentInsets = .init(top: 8, leading: 8, bottom: 18, trailing: 8)
+                section.boundarySupplementaryItems = [self.supplementaryHeaderItem()]
+                
+                return section
+            case .actors:
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                      heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                       heightDimension: .estimated(CGFloat(self.detailMovieInfo?.actors.count ?? 1) * 50))
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
+                                                             subitem: item, count: self.detailMovieInfo?.actors.count == 0 ? 1 : self.detailMovieInfo?.actors.count ?? 1)
+                
+                let section = NSCollectionLayoutSection(group: group)
+                section.orthogonalScrollingBehavior = .none
+                section.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
                 section.boundarySupplementaryItems = [self.supplementaryHeaderItem()]
                 
                 return section
@@ -108,16 +127,18 @@ extension DetailInfoViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch sectionList[section] {
+        switch sectionList[section].section {
         case .main:
             return detailMovieInfo == nil ? 0 : 1
         case .standard:
             return standardInfoList.count
+        case .actors:
+            return detailMovieInfo == nil ? 0 : detailMovieInfo?.actors.count ?? 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch sectionList[indexPath.section] {
+        switch sectionList[indexPath.section].section {
         case .main:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainInfoCollectionViewCell.id, for: indexPath) as? MainInfoCollectionViewCell else { return UICollectionViewCell() }
             guard let movie = self.detailMovieInfo else { return UICollectionViewCell() }
@@ -166,6 +187,12 @@ extension DetailInfoViewController: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StandardInfoCollectionViewCell.id, for: indexPath) as? StandardInfoCollectionViewCell else { return UICollectionViewCell() }
             cell.setData(data: standardInfoList[indexPath.item])
             return cell
+        case .actors:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActorCollectionViewCell.id, for: indexPath) as? ActorCollectionViewCell else { return UICollectionViewCell() }
+            if let title = detailMovieInfo?.actors[indexPath.item] {
+                cell.setData(title: title)
+            }
+            return cell
         }
         
     }
@@ -174,7 +201,7 @@ extension DetailInfoViewController: UICollectionViewDataSource {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SubjectReusableView.id, for: indexPath) as? SubjectReusableView else { return UICollectionReusableView() }
-            header.setData(title: "기본 정보")
+            header.setData(title: self.sectionList[indexPath.section].title)
             return header
         default:
             return UICollectionReusableView()
@@ -187,4 +214,5 @@ extension DetailInfoViewController: UICollectionViewDataSource {
 enum SecondSection {
     case main
     case standard
+    case actors
 }
