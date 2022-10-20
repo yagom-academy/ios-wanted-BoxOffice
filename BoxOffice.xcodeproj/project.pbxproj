@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		361D1ACD29017CDF00C31AD6 /* SecondContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361D1ACC29017CDF00C31AD6 /* SecondContentView.swift */; };
+		361D1ACF2901B96300C31AD6 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361D1ACE2901B96300C31AD6 /* String+Extension.swift */; };
 		367520DB28FE7E1C0010437F /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520DA28FE7E1C0010437F /* HTTPClient.swift */; };
 		367520DD28FE7E3F0010437F /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520DC28FE7E3F0010437F /* Repository.swift */; };
 		367520DF28FE7E540010437F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367520DE28FE7E540010437F /* API.swift */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		361D1ACC29017CDF00C31AD6 /* SecondContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondContentView.swift; sourceTree = "<group>"; };
+		361D1ACE2901B96300C31AD6 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		367520DA28FE7E1C0010437F /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		367520DC28FE7E3F0010437F /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		367520DE28FE7E540010437F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				367520EA28FE7F1A0010437F /* UIImage+Extension.swift */,
 				367520FD28FE948D0010437F /* UIFont+Extension.swift */,
 				3675210228FFEC730010437F /* Date+Extension.swift */,
+				361D1ACE2901B96300C31AD6 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				367520DD28FE7E3F0010437F /* Repository.swift in Sources */,
 				367520DF28FE7E540010437F /* API.swift in Sources */,
 				4CEA382728FD5785007B86EE /* SceneCategory.swift in Sources */,
+				361D1ACF2901B96300C31AD6 /* String+Extension.swift in Sources */,
 				3676D24129005BE300807845 /* Test_SecondContentView.swift in Sources */,
 				4CEA384428FD5B33007B86EE /* FirstSceneAction.swift in Sources */,
 				3676D23F2900556200807845 /* Temp_SecondContentView.swift in Sources */,
