@@ -15,6 +15,7 @@ class StarScore: UIView {
             scoreLabel.text = "\(score) / 5"
         }
     }
+    var buttonAction: ( (Int) -> Void )?
     
     lazy var starStackView: UIStackView = {
         let stack = UIStackView()
@@ -94,7 +95,7 @@ class StarScore: UIView {
             scoreLabel.topAnchor.constraint(equalTo: starStackView.bottomAnchor, constant: 20),
             scoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             scoreLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            scoreLabel.bottomAnchor.constraint(equalTo: bottomAnchor,constant: 20)
+            scoreLabel.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -20)
         
             
         ])
@@ -138,6 +139,7 @@ class StarScore: UIView {
         }
         
         self.score = outputScore()
+        buttonAction!(self.score)
 
     }
     
@@ -172,6 +174,7 @@ class starButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.adjustsImageWhenHighlighted = false
     }
     
     required init?(coder aDecoder: NSCoder) {

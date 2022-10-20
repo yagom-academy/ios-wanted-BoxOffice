@@ -12,15 +12,6 @@ class StarScoreCell: UITableViewCell {
     static var identifier: String = String(describing: StarScoreCell.self)
     var buttonAction: ( () -> Void ) = {}
     
-    let starScoreTitleLabel: UILabel = {
-        let view = UILabel()
-        view.font = .boldSystemFont(ofSize: 20)
-        view.textAlignment = .center
-        view.text = "평균별점"
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     let starScore: StarScore = {
         let view = StarScore()
         view.isUserInteractionEnabled = true

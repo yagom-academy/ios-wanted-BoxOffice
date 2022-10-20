@@ -30,6 +30,11 @@
 		0B87456E29006A1000E5155E /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87456D29006A1000E5155E /* String+extension.swift */; };
 		0B8745702900775500E5155E /* StarScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87456F2900775500E5155E /* StarScore.swift */; };
 		0B87457229008AB200E5155E /* StarScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87457129008AB200E5155E /* StarScoreCell.swift */; };
+		0B8745742901748B00E5155E /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8745732901748B00E5155E /* ReviewView.swift */; };
+		0B8745762901751200E5155E /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8745752901751200E5155E /* ReviewViewController.swift */; };
+		0B87457A29018C6E00E5155E /* UITextField+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87457929018C6E00E5155E /* UITextField+extension.swift */; };
+		0B87457C290192C900E5155E /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87457B290192C900E5155E /* ReviewModel.swift */; };
+		0B87457E2901963500E5155E /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87457D2901963500E5155E /* ReviewViewModel.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
@@ -60,6 +65,11 @@
 		0B87456D29006A1000E5155E /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		0B87456F2900775500E5155E /* StarScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarScore.swift; sourceTree = "<group>"; };
 		0B87457129008AB200E5155E /* StarScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarScoreCell.swift; sourceTree = "<group>"; };
+		0B8745732901748B00E5155E /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
+		0B8745752901751200E5155E /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		0B87457929018C6E00E5155E /* UITextField+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+extension.swift"; sourceTree = "<group>"; };
+		0B87457B290192C900E5155E /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
+		0B87457D2901963500E5155E /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +94,7 @@
 			children = (
 				0B87453528FE730200E5155E /* BoxOfficeView.swift */,
 				0B87455F290005D400E5155E /* MovieInfoView.swift */,
+				0B8745732901748B00E5155E /* ReviewView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -93,6 +104,7 @@
 			children = (
 				0B87452F28FE724200E5155E /* BoxOfficeViewController.swift */,
 				0B87455D290005BA00E5155E /* MovieInfoViewController.swift */,
+				0B8745752901751200E5155E /* ReviewViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -113,6 +125,7 @@
 				0B87454328FE80DA00E5155E /* BoxOfficeModel.swift */,
 				0B87455328FF06F700E5155E /* PosterModel.swift */,
 				0B8745672900429300E5155E /* MovieInfoModel.swift */,
+				0B87457B290192C900E5155E /* ReviewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -125,6 +138,7 @@
 				0B8745652900423D00E5155E /* MovieInfoViewModel.swift */,
 				0B874569290045BD00E5155E /* MovieInfoCellViewModel.swift */,
 				0B874563290016FA00E5155E /* TableViewCellViewModel.swift */,
+				0B87457D2901963500E5155E /* ReviewViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -145,6 +159,7 @@
 				0B87455928FF119400E5155E /* UIImageView+extension.swift */,
 				0B87455B28FF167900E5155E /* Collection+extension.swift */,
 				0B87456D29006A1000E5155E /* String+extension.swift */,
+				0B87457929018C6E00E5155E /* UITextField+extension.swift */,
 			);
 			path = Extenstions;
 			sourceTree = "<group>";
@@ -268,7 +283,9 @@
 				0B8745702900775500E5155E /* StarScore.swift in Sources */,
 				0B87453028FE724200E5155E /* BoxOfficeViewController.swift in Sources */,
 				0B874560290005D400E5155E /* MovieInfoView.swift in Sources */,
+				0B87457E2901963500E5155E /* ReviewViewModel.swift in Sources */,
 				0B8745622900167600E5155E /* BoxOfficeCellViewModel.swift in Sources */,
+				0B87457A29018C6E00E5155E /* UITextField+extension.swift in Sources */,
 				0B87456A290045BD00E5155E /* MovieInfoCellViewModel.swift in Sources */,
 				0B87456C290045F500E5155E /* MovieInfoTableViewCell.swift in Sources */,
 				0B87455E290005BA00E5155E /* MovieInfoViewController.swift in Sources */,
@@ -282,6 +299,7 @@
 				0B87454428FE80DA00E5155E /* BoxOfficeModel.swift in Sources */,
 				0B87455428FF06F700E5155E /* PosterModel.swift in Sources */,
 				0B87453628FE730200E5155E /* BoxOfficeView.swift in Sources */,
+				0B8745742901748B00E5155E /* ReviewView.swift in Sources */,
 				0B87455228FF049600E5155E /* API_KEY.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 				0B87455C28FF167900E5155E /* Collection+extension.swift in Sources */,
@@ -289,6 +307,8 @@
 				0B87455A28FF119400E5155E /* UIImageView+extension.swift in Sources */,
 				0B87454828FEBA7B00E5155E /* APIService.swift in Sources */,
 				0B87454F28FEF39E00E5155E /* PaddingLabel.swift in Sources */,
+				0B8745762901751200E5155E /* ReviewViewController.swift in Sources */,
+				0B87457C290192C900E5155E /* ReviewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
