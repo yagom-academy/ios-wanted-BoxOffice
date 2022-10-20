@@ -49,13 +49,16 @@ final class MovieReviewViewController: UIViewController {
     
     private let registerButton: UIButton = {
         let button = UIButton()
-        button.setTitle("리뷰 등록", for: .normal)
-        button.backgroundColor = .systemBlue
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor.systemBlue.cgColor
         button.layer.cornerRadius = 10
+        button.setTitle("리뷰 등록", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.isEnabled = false
         return button
     }()
     
-    private let starValueList = ["1","2","3","4","5"]
+    private var viewModel: MovieReviewViewModel = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,8 +66,26 @@ final class MovieReviewViewController: UIViewController {
         self.setupLayouts()
         self.starPickerView.dataSource = self
         self.starPickerView.delegate = self
+        self.contentTextView.delegate = self
+        self.registerButton.addTarget(self, action: #selector(registerButtonTapped(_:)), for: .touchUpInside)
+        
     }
     
+    private func bind(_ viewmodel: MovieReviewViewModel) {
+        let output = viewModel.transform()
+        output.buttonIsEnable.subscribe { [weak self] isEnabled in
+            let buttonColor: UIColor = isEnabled ? .systemBlue : .white
+            let titleColor: UIColor = isEnabled ? .white : .black
+            self?.registerButton.backgroundColor = buttonColor
+            self?.registerButton.setTitleColor(titleColor, for: .normal)
+            self?.registerButton.isEnabled = isEnabled
+        }
+    }
+    
+    @objc func registerButtonTapped(_ sender: UIButton) {
+        self.navigationController?.pushViewController(MovieDetailViewController(), animated: true)
+    }
+
     private func setupLayouts() {
         ["별명", "암호"].forEach {
             let reviewView = ReviewTextView(title: $0)
@@ -72,6 +93,7 @@ final class MovieReviewViewController: UIViewController {
                 reviewView.textField.isSecureTextEntry = true
             }
             reviewView.widthAnchor.constraint(equalToConstant: self.view.bounds.width).isActive = true
+            reviewView.delegate = self
             self.infoStackView.addArrangedSubview(reviewView)
         }
         
@@ -115,6 +137,27 @@ final class MovieReviewViewController: UIViewController {
     }
     
 }
+// MARK: - extension
+extension MovieReviewViewController: ReviewTextViewDelegate {
+    func textFieldeditEnd(title: String, text: String) {
+        switch title {
+        case "별명":
+            viewModel.nickname.value = text
+        case "암호":
+            viewModel.password.value = text
+        default:
+            return
+        }
+        bind(viewModel)
+    }
+}
+
+extension MovieReviewViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        viewModel.content.value = textView.text
+    }
+
+}
 
 extension MovieReviewViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -122,35 +165,16 @@ extension MovieReviewViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return starValueList.count
+        return viewModel.starValueList.count
     }
 }
 
 extension MovieReviewViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return starValueList[row]
+        return viewModel.starValueList[row]
     }
     
-    //    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    //        <#code#>
-    //    }
-}
-
-import SwiftUI
-struct MovieListView33Controller_Previews: PreviewProvider {
-    static var previews: some View {
-        Container().edgesIgnoringSafeArea(.all)
-    }
-    
-    struct Container: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> UIViewController {
-            let vc = MovieReviewViewController()
-            return UINavigationController(rootViewController: vc)
+        func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+            viewModel.starScore.value =  viewModel.starValueList[row]
         }
-        
-        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) { }
-        
-        typealias UIViewControllerType = UIViewController
-    }
 }
-

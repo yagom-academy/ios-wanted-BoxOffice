@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ReviewTextViewDelegate: AnyObject {
+    func textFieldeditEnd(title: String, text: String)
+}
+
 final class ReviewTextView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -21,19 +25,12 @@ final class ReviewTextView: UIView {
         return textField
     }()
     
-    lazy var contentTextView: UITextView = {
-        let textView = UITextView()
-        textView.contentInset = .init(top: 10, left: 10, bottom: 10, right: 10)
-        textView.font = .systemFont(ofSize: 12, weight: .regular)
-        textView.layer.borderWidth = 1
-        textView.layer.borderColor = UIColor.systemGray5.cgColor
-        textView.layer.cornerRadius = 10
-        return textView
-    }()
+    weak var delegate: ReviewTextViewDelegate?
 
     init() {
         super.init(frame: .zero)
         self.setUpLayouts()
+        self.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
     convenience init(title: String) {
@@ -60,5 +57,8 @@ final class ReviewTextView: UIView {
         
     }
     
+    @objc func textFieldDidChange(_ sender: UIButton) {
+        delegate?.textFieldeditEnd(title: titleLabel.text ?? "", text: textField.text ?? "")
+    }
+    
 }
-
