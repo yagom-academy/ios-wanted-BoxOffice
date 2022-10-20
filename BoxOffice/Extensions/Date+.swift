@@ -19,6 +19,20 @@ extension Date {
         return calendar.date(byAdding: .day, value: -7, to: self) ?? Date()
     }
 
+    var year: Int {
+        get {
+            return calendar.component(.year, from: self)
+        }
+        set {
+            guard newValue > 0 else { return }
+            let currentYear = calendar.component(.year, from: self)
+            let yearsToAdd = newValue - currentYear
+            if let date = calendar.date(byAdding: .year, value: yearsToAdd, to: self) {
+                self = date
+            }
+        }
+    }
+
     func string(withFormat format: String = "yyyyMMdd") -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format

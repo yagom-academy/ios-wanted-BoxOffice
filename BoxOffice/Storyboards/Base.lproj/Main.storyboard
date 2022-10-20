@@ -71,11 +71,12 @@
                                 <segment title="주말"/>
                             </segments>
                             <connections>
-                                <action selector="segmentedControlValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="aml-qz-x4S"/>
+                                <action selector="segmentedControlValueChanged" destination="BYZ-38-t0r" eventType="valueChanged" id="qqi-RR-svF"/>
                             </connections>
                         </segmentedControl>
                     </navigationItem>
                     <connections>
+                        <outlet property="segmentedControl" destination="GlV-a3-Qn7" id="SaY-7b-ave"/>
                         <outlet property="tableView" destination="cKx-fh-sXl" id="vJ7-TH-pD0"/>
                     </connections>
                 </viewController>
@@ -92,7 +93,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oPz-96-hbh">
-                                <rect key="frame" x="0.0" y="103" width="430" height="795"/>
+                                <rect key="frame" x="0.0" y="155" width="430" height="743"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ldk-JM-dei">
                                     <size key="itemSize" width="128" height="128"/>
@@ -116,8 +117,8 @@
                             <constraint firstItem="oPz-96-hbh" firstAttribute="leading" secondItem="H3F-lW-fuw" secondAttribute="leading" id="tM7-pq-bWP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="qWB-Kn-6hW">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="sFa-nt-4dt">
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="qWB-Kn-6hW">
+                        <barButtonItem key="rightBarButtonItem" title="리뷰 작성하기" id="sFa-nt-4dt">
                             <connections>
                                 <segue destination="8Gy-hW-aB5" kind="show" id="hxf-aD-6T9"/>
                             </connections>
@@ -208,7 +209,9 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="fPT-9r-yXH" firstAttribute="leading" secondItem="raU-zG-7wg" secondAttribute="leading" constant="16" id="4vz-pg-obq"/>
                                             <constraint firstItem="IuM-dp-YCy" firstAttribute="leading" secondItem="raU-zG-7wg" secondAttribute="leading" constant="16" id="BIb-eX-Whf"/>
+                                            <constraint firstAttribute="trailing" secondItem="fPT-9r-yXH" secondAttribute="trailing" constant="16" id="W0K-Ag-dyT"/>
                                             <constraint firstAttribute="trailing" secondItem="IuM-dp-YCy" secondAttribute="trailing" constant="16" id="fuw-Y5-WvU"/>
                                             <constraint firstItem="fPT-9r-yXH" firstAttribute="top" secondItem="raU-zG-7wg" secondAttribute="top" id="nzw-nb-2gE"/>
                                             <constraint firstAttribute="bottom" secondItem="fPT-9r-yXH" secondAttribute="bottom" id="zqm-wr-NYT"/>

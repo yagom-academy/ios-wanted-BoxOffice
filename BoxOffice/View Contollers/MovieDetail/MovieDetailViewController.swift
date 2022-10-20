@@ -23,7 +23,7 @@ final class MovieDetailViewController: UIViewController {
     private let movieSearchService = MovieSearchService()
     private let movieReviewService = MovieReviewService()
 
-    var movie: MovieRanking!
+    var movieRanking: MovieRanking!
 
     @Published private var movieDetail: MovieDetail!
     @Published private var movieReviews: [MovieReview] = []
@@ -35,10 +35,10 @@ final class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        subscribe()
         configureCollectionView()
         configureDataSource()
-        configureMovieRankingView()
-        addObserverForMovieDetail()
+        updateView(with: movieRanking)
         fetchMovieReviews()
         fetchMovieDetail()
     }
@@ -62,7 +62,7 @@ final class MovieDetailViewController: UIViewController {
             )
 
             switch sectionIndex {
-            case .info:
+            case .info, .review:
                 let section = NSCollectionLayoutSection.list(
                     using: .init(appearance: .plain),
                     layoutEnvironment: layoutEnvironment
@@ -97,14 +97,6 @@ final class MovieDetailViewController: UIViewController {
                 section.contentInsets = sectionContentInset
                 section.boundarySupplementaryItems = [sectionHeader]
                 return section
-            case .review:
-                let section = NSCollectionLayoutSection.list(
-                    using: .init(appearance: .plain),
-                    layoutEnvironment: layoutEnvironment
-                )
-                section.contentInsets = sectionContentInset
-                section.boundarySupplementaryItems = [sectionHeader]
-                return section
             }
         }
         collectionView.collectionViewLayout = layout
@@ -114,7 +106,7 @@ final class MovieDetailViewController: UIViewController {
     private func configureDataSource()  {
         // Cell Registration
         let infoItemRegistration = CellRegistration { cell, indexPath, item in
-            if let info = item as? MovieDetailInfo {
+            if let info = item as? Item {
                 var content = UIListContentConfiguration.valueCell()
                 content.text = info.title
                 content.textProperties.font = .preferredFont(forTextStyle: .footnote)
@@ -150,12 +142,15 @@ final class MovieDetailViewController: UIViewController {
         let reviewItemRegistration = CellRegistration { cell, indexPath, item in
             if let review = item as? MovieReview {
                 var content = UIListContentConfiguration.subtitleCell()
-                content.text = review.nickname
-                content.textProperties.font = .preferredFont(forTextStyle: .footnote)
+                let ratingText = "\(String(repeating: "★", count: review.rating))\(String(repeating: "☆", count: 5 - review.rating))"
+                content.text = "\(review.nickname) \(ratingText)"
+                content.textProperties.font = .preferredFont(forTextStyle: .caption2)
+                content.textProperties.color = .secondaryLabel
                 content.secondaryText = review.content
-                content.secondaryTextProperties.font = .preferredFont(forTextStyle: .footnote)
+                content.secondaryTextProperties.font = .preferredFont(forTextStyle: .caption1)
                 content.secondaryTextProperties.numberOfLines = 0
-                content.image = UIImage(systemName: "person.fill")
+                content.image = UIImage(systemName: "person.circle.fill")
+                content.imageProperties.tintColor = .secondarySystemFill
                 cell.contentConfiguration = content
             }
         }
@@ -207,23 +202,7 @@ final class MovieDetailViewController: UIViewController {
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 
-    private func configureMovieRankingView() {
-        let movieRankingView = MovieRankingView(frame: .zero)
-        movieRankingView.translatesAutoresizingMaskIntoConstraints = false
-
-        let height: CGFloat = 88
-        collectionView.addSubview(movieRankingView)
-        NSLayoutConstraint.activate([
-            movieRankingView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: -height),
-            movieRankingView.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
-            movieRankingView.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
-            movieRankingView.heightAnchor.constraint(equalToConstant: height),
-        ])
-        collectionView.contentInset = UIEdgeInsets(top: height, left: 0, bottom: 0, right: 0)
-        movieRankingView.configure(with: movie)
-    }
-
-    private func addObserverForMovieDetail() {
+    private func subscribe() {
         $movieDetail
             .receive(on: DispatchQueue.main)
             .sink { [weak self] detail in
@@ -238,6 +217,13 @@ final class MovieDetailViewController: UIViewController {
                 self?.updateView(with: reviews)
             }
             .store(in: &cancellables)
+    }
+
+    private func updateView(with ranking: MovieRanking) {
+        navigationItem.title = ranking.name
+        var snapshot = dataSource.snapshot()
+        snapshot.appendItems(ranking.info, toSection: .info)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 
     private func updateView(with detail: MovieDetail) {
@@ -256,7 +242,7 @@ final class MovieDetailViewController: UIViewController {
     private func fetchMovieDetail() {
         Task {
             do {
-                let detail = try await movieSearchService.searchMovieDetail(for: movie.identifier)
+                let detail = try await movieSearchService.searchMovieDetail(for: movieRanking.identifier)
                 self.movieDetail = detail
             } catch let error {
                 print(error.localizedDescription)
@@ -267,7 +253,7 @@ final class MovieDetailViewController: UIViewController {
     private func fetchMovieReviews() {
         Task {
             do {
-                let reviews = try await movieReviewService.reviews(for: movie.identifier)
+                let reviews = try await movieReviewService.reviews(for: movieRanking.identifier)
                 self.movieReviews = reviews
             } catch let error {
                 print(error.localizedDescription)
@@ -325,16 +311,14 @@ fileprivate enum Section: Int, CaseIterable {
 
 fileprivate extension MovieDetail {
 
-    /// 감독 및 출연진
     var crew: [Crew] {
         directors + actors
     }
 
-    /// 영화 상세정보
-    var info: [MovieDetailInfo] {
+    var info: [Item] {
         [
-            .init(title: "개봉", value: openDate.dateString()),
-            .init(title: "제작", value: productionDate),
+            .init(title: "개봉", value: "\(openDate.year) 년"),
+            .init(title: "제작", value: "\(productionDate) 년"),
             .init(title: "장르", value: genres.joined()),
             .init(title: "관람등급", value: watchGrade),
         ]
@@ -342,9 +326,31 @@ fileprivate extension MovieDetail {
 
 }
 
+fileprivate extension MovieRanking {
+
+    var changeRankingDisplayText: String {
+        if changeRanking > 0 {
+            return "+\(changeRanking.string)"
+        } else if changeRanking == 0 {
+            return "-"
+        } else {
+            return changeRanking.string
+        }
+    }
+
+    var info: [Item] {
+        [
+            .init(title: "순위", value: "\(ranking.string) (\(changeRankingDisplayText))"),
+            .init(title: "신규진입", value: isNewRanking ? "Y" : "N"),
+            .init(title: "누적관객", value: "\(numberOfMoviegoers.string) 명")
+        ]
+    }
+
+}
+
 // MARK: MovieDetailInfo
 
-fileprivate struct MovieDetailInfo: Hashable {
+fileprivate struct Item: Hashable {
 
     let title: String
     let value: String

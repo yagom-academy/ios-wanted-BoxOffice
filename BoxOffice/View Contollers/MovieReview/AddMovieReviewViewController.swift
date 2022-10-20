@@ -33,7 +33,7 @@ final class AddMovieReviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addObserverForKeyboard()
+        subscribe()
         updateSaveButtonState()
     }
 
@@ -41,7 +41,7 @@ final class AddMovieReviewViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
-    private func addObserverForKeyboard() {
+    private func subscribe() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow(notification:)),
@@ -80,13 +80,11 @@ final class AddMovieReviewViewController: UIViewController {
 
     @IBAction
     private func imageViewDidTap() {
-        Logger.ui.debug(#function)
+        // TODO
     }
 
     @IBAction
     private func cancelButtonDidTap() {
-        Logger.ui.debug(#function)
-
         dismiss(animated: true)
     }
 
@@ -101,7 +99,7 @@ final class AddMovieReviewViewController: UIViewController {
 
         guard let destination = segue.destination as? MovieDetailViewController else { return }
 
-        let movieIdentifier = destination.movie.identifier
+        let movieIdentifier = destination.movieRanking.identifier
         let nickname = nicknameTextField.text!
         let password = passwordTextField.text!
         let rating = ratingControl.rating
@@ -117,7 +115,8 @@ final class AddMovieReviewViewController: UIViewController {
 
 }
 
-// MARK: - UITex
+// MARK: - UITextFieldDelegate
+
 extension AddMovieReviewViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -1,8 +1,8 @@
 //
 //  RatingControl.swift
-//  FoodTracker
+//  BoxOffice
 //
-//  Created by 홍다희 on 2021/03/30.
+//  Created by 홍다희 on 2022/10/18.
 //
 
 import UIKit
@@ -48,7 +48,7 @@ class RatingControl: UIStackView {
         setupButtons()
     }
 
-    // MARK: Button Action
+    // MARK: Action Handlers
 
     @objc func ratingButtonTapped(button: UIButton) {
         guard let index = ratingButtons.firstIndex(of: button) else {

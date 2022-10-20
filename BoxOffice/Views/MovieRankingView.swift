@@ -52,7 +52,7 @@ final class MovieRankingView: UIView {
 
     // MARK: -
 
-    func configure(with movieRanking: MovieRanking) {
+    func updateView(with movieRanking: MovieRanking) {
         nameLabel.text = movieRanking.name
         openDateLabel.text = "\(movieRanking.openDate.dateString()) 개봉"
         numberOfMoviegoersLabel.text = "누적관객 \(movieRanking.numberOfMoviegoers.string)명"

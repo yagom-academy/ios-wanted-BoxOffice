@@ -7,13 +7,13 @@
 
 import UIKit
 import Combine
-import OSLog
 
 final class MovieListViewController: UIViewController {
 
     // MARK: UI
 
     @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var segmentedControl: UISegmentedControl!
 
     // MARK: Properties
 
@@ -27,35 +27,14 @@ final class MovieListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addObserverForMovies()
+        navigationItem.backButtonDisplayMode = .minimal
+        subscribe()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        fetchMovieRanking(for: .daily)
-    }
-
-    // MARK: -
-
-    private func addObserverForMovies() {
-        $movies
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] movies in
-                self?.tableView.reloadData()
-            }
-            .store(in: &cancellables)
-    }
-
-    private func fetchMovieRanking(for duration: DurationUnit) {
-        Task {
-            do {
-                let movies = try await movieSearchService.searchMovieRanking(for: duration)
-                self.movies = movies
-            } catch let error {
-                print(error.localizedDescription)
-            }
-        }
+        fetchMovieRanking()
     }
 
     // MARK: Navigation
@@ -64,18 +43,35 @@ final class MovieListViewController: UIViewController {
         guard let destination = segue.destination as? MovieDetailViewController,
               let indexPath = tableView.indexPathForSelectedRow else { return }
         let movie = movies[indexPath.row]
-        Logger.ui.debug("\(#function), \(movie.identifier)")
-        destination.movie = movie
+        destination.movieRanking = movie
     }
 
     // MARK: Action Handler
 
     @IBAction
-    private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        Logger.ui.debug("\(#function) \(sender.selectedSegmentIndex)")
+    private func segmentedControlValueChanged() {
+        fetchMovieRanking()
+    }
 
-        guard let selectedDuration = DurationUnit(rawValue: sender.selectedSegmentIndex) else { return }
-        fetchMovieRanking(for: selectedDuration)
+    private func subscribe() {
+        $movies
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] movies in
+                self?.tableView.reloadData()
+            }
+            .store(in: &cancellables)
+    }
+
+    private func fetchMovieRanking() {
+        guard let duration = DurationUnit(rawValue: segmentedControl.selectedSegmentIndex) else { return }
+        Task {
+            do {
+                let movies = try await movieSearchService.searchMovieRanking(for: duration)
+                self.movies = movies
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        }
     }
 
 }
@@ -96,7 +92,7 @@ extension MovieListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let movie = movies[indexPath.row]
-        cell.movieRankingView.configure(with: movie)
+        cell.movieRankingView.updateView(with: movie)
         return cell
     }
 

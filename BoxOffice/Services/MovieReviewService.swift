@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseStorage
 import FirebaseFirestore
+import OSLog
 
 final class MovieReviewService {
 
@@ -35,7 +36,7 @@ final class MovieReviewService {
         do {
             _ = try reference.addDocument(from: review)
         } catch {
-            print(error.localizedDescription)
+            Logger.persistence.error("\(error.localizedDescription), \(review.movieIdentifier)")
         }
     }
 
