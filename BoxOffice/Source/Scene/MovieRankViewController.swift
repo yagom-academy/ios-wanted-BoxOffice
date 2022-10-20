@@ -10,7 +10,7 @@ import UIKit
 class MovieRankViewController: UIViewController {
     
     let movieRankView = MovieRankView()
-    private var dataSource: UICollectionViewDiffableDataSource<Section, SimpleMovieInfoEntity>!
+    private var dataSource: UICollectionViewDiffableDataSource<FirstSection, SimpleMovieInfoEntity>!
     var movieList: [SimpleMovieInfoEntity] = []
     
     override func loadView() {
@@ -63,7 +63,7 @@ class MovieRankViewController: UIViewController {
             }
         }
         
-        dataSource = UICollectionViewDiffableDataSource<Section, SimpleMovieInfoEntity>(collectionView: self.movieRankView.collectionView) { collectionView, indexPath, video in
+        dataSource = UICollectionViewDiffableDataSource<FirstSection, SimpleMovieInfoEntity>(collectionView: self.movieRankView.collectionView) { collectionView, indexPath, video in
             collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: video)
         }
     }
@@ -71,7 +71,7 @@ class MovieRankViewController: UIViewController {
     
     private func getMovieRank() {
         let yesterday = Date(timeIntervalSinceNow: -86400).toString()
-        var snapshot = NSDiffableDataSourceSnapshot<Section, SimpleMovieInfoEntity>()
+        var snapshot = NSDiffableDataSourceSnapshot<FirstSection, SimpleMovieInfoEntity>()
         snapshot.appendSections([.main])
         
         Task {
@@ -117,6 +117,6 @@ extension MovieRankViewController: UICollectionViewDelegate {
     }
 }
 
-enum Section {
+enum FirstSection {
     case main
 }

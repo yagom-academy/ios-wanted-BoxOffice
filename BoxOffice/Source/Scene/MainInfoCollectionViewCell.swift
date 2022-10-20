@@ -8,6 +8,8 @@
 import UIKit
 
 class MainInfoCollectionViewCell: UICollectionViewCell {
+    static let id = "MAIN"
+
     let posterImageView: UIImageView = {
         let imageView = UIImageView()
         return imageView
@@ -61,6 +63,7 @@ class MainInfoCollectionViewCell: UICollectionViewCell {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
+        stackView.spacing = 10
         stackView.distribution = .fill
         return stackView
     }()
