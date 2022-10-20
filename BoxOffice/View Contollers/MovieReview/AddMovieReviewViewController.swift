@@ -10,7 +10,10 @@ import OSLog
 
 final class AddMovieReviewViewController: UIViewController {
 
+    // MARK: Constants
+
     static let textViewPlaceHolder = "리뷰 (선택사항)"
+
     // MARK: UI
 
     @IBOutlet var scrollView: UIScrollView!
@@ -21,35 +24,35 @@ final class AddMovieReviewViewController: UIViewController {
     @IBOutlet var contentTextView: UITextView!
     @IBOutlet var saveButton: UIBarButtonItem!
 
-    // MARK: Properties
-
-    var review: MovieReview?
-
     // MARK: View Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        addObserverForKeyboard()
+        updateSaveButtonState()
     }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
-    // MARK: Action Handlers
-
-    @IBAction
-    private func imageViewDidTap() {
-        Logger.ui.debug(#function)
-
+    private func addObserverForKeyboard() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(notification:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(notification:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
 
-    @IBAction
-    private func cancelButtonDidTap() {
-        dismiss(animated: true)
-    }
+    // MARK: Keyboard Notification
 
     @objc
     private func keyboardWillShow(notification: NSNotification) {
@@ -67,6 +70,58 @@ final class AddMovieReviewViewController: UIViewController {
         let contentInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInsets
         scrollView.verticalScrollIndicatorInsets = contentInsets
+    }
+
+    // MARK: Action Handlers
+
+    @IBAction
+    private func imageViewDidTap() {
+        Logger.ui.debug(#function)
+    }
+
+    @IBAction
+    private func cancelButtonDidTap() {
+        Logger.ui.debug(#function)
+
+        dismiss(animated: true)
+    }
+
+    @IBAction
+    private func saveButtonDidTap() {
+        Logger.ui.debug(#function)
+
+        let nickname = nicknameTextField.text!
+        let password = passwordTextField.text!
+        let rating = ratingControl.rating
+        let content = contentTextView.text
+        let review = MovieReview(nickname: nickname, password: password, rating: rating, content: content)
+        MovieReview.sampleData.append(review)
+
+        dismiss(animated: true)
+    }
+
+}
+
+// MARK: - UITex
+extension AddMovieReviewViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == nicknameTextField {
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            contentTextView.becomeFirstResponder()
+        }
+        return true
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        updateSaveButtonState()
+    }
+
+    private func updateSaveButtonState() {
+        let nickname = nicknameTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        saveButton.isEnabled = !nickname.isEmpty && !password.isEmpty
     }
 
 }

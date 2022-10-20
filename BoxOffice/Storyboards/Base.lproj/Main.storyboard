@@ -244,7 +244,11 @@
                                 <action selector="cancelButtonDidTap" destination="O5U-Tq-URT" id="Mdu-fc-KeB"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="1vH-vV-rAk"/>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="1vH-vV-rAk">
+                            <connections>
+                                <action selector="saveButtonDidTap" destination="O5U-Tq-URT" id="rZd-xi-eEm"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="contentTextView" destination="8Xn-2z-b2C" id="5DF-MH-oLk"/>

@@ -16,7 +16,7 @@ struct MovieReview: Hashable {
     let nickname: String
     let password: String
     let rating: Int
-    let content: String
+    let content: String?
     //    let image: String
 }
 
