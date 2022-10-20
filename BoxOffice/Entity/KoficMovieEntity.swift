@@ -59,3 +59,95 @@ enum RankOldAndNew: String, Codable {
     case old = "OLD"
     case new = "NEW"
 }
+
+/*****************************************************************************/
+
+// MARK: - KopicMovieDetail
+struct KoficMovieDetailEntity: Codable {
+    let movieInfoResult: MovieInfoResult
+}
+
+// MARK: - MovieInfoResult
+struct MovieInfoResult: Codable {
+    let movieInfo: MovieInfo
+    let source: String
+}
+
+// MARK: - MovieInfo
+struct MovieInfo: Codable {
+    let movieCd, movieNm, movieNmEn, movieNmOg: String
+    let showTm, prdtYear, openDt, prdtStatNm: String
+    let typeNm: String
+    let nations: [Nation]
+    let genres: [Genre]
+    let directors: [Director]
+    let actors: [Actor]
+    let showTypes: [ShowType]
+    let companys: [Company]
+    let audits: [Audit]
+
+    enum CodingKeys: String, CodingKey {
+        case movieCd
+        case movieNm, movieNmEn, movieNmOg, showTm, prdtYear, openDt, prdtStatNm, typeNm, nations, genres, directors, actors, showTypes, companys, audits
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.movieCd = try container.decode(String.self, forKey: .movieCd)
+        self.movieNm = try container.decode(String.self, forKey: .movieNm)
+        self.movieNmEn = try container.decode(String.self, forKey: .movieNmEn)
+        self.movieNmOg = try container.decode(String.self, forKey: .movieNmOg)
+        self.showTm = try container.decode(String.self, forKey: .showTm)
+        self.prdtYear = (try? container.decode(String.self, forKey: .prdtYear)) ?? ""
+        self.openDt = try container.decode(String.self, forKey: .openDt)
+        self.prdtStatNm = try container.decode(String.self, forKey: .prdtStatNm)
+        self.typeNm = try container.decode(String.self, forKey: .typeNm)
+        self.nations = try container.decode([Nation].self, forKey: .nations)
+        self.genres = try container.decode([Genre].self, forKey: .genres)
+        self.directors = try container.decode([Director].self, forKey: .directors)
+        self.actors = try container.decode([Actor].self, forKey: .actors)
+        self.showTypes = try container.decode([ShowType].self, forKey: .showTypes)
+        self.companys = try container.decode([Company].self, forKey: .companys)
+        self.audits = try container.decode([Audit].self, forKey: .audits)
+    }
+}
+
+// MARK: - Actor
+struct Actor: Codable {
+    let peopleNm, peopleNmEn, cast, castEn: String
+}
+
+// MARK: - Audit
+struct Audit: Codable {
+    let auditNo, watchGradeNm: String
+}
+
+// MARK: - Company
+struct Company: Codable {
+    let companyCd, companyNm, companyNmEn, companyPartNm: String
+
+    enum CodingKeys: String, CodingKey {
+        case companyCd
+        case companyNm, companyNmEn, companyPartNm
+    }
+}
+
+// MARK: - Director
+struct Director: Codable {
+    let peopleNm, peopleNmEn: String
+}
+
+// MARK: - Genre
+struct Genre: Codable {
+    let genreNm: String
+}
+
+// MARK: - Nation
+struct Nation: Codable {
+    let nationNm: String
+}
+
+// MARK: - ShowType
+struct ShowType: Codable {
+    let showTypeGroupNm, showTypeNm: String
+}

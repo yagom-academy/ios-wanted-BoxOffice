@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class FirstViewController: UIViewController, FirstViewControllerRoutable {
 
     var model: FirstModel
     
@@ -60,7 +60,10 @@ extension FirstViewController: Presentable {
     }
     
     func bind() {
-        
+        model.routeSubject = { [weak self] sceneCategory in
+            guard let self = self else { return }
+            self.route(to: sceneCategory)
+        }
     }
     
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FirstModel {
+class FirstModel: SceneActionReceiver {
     //input
     var didReceiveSceneAction: (SceneAction) -> () = { action in }
     
@@ -30,15 +30,24 @@ class FirstModel {
         bind()
     }
     
-    private func bind() {
-        
-    }
-    
     func populateData() {
         print(#function)
         Task {
             guard let entity = await requestAPI() else { return }
             privateFirstContentViewModel.didReceiveEntity(entity)
+        }
+    }
+    
+    private func bind() {
+        privateFirstContentViewModel.propergateDidSelectItem = { [weak self] cellModel in
+            guard let self = self else { return }
+            
+            let httpClient = HTTPClient()
+            let repository = Repository(httpClient: httpClient)
+            let secondModel = SecondModel(repository: repository)
+            secondModel.previousSelectedMovieModel = cellModel
+            let context = SceneContext(dependency: secondModel)
+            self.routeSubject?(.detail(.secondViewController(context: context)))
         }
     }
     

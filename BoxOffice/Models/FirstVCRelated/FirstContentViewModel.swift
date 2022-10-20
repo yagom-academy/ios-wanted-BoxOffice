@@ -11,9 +11,11 @@ class FirstContentViewModel {
     
     //input
     var didReceiveEntity: (KoficMovieEntity) -> () = { entity in }
+    var didSelectItemInTableView: (_ indexPath: IndexPath) -> () = { indexPath in }
     
     //output
     @MainThreadActor var didReceiveViewModel: ( ((Void)) -> () )?
+    var propergateDidSelectItem: (_ cellModel: FirstMovieCellModel) -> () = { cellModel in }
     
     var dataSource: [FirstMovieCellModel] {
         return privateDataSource
@@ -32,7 +34,15 @@ class FirstContentViewModel {
             self.populateEntity(result: entity)
             self.didReceiveViewModel?(())
         }
+        
+        didSelectItemInTableView = { [weak self] indexPath in
+            guard let self = self else { return }
+            let cellModel = self.findAndReturnSelectedItem(indexPathRow: indexPath.row)
+            self.propergateDidSelectItem(cellModel)
+        }
     }
+    
+    
     
     // TODO: 엔티티를 모델로 매핑
     private func populateEntity(result: KoficMovieEntity) {
@@ -59,5 +69,9 @@ class FirstContentViewModel {
             cellModel.showCnt = dailyBoxOfficeValue.showCnt
             return cellModel
         }
+    }
+    
+    private func findAndReturnSelectedItem(indexPathRow: Int) -> FirstMovieCellModel {
+        return privateDataSource[indexPathRow]
     }
 }
