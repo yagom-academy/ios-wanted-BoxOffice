@@ -28,6 +28,11 @@ class FirstViewController: UIViewController {
         }
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            cell.backgroundColor = .clear
+    }
+
+    
     ///첫번째화면 API
     func officeapi() {
         OfficeApi.callAPI(targetDay: targetDay) { data in

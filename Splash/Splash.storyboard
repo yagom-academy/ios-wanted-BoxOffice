@@ -17,21 +17,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="felix-mooneeram-evlkOfkQ5rE-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="JbR-ou-R0M">
-                                <rect key="frame" x="-1000" y="0.0" width="6000" height="844"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="felix-mooneeram-evlkOfkQ5rE-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="tQY-oz-Ga6">
+                                <rect key="frame" x="0.0" y="47" width="3000" height="763"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="JbR-ou-R0M" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="-1000" id="Jf0-Ff-xiU"/>
-                            <constraint firstAttribute="bottom" secondItem="JbR-ou-R0M" secondAttribute="bottom" id="NBm-gT-Zyo"/>
-                            <constraint firstItem="JbR-ou-R0M" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="rsL-ma-Hmk"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="tQY-oz-Ga6" secondAttribute="bottom" id="LWi-S7-fE9"/>
+                            <constraint firstItem="tQY-oz-Ga6" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="UAO-5I-tCA"/>
+                            <constraint firstItem="tQY-oz-Ga6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="xN1-dG-5gh"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="imageView" destination="JbR-ou-R0M" id="5CN-ft-2wv"/>
-                        <outlet property="leaadingConstraint" destination="Jf0-Ff-xiU" id="kej-Jc-F0g"/>
+                        <outlet property="imageView" destination="tQY-oz-Ga6" id="87O-CK-vDP"/>
+                        <outlet property="leaadingConstraint" destination="xN1-dG-5gh" id="H83-Va-zrR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -40,7 +40,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="felix-mooneeram-evlkOfkQ5rE-unsplash" width="6000" height="4000"/>
+        <image name="felix-mooneeram-evlkOfkQ5rE-unsplash" width="3000" height="2000"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

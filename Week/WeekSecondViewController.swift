@@ -44,6 +44,7 @@ class WeekSecondViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "영화 상세정보"
         setLabels()
     }
     

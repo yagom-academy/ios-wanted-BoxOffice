@@ -17,11 +17,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ntH-Vs-w7r">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jeremy-yap-J39X2xX_8CQ-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="5Ss-oX-Chp">
+                                <rect key="frame" x="0.0" y="91" width="390" height="670"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ntH-Vs-w7r">
                                 <rect key="frame" x="0.0" y="91" width="390" height="670"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieListTableViewCell" rowHeight="120" id="WqA-Uq-6J9" customClass="MovieListTableViewCell" customModule="BoxOffice" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieListTableViewCell" rowHeight="120" id="WqA-Uq-6J9" customClass="MovieListTableViewCell" customModule="BoxOffice" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="390" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WqA-Uq-6J9" id="0sE-wb-KJS">
@@ -122,12 +125,16 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5Ss-oX-Chp" secondAttribute="trailing" id="2Fx-Lu-TaT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ntH-Vs-w7r" secondAttribute="bottom" id="88P-l0-and"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ntH-Vs-w7r" secondAttribute="trailing" id="8lW-WZ-Ia5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="5Ss-oX-Chp" secondAttribute="bottom" id="JzQ-18-Zwt"/>
                             <constraint firstItem="gmO-Tc-G7P" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="LC1-dl-YbP"/>
                             <constraint firstItem="ntH-Vs-w7r" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MmF-DZ-RJp"/>
+                            <constraint firstItem="5Ss-oX-Chp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Ukd-Zh-bGS"/>
                             <constraint firstItem="gmO-Tc-G7P" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iTJ-Lg-aGC"/>
                             <constraint firstItem="ntH-Vs-w7r" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="lk3-6t-dul"/>
+                            <constraint firstItem="5Ss-oX-Chp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="qaE-pR-X7j"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="일별 영화" id="ZTY-Uv-R9l"/>
@@ -148,7 +155,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TtE-Az-9tL">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="felix-mooneeram-evlkOfkQ5rE-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="wSl-UZ-TCS">
+                                <rect key="frame" x="0.0" y="47" width="390" height="1119"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TtE-Az-9tL">
                                 <rect key="frame" x="0.0" y="47" width="390" height="1119"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ywH-aG-5H6">
@@ -282,12 +292,16 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="TtE-Az-9tL" firstAttribute="bottom" secondItem="qwI-x3-TvG" secondAttribute="bottom" id="797-ZV-BfI"/>
+                            <constraint firstItem="wSl-UZ-TCS" firstAttribute="top" secondItem="qwI-x3-TvG" secondAttribute="top" id="BEh-rc-cYo"/>
                             <constraint firstItem="TtE-Az-9tL" firstAttribute="trailing" secondItem="qwI-x3-TvG" secondAttribute="trailing" id="FOZ-yT-1oN"/>
                             <constraint firstItem="TtE-Az-9tL" firstAttribute="top" secondItem="qwI-x3-TvG" secondAttribute="top" id="RYN-1g-2HN"/>
                             <constraint firstItem="TtE-Az-9tL" firstAttribute="leading" secondItem="qwI-x3-TvG" secondAttribute="leading" id="XDn-BT-aed"/>
+                            <constraint firstItem="qwI-x3-TvG" firstAttribute="bottom" secondItem="wSl-UZ-TCS" secondAttribute="bottom" id="jAD-Qe-X1p"/>
                             <constraint firstItem="TtE-Az-9tL" firstAttribute="trailing" secondItem="qwI-x3-TvG" secondAttribute="trailing" id="kR5-Yc-9im"/>
                             <constraint firstItem="TtE-Az-9tL" firstAttribute="leading" secondItem="qwI-x3-TvG" secondAttribute="leading" id="uSu-ew-lvL"/>
                             <constraint firstItem="TtE-Az-9tL" firstAttribute="top" secondItem="qwI-x3-TvG" secondAttribute="top" id="uem-yK-vHT"/>
+                            <constraint firstItem="wSl-UZ-TCS" firstAttribute="leading" secondItem="qwI-x3-TvG" secondAttribute="leading" id="yWB-lP-0b7"/>
+                            <constraint firstItem="qwI-x3-TvG" firstAttribute="trailing" secondItem="wSl-UZ-TCS" secondAttribute="trailing" id="ycg-Ln-sYD"/>
                         </constraints>
                     </view>
                     <size key="freeformSize" width="390" height="1200"/>
@@ -330,7 +344,7 @@
             </objects>
             <point key="canvasLocation" x="976.92307692307691" y="-2.1327014218009479"/>
         </scene>
-        <!--주간-->
+        <!--주간 영화-->
         <scene sceneID="Ngd-sT-pZP">
             <objects>
                 <viewController storyboardIdentifier="WeekViewController" id="rnt-ZA-tD7" customClass="WeekViewController" customModule="BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
@@ -338,11 +352,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NQx-oz-pC6">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alex-litvin-MAYsdoYpGuk-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="YMc-4g-PMe">
+                                <rect key="frame" x="0.0" y="91" width="390" height="670"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NQx-oz-pC6">
                                 <rect key="frame" x="0.0" y="91" width="390" height="670"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="120" id="Le8-MF-qPV" customClass="WeekTableViewCell" customModule="BoxOffice" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="120" id="Le8-MF-qPV" customClass="WeekTableViewCell" customModule="BoxOffice" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="390" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Le8-MF-qPV" id="Dmc-Ya-9mH">
@@ -382,7 +399,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="신규진입" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhn-mK-ajQ">
-                                                    <rect key="frame" x="321" y="9.9999999999999982" width="59" height="20.333333333333329"/>
+                                                    <rect key="frame" x="300.66666666666669" y="9.9999999999999982" width="79.333333333333314" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -403,7 +420,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="hvi-cf-Wmm" secondAttribute="bottom" constant="10" id="BZV-CD-xl0"/>
                                                 <constraint firstItem="Lbp-j1-du5" firstAttribute="leading" secondItem="Ibl-dM-Kv1" secondAttribute="trailing" constant="25" id="DN9-0n-Uac"/>
-                                                <constraint firstItem="dhn-mK-ajQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Lbp-j1-du5" secondAttribute="trailing" constant="8" symbolic="YES" id="K6y-Tt-x6d"/>
+                                                <constraint firstItem="dhn-mK-ajQ" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Lbp-j1-du5" secondAttribute="trailing" id="K6y-Tt-x6d"/>
                                                 <constraint firstItem="pNe-XA-fFv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Dmc-Ya-9mH" secondAttribute="leading" constant="20" symbolic="YES" id="LTc-NY-KcK"/>
                                                 <constraint firstItem="Ibl-dM-Kv1" firstAttribute="centerY" secondItem="Dmc-Ya-9mH" secondAttribute="centerY" id="RRe-I1-lOY"/>
                                                 <constraint firstItem="Ibl-dM-Kv1" firstAttribute="leading" secondItem="Dmc-Ya-9mH" secondAttribute="leading" constant="15" id="Tkp-09-Akt"/>
@@ -447,10 +464,14 @@
                             <constraint firstItem="NQx-oz-pC6" firstAttribute="leading" secondItem="Oos-CO-leH" secondAttribute="leading" id="Bhd-qF-MSX"/>
                             <constraint firstItem="3T3-D5-CEK" firstAttribute="centerY" secondItem="66F-5z-VfY" secondAttribute="centerY" id="HgG-ab-VtZ"/>
                             <constraint firstItem="NQx-oz-pC6" firstAttribute="top" secondItem="Oos-CO-leH" secondAttribute="top" id="ILD-ER-wMh"/>
+                            <constraint firstItem="Oos-CO-leH" firstAttribute="bottom" secondItem="YMc-4g-PMe" secondAttribute="bottom" id="QV1-02-jop"/>
+                            <constraint firstItem="Oos-CO-leH" firstAttribute="trailing" secondItem="YMc-4g-PMe" secondAttribute="trailing" id="VNF-j4-OQD"/>
+                            <constraint firstItem="YMc-4g-PMe" firstAttribute="leading" secondItem="Oos-CO-leH" secondAttribute="leading" id="WWq-qX-meP"/>
+                            <constraint firstItem="YMc-4g-PMe" firstAttribute="top" secondItem="Oos-CO-leH" secondAttribute="top" id="Yo7-Pu-Dk5"/>
                             <constraint firstItem="3T3-D5-CEK" firstAttribute="centerX" secondItem="66F-5z-VfY" secondAttribute="centerX" id="n2v-Xi-qrO"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="주간" id="QX3-Ay-Vrs"/>
+                    <navigationItem key="navigationItem" title="주간 영화" id="QX3-Ay-Vrs"/>
                     <connections>
                         <outlet property="weekTableView" destination="NQx-oz-pC6" id="V70-Tc-Lew"/>
                         <outlet property="weekloader" destination="3T3-D5-CEK" id="UzE-CU-72t"/>
@@ -468,10 +489,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fxv-YE-wVW">
-                                <rect key="frame" x="0.0" y="47" width="390" height="797"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="felix-mooneeram-evlkOfkQ5rE-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="MUM-Eq-i6t">
+                                <rect key="frame" x="0.0" y="47" width="390" height="763"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fxv-YE-wVW">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H0Y-Gp-7sO">
+                                    <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H0Y-Gp-7sO">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="1000"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="순위" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OSo-Cm-3RK">
@@ -601,9 +625,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Fxv-YE-wVW" firstAttribute="leading" secondItem="v0x-H8-ttr" secondAttribute="leading" id="4xz-vf-zww"/>
-                            <constraint firstItem="Fxv-YE-wVW" firstAttribute="top" secondItem="v0x-H8-ttr" secondAttribute="top" id="T1M-I1-FgP"/>
+                            <constraint firstItem="Fxv-YE-wVW" firstAttribute="top" secondItem="AAK-cN-hsl" secondAttribute="top" id="T1M-I1-FgP"/>
+                            <constraint firstItem="v0x-H8-ttr" firstAttribute="bottom" secondItem="MUM-Eq-i6t" secondAttribute="bottom" id="jUe-1c-li2"/>
+                            <constraint firstItem="MUM-Eq-i6t" firstAttribute="top" secondItem="v0x-H8-ttr" secondAttribute="top" id="jiz-66-8Rn"/>
                             <constraint firstItem="Fxv-YE-wVW" firstAttribute="bottom" secondItem="AAK-cN-hsl" secondAttribute="bottom" id="kOe-Bq-Dsb"/>
+                            <constraint firstItem="MUM-Eq-i6t" firstAttribute="leading" secondItem="v0x-H8-ttr" secondAttribute="leading" id="nZQ-eY-SL0"/>
                             <constraint firstItem="Fxv-YE-wVW" firstAttribute="trailing" secondItem="v0x-H8-ttr" secondAttribute="trailing" id="t0H-3J-yPI"/>
+                            <constraint firstItem="v0x-H8-ttr" firstAttribute="trailing" secondItem="MUM-Eq-i6t" secondAttribute="trailing" id="zEZ-mC-pd8"/>
                         </constraints>
                     </view>
                     <connections>
@@ -662,10 +690,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gPu-TR-JAu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1086.1538461538462" y="786.96682464454977"/>
+            <point key="canvasLocation" x="955" y="787"/>
         </scene>
     </scenes>
     <resources>
+        <image name="alex-litvin-MAYsdoYpGuk-unsplash" width="2736" height="1824"/>
+        <image name="felix-mooneeram-evlkOfkQ5rE-unsplash" width="3000" height="2000"/>
+        <image name="jeremy-yap-J39X2xX_8CQ-unsplash" width="5184" height="3456"/>
         <image name="pencil.circle" catalog="system" width="128" height="123"/>
         <image name="ticket" catalog="system" width="128" height="86"/>
         <systemColor name="systemBackgroundColor">

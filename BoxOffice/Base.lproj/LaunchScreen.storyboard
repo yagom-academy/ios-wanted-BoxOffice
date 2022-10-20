@@ -45,7 +45,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="alex-litvin-MAYsdoYpGuk-unsplash" width="5472" height="3648"/>
+        <image name="alex-litvin-MAYsdoYpGuk-unsplash" width="2736" height="1824"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
