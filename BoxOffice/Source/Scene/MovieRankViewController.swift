@@ -32,34 +32,13 @@ class MovieRankViewController: UIViewController {
     private func configureDataSource() {
         let cellRegistration = UICollectionView.CellRegistration<MovieCollectionViewCell, SimpleMovieInfoEntity> { cell, indexPath, movie in
             Task {
-                cell.rankingLabel.text = "\(movie.rank)"
                 do {
                     let image = try await NetworkManager.shared.getPosterImage(englishName: movie.englishName)
                     cell.posterImageView.image = image
                 } catch {
                     print(error.localizedDescription)
                 }
-                if movie.inset.first == "-" {
-                    cell.rankingChangeButton.tintColor = .systemBlue
-                    cell.rankingChangeButton.setImage(UIImage(systemName: "arrow.down"), for: .normal)
-                    cell.rankingChangeButton.setTitle(String(movie.inset.last!), for: .normal)
-                } else if movie.inset == "0" {
-                    cell.rankingChangeButton.tintColor = .white
-                    cell.rankingChangeButton.setImage(UIImage(systemName: "minus"), for: .normal)
-                    cell.rankingChangeButton.setTitle(movie.inset, for: .normal)
-                } else {
-                    cell.rankingChangeButton.tintColor = .systemRed
-                    cell.rankingChangeButton.setImage(UIImage(systemName: "arrow.up"), for: .normal)
-                    cell.rankingChangeButton.setTitle(movie.inset, for: .normal)
-                }
-                if movie.oldAndNew == .new {
-                    cell.newButton.isHidden = false
-                } else {
-                    cell.newButton.isHidden = true
-                }
-                cell.movieNameLabel.text = movie.name
-                cell.releaseDateLabel.text = "개봉일 : " + movie.release
-                cell.audienceLabel.text = "총 관객 : " + movie.audience
+                cell.setData(movie)
             }
         }
         

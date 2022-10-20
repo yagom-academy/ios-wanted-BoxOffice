@@ -120,6 +120,41 @@ class MainInfoCollectionViewCell: UICollectionViewCell {
         genreNameLabel.text = ""
     }
     
+    public func setData(_ movie: DetailMovieInfoEntity) {
+        if let rank = movie.simpleInfo?.rank {
+            rankingLabel.text = "\(rank)"
+        }
+        if movie.simpleInfo?.inset.first == "-" {
+            rankingChangeButton.tintColor = .systemBlue
+            rankingChangeButton.setImage(UIImage(systemName: "arrow.down"), for: .normal)
+            rankingChangeButton.setTitle(String(movie.simpleInfo?.inset.last! ?? Character("")), for: .normal)
+        } else if movie.simpleInfo?.inset == "0" {
+            rankingChangeButton.tintColor = .white
+            rankingChangeButton.setImage(UIImage(systemName: "minus"), for: .normal)
+            rankingChangeButton.setTitle(movie.simpleInfo?.inset, for: .normal)
+        } else {
+            rankingChangeButton.tintColor = .systemRed
+            rankingChangeButton.setImage(UIImage(systemName: "arrow.up"), for: .normal)
+            rankingChangeButton.setTitle(movie.simpleInfo?.inset, for: .normal)
+        }
+        if movie.simpleInfo?.oldAndNew == .new {
+            newButton.isHidden = false
+        } else {
+            newButton.isHidden = true
+        }
+        movieNameLabel.text = movie.simpleInfo?.name
+        openYearLabel.text = String(movie.openYear.prefix(4)) + " "
+        var genreString = ""
+        for i in 0..<movie.genreName.count {
+            if i == movie.genreName.count - 1 {
+                genreString += movie.genreName[i]
+            } else {
+                genreString += "\(movie.genreName[i]), "
+            }
+        }
+        genreNameLabel.text = genreString
+    }
+    
     private func setLayouts() {
         setProperties()
         setViewHierarchy()

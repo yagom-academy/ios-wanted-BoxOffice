@@ -84,7 +84,7 @@ class DetailInfoViewController: UIViewController {
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(2),
                                                        heightDimension: .estimated(100))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                               subitem: item, count: self.standardInfoList.count == 0 ? 6 : self.standardInfoList.count)
+                                                               subitem: item, count: 6)
                 group.interItemSpacing = .fixed(CGFloat(10))
                 
                 let section = NSCollectionLayoutSection(group: group)
@@ -94,14 +94,15 @@ class DetailInfoViewController: UIViewController {
                 
                 return section
             case .actors:
+                let actorCount = self.detailMovieInfo?.actors.count ?? 1
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                       heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                       heightDimension: .estimated(CGFloat(self.detailMovieInfo?.actors.count ?? 1) * 50))
+                                                       heightDimension: .estimated(CGFloat(actorCount) * 50))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
-                                                             subitem: item, count: self.detailMovieInfo?.actors.count == 0 ? 1 : self.detailMovieInfo?.actors.count ?? 1)
+                                                             subitem: item, count: (actorCount == 0 ? 1 : actorCount))
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .none
@@ -142,45 +143,13 @@ extension DetailInfoViewController: UICollectionViewDataSource {
         case .main:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainInfoCollectionViewCell.id, for: indexPath) as? MainInfoCollectionViewCell else { return UICollectionViewCell() }
             guard let movie = self.detailMovieInfo else { return UICollectionViewCell() }
-            
             Task {
-                if let rank = movie.simpleInfo?.rank {
-                    cell.rankingLabel.text = "\(rank)"
-                }
                 do {
                     cell.posterImageView.image = try await NetworkManager.shared.getPosterImage(englishName: movie.simpleInfo?.englishName ?? "")
                 } catch {
                     print(error.localizedDescription)
                 }
-                if movie.simpleInfo?.inset.first == "-" {
-                    cell.rankingChangeButton.tintColor = .systemBlue
-                    cell.rankingChangeButton.setImage(UIImage(systemName: "arrow.down"), for: .normal)
-                    cell.rankingChangeButton.setTitle(String(movie.simpleInfo?.inset.last! ?? Character("")), for: .normal)
-                } else if movie.simpleInfo?.inset == "0" {
-                    cell.rankingChangeButton.tintColor = .white
-                    cell.rankingChangeButton.setImage(UIImage(systemName: "minus"), for: .normal)
-                    cell.rankingChangeButton.setTitle(movie.simpleInfo?.inset, for: .normal)
-                } else {
-                    cell.rankingChangeButton.tintColor = .systemRed
-                    cell.rankingChangeButton.setImage(UIImage(systemName: "arrow.up"), for: .normal)
-                    cell.rankingChangeButton.setTitle(movie.simpleInfo?.inset, for: .normal)
-                }
-                if movie.simpleInfo?.oldAndNew == .new {
-                    cell.newButton.isHidden = false
-                } else {
-                    cell.newButton.isHidden = true
-                }
-                cell.movieNameLabel.text = movie.simpleInfo?.name
-                cell.openYearLabel.text = String(movie.openYear.prefix(4)) + " "
-                var genreString = ""
-                for i in 0..<movie.genreName.count {
-                    if i == movie.genreName.count - 1 {
-                        genreString += movie.genreName[i]
-                    } else {
-                        genreString += "\(movie.genreName[i]), "
-                    }
-                }
-                cell.genreNameLabel.text = genreString
+                cell.setData(movie)
             }
             return cell
         case .standard:

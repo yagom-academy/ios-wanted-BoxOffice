@@ -110,6 +110,31 @@ class MovieCollectionViewCell: UICollectionViewCell {
         audienceLabel.text = ""
     }
     
+    public func setData(_ movie: SimpleMovieInfoEntity) {
+        rankingLabel.text = "\(movie.rank)"
+        if movie.inset.first == "-" {
+            rankingChangeButton.tintColor = .systemBlue
+            rankingChangeButton.setImage(UIImage(systemName: "arrow.down"), for: .normal)
+            rankingChangeButton.setTitle(String(movie.inset.last!), for: .normal)
+        } else if movie.inset == "0" {
+            rankingChangeButton.tintColor = .white
+            rankingChangeButton.setImage(UIImage(systemName: "minus"), for: .normal)
+            rankingChangeButton.setTitle(movie.inset, for: .normal)
+        } else {
+            rankingChangeButton.tintColor = .systemRed
+            rankingChangeButton.setImage(UIImage(systemName: "arrow.up"), for: .normal)
+            rankingChangeButton.setTitle(movie.inset, for: .normal)
+        }
+        if movie.oldAndNew == .new {
+            newButton.isHidden = false
+        } else {
+            newButton.isHidden = true
+        }
+        movieNameLabel.text = movie.name
+        releaseDateLabel.text = "개봉일 : " + movie.release
+        audienceLabel.text = "총 관객 : " + movie.audience
+    }
+    
     private func setLayouts() {
         setProperties()
         setViewHierarchy()
