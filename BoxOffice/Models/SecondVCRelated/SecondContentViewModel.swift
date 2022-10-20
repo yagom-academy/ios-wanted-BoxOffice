@@ -48,41 +48,41 @@ class SecondContentViewModel: ObservableObject {
     
     private func populateEntity(result: KoficMovieDetailEntity, previousModel: FirstMovieCellModel) {
         
-        boxOfficeRank = (title: "박스오피스 랭크", data: previousModel.rank)
+        boxOfficeRank = (title: String.emojiAndTitle(emojiValue: .boxOfficeRank), data: previousModel.rank)
         let combinedName = "\(result.movieInfoResult.movieInfo.movieNmEn) \n \(result.movieInfoResult.movieInfo.movieNm)"
-        movieName = (title: "영화이름", data: combinedName)
+        movieName = (title: String.emojiAndTitle(emojiValue: .movieName), data: combinedName)
         
-        releasedDay = (title: "개봉일", data: previousModel.openDt)
+        releasedDay = (title: String.emojiAndTitle(emojiValue: .releasedDay), data: previousModel.openDt)
         
-        audCount = (title: "관객수", data: previousModel.audiCnt)
-        rankIncrement = (title: "랭크증감", data: previousModel.rankInten)
-        rankApproached = (title: "랭크신규진입", data: previousModel.rankOldAndNew)
-        makedYear = (title: "제작년도", data: result.movieInfoResult.movieInfo.prdtYear)
-        releasedYear = (title: "개봉년도", data: result.movieInfoResult.movieInfo.openDt)
-        runningTime = (title: "상영시간", data: result.movieInfoResult.movieInfo.showTm)
+        audCount = (title: String.emojiAndTitle(emojiValue: .audCount), data: previousModel.audiCnt)
+        rankIncrement = (title: String.emojiAndTitle(emojiValue: .rankIncrement), data: previousModel.rankInten)
+        rankApproached = (title: String.emojiAndTitle(emojiValue: .rankApproach), data: previousModel.rankOldAndNew)
+        makedYear = (title: String.emojiAndTitle(emojiValue: .makedYear), data: result.movieInfoResult.movieInfo.prdtYear)
+        releasedYear = (title: String.emojiAndTitle(emojiValue: .releasedYear), data: result.movieInfoResult.movieInfo.openDt)
+        runningTime = (title: String.emojiAndTitle(emojiValue: .runningTime), data: result.movieInfoResult.movieInfo.showTm)
         
         let genres = result.movieInfoResult.movieInfo.genres.map { genre in
             return genre.genreNm
         }
         
-        genre = (title: "장르", data: genres)
+        genre = (title: String.emojiAndTitle(emojiValue: .genres), data: genres)
         
         let directors = result.movieInfoResult.movieInfo.directors.map { director in
             return director.peopleNm
         }
         
-        director = (title: "감독", data: directors)
+        director = (title: String.emojiAndTitle(emojiValue: .directors), data: directors)
         
         let actorNames = result.movieInfoResult.movieInfo.actors.map { actorData in
             actorData.peopleNm
         }
         
-        actors = (title: "배우", data: actorNames)
+        actors = (title: String.emojiAndTitle(emojiValue: .actors), data: actorNames)
         
         let audits = result.movieInfoResult.movieInfo.audits.map { audit in
             audit.watchGradeNm
         }
         
-        restictionRate = (title: "관람등급", data: audits)
+        restictionRate = (title: String.emojiAndTitle(emojiValue: .restrictionRate), data: audits)
     }
 }
