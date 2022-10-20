@@ -13,6 +13,7 @@ final class AddMovieReviewViewController: UIViewController {
     static let textViewPlaceHolder = "리뷰 (선택사항)"
     // MARK: UI
 
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var ratingControl: RatingControl!
     @IBOutlet var nicknameTextField: UITextField!
@@ -23,6 +24,19 @@ final class AddMovieReviewViewController: UIViewController {
     // MARK: Properties
 
     var review: MovieReview?
+
+    // MARK: View Life Cycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     // MARK: Action Handlers
 
@@ -35,6 +49,24 @@ final class AddMovieReviewViewController: UIViewController {
     @IBAction
     private func cancelButtonDidTap() {
         dismiss(animated: true)
+    }
+
+    @objc
+    private func keyboardWillShow(notification: NSNotification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardFrame.height, right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.verticalScrollIndicatorInsets = contentInsets
+    }
+
+    @objc
+    private func keyboardWillHide(notification: NSNotification) {
+        let contentInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInsets
+        scrollView.verticalScrollIndicatorInsets = contentInsets
     }
 
 }
