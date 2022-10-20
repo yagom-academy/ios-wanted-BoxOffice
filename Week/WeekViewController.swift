@@ -10,12 +10,21 @@ import UIKit
 class WeekViewController: UIViewController {
     
     @IBOutlet weak var weekTableView: UITableView!
+    @IBOutlet weak var weekloader: UIActivityIndicatorView!
     let targetDay = "20190201"
     var weekapi: [WeeklyBoxOfficeList] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        weekloader.alpha = 1.0
+        weekTableView.alpha = 0.0
         weekModelAPI()
+        
+        UIView.animate(withDuration: 1.0) {
+            self.weekTableView
+                .alpha = 1.0
+            self.weekloader.alpha = 0.0
+        }
     }
     
     

@@ -9,14 +9,23 @@ import UIKit
 
 class FirstViewController: UIViewController {
     @IBOutlet weak var firstTableView: UITableView!
+    @IBOutlet weak var loader: UIActivityIndicatorView!
     let targetDay = "20190204"
     var office: [MovieInfost] = []
     
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        loader.alpha = 1.0
+        firstTableView.alpha = 0.0
+        
         officeapi()
         
+        UIView.animate(withDuration: 1.0) {
+            self.firstTableView
+                .alpha = 1.0
+            self.loader.alpha = 0.0
+        }
     }
     
     ///첫번째화면 API

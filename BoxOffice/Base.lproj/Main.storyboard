@@ -115,19 +115,25 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="bjs-Zr-hr4"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="gmO-Tc-G7P">
+                                <rect key="frame" x="185" y="412" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ntH-Vs-w7r" secondAttribute="bottom" id="88P-l0-and"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ntH-Vs-w7r" secondAttribute="trailing" id="8lW-WZ-Ia5"/>
+                            <constraint firstItem="gmO-Tc-G7P" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="LC1-dl-YbP"/>
                             <constraint firstItem="ntH-Vs-w7r" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MmF-DZ-RJp"/>
+                            <constraint firstItem="gmO-Tc-G7P" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iTJ-Lg-aGC"/>
                             <constraint firstItem="ntH-Vs-w7r" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="lk3-6t-dul"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="일별 영화" id="ZTY-Uv-R9l"/>
                     <connections>
                         <outlet property="firstTableView" destination="ntH-Vs-w7r" id="XgV-Lr-VV5"/>
+                        <outlet property="loader" destination="gmO-Tc-G7P" id="dAz-Tt-b7l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -429,6 +435,9 @@
                                     <outlet property="delegate" destination="rnt-ZA-tD7" id="uE1-7m-0pv"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="3T3-D5-CEK">
+                                <rect key="frame" x="185" y="412" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Oos-CO-leH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -436,12 +445,15 @@
                             <constraint firstItem="Oos-CO-leH" firstAttribute="trailing" secondItem="NQx-oz-pC6" secondAttribute="trailing" id="42s-h3-FTE"/>
                             <constraint firstItem="Oos-CO-leH" firstAttribute="bottom" secondItem="NQx-oz-pC6" secondAttribute="bottom" id="7kT-ex-VRD"/>
                             <constraint firstItem="NQx-oz-pC6" firstAttribute="leading" secondItem="Oos-CO-leH" secondAttribute="leading" id="Bhd-qF-MSX"/>
+                            <constraint firstItem="3T3-D5-CEK" firstAttribute="centerY" secondItem="66F-5z-VfY" secondAttribute="centerY" id="HgG-ab-VtZ"/>
                             <constraint firstItem="NQx-oz-pC6" firstAttribute="top" secondItem="Oos-CO-leH" secondAttribute="top" id="ILD-ER-wMh"/>
+                            <constraint firstItem="3T3-D5-CEK" firstAttribute="centerX" secondItem="66F-5z-VfY" secondAttribute="centerX" id="n2v-Xi-qrO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="주간" id="QX3-Ay-Vrs"/>
                     <connections>
                         <outlet property="weekTableView" destination="NQx-oz-pC6" id="V70-Tc-Lew"/>
+                        <outlet property="weekloader" destination="3T3-D5-CEK" id="UzE-CU-72t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r2H-VN-Lb0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -463,14 +475,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="1000"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="순위" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OSo-Cm-3RK">
-                                                <rect key="frame" x="30" y="30" width="30" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="29.999999999999996" y="30" width="60.666666666666657" height="42"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="35"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbU-SC-fcG">
-                                                <rect key="frame" x="50" y="95" width="290" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="50" y="95" width="290" height="36"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
