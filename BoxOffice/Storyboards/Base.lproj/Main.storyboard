@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -62,7 +63,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="BoxOffice" largeTitleDisplayMode="always" id="rKR-Ou-hNd">
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="GlV-a3-Qn7">
-                            <rect key="frame" x="126.66666666666669" y="5.6666666666666679" width="137" height="33"/>
+                            <rect key="frame" x="126.66666666666669" y="6" width="137" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="일별"/>
@@ -115,7 +116,13 @@
                             <constraint firstItem="oPz-96-hbh" firstAttribute="leading" secondItem="H3F-lW-fuw" secondAttribute="leading" id="tM7-pq-bWP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="qWB-Kn-6hW"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="qWB-Kn-6hW">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="sFa-nt-4dt">
+                            <connections>
+                                <segue destination="8Gy-hW-aB5" kind="show" id="hxf-aD-6T9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="oPz-96-hbh" id="wrX-18-FfP"/>
                     </connections>
@@ -123,6 +130,111 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gnr-t1-Q99" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1845" y="-2"/>
+        </scene>
+        <!--Add Movie Review View Controller-->
+        <scene sceneID="Oc2-aa-PyU">
+            <objects>
+                <viewController id="O5U-Tq-URT" customClass="AddMovieReviewViewController" customModule="BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gO3-3O-pBt">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fPT-9r-yXH">
+                                <rect key="frame" x="0.0" y="91" width="390" height="719"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Nlw-73-on5">
+                                        <rect key="frame" x="85" y="0.0" width="220" height="220.66666666666666"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fGP-2K-Rhk">
+                                                <rect key="frame" x="25.666666666666671" y="1" width="168.66666666666663" height="167.33333333333331"/>
+                                                <color key="tintColor" systemColor="secondarySystemFillColor"/>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="fGP-2K-Rhk" secondAttribute="height" multiplier="1:1" id="cWk-sQ-Scb"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="93C-OD-IHV" appends="YES" id="Kfl-ff-5Co"/>
+                                                </connections>
+                                            </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQR-Xo-h1J" customClass="RatingControl" customModule="BoxOffice" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="176.66666666666669" width="220" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="220" id="Mzb-LQ-gWp"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IuM-dp-YCy">
+                                        <rect key="frame" x="16" y="228.66666666666671" width="358" height="490.33333333333326"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="닉네임" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ip-DA-h2L">
+                                                <rect key="frame" x="0.0" y="0.0" width="358" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="nickname"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="O5U-Tq-URT" id="bcj-GR-XBD"/>
+                                                </connections>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gHB-kS-QzI">
+                                                <rect key="frame" x="0.0" y="42" width="358" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="O5U-Tq-URT" id="I3S-la-Kcl"/>
+                                                </connections>
+                                            </textField>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8Xn-2z-b2C">
+                                                <rect key="frame" x="0.0" y="83.999999999999972" width="358" height="406.33333333333326"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="O5U-Tq-URT" id="r6z-mQ-enK"/>
+                                                </connections>
+                                            </textView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="On9-nL-QRG"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fGP-2K-Rhk" firstAttribute="height" secondItem="gO3-3O-pBt" secondAttribute="height" multiplier="0.2" id="4c4-w5-OLb"/>
+                            <constraint firstItem="On9-nL-QRG" firstAttribute="bottom" secondItem="fPT-9r-yXH" secondAttribute="bottom" id="7IQ-jq-Vbf"/>
+                            <constraint firstItem="fPT-9r-yXH" firstAttribute="leading" secondItem="gO3-3O-pBt" secondAttribute="leading" id="HCb-Kq-0qs"/>
+                            <constraint firstItem="fPT-9r-yXH" firstAttribute="top" secondItem="On9-nL-QRG" secondAttribute="top" id="Nh2-8Z-yvY"/>
+                            <constraint firstItem="On9-nL-QRG" firstAttribute="trailing" secondItem="IuM-dp-YCy" secondAttribute="trailing" constant="16" id="Xlb-LM-Tag"/>
+                            <constraint firstItem="On9-nL-QRG" firstAttribute="trailing" secondItem="fPT-9r-yXH" secondAttribute="trailing" id="ccs-u0-39q"/>
+                            <constraint firstItem="IuM-dp-YCy" firstAttribute="leading" secondItem="On9-nL-QRG" secondAttribute="leading" constant="16" id="dRs-GH-ygi"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="gfl-E8-ZW9">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Sz8-Bz-bd7">
+                            <connections>
+                                <action selector="cancelButtonDidTap" destination="O5U-Tq-URT" id="Mdu-fc-KeB"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="1vH-vV-rAk"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="contentTextView" destination="8Xn-2z-b2C" id="5DF-MH-oLk"/>
+                        <outlet property="imageView" destination="fGP-2K-Rhk" id="DoF-Cj-clY"/>
+                        <outlet property="nicknameTextField" destination="0Ip-DA-h2L" id="7Mx-Kd-jOo"/>
+                        <outlet property="passwordTextField" destination="gHB-kS-QzI" id="Bf9-Ge-TiF"/>
+                        <outlet property="ratingControl" destination="MQR-Xo-h1J" id="JZc-D9-Hmu"/>
+                        <outlet property="saveButton" destination="1vH-vV-rAk" id="KdF-eb-UdG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jmq-xK-6UZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="93C-OD-IHV">
+                    <connections>
+                        <action selector="imageViewDidTap" destination="O5U-Tq-URT" id="JXq-lM-UKw"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="3740" y="-2.1327014218009479"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5RQ-yg-Hye">
@@ -142,10 +254,39 @@
             </objects>
             <point key="canvasLocation" x="47.692307692307693" y="-2.1327014218009479"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5KL-GY-Qir">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Gy-hW-aB5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="JjA-Ot-04Q"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yXr-3P-1VK">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="O5U-Tq-URT" kind="relationship" relationship="rootViewController" id="FFI-Pj-1oi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JPK-rh-HyQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2810.7692307692305" y="-2.1327014218009479"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="person.circle.fill" catalog="system" width="128" height="123"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemFillColor">
+            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.16" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
