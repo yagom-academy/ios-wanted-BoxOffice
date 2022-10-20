@@ -9,15 +9,34 @@ import SwiftUI
 
 struct BasicDataView: View {
     
-    @Binding var title: String
-    @Binding var data: String
+    @Binding var data: (title: String, data: String)
     
     var body: some View {
-        HStack {
-            Text(title)
+        VStack {
+            Text(data.title)
                 .font(.largeTitle)
-            Text(data)
+            Text(data.data)
                 .font(.body)
+        }
+        
+    }
+}
+
+struct ArrayDataView: View {
+    @Binding var data: (title: String, data: [String])
+    
+    var body: some View {
+        VStack {
+            Text(data.title)
+                .font(.largeTitle)
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(data.data, id: \.self) { value in
+                        Text(value)
+                            .font(.body)
+                    }
+                }
+            }
         }
         
     }
@@ -34,41 +53,36 @@ struct SecondContentView: View {
     var body: some View {
         ScrollView {
             VStack {
-                
-                HStack {
-                    Text($viewModel.movieName.wrappedValue.title)
-                    Text($viewModel.movieName.wrappedValue.data)
-                }
-                HStack {
-                    Text($viewModel.releasedDay.wrappedValue.title)
-                    Text($viewModel.releasedDay.wrappedValue.data)
-                }
-                HStack {
-                    Text($viewModel.audCount.wrappedValue.title)
-                    Text($viewModel.audCount.wrappedValue.data)
-                }
-                HStack {
-                    Text($viewModel.rankIncrement.wrappedValue.title)
-                    Text($viewModel.rankIncrement.wrappedValue.data)
-                }
-                HStack {
-                    Text($viewModel.rankApproached.wrappedValue.title)
-                    Text($viewModel.rankApproached.wrappedValue.data)
-                }
-                HStack {
-                    Text($viewModel.makedYear.wrappedValue.title)
-                    Text($viewModel.makedYear.wrappedValue.data)
-                }
-                HStack {
-                    Text($viewModel.releasedYear.wrappedValue.title)
-                    Text($viewModel.releasedYear.wrappedValue.data)
-                }
-                HStack {
-                    Text($viewModel.runningTime.wrappedValue.title)
-                    Text($viewModel.runningTime.wrappedValue.data)
-                }
-                
-                //todo: 배열데이터에 대한 처리
+                //$sign을 observedObject에 붙인다는건 그 안에 있는 @published 오브젝트를. binding 오브젝트로 꺼내서 쓰고, 서브뷰에 전파할 수 있게 해준다는 의미인 듯 하다
+                BasicDataView(data: $viewModel.boxOfficeRank)
+                    .padding()
+                BasicDataView(data: $viewModel.movieName)
+                    .padding()
+                BasicDataView(data: $viewModel.releasedDay)
+                    .padding()
+                BasicDataView(data: $viewModel.audCount)
+                    .padding()
+                BasicDataView(data: $viewModel.rankIncrement)
+                    .padding()
+                BasicDataView(data: $viewModel.rankApproached)
+                    .padding()
+                BasicDataView(data: $viewModel.makedYear)
+                    .padding()
+                BasicDataView(data: $viewModel.releasedYear)
+                    .padding()
+                BasicDataView(data: $viewModel.runningTime)
+                    .padding()
+            }
+            
+            VStack {
+                ArrayDataView(data: $viewModel.genre)
+                    .padding()
+                ArrayDataView(data: $viewModel.director)
+                    .padding()
+                ArrayDataView(data: $viewModel.actors)
+                    .padding()
+                ArrayDataView(data: $viewModel.restictionRate)
+                    .padding()
             }
         }
     }
