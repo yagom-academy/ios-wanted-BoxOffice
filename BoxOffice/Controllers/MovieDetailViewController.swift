@@ -22,6 +22,7 @@ class MovieDetailViewController: UIViewController {
                                                         action: #selector(shareButtonPressed))
     navigationController?.navigationBar.tintColor = .black
 
+    tableView.separatorStyle = .none
     tableView.delegate = self
     tableView.dataSource = self
 
@@ -34,6 +35,8 @@ extension MovieDetailViewController {
   func addViews() {
     view.addSubview(tableView)
     tableView.register(MovieDetailCell.self, forCellReuseIdentifier: MovieDetailCell.id)
+    tableView.register(ReviewCell.self, forCellReuseIdentifier: ReviewCell.id)
+    tableView.register(ReviewCellHeaderView.self, forHeaderFooterViewReuseIdentifier: ReviewCellHeaderView.id)
   }
 
   func setConstraints() {
@@ -53,16 +56,51 @@ extension MovieDetailViewController {
 }
 
 extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource {
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return 2
+  }
+
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
+    switch section {
+    case 1:
+      return 5
+    default:
+      return 1
+    }
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieDetailCell.id,
-                                                   for: indexPath) as? MovieDetailCell
-    else { return UITableViewCell() }
+    switch indexPath.section {
+    case 0:
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieDetailCell.id,
+                                                     for: indexPath) as? MovieDetailCell
+      else { return UITableViewCell() }
 
-    return cell
+      return cell
+    case 1:
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewCell.id,
+                                                     for: indexPath) as? ReviewCell
+      else { return UITableViewCell() }
+
+      return cell
+
+    default:
+      return UITableViewCell()
+    }
+  }
+
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    if section == 1 {
+      guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: ReviewCellHeaderView.id)
+              as? ReviewCellHeaderView
+      else {
+        return UITableViewHeaderFooterView()
+      }
+
+      return header
+    } else {
+      return UITableViewHeaderFooterView()
+    }
   }
 
 }

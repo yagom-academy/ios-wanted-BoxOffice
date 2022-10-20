@@ -10,6 +10,14 @@ import UIKit
 class MovieDetailCell: UITableViewCell {
   static let id = "detailCell"
 
+  let poster: UIImageView = {
+    let iv = UIImageView()
+    iv.image = UIImage(systemName: "photo")
+    iv.contentMode = .scaleAspectFit
+
+    return iv
+  }()
+
   let ranking: UILabel = {
     let label = UILabel()
     label.font = UIFont.systemFont(ofSize: 20)
@@ -183,22 +191,28 @@ extension MovieDetailCell {
       vertical.addArrangedSubview($0)
     }
 
-    [ranking, audienceCount, newTag, rankDiff, rankUpDown, vertical, actors, ].forEach {
+    [poster, ranking, audienceCount, newTag, rankDiff, rankUpDown, vertical, actors, ].forEach {
       contentView.addSubview($0)
     }
   }
 
   func setConstraints() {
-    [ranking, audienceCount, newTag, rankDiff, rankUpDown, vertical, actors, ].forEach {
+    [poster, ranking, audienceCount, newTag, rankDiff, rankUpDown, vertical, actors, ].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     NSLayoutConstraint.activate([
-      ranking.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-      ranking.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+      poster.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+      poster.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+      poster.widthAnchor.constraint(equalToConstant: 100),
+      poster.heightAnchor.constraint(equalToConstant: 144),
+      ranking.topAnchor.constraint(equalTo: poster.bottomAnchor, constant: 10),
+//      ranking.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
+      ranking.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
       audienceCount.topAnchor.constraint(equalTo: ranking.bottomAnchor, constant: 8),
-      audienceCount.leadingAnchor.constraint(equalTo: ranking.leadingAnchor),
-      newTag.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+//      audienceCount.leadingAnchor.constraint(equalTo: ranking.leadingAnchor),
+      audienceCount.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+      newTag.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18),
       newTag.centerYAnchor.constraint(equalTo: ranking.centerYAnchor),
       newTag.widthAnchor.constraint(equalToConstant: 40),
       rankUpDown.trailingAnchor.constraint(equalTo: newTag.trailingAnchor),
@@ -209,11 +223,11 @@ extension MovieDetailCell {
       rankDiff.trailingAnchor.constraint(equalTo: rankUpDown.leadingAnchor, constant: -10),
       audienceCount.trailingAnchor.constraint(lessThanOrEqualTo: rankDiff.leadingAnchor),
 
-      vertical.topAnchor.constraint(equalTo: audienceCount.bottomAnchor, constant: 10),
-      vertical.leadingAnchor.constraint(equalTo: audienceCount.leadingAnchor),
-      vertical.trailingAnchor.constraint(equalTo: rankUpDown.trailingAnchor),
+      vertical.topAnchor.constraint(equalTo: audienceCount.bottomAnchor, constant: 20),
+      vertical.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
+      vertical.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18),
 
-      actors.topAnchor.constraint(equalTo: vertical.bottomAnchor, constant: 10),
+      actors.topAnchor.constraint(equalTo: vertical.bottomAnchor, constant: 20),
       actors.leadingAnchor.constraint(equalTo: vertical.leadingAnchor),
       actors.trailingAnchor.constraint(equalTo: vertical.trailingAnchor),
 

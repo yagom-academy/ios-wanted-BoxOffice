@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4009BEA129017FE80096B63A /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4009BEA029017FE80096B63A /* ReviewCell.swift */; };
+		4009BEA329018E6D0096B63A /* ReviewCellHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4009BEA229018E6D0096B63A /* ReviewCellHeaderView.swift */; };
 		406FFBFA28FDD364004C85D4 /* SecretInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 406FFBF928FDD364004C85D4 /* SecretInfo.plist */; };
 		406FFBFC28FDD3E4004C85D4 /* Extension+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FFBFB28FDD3E4004C85D4 /* Extension+Bundle.swift */; };
 		406FFC0328FEA2D4004C85D4 /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FFC0228FEA2D4004C85D4 /* MovieListCell.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4009BEA029017FE80096B63A /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		4009BEA229018E6D0096B63A /* ReviewCellHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCellHeaderView.swift; sourceTree = "<group>"; };
 		406FFBF928FDD364004C85D4 /* SecretInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SecretInfo.plist; sourceTree = "<group>"; };
 		406FFBFB28FDD3E4004C85D4 /* Extension+Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Bundle.swift"; sourceTree = "<group>"; };
 		406FFC0228FEA2D4004C85D4 /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
@@ -78,6 +82,8 @@
 				635A19F228F9603A00197BCC /* LaunchScreen.storyboard */,
 				406FFC0228FEA2D4004C85D4 /* MovieListCell.swift */,
 				4090C82E2900607C00B807C5 /* MovieDetailCell.swift */,
+				4009BEA029017FE80096B63A /* ReviewCell.swift */,
+				4009BEA229018E6D0096B63A /* ReviewCellHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -203,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				406FFC0928FF0759004C85D4 /* MovieModel.swift in Sources */,
+				4009BEA129017FE80096B63A /* ReviewCell.swift in Sources */,
 				4090C82F2900607C00B807C5 /* MovieDetailCell.swift in Sources */,
 				406FFC0328FEA2D4004C85D4 /* MovieListCell.swift in Sources */,
 				635A19EC28F9603900197BCC /* MovieListViewController.swift in Sources */,
@@ -212,6 +219,7 @@
 				4090C82D2900605800B807C5 /* MovieDetailViewController.swift in Sources */,
 				4090C82928FFBCFB00B807C5 /* PosterCache.swift in Sources */,
 				406FFC0528FEA356004C85D4 /* UIPreview.swift in Sources */,
+				4009BEA329018E6D0096B63A /* ReviewCellHeaderView.swift in Sources */,
 				406FFBFC28FDD3E4004C85D4 /* Extension+Bundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
