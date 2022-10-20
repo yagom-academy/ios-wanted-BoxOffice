@@ -7,24 +7,6 @@
 
 import Foundation
 
-//struct MovieCodable: Codable {
-    
-//    let boxOfficeResult : BoxOfficeResult
-//}
-//struct BoxOfficeResult : Codable {
-//    let boxofficeType: String
-//    let dailyBoxOfficeList : [DailyBoxOfficeList]
-//}
-//struct DailyBoxOfficeList : Codable {
-//    let rank : String
-//    let rankInten: String
-//    let movieNm : String
-//    let openDt : String
-//    let rankOldAndNew : String
-//    let audiInten : String
-//    let audiAcc : String
-//}
-
 // MARK: - MovieCodable
 struct MovieCodable: Codable {
     let boxOfficeResult: BoxOfficeResult

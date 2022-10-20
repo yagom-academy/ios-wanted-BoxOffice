@@ -21,14 +21,20 @@ class MovieInformationViewController: UIViewController {
     @IBOutlet weak var 장르: UILabel!
     @IBOutlet weak var 관람등급: UILabel!
     @IBOutlet weak var 개봉연도: UILabel!
-    @IBOutlet weak var 리뷰쓰기: UIButton!
+    @IBOutlet weak var reviewButton: UIButton!
     
+    @IBOutlet weak var sharebutton: UIButton!
     let mainVC = MainViewController()
     var movieModel : MovieModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        리뷰창()
+        revieView()
+        dataSeting()
+        uiSetting()
+    }
+    
+    func dataSeting() {
         guard let movieModel = self.movieModel else {return}
         movieInfomationApi.getData(myApiKey: mainVC.myApiKey, todays: mainVC.inquiryTime() ,itemPerPage: "\(mainVC.itemPerPageArry)", movieCd: movieModel.영화번호) { result in
             self.영화명.text = "영화제목: \(movieModel.영화제목)"
@@ -42,30 +48,34 @@ class MovieInformationViewController: UIViewController {
             self.관람등급.text = "관람등급: \(result.movieInfoResult.movieInfo.audits[0].watchGradeNm)"
             self.개봉연도.text = "개봉연도: \(result.movieInfoResult.movieInfo.openDt)"
             self.제작연도.text = "제작연도: \(result.movieInfoResult.movieInfo.prdtYear)"
-            self.배우명?.text = "배우: \(result.movieInfoResult.movieInfo.actors[0].peopleNm),\(result.movieInfoResult.movieInfo.actors[1].peopleNm)"
+            if result.movieInfoResult.movieInfo.actors.count == 0 {
+                self.배우명?.text = "배우: "
+            }else {
+                //            self.배우명?.text = "배우: \(result.movieInfoResult.movieInfo.actors.reduce("") { "\($0) \($1.peopleNm)"})"
+                //            self.배우명?.text  = "배우: \(result.movieInfoResult.movieInfo.actors.first?.peopleNm ?? "")"
+                self.배우명?.text = "배우: \(result.movieInfoResult.movieInfo.actors[0].peopleNm),\(result.movieInfoResult.movieInfo.actors[1].peopleNm)"
+            }
             self.감독명.text = "감독: \(result.movieInfoResult.movieInfo.directors[0].peopleNm)"
-            print(result)
         }
     }
-
-    func 리뷰창() {
-        리뷰쓰기.addTarget(self, action: #selector(클릭), for: .touchUpInside)
+    func uiSetting() {
+        reviewButton.tintColor = .white
+        reviewButton.backgroundColor = .systemOrange
+        reviewButton.layer.cornerRadius = 12
+        reviewButton.alpha = 0.9
+        sharebutton.tintColor = .white
+        sharebutton.backgroundColor = .systemOrange
+        sharebutton.layer.cornerRadius = 12
         
     }
-    @objc func 클릭() {
+
+    func revieView() {
+        reviewButton.addTarget(self, action: #selector(reviewButtonAtion), for: .touchUpInside)
+    }
+    
+    @objc func reviewButtonAtion() {
         guard let viewController = storyboard?.instantiateViewController(withIdentifier: "ReViewViewController") as? ReViewViewController else {return}
         navigationController?.pushViewController(viewController, animated: true)
         
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

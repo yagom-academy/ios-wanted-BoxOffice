@@ -37,12 +37,26 @@ class MovieTableViewCell: UITableViewCell {
                 newRankingLabel.textColor = .red
             }
         }
-            movieNameLabel.text = "영화명: \(model.영화제목)"
+        movieNameLabel.text = "영화명: \(model.영화제목)"
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         guard let 관객수 = numberFormatter.string(from: NSNumber(value: Int(model.관객수) ?? 0)) else {return}
-            audienceLabel.text = "오늘의 관객수: \(관객수) 명"
+        audienceLabel.text = "오늘의 관객수: \(관객수)명"
+        if model.순위증감 > "0" {
+            increaseRanking.textColor = .red
+            increaseRanking.text = "전날 대비 순위: \(model.순위증감)"
+            let attributeString = NSMutableAttributedString(string:  increaseRanking.text ?? "")
+            attributeString.addAttribute(.foregroundColor, value: UIColor.black, range: ( increaseRanking.text! as NSString).range(of: "전날 대비 순위:"))
+            increaseRanking.attributedText = attributeString
+        } else if model.순위증감 < "0" {
+            increaseRanking.textColor = .blue
+            increaseRanking.text = "전날 대비 순위: \(model.순위증감)"
+            let attributeString = NSMutableAttributedString(string:  increaseRanking.text ?? "")
+            attributeString.addAttribute(.foregroundColor, value: UIColor.black, range: ( increaseRanking.text! as NSString).range(of: "전날 대비 순위:"))
+            increaseRanking.attributedText = attributeString
+        } else {
             increaseRanking.text = "전날 대비 순위: \(model.순위증감)"
         }
     }
-    
+}
+

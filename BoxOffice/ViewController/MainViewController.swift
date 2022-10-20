@@ -10,10 +10,9 @@ import UIKit
 class MainViewController: UIViewController {
     
     @IBOutlet weak var 버튼: UIButton!
-    var movie : [MovieModel] = []
-    
     @IBOutlet weak var tableView: UITableView!
     
+    var movie : [MovieModel] = []
     let itemPerPageArry = 10
     let myApiKey = "e1e395c6dd084d40f20882f0d2fb5da6"
     
@@ -45,7 +44,6 @@ class MainViewController: UIViewController {
     }
 }
 extension MainViewController: UITableViewDataSource {
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movie.count
