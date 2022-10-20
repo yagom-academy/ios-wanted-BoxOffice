@@ -10,7 +10,7 @@ import SwiftUI
 
 class SecondViewController: UIViewController, SecondViewControllerRoutable {
 
-    lazy var contentView = SecondContentView(viewModel: model.secondContentViewModel)
+    lazy var contentView = SecondContentView(viewModel: self.model.secondContentViewModel)
     
     var model: SecondModel
     
