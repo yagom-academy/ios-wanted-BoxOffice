@@ -60,7 +60,7 @@ class SecondContentViewModel: ObservableObject {
         
         print("secondContentViewModel populate Entity")
         
-        boxOfficeRank = "boxOfficeRank"
+        boxOfficeRank = previousModel.rank
         
         let combinedName = "\(result.movieInfoResult.movieInfo.movieNmEn) / \(result.movieInfoResult.movieInfo.movieNm)"
         movieName = combinedName
