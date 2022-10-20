@@ -17,7 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         UserDefaults.standard.setValue("35e301e07aec91b0a780eee5eb804f96", forKey: UserDefaultKey.BOX_OFFICE_KEY)
         UserDefaults.standard.setValue("b1334363", forKey: UserDefaultKey.POSTER_KEY)
-        window?.rootViewController = MovieRankViewController()
+        let navigationController = UINavigationController(rootViewController: MovieRankViewController())
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 

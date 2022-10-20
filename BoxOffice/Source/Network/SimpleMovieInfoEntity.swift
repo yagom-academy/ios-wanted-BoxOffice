@@ -5,10 +5,10 @@
 //  Created by 권준상 on 2022/10/19.
 //
 
-import Foundation
+import UIKit
 
-struct SimpleMovieInfo: Hashable {
-    var imageURL: String?
+struct SimpleMovieInfoEntity: Hashable {
+    var movieId: String
     var englishName: String
     var rank: Int
     var name: String
@@ -16,4 +16,8 @@ struct SimpleMovieInfo: Hashable {
     var audience: String
     var release: String
     var oldAndNew: RankOldAndNew
+    
+    static func == (lhs: SimpleMovieInfoEntity, rhs: SimpleMovieInfoEntity) -> Bool {
+        lhs.movieId == rhs.movieId
+    }
 }

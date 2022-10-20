@@ -12,8 +12,8 @@ final class NetworkManager {
     var dailyBoxOfficeURL = URLComponents(string: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?")
     var detailMovieInfoURL = URLComponents(string: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?")
     var posterURL = URLComponents(string: "http://www.omdbapi.com/?")
-    
-    func getDailyMovieRank(date: String) async throws -> [SimpleMovieInfo] {
+        
+    func getDailyMovieRank(date: String) async throws -> [SimpleMovieInfoEntity] {
         let queryItems = [URLQueryItem(name: "key", value: UserDefaults.standard.string(forKey: UserDefaultKey.BOX_OFFICE_KEY)),
                           URLQueryItem(name: "targetDt", value: date),
                           URLQueryItem(name: "wideAreaCd", value: "0105001")]
@@ -35,21 +35,22 @@ final class NetworkManager {
         
         let decoder = JSONDecoder()
         let result = try decoder.decode(DailyBoxOfficeDTO.self, from: data)
-        let movieList = MovieList()
+        var movieList:[SimpleMovieInfoEntity] = []
         
         for dailyBoxOffice in result.boxOfficeResult.dailyBoxOfficeList {
             let englishName = try await self.getEnglishName(movieCd: dailyBoxOffice.movieCD)
             
-            let simpleMovieInfo = SimpleMovieInfo(englishName: englishName,
+            let simpleMovieInfo = SimpleMovieInfoEntity(movieId: dailyBoxOffice.movieCD,
+                                                  englishName: englishName,
                                                   rank: Int(dailyBoxOffice.rank) ?? 0,
                                                   name: dailyBoxOffice.movieNm,
                                                   inset: dailyBoxOffice.rankInten,
                                                   audience: dailyBoxOffice.audiAcc,
                                                   release: dailyBoxOffice.openDt,
                                                   oldAndNew: dailyBoxOffice.rankOldAndNew)
-            await movieList.append(simpleMovieInfo)
+            movieList.append(simpleMovieInfo)
         }
-        return await movieList.innerList
+        return movieList
     }
     
     func getEnglishName(movieCd: String) async throws -> String {
@@ -114,11 +115,45 @@ final class NetworkManager {
             return UIImage(systemName: "video.fill")!
         }
     }
-}
-
-actor MovieList {
-    var innerList: [SimpleMovieInfo] = []
-    func append(_ movie: SimpleMovieInfo) {
-        innerList.append(movie)
+    
+    func getDetailMovieInfo(movieCd: String) async throws -> DetailMovieInfoEntity {
+        let queryItems = [URLQueryItem(name: "key", value: UserDefaults.standard.string(forKey: UserDefaultKey.BOX_OFFICE_KEY)),
+                          URLQueryItem(name: "movieCd", value: movieCd)]
+        detailMovieInfoURL?.queryItems = queryItems
+        
+        guard let detailURL = detailMovieInfoURL?.url else { throw NetworkError.pathErr }
+        
+        let (data, response) = try await URLSession.shared.data(from: detailURL)
+        
+        guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+            throw NetworkError.invalidErr
+        }
+        let successRange = 200..<300
+        
+        guard successRange.contains(statusCode) else {
+            throw NetworkError.serverErr
+        }
+        
+        let decoder = JSONDecoder()
+        let result = try decoder.decode(MovieInfoDTO.self, from: data)
+        
+        var genreNames: [String] = []
+        var actorNames: [String] = []
+        
+        for genre in result.movieInfoResult.movieInfo.genres {
+            genreNames.append(genre.genreNm)
+        }
+        for actor in result.movieInfoResult.movieInfo.actors {
+            actorNames.append(actor.peopleNm)
+        }
+        let detailMovieInfo = DetailMovieInfoEntity(productYear: result.movieInfoResult.movieInfo.prdtYear,
+                                                    showTime: result.movieInfoResult.movieInfo.showTm,
+                                                    openYear: result.movieInfoResult.movieInfo.openDt,
+                                                    genreName: genreNames,
+                                                    directors: result.movieInfoResult.movieInfo.directors.first?.peopleNm ?? "",
+                                                    actors: actorNames,
+                                                    watchGrade: result.movieInfoResult.movieInfo.audits.first?.watchGradeNm ?? "전체 이용가")
+        
+        return detailMovieInfo
     }
 }
