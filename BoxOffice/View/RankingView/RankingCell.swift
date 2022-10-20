@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RankingCell: UICollectionViewCell {
+final class RankingCell: UICollectionViewCell {
     static let nibName = "RankingCell"
 
     @IBOutlet weak var posterImageView: UIImageView!
@@ -35,14 +35,14 @@ class RankingCell: UICollectionViewCell {
         dailyAttendanceLabel.text = nil 
     }
     
-    func configure(with item: MockData) {
+    func configure(with item: Movie) {
         posterImageView.image = UIImage(named: "poster.png")
-        rankingLabel.text = "\(item.ranking)"
-        ratioComparedToYesterdayLabel.text = "\(item.inOrDecreaseComparedYesterday)"
+        rankingLabel.text = "\(item.main.ranking)"
+        ratioComparedToYesterdayLabel.text = "\(item.main.ratioComparedToYesterday)"
         isIncreasedLabel.text = "up↑"
-        koreanNameLabel.text = item.koreanName
-        releasedDateLabel.text = item.releasedDate
-        dailyAttendanceLabel.text = "\(item.dailyAttendance)"
+        koreanNameLabel.text = item.main.koreanName
+        releasedDateLabel.text = item.main.releasedDate
+        dailyAttendanceLabel.text = "\(item.main.dailyAttendance)"
     }
     
     private func appearanceOfPosterImageView() {

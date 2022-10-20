@@ -8,7 +8,7 @@
 import UIKit
 
 final class DailyRankingViewController: UIViewController {
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
+    private var dataSource: UICollectionViewDiffableDataSource<RankingSection, RankingItem>!
     
     private let boxOfficeLabelBackgroundView: UIImageView = {
         let imageView = UIImageView()
@@ -69,7 +69,7 @@ extension DailyRankingViewController {
     private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
             
-            let section = Section(rawValue: sectionIndex)!
+            let section = RankingSection(rawValue: sectionIndex)!
             
             let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(40))
             
@@ -110,24 +110,23 @@ extension DailyRankingViewController {
 extension DailyRankingViewController {
     private func configureDataSource() {
         /// - Tag: Registration
-        let onboardingCellRegistration = UICollectionView.CellRegistration<OnboardingCell, Onboarding>(cellNib: OnboardingCell.nib()) { cell, _, item in
+        let rankingHeaderRegistration = UICollectionView.SupplementaryRegistration<RankingHeaderView>(supplementaryNib: RankingHeaderView.nib(), elementKind: RankingHeaderView.elementKind) { rankingHeaderView, _, indexPath in
+        guard RankingSection(rawValue: indexPath.section) == .ranking else { return }
+        // TODO: -
+        }
+        
+        let onboardingCellRegistration = UICollectionView.CellRegistration<OnboardingCell, Banner>(cellNib: OnboardingCell.nib()) { cell, _, item in
             cell.configure(with: item)
         }
         
-        let rankingHeaderRegistration = UICollectionView.SupplementaryRegistration(supplementaryNib: RankingHeaderView.nib(), elementKind: RankingHeaderView.elementKind) { supplementaryView, _, indexPath in
-            guard Section(rawValue: indexPath.section) != nil else { return }
-            // TODO: -
-        }
-        
-        let rankingCellRegistration = UICollectionView.CellRegistration<RankingCell, MockData>(cellNib: RankingCell.nib()) { cell, _, item in
-            
+        let rankingCellRegistration = UICollectionView.CellRegistration<RankingCell, Movie>(cellNib: RankingCell.nib()) { cell, _, item in
             cell.configure(with: item)
         }
         
         /// - Tag: DataSource
-        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
+        dataSource = UICollectionViewDiffableDataSource<RankingSection, RankingItem>(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
             switch item {
-            case .onboarding(let onboardingItem):
+            case .banner(let onboardingItem):
                 return collectionView.dequeueConfiguredReusableCell(using: onboardingCellRegistration, for: indexPath, item: onboardingItem)
             case .ranking(let rankingItem):
                 return collectionView.dequeueConfiguredReusableCell(using: rankingCellRegistration, for: indexPath, item: rankingItem)
@@ -137,19 +136,18 @@ extension DailyRankingViewController {
         dataSource.supplementaryViewProvider = { [weak self] _, kind, index in
             guard let self = self,
                   kind == RankingHeaderView.elementKind else { return nil }
-            
             return self.collectionView.dequeueConfiguredReusableSupplementary(using: rankingHeaderRegistration, for: index)
         }
         
         /// - Tag: Snapshot
-        let sections: [Section] = Section.allCases
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        let sections: [RankingSection] = RankingSection.allCases
+        var snapshot = NSDiffableDataSourceSnapshot<RankingSection, RankingItem>()
         snapshot.appendSections(sections)
         dataSource.apply(snapshot)
         
-        Section.allCases.forEach { section in
+        RankingSection.allCases.forEach { section in
             let sectionItems = MockDataController.shared.items(for: section)
-            var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
+            var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<RankingItem>()
             sectionSnapshot.append(sectionItems)
             dataSource.apply(sectionSnapshot, to: section)
         }
@@ -160,14 +158,17 @@ extension DailyRankingViewController {
 extension DailyRankingViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath),
-              Section(rawValue: indexPath.section) == .ranking,
-              let movie: MockData = item.ranking else {
+              RankingSection(rawValue: indexPath.section) == .ranking,
+              let movie: Movie = item.ranking else {
             collectionView.deselectItem(at: indexPath, animated: true)
             return
         }
         let detailViewController = DetailViewController()
-        detailViewController.item = movie
-        configureBackBarButton(with: movie.koreanName)
+        let mainItem = DetailItem.main(movie.main)
+        let plotItem = DetailItem.plot(movie.plot)
+        let detailItem = DetailItem.detail(movie.detail)
+        detailViewController.detailItems = [mainItem, plotItem, detailItem]
+        configureBackBarButton(with: movie.main.koreanName)
         navigationController?.pushViewController(detailViewController, animated: true)
     }
     

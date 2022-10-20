@@ -25,6 +25,9 @@
                     <color key="tintColor" red="0.28422497219999998" green="0.1067590726" blue="0.73457610610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" image="calendar" catalog="system"/>
+                    <connections>
+                        <action selector="didTapCalendarButton:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="9be-bG-Kh9"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="서울" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hty-RA-ih4">
                     <rect key="frame" x="223.66666666666666" y="43" width="333.33333333333337" height="16"/>
@@ -52,7 +55,7 @@
                 <constraint firstItem="80Z-C9-RWl" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" id="uDY-Tq-a38"/>
             </constraints>
             <connections>
-                <outlet property="calenderButton" destination="wZw-Jv-6oN" id="aAZ-Id-TLe"/>
+                <outlet property="calendarButton" destination="wZw-Jv-6oN" id="i4M-K4-8YF"/>
                 <outlet property="selectedDate" destination="UwF-jN-sRs" id="j7h-4g-tbo"/>
             </connections>
             <point key="canvasLocation" x="313.07692307692309" y="-104.85781990521326"/>

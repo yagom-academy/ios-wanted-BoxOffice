@@ -7,18 +7,21 @@
 
 import UIKit
 
-class OnboardingCell: UICollectionViewCell {
+final class OnboardingCell: UICollectionViewCell {
     static let nibName = "OnboardingCell"
 
     @IBOutlet weak var onboardingImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = .blue
     }
     
-    func configure(with onboarding: Onboarding) {
-        onboardingImageView.image = onboarding.banner
+    override func prepareForReuse() {
+        onboardingImageView.image = nil
+    }
+    
+    func configure(with onboarding: Banner) {
+        onboardingImageView.image = onboarding.image
     }
     
     static func nib() -> UINib {
