@@ -26,7 +26,7 @@ struct DailyListObject: Codable {
   let movieCd: String
   let movieNm: String
   let openDt: String
-  let audiCnt: String
+  let audiAcc: String
 }
 
 struct MovieDetailResult: Codable {
