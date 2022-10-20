@@ -15,9 +15,11 @@ struct BasicDataView: View {
         VStack {
             Text(data.title)
                 .font(.largeTitle)
+                .padding(.all)
             Text(data.data)
                 .font(.body)
-        }
+                .padding(.all)
+        }.multilineTextAlignment(.center)
         
     }
 }
@@ -29,12 +31,14 @@ struct ArrayDataView: View {
         VStack {
             Text(data.title)
                 .font(.largeTitle)
+                .padding(.all)
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(data.data, id: \.self) { value in
                         Text(value)
-                            .font(.body)
-                    }
+                    }.font(.body)
+                    .multilineTextAlignment(.center)
+                    .padding(.all)
                 }
             }
         }
