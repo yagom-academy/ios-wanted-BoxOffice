@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import OSLog
 
 final class AddMovieReviewViewController: UIViewController {
 
@@ -27,6 +28,7 @@ final class AddMovieReviewViewController: UIViewController {
 
     @IBAction
     private func imageViewDidTap() {
+        Logger.ui.debug(#function)
 
     }
 
@@ -40,6 +42,7 @@ final class AddMovieReviewViewController: UIViewController {
 // MARK: - UITextViewDelegate
 
 extension AddMovieReviewViewController: UITextViewDelegate {
+
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == Self.textViewPlaceHolder {
             textView.text = nil
@@ -53,4 +56,34 @@ extension AddMovieReviewViewController: UITextViewDelegate {
             textView.textColor = .tertiaryLabel
         }
     }
+
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        // textView의 높이로 입력 글자수 제한
+        let combinedText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+
+        let attributedText = NSMutableAttributedString(string: combinedText)
+        attributedText.addAttribute(
+            NSAttributedString.Key.font,
+            value: textView.font as Any,
+            range: NSMakeRange(0, attributedText.length)
+        )
+
+        let padding = textView.textContainer.lineFragmentPadding
+
+        let boundingSize = CGSizeMake(textView.frame.size.width - padding * 2, CGFloat.greatestFiniteMagnitude)
+
+        let boundingRect = attributedText.boundingRect(
+            with: boundingSize,
+            options: NSStringDrawingOptions.usesLineFragmentOrigin,
+            context: nil
+        )
+
+        if (boundingRect.size.height + padding * 2 <= textView.frame.size.height){
+            return true
+        }
+        else {
+            return false
+        }
+    }
+
 }
