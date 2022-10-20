@@ -11,7 +11,7 @@ final class MovieReviewViewController: UIViewController {
     
     private let contentTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.font = .systemFont(ofSize: 15, weight: .semibold)
         label.text = "내용"
         return label
     }()
@@ -28,7 +28,7 @@ final class MovieReviewViewController: UIViewController {
     
     private let starTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.font = .systemFont(ofSize: 15, weight: .semibold)
         label.text = "별점"
         return label
     }()
@@ -45,6 +45,17 @@ final class MovieReviewViewController: UIViewController {
         stackView.spacing = 10
         stackView.alignment = .leading
         return stackView
+    }()
+    
+    private let errorLabel: UILabel = {
+        let label = UILabel()
+        label.text = "암호는 알파벳 소문자, 숫자, 특수문자가 1개 이상, 6~20자로 작성해주세요."
+        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.textColor = .red
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.isHidden = true
+        return label
     }()
     
     private let registerButton: UIButton = {
@@ -80,6 +91,12 @@ final class MovieReviewViewController: UIViewController {
             self?.registerButton.setTitleColor(titleColor, for: .normal)
             self?.registerButton.isEnabled = isEnabled
         }
+        
+        output.passwordIsValid.subscribe { [weak self] isValid in
+            print("비번: \(isValid)")
+            self?.errorLabel.isHidden = isValid
+            
+        }
     }
     
     @objc func registerButtonTapped(_ sender: UIButton) {
@@ -102,6 +119,7 @@ final class MovieReviewViewController: UIViewController {
                                                 self.starPickerView,
                                                 self.contentTitleLabel,
                                                 self.contentTextView,
+                                                self.errorLabel,
                                                 self.registerButton)
         
         NSLayoutConstraint.activate([
@@ -128,7 +146,14 @@ final class MovieReviewViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            self.registerButton.topAnchor.constraint(equalTo: self.contentTextView.bottomAnchor, constant: 30),
+            self.errorLabel.topAnchor.constraint(equalTo: self.contentTextView.bottomAnchor, constant: 20),
+            self.errorLabel.leadingAnchor.constraint(equalTo: self.infoStackView.leadingAnchor),
+            self.errorLabel.trailingAnchor.constraint(equalTo: self.infoStackView.trailingAnchor),
+            self.errorLabel.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            self.registerButton.topAnchor.constraint(equalTo: self.errorLabel.bottomAnchor, constant: 30),
             self.registerButton.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
             self.registerButton.widthAnchor.constraint(equalToConstant: 150),
             self.registerButton.heightAnchor.constraint(equalToConstant: 40)
@@ -139,7 +164,7 @@ final class MovieReviewViewController: UIViewController {
 }
 // MARK: - extension
 extension MovieReviewViewController: ReviewTextViewDelegate {
-    func textFieldeditEnd(title: String, text: String) {
+    func textFieldEditEnd(title: String, text: String) {
         switch title {
         case "별명":
             viewModel.nickname.value = text
@@ -174,7 +199,7 @@ extension MovieReviewViewController: UIPickerViewDelegate {
         return viewModel.starValueList[row]
     }
     
-        func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-            viewModel.starScore.value =  viewModel.starValueList[row]
-        }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        viewModel.starScore.value =  viewModel.starValueList[row]
+    }
 }

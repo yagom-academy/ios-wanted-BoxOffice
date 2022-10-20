@@ -22,8 +22,9 @@ final class MovieReviewViewModel {
     }
     
     func transform() -> Output {
-        Output(buttonIsEnable: Observable(!nickname.value.isEmpty && !password.value.isEmpty),
-               passwordIsValid: Observable(passwordValidCheck(text: password.value)))
+        let passwordValid = passwordValidCheck(text: password.value)
+        return Output(buttonIsEnable: Observable(!nickname.value.isEmpty && !password.value.isEmpty && passwordValid),
+               passwordIsValid: Observable(passwordValid))
     }
     
     private func passwordValidCheck(text: String) -> Bool {

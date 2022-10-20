@@ -8,13 +8,13 @@
 import UIKit
 
 protocol ReviewTextViewDelegate: AnyObject {
-    func textFieldeditEnd(title: String, text: String)
+    func textFieldEditEnd(title: String, text: String)
 }
 
 final class ReviewTextView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.font = .systemFont(ofSize: 15, weight: .semibold)
         label.text = "ggd"
         return label
     }()
@@ -58,7 +58,7 @@ final class ReviewTextView: UIView {
     }
     
     @objc func textFieldDidChange(_ sender: UIButton) {
-        delegate?.textFieldeditEnd(title: titleLabel.text ?? "", text: textField.text ?? "")
+        delegate?.textFieldEditEnd(title: titleLabel.text ?? "", text: textField.text ?? "")
     }
     
 }
