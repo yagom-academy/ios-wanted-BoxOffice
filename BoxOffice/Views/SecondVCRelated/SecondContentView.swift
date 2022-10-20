@@ -9,23 +9,15 @@ import SwiftUI
 
 struct SecondContentView: View {
     
-    //environment state 같은 걸로 해야할줄 알았는데 이렇게도 되긴 되나...
     @ObservedObject var viewModel: SecondContentViewModel
     
     init(viewModel: SecondContentViewModel) {
         self.viewModel = viewModel
     }
     
-    let columns = [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)]
-    
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: columns, spacing: 40) {
-                ForEach(viewModel.dataSource) { value in
-                    Text(value.name)
-                    Text(value.data)
-                }
-            }
+            
         }
     }
 }
