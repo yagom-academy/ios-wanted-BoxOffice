@@ -14,19 +14,19 @@ class SecondContentViewModel: ObservableObject {
     var didReceiveEntity: (_ entity: KoficMovieDetailEntity, _ previousModel: FirstMovieCellModel) -> () = { entity, cellModel in }
     
     //output
-    @Published var boxOfficeRank: (title: String, data: String) = (title: "", data: "")//박스오피스 순위
-    @Published var movieName: (title: String, data: String) = (title: "", data: "") //영화명
-    @Published var releasedDay: (title: String, data: String) = (title: "", data: "") //개봉일
-    @Published var audCount: (title: String, data: String) = (title: "", data: "") //관객수
-    @Published var rankIncrement: (title: String, data: String) = (title: "", data: "") //전일대비 순위의 증감분
-    @Published var rankApproached: (title: String, data: String) = (title: "", data: "") //랭킹에 신규 진입 여부
-    @Published var makedYear: (title: String, data: String) = (title: "", data: "") //제작연도
-    @Published var releasedYear: (title: String, data: String) = (title: "", data: "") //개봉연도
-    @Published var runningTime: (title: String, data: String) = (title: "", data: "") //상영시간
-    @Published var genre: (title: String, data: [String]) = (title: "", data: []) //장르
-    @Published var director:(title: String, data: [String]) = (title: "", data: []) //감독명
-    @Published var actors:(title: String, data: [String]) = (title: "", data: []) //배우명
-    @Published var restictionRate:(title: String, data: [String]) = (title: "", data: []) //관람등급 명칭
+    @Published var boxOfficeRank: (title: String, data: String) = (title: "박스오피스 랭크", data: "")//박스오피스 순위
+    @Published var movieName: (title: String, data: String) = (title: "영화이름", data: "") //영화명
+    @Published var releasedDay: (title: String, data: String) = (title: "개봉일", data: "") //개봉일
+    @Published var audCount: (title: String, data: String) = (title: "관객수", data: "") //관객수
+    @Published var rankIncrement: (title: String, data: String) = (title: "랭크증감", data: "") //전일대비 순위의 증감분
+    @Published var rankApproached: (title: String, data: String) = (title: "랭크신규진입", data: "") //랭킹에 신규 진입 여부
+    @Published var makedYear: (title: String, data: String) = (title: "제작연도", data: "") //제작연도
+    @Published var releasedYear: (title: String, data: String) = (title: "개봉연도", data: "") //개봉연도
+    @Published var runningTime: (title: String, data: String) = (title: "상영시간", data: "") //상영시간
+    @Published var genre: (title: String, data: [String]) = (title: "장르", data: []) //장르
+    @Published var director:(title: String, data: [String]) = (title: "감독명", data: []) //감독명
+    @Published var actors:(title: String, data: [String]) = (title: "배우명", data: []) //배우명
+    @Published var restictionRate:(title: String, data: [String]) = (title: "관람등급 명칭", data: []) //관람등급 명칭
     
     //properties
     
@@ -39,14 +39,17 @@ class SecondContentViewModel: ObservableObject {
             print("secondContentViewModel didReceiveEntity")
             guard let self = self else { return }
             
-            self.populateEntity(result: entity, previousModel: cellModel)
+            //TODO: GCD아닌 다른 방법으로 처리 고민
+            DispatchQueue.main.async {
+                self.populateEntity(result: entity, previousModel: cellModel)
+            }
         }
     }
     
     private func populateEntity(result: KoficMovieDetailEntity, previousModel: FirstMovieCellModel) {
         
         boxOfficeRank = (title: "박스오피스 랭크", data: previousModel.rank)
-        let combinedName = "\(result.movieInfoResult.movieInfo.movieNmEn) / \(result.movieInfoResult.movieInfo.movieNm)"
+        let combinedName = "\(result.movieInfoResult.movieInfo.movieNmEn) \n \(result.movieInfoResult.movieInfo.movieNm)"
         movieName = (title: "영화이름", data: combinedName)
         
         releasedDay = (title: "개봉일", data: previousModel.openDt)
