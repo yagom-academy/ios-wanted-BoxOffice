@@ -9,7 +9,7 @@ import Foundation
 
 class SecondModel: SceneActionReceiver {
     //input
-    var movieCd: String = ""
+    var previousSelectedMovieModel: FirstMovieCellModel = FirstMovieCellModel()
     var didReceiveSceneAction: (SceneAction) -> () = { action in }
     //output
     @MainThreadActor var routeSubject: ( (SceneCategory) -> () )?
@@ -34,6 +34,7 @@ class SecondModel: SceneActionReceiver {
         Task {
             print("secondModel populate Data")
             guard let entity = await requestAPI() else { return }
+            // TODO: entity에 필요값 추가 <<- 1번째 화면에서 선택한 엔티티에서 값을 가져와야...
             privateSecondContentViewModel.didReceiveEntity(entity)
         }
     }
@@ -44,9 +45,10 @@ class SecondModel: SceneActionReceiver {
     
     private func requestAPI() async -> KoficMovieDetailEntity? {
         print("secondModel request api")
-        print("movie cd check : \(self.movieCd)")
+        print("movie cd check : \(self.previousSelectedMovieModel.movieCd)")
+        let movieCd = self.previousSelectedMovieModel.movieCd
         do {
-            let entity: KoficMovieDetailEntity = try await repository.fetch(api: .kofic(.detailMovieInfo(movieCd: self.movieCd)))
+            let entity: KoficMovieDetailEntity = try await repository.fetch(api: .kofic(.detailMovieInfo(movieCd: movieCd)))
             print("secondModel entity check : \(entity)")
             return entity
         } catch let error {

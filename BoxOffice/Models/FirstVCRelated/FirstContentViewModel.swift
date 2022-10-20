@@ -15,7 +15,7 @@ class FirstContentViewModel {
     
     //output
     @MainThreadActor var didReceiveViewModel: ( ((Void)) -> () )?
-    var propergateDidSelectItem: (_ String: String) -> () = { string in }
+    var propergateDidSelectItem: (_ cellModel: FirstMovieCellModel) -> () = { cellModel in }
     
     var dataSource: [FirstMovieCellModel] {
         return privateDataSource
@@ -37,8 +37,8 @@ class FirstContentViewModel {
         
         didSelectItemInTableView = { [weak self] indexPath in
             guard let self = self else { return }
-            let movieCd = self.findAndReturnSelectedItem(indexPathRow: indexPath.row)
-            self.propergateDidSelectItem(movieCd)
+            let cellModel = self.findAndReturnSelectedItem(indexPathRow: indexPath.row)
+            self.propergateDidSelectItem(cellModel)
         }
     }
     
@@ -71,7 +71,7 @@ class FirstContentViewModel {
         }
     }
     
-    private func findAndReturnSelectedItem(indexPathRow: Int) -> String {
-        return privateDataSource[indexPathRow].movieCd
+    private func findAndReturnSelectedItem(indexPathRow: Int) -> FirstMovieCellModel {
+        return privateDataSource[indexPathRow]
     }
 }
