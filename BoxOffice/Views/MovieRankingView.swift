@@ -58,22 +58,30 @@ final class MovieRankingView: UIView {
         numberOfMoviegoersLabel.text = "누적관객 \(movieRanking.numberOfMoviegoers.string)명"
         rankingLabel.text = movieRanking.ranking.string
         if movieRanking.isNewRanking {
+            isNewRankingInfoView.isHidden = false
             isNewRankingLabel.text = "NEW"
         } else {
-            isNewRankingInfoView.removeFromSuperview()
+            isNewRankingInfoView.isHidden = true
         }
         if movieRanking.changeRanking == 0 {
-            changeRankingInfoView.removeFromSuperview()
+            changeRankingInfoView.isHidden = true
         } else {
+            changeRankingInfoView.isHidden = false
             let isRankUp = movieRanking.changeRanking > 0
             let upColor: UIColor = .systemPink
             let downColor: UIColor = .systemBlue
             let upIcon = UIImage(systemName: "arrowtriangle.up.fill")
             let downIcon = UIImage(systemName: "arrowtriangle.down.fill")
             changeRankingLabel.text = movieRanking.changeRanking.string
-            changeRankingImageView.image = isRankUp ? upIcon : downIcon
-            changeRankingLabel.textColor = isRankUp ? upColor : downColor
-            changeRankingImageView.tintColor = isRankUp ? upColor : downColor
+            if isRankUp {
+                changeRankingImageView.image = upIcon
+                changeRankingLabel.textColor = upColor
+                changeRankingImageView.tintColor = upColor
+            } else {
+                changeRankingImageView.image = downIcon
+                changeRankingLabel.textColor = downColor
+                changeRankingImageView.tintColor = downColor
+            }
         }
     }
 

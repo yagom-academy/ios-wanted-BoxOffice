@@ -62,7 +62,7 @@ final class MovieDetailViewController: UIViewController {
             )
 
             switch sectionIndex {
-            case .info, .review:
+            case .info:
                 let section = NSCollectionLayoutSection.list(
                     using: .init(appearance: .plain),
                     layoutEnvironment: layoutEnvironment
@@ -97,10 +97,40 @@ final class MovieDetailViewController: UIViewController {
                 section.contentInsets = sectionContentInset
                 section.boundarySupplementaryItems = [sectionHeader]
                 return section
+            case .review:
+                var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+                configuration.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in
+                    guard let item = self?.dataSource.itemIdentifier(for: indexPath) else { fatalError() }
+                    return self?.trailingSwipeActionConfigurationForListCellItem(item)
+                }
+                let section = NSCollectionLayoutSection.list(
+                    using: configuration,
+                    layoutEnvironment: layoutEnvironment
+                )
+                section.contentInsets = sectionContentInset
+                section.boundarySupplementaryItems = [sectionHeader]
+                return section
             }
         }
         collectionView.collectionViewLayout = layout
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Self.headerResuseIdentifier)
+    }
+
+    fileprivate func trailingSwipeActionConfigurationForListCellItem(_ item: AnyHashable) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
+            [weak self] (_, _, completion) in
+            guard let self = self,
+                  let review = item as? MovieReview else {
+                completion(false)
+                return
+            }
+//            self.movieReviewService.deleteReview(review)
+            print(item)
+            print(review)
+            completion(true)
+        }
+        deleteAction.image = UIImage(systemName: "trash")
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 
     private func configureDataSource()  {
