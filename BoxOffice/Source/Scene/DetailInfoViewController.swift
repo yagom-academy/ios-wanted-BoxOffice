@@ -11,6 +11,7 @@ typealias SectionAndTitle = (title: String, section: SecondSection)
 
 class DetailInfoViewController: UIViewController {
     
+    var shareItems = [String]()
     let detailInfoView = DetailInfoView()
     var simpleMovieInfo: SimpleMovieInfoEntity?
     var detailMovieInfo: DetailMovieInfoEntity?
@@ -23,8 +24,16 @@ class DetailInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationBar()
         setCollectionView()
         getMovieInfo()
+    }
+    
+    private func setNavigationBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonDidTap))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareButtonDidTap))
+        navigationItem.leftBarButtonItem?.tintColor = .systemGray
+        navigationItem.rightBarButtonItem?.tintColor = .systemGray
     }
     
     private func setCollectionView() {
@@ -118,6 +127,26 @@ class DetailInfoViewController: UIViewController {
         return .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(40)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
     }
     
+    private func setTextData(_ movie: DetailMovieInfoEntity) {
+        shareItems.append("영화 : " + movie.simpleInfo!.name + "\n")
+        shareItems.append("개봉 날짜 : " + movie.simpleInfo!.release + "\n")
+        shareItems.append("총 관객 : " + movie.simpleInfo!.audience + "\n")
+        shareItems.append("감독 : " + movie.directors + "\n")
+        shareItems.append("상영시간 : " + movie.showTime + "\n")
+        shareItems.append("연령 등급 : " + movie.watchGrade + "\n")
+        shareItems.append("제작 연도 : " + movie.productYear + "\n")
+    }
+    
+    @objc func backButtonDidTap() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func shareButtonDidTap() {
+        let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    
     
 }
 
@@ -150,6 +179,7 @@ extension DetailInfoViewController: UICollectionViewDataSource {
                     print(error.localizedDescription)
                 }
                 cell.setData(movie)
+                setTextData(movie)
             }
             return cell
         case .standard:
