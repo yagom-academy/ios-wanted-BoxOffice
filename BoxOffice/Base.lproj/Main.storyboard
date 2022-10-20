@@ -352,20 +352,23 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="Lbp-j1-du5">
                                                     <rect key="frame" x="86.999999999999986" y="25" width="213.66666666666663" height="85"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOt-Jw-vZ3">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOt-Jw-vZ3">
                                                             <rect key="frame" x="0.0" y="0.0" width="38.333333333333336" height="26.333333333333332"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="관객수" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ogb-fS-bi8">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="관객수" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ogb-fS-bi8">
                                                             <rect key="frame" x="0.0" y="37.333333333333336" width="52" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="개봉일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ir-hV-2ep">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개봉일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ir-hV-2ep">
                                                             <rect key="frame" x="0.0" y="72.333333333333329" width="44.333333333333336" height="12.666666666666671"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="12.666666666666671" id="BlO-5l-hms"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -394,6 +397,8 @@
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="hvi-cf-Wmm" secondAttribute="bottom" constant="10" id="BZV-CD-xl0"/>
                                                 <constraint firstItem="Lbp-j1-du5" firstAttribute="leading" secondItem="Ibl-dM-Kv1" secondAttribute="trailing" constant="25" id="DN9-0n-Uac"/>
+                                                <constraint firstItem="dhn-mK-ajQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Lbp-j1-du5" secondAttribute="trailing" constant="8" symbolic="YES" id="K6y-Tt-x6d"/>
+                                                <constraint firstItem="pNe-XA-fFv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Dmc-Ya-9mH" secondAttribute="leading" constant="20" symbolic="YES" id="LTc-NY-KcK"/>
                                                 <constraint firstItem="Ibl-dM-Kv1" firstAttribute="centerY" secondItem="Dmc-Ya-9mH" secondAttribute="centerY" id="RRe-I1-lOY"/>
                                                 <constraint firstItem="Ibl-dM-Kv1" firstAttribute="leading" secondItem="Dmc-Ya-9mH" secondAttribute="leading" constant="15" id="Tkp-09-Akt"/>
                                                 <constraint firstItem="dhn-mK-ajQ" firstAttribute="top" secondItem="Dmc-Ya-9mH" secondAttribute="top" constant="10" id="UJa-gj-v2Q"/>

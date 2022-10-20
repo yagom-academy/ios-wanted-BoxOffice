@@ -10,7 +10,7 @@ import Foundation
 class WeekApi {
     class func weekApi(targetDay: String, completion: @escaping (Week) -> Void ) {
         let key = "9a03d4e2eafea3c2e79c80e98ac2919c"
-        let targetDay = "20190201" //치킨시즌
+        let targetDay = "20190201" 
         let seoul = "0105001"
         
         let config = URLSessionConfiguration.default

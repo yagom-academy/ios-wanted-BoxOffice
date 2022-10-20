@@ -29,16 +29,16 @@ class WeekSecondViewController: UIViewController {
     @IBOutlet weak var weekRankingLabel: UILabel!
     @IBOutlet weak var weekMovieTitleLabel: UILabel!
     @IBOutlet weak var weekGenreLabel: UILabel!
-    @IBOutlet weak var weekViewingLevelLabel: UILabel! //관람등급
+    @IBOutlet weak var weekViewingLevelLabel: UILabel!
     @IBOutlet weak var weekOpeningDateLabel: UILabel!
     @IBOutlet weak var weekRunTimeLabel: UILabel!
     @IBOutlet weak var weekAudienceLabel: UILabel!
     @IBOutlet weak var weekDirectorName: UILabel!
     @IBOutlet weak var weekActorName: UILabel!
-    @IBOutlet weak var weekYearOfReleaseLabel: UILabel!  //개봉연도
-    @IBOutlet weak var weekYearOfManufactureLabel: UILabel!  //제작연도
-    @IBOutlet weak var weekComparedToYesterdayLabel: UILabel!  //전일대비
-    @IBOutlet weak var weekNewRankingLabel: UILabel!    ///신규랭킹
+    @IBOutlet weak var weekYearOfReleaseLabel: UILabel!
+    @IBOutlet weak var weekYearOfManufactureLabel: UILabel!
+    @IBOutlet weak var weekComparedToYesterdayLabel: UILabel!
+    @IBOutlet weak var weekNewRankingLabel: UILabel!   
 
     private var weekViewModel: WeekViewModel?
     
@@ -60,7 +60,7 @@ class WeekSecondViewController: UIViewController {
         weekOpeningDateLabel.text = "개봉일: \(weekViewModel.openingDate)"
         weekGenreLabel.text = "개요 - \(weekViewModel.genre)"
         weekRunTimeLabel.text = "상영시간: \(weekViewModel.runTime)분"
-        weekViewingLevelLabel.text = weekViewModel.viewingLevel //관람등급
+        weekViewingLevelLabel.text = weekViewModel.viewingLevel
         weekDirectorName.text = "감독: \(weekViewModel.director)"
         weekActorName.text = "배우: \(weekViewModel.actiorName)"
         weekYearOfReleaseLabel.text = "개봉연도: \(weekViewModel.yearOfRelease)"

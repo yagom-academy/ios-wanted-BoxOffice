@@ -21,7 +21,6 @@ class FirstViewController: UIViewController {
     
     ///첫번째화면 API
     func officeapi() {
-        //코다블 을 불러오는문제     코다블 코딩키 검색  코다블
         OfficeApi.callAPI(targetDay: targetDay) { data in
             self.office = data.boxOfficeResult.dailyBoxOfficeList
             self.firstTableView.reloadData()

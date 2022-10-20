@@ -22,16 +22,15 @@ class OfficeApi {
         let dataTask = session.dataTask(with: url) { data, response, error in
             let successRange = 200..<300
             guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode, successRange.contains(statusCode) else { return }
-            // 파싱하는 부분
+            
             guard let resultData = data else { return }
-//            print("나타나\(resultData)")
+
             let decoder = JSONDecoder()
             let decodedData = try! decoder.decode(BoxOffice.self, from: resultData)
-//            print("나타나라\(decodedData)")
+
             DispatchQueue.main.async {
                 completion(decodedData)
             }
-//            print("나타나라제발\(decodedData)")
         }
         dataTask.resume()
     }

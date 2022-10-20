@@ -18,12 +18,12 @@ class MovieListTableViewCell: UITableViewCell {
     
     
     func setModel(model: MovieInfost) {
-        rankingLabel.text = model.rank       //랭킹
-        movieTitleLabel.text = "영화: \(model.movieNm)"     // 제목
-        audienceLabel.text = "관객수: \(model.audiAcc)명"     //관객수
-        openingDateLabel.text = "개봉일: \(model.openDt)"    //개봉일
-        newRankingLabel.text = "신규 판별 \(model.rankOldAndNew)"    // 신규 진입
-//        comparedToYesterdayLabel.text = "순위변동: \(model.rankInten)"  //전일대비 순위변동
+        rankingLabel.text = model.rank
+        movieTitleLabel.text = "영화: \(model.movieNm)"
+        audienceLabel.text = "관객수: \(model.audiAcc)명"
+        openingDateLabel.text = "개봉일: \(model.openDt)"
+        newRankingLabel.text = "신규 판별 \(model.rankOldAndNew)"
+//        comparedToYesterdayLabel.text = "순위변동: \(model.rankInten)"
         if model.rankInten == "0" {
             comparedToYesterdayLabel.text = "변동없음"
             countLabel.text = " "
@@ -41,13 +41,11 @@ class MovieListTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

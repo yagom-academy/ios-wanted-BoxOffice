@@ -21,10 +21,10 @@ class MovieApi {
             guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode, successRange.contains(statusCode) else { return }
             
             guard let resultData = data else { return }
-//            print("나타나\(resultData)")
+
             let decoder = JSONDecoder()
             guard let decodedData = try? decoder.decode(Empty.self, from: resultData) else { return }
-//            print("나타나라\(decodedData)")
+
             DispatchQueue.main.async {
                 completion(decodedData)
             }
