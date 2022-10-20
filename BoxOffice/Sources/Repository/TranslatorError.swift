@@ -7,11 +7,13 @@
 
 import Foundation
 
-enum TranslatorError: Error {
+enum TranslatorError: String, LocalizedError {
     case castingError
     case zeroByteData
-    
-    var localizedDescription: String {
+}
+
+extension TranslatorError {
+    var errorDescription: String? {
         switch self {
         case .castingError:
             return "형 변환을 시도하던 중 오류가 발생했습니다."
@@ -20,3 +22,4 @@ enum TranslatorError: Error {
         }
     }
 }
+

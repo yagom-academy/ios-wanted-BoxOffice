@@ -23,7 +23,7 @@ final class ApiProvderTests: XCTestCase {
 
     func test_dailyBoxOfficeList_API() throws {
         // given
-        let param = BoxOfficeListRequest(key: Environment.kobisKey, targetDt: "20221018")
+        let param = BoxOfficeListRequest(key: Environment.kobisKey, targetDt: Date.yesterDay.toString(.yyyyMMdd))
         let expecation = self.expectation(description: "ApiProviderTest")
         var result: DailyBoxOfficeListResponse?
         
@@ -43,7 +43,7 @@ final class ApiProvderTests: XCTestCase {
     
     func test_weeklyBoxOfficeList_API() throws {
         // given
-        let param = BoxOfficeListRequest(key: Environment.kobisKey, targetDt: "20221017", weekGb: .weekly)
+        let param = BoxOfficeListRequest(key: Environment.kobisKey, targetDt: Date.lastWeek.toString(.yyyyMMdd), weekGb: .weekly)
         let expecation = self.expectation(description: "ApiProviderTest")
         var result: WeeklyBoxOfficeListResponse?
         

@@ -7,11 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		462CB2212901366000BA4A55 /* GestureRecognizerPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462CB2202901366000BA4A55 /* GestureRecognizerPublisher.swift */; };
+		462CB2232901367C00BA4A55 /* ControlEventPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462CB2222901367C00BA4A55 /* ControlEventPublisher.swift */; };
+		46B170E229001415002A8735 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B170E129001415002A8735 /* Date+Extension.swift */; };
+		46B170E429001FD7002A8735 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B170E329001FD7002A8735 /* NSObject+Extension.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
-		635A19EC28F9603900197BCC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* ViewController.swift */; };
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
 		B02D9CC028FF7269005E717B /* TranslatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D9CBF28FF7269005E717B /* TranslatorError.swift */; };
+		B02D9CC328FF8A83005E717B /* BoxOfficeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D9CC228FF8A83005E717B /* BoxOfficeListViewModel.swift */; };
+		B02D9CC528FF8ABC005E717B /* BoxOfficeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D9CC428FF8ABC005E717B /* BoxOfficeListViewController.swift */; };
+		B02D9CC728FF8B36005E717B /* BoxOfficeListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D9CC628FF8B36005E717B /* BoxOfficeListCollectionViewCell.swift */; };
+		B02D9CCB28FF8CEC005E717B /* ContentViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D9CCA28FF8CEC005E717B /* ContentViewPreview.swift */; };
+		B02D9CCD28FF9047005E717B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D9CCC28FF9047005E717B /* UIColor+Extension.swift */; };
+		B02D9CD228FF93BE005E717B /* OverlayedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D9CD128FF93BE005E717B /* OverlayedImageView.swift */; };
+		B02D9CD428FF9622005E717B /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D9CD328FF9622005E717B /* UIFont+Extension.swift */; };
+		B02D9CD628FF9B8C005E717B /* BoxOfficeListCollectionViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D9CD528FF9B8C005E717B /* BoxOfficeListCollectionViewCellModel.swift */; };
 		B04716CD28FE17C60025FF23 /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04716CC28FE17C60025FF23 /* ApiProvider.swift */; };
 		B04716CF28FE18380025FF23 /* KobisAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04716CE28FE18380025FF23 /* KobisAPI.swift */; };
 		B04716D128FE18460025FF23 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04716D028FE18460025FF23 /* TargetType.swift */; };
@@ -37,13 +48,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		462CB2202901366000BA4A55 /* GestureRecognizerPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GestureRecognizerPublisher.swift; path = ../../../../../../../Documents/GestureRecognizerPublisher.swift; sourceTree = "<group>"; };
+		462CB2222901367C00BA4A55 /* ControlEventPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlEventPublisher.swift; sourceTree = "<group>"; };
+		46B170E129001415002A8735 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		46B170E329001FD7002A8735 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		635A19EB28F9603900197BCC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		635A19F028F9603A00197BCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		635A19F528F9603A00197BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B02D9CBF28FF7269005E717B /* TranslatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorError.swift; sourceTree = "<group>"; };
+		B02D9CC228FF8A83005E717B /* BoxOfficeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListViewModel.swift; sourceTree = "<group>"; };
+		B02D9CC428FF8ABC005E717B /* BoxOfficeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListViewController.swift; sourceTree = "<group>"; };
+		B02D9CC628FF8B36005E717B /* BoxOfficeListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListCollectionViewCell.swift; sourceTree = "<group>"; };
+		B02D9CCA28FF8CEC005E717B /* ContentViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewPreview.swift; sourceTree = "<group>"; };
+		B02D9CCC28FF9047005E717B /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		B02D9CD128FF93BE005E717B /* OverlayedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayedImageView.swift; sourceTree = "<group>"; };
+		B02D9CD328FF9622005E717B /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		B02D9CD528FF9B8C005E717B /* BoxOfficeListCollectionViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListCollectionViewCellModel.swift; sourceTree = "<group>"; };
 		B04716CC28FE17C60025FF23 /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
 		B04716CE28FE18380025FF23 /* KobisAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisAPI.swift; sourceTree = "<group>"; };
 		B04716D028FE18460025FF23 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
@@ -77,13 +99,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		462CB21F2901365600BA4A55 /* Combine */ = {
+			isa = PBXGroup;
+			children = (
+				462CB2202901366000BA4A55 /* GestureRecognizerPublisher.swift */,
+				462CB2222901367C00BA4A55 /* ControlEventPublisher.swift */,
+			);
+			path = Combine;
+			sourceTree = "<group>";
+		};
 		46B77B7F28FD6268009A2FA9 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				B02D9CC928FF8CE1005E717B /* Utils */,
 				B04716E928FE41670025FF23 /* Repository */,
-				B04716D228FE21200025FF23 /* Extension */,
 				46B77B8128FD6289009A2FA9 /* LifeCycle */,
 				46B77B8228FD6294009A2FA9 /* Views */,
+				B02D9CC128FF8985005E717B /* ViewModels */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -110,7 +142,9 @@
 		46B77B8228FD6294009A2FA9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				635A19EB28F9603900197BCC /* ViewController.swift */,
+				B02D9CCE28FF939E005E717B /* Common */,
+				B02D9CC428FF8ABC005E717B /* BoxOfficeListViewController.swift */,
+				B02D9CC628FF8B36005E717B /* BoxOfficeListCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -142,6 +176,33 @@
 			path = BoxOffice;
 			sourceTree = "<group>";
 		};
+		B02D9CC128FF8985005E717B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B02D9CC228FF8A83005E717B /* BoxOfficeListViewModel.swift */,
+				B02D9CD528FF9B8C005E717B /* BoxOfficeListCollectionViewCellModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B02D9CC928FF8CE1005E717B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				462CB21F2901365600BA4A55 /* Combine */,
+				B04716D228FE21200025FF23 /* Extension */,
+				B02D9CCA28FF8CEC005E717B /* ContentViewPreview.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		B02D9CCE28FF939E005E717B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B02D9CD128FF93BE005E717B /* OverlayedImageView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		B04716CB28FE17AE0025FF23 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +219,10 @@
 			isa = PBXGroup;
 			children = (
 				B04716D328FE21310025FF23 /* Encodable+Extension.swift */,
+				B02D9CCC28FF9047005E717B /* UIColor+Extension.swift */,
+				B02D9CD328FF9622005E717B /* UIFont+Extension.swift */,
+				46B170E129001415002A8735 /* Date+Extension.swift */,
+				46B170E329001FD7002A8735 /* NSObject+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -291,18 +356,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				B04716D128FE18460025FF23 /* TargetType.swift in Sources */,
+				46B170E229001415002A8735 /* Date+Extension.swift in Sources */,
+				B02D9CD628FF9B8C005E717B /* BoxOfficeListCollectionViewCellModel.swift in Sources */,
+				46B170E429001FD7002A8735 /* NSObject+Extension.swift in Sources */,
 				B04716ED28FE42260025FF23 /* Translator.swift in Sources */,
+				B02D9CC328FF8A83005E717B /* BoxOfficeListViewModel.swift in Sources */,
+				B02D9CD228FF93BE005E717B /* OverlayedImageView.swift in Sources */,
+				B02D9CCD28FF9047005E717B /* UIColor+Extension.swift in Sources */,
+				B02D9CC528FF8ABC005E717B /* BoxOfficeListViewController.swift in Sources */,
 				B04716E328FE27C20025FF23 /* Environment.swift in Sources */,
+				462CB2232901367C00BA4A55 /* ControlEventPublisher.swift in Sources */,
 				B04716F528FE7C370025FF23 /* OmdbAPI.swift in Sources */,
-				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
+				B02D9CCB28FF8CEC005E717B /* ContentViewPreview.swift in Sources */,
 				B04716CF28FE18380025FF23 /* KobisAPI.swift in Sources */,
 				B02D9CC028FF7269005E717B /* TranslatorError.swift in Sources */,
+				B02D9CC728FF8B36005E717B /* BoxOfficeListCollectionViewCell.swift in Sources */,
 				B04716E528FE3B6C0025FF23 /* Logger.swift in Sources */,
+				462CB2212901366000BA4A55 /* GestureRecognizerPublisher.swift in Sources */,
 				B04716EB28FE41770025FF23 /* Repository.swift in Sources */,
 				B04716D428FE21310025FF23 /* Encodable+Extension.swift in Sources */,
 				B04716CD28FE17C60025FF23 /* ApiProvider.swift in Sources */,
 				B04716E828FE3FF70025FF23 /* Movie.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
+				B02D9CD428FF9622005E717B /* UIFont+Extension.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -448,6 +524,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U9B2QVCTVS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BoxOffice/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -461,7 +538,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OMDB_KEY = 7e733d2e;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.BoxOffice;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.BoxOffice.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -476,6 +553,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U9B2QVCTVS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BoxOffice/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -489,7 +567,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OMDB_KEY = 7e733d2e;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.BoxOffice;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.BoxOffice.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

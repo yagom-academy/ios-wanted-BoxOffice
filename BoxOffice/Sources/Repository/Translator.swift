@@ -16,9 +16,6 @@ enum Translator {
                 let rank = Int($0.rank),
                 let rankInten = Int($0.rankInten),
                 let rankOldAndNew = BoxOfficeInfo.RankType(rawValue: $0.rankOldAndNew),
-                let audienceCount = Int($0.audiCnt),
-                let audienceInten = Int($0.audiInten),
-                let audienceChange = Int($0.audiChange),
                 let audienceAccumulation = Int($0.audiAcc)
             else { return }
             result.append(
@@ -30,9 +27,6 @@ enum Translator {
                         rank: rank,
                         rankInten: rankInten,
                         rankOldAndNew: rankOldAndNew,
-                        audienceCount: audienceCount,
-                        audienceInten: audienceInten,
-                        audienceChange: audienceChange,
                         audienceAccumulation: audienceAccumulation))
             )
         }
@@ -47,9 +41,6 @@ enum Translator {
                 let rank = Int($0.rank),
                 let rankInten = Int($0.rankInten),
                 let rankOldAndNew = BoxOfficeInfo.RankType(rawValue: $0.rankOldAndNew),
-                let audienceCount = Int($0.audiCnt),
-                let audienceInten = Int($0.audiInten),
-                let audienceChange = Int($0.audiChange),
                 let audienceAccumulation = Int($0.audiAcc)
             else { return }
             result.append(
@@ -61,9 +52,6 @@ enum Translator {
                         rank: rank,
                         rankInten: rankInten,
                         rankOldAndNew: rankOldAndNew,
-                        audienceCount: audienceCount,
-                        audienceInten: audienceInten,
-                        audienceChange: audienceChange,
                         audienceAccumulation: audienceAccumulation))
             )
         }
