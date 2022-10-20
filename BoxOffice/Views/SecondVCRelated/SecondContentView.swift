@@ -48,11 +48,11 @@ struct ArrayDataView: View {
 
 struct SecondContentView: View {
     
-    @ObservedObject var viewModel: SecondContentViewModel
-    
-    init(viewModel: SecondContentViewModel) {
-        self.viewModel = viewModel
-    }
+    //SwiftUI View는 변경점이 생기면 뷰를 새로 만들었다가 없앴다가 새로 만들었다가 한다
+    //그 과정에서 모델도 새로 만들어지고 없어졌다가 새로 만들어지고 한다.
+    //그렇기에 모델은 한번 초기화가 되면 삭제-생성이 반복되는 것이 아닌 한번 만들어지면 그대로 메모리에 유지되도록 해야 한다. 그래서 @ObservedObject가 아니라 @StateObject를 붙여주는 것이다
+    //StateObject는 ObservedObject와 거의 똑같으나, 하나의 객체로 만들어진다. 그리고 View가 얼마나 초기화되든지 상관없이 별개의 객체로 관리된다.
+    @StateObject var viewModel: SecondContentViewModel
     
     var body: some View {
         ScrollView {
