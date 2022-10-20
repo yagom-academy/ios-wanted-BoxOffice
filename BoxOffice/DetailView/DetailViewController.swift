@@ -8,15 +8,22 @@
 import UIKit
 
 class DetailViewController : UIViewController{
+    
+    let detailView = DetailView()
+            
+    var movie : Movie?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isHidden = false
+        setInfo()
         addSubViews()
         setConstraints()
     }
     
-    let detailView = DetailView()
-
+    func setInfo(){
+        detailView.setInfo(movie: movie!)
+    }
+    
     func addSubViews(){
         view.addSubview(detailView)
         detailView.translatesAutoresizingMaskIntoConstraints = false

@@ -11,33 +11,46 @@ class DetailView : UIView {
     
     let scrollView = UIScrollView()
     
-    let posterView = UIImageView()
-    
-    let rankGroudView = RankGroupViewForDetailView()
+    let newLabel : UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "New"
+        lbl.textColor = .systemYellow
+        lbl.font = .boldSystemFont(ofSize: 30)
+        return lbl
+    }()
         
+    let posterView : UIImageView = {
+        let imgView = UIImageView()
+        imgView.layer.cornerRadius = 10
+        imgView.clipsToBounds = true
+        return imgView
+    }()
+    
+    let rankLabel : UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.font = .boldSystemFont(ofSize: 36)
+        lbl.backgroundColor = .systemBackground.withAlphaComponent(0.5)
+        lbl.textAlignment = .center
+        lbl.textColor = .label
+        return lbl
+    }()
+                
     let titleLabel : UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.font = .boldSystemFont(ofSize: 36)
-        lbl.text = "아이언맨"
+        lbl.numberOfLines = 0
+        lbl.lineBreakMode = .byCharWrapping
+        lbl.textAlignment = .center
         return lbl
-    }()
-    
-    lazy var stackH : UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [rankGroudView,titleLabel])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.distribution = .fill
-        stackView.spacing = 30
-        stackView.axis = .horizontal
-        stackView.alignment = .bottom
-        return stackView
     }()
     
     let tableInfoView = TableInfoView()
     
-    
     lazy var stackV : UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [posterView,stackH,tableInfoView])
+        let stackView = UIStackView(arrangedSubviews: [newLabel,posterView,titleLabel,tableInfoView])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .fill
         stackView.spacing = 20
@@ -51,10 +64,6 @@ class DetailView : UIView {
         addSubViews()
         setConstraints()
         scrollView.backgroundColor = .systemBackground
-        posterView.image = UIImage(named: "James")
-        //rankGroudView.setInfo(isNew: true, rank: "3", isUp: true, rankDiff: "2")
-        tableInfoView.setInfo(releaseDate: "2012/12/28", filmYear: "2010", playTime: "120분", genre: "액션", director: "루소 형제", actor: "로버트 다우니 주니어", rate: "12세", numOfAudience: "120M")
-      //  scrollView.contentInsetAdjustmentBehavior = .never
     }
     
     required init?(coder: NSCoder) {
@@ -65,7 +74,8 @@ class DetailView : UIView {
         self.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(stackV)
-      //  tableView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(newLabel)
+        posterView.addSubview(rankLabel)
     }
     
     func setConstraints(){
@@ -82,8 +92,19 @@ class DetailView : UIView {
             stackV.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             stackV.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             tableInfoView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.8),
+            rankLabel.leadingAnchor.constraint(equalTo: posterView.leadingAnchor),
+            rankLabel.topAnchor.constraint(equalTo: posterView.topAnchor),
+            rankLabel.widthAnchor.constraint(equalTo: rankLabel.heightAnchor),
+            newLabel.bottomAnchor.constraint(equalTo: posterView.topAnchor),
+            newLabel.centerXAnchor.constraint(equalTo: posterView.centerXAnchor)
         ])
     }
 
-
+    func setInfo(movie:Movie){
+        newLabel.isHidden = movie.boxOfficeInfo.rankOldAndNew == "NEW" ? false : true
+        posterView.image = movie.poster
+        titleLabel.text = movie.boxOfficeInfo.movieNm
+        rankLabel.text = movie.boxOfficeInfo.rank
+        tableInfoView.setInfo(releaseDate: movie.boxOfficeInfo.openDt, filmYear: movie.detailInfo.prdtYear, playTime: movie.detailInfo.showTm, genre: movie.detailInfo.genres[0].genreNm, director: movie.detailInfo.directors[0].peopleNm, actor: movie.detailInfo.actors, rate: movie.detailInfo.audits[0].watchGradeNm, numOfAudience: movie.boxOfficeInfo.audiAcc)
+    }
 }

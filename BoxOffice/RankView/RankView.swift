@@ -8,19 +8,15 @@
 import UIKit
 
 protocol RankViewProtocol{
-    func presentDetailView()
+    func presentDetailView(movie:Movie)
 }
 
 class RankView : UIView {
     
-    let headerView = CustomHeader()
+    var movie : [Movie] = []
     
-    let tableView = UITableView(frame: .zero, style: .grouped) //plain으로 하면 헤더가 사라지지 않음
-    
-    var boxOfficeResponse : BoxOfficeResponse?
-    
-    var boxOfficeInfo : [BoxOfficeInfo]?
-    
+    let tableView = UITableView(frame: .zero, style: .insetGrouped) //plain으로 하면 헤더가 사라지지 않음
+        
     var range : String?
     
     var delegate : RankViewProtocol?
@@ -55,22 +51,10 @@ class RankView : UIView {
         tableView.delegate = self
         tableView.register(CustomCell.self, forCellReuseIdentifier: CustomCell.id)
         tableView.register(CustomHeader.self, forHeaderFooterViewReuseIdentifier: CustomHeader.id)
-        tableView.rowHeight = UITableView.automaticDimension
+        let a = UIScreen.main.bounds.size.height / 3
+        tableView.rowHeight = a//UITableView.automaticDimension
         tableView.separatorStyle = .none
-    }
-    
-    func setInfo(){
-        boxOfficeInfo = boxOfficeResponse?.boxOfficeResult.dailyBoxOfficeList
-        range = boxOfficeResponse?.boxOfficeResult.showRange
-    }
-    
-    func urlToImage(url:String) -> UIImage? {
-        let url = URL(string: url)
-        guard let url = url else { return nil}
-        if let data = try? Data(contentsOf:url), let image = UIImage(data: data){
-            return image
-        }
-        return nil
+        tableView.backgroundColor = .systemBackground
     }
     
 }
@@ -79,39 +63,29 @@ class RankView : UIView {
 extension RankView : UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.presentDetailView()
-        tableView.cellForRow(at: indexPath)?.isSelected = false
-
+        delegate?.presentDetailView(movie:movie[indexPath.row])
     }
     //시각적인 설정
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
     }
-    
     //텍스트만 설정
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: CustomHeader.id) as? CustomHeader else { return UITableViewHeaderFooterView() }
         header.dateLabel.text = range
         return header
-        
-//        if section == 0{
-//            return header
-//        }else{
-//            return nil
-//        }
     }
-
 }
 
 extension RankView : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return boxOfficeInfo?.count ?? 0
+        return movie.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.id, for: indexPath) as? CustomCell, let boxOfficeInfo = boxOfficeInfo?[indexPath.row] else { return UITableViewCell()}
-        let isNew = boxOfficeInfo.rankOldAndNew == "NEW" ? true : false
-        cell.rankGroupView.setInfo(isNew: isNew, rank: boxOfficeInfo.rank, upAndDown: boxOfficeInfo.rankInten)
-        cell.infoGroupView.setInfo(posterImage: UIImage(named:"James"), title: boxOfficeInfo.movieNm, releaseDate: boxOfficeInfo.openDt, numOfAudience: boxOfficeInfo.audiAcc)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.id, for: indexPath) as? CustomCell else { return UITableViewCell()}
+        let movie = movie[indexPath.row]
+        cell.infoGroupView.setInfo(posterImage:movie.poster ,title: movie.boxOfficeInfo.movieNm, releaseDate: movie.boxOfficeInfo.openDt, numOfAudience: movie.boxOfficeInfo.audiAcc, rank: movie.boxOfficeInfo.rank, upAndDown: movie.boxOfficeInfo.rankInten, isNew: movie.boxOfficeInfo.rankOldAndNew)
+        cell.selectionStyle = .none
         return cell
     }
     

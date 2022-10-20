@@ -8,13 +8,11 @@
 import UIKit
 import Foundation
 
-struct RankInfo{
-    let rank : Int
-    let rankDiff : Int
-    let title : String
-    let releaseDate : String
-    let numOfAudience : Int
-    let isNew : Bool
+struct Movie{
+    let boxOfficeInfo : BoxOfficeInfo
+    let detailInfo : MovieInfo
+    let poster : UIImage
+    let rating : [Rating]
 }
 
 struct BoxOfficeResponse : Decodable{
@@ -34,8 +32,14 @@ struct BoxOfficeInfo : Decodable{
     let openDt : String //개봉일
     let audiAcc : String //(누적)관객수
     let rankOldAndNew : String //순위신규진입여부 OLD, NEW
-    let movieCd : String //포스터검색하기 위해 필요한 영문 제목의 검색용
+    let movieCd : String //상세정보 검색하기 위해 필요한 영문 제목의 검색용
 }
+
+
+
+
+
+
 
 struct MovieInfoResponse : Decodable{
     let movieInfoResult : MovieInfoResult
@@ -47,8 +51,43 @@ struct MovieInfoResult : Decodable{
 
 struct MovieInfo : Decodable{
     let movieNmEn : String
+    //상세 페이지에 필요한 정보들
+    let movieNm : String
+    let openDt : String //개봉일
+    let prdtYear : String //제작년도
+    let showTm : String //상영시간
+    let genres : [Genre] //장르
+    let directors : [PeopleNm] //감독
+    let actors : [PeopleNm] //배우
+    let audits : [WatchGrade] //관람등급
+ //   var audiAcc : String?
 }
 
-struct MoviePoster : Decodable{
-    let poster : String
+struct Genre : Decodable{
+    let genreNm : String
+}
+
+struct PeopleNm : Decodable{
+    let peopleNm : String
+}
+
+struct WatchGrade : Decodable{
+    let watchGradeNm : String
+}
+
+
+
+
+
+
+
+
+struct MovieInfoUsingOMDB : Decodable{
+    let Poster : String
+    let Ratings : [Rating]
+}
+
+struct Rating : Decodable{
+    let Source : String
+    let Value : String
 }

@@ -103,14 +103,17 @@ class TableInfoView : UIView {
         }
     }
     
-    func setInfo(releaseDate:String, filmYear:String, playTime:String, genre:String, director:String, actor:String, rate:String, numOfAudience:String){
+    func setInfo(releaseDate:String, filmYear:String, playTime:String, genre:String, director:String, actor:[PeopleNm], rate:String, numOfAudience:String){
+        
+        let actor = actor.count > 0 ?  actor[0].peopleNm : "없음"
+        
         answerReleaseDateLabel.text = releaseDate
         answerFilmYearLabel.text = filmYear
-        answerPlayTimeLabel.text = playTime
+        answerPlayTimeLabel.text = "\(playTime)분"
         answerGenreLabel.text = genre
         answerDirectorLabel.text = director
         answerActorLabel.text = actor
         answerRateLabel.text = rate
-        answerBumOfAudienceLabel.text = numOfAudience
+        answerBumOfAudienceLabel.text = "\(numOfAudience)명"
     }
 }

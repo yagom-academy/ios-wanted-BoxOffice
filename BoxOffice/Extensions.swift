@@ -18,4 +18,27 @@ extension String{
         let idx = index(startIndex, offsetBy: 3)
         return String(self[...idx])
     }
+    
+    func makeItFitToURL() -> Self{
+        guard self.count > 0 else { return self}
+        var str = ""
+        for char in self{
+            if char == " "{
+                str.append("%20")
+            }else{
+                str.append(String(char))
+            }
+        }
+        print(str)
+        return str
+    }
+}
+
+extension UIFont {
+    static func preferredFont(for style: TextStyle, weight: Weight) -> UIFont {
+        let metrics = UIFontMetrics(forTextStyle: style)
+        let desc = UIFontDescriptor.preferredFontDescriptor(withTextStyle: style)
+        let font = UIFont.systemFont(ofSize: desc.pointSize, weight: weight)
+        return metrics.scaledFont(for: font)
+    }
 }

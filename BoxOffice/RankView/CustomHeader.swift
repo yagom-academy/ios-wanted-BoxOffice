@@ -15,13 +15,15 @@ class CustomHeader : UITableViewHeaderFooterView{
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = "박스오피스"
-        lbl.font = .boldSystemFont(ofSize: 40)
+        lbl.font = .preferredFont(for: .largeTitle,weight: .bold)
+        //lbl.font = .boldSystemFont(ofSize: 40)
         return lbl
     }()
     let dateLabel : UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.font = .systemFont(ofSize: 13)
+    //    lbl.font = .preferredFont(forTextStyle: .caption2)
+        lbl.font = .systemFont(ofSize: 18)
         return lbl
     }()
     
@@ -44,9 +46,9 @@ class CustomHeader : UITableViewHeaderFooterView{
     func setConstraints(){
         NSLayoutConstraint.activate([
             appTitleLable.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            appTitleLable.bottomAnchor.constraint(equalTo: self.dateLabel.topAnchor),
+            appTitleLable.bottomAnchor.constraint(equalTo: dateLabel.topAnchor),
             dateLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            dateLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: -5)
+            dateLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
 }

@@ -11,33 +11,50 @@ class RankViewController: UIViewController {
     
     let rankView = RankView()
     
+    var detailInfo : [MovieInfo] = []
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         fetch()
+        makeNavigationBarClear()
         addSubViews()
         setConstraints()
         rankView.delegate = self
     }
     
+    func makeNavigationBarClear(){
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+    }
+    
     func fetch(){
-        MovieService().getMovieInfo { result in
-            switch result{
-            case .success(let response):
-                DispatchQueue.main.async {
-                    self.rankView.boxOfficeResponse = response
-                    self.rankView.setInfo()
-                    self.rankView.tableView.reloadData()
+        Task{
+            do{
+                let response = try await MovieService().getMovieInfo()
+                rankView.range = response.boxOfficeResult.showRange
+                rankView.tableView.reloadData()
+                let boxOfficeInfoArr = response.boxOfficeResult.dailyBoxOfficeList
+                for boxOfficeInfo in boxOfficeInfoArr{
+                    let detailInfo = try await MovieService().getDetailMovieInfo(movieCd: boxOfficeInfo.movieCd).movieInfoResult.movieInfo
+                    let englishTitle = detailInfo.movieNmEn
+                    let releaseYear = boxOfficeInfo.openDt.extractYear()
+                    var poster : UIImage?
+                    var ratings : [Rating] = []
+                    do{
+                        (poster,ratings) = try await MovieService().getMoviePoster(englishTitle: englishTitle, releaseYear: releaseYear)
+                    }catch{
+                        print(error.localizedDescription)
+                    }
+                    rankView.movie.append(Movie(boxOfficeInfo: boxOfficeInfo, detailInfo: detailInfo, poster: poster ?? UIImage(named: "NoImage")!, rating: ratings))
+                    rankView.tableView.beginUpdates()
+                    rankView.tableView.insertRows(at: [IndexPath(row: rankView.movie.count - 1, section: 0)], with: .automatic)
+                    rankView.tableView.endUpdates()
                 }
-            case .failure(let error) :
+            }catch{
                 print(error.localizedDescription)
             }
         }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = true
-
     }
 
     func addSubViews(){
@@ -57,9 +74,9 @@ class RankViewController: UIViewController {
 }
 
 extension RankViewController : RankViewProtocol{
-    func presentDetailView() {
+    func presentDetailView(movie:Movie) {
         let vc = DetailViewController()
+        vc.movie = movie
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
