@@ -9,6 +9,7 @@ import UIKit
 
 final class AddMovieReviewViewController: UIViewController {
 
+    static let textViewPlaceHolder = "리뷰 (선택사항)"
     // MARK: UI
 
     @IBOutlet var imageView: UIImageView!
@@ -31,7 +32,25 @@ final class AddMovieReviewViewController: UIViewController {
 
     @IBAction
     private func cancelButtonDidTap() {
-
+        dismiss(animated: true)
     }
 
+}
+
+// MARK: - UITextViewDelegate
+
+extension AddMovieReviewViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == Self.textViewPlaceHolder {
+            textView.text = nil
+            textView.textColor = .label
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = Self.textViewPlaceHolder
+            textView.textColor = .tertiaryLabel
+        }
+    }
 }
