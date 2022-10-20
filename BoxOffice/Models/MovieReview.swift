@@ -1,31 +1,63 @@
 //
-//  Review.swift
+//  MovieReview.swift
 //  BoxOffice
 //
 //  Created by 홍다희 on 2022/10/18.
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
-struct MovieReview: Hashable {
+struct MovieReview: Codable {
 
     // MARK: Properties
 
-    private let uuid = UUID()
+    @DocumentID var uuidString: String?
 
+    /// 영화코드
+    let movieIdentifier: String
+    /// 별명
     let nickname: String
+    /// 암호
     let password: String
+    /// 별점
     let rating: Int
+    /// 내용
     let content: String?
+    /// 사진
     //    let image: String
+
+    private let uuid: UUID
+
+    // MARK: Init
+
+    init(
+        movieIdentifier: String,
+        nickname: String,
+        password: String,
+        rating: Int,
+        content: String? = nil,
+        uuid: UUID = UUID()
+    ) {
+        self.uuidString = uuid.uuidString
+        self.movieIdentifier = movieIdentifier
+        self.nickname = nickname
+        self.password = password
+        self.rating = rating
+        self.content = content
+        self.uuid = uuid
+    }
+
 }
 
-extension MovieReview {
-    static var sampleData: [MovieReview] = [
-        MovieReview(nickname: "nickname1", password: "1", rating: 1, content: "review content1"),
-        MovieReview(nickname: "nickname2", password: "2", rating: 2, content: "review content2"),
-        MovieReview(nickname: "nickname3", password: "3", rating: 3, content: "review content3"),
-        MovieReview(nickname: "nickname4", password: "4", rating: 4, content: "review content4"),
-        MovieReview(nickname: "nickname5", password: "5", rating: 5, content: "review content5"),
-    ]
+extension MovieReview: Hashable {
+
+    static func == (lhs: MovieReview, rhs: MovieReview) -> Bool {
+        lhs.uuid == rhs.uuid
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
+    }
+
 }

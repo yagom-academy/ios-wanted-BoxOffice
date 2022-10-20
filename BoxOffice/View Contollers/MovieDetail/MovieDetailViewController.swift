@@ -8,13 +8,11 @@
 import UIKit
 import Combine
 
-
-
 final class MovieDetailViewController: UIViewController {
 
     // MARK: Constants
 
-    static let reuseIdentifier = "reuse-identifier"
+    static let headerResuseIdentifier = "headerResuseIdentifier"
 
     // MARK: UI
 
@@ -23,10 +21,12 @@ final class MovieDetailViewController: UIViewController {
     // MARK: Properties
 
     private let movieSearchService = MovieSearchService()
+    private let movieReviewService = MovieReviewService()
 
     var movie: MovieRanking!
 
     @Published private var movieDetail: MovieDetail!
+    @Published private var movieReviews: [MovieReview] = []
     private var cancellables: Set<AnyCancellable> = .init()
     private var dataSource: DataSource!
 
@@ -38,12 +38,8 @@ final class MovieDetailViewController: UIViewController {
         configureCollectionView()
         configureDataSource()
         configureMovieRankingView()
-        configureObserver()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
+        addObserverForMovieDetail()
+        fetchMovieReviews()
         fetchMovieDetail()
     }
 
@@ -61,7 +57,7 @@ final class MovieDetailViewController: UIViewController {
             )
             let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44)),
-                elementKind: Self.reuseIdentifier,
+                elementKind: Self.headerResuseIdentifier,
                 alignment: .topLeading
             )
 
@@ -112,7 +108,7 @@ final class MovieDetailViewController: UIViewController {
             }
         }
         collectionView.collectionViewLayout = layout
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Self.reuseIdentifier)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Self.headerResuseIdentifier)
     }
 
     private func configureDataSource()  {
@@ -165,7 +161,7 @@ final class MovieDetailViewController: UIViewController {
         }
 
         // HeaderRegistraion
-        let headerRegistration = SupplementaryRegistration(elementKind: Self.reuseIdentifier) { supplementaryView, elementKind, indexPath in
+        let headerRegistration = SupplementaryRegistration(elementKind: Self.headerResuseIdentifier) { supplementaryView, elementKind, indexPath in
             var config = UIListContentConfiguration.plainHeader()
             config.text = self.dataSource.snapshot().sectionIdentifiers[indexPath.section].title
             supplementaryView.contentConfiguration = config
@@ -207,7 +203,7 @@ final class MovieDetailViewController: UIViewController {
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems([], toSection: .crew)
         snapshot.appendItems([], toSection: .info)
-        snapshot.appendItems(MovieReview.sampleData, toSection: .review)
+        snapshot.appendItems([], toSection: .review)
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 
@@ -227,12 +223,19 @@ final class MovieDetailViewController: UIViewController {
         movieRankingView.configure(with: movie)
     }
 
-    private func configureObserver() {
+    private func addObserverForMovieDetail() {
         $movieDetail
             .receive(on: DispatchQueue.main)
             .sink { [weak self] detail in
                 guard let detail = detail else { return }
                 self?.updateView(with: detail)
+            }
+            .store(in: &cancellables)
+
+        $movieReviews
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] reviews in
+                self?.updateView(with: reviews)
             }
             .store(in: &cancellables)
     }
@@ -244,6 +247,12 @@ final class MovieDetailViewController: UIViewController {
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 
+    private func updateView(with reviews: [MovieReview]) {
+        var snapshot = dataSource.snapshot()
+        snapshot.appendItems(reviews, toSection: .review)
+        dataSource.apply(snapshot, animatingDifferences: false)
+    }
+
     private func fetchMovieDetail() {
         Task {
             do {
@@ -252,6 +261,28 @@ final class MovieDetailViewController: UIViewController {
             } catch let error {
                 print(error.localizedDescription)
             }
+        }
+    }
+
+    private func fetchMovieReviews() {
+        Task {
+            do {
+                let reviews = try await movieReviewService.reviews(for: movie.identifier)
+                self.movieReviews = reviews
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    // MARK: Navigation
+
+    @IBAction
+    func unwindToMovieDetail(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? AddMovieReviewViewController,
+           let review = sourceViewController.review {
+            movieReviewService.addReview(review)
+            self.fetchMovieReviews()
         }
     }
 

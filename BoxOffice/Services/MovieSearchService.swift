@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol MovieSearchAPI {
+protocol MovieSearchServiceType {
 
     func searchMovieRanking(for duration: DurationUnit) async throws -> [MovieRanking]
     func searchMovieDetail(for identifier: String) async throws -> MovieDetail
 
 }
 
-class MovieSearchService: MovieSearchAPI {
+class MovieSearchService: MovieSearchServiceType {
 
     private let apiRequestLoader: APIRequestLoader
 

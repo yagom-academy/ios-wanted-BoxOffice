@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cKx-fh-sXl">
-                                <rect key="frame" x="0.0" y="155" width="430" height="743"/>
+                                <rect key="frame" x="0.0" y="103" width="430" height="795"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieListTableViewCell" rowHeight="86" id="V38-Hw-y7q" customClass="MovieListTableViewCell" customModule="BoxOffice" customModuleProvider="target">
@@ -146,10 +146,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="430" height="730.33333333333337"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fPT-9r-yXH">
-                                                <rect key="frame" x="0.0" y="0.0" width="430" height="730.33333333333337"/>
+                                                <rect key="frame" x="16" y="0.0" width="398" height="730.33333333333337"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Nlw-73-on5">
-                                                        <rect key="frame" x="105" y="0.0" width="220" height="238.33333333333334"/>
+                                                        <rect key="frame" x="89" y="0.0" width="220" height="238.33333333333334"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fGP-2K-Rhk">
                                                                 <rect key="frame" x="16.666666666666671" y="1" width="186.66666666666663" height="185"/>
@@ -171,7 +171,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IuM-dp-YCy">
-                                                        <rect key="frame" x="16" y="246.33333333333331" width="398" height="483.99999999999994"/>
+                                                        <rect key="frame" x="0.0" y="246.33333333333331" width="398" height="483.99999999999994"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="닉네임" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ip-DA-h2L">
                                                                 <rect key="frame" x="0.0" y="0.0" width="398" height="34"/>
@@ -209,8 +209,6 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="IuM-dp-YCy" firstAttribute="leading" secondItem="raU-zG-7wg" secondAttribute="leading" constant="16" id="BIb-eX-Whf"/>
-                                            <constraint firstAttribute="trailing" secondItem="fPT-9r-yXH" secondAttribute="trailing" id="EZO-uZ-WT4"/>
-                                            <constraint firstItem="fPT-9r-yXH" firstAttribute="leading" secondItem="raU-zG-7wg" secondAttribute="leading" id="MgJ-eL-s2a"/>
                                             <constraint firstAttribute="trailing" secondItem="IuM-dp-YCy" secondAttribute="trailing" constant="16" id="fuw-Y5-WvU"/>
                                             <constraint firstItem="fPT-9r-yXH" firstAttribute="top" secondItem="raU-zG-7wg" secondAttribute="top" id="nzw-nb-2gE"/>
                                             <constraint firstAttribute="bottom" secondItem="fPT-9r-yXH" secondAttribute="bottom" id="zqm-wr-NYT"/>
@@ -246,7 +244,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="1vH-vV-rAk">
                             <connections>
-                                <action selector="saveButtonDidTap" destination="O5U-Tq-URT" id="rZd-xi-eEm"/>
+                                <segue destination="008-lG-xqs" kind="unwind" unwindAction="unwindToMovieDetailWithSender:" id="i9J-86-o6w"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -261,6 +259,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jmq-xK-6UZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="008-lG-xqs" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="93C-OD-IHV">
                     <connections>
                         <action selector="imageViewDidTap" destination="O5U-Tq-URT" id="JXq-lM-UKw"/>

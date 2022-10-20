@@ -16,13 +16,17 @@ final class AddMovieReviewViewController: UIViewController {
 
     // MARK: UI
 
-    @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet var imageView: UIImageView!
-    @IBOutlet var ratingControl: RatingControl!
-    @IBOutlet var nicknameTextField: UITextField!
-    @IBOutlet var passwordTextField: UITextField!
-    @IBOutlet var contentTextView: UITextView!
-    @IBOutlet var saveButton: UIBarButtonItem!
+    @IBOutlet private var scrollView: UIScrollView!
+    @IBOutlet private var imageView: UIImageView!
+    @IBOutlet private var ratingControl: RatingControl!
+    @IBOutlet private var nicknameTextField: UITextField!
+    @IBOutlet private var passwordTextField: UITextField!
+    @IBOutlet private var contentTextView: UITextView!
+    @IBOutlet private var saveButton: UIBarButtonItem!
+
+    // MARK: Properties
+
+    var review: MovieReview?
 
     // MARK: View Life Cycle
 
@@ -86,18 +90,29 @@ final class AddMovieReviewViewController: UIViewController {
         dismiss(animated: true)
     }
 
-    @IBAction
-    private func saveButtonDidTap() {
-        Logger.ui.debug(#function)
+    // MARK: Navigation
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let button = sender as? UIBarButtonItem,
+              button === saveButton else {
+            Logger.ui.debug("The save button was not pressed, cancelling")
+            return
+        }
+
+        guard let destination = segue.destination as? MovieDetailViewController else { return }
+
+        let movieIdentifier = destination.movie.identifier
         let nickname = nicknameTextField.text!
         let password = passwordTextField.text!
         let rating = ratingControl.rating
         let content = contentTextView.text
-        let review = MovieReview(nickname: nickname, password: password, rating: rating, content: content)
-        MovieReview.sampleData.append(review)
-
-        dismiss(animated: true)
+        review = MovieReview(
+            movieIdentifier: movieIdentifier,
+            nickname: nickname,
+            password: password,
+            rating: rating,
+            content: content
+        )
     }
 
 }
@@ -165,7 +180,7 @@ extension AddMovieReviewViewController: UITextViewDelegate {
             context: nil
         )
 
-        if (boundingRect.size.height + padding * 2 <= textView.frame.size.height){
+        if (boundingRect.size.height + padding * 2 <= textView.frame.size.height) {
             return true
         }
         else {

@@ -27,7 +27,7 @@ final class MovieListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureObserver()
+        addObserverForMovies()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -38,7 +38,7 @@ final class MovieListViewController: UIViewController {
 
     // MARK: -
 
-    private func configureObserver() {
+    private func addObserverForMovies() {
         $movies
             .receive(on: DispatchQueue.main)
             .sink { [weak self] movies in
@@ -64,6 +64,7 @@ final class MovieListViewController: UIViewController {
         guard let destination = segue.destination as? MovieDetailViewController,
               let indexPath = tableView.indexPathForSelectedRow else { return }
         let movie = movies[indexPath.row]
+        Logger.ui.debug("\(#function), \(movie.identifier)")
         destination.movie = movie
     }
 
