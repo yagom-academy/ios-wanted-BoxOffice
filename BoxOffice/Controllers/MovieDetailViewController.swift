@@ -54,7 +54,27 @@ extension MovieDetailViewController {
   }
 
   @objc func shareButtonPressed() {
-    print("shaaaaaaaaaaare")
+    // TODO: - 리뷰관련, 신규 진입 여부, 순위 변동 정보 추가 및 양식 수정하기
+    guard let _rankInfo = rankInfo, let movie = movieInfo else { return }
+    let activityViewController = UIActivityViewController(activityItems: [
+      PosterCache.loadPoster(_rankInfo.movieCd),
+      _rankInfo.rank, _rankInfo.openDt, _rankInfo.audiAcc, _rankInfo.movieNm,
+      movie.genres.map { $0.genreNm }.joined(separator: ", "),
+      movie.directors.map { $0.peopleNm }.joined(separator: ", "),
+      movie.actors.map { $0.peopleNm }.joined(separator: ", "),
+      movie.showTm, movie.prdtYear,
+    ],
+                                                          applicationActivities: nil)
+
+    activityViewController.completionWithItemsHandler = { activityType, success, items, error in
+      if success {
+        print("공유 성공")
+      } else {
+        print("공유 취소 or 실패")
+      }
+    }
+
+    self.present(activityViewController, animated: true)
   }
 }
 

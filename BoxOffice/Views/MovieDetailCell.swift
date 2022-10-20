@@ -277,7 +277,7 @@ extension MovieDetailCell {
       self.newTag.isHidden = true
     }
   }
-  
+
 }
 
 #if canImport(SwiftUI) && DEBUG
