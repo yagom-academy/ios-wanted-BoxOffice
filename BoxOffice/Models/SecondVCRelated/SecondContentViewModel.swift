@@ -17,7 +17,7 @@ class SecondContentViewModel: ObservableObject {
     
     // TODO: 1번째 화면에서 선택한 엔티티도 받아오도록 추가?
     //input
-    var didReceiveEntity: (KoficMovieDetailEntity) -> () = { entity in }
+    var didReceiveEntity: (_ entity: KoficMovieDetailEntity, _ previousModel: FirstMovieCellModel) -> () = { entity, cellModel in }
     
     //output
     @MainThreadActor var didReceiveViewModel: ( ((Void)) -> () )?
@@ -47,16 +47,16 @@ class SecondContentViewModel: ObservableObject {
     }
     
     private func bind() {
-        didReceiveEntity = { [weak self] entity in
+        didReceiveEntity = { [weak self] entity, cellModel in
             print("secondContentViewModel didReceiveEntity")
             guard let self = self else { return }
             
-            self.populateEntity(result: entity)
+            self.populateEntity(result: entity, previousModel: cellModel)
             self.didReceiveViewModel?(())
         }
     }
     
-    private func populateEntity(result: KoficMovieDetailEntity) {
+    private func populateEntity(result: KoficMovieDetailEntity, previousModel: FirstMovieCellModel) {
         
         print("secondContentViewModel populate Entity")
         
@@ -64,17 +64,17 @@ class SecondContentViewModel: ObservableObject {
         
         let combinedName = "\(result.movieInfoResult.movieInfo.movieNmEn) / \(result.movieInfoResult.movieInfo.movieNm)"
         movieName = combinedName
-        releasedDay = "releasedDay"
-        audCount = "audCount"
-        rankIncrement = "rankIncrement"
-        rankApproached = "rankApproached"
+        releasedDay = previousModel.openDt
+        audCount = previousModel.audiCnt
+        rankIncrement = previousModel.rankInten
+        rankApproached = previousModel.rankOldAndNew
         makedYear = result.movieInfoResult.movieInfo.prdtYear
         releasedYear = result.movieInfoResult.movieInfo.openDt
         runningTime = result.movieInfoResult.movieInfo.showTm
-        genre = "genre"
-        director = "director"
-        actors = "actors"
-        restictionRate = "watchGrade"
+        genre = "genre??"
+        director = "director??"
+        actors = "actors??"
+        restictionRate = "watchGrade??"
         
         let boxOfficeRankData = TempDataType(name: "박스오피스 랭크", data: boxOfficeRank)
         let movieNameData = TempDataType(name: "영화이름", data: movieName)

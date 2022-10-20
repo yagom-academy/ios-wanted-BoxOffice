@@ -34,8 +34,7 @@ class SecondModel: SceneActionReceiver {
         Task {
             print("secondModel populate Data")
             guard let entity = await requestAPI() else { return }
-            // TODO: entity에 필요값 추가 <<- 1번째 화면에서 선택한 엔티티에서 값을 가져와야...
-            privateSecondContentViewModel.didReceiveEntity(entity)
+            privateSecondContentViewModel.didReceiveEntity(entity, previousSelectedMovieModel)
         }
     }
     
