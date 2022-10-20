@@ -9,7 +9,7 @@ import UIKit
 
 class FirstViewController: UIViewController {
     @IBOutlet weak var firstTableView: UITableView!
-    let targetDay = "20190201"
+    let targetDay = "20190204"
     var office: [MovieInfost] = []
     
     
@@ -18,6 +18,7 @@ class FirstViewController: UIViewController {
         officeapi()
         
     }
+    
     ///첫번째화면 API
     func officeapi() {
         //코다블 을 불러오는문제     코다블 코딩키 검색  코다블

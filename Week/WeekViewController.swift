@@ -8,7 +8,7 @@
 import UIKit
 
 class WeekViewController: UIViewController {
-
+    
     @IBOutlet weak var weekTableView: UITableView!
     let targetDay = "20190201"
     var weekapi: [WeeklyBoxOfficeList] = []
@@ -17,12 +17,19 @@ class WeekViewController: UIViewController {
         super.viewDidLoad()
         weekModelAPI()
     }
-
+    
     
     func weekModelAPI() {
         WeekApi.weekApi(targetDay: targetDay) { data in
             self.weekapi = data.boxOfficeResult.weeklyBoxOfficeList
             self.weekTableView.reloadData()
+        }
+    }
+    
+    ///두번째화면 API
+    func detailapi(targetData: String, completion: @escaping (MovieInfo) -> Void) {
+        MovieApi.callApiDetail(targetData: targetData) { data in
+            completion(data.movieInfoResult.movieInfo)
         }
     }
 }
@@ -41,5 +48,16 @@ extension WeekViewController: UITableViewDelegate, UITableViewDataSource {
         cell.weekSetModel(model: movie)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let weekViewController = storyboard?.instantiateViewController(withIdentifier: "WeekSecondViewController") as? WeekSecondViewController else { return }
+        
+        let selectOffice = weekapi[indexPath.row]
+        detailapi(targetData: selectOffice.movieCD) { movieInfo in
+            let weekViewModel = WeekViewModel.init(rank: selectOffice.rank, movieTitle: selectOffice.movieNm, openingDate: selectOffice.openDt, genre: movieInfo.genres.first?.genreNm ?? "", runTime: movieInfo.showTm, viewingLevel: movieInfo.audits.first?.watchGradeNm ?? "", audiAcc: selectOffice.audiAcc, audience: selectOffice.audiAcc, director: movieInfo.directors.first?.peopleNm ?? "", actiorName: movieInfo.actors.first?.peopleNm ?? "", yearOfRelease: movieInfo.openDt, yearOfManufacture: movieInfo.prdtYear, comparedToYesterday: selectOffice.rankInten, newRankingLabel: selectOffice.rankOldAndNew.rawValue)
+            weekViewController.setModel(weekViewModel)
+            self.navigationController?.pushViewController(weekViewController, animated: true)
+        }
     }
 }

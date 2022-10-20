@@ -14,7 +14,7 @@ class MovieListTableViewCell: UITableViewCell {
     @IBOutlet weak var openingDateLabel: UILabel!
     @IBOutlet weak var newRankingLabel: UILabel!
     @IBOutlet weak var comparedToYesterdayLabel: UILabel!
-    
+    @IBOutlet weak var countLabel: UILabel!
     
     
     func setModel(model: MovieInfost) {
@@ -22,8 +22,20 @@ class MovieListTableViewCell: UITableViewCell {
         movieTitleLabel.text = "영화: \(model.movieNm)"     // 제목
         audienceLabel.text = "관객수: \(model.audiAcc)명"     //관객수
         openingDateLabel.text = "개봉일: \(model.openDt)"    //개봉일
-        newRankingLabel.text = "신규 판별 - \(model.rankOldAndNew)"    // 신규 진입
-        comparedToYesterdayLabel.text = "순위변동 : \(model.rankInten)"  //전일대비 순위변동
+        newRankingLabel.text = "신규 판별 \(model.rankOldAndNew)"    // 신규 진입
+//        comparedToYesterdayLabel.text = "순위변동: \(model.rankInten)"  //전일대비 순위변동
+        if model.rankInten == "0" {
+            comparedToYesterdayLabel.text = "변동없음"
+            countLabel.text = " "
+        } else if model.rankInten >= "0" {
+            countLabel.text = "▲"
+            countLabel.textColor = .red
+            comparedToYesterdayLabel.text = model.rankInten
+        } else {
+            countLabel.text = "▼"
+            countLabel.textColor = .blue
+            comparedToYesterdayLabel.text = model.rankInten
+        }
     }
   
     

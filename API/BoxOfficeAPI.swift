@@ -10,9 +10,9 @@ import Foundation
 class OfficeApi {
     class func callAPI(targetDay: String, completion: @escaping (BoxOffice) -> Void ) {
         let key = "9a03d4e2eafea3c2e79c80e98ac2919c"
-        let targetDay = "20190201" //치킨시즌
+        let targetDay = "20190204" //치킨시즌
         let seoul = "0105001"
-
+        
         
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)

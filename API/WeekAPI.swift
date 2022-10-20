@@ -25,10 +25,8 @@ class WeekApi {
             guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode, successRange.contains(statusCode) else { return }
             
             guard let resultData = data else { return }
-            print("나타나\(resultData)")
             let decoder = JSONDecoder()
             let decodedData = try! decoder.decode(Week.self, from: resultData)
-            print("나타나라\(decodedData)")
             DispatchQueue.main.async {
                 completion(decodedData)
             }
