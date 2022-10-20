@@ -92,7 +92,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oPz-96-hbh">
+                            <collectionView clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oPz-96-hbh">
                                 <rect key="frame" x="0.0" y="155" width="430" height="743"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ldk-JM-dei">
@@ -144,13 +144,13 @@
                                 <rect key="frame" x="0.0" y="103" width="430" height="795"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="raU-zG-7wg" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="430" height="736.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="430" height="730.33333333333337"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fPT-9r-yXH">
-                                                <rect key="frame" x="16" y="0.0" width="398" height="736.33333333333337"/>
+                                                <rect key="frame" x="16" y="0.0" width="398" height="730.33333333333337"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Nlw-73-on5">
-                                                        <rect key="frame" x="89" y="0.0" width="220" height="244.33333333333334"/>
+                                                        <rect key="frame" x="89" y="0.0" width="220" height="238.33333333333334"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fGP-2K-Rhk">
                                                                 <rect key="frame" x="16.666666666666671" y="1" width="186.66666666666663" height="185"/>
@@ -164,16 +164,16 @@
                                                                 </connections>
                                                             </imageView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQR-Xo-h1J" customClass="RatingControl" customModule="BoxOffice" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="194.33333333333331" width="220" height="50"/>
+                                                                <rect key="frame" x="0.0" y="194.33333333333331" width="220" height="44"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="50" id="9ZK-eO-SLY"/>
+                                                                    <constraint firstAttribute="height" constant="44" id="9ZK-eO-SLY"/>
                                                                     <constraint firstAttribute="width" constant="220" id="Mzb-LQ-gWp"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IuM-dp-YCy">
-                                                        <rect key="frame" x="0.0" y="252.33333333333331" width="398" height="483.99999999999994"/>
+                                                        <rect key="frame" x="0.0" y="246.33333333333331" width="398" height="483.99999999999994"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="닉네임" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ip-DA-h2L">
                                                                 <rect key="frame" x="0.0" y="0.0" width="398" height="34"/>

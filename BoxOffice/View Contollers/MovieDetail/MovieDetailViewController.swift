@@ -119,14 +119,11 @@ final class MovieDetailViewController: UIViewController {
     fileprivate func trailingSwipeActionConfigurationForListCellItem(_ item: AnyHashable) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
             [weak self] (_, _, completion) in
-            guard let self = self,
-                  let review = item as? MovieReview else {
+            guard let review = item as? MovieReview else {
                 completion(false)
                 return
             }
-//            self.movieReviewService.deleteReview(review)
-            print(item)
-            print(review)
+            self?.deleteMovieReview(review)
             completion(true)
         }
         deleteAction.image = UIImage(systemName: "trash")
@@ -265,8 +262,10 @@ final class MovieDetailViewController: UIViewController {
 
     private func updateView(with reviews: [MovieReview]) {
         var snapshot = dataSource.snapshot()
+        let beforeReviews = snapshot.itemIdentifiers(inSection: .review)
+        snapshot.deleteItems(beforeReviews)
         snapshot.appendItems(reviews, toSection: .review)
-        dataSource.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 
     private func fetchMovieDetail() {
@@ -286,6 +285,17 @@ final class MovieDetailViewController: UIViewController {
                 let reviews = try await movieReviewService.reviews(for: movieRanking.identifier)
                 self.movieReviews = reviews
             } catch let error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    private func deleteMovieReview(_ review: MovieReview) {
+        Task {
+            do {
+                try await movieReviewService.deleteReview(review)
+                fetchMovieReviews()
+            } catch {
                 print(error.localizedDescription)
             }
         }

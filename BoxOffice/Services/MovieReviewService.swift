@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseStorage
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 import OSLog
 
 final class MovieReviewService {
@@ -36,8 +37,14 @@ final class MovieReviewService {
         do {
             _ = try reference.addDocument(from: review)
         } catch {
-            Logger.persistence.error("\(error.localizedDescription), \(review.movieIdentifier)")
+            Logger.persistence.error("Error adding document: \(error)")
         }
+    }
+
+    func deleteReview(_ review: MovieReview) async throws {
+        guard let uuidString = review.uuidString else { fatalError() }
+        let reference = reviewCollectionReference(for: review.movieIdentifier)
+        try await reference.document(uuidString).delete()
     }
 
     private func reviewCollectionReference(for identifier: String) -> CollectionReference {
