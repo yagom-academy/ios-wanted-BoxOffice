@@ -8,6 +8,9 @@
 import UIKit
 
 final class MovieDetailCell: UITableViewCell {
+    
+    static let identifier: String = "MovieDetailCell"
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .semibold)
@@ -17,7 +20,7 @@ final class MovieDetailCell: UITableViewCell {
     
     private let infoLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
+        label.numberOfLines = 2
         label.font = .systemFont(ofSize: 15, weight: .regular)
         return label
     }()
