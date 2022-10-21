@@ -17,7 +17,6 @@ class MovieRankViewController: UIViewController {
     var weekendMovieList: [SimpleMovieInfoEntity] = []
     var weekDay: [String] = ["월", "화", "수", "목", "금"]
     var sectionList: [FirstSectionAndTitle] = [("일별 박스오피스 순위", .daily), ("주말 박스오피스 순위", .weekend)]
-    let subjectReusableView = SubjectReusableView()
     
     
     override func loadView() {
@@ -29,6 +28,15 @@ class MovieRankViewController: UIViewController {
         setCollectionView()
         configureDataSource()
         getMovieRank()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setNavigationBar()
+    }
+    
+    private func setNavigationBar() {
+        self.navigationItem.title = "BoxOffice"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func setCollectionView() {
@@ -51,7 +59,7 @@ class MovieRankViewController: UIViewController {
         }
         
         let headerRegistration = UICollectionView.SupplementaryRegistration
-        <SubjectReusableView>(elementKind: UICollectionView.elementKindSectionHeader) {
+        <BigSubjectReusableView>(elementKind: UICollectionView.elementKindSectionHeader) {
             supplementaryView, string, indexPath in
             supplementaryView.setData(title: self.sectionList[indexPath.section].title)
             supplementaryView.backgroundColor = .systemBackground
@@ -135,6 +143,7 @@ class MovieRankViewController: UIViewController {
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .continuous
                 section.boundarySupplementaryItems = [self.supplementaryHeaderItem()]
+                section.contentInsets = .init(top: 0, leading: 5, bottom: 20, trailing: 5)
                 return section
             case .weekend:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -148,13 +157,14 @@ class MovieRankViewController: UIViewController {
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .continuous
                 section.boundarySupplementaryItems = [self.supplementaryHeaderItem()]
+                section.contentInsets = .init(top: 0, leading: 5, bottom: 20, trailing: 5)
                 return section
             }
         }
     }
     
     private func supplementaryHeaderItem() -> NSCollectionLayoutBoundarySupplementaryItem {
-        return .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(70)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        return .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(40)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
     }
 
 }
@@ -162,9 +172,19 @@ class MovieRankViewController: UIViewController {
 extension MovieRankViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)  {
         let detailInfoViewController = DetailInfoViewController()
-        let movie = dailyMovieList[indexPath.item]
-        detailInfoViewController.simpleMovieInfo = movie
-        self.navigationController?.pushViewController(detailInfoViewController, animated: true)
+        switch indexPath.section {
+        case 0:
+            let movie = dailyMovieList[indexPath.item]
+            detailInfoViewController.simpleMovieInfo = movie
+            self.navigationController?.pushViewController(detailInfoViewController, animated: true)
+        case 1:
+            let movie = weekendMovieList[indexPath.item]
+            detailInfoViewController.simpleMovieInfo = movie
+            self.navigationController?.pushViewController(detailInfoViewController, animated: true)
+        default:
+            return
+        }
+        
     }
 }
 
