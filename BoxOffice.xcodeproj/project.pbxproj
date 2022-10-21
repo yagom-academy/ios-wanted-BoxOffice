@@ -22,6 +22,11 @@
 		B008249229021C850072A987 /* MovieDetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008249129021C850072A987 /* MovieDetailInfoView.swift */; };
 		B008249429021DAC0072A987 /* MovieDetailInfoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008249329021DAC0072A987 /* MovieDetailInfoCellView.swift */; };
 		B0082496290225A90072A987 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0082495290225A90072A987 /* String+Extension.swift */; };
+		B008249829023C520072A987 /* TriSectoredStackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008249729023C520072A987 /* TriSectoredStackViewModel.swift */; };
+		B008249A29023C5C0072A987 /* TriSectoredStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008249929023C5C0072A987 /* TriSectoredStackView.swift */; };
+		B008249C29023DFF0072A987 /* CenterLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008249B29023DFF0072A987 /* CenterLabelView.swift */; };
+		B008249E290242F70072A987 /* CenterLabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008249D290242F70072A987 /* CenterLabelViewModel.swift */; };
+		B00824A0290244AD0072A987 /* Publisher+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008249F290244AD0072A987 /* Publisher+Extension.swift */; };
 		B02D9CC028FF7269005E717B /* TranslatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D9CBF28FF7269005E717B /* TranslatorError.swift */; };
 		B02D9CC328FF8A83005E717B /* BoxOfficeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D9CC228FF8A83005E717B /* BoxOfficeListViewModel.swift */; };
 		B02D9CC528FF8ABC005E717B /* BoxOfficeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D9CC428FF8ABC005E717B /* BoxOfficeListViewController.swift */; };
@@ -73,6 +78,11 @@
 		B008249129021C850072A987 /* MovieDetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailInfoView.swift; sourceTree = "<group>"; };
 		B008249329021DAC0072A987 /* MovieDetailInfoCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailInfoCellView.swift; sourceTree = "<group>"; };
 		B0082495290225A90072A987 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		B008249729023C520072A987 /* TriSectoredStackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriSectoredStackViewModel.swift; sourceTree = "<group>"; };
+		B008249929023C5C0072A987 /* TriSectoredStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriSectoredStackView.swift; sourceTree = "<group>"; };
+		B008249B29023DFF0072A987 /* CenterLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterLabelView.swift; sourceTree = "<group>"; };
+		B008249D290242F70072A987 /* CenterLabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterLabelViewModel.swift; sourceTree = "<group>"; };
+		B008249F290244AD0072A987 /* Publisher+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Extension.swift"; sourceTree = "<group>"; };
 		B02D9CBF28FF7269005E717B /* TranslatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorError.swift; sourceTree = "<group>"; };
 		B02D9CC228FF8A83005E717B /* BoxOfficeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListViewModel.swift; sourceTree = "<group>"; };
 		B02D9CC428FF8ABC005E717B /* BoxOfficeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +174,8 @@
 			isa = PBXGroup;
 			children = (
 				462CB234290150D300BA4A55 /* MoviePosterViewModel.swift */,
+				B008249729023C520072A987 /* TriSectoredStackViewModel.swift */,
+				B008249D290242F70072A987 /* CenterLabelViewModel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -261,6 +273,8 @@
 			children = (
 				B02D9CD128FF93BE005E717B /* OverlayedImageView.swift */,
 				462CB22E29014F9300BA4A55 /* MoviePosterView.swift */,
+				B008249929023C5C0072A987 /* TriSectoredStackView.swift */,
+				B008249B29023DFF0072A987 /* CenterLabelView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -287,6 +301,7 @@
 				46B170E329001FD7002A8735 /* NSObject+Extension.swift */,
 				462CB2362901550D00BA4A55 /* Int+Extension.swift */,
 				B0082495290225A90072A987 /* String+Extension.swift */,
+				B008249F290244AD0072A987 /* Publisher+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -425,12 +440,14 @@
 				B04716D128FE18460025FF23 /* TargetType.swift in Sources */,
 				46B170E229001415002A8735 /* Date+Extension.swift in Sources */,
 				B02D9CD628FF9B8C005E717B /* BoxOfficeListCollectionViewCellModel.swift in Sources */,
+				B008249E290242F70072A987 /* CenterLabelViewModel.swift in Sources */,
 				46B170E429001FD7002A8735 /* NSObject+Extension.swift in Sources */,
 				B04716ED28FE42260025FF23 /* Translator.swift in Sources */,
 				462CB2372901550D00BA4A55 /* Int+Extension.swift in Sources */,
 				B02D9CC328FF8A83005E717B /* BoxOfficeListViewModel.swift in Sources */,
 				B02D9CD228FF93BE005E717B /* OverlayedImageView.swift in Sources */,
 				B02D9CCD28FF9047005E717B /* UIColor+Extension.swift in Sources */,
+				B008249829023C520072A987 /* TriSectoredStackViewModel.swift in Sources */,
 				B02D9CC528FF8ABC005E717B /* BoxOfficeListViewController.swift in Sources */,
 				B04716E328FE27C20025FF23 /* Environment.swift in Sources */,
 				462CB2232901367C00BA4A55 /* ControlEventPublisher.swift in Sources */,
@@ -442,6 +459,8 @@
 				B02D9CC728FF8B36005E717B /* BoxOfficeListCollectionViewCell.swift in Sources */,
 				B04716E528FE3B6C0025FF23 /* Logger.swift in Sources */,
 				462CB22929014A3500BA4A55 /* MovieDetailViewModel.swift in Sources */,
+				B008249C29023DFF0072A987 /* CenterLabelView.swift in Sources */,
+				B00824A0290244AD0072A987 /* Publisher+Extension.swift in Sources */,
 				B04716EB28FE41770025FF23 /* Repository.swift in Sources */,
 				B008249229021C850072A987 /* MovieDetailInfoView.swift in Sources */,
 				462CB235290150D300BA4A55 /* MoviePosterViewModel.swift in Sources */,
@@ -452,6 +471,7 @@
 				B02D9CD428FF9622005E717B /* UIFont+Extension.swift in Sources */,
 				462CB22B29014A4800BA4A55 /* MovieDetailViewController.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
+				B008249A29023C5C0072A987 /* TriSectoredStackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

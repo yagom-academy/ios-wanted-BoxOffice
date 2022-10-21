@@ -51,6 +51,20 @@ class MovieDetailInfoView: UIView {
         return views
     }()
     
+    lazy var topBorderView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "#707070").withAlphaComponent(0.7)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var bottomBorderView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "#707070").withAlphaComponent(0.7)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // MARK: Associated Types
     typealias ViewModel = MovieDetailViewModel
     
@@ -94,6 +108,8 @@ class MovieDetailInfoView: UIView {
     func buildViewHierarchy() {
         self.addSubview(titleLabel)
         self.addSubview(verticalStackView)
+        self.addSubview(topBorderView)
+        self.addSubview(bottomBorderView)
         horizontalStackViews.forEach {
             verticalStackView.addArrangedSubview($0)
         }
@@ -118,10 +134,24 @@ class MovieDetailInfoView: UIView {
         ]
         
         constraints += [
-            verticalStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
+            topBorderView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
+            topBorderView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            topBorderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 16),
+            topBorderView.heightAnchor.constraint(equalToConstant: 1),
+        ]
+        
+        constraints += [
+            verticalStackView.topAnchor.constraint(equalTo: topBorderView.bottomAnchor),
             verticalStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             verticalStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            verticalStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ]
+        
+        constraints += [
+            bottomBorderView.topAnchor.constraint(equalTo: verticalStackView.bottomAnchor),
+            bottomBorderView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            bottomBorderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 16),
+            bottomBorderView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            bottomBorderView.heightAnchor.constraint(equalToConstant: 1),
         ]
     }
     
