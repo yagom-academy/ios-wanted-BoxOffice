@@ -87,6 +87,7 @@ final class AddMovieReviewViewController: UIViewController {
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
+
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillHide(notification:)),

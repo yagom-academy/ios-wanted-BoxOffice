@@ -92,7 +92,7 @@ extension MovieListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let movie = movies[indexPath.row]
-        cell.movieRankingView.updateView(with: movie)
+        cell.updateView(with: movie)
         return cell
     }
 
