@@ -27,6 +27,10 @@ struct MovieDetail: Decodable {
     let actors: [Crew]
     /// 관람등급 명칭
     let watchGrade: String
+    /// 감독 및 배우
+    var crew: [Crew] {
+        directors + actors
+    }
 
     // MARK: Decodable
 

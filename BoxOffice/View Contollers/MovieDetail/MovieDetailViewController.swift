@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import OSLog
 
 final class MovieDetailViewController: UIViewController {
 
@@ -17,6 +18,7 @@ final class MovieDetailViewController: UIViewController {
     // MARK: UI
 
     @IBOutlet private var collectionView: UICollectionView!
+    @IBOutlet private var shareButton: UIBarButtonItem!
 
     // MARK: Properties
 
@@ -133,7 +135,7 @@ final class MovieDetailViewController: UIViewController {
     private func configureDataSource()  {
         // Cell Registration
         let infoItemRegistration = CellRegistration { cell, indexPath, item in
-            if let info = item as? Item {
+            if let info = item as? Info {
                 var content = UIListContentConfiguration.valueCell()
                 content.text = info.title
                 content.textProperties.font = .preferredFont(forTextStyle: .footnote)
@@ -301,7 +303,7 @@ final class MovieDetailViewController: UIViewController {
         }
     }
 
-    // MARK: Navigation
+    // MARK: Action Handlers
 
     @IBAction
     func unwindToMovieDetail(sender: UIStoryboardSegue) {
@@ -310,6 +312,23 @@ final class MovieDetailViewController: UIViewController {
             movieReviewService.addReview(review)
             self.fetchMovieReviews()
         }
+    }
+
+    @IBAction
+    private func shareButtonDidTap() {
+        showShareSheet()
+    }
+
+    private func showShareSheet() {
+        Logger.ui.debug(#function)
+
+        let shareText = [movieRanking.info, movieDetail.info]
+            .flatMap { $0 }
+            .compactMap { "\($0.title): \($0.value) \n" }
+            .joined()
+        let shareTexts = [movieRanking.name, shareText]
+        let activityViewController = UIActivityViewController(activityItems: shareTexts, applicationActivities: nil)
+        present(activityViewController, animated: true)
     }
 
 }
@@ -345,54 +364,4 @@ fileprivate enum Section: Int, CaseIterable {
         case .review: return "평가 및 리뷰"
         }
     }
-}
-
-// MARK: MovieDetail
-
-fileprivate extension MovieDetail {
-
-    var crew: [Crew] {
-        directors + actors
-    }
-
-    var info: [Item] {
-        [
-            .init(title: "개봉", value: "\(openDate.year) 년"),
-            .init(title: "제작", value: "\(productionDate) 년"),
-            .init(title: "장르", value: genres.joined()),
-            .init(title: "관람등급", value: watchGrade),
-        ]
-    }
-
-}
-
-fileprivate extension MovieRanking {
-
-    var changeRankingDisplayText: String {
-        if changeRanking > 0 {
-            return "+\(changeRanking.string)"
-        } else if changeRanking == 0 {
-            return "-"
-        } else {
-            return changeRanking.string
-        }
-    }
-
-    var info: [Item] {
-        [
-            .init(title: "순위", value: "\(ranking.string) (\(changeRankingDisplayText))"),
-            .init(title: "신규진입", value: isNewRanking ? "Y" : "N"),
-            .init(title: "누적관객", value: "\(numberOfMoviegoers.string) 명")
-        ]
-    }
-
-}
-
-// MARK: MovieDetailInfo
-
-fileprivate struct Item: Hashable {
-
-    let title: String
-    let value: String
-
 }

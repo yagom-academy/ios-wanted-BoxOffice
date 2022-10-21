@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D804551290260B300DC3B55 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D804550290260B300DC3B55 /* Info.swift */; };
 		5DAF347D28FD38A700A31BB7 /* MovieListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF347C28FD38A700A31BB7 /* MovieListTableViewCell.swift */; };
 		5DAF348028FD38EA00A31BB7 /* Reusable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF347F28FD38EA00A31BB7 /* Reusable+.swift */; };
 		5DAF348328FD3ACD00A31BB7 /* MovieRanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF348228FD3ACD00A31BB7 /* MovieRanking.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5D804550290260B300DC3B55 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		5DAF347C28FD38A700A31BB7 /* MovieListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListTableViewCell.swift; sourceTree = "<group>"; };
 		5DAF347F28FD38EA00A31BB7 /* Reusable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reusable+.swift"; sourceTree = "<group>"; };
 		5DAF348228FD3ACD00A31BB7 /* MovieRanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRanking.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				5DAF348228FD3ACD00A31BB7 /* MovieRanking.swift */,
 				5DEE037428FE45AF007B71AB /* MovieDetail.swift */,
 				5DEE036C28FDC9B7007B71AB /* MovieReview.swift */,
+				5D804550290260B300DC3B55 /* Info.swift */,
 				5DEE036628FD9DB2007B71AB /* DurationUnit.swift */,
 				5DEE035D28FD7F0F007B71AB /* movie.ranking.json */,
 				5DEE037228FE3F0D007B71AB /* movie.detail.json */,
@@ -375,6 +378,7 @@
 				5DD8C786290132D5004A8DC9 /* Logger+.swift in Sources */,
 				5DAF348528FD3D3800A31BB7 /* MovieSearchService.swift in Sources */,
 				5DAF348728FD454B00A31BB7 /* Date+.swift in Sources */,
+				5D804551290260B300DC3B55 /* Info.swift in Sources */,
 				5DCFD17028FF010900B74672 /* MovieRankingRequest.swift in Sources */,
 				5DCFD1872900CA2D00B74672 /* AddMovieReviewViewController.swift in Sources */,
 				5DFB655628FEF36000DC2443 /* MovieRankingView.swift in Sources */,

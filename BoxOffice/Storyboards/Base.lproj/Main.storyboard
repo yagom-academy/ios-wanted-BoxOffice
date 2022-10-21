@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cKx-fh-sXl">
-                                <rect key="frame" x="0.0" y="103" width="430" height="795"/>
+                                <rect key="frame" x="0.0" y="155" width="430" height="743"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieListTableViewCell" rowHeight="86" id="V38-Hw-y7q" customClass="MovieListTableViewCell" customModule="BoxOffice" customModuleProvider="target">
@@ -118,14 +118,22 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="qWB-Kn-6hW">
-                        <barButtonItem key="rightBarButtonItem" title="리뷰 추가" id="sFa-nt-4dt">
-                            <connections>
-                                <segue destination="8Gy-hW-aB5" kind="show" id="hxf-aD-6T9"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="compose" id="sFa-nt-4dt">
+                                <connections>
+                                    <segue destination="8Gy-hW-aB5" kind="show" id="hxf-aD-6T9"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="action" id="tsy-ci-eVh">
+                                <connections>
+                                    <action selector="shareButtonDidTap" destination="adE-dr-H6b" id="hwG-8z-3Dv"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="oPz-96-hbh" id="wrX-18-FfP"/>
+                        <outlet property="shareButton" destination="tsy-ci-eVh" id="EOc-Vu-jWs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gnr-t1-Q99" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
