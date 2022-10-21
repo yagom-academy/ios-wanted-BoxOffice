@@ -49,6 +49,9 @@
 		B04716ED28FE42260025FF23 /* Translator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04716EC28FE42260025FF23 /* Translator.swift */; };
 		B04716F328FE49630025FF23 /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04716F228FE49630025FF23 /* RepositoryTests.swift */; };
 		B04716F528FE7C370025FF23 /* OmdbAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04716F428FE7C370025FF23 /* OmdbAPI.swift */; };
+		B0F7B04D2902872A00D02CC1 /* CreateReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F7B04C2902872A00D02CC1 /* CreateReviewViewModel.swift */; };
+		B0F7B04F290287B500D02CC1 /* CreateReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F7B04E290287B500D02CC1 /* CreateReviewViewController.swift */; };
+		B0F7B0512902885400D02CC1 /* CreateReviewNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F7B0502902885400D02CC1 /* CreateReviewNavigationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +110,9 @@
 		B04716EC28FE42260025FF23 /* Translator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translator.swift; sourceTree = "<group>"; };
 		B04716F228FE49630025FF23 /* RepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
 		B04716F428FE7C370025FF23 /* OmdbAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmdbAPI.swift; sourceTree = "<group>"; };
+		B0F7B04C2902872A00D02CC1 /* CreateReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewViewModel.swift; sourceTree = "<group>"; };
+		B0F7B04E290287B500D02CC1 /* CreateReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewViewController.swift; sourceTree = "<group>"; };
+		B0F7B0502902885400D02CC1 /* CreateReviewNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewNavigationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +225,7 @@
 			children = (
 				462CB224290149FA00BA4A55 /* BoxOfficeList */,
 				462CB22629014A1100BA4A55 /* MovieDetail */,
+				B0F7B04A2902870D00D02CC1 /* CreateReview */,
 				B02D9CCE28FF939E005E717B /* Common */,
 			);
 			path = Views;
@@ -256,6 +263,7 @@
 			children = (
 				462CB22529014A0800BA4A55 /* BoxOfficeList */,
 				462CB22729014A1800BA4A55 /* MovieDetail */,
+				B0F7B04B2902871B00D02CC1 /* CreateReview */,
 				462CB233290150C300BA4A55 /* Common */,
 			);
 			path = ViewModels;
@@ -336,6 +344,23 @@
 				B02D9CBF28FF7269005E717B /* TranslatorError.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		B0F7B04A2902870D00D02CC1 /* CreateReview */ = {
+			isa = PBXGroup;
+			children = (
+				B0F7B04E290287B500D02CC1 /* CreateReviewViewController.swift */,
+				B0F7B0502902885400D02CC1 /* CreateReviewNavigationView.swift */,
+			);
+			path = CreateReview;
+			sourceTree = "<group>";
+		};
+		B0F7B04B2902871B00D02CC1 /* CreateReview */ = {
+			isa = PBXGroup;
+			children = (
+				B0F7B04C2902872A00D02CC1 /* CreateReviewViewModel.swift */,
+			);
+			path = CreateReview;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -451,10 +476,12 @@
 				B00824A2290247BD0072A987 /* MovieDetailStaffView.swift in Sources */,
 				B02D9CD228FF93BE005E717B /* OverlayedImageView.swift in Sources */,
 				B02D9CCD28FF9047005E717B /* UIColor+Extension.swift in Sources */,
+				B0F7B0512902885400D02CC1 /* CreateReviewNavigationView.swift in Sources */,
 				B008249829023C520072A987 /* TriSectoredStackViewModel.swift in Sources */,
 				B02D9CC528FF8ABC005E717B /* BoxOfficeListViewController.swift in Sources */,
 				B04716E328FE27C20025FF23 /* Environment.swift in Sources */,
 				462CB2232901367C00BA4A55 /* ControlEventPublisher.swift in Sources */,
+				B0F7B04F290287B500D02CC1 /* CreateReviewViewController.swift in Sources */,
 				B04716F528FE7C370025FF23 /* OmdbAPI.swift in Sources */,
 				B02D9CCB28FF8CEC005E717B /* ContentViewPreview.swift in Sources */,
 				B04716CF28FE18380025FF23 /* KobisAPI.swift in Sources */,
@@ -469,6 +496,7 @@
 				B008249229021C850072A987 /* MovieDetailInfoView.swift in Sources */,
 				462CB235290150D300BA4A55 /* MoviePosterViewModel.swift in Sources */,
 				B04716D428FE21310025FF23 /* Encodable+Extension.swift in Sources */,
+				B0F7B04D2902872A00D02CC1 /* CreateReviewViewModel.swift in Sources */,
 				B04716CD28FE17C60025FF23 /* ApiProvider.swift in Sources */,
 				B04716E828FE3FF70025FF23 /* Movie.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
