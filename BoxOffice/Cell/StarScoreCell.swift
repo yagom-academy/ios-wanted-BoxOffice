@@ -14,7 +14,7 @@ class StarScoreCell: UITableViewCell {
     
     let starScore: StarScore = {
         let view = StarScore()
-        view.isUserInteractionEnabled = true
+        view.isUserInteractionEnabled = false
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -50,7 +50,7 @@ class StarScoreCell: UITableViewCell {
             starScore.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             starScore.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
             
-            reviewButton.topAnchor.constraint(equalTo: starScore.bottomAnchor, constant: 46),
+            reviewButton.topAnchor.constraint(equalTo: starScore.bottomAnchor, constant: 20),
             reviewButton.leadingAnchor.constraint(equalTo:contentView.leadingAnchor),
             reviewButton.trailingAnchor.constraint(equalTo:contentView.trailingAnchor),
             reviewButton.heightAnchor.constraint(equalToConstant: 54),

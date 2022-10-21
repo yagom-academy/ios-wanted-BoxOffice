@@ -62,6 +62,7 @@ class ReviewView: UIView {
     let passwordTextField: UITextField = {
         let view = UITextField()
         view.tag = 1
+        view.isSecureTextEntry = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -87,6 +88,7 @@ class ReviewView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .white
         makeAsterisk()
         setupConstraints()
     }

@@ -32,7 +32,8 @@ class MovieInfoView: UIView {
             movieInfoTableView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             movieInfoTableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             movieInfoTableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            movieInfoTableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+            movieInfoTableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+    
         ])
     }
 

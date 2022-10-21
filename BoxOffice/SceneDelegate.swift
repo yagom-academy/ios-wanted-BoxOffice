@@ -18,9 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        //let mainVC = BoxOfficeViewController()
+        let mainVC = BoxOfficeViewController()
         //let mainVC = MovieInfoViewController()
-        let mainVC = ReviewViewController()
+        //let mainVC = ReviewViewController()
         let navigationController = UINavigationController(rootViewController: mainVC)
         window?.rootViewController = navigationController
         window?.backgroundColor = .systemBackground

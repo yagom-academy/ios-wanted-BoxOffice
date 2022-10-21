@@ -13,4 +13,5 @@ struct Review: Codable {
     let score: Int
     let text: String
     let imageURL: String
+    let id: UUID
 }

@@ -10,11 +10,48 @@ import Foundation
 class MovieInfoViewModel {
     
     var cellViewModel = [TableViewCellViewModel]()
+    var reviewCellViewModel = [TableViewCellViewModel]()
     var movieInfoModel: MovieInfoModel?
     let dailyBoxOffice: DailyBoxOfficeList
+    var allScore = 0
     
     init(dailyBoxOffice: DailyBoxOfficeList) {
         self.dailyBoxOffice = dailyBoxOffice
+    }
+    
+    func clearCellViewModel() {
+        cellViewModel = [TableViewCellViewModel]()
+        reviewCellViewModel = [TableViewCellViewModel]()
+    }
+    
+    func averageScore() -> Int {
+        if reviewCellViewModel.count == 0 {
+            return 0
+        }
+        let average = allScore / reviewCellViewModel.count
+        return average
+    }
+    
+    func sectionCount() -> Int {
+        
+        var sectionCount = 0
+        
+        if cellViewModel.count != 0 {
+            sectionCount += 2
+        }
+        if reviewCellViewModel.count != 0 {
+            sectionCount += 1
+        }
+        return sectionCount
+    }
+    
+    func requestFireBase(completion: @escaping ()->()) {
+        self.allScore = 0
+        FirebaseStorage.shared.fireBasefetchData(movieName: dailyBoxOffice.movieNm) { review in
+            self.reviewCellViewModel.append(ReviewCellViewModel(cellData: review))
+            self.allScore += review.score
+            completion()
+        }
     }
     
     
@@ -35,6 +72,20 @@ class MovieInfoViewModel {
             completion()
             
         }
+    }
+    
+    func deleteReview(password: String, index: Int, completion: @escaping (Bool) -> () ) {
+        guard let model = reviewCellViewModel[index] as? ReviewCellViewModel else { return }
+        
+        if password == model.cellData.password {
+            FirebaseStorage.shared.deleteData(id: model.cellData.id, movieName: dailyBoxOffice.movieNm) {
+                completion(true)
+            }
+        } else {
+            completion(false)
+        }
+        
+        
     }
 }
 
