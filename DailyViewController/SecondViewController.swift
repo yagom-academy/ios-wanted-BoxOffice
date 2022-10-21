@@ -24,7 +24,7 @@ struct SecondViewModel {
     let newRankingLabel: String
 }
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var rankingLabel: UILabel!
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
@@ -39,13 +39,25 @@ class SecondViewController: UIViewController {
     @IBOutlet weak var comparedToYesterdayLabel: UILabel!
     @IBOutlet weak var newRankingLabel: UILabel!
 
+    @IBOutlet weak var reView: Review!
     private var secondViewModel: SecondViewModel?
+    
+    @IBOutlet weak var reviewButton: UIButton!
+   
+    @IBAction func reviewButton(_ sender: Any) {
+        guard let thirdViewController = storyboard?.instantiateViewController(withIdentifier: "ThirdViewController") else { return }
+        self.navigationController?.pushViewController(thirdViewController, animated: true )
+        
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "영화 상세정보"
         setLabels()
     }
+   
     
     func setModel(_ secondViewModel: SecondViewModel) {
         self.secondViewModel = secondViewModel
@@ -66,6 +78,11 @@ class SecondViewController: UIViewController {
         comparedToYesterdayLabel.text = "순위변동: \(secondViewModel.comparedToYesterday)"
         newRankingLabel.text = "신규 진입- \(secondViewModel.newRankingLabel)"
         audienceLabel.text = "관객수: \(secondViewModel.audiAcc)명"
-
+    }
+    
+    @objc func pustButton(sender: UIButton) {
+        guard let thirdViewController = storyboard?.instantiateViewController(withIdentifier: "ThirdViewController") as? ThirdViewController else { return }
+        self.navigationController?.pushViewController(thirdViewController, animated: true)
+        
     }
 }

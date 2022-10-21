@@ -16,19 +16,10 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var checkPassword: UITextField!
     @IBOutlet weak var check: UIButton!
     
-    @IBAction func cancel(_ sender: Any) {
+    @IBAction func cancel(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-    
-    @objc func changed(_ sender: UITextField) {
-    print("test :", sender.text)
-        if !(self.idText.text?.isEmpty ?? true)
-            && !(self.passwordText.text?.isEmpty ?? true)
-            && isSameBothTextField(passwordText, checkPassword) {
-            
-        }
 
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.idText.delegate = self
@@ -57,6 +48,18 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
             self.check.setTitleColor(UIColor.gray, for: UIControl.State.normal)
             print("no")
         }
+    }
+    
+    @objc func changed(_ sender: UITextField) {
+    print("test :", sender.text)
+        if !(self.idText.text?.isEmpty ?? true)
+            && !(self.passwordText.text?.isEmpty ?? true)
+            && isSameBothTextField(passwordText, checkPassword) {
+            updateButton(willActiove: true)
+        } else {
+            updateButton(willActiove: false)
+        }
+
     }
     
 }

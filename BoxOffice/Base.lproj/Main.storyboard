@@ -252,6 +252,25 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0A-DE-WuP" customClass="Review" customModule="BoxOffice" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="591" width="390" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mux-pg-cts">
+                                                        <rect key="frame" x="297" y="2.6666666666666288" width="83" height="35"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="리뷰하기"/>
+                                                        <connections>
+                                                            <action selector="reviewButton:" destination="kpM-Wo-x7E" eventType="touchUpInside" id="3ds-UH-bfi"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="390" id="8Kq-ny-yCj"/>
+                                                    <constraint firstAttribute="trailing" secondItem="mux-pg-cts" secondAttribute="trailing" constant="10" id="LCd-Lb-WIr"/>
+                                                    <constraint firstItem="mux-pg-cts" firstAttribute="centerY" secondItem="d0A-DE-WuP" secondAttribute="centerY" id="SBc-I0-MDP"/>
+                                                    <constraint firstAttribute="height" constant="40" id="T8J-Se-qvS"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="Hdn-Nf-Baf" firstAttribute="leading" secondItem="ywH-aG-5H6" secondAttribute="leading" constant="50" id="0Wj-aN-66c"/>
@@ -263,6 +282,7 @@
                                             <constraint firstItem="u6Y-sN-f3Z" firstAttribute="top" secondItem="6df-Lp-m9X" secondAttribute="bottom" constant="60" id="C5h-Rt-OVC"/>
                                             <constraint firstItem="44s-gn-MNb" firstAttribute="leading" secondItem="ywH-aG-5H6" secondAttribute="leading" constant="15" id="Ey3-OG-nuO"/>
                                             <constraint firstItem="44s-gn-MNb" firstAttribute="top" secondItem="2Ie-xV-CMH" secondAttribute="bottom" constant="45" id="F12-kS-BRo"/>
+                                            <constraint firstItem="d0A-DE-WuP" firstAttribute="leading" secondItem="ywH-aG-5H6" secondAttribute="leading" id="ILF-Lk-rTZ"/>
                                             <constraint firstItem="8QB-Qp-a3F" firstAttribute="leading" secondItem="ywH-aG-5H6" secondAttribute="leading" constant="15" id="JC0-GO-wim"/>
                                             <constraint firstItem="zdg-wO-jWe" firstAttribute="leading" secondItem="ywH-aG-5H6" secondAttribute="leading" constant="15" id="MBW-sI-cgw"/>
                                             <constraint firstItem="arj-LT-8ij" firstAttribute="top" secondItem="ywH-aG-5H6" secondAttribute="top" constant="40" id="Opl-06-SC6"/>
@@ -274,12 +294,14 @@
                                             <constraint firstAttribute="trailing" secondItem="arj-LT-8ij" secondAttribute="trailing" constant="70" id="hCt-2U-aG7"/>
                                             <constraint firstItem="8QB-Qp-a3F" firstAttribute="top" secondItem="44s-gn-MNb" secondAttribute="bottom" constant="45" id="hc5-zG-wsG"/>
                                             <constraint firstAttribute="trailing" secondItem="AJo-Db-vts" secondAttribute="trailing" constant="15" id="hyb-ac-ZgP"/>
+                                            <constraint firstAttribute="trailing" secondItem="d0A-DE-WuP" secondAttribute="trailing" id="iOS-fL-cmT"/>
                                             <constraint firstItem="Hdn-Nf-Baf" firstAttribute="top" secondItem="ywH-aG-5H6" secondAttribute="top" constant="95" id="jhO-uo-ARu"/>
                                             <constraint firstItem="JOL-UF-4qq" firstAttribute="top" secondItem="ywH-aG-5H6" secondAttribute="top" constant="30" id="juc-sJ-zLv"/>
                                             <constraint firstItem="2Ie-xV-CMH" firstAttribute="leading" secondItem="ywH-aG-5H6" secondAttribute="leading" constant="15" id="lRf-OI-0Xr"/>
                                             <constraint firstItem="Hdn-Nf-Baf" firstAttribute="centerX" secondItem="ywH-aG-5H6" secondAttribute="centerX" id="o18-WU-nUl"/>
                                             <constraint firstAttribute="height" constant="1000" id="o43-wn-RjL"/>
                                             <constraint firstItem="aOt-at-CM8" firstAttribute="top" secondItem="NHs-ZX-Y8Y" secondAttribute="bottom" constant="45" id="pF4-vP-ZKR"/>
+                                            <constraint firstItem="d0A-DE-WuP" firstAttribute="top" secondItem="8QB-Qp-a3F" secondAttribute="bottom" constant="10" id="rAV-O2-ajz"/>
                                             <constraint firstItem="2Ie-xV-CMH" firstAttribute="top" secondItem="zdg-wO-jWe" secondAttribute="bottom" constant="45" id="vmi-3h-GDO"/>
                                             <constraint firstItem="XTW-a4-wbm" firstAttribute="top" secondItem="ywH-aG-5H6" secondAttribute="top" constant="200" id="xMe-lf-Y7F"/>
                                             <constraint firstAttribute="trailing" secondItem="u6Y-sN-f3Z" secondAttribute="trailing" constant="15" id="xY9-X6-BbK"/>
@@ -316,6 +338,7 @@
                             <constraint firstItem="zea-3Q-4a6" firstAttribute="top" secondItem="Sp4-6R-Q5x" secondAttribute="top" id="xEt-Mf-EHn"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="X2A-w7-xSS"/>
                     <size key="freeformSize" width="390" height="844"/>
                     <connections>
                         <outlet property="ActorName" destination="zdg-wO-jWe" id="vAg-Lt-LZM"/>
@@ -329,6 +352,7 @@
                         <outlet property="newRankingLabel" destination="8QB-Qp-a3F" id="HrX-qy-ckq"/>
                         <outlet property="openingDateLabel" destination="AJo-Db-vts" id="Paa-44-1SC"/>
                         <outlet property="rankingLabel" destination="JOL-UF-4qq" id="iCs-Ow-6Tp"/>
+                        <outlet property="reView" destination="d0A-DE-WuP" id="xeK-tE-Sbt"/>
                         <outlet property="runTimeLabel" destination="6df-Lp-m9X" id="iat-tZ-2F5"/>
                         <outlet property="viewingLevelLabel" destination="XTW-a4-wbm" id="v5X-qj-3VY"/>
                     </connections>
@@ -340,7 +364,7 @@
         <!--Third View Controller-->
         <scene sceneID="FEz-QS-mAa">
             <objects>
-                <viewController id="Qsz-im-X6S" customClass="ThirdViewController" customModule="BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ThirdViewController" id="Qsz-im-X6S" customClass="ThirdViewController" customModule="BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h9P-Fg-aob">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -365,7 +389,7 @@
                                     <action selector="cancel:" destination="Qsz-im-X6S" eventType="touchUpInside" id="kd8-LF-3oo"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="키미노 스이죠우오 타베타이 I want to eat your pancreas " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="o9U-nn-aMP">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="리뷰" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="o9U-nn-aMP">
                                 <rect key="frame" x="15" y="252" width="360" height="262"/>
                                 <color key="backgroundColor" systemColor="systemBrownColor"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
