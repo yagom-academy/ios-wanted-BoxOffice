@@ -8,7 +8,11 @@
 import UIKit
 
 final class DailyRankingViewController: UIViewController {
-    private var dataSource: UICollectionViewDiffableDataSource<RankingSection, RankingItem>!
+    private var dataSource: UICollectionViewDiffableDataSource<MainSection, MainItem>!
+    private var items: [MainItem] = [
+        .banner(Banner(image: UIImage(named: "testImage1")!)),
+        .banner(Banner(image: UIImage(named: "testImage2")!))
+    ]
     
     private let boxOfficeLabelBackgroundView: UIImageView = {
         let imageView = UIImageView()
@@ -18,7 +22,7 @@ final class DailyRankingViewController: UIViewController {
     }()
     
     private let boxOfficeLabel: UILabel = {
-        // TODO: - Navigation Title로 변경해야 함 (뷰높이 == detailView collectionView top)
+        // TODO: - Navigation Title로 변경
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "BoxOffice"
@@ -37,9 +41,21 @@ final class DailyRankingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureHierarchy()
-        configureDataSource()
+        Task(priority: .userInitiated) {
+            let movieItems = try await APIManager.fetchMainItems(date: Date().yesterday)
+            items.append(contentsOf: movieItems)
+            sortItems()
+            configureHierarchy()
+            configureDataSource()
+        }
+    }
+    
+    private func sortItems() {
+        items.sort { lhs, rhs in
+            guard let lhs = lhs.ranking?.rank,
+                  let rhs = rhs.ranking?.rank else { return false }
+            return lhs < rhs
+        }
     }
     
     private func configureHierarchy() {
@@ -69,7 +85,7 @@ extension DailyRankingViewController {
     private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
             
-            let section = RankingSection(rawValue: sectionIndex)!
+            let section = MainSection(rawValue: sectionIndex)!
             
             let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(40))
             
@@ -77,12 +93,12 @@ extension DailyRankingViewController {
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
     
             let defaultSpacing = CGFloat(15)
-            let bottomSpacing = CGFloat(45)
+            let bottomSpacing = CGFloat(60)
             
             switch section {
             // Onboarding cell layout
-            case .onboarding:
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.4))
+            case .banner:
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.5))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .paging
@@ -111,7 +127,7 @@ extension DailyRankingViewController {
     private func configureDataSource() {
         /// - Tag: Registration
         let rankingHeaderRegistration = UICollectionView.SupplementaryRegistration<RankingHeaderView>(supplementaryNib: RankingHeaderView.nib(), elementKind: RankingHeaderView.elementKind) { rankingHeaderView, _, indexPath in
-        guard RankingSection(rawValue: indexPath.section) == .ranking else { return }
+        guard MainSection(rawValue: indexPath.section) == .ranking else { return }
         // TODO: -
         }
         
@@ -124,7 +140,7 @@ extension DailyRankingViewController {
         }
         
         /// - Tag: DataSource
-        dataSource = UICollectionViewDiffableDataSource<RankingSection, RankingItem>(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
+        dataSource = UICollectionViewDiffableDataSource<MainSection, MainItem>(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
             switch item {
             case .banner(let onboardingItem):
                 return collectionView.dequeueConfiguredReusableCell(using: onboardingCellRegistration, for: indexPath, item: onboardingItem)
@@ -140,14 +156,14 @@ extension DailyRankingViewController {
         }
         
         /// - Tag: Snapshot
-        let sections: [RankingSection] = RankingSection.allCases
-        var snapshot = NSDiffableDataSourceSnapshot<RankingSection, RankingItem>()
+        let sections: [MainSection] = MainSection.allCases
+        var snapshot = NSDiffableDataSourceSnapshot<MainSection, MainItem>()
         snapshot.appendSections(sections)
         dataSource.apply(snapshot)
         
-        RankingSection.allCases.forEach { section in
-            let sectionItems = MockDataController.shared.items(for: section)
-            var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<RankingItem>()
+        MainSection.allCases.forEach { section in
+            let sectionItems = MovieDataManager.searchItems(items, for: section)
+            var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<MainItem>()
             sectionSnapshot.append(sectionItems)
             dataSource.apply(sectionSnapshot, to: section)
         }
@@ -156,19 +172,18 @@ extension DailyRankingViewController {
 
 /// - Tag: UICollectionViewDelegate
 extension DailyRankingViewController: UICollectionViewDelegate {
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath),
-              RankingSection(rawValue: indexPath.section) == .ranking,
+              MainSection(rawValue: indexPath.section) == .ranking,
               let movie: Movie = item.ranking else {
             collectionView.deselectItem(at: indexPath, animated: true)
             return
         }
         let detailViewController = DetailViewController()
-        let mainItem = DetailItem.main(movie.main)
-        let plotItem = DetailItem.plot(movie.plot)
-        let detailItem = DetailItem.detail(movie.detail)
-        detailViewController.detailItems = [mainItem, plotItem, detailItem]
-        configureBackBarButton(with: movie.main.koreanName)
+        let detailItems = MovieDataManager.convertDetailItemType(from: movie)
+        detailViewController.detailItems = detailItems
+        configureBackBarButton(with: movie.name)
         navigationController?.pushViewController(detailViewController, animated: true)
     }
     

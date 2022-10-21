@@ -28,10 +28,10 @@
             </objects>
             <point key="canvasLocation" x="820" y="-7.1090047393364921"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="IMB-un-vOJ">
             <objects>
-                <viewController id="YMP-0n-zmE" sceneMemberID="viewController">
+                <viewController id="YMP-0n-zmE" customClass="DetailViewController" customModule="BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YDl-cb-AHT">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

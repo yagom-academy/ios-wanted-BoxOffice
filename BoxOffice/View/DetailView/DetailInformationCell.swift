@@ -32,10 +32,10 @@ final class DetailInformationCell: UICollectionViewCell {
         watchGradeLabel.text = nil
     }
     
-    func configure(with mockData: DetailInformation) {
-        productionYearLabel.text = mockData.productionYear
-        releasedYearLabel.text = mockData.releasedYear
-        runningTimeLabel.text = mockData.runningTime
+    func configure(with mockData: DetailInfo) {
+        productionYearLabel.text = ""
+        releasedYearLabel.text = ""
+        runningTimeLabel.text = ""
         genreLabel.text = "어쩌구"
         directorsLabel.text = "mockData"
 //        actorsLabel.text = "mockData"

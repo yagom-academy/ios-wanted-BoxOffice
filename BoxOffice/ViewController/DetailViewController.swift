@@ -14,8 +14,6 @@ final class DetailViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-//        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
-//        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.delegate = self
         return collectionView
     }()
@@ -31,21 +29,24 @@ final class DetailViewController: UIViewController {
         
         configureHierarchy()
         configureDataSource()
+        share()
     }
     
     private func configureHierarchy() {
         view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
         view.addSubview(floatingView)
+        view.bringSubviewToFront(floatingView)
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            floatingView.widthAnchor.constraint(equalToConstant: 200),
+            floatingView.widthAnchor.constraint(equalToConstant: 180),
+            floatingView.heightAnchor.constraint(equalToConstant: 60),
             floatingView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20),
-            floatingView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -130)
+            floatingView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -130),
         ])
     }
 }
@@ -66,7 +67,7 @@ extension DetailViewController {
             
             let defaultSpacing = CGFloat(15)
             let bottomSpacing = CGFloat(30)
-            let estimatedHeight = CGFloat(100)
+            let estimatedHeight = CGFloat(300)
             
             switch section {
             // trailer section layout
@@ -106,36 +107,31 @@ extension DetailViewController {
         let textHeaderRegistration = UICollectionView.SupplementaryRegistration<TextHeaderView>(supplementaryNib: TextHeaderView.nib(), elementKind: TextHeaderView.elementKind) { textHeaderView, _, indexPath in
             guard let section = DetailSection(rawValue: indexPath.section),
                   section != .main,
-                  let title = section.title else { return }
+                  let title = section.headerTitle else { return }
             textHeaderView.configure(title: title)
         }
 
-        let trailerCellRegistration = UICollectionView.CellRegistration<TrailerCell, MainInformation>(cellNib: TrailerCell.nib()) { cell, _, mainitem in
-            if mainitem.backdropPath == nil,
-               mainitem.posterPath == nil,
-               mainitem.id == nil {
-                cell.playImageView.image = UIImage(systemName: "play.slash")
-            }
+        let trailerCellRegistration = UICollectionView.CellRegistration<TrailerCell, MainInfo>(cellNib: TrailerCell.nib()) { cell, _, mainitem in
             cell.configure(with: mainitem)
         }
         
-        let plotCellRegistration = UICollectionView.CellRegistration<PlotCell, Plot>(cellNib: PlotCell.nib()) { cell, _, plot in
+        let plotCellRegistration = UICollectionView.CellRegistration<PlotCell, PlotInfo>(cellNib: PlotCell.nib()) { cell, _, plot in
             cell.appearanceLabel(isOpend: plot.isOpend)
             cell.configure(with: plot)
         }
        
-        let detailCellRegistration = UICollectionView.CellRegistration<DetailInformationCell, DetailInformation>(cellNib: DetailInformationCell.nib()) { cell, _, detailitem in
+        let detailCellRegistration = UICollectionView.CellRegistration<DetailInformationCell, DetailInfo>(cellNib: DetailInformationCell.nib()) { cell, _, detailitem in
             cell.configure(with: detailitem)
         }
 
         /// - Tag: DataSource
         dataSource = UICollectionViewDiffableDataSource<DetailSection, DetailItem>(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
             switch item {
-            case .main(let mainItem):
+            case .mainInfo(let mainItem):
                 return collectionView.dequeueConfiguredReusableCell(using: trailerCellRegistration, for: indexPath, item: mainItem)
-            case .plot(let plot):
+            case .plotInfo(let plot):
                 return collectionView.dequeueConfiguredReusableCell(using: plotCellRegistration, for: indexPath, item: plot)
-            case .detail(let detailItem):
+            case .detailInfo(let detailItem):
                 return collectionView.dequeueConfiguredReusableCell(using: detailCellRegistration, for: indexPath, item: detailItem)
             }
         })
@@ -146,14 +142,14 @@ extension DetailViewController {
         }
 
         /// - Tag: Snapshot
-        let sections: [DetailSection] = DetailSection.allCases
+        let sections = DetailSection.allCases
         var snapshot = NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
         snapshot.appendSections(sections)
         dataSource.apply(snapshot)
 
         DetailSection.allCases.forEach { section in
             var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<DetailItem>()
-            sectionSnapshot.append(MockDataController.shared.items(with: self.detailItems, for: section))
+            sectionSnapshot.append(MovieDataManager.searchItems(detailItems, for: section))
             dataSource.apply(sectionSnapshot, to: section)
         }
     }
@@ -179,12 +175,31 @@ extension DetailViewController: UICollectionViewDelegate {
         var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<DetailItem>()
         var newPlot = originalPlot
         newPlot.isOpend = !originalPlot.isOpend
-        sectionSnapshot.append([.plot(newPlot)])
+        sectionSnapshot.append([.plotInfo(newPlot)])
         dataSource.apply(sectionSnapshot, to: section)
     }
 }
 
 /// - Tag: Share
 extension DetailViewController {
-
+    private func share() {
+        floatingView.shareButton.addTarget(self, action: #selector(didTapShareButton), for: .touchUpInside)
+    }
+    
+    @objc
+    private func didTapShareButton() {
+        guard let mainItem = detailItems.filter({ $0.type == "mainInfo" }).first?.main,
+              let detailItem = detailItems.filter({ $0.type == "detailInfo" }).first?.detail else { return }
+        let poster = UIImage(named: "poster")!
+        let title = "\(mainItem.name)\n"
+        let totalAttendance = "2,135,334명 관람\n"
+        let dailyRanking = "\(String(describing: mainItem.rank))위\n"
+        let genres = "\(detailItem.genres.first!)\n"
+        let director = "감독: \(detailItem.directors.first!)\n"
+        let actors = "배우: 현빈, 손예진, 아무개\n\n"
+        let message = "이거 봅시다🥳"
+        
+        let activityController = UIActivityViewController(activityItems: [poster, title, totalAttendance, dailyRanking, genres, director, actors, message], applicationActivities: nil)
+        present(activityController, animated: true)
+    }
 }

@@ -24,32 +24,32 @@
                         </constraints>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradientBlack" translatesAutoresizingMaskIntoConstraints="NO" id="PpX-xq-gWz">
-                        <rect key="frame" x="0.0" y="173.66666666666666" width="186" height="74.333333333333343"/>
+                        <rect key="frame" x="0.0" y="124" width="186" height="124"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPr-pi-5Po">
-                        <rect key="frame" x="3" y="214.33333333333334" width="21.666666666666668" height="40.666666666666657"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                        <rect key="frame" x="3" y="207" width="25.666666666666668" height="48"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="x6h-MR-waH">
-                        <rect key="frame" x="29.666666666666671" y="233.66666666666666" width="156.33333333333331" height="14.333333333333343"/>
+                        <rect key="frame" x="33.666666666666671" y="232.33333333333334" width="152.33333333333331" height="15.666666666666657"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="전일대비" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lek-p0-nVd">
-                                <rect key="frame" x="0.0" y="2.3333333333333428" width="34.666666666666664" height="12"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <rect key="frame" x="0.0" y="2.3333333333333153" width="38.333333333333336" height="13.333333333333336"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6o-9y-kLw">
-                                <rect key="frame" x="37.666666666666657" y="0.0" width="6" height="14.333333333333334"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                <rect key="frame" x="41.333333333333336" y="0.0" width="6.6666666666666643" height="15.666666666666666"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="up↑" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SUe-S5-wLg">
-                                <rect key="frame" x="46.666666666666664" y="2.3333333333333428" width="109.66666666666669" height="12"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <rect key="frame" x="51.000000000000007" y="0.0" width="101.33333333333334" height="15.666666666666666"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -78,6 +78,13 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.slash" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tH7-Ow-PgS">
+                        <rect key="frame" x="65" y="139" width="56" height="54.666666666666671"/>
+                        <color key="tintColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="tH7-Ow-PgS" secondAttribute="height" id="AdN-8n-p7o"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -85,35 +92,41 @@
                 <constraint firstAttribute="trailing" secondItem="ChV-md-OUT" secondAttribute="trailing" id="0dy-Di-68v"/>
                 <constraint firstItem="ChV-md-OUT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Anf-gA-r1f"/>
                 <constraint firstItem="PpX-xq-gWz" firstAttribute="leading" secondItem="ChV-md-OUT" secondAttribute="leading" id="EEy-Uz-tbb"/>
+                <constraint firstItem="tH7-Ow-PgS" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="-20" id="EsC-Ab-1Ei"/>
                 <constraint firstItem="PpX-xq-gWz" firstAttribute="trailing" secondItem="ChV-md-OUT" secondAttribute="trailing" id="GFV-dE-0sk"/>
                 <constraint firstItem="njV-kd-koY" firstAttribute="top" secondItem="PpX-xq-gWz" secondAttribute="bottom" constant="10" id="GsJ-u2-W2H"/>
                 <constraint firstItem="ChV-md-OUT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="JiF-6k-Wfu"/>
                 <constraint firstItem="PpX-xq-gWz" firstAttribute="bottom" secondItem="ChV-md-OUT" secondAttribute="bottom" id="Kak-8r-AI4"/>
                 <constraint firstItem="x6h-MR-waH" firstAttribute="bottom" secondItem="ChV-md-OUT" secondAttribute="bottom" id="NUi-aK-EXG"/>
-                <constraint firstItem="PpX-xq-gWz" firstAttribute="height" secondItem="ChV-md-OUT" secondAttribute="height" multiplier="0.3" id="PBk-y6-lKa"/>
+                <constraint firstItem="PpX-xq-gWz" firstAttribute="height" secondItem="ChV-md-OUT" secondAttribute="height" multiplier="0.5" id="PBk-y6-lKa"/>
                 <constraint firstItem="x6h-MR-waH" firstAttribute="leading" secondItem="LPr-pi-5Po" secondAttribute="trailing" constant="5" id="PcK-Ti-dhX"/>
                 <constraint firstItem="LPr-pi-5Po" firstAttribute="leading" secondItem="ChV-md-OUT" secondAttribute="leading" constant="3" id="QYt-G8-Klt"/>
+                <constraint firstItem="tH7-Ow-PgS" firstAttribute="width" secondItem="ChV-md-OUT" secondAttribute="width" multiplier="0.3" id="ULe-PQ-xcJ"/>
                 <constraint firstItem="x6h-MR-waH" firstAttribute="trailing" secondItem="ChV-md-OUT" secondAttribute="trailing" id="ZND-cF-M7w"/>
                 <constraint firstItem="LPr-pi-5Po" firstAttribute="bottom" secondItem="ChV-md-OUT" secondAttribute="bottom" constant="7" id="h8u-Zx-IbU"/>
+                <constraint firstItem="tH7-Ow-PgS" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="jDo-lo-RoD"/>
                 <constraint firstItem="ChV-md-OUT" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="pKg-bm-Cxn"/>
                 <constraint firstAttribute="trailing" secondItem="njV-kd-koY" secondAttribute="trailing" id="v0T-66-Rdo"/>
                 <constraint firstItem="njV-kd-koY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="wRT-fI-YRh"/>
             </constraints>
             <size key="customSize" width="186" height="372"/>
             <connections>
+                <outlet property="compareToYesterdayLabel" destination="Lek-p0-nVd" id="VmC-z9-KCl"/>
                 <outlet property="dailyAttendanceLabel" destination="BZv-Cw-pPE" id="UTs-OK-I60"/>
                 <outlet property="gradientBlackView" destination="PpX-xq-gWz" id="0q8-j2-VLQ"/>
                 <outlet property="isIncreasedLabel" destination="SUe-S5-wLg" id="PS7-Wy-vLm"/>
                 <outlet property="koreanNameLabel" destination="5eW-ag-ESh" id="doz-v8-qky"/>
                 <outlet property="posterImageView" destination="ChV-md-OUT" id="G3Y-Ui-HOa"/>
                 <outlet property="rankingLabel" destination="LPr-pi-5Po" id="aN9-nX-jmp"/>
-                <outlet property="ratioComparedToYesterdayLabel" destination="G6o-9y-kLw" id="ucb-CG-Vx5"/>
+                <outlet property="ratioLabel" destination="G6o-9y-kLw" id="ucb-CG-Vx5"/>
                 <outlet property="releasedDateLabel" destination="MUm-s9-8D6" id="8nk-qT-Ic7"/>
+                <outlet property="slashImageView" destination="tH7-Ow-PgS" id="RbK-RY-HwC"/>
             </connections>
             <point key="canvasLocation" x="6.1538461538461533" y="32.701421800947863"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="circle.slash" catalog="system" width="128" height="123"/>
         <image name="gradientBlack" width="640" height="360"/>
     </resources>
 </document>

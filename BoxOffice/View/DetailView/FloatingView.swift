@@ -24,6 +24,7 @@ class FloatingView: UIView {
         button.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         button.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         button.contentMode = .scaleAspectFill
+        button.isEnabled = true
         return button
     }()
     
@@ -33,6 +34,7 @@ class FloatingView: UIView {
         button.setTitle("✏️ 리뷰쓰기", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         button.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        button.isEnabled = true
         return button
     }()
     
@@ -49,15 +51,15 @@ class FloatingView: UIView {
         [backgroundView, shareButton, reviewButton].forEach { addSubview($0) }
         NSLayoutConstraint.activate([
             backgroundView.widthAnchor.constraint(equalTo: self.widthAnchor),
-            backgroundView.heightAnchor.constraint(equalTo: backgroundView.widthAnchor, multiplier: 0.3),
+            backgroundView.heightAnchor.constraint(equalTo: self.heightAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
             shareButton.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
-            shareButton.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor, constant: -60),
+            shareButton.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor, constant: -55),
             
             reviewButton.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
-            reviewButton.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor, constant: 15)
+            reviewButton.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor, constant: 16)
         ])
     }
 }

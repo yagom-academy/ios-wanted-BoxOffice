@@ -12,13 +12,14 @@ final class RankingCell: UICollectionViewCell {
 
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var rankingLabel: UILabel!
-    @IBOutlet weak var ratioComparedToYesterdayLabel: UILabel!
+    @IBOutlet weak var ratioLabel: UILabel!
     @IBOutlet weak var isIncreasedLabel: UILabel!
     @IBOutlet weak var koreanNameLabel: UILabel!
     @IBOutlet weak var releasedDateLabel: UILabel!
     @IBOutlet weak var dailyAttendanceLabel: UILabel!
-    
     @IBOutlet weak var gradientBlackView: UIImageView!
+    @IBOutlet weak var slashImageView: UIImageView!
+    @IBOutlet weak var compareToYesterdayLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,28 +29,47 @@ final class RankingCell: UICollectionViewCell {
     override func prepareForReuse() {
         posterImageView.image = nil
         rankingLabel.text = nil
-        ratioComparedToYesterdayLabel.text = nil
+        ratioLabel.text = nil
         isIncreasedLabel.text = nil
         koreanNameLabel.text = nil
         releasedDateLabel.text = nil
-        dailyAttendanceLabel.text = nil 
+        dailyAttendanceLabel.text = nil
+        slashImageView.isHidden = true
     }
     
     func configure(with item: Movie) {
-        posterImageView.image = UIImage(named: "poster.png")
-        rankingLabel.text = "\(item.main.ranking)"
-        ratioComparedToYesterdayLabel.text = "\(item.main.ratioComparedToYesterday)"
-        isIncreasedLabel.text = "up↑"
-        koreanNameLabel.text = item.main.koreanName
-        releasedDateLabel.text = item.main.releasedDate
-        dailyAttendanceLabel.text = "\(item.main.dailyAttendance)"
+        // TODO: - cell은 그리는 역할만 하도록
+        if let posterPath = item.posterPath {
+            // TODO: - cache 있으면 동기, 없으면 비동기로
+            Task {
+                let poster = try await ImageManager.fetchImage(posterPath)
+                Task(priority: .userInitiated) {
+                    posterImageView.image = poster
+                }
+            }
+        } else {
+            posterImageView.image = UIImage(named: "noImage")
+            slashImageView.isHidden = false
+        }
+        
+        if item.isNewInRank == .new {
+            compareToYesterdayLabel.isHidden = true
+            ratioLabel.isHidden = true
+            isIncreasedLabel.text = "진입"
+        } else {
+            ratioLabel.text = "\(item.ratioComparedToYesterday)"
+            isIncreasedLabel.text = item.isIncreased.stringType
+        }
+        rankingLabel.text = "\(item.rank)"
+        koreanNameLabel.text = item.name
+        releasedDateLabel.text = item.releasedDate.converToStringTypeForUI + " 개봉"
+        dailyAttendanceLabel.text = item.dailyAudience.convertDecimalStringType() + "명 관람"
     }
     
     private func appearanceOfPosterImageView() {
-        posterImageView.layer.cornerRadius = 10
-        posterImageView.clipsToBounds = true
-        gradientBlackView.layer.cornerRadius = 10
-        gradientBlackView.clipsToBounds = true
+        posterImageView.isCorner(radius: 10)
+        gradientBlackView.isCorner(radius: 10)
+        slashImageView.isHidden = true
     }
     
     static func nib() -> UINib {

@@ -23,7 +23,7 @@ final class PlotCell: UICollectionViewCell {
         openAndCloseLabel.text = "...더보기"
     }
     
-    func configure(with mockData: Plot) {
+    func configure(with mockData: PlotInfo) {
         plotLabel.text = mockData.content
     }
     
