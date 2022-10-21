@@ -8,8 +8,8 @@
 import Foundation
 
 protocol NetworkDelegate {
-  func didUpdateBoxOfficeList(_ _dailyList: [DailyListObject])
-  func didUpdateMovieInfo(_ _movieInfo: MovieInfo, _ index: Int)
+  func didUpdateBoxOfficeList(_ _result: [RankListObject], _ type: BoxOfficeType)
+  func didUpdateMovieInfo(_ _movieInfo: MovieInfo, _ index: Int, _ type: BoxOfficeType)
   func didUpdatePosterInfo(_ _imagePath: String, _ index: Int)
 }
 
@@ -27,7 +27,7 @@ struct NetworkManager {
 
   // MARK: - Fetch Data
 
-  // Fetch Daily Box Office
+  // Fetch Daily or Weekly Box Office
   func fetchMovie(targetDate: String, type: BoxOfficeType) {
     var url = urlKobis
     let query = "?targetDt=\(targetDate)&wideAreaCd=0105001&key=\(Bundle.main.kobisKey)"
@@ -35,21 +35,21 @@ struct NetworkManager {
     switch type {
     case .daily:
       url += type.rawValue + query
+      self.performRequest(urlString: url, type: .daily)
     case .weekly:
-      url += type.rawValue + query
+      url += type.rawValue + query + "&weekGb=0"
+      self.performRequest(urlString: url, type: .weekly)
     }
-
-    self.performRequest(urlString: url)
   }
 
   // Fetch Movie Detail Info
-  func fetchMovie(movieCode: String, index: Int) {
+  func fetchMovie(movieCode: String, index: Int, type: BoxOfficeType) {
     var url = urlKobis + "movie/searchMovieInfo.json"
     let query = "?key=\(Bundle.main.kobisKey)&movieCd=\(movieCode)"
 
     url += query
 
-    performRequest(urlString: url, index: index)
+    performRequest(urlString: url, index: index, type: type)
   }
 
   // Fetch Movie Poster Info
@@ -64,8 +64,8 @@ struct NetworkManager {
 
 // MARK: - Perform Request
 
-  // Perform Daily Box Office Request
-  func performRequest(urlString: String) {
+  // Perform Box Office Request
+  func performRequest(urlString: String, type: BoxOfficeType) {
     if let url = URL(string: urlString) {
       let session = URLSession(configuration: .default)
 
@@ -75,8 +75,8 @@ struct NetworkManager {
         }
 
         if let safeData = data {
-          if let boxOfficeResult = self.parseDaliyBoxOfficeJSON(safeData) {
-            self.delegate?.didUpdateBoxOfficeList(boxOfficeResult)
+          if let boxOfficeResult = self.parseBoxOfficeJSON(safeData, type) {
+            self.delegate?.didUpdateBoxOfficeList(boxOfficeResult, type)
           }
         }
       }
@@ -86,7 +86,7 @@ struct NetworkManager {
   }
 
   // Perform Movie Detail Info Request
-  func performRequest(urlString: String, index: Int) {
+  func performRequest(urlString: String, index: Int, type: BoxOfficeType) {
     if let url = URL(string: urlString) {
       let session = URLSession(configuration: .default)
 
@@ -97,7 +97,7 @@ struct NetworkManager {
 
         if let safeData = data {
           if let movieInfo = self.parseMovieInfoJSON(safeData) {
-            self.delegate?.didUpdateMovieInfo(movieInfo, index)
+            self.delegate?.didUpdateMovieInfo(movieInfo, index, type)
           }
         }
       }
@@ -135,20 +135,23 @@ struct NetworkManager {
   // MARK: - Parse JSON
 
   // TODO: - 파싱결과 enum 만들어서 함수 하나로 줄이기
-  func parseDaliyBoxOfficeJSON(_ resultData: Data) -> [DailyListObject]? {
+  func parseBoxOfficeJSON(_ resultData: Data, _ type: BoxOfficeType) -> [RankListObject]? {
     do {
-      let decodedData = try decoder.decode(DailyBoxOfficeResult.self, from: resultData)
 
-      return decodedData.boxOfficeResult.dailyBoxOfficeList
+      switch type {
+      case .daily:
+        let decodedData = try decoder.decode(DailyBoxOfficeResult.self, from: resultData)
+        return decodedData.boxOfficeResult.dailyBoxOfficeList
+      case .weekly:
+        let decodedData = try decoder.decode(WeeklyBoxOfficeResult.self, from: resultData)
+        return decodedData.boxOfficeResult.weeklyBoxOfficeList
+      }
+
     } catch {
       print("parse boxOffice JSON error")
       return nil
     }
   }
-
-//  func parseWeeklyBoxOfficeJSON(_ resultData: Data) -> ? {
-//
-//  }
 
   func parseMovieInfoJSON(_ resultData: Data) -> MovieInfo? {
     do {
