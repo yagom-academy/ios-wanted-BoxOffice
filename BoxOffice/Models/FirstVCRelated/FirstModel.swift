@@ -9,6 +9,7 @@ import Foundation
 
 class FirstModel: SceneActionReceiver {
     //input
+    var didTapCalendarButton: (() -> ()) = { }
     var didReceiveSceneAction: (SceneAction) -> () = { action in }
     
     //output
@@ -47,6 +48,14 @@ class FirstModel: SceneActionReceiver {
             secondModel.previousSelectedMovieEntity = entity
             let context = SceneContext(dependency: secondModel)
             self.routeSubject?(.detail(.secondViewController(context: context)))
+        }
+        
+        didTapCalendarButton = { [weak self] in
+            guard let self = self else { return }
+            
+            let fourthModel = FourthModel()
+            let context = SceneContext(dependency: fourthModel)
+            self.routeSubject?(.detail(.fourthViewController(context: context)))
         }
     }
     

@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct FourthContentView: View {
+    
+    @State private var date = Date()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        DatePicker("날짜 선택", selection: $date, displayedComponents: [.date])
+            .datePickerStyle(.graphical)
     }
 }
 

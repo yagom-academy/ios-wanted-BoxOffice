@@ -69,7 +69,7 @@ extension FirstViewController: Presentable {
     }
     
     @objc func dateAction() {
-        
+        model.didTapCalendarButton()
     }
     
     

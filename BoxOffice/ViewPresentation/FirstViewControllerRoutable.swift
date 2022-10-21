@@ -23,8 +23,8 @@ extension FirstViewControllerRoutable where Self: FirstViewController {
             let nextScene = buildScene(scene: Scene)
             guard let nextVC = nextScene as? UIViewController else { return }
             
-            nextVC.modalPresentationStyle = .overFullScreen //currentcontext?
-            nextVC.modalTransitionStyle = .crossDissolve //?이걸 굳이...?
+//            nextVC.modalPresentationStyle = .overFullScreen //currentcontext?
+//            nextVC.modalTransitionStyle = .crossDissolve //?이걸 굳이...?
             self.present(nextVC, animated: true)
         case .close:
             break
