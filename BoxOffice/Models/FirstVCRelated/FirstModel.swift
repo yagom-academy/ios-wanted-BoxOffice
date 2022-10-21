@@ -23,7 +23,6 @@ class FirstModel: SceneActionReceiver {
     
     private var repository: RepositoryProtocol
     
-    // TODO: Repository
     init(repository: RepositoryProtocol) {
         self.privateFirstContentViewModel = FirstContentViewModel()
         self.repository = repository
@@ -39,13 +38,13 @@ class FirstModel: SceneActionReceiver {
     }
     
     private func bind() {
-        privateFirstContentViewModel.propergateDidSelectItem = { [weak self] cellModel in
+        privateFirstContentViewModel.propergateDidSelectItem = { [weak self] entity in
             guard let self = self else { return }
             
             let httpClient = HTTPClient()
             let repository = Repository(httpClient: httpClient)
             let secondModel = SecondModel(repository: repository)
-            secondModel.previousSelectedMovieModel = cellModel
+            secondModel.previousSelectedMovieEntity = entity
             let context = SceneContext(dependency: secondModel)
             self.routeSubject?(.detail(.secondViewController(context: context)))
         }

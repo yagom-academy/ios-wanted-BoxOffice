@@ -15,7 +15,7 @@ class FirstContentViewModel {
     
     //output
     @MainThreadActor var didReceiveViewModel: ( ((Void)) -> () )?
-    var propergateDidSelectItem: (_ cellModel: FirstMovieCellModel) -> () = { cellModel in }
+    var propergateDidSelectItem: (_ entity: DailyBoxOfficeList) -> () = { entity in }
     
     var dataSource: [FirstMovieCellModel] {
         return privateDataSource
@@ -23,6 +23,7 @@ class FirstContentViewModel {
     
     //properties
     private var privateDataSource: [FirstMovieCellModel] = []
+    private var entity: KoficMovieEntity?
     
     init() {
         bind()
@@ -37,8 +38,8 @@ class FirstContentViewModel {
         
         didSelectItemInTableView = { [weak self] indexPath in
             guard let self = self else { return }
-            let cellModel = self.findAndReturnSelectedItem(indexPathRow: indexPath.row)
-            self.propergateDidSelectItem(cellModel)
+            guard let selectedEntity = self.findAndReturnSelectedItem(indexPathRow: indexPath.row) else { return }
+            self.propergateDidSelectItem(selectedEntity)
         }
     }
     
@@ -47,6 +48,7 @@ class FirstContentViewModel {
     // TODO: 엔티티를 모델로 매핑
     private func populateEntity(result: KoficMovieEntity) {
         print(#function)
+        self.entity = result
         privateDataSource = result.boxOfficeResult.dailyBoxOfficeList.map { dailyBoxOfficeValue -> FirstMovieCellModel in
             let cellModel = FirstMovieCellModel()
             cellModel.rnum = dailyBoxOfficeValue.rnum
@@ -71,7 +73,8 @@ class FirstContentViewModel {
         }
     }
     
-    private func findAndReturnSelectedItem(indexPathRow: Int) -> FirstMovieCellModel {
-        return privateDataSource[indexPathRow]
+    private func findAndReturnSelectedItem(indexPathRow: Int) -> DailyBoxOfficeList? {
+        guard let entity = entity else { return nil }
+        return entity.boxOfficeResult.dailyBoxOfficeList[indexPathRow]
     }
 }
