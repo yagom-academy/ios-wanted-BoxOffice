@@ -122,6 +122,9 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="ihQ-ai-FUz" id="e5l-Df-K3X"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wsa-t1-jS6"/>
@@ -135,6 +138,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Weekly" id="fbE-nl-Xlo"/>
                     <connections>
+                        <outlet property="collectionView" destination="V9l-KI-05y" id="tLy-eN-fFp"/>
                         <segue destination="Arw-ko-DA3" kind="show" identifier="" id="xpL-oE-EF6"/>
                     </connections>
                 </viewController>
@@ -160,7 +164,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9PJ-wt-PsC"/>
+        <segue reference="xpL-oE-EF6"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="list.number" catalog="system" width="128" height="97"/>

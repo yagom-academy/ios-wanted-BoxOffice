@@ -5,7 +5,7 @@
 //  Created by 신병기 on 2022/10/19.
 //
 
-import UIKit
+import Foundation
 
 final class DailyViewModel {
     let apiService = ApiService()
