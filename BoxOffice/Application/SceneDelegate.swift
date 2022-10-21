@@ -24,8 +24,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let repository = DefaultMoviesRepository()
         
         let mainViewController = MoviesListViewController(viewModel: viewModel, repository: repository)
+        let navigationController = UINavigationController(rootViewController: mainViewController)
         
-        window?.rootViewController = mainViewController
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 

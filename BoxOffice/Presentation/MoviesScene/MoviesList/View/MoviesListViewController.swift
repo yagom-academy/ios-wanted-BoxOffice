@@ -33,6 +33,7 @@ class MoviesListViewController: UIViewController {
         setupViews()
         setupConstraints()
         bind()
+        setNavigationbar()
     }
     
 }
@@ -44,17 +45,35 @@ extension MoviesListViewController {
     }
     
     func setupConstraints() {
-        
         self.moviesListTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            self.moviesListTableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            self.moviesListTableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            self.moviesListTableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            self.moviesListTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            self.moviesListTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.moviesListTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.moviesListTableView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.moviesListTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
     }
     
     func bind() {
+    }
+    
+    func setNavigationbar() {
+        if #available(iOS 15, *) {
+            let barAppearance = UINavigationBarAppearance()
+            barAppearance.backgroundColor = .white
+            barAppearance.titleTextAttributes = [
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 25, weight: .heavy)
+            ]
+            self.navigationItem.standardAppearance = barAppearance
+            self.navigationItem.scrollEdgeAppearance = barAppearance
+        } else {
+            self.navigationController?.navigationBar.titleTextAttributes = [
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 25, weight: .heavy)
+            ]
+        }
+        
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.topItem?.title = "Box Office"
     }
 }
 
@@ -66,9 +85,7 @@ extension MoviesListViewController {
                 self.viewModel?.items = Observable(movieList.map({
                     MoviesListItemViewModel(rank: $0.rank, movieNm: $0.movieNm, openDt: $0.openDt, audiAcc: $0.audiAcc, rankInten: $0.rankInten, rankOldAndNew: $0.rankOldAndNew)
                 }))
-                
-                print(movieList)
-                
+               
                 DispatchQueue.main.async {
                     self.moviesListTableView.reloadData()
                 }
