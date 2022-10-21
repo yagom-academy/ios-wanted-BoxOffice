@@ -11,7 +11,7 @@ class SecondContentViewModel: ObservableObject {
     
     // TODO: 1번째 화면에서 선택한 엔티티도 받아오도록 추가?
     //input
-    var didReceiveEntity: (_ entity: KoficMovieDetailEntity, _ previousModel: FirstMovieCellModel) -> () = { entity, cellModel in }
+    var didReceiveEntity: (_ entity: KoficMovieDetailEntity, _ previousEntity: DailyBoxOfficeList) -> () = { entity, previousEntity in }
     
     //output
     @Published var boxOfficeRank: (title: String, data: String) = (title: "박스오피스 랭크", data: "")//박스오피스 순위
@@ -41,22 +41,22 @@ class SecondContentViewModel: ObservableObject {
             
             //TODO: GCD아닌 다른 방법으로 처리 고민
             DispatchQueue.main.async {
-                self.populateEntity(result: entity, previousModel: cellModel)
+                self.populateEntity(result: entity, previousEntity: cellModel)
             }
         }
     }
     
-    private func populateEntity(result: KoficMovieDetailEntity, previousModel: FirstMovieCellModel) {
+    private func populateEntity(result: KoficMovieDetailEntity, previousEntity: DailyBoxOfficeList) {
         
-        boxOfficeRank = (title: String.emojiAndTitle(emojiValue: .boxOfficeRank), data: previousModel.rank)
+        boxOfficeRank = (title: String.emojiAndTitle(emojiValue: .boxOfficeRank), data: previousEntity.rank)
         let combinedName = "\(result.movieInfoResult.movieInfo.movieNmEn) \n \(result.movieInfoResult.movieInfo.movieNm)"
         movieName = (title: String.emojiAndTitle(emojiValue: .movieName), data: combinedName)
         
-        releasedDay = (title: String.emojiAndTitle(emojiValue: .releasedDay), data: previousModel.openDt)
+        releasedDay = (title: String.emojiAndTitle(emojiValue: .releasedDay), data: previousEntity.openDt)
         
-        audCount = (title: String.emojiAndTitle(emojiValue: .audCount), data: previousModel.audiCnt)
-        rankIncrement = (title: String.emojiAndTitle(emojiValue: .rankIncrement), data: previousModel.rankInten)
-        rankApproached = (title: String.emojiAndTitle(emojiValue: .rankApproach), data: previousModel.rankOldAndNew)
+        audCount = (title: String.emojiAndTitle(emojiValue: .audCount), data: previousEntity.audiCnt)
+        rankIncrement = (title: String.emojiAndTitle(emojiValue: .rankIncrement), data: previousEntity.rankInten)
+        rankApproached = (title: String.emojiAndTitle(emojiValue: .rankApproach), data: previousEntity.rankOldAndNew.rawValue)
         makedYear = (title: String.emojiAndTitle(emojiValue: .makedYear), data: result.movieInfoResult.movieInfo.prdtYear)
         releasedYear = (title: String.emojiAndTitle(emojiValue: .releasedYear), data: result.movieInfoResult.movieInfo.openDt)
         runningTime = (title: String.emojiAndTitle(emojiValue: .runningTime), data: result.movieInfoResult.movieInfo.showTm)

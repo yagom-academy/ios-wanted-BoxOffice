@@ -32,6 +32,27 @@ struct DailyBoxOfficeList: Codable {
         case movieNm, openDt, salesAmt, salesShare, salesInten, salesChange, salesAcc, audiCnt, audiInten, audiChange, audiAcc, scrnCnt, showCnt
     }
     
+    init() {
+        self.rnum = ""
+        self.rank = ""
+        self.rankInten = ""
+        self.rankOldAndNew = RankOldAndNew.new
+        self.movieCd = ""
+        self.movieNm = ""
+        self.openDt = ""
+        self.salesAmt = ""
+        self.salesShare = ""
+        self.salesInten = ""
+        self.salesChange = ""
+        self.salesAcc = ""
+        self.audiCnt = ""
+        self.audiInten = ""
+        self.audiChange = ""
+        self.audiAcc = ""
+        self.scrnCnt = ""
+        self.showCnt = ""
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.rnum = try container.decode(String.self, forKey: .rnum) //순번을 출력
