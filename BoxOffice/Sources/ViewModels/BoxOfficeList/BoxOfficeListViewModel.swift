@@ -31,6 +31,10 @@ class BoxOfficeListViewModel {
     func bind() {
         $filter
             .removeDuplicates()
+            .handleEvents(receiveOutput: { [weak self] _ in
+                guard let self else { return }
+                self.cellModels = []
+            })
             .flatMap { [weak self] filter -> AnyPublisher<[Movie], Error> in
                 guard let self else { return Empty().eraseToAnyPublisher() }
                 switch filter {
