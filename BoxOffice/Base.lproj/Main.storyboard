@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="good" translatesAutoresizingMaskIntoConstraints="NO" id="4ej-Qy-RUj">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moon" translatesAutoresizingMaskIntoConstraints="NO" id="4ej-Qy-RUj">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                             </imageView>
                             <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9p-v1-CUZ">
@@ -364,7 +364,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="good" translatesAutoresizingMaskIntoConstraints="NO" id="YMc-4g-PMe">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moon" translatesAutoresizingMaskIntoConstraints="NO" id="YMc-4g-PMe">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                             </imageView>
                             <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ipv-49-w6l">
@@ -372,7 +372,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <tableView clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NQx-oz-pC6">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="761"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="120" id="Le8-MF-qPV" customClass="WeekTableViewCell" customModule="BoxOffice" customModuleProvider="target">
@@ -476,7 +476,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Oos-CO-leH" firstAttribute="trailing" secondItem="NQx-oz-pC6" secondAttribute="trailing" id="42s-h3-FTE"/>
-                            <constraint firstItem="Oos-CO-leH" firstAttribute="bottom" secondItem="NQx-oz-pC6" secondAttribute="bottom" id="7kT-ex-VRD"/>
+                            <constraint firstAttribute="bottom" secondItem="NQx-oz-pC6" secondAttribute="bottom" id="7kT-ex-VRD"/>
                             <constraint firstItem="NQx-oz-pC6" firstAttribute="leading" secondItem="Oos-CO-leH" secondAttribute="leading" id="Bhd-qF-MSX"/>
                             <constraint firstItem="3T3-D5-CEK" firstAttribute="centerY" secondItem="66F-5z-VfY" secondAttribute="centerY" id="HgG-ab-VtZ"/>
                             <constraint firstItem="NQx-oz-pC6" firstAttribute="top" secondItem="66F-5z-VfY" secondAttribute="top" id="ILD-ER-wMh"/>
@@ -719,8 +719,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="good" width="3648" height="5472"/>
         <image name="jeremy-yap-J39X2xX_8CQ-unsplash" width="5184" height="3456"/>
+        <image name="moon" width="2143" height="3000"/>
         <image name="pencil.circle" catalog="system" width="128" height="123"/>
         <image name="ticket" catalog="system" width="128" height="86"/>
         <systemColor name="systemBackgroundColor">

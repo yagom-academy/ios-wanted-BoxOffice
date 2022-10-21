@@ -42,7 +42,7 @@ class MovieListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .clear
-        rankingLabel.textColor = .white
+        rankingLabel.textColor = .black
         movieTitleLabel.textColor = rankingLabel.textColor
         audienceLabel.textColor = rankingLabel.textColor
         openingDateLabel.textColor = rankingLabel.textColor
