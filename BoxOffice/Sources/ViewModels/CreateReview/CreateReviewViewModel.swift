@@ -16,9 +16,13 @@ class CreateReviewViewModel {
     // MARK: Output
     @Published var movie: Movie
     @Published var posterImage: UIImage?
+    @Published var rating: Int = 0
     @Published var nickname: String?
     @Published var password: String?
     @Published var content: String?
+    @Published var reviewImage: UIImage?
+    
+    @Published var ratingViewModel = RatingViewModel()
     
     // MARK: Properties
     let repository = Repository()
@@ -48,9 +52,16 @@ class CreateReviewViewModel {
                 guard let self else { return }
                 self.posterImage = image
             }).store(in: &subscriptions)
+        
+        ratingViewModel.$rating
+            .sink(receiveValue: { [weak self] rating in
+                guard let self else { return }
+                self.rating = rating
+            }).store(in: &subscriptions)
     }
     
     enum ViewAction {
         case dismiss
+        case showPHPicker
     }
 }

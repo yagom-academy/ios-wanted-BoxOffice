@@ -1,5 +1,5 @@
 //
-//  CreateReviewRatingView.swift
+//  CreateReviewPhotoView.swift
 //  BoxOffice
 //
 //  Created by 한경수 on 2022/10/21.
@@ -8,39 +8,38 @@
 import Foundation
 import UIKit
 import Combine
+import PhotosUI
 import SwiftUI
 
 // MARK: - View
-class CreateReviewRatingView: UIView {
+class CreateReviewPhotoView: UIView {
     // MARK: View Components
-    lazy var circle: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "circle")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .appleSDGothicNeo(weight: .bold, size: 14)
         label.textColor = UIColor(hex: "#DFDFDF")
-        label.text = "별점"
+        label.text = "사진"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    lazy var ratingView: RatingView = {
-        let view = RatingView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 4
+        imageView.layer.borderColor = UIColor(hex: "#707070").cgColor
+        imageView.layer.borderWidth = 1
+        imageView.clipsToBounds = true
+        imageView.backgroundColor = .white
+        imageView.isUserInteractionEnabled = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
-    lazy var ratingLabel: UILabel = {
-        let label = UILabel()
-        label.font = .appleSDGothicNeo(weight: .medium, size: 16)
-        label.textColor = UIColor(hex: "#DFDFDF")
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    lazy var backgroundView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "plus")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     // MARK: Associated Types
@@ -79,15 +78,15 @@ class CreateReviewRatingView: UIView {
     // MARK: Setup Views
     func setupViews() {
         self.backgroundColor = .clear
+        imageView.addGestureRecognizer(UITapGestureRecognizer())
     }
     
     
     // MARK: Build View Hierarchy
     func buildViewHierarchy() {
-        self.addSubview(circle)
         self.addSubview(titleLabel)
-        self.addSubview(ratingView)
-        self.addSubview(ratingLabel)
+        self.addSubview(backgroundView)
+        self.addSubview(imageView)
     }
     
     
@@ -98,54 +97,53 @@ class CreateReviewRatingView: UIView {
         defer { NSLayoutConstraint.activate(constraints) }
         
         constraints += [
-            circle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
-            circle.widthAnchor.constraint(equalToConstant: 4),
-            circle.heightAnchor.constraint(equalToConstant: 4),
-            circle.centerYAnchor.constraint(equalTo: centerYAnchor),
+            self.heightAnchor.constraint(equalToConstant: 144),
         ]
         
         constraints += [
-            titleLabel.leadingAnchor.constraint(equalTo: circle.trailingAnchor, constant: 4),
-            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
         ]
         
         constraints += [
-            ratingView.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 16),
-            ratingView.widthAnchor.constraint(equalToConstant: 100),
-            ratingView.heightAnchor.constraint(equalToConstant: 18),
-            ratingView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            ratingView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
+            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+            imageView.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 16),
+            imageView.widthAnchor.constraint(equalToConstant: 120),
+            imageView.heightAnchor.constraint(equalToConstant: 120),
         ]
         
         constraints += [
-            ratingLabel.leadingAnchor.constraint(equalTo: ratingView.trailingAnchor, constant: 12),
-            ratingLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            backgroundView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            backgroundView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
+            backgroundView.widthAnchor.constraint(equalToConstant: 38),
+            backgroundView.heightAnchor.constraint(equalToConstant: 38),
         ]
     }
     
     
     // MARK: Binding
     func bind(viewModel: ViewModel) {
-        viewModel.$ratingViewModel
-            .assign(to: \.viewModel, on: ratingView)
+        imageView.gesture(.tap)
+            .map { _ in ViewModel.ViewAction.showPHPicker }
+            .subscribe(viewModel.viewAction)
             .store(in: &subscriptions)
         
-        viewModel.$rating
-            .map { "\($0)" }
-            .assign(to: \.text, on: ratingLabel)
+        viewModel.$reviewImage
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.image, on: imageView)
             .store(in: &subscriptions)
     }
 }
 
 #if canImport(SwiftUI) && DEBUG
-struct CreateReviewRatingViewPreview: PreviewProvider {
+struct CreateReviewPhotoViewPreview: PreviewProvider {
     static var previews: some View {
         ContentViewPreview {
-            let view = CreateReviewRatingView()
+            let view = CreateReviewPhotoView()
             view.viewModel = CreateReviewViewModel(movie: .dummyMovie)
             return view
         }.background(Color(UIColor(hex: "#101010")))
-        .previewLayout(.fixed(width: 390, height: 40))
+        .previewLayout(.fixed(width: 390, height: 144))
     }
 }
 #endif

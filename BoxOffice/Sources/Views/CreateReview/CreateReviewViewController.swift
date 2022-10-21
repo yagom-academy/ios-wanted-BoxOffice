@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Combine
+import PhotosUI
 import SwiftUI
 
 // MARK: - View Controller
@@ -62,6 +63,12 @@ class CreateReviewViewController: UIViewController {
         return view
     }()
     
+    lazy var photoView: CreateReviewPhotoView = {
+        let view = CreateReviewPhotoView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var dividerViews: [UIView] = {
         var views = [UIView(), UIView(), UIView(), UIView(), UIView()]
         views.forEach {
@@ -69,6 +76,13 @@ class CreateReviewViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         return views
+    }()
+    
+    lazy var picker: PHPickerViewController = {
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .any(of: [.images])
+        let picker = PHPickerViewController(configuration: configuration)
+        return picker
     }()
     
     // MARK: Associated Types
@@ -107,6 +121,7 @@ class CreateReviewViewController: UIViewController {
     // MARK: Setup Views
     func setupViews() {
         self.view.backgroundColor = UIColor(hex: "#101010")
+        picker.delegate = self
     }
     
     // MARK: Build View Hierarchy
@@ -119,6 +134,7 @@ class CreateReviewViewController: UIViewController {
         contentView.addSubview(nicknameView)
         contentView.addSubview(passwordView)
         contentView.addSubview(paragraphView)
+        contentView.addSubview(photoView)
         dividerViews.forEach {
             contentView.addSubview($0)
         }
@@ -217,16 +233,36 @@ class CreateReviewViewController: UIViewController {
             dividerViews[4].trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             dividerViews[4].heightAnchor.constraint(equalToConstant: 1),
         ]
+        
+        constraints += [
+            photoView.topAnchor.constraint(equalTo: dividerViews[4].bottomAnchor),
+            photoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            photoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+        ]
     }
     
     
     // MARK: Binding
     func bind(viewModel: ViewModel) {
+        viewModel.viewAction
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] action in
+                guard let self else { return }
+                switch action {
+                case .dismiss:
+                    self.navigationController?.popViewController(animated: true)
+                case .showPHPicker:
+                    self.present(self.picker, animated: true)
+                }
+            }).store(in: &subscriptions)
+        
         navigationView.viewModel = viewModel
         infoView.viewModel = viewModel
+        ratingView.viewModel = viewModel
         nicknameView.viewModel = viewModel
         passwordView.viewModel = viewModel
         paragraphView.viewModel = viewModel
+        photoView.viewModel = viewModel
     }
     
     // MARK: Util
@@ -236,6 +272,23 @@ class CreateReviewViewController: UIViewController {
         view.heightAnchor.constraint(equalToConstant: 1).isActive = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }
+}
+
+extension CreateReviewViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        
+        if let itemProvider = results.first?.itemProvider {
+            if itemProvider.canLoadObject(ofClass: UIImage.self) {
+                itemProvider.loadObject(ofClass: UIImage.self, completionHandler: { [weak self] image, error in
+                    guard let self,
+                          let image = image as? UIImage
+                    else { return }
+                    self.viewModel?.reviewImage = image
+                })
+            }
+        }
     }
 }
 
