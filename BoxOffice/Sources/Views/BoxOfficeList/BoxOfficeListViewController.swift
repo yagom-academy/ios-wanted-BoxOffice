@@ -171,6 +171,16 @@ class BoxOfficeListViewController: UIViewController {
                 guard let self else { return }
                 self.collectionView.reloadData()
             }).store(in: &subscriptions)
+        
+        viewModel.viewAction
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] action in
+                guard let self else { return }
+                switch action {
+                case .pushViewController(let vc):
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }).store(in: &subscriptions)
     }
 }
 
@@ -195,6 +205,10 @@ extension BoxOfficeListViewController: UICollectionViewDataSource, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.viewModel.selectItem.send(indexPath.row)
     }
 }
 

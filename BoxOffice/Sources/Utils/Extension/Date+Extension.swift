@@ -26,4 +26,5 @@ extension Date {
 enum DateFormat: String {
     case yyyyMMdd = "yyyyMMdd"
     case yyyyMMddDot = "yyyy.MM.dd"
+    case yyyyMMddHypen = "yyyy-MM-dd"
 }

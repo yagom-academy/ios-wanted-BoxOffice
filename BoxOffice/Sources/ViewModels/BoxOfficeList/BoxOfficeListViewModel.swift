@@ -11,10 +11,12 @@ import Combine
 
 class BoxOfficeListViewModel {
     // MARK: Input
+    let selectItem = PassthroughSubject<Int, Never>()
     
     // MARK: Output
     @Published var cellModels = [BoxOfficeListCollectionViewCellModel]()
     @Published var filter: BoxOfficeFilter = .weekend
+    let viewAction = PassthroughSubject<ViewAction, Never>()
     
     // MARK: Properties
     let repository = Repository()
@@ -29,10 +31,10 @@ class BoxOfficeListViewModel {
     func bind() {
         $filter
             .removeDuplicates()
-//            .handleEvents(receiveOutput: { [weak self] _ in
-//                guard let self else { return }
-//                self.cellModels = []
-//            })
+            .handleEvents(receiveOutput: { [weak self] _ in
+                guard let self else { return }
+                self.cellModels = []
+            })
             .flatMap { [weak self] filter -> AnyPublisher<[Movie], Error> in
                 guard let self else { return Empty().eraseToAnyPublisher() }
                 switch filter {
@@ -54,6 +56,19 @@ class BoxOfficeListViewModel {
                 guard let self else { return }
                 self.cellModels = viewModels
             }).store(in: &subscriptions)
+        
+        selectItem
+            .compactMap { [weak self] index in
+                guard let self else { return nil }
+                let vc = MovieDetailViewController()
+                vc.viewModel = MovieDetailViewModel(movie: self.cellModels[index].movie)
+                return .pushViewController(vc)
+            }.subscribe(viewAction)
+            .store(in: &subscriptions)
+    }
+    
+    enum ViewAction {
+        case pushViewController(_ vc: UIViewController)
     }
 }
 

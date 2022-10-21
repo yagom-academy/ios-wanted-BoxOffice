@@ -1,8 +1,8 @@
 //
-//  BoxOfficeListCollectionViewCell.swift
+//  MoviePosterView.swift
 //  BoxOffice
 //
-//  Created by CodeCamper on 2022/10/19.
+//  Created by 한경수 on 2022/10/20.
 //
 
 import Foundation
@@ -11,7 +11,7 @@ import Combine
 import SwiftUI
 
 // MARK: - View
-class BoxOfficeListCollectionViewCell: UICollectionViewCell {
+class MoviePosterView: UIView {
     // MARK: View Components
     lazy var posterImageView: OverlayedImageView = {
         let gradientLayer = CAGradientLayer()
@@ -56,45 +56,21 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .appleSDGothicNeo(weight: .semiBold, size: 16)
-        label.textColor = UIColor(hex: "#222222")
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var openDateLabel: UILabel = {
-        let label = UILabel()
-        label.font = .appleSDGothicNeo(weight: .medium, size: 12)
-        label.textColor = UIColor(hex: "#9A9A9A")
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var audienceCountLabel: UILabel = {
-        let label = UILabel()
-        label.font = .appleSDGothicNeo(weight: .medium, size: 12)
-        label.textColor = UIColor(hex: "#9A9A9A")
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     // MARK: Associated Types
-    typealias ViewModel = BoxOfficeListCollectionViewCellModel
+    typealias ViewModel = MoviePosterViewModel
     
     // MARK: Properties
     var didSetupConstraints = false
     var viewModel: ViewModel? {
         didSet {
-            guard let viewModel else { return }
+            guard let viewModel = viewModel else { return }
             bind(viewModel: viewModel)
         }
     }
     var subscriptions = [AnyCancellable]()
     
     // MARK: Life Cycle
-    override init(frame: CGRect) {
+    init() {
         super.init(frame: .zero)
         setupViews()
         buildViewHierarchy()
@@ -113,18 +89,6 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
         super.updateConstraints()
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        subscriptions = []
-        posterImageView.image = nil
-        rankLabel.text = ""
-        rankIntenImage.isHidden = true
-        rankIntenLabel.isHidden = true
-        titleLabel.text = ""
-        openDateLabel.text = ""
-        audienceCountLabel.text = ""
-    }
-    
     // MARK: Setup Views
     func setupViews() {
         
@@ -133,14 +97,11 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
     
     // MARK: Build View Hierarchy
     func buildViewHierarchy() {
-        self.contentView.addSubview(posterImageView)
-        self.contentView.addSubview(rankLabel)
-        self.contentView.addSubview(rankIntenStackView)
+        self.addSubview(posterImageView)
+        self.addSubview(rankLabel)
+        self.addSubview(rankIntenStackView)
         rankIntenStackView.addArrangedSubview(rankIntenImage)
         rankIntenStackView.addArrangedSubview(rankIntenLabel)
-        self.contentView.addSubview(titleLabel)
-        self.contentView.addSubview(openDateLabel)
-        self.contentView.addSubview(audienceCountLabel)
     }
     
     
@@ -151,10 +112,10 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
         defer { NSLayoutConstraint.activate(constraints) }
         
         constraints += [
-            posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            posterImageView.heightAnchor.constraint(equalTo: posterImageView.widthAnchor, multiplier: 15 / 11)
+            posterImageView.topAnchor.constraint(equalTo: topAnchor),
+            posterImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            posterImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            posterImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ]
         
         constraints += [
@@ -171,24 +132,6 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
             rankIntenStackView.leadingAnchor.constraint(equalTo: rankLabel.trailingAnchor, constant: 4),
             rankIntenStackView.bottomAnchor.constraint(equalTo: posterImageView.bottomAnchor),
             rankIntenStackView.heightAnchor.constraint(equalToConstant: 19),
-        ]
-        
-        constraints += [
-            titleLabel.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 12),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-        ]
-        
-        constraints += [
-            openDateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
-            openDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            openDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-        ]
-        
-        constraints += [
-            audienceCountLabel.topAnchor.constraint(equalTo: openDateLabel.bottomAnchor),
-            audienceCountLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            audienceCountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
         ]
     }
     
@@ -235,38 +178,25 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
                     self.rankIntenLabel.isHidden = false
                 }
             }).store(in: &subscriptions)
-        
-        viewModel.$movie
-            .map { $0.movieName }
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.text, on: titleLabel)
-            .store(in: &subscriptions)
-        
-        viewModel.$movie
-            .map { $0.openDate }
-            .map { "\($0) 개봉" }
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.text, on: openDateLabel)
-            .store(in: &subscriptions)
     }
     
     // MARK: Util
-    static func calculateCellHeight(width: CGFloat) -> CGFloat {
-        return (width * 15 / 11) + 65
+    func clearAll() {
+        posterImageView.image = nil
+        rankLabel.text = ""
+        rankIntenImage.isHidden = true
+        rankIntenLabel.isHidden = true
     }
 }
 
 #if canImport(SwiftUI) && DEBUG
-struct BoxOfficeListCollectionViewCellPreview: PreviewProvider {
+struct MoviePosterViewPreview: PreviewProvider {
     static var previews: some View {
-        let width: CGFloat = 115
-        let height = BoxOfficeListCollectionViewCell.calculateCellHeight(width: width)
-        let viewModel = BoxOfficeListCollectionViewCellModel(movie: Movie.dummyMovie)
         ContentViewPreview {
-            let cell = BoxOfficeListCollectionViewCell(frame: .zero)
-            cell.viewModel = viewModel
-            return cell
-        }.previewLayout(.fixed(width: width, height: height))
+            let view = MoviePosterView()
+            view.viewModel = MoviePosterViewModel(movie: .dummyMovie)
+            return view
+        }.previewLayout(.fixed(width: 110, height: 150))
     }
 }
 #endif
