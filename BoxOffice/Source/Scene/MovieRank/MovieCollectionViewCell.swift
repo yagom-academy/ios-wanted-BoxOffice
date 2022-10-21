@@ -23,7 +23,7 @@ final class MovieCollectionViewCell: UICollectionViewCell {
     
     private let rankingLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemBackground
+        label.textColor = .white
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.layer.zPosition = 1
@@ -44,7 +44,7 @@ final class MovieCollectionViewCell: UICollectionViewCell {
         button.setPreferredSymbolConfiguration(config, forImageIn: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.setTitleColor(.systemBackground, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.layer.zPosition = 1
         return button
     }()

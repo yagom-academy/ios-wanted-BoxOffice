@@ -17,14 +17,14 @@ final class MainInfoCollectionViewCell: UICollectionViewCell {
     
     private let darkBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        view.backgroundColor = UIColor.label.withAlphaComponent(0.5)
         view.layer.cornerRadius = 2
         return view
     }()
     
     private let rankingLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemBackground
+        label.textColor = .white
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.layer.zPosition = 1
@@ -45,7 +45,7 @@ final class MainInfoCollectionViewCell: UICollectionViewCell {
         button.setPreferredSymbolConfiguration(config, forImageIn: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.setTitleColor(.systemBackground, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.layer.zPosition = 1
         return button
     }()
