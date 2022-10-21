@@ -13,6 +13,8 @@ class WriteReviewViewController: UIViewController {
   let starEmpty = UIImage(systemName: "star")
 
   var starButtons = [UIButton]()
+  var score = 0
+  var movieCode = ""
 
   let horizontal: UIStackView = {
     let sv = UIStackView()
@@ -26,9 +28,10 @@ class WriteReviewViewController: UIViewController {
 
   let reviewInput: UITextView = {
     let tv = UITextView()
-    tv.textContainerInset = UIEdgeInsets(top: 20, left: 10, bottom: -20, right: -10)
+    tv.textContainerInset = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
     tv.layer.borderWidth = 1
     tv.layer.borderColor = UIColor.gray.cgColor
+    tv.autocapitalizationType = .none
 
     return tv
   }()
@@ -36,6 +39,7 @@ class WriteReviewViewController: UIViewController {
   let nickname: UITextField = {
     let tf = UITextField()
     tf.placeholder = "별명 입력"
+    tf.autocapitalizationType = .none
 
     return tf
   }()
@@ -43,6 +47,8 @@ class WriteReviewViewController: UIViewController {
   let password: UITextField = {
     let tf = UITextField()
     tf.placeholder = "비밀번호 입력"
+    tf.autocapitalizationType = .none
+//    tf.isSecureTextEntry = true
 
     return tf
   }()
@@ -67,8 +73,8 @@ class WriteReviewViewController: UIViewController {
 
     addViews()
     setConstraints()
+    setActions()
   }
-
 
 }
 
@@ -99,20 +105,38 @@ extension WriteReviewViewController {
     }
 
     NSLayoutConstraint.activate([
-      horizontal.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 18),
+      horizontal.topAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 18),
       horizontal.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      reviewInput.topAnchor.constraint(equalTo: horizontal.bottomAnchor, constant: 18),
-      reviewInput.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-      reviewInput.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-      vertical.topAnchor.constraint(equalTo: reviewInput.bottomAnchor, constant: 18),
-      vertical.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-      vertical.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-      vertical.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -18),
+      vertical.topAnchor.constraint(equalTo: horizontal.bottomAnchor, constant: 18),
+      vertical.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+      vertical.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+      reviewInput.topAnchor.constraint(equalTo: vertical.bottomAnchor, constant: 18),
+      reviewInput.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+      reviewInput.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+      reviewInput.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -18),
 
     ])
   }
 
+  func setActions() {
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+    view.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                     action: #selector(dismissKeyboard)))
+  }
+
+  func checkValidPassword(_ pw: String) -> Bool {
+    let pattern = #"^(?=.*[a-z])(?=.*\d)(?=.*[!@#$])[a-z0-9!@#$]{6,20}$"#
+
+    if pw.range(of: pattern, options: .regularExpression) != nil {
+      return true
+    } else { return false }
+  }
+
   @objc func starButtonTapped(_ sender: UIButton) {
+    score = sender.tag + 1
+
     for i in 0 ... sender.tag {
       starButtons[i].setBackgroundImage(starFilled, for: .normal)
     }
@@ -124,6 +148,48 @@ extension WriteReviewViewController {
 
   @objc func doneButtonPressed() {
     print("리뷰 등록")
+    if nickname.text! == "" || !checkValidPassword(password.text!) {
+      let alertController = UIAlertController(title: "별명 또는 비밀번호 형식 오류",
+                                              message: """
+                                              별명 한 글자 이상, 비밀번호 6 ~ 20자리
+                                              알파벳 소문자, 숫자, 특수문자[!, @, #, $] 각 한 글자 이상 포함
+                                              """,
+                                              preferredStyle: .alert)
+      let confirmAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
+        print(self.nickname.text!, self.password.text!)
+      })
+      alertController.addAction(confirmAction)
+      present(alertController, animated: true, completion: nil)
+    } else {
+      print(movieCode, nickname.text!, password.text!, score, reviewInput.text!)
+      self.navigationController?.popViewController(animated: true)
+    }
+
+  }
+
+  // TODO: - 가로 모드에서 화면 올리기, verticalScrollInset 수정하기
+  @objc func keyboardWillShow(_ notification: NSNotification) {
+    guard let userInfo = notification.userInfo,
+          let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
+//          let currentTextView = UIResponder.currentFirst() as? UITextView
+    else { return }
+
+//    let keyboardTopY = keyboardFrame.cgRectValue.origin.y
+//    let convertedTextViewFrame = view.convert(currentTextView.frame, from: currentTextView.superview)
+//    let textViewMidY = convertedTextViewFrame.origin.y + convertedTextViewFrame.size.height / 2
+
+    self.reviewInput.contentInset.bottom = keyboardFrame.cgRectValue.size.height
+    self.reviewInput.verticalScrollIndicatorInsets.bottom = keyboardFrame.cgRectValue.size.height / 2
+  }
+
+  @objc func keyboardWillHide(_ notification: NSNotification) {
+    self.view.frame.origin.y = 0
+    self.reviewInput.textContainerInset = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
+    self.reviewInput.verticalScrollIndicatorInsets = UIEdgeInsets.zero
+  }
+
+  @objc func dismissKeyboard() {
+    view.endEditing(true)
   }
 }
 

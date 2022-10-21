@@ -165,6 +165,7 @@ extension MovieDetailViewController: WriteReviewDelegate {
   func showWriteReviewPage() {
     let nextVC = WriteReviewViewController()
     nextVC.title = "리뷰작성"
+    nextVC.movieCode = rankInfo?.movieCd ?? ""
     navigationController?.pushViewController(nextVC, animated: true)
   }
 }
