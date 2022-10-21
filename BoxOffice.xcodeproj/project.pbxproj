@@ -11,6 +11,9 @@
 		634C26EF29007838006E6811 /* WeekSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C26EE29007838006E6811 /* WeekSecondViewController.swift */; };
 		634C26F4290126AB006E6811 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C26F3290126AB006E6811 /* SplashViewController.swift */; };
 		634C26F6290128D6006E6811 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 634C26F5290128D6006E6811 /* Splash.storyboard */; };
+		634C26FA2902A0AA006E6811 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C26F92902A0AA006E6811 /* ThirdViewController.swift */; };
+		634C26FF2902B050006E6811 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C26FE2902B050006E6811 /* Review.swift */; };
+		634C27012902B058006E6811 /* Review.xib in Resources */ = {isa = PBXBuildFile; fileRef = 634C27002902B058006E6811 /* Review.xib */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19EF28F9603900197BCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19ED28F9603900197BCC /* Main.storyboard */; };
@@ -31,6 +34,9 @@
 		634C26EE29007838006E6811 /* WeekSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSecondViewController.swift; sourceTree = "<group>"; };
 		634C26F3290126AB006E6811 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		634C26F5290128D6006E6811 /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
+		634C26F92902A0AA006E6811 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
+		634C26FE2902B050006E6811 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		634C27002902B058006E6811 /* Review.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Review.xib; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,12 +74,22 @@
 			path = Splash;
 			sourceTree = "<group>";
 		};
+		634C26FB2902AFC4006E6811 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				634C26FE2902B050006E6811 /* Review.swift */,
+				634C27002902B058006E6811 /* Review.xib */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
 		635A19DB28F9603900197BCC = {
 			isa = PBXGroup;
 			children = (
 				636B6D5128FD4617002C16D8 /* API */,
 				636B6D4828FD33A9002C16D8 /* Model */,
-				636B6D4928FD341F002C16D8 /* ViewController */,
+				636B6D4928FD341F002C16D8 /* DailyViewController */,
+				634C26FB2902AFC4006E6811 /* Review */,
 				636B6D7628FE8276002C16D8 /* Week */,
 				634C26F229012687006E6811 /* Splash */,
 				635A19E628F9603900197BCC /* BoxOffice */,
@@ -111,14 +127,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		636B6D4928FD341F002C16D8 /* ViewController */ = {
+		636B6D4928FD341F002C16D8 /* DailyViewController */ = {
 			isa = PBXGroup;
 			children = (
 				636B6D4A28FD3463002C16D8 /* FirstViewController.swift */,
 				636B6D4F28FD34D1002C16D8 /* MovieListTableViewCell.swift */,
 				636B6D4C28FD3496002C16D8 /* SecondViewController.swift */,
+				634C26F92902A0AA006E6811 /* ThirdViewController.swift */,
 			);
-			path = ViewController;
+			path = DailyViewController;
 			sourceTree = "<group>";
 		};
 		636B6D5128FD4617002C16D8 /* API */ = {
@@ -201,6 +218,7 @@
 			files = (
 				635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */,
 				635A19F128F9603A00197BCC /* Assets.xcassets in Resources */,
+				634C27012902B058006E6811 /* Review.xib in Resources */,
 				635A19EF28F9603900197BCC /* Main.storyboard in Resources */,
 				634C26F6290128D6006E6811 /* Splash.storyboard in Resources */,
 			);
@@ -218,11 +236,13 @@
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				636B6D7828FE82A7002C16D8 /* WeekTableViewCell.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
+				634C26FF2902B050006E6811 /* Review.swift in Sources */,
 				634C26ED290073F1006E6811 /* WeekAPI.swift in Sources */,
 				634C26F4290126AB006E6811 /* SplashViewController.swift in Sources */,
 				636B6D4728FD33A0002C16D8 /* Model.swift in Sources */,
 				636B6D4D28FD3496002C16D8 /* SecondViewController.swift in Sources */,
 				636B6D7528FE825E002C16D8 /* WeekViewController.swift in Sources */,
+				634C26FA2902A0AA006E6811 /* ThirdViewController.swift in Sources */,
 				636B6D5028FD34D1002C16D8 /* MovieListTableViewCell.swift in Sources */,
 				634C26EF29007838006E6811 /* WeekSecondViewController.swift in Sources */,
 				636B6D4B28FD3463002C16D8 /* FirstViewController.swift in Sources */,
