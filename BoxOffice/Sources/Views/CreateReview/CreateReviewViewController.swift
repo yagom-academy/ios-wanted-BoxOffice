@@ -50,6 +50,12 @@ class CreateReviewViewController: UIViewController {
         return view
     }()
     
+    lazy var passwordView: CreateReviewPasswordView = {
+        let view = CreateReviewPasswordView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var dividerViews: [UIView] = {
         var views = [UIView(), UIView(), UIView(), UIView(), UIView()]
         views.forEach {
@@ -105,6 +111,7 @@ class CreateReviewViewController: UIViewController {
         contentView.addSubview(infoView)
         contentView.addSubview(ratingView)
         contentView.addSubview(nicknameView)
+        contentView.addSubview(passwordView)
         dividerViews.forEach {
             contentView.addSubview($0)
         }
@@ -176,6 +183,19 @@ class CreateReviewViewController: UIViewController {
             dividerViews[2].leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             dividerViews[2].trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             dividerViews[2].heightAnchor.constraint(equalToConstant: 1),
+        ]
+        
+        constraints += [
+            passwordView.topAnchor.constraint(equalTo: dividerViews[2].bottomAnchor),
+            passwordView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            passwordView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+        ]
+        
+        constraints += [
+            dividerViews[3].topAnchor.constraint(equalTo: passwordView.bottomAnchor),
+            dividerViews[3].leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            dividerViews[3].trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            dividerViews[3].heightAnchor.constraint(equalToConstant: 1),
         ]
     }
     
