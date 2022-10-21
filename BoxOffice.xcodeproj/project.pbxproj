@@ -28,6 +28,8 @@
 		6C9DAC7F28FD4A39001C0D8B /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9DAC7E28FD4A39001C0D8B /* MovieListCell.swift */; };
 		6CA3F6B229019AB000DE1ABA /* MovieReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA3F6B129019AB000DE1ABA /* MovieReviewViewModel.swift */; };
 		6CA3F6B52901A0A700DE1ABA /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA3F6B42901A0A700DE1ABA /* Observable.swift */; };
+		6CC4C3EF2902ACAE0054C3BA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6CC4C3EE2902ACAE0054C3BA /* FirebaseStorage */; };
+		6CC4C3F12902B2A30054C3BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CC4C3F02902B2A30054C3BA /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,7 @@
 		6C9DAC7E28FD4A39001C0D8B /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
 		6CA3F6B129019AB000DE1ABA /* MovieReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewViewModel.swift; sourceTree = "<group>"; };
 		6CA3F6B42901A0A700DE1ABA /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		6CC4C3F02902B2A30054C3BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../.Trash/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CC4C3EF2902ACAE0054C3BA /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +100,7 @@
 				635A19F028F9603A00197BCC /* Assets.xcassets */,
 				635A19F228F9603A00197BCC /* LaunchScreen.storyboard */,
 				635A19F528F9603A00197BCC /* Info.plist */,
+				6CC4C3F02902B2A30054C3BA /* GoogleService-Info.plist */,
 			);
 			path = BoxOffice;
 			sourceTree = "<group>";
@@ -184,6 +189,9 @@
 			dependencies = (
 			);
 			name = BoxOffice;
+			packageProductDependencies = (
+				6CC4C3EE2902ACAE0054C3BA /* FirebaseStorage */,
+			);
 			productName = BoxOffice;
 			productReference = 635A19E428F9603900197BCC /* BoxOffice.app */;
 			productType = "com.apple.product-type.application";
@@ -212,6 +220,9 @@
 				Base,
 			);
 			mainGroup = 635A19DB28F9603900197BCC;
+			packageReferences = (
+				6CC4C3ED2902ACAE0054C3BA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 635A19E528F9603900197BCC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -228,6 +239,7 @@
 			files = (
 				635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */,
 				635A19F128F9603A00197BCC /* Assets.xcassets in Resources */,
+				6CC4C3F12902B2A30054C3BA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +478,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6CC4C3ED2902ACAE0054C3BA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6CC4C3EE2902ACAE0054C3BA /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CC4C3ED2902ACAE0054C3BA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 635A19DC28F9603900197BCC /* Project object */;
 }

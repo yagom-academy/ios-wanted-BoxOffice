@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 final class MovieReviewViewController: UIViewController {
     
@@ -69,7 +70,13 @@ final class MovieReviewViewController: UIViewController {
         return button
     }()
     
+    var movieTitle: String = ""
     private var viewModel: MovieReviewViewModel = .init()
+    private var finalReview: ReviewModel = .init(nickname: "", password: "", starScore: 0, content: "") {
+        didSet {
+            print("리뷰 변경", finalReview)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +86,7 @@ final class MovieReviewViewController: UIViewController {
         self.starPickerView.delegate = self
         self.contentTextView.delegate = self
         self.registerButton.addTarget(self, action: #selector(registerButtonTapped(_:)), for: .touchUpInside)
-        
+        print("title: \(movieTitle)")
     }
     
     private func bind(_ viewmodel: MovieReviewViewModel) {
@@ -90,19 +97,52 @@ final class MovieReviewViewController: UIViewController {
             self?.registerButton.backgroundColor = buttonColor
             self?.registerButton.setTitleColor(titleColor, for: .normal)
             self?.registerButton.isEnabled = isEnabled
+            print("유효성 \(isEnabled)")
         }
         
         output.passwordIsValid.subscribe { [weak self] isValid in
             print("비번: \(isValid)")
             self?.errorLabel.isHidden = isValid
-            
         }
+        
+        output.registerReview.subscribe { model in
+            self.finalReview = model
+        }
+        
+    }
+    
+    private func uploadReviewToStorage(_ review: ReviewModel) {
+        let reviewName = "[영화리뷰] : " + movieTitle
+        let jsonEncoder = JSONEncoder()
+        jsonEncoder.outputFormatting = .prettyPrinted
+        do {
+            let data = try jsonEncoder.encode(review)
+            let storageRef = Storage.storage().reference().child("\(reviewName)")
+            let metaData = StorageMetadata()
+            metaData.contentType = "txt"
+            storageRef.putData(data, metadata: metaData) { metaData, error in
+                if let error = error {
+                    print("metadata error: \(error)")
+                } else {
+                    print("🎉 Upload Success")
+                }
+            }
+        } catch {
+            fatalError("🚨ERROR: Review encode fail")
+        }
+        
     }
     
     @objc func registerButtonTapped(_ sender: UIButton) {
-        self.navigationController?.pushViewController(MovieDetailViewController(), animated: true)
+        self.uploadReviewToStorage(finalReview)
+        let alertVC = UIAlertController(title: nil, message: "🎉 \(movieTitle) \n 영화 리뷰가 작성되었습니다!", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        alertVC.addAction(confirm)
+        self.present(alertVC, animated: true)
     }
-
+    
     private func setupLayouts() {
         ["별명", "암호"].forEach {
             let reviewView = ReviewTextView(title: $0)
@@ -180,8 +220,8 @@ extension MovieReviewViewController: ReviewTextViewDelegate {
 extension MovieReviewViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         viewModel.content.value = textView.text
+        bind(viewModel)
     }
-
 }
 
 extension MovieReviewViewController: UIPickerViewDataSource {
@@ -201,5 +241,6 @@ extension MovieReviewViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         viewModel.starScore.value =  viewModel.starValueList[row]
+        bind(viewModel)
     }
 }

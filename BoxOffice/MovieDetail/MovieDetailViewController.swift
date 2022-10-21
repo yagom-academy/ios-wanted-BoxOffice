@@ -117,7 +117,9 @@ final class MovieDetailViewController: UIViewController {
     }
     
     @objc func writeReview() {
-        self.navigationController?.pushViewController(MovieReviewViewController(), animated: true)
+        let reviewVC = MovieReviewViewController()
+        reviewVC.movieTitle = self.movieTitle.text ?? ""
+        self.navigationController?.pushViewController(reviewVC, animated: true)
     }
     
     private func setupLayouts() {
@@ -178,22 +180,5 @@ extension MovieDetailViewController: UITableViewDelegate {
     // TODO: 라벨 크기에 따른 동적 셀 구현해야됨
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
-    }
-}
-
-struct MovieListViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        Container().edgesIgnoringSafeArea(.all)
-    }
-
-    struct Container: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> UIViewController {
-            let vc = MovieDetailViewController()
-            return UINavigationController(rootViewController: vc)
-        }
-
-        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) { }
-
-        typealias UIViewControllerType = UIViewController
     }
 }
