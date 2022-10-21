@@ -162,6 +162,16 @@ extension WriteReviewViewController {
       present(alertController, animated: true, completion: nil)
     } else {
       print(movieCode, nickname.text!, password.text!, score, reviewInput.text!)
+
+      let reviewInfo = ReviewModel(movieCode: movieCode,
+                               nickname: nickname.text!,
+                               password: password.text!,
+                               review: reviewInput.text!, score: score)
+
+      FireStorageManager.shared.uploadReview(movieCode: movieCode,
+                                             fileName: UUID().uuidString,
+                                             reviewInfo: reviewInfo)
+
       self.navigationController?.popViewController(animated: true)
     }
 
