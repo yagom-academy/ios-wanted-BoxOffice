@@ -14,10 +14,11 @@ class MovieDetailViewModel {
     
     // MARK: Output
     @Published var movie: Movie
+    @Published var posterModel: MoviePosterViewModel?
     let viewAction = PassthroughSubject<ViewAction, Never>()
     
     // MARK: Properties
-    
+    var subscriptions = [AnyCancellable]()
     
     // MARK: Life Cycle
     init(movie: Movie) {
@@ -27,7 +28,11 @@ class MovieDetailViewModel {
     
     // MARK: Binding
     func bind() {
-
+        $movie
+            .sink(receiveValue: { [weak self] movie in
+                guard let self else { return }
+                self.posterModel = MoviePosterViewModel(movie: movie)
+            }).store(in: &subscriptions)
     }
     
     enum ViewAction {

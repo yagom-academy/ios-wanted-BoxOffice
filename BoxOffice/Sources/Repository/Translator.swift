@@ -13,6 +13,7 @@ enum Translator {
         var result = [Movie]()
         boxOfficeList.forEach {
             guard
+                let openDate = $0.openDt.asDate(),
                 let rank = Int($0.rank),
                 let rankInten = Int($0.rankInten),
                 let rankOldAndNew = BoxOfficeInfo.RankType(rawValue: $0.rankOldAndNew),
@@ -22,7 +23,7 @@ enum Translator {
                 Movie(
                     movieCode: $0.movieCd,
                     movieName: $0.movieNm,
-                    openDate: $0.openDt,
+                    openDate: openDate,
                     boxOfficeInfo: BoxOfficeInfo(
                         rank: rank,
                         rankInten: rankInten,
@@ -38,6 +39,7 @@ enum Translator {
         var result = [Movie]()
         boxOfficeList.forEach {
             guard
+                let openDate = $0.openDt.asDate(),
                 let rank = Int($0.rank),
                 let rankInten = Int($0.rankInten),
                 let rankOldAndNew = BoxOfficeInfo.RankType(rawValue: $0.rankOldAndNew),
@@ -47,7 +49,7 @@ enum Translator {
                 Movie(
                     movieCode: $0.movieCd,
                     movieName: $0.movieNm,
-                    openDate: $0.openDt,
+                    openDate: openDate,
                     boxOfficeInfo: BoxOfficeInfo(
                         rank: rank,
                         rankInten: rankInten,

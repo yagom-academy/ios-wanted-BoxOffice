@@ -10,7 +10,7 @@ import Foundation
 struct Movie {
     var movieCode: String
     var movieName: String
-    var openDate: String
+    var openDate: Date
     var boxOfficeInfo: BoxOfficeInfo?
     var detailInfo: MovieDetailInfo?
 }
@@ -44,7 +44,7 @@ extension Movie {
         return Movie(
             movieCode: "20112207",
             movieName: "미션임파서블:고스트프로토콜",
-            openDate: "2011-12-15",
+            openDate: Date(),
             boxOfficeInfo: BoxOfficeInfo(
                 rank: 1,
                 rankInten: 1,
@@ -54,7 +54,7 @@ extension Movie {
                 movieNameEnglish: "Mission: Impossible: Ghost Protocol",
                 showTime: 132,
                 productionYear: "2011",
-                genres: ["액션"],
+                genres: ["액션", "드라마"],
                 directors: ["브래드 버드"],
                 actors: ["톰 크루즈", "제레미 레너"],
                 audit: "15세이상관람가",

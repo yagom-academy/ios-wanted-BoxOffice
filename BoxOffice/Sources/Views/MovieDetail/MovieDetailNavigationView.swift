@@ -42,17 +42,20 @@ class MovieDetailNavigationView: UIView {
     
     // MARK: Properties
     var didSetupConstraints = false
-    var viewModel: ViewModel
+    var viewModel: ViewModel? {
+        didSet {
+            guard let viewModel else { return }
+            bind(viewModel: viewModel)
+        }
+    }
     var subscriptions = [AnyCancellable]()
     
     // MARK: Life Cycle
-    init(viewModel: ViewModel) {
-        self.viewModel = viewModel
+    init() {
         super.init(frame: .zero)
         setupViews()
         buildViewHierarchy()
         self.setNeedsUpdateConstraints()
-        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -109,7 +112,7 @@ class MovieDetailNavigationView: UIView {
     
     
     // MARK: Binding
-    func bind() {
+    func bind(viewModel: ViewModel) {
         // Action
         backButton.controlEvent(.touchUpInside)
             .map { ViewModel.ViewAction.dismiss }
@@ -134,8 +137,9 @@ class MovieDetailNavigationView: UIView {
 struct MovieDetailNavigationPreview: PreviewProvider {
     static var previews: some View {
         ContentViewPreview {
-            let viewModel = MovieDetailViewModel(movie: Movie.dummyMovie)
-            return MovieDetailNavigationView(viewModel: viewModel)
+            let view = MovieDetailNavigationView()
+            view.viewModel = MovieDetailViewModel(movie: Movie.dummyMovie)
+            return view
         }.previewLayout(.fixed(width: 390, height: 45))
     }
 }
