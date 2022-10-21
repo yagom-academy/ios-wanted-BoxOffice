@@ -152,27 +152,33 @@
                                 <rect key="frame" x="0.0" y="103" width="430" height="795"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="raU-zG-7wg" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="430" height="730.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="430" height="644"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fPT-9r-yXH">
-                                                <rect key="frame" x="16" y="0.0" width="398" height="730.33333333333337"/>
+                                                <rect key="frame" x="16" y="0.0" width="398" height="644"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Nlw-73-on5">
-                                                        <rect key="frame" x="89" y="0.0" width="220" height="238.33333333333334"/>
+                                                        <rect key="frame" x="89" y="0.0" width="220" height="152"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fGP-2K-Rhk">
-                                                                <rect key="frame" x="16.666666666666671" y="1" width="186.66666666666663" height="185"/>
+                                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fGP-2K-Rhk">
+                                                                <rect key="frame" x="60" y="1" width="100" height="98.666666666666671"/>
                                                                 <color key="tintColor" systemColor="secondarySystemFillColor"/>
                                                                 <gestureRecognizers/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" secondItem="fGP-2K-Rhk" secondAttribute="height" multiplier="1:1" id="cWk-sQ-Scb"/>
+                                                                    <constraint firstAttribute="width" constant="100" id="Mtz-TS-KUE"/>
+                                                                    <constraint firstAttribute="height" constant="100" id="Zx3-hF-gKJ"/>
                                                                 </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="50"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <outletCollection property="gestureRecognizers" destination="93C-OD-IHV" appends="YES" id="Kfl-ff-5Co"/>
                                                                 </connections>
                                                             </imageView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQR-Xo-h1J" customClass="RatingControl" customModule="BoxOffice" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="194.33333333333331" width="220" height="44"/>
+                                                                <rect key="frame" x="0.0" y="108" width="220" height="44"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="44" id="9ZK-eO-SLY"/>
                                                                     <constraint firstAttribute="width" constant="220" id="Mzb-LQ-gWp"/>
@@ -181,7 +187,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IuM-dp-YCy">
-                                                        <rect key="frame" x="0.0" y="246.33333333333331" width="398" height="483.99999999999994"/>
+                                                        <rect key="frame" x="0.0" y="160" width="398" height="484"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="닉네임" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ip-DA-h2L">
                                                                 <rect key="frame" x="0.0" y="0.0" width="398" height="34"/>
@@ -244,7 +250,6 @@
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="gMT-AN-Sr4" firstAttribute="trailing" secondItem="On9-nL-QRG" secondAttribute="trailing" id="Hjo-Sx-KlB"/>
-                            <constraint firstItem="fGP-2K-Rhk" firstAttribute="height" secondItem="gO3-3O-pBt" secondAttribute="height" multiplier="0.2" id="Ori-Yt-08h"/>
                             <constraint firstItem="gMT-AN-Sr4" firstAttribute="bottom" secondItem="On9-nL-QRG" secondAttribute="bottom" id="b9K-O4-i3v"/>
                             <constraint firstItem="On9-nL-QRG" firstAttribute="leading" secondItem="gMT-AN-Sr4" secondAttribute="leading" id="igb-1j-AjH"/>
                             <constraint firstItem="On9-nL-QRG" firstAttribute="top" secondItem="gMT-AN-Sr4" secondAttribute="top" id="jTJ-v2-l8W"/>

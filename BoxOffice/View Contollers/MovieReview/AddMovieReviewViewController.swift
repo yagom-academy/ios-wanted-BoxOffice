@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 import Combine
 import OSLog
 
@@ -118,7 +119,13 @@ final class AddMovieReviewViewController: UIViewController {
 
     @IBAction
     private func imageViewDidTap() {
-        // TODO
+        var configuration = PHPickerConfiguration(photoLibrary: .shared())
+        configuration.filter = .images
+        configuration.selectionLimit = 1
+
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        present(picker, animated: true)
     }
 
     @IBAction
@@ -141,7 +148,10 @@ final class AddMovieReviewViewController: UIViewController {
         let username = usernameTextField.text!
         let password = passwordTextField.text!
         let rating = ratingControl.rating
-        let content = contentTextView.text
+        var content = contentTextView.text
+        if content == Self.textViewPlaceHolder {
+            content = nil
+        }
         review = MovieReview(
             movieIdentifier: movieIdentifier,
             username: username,
@@ -225,6 +235,34 @@ extension AddMovieReviewViewController: UITextViewDelegate {
         }
         else {
             return false
+        }
+    }
+
+}
+
+extension AddMovieReviewViewController: PHPickerViewControllerDelegate {
+
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+
+        guard let result = results.first else { return }
+
+        let itemProvider = result.itemProvider
+        if itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+                if let error = error {
+                    Logger.ui.error("Couldn't display \(result.assetIdentifier ?? "") with error: \(error.localizedDescription)")
+                }
+                if let image = image as? UIImage {
+                    self?.updateImageView(image)
+                }
+            }
+        }
+    }
+
+    private func updateImageView(_ image: UIImage) {
+        DispatchQueue.main.async {
+            self.imageView.image = image
         }
     }
 
