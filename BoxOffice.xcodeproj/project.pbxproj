@@ -24,7 +24,7 @@
 		636B6D4D28FD3496002C16D8 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B6D4C28FD3496002C16D8 /* SecondViewController.swift */; };
 		636B6D5028FD34D1002C16D8 /* MovieListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B6D4F28FD34D1002C16D8 /* MovieListTableViewCell.swift */; };
 		636B6D5528FD4647002C16D8 /* BoxOfficeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B6D5428FD4647002C16D8 /* BoxOfficeAPI.swift */; };
-		636B6D7328FE81FC002C16D8 /* MovieDatailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B6D7228FE81FC002C16D8 /* MovieDatailAPI.swift */; };
+		636B6D7328FE81FC002C16D8 /* MovieDetailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B6D7228FE81FC002C16D8 /* MovieDetailAPI.swift */; };
 		636B6D7528FE825E002C16D8 /* WeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B6D7428FE825E002C16D8 /* WeekViewController.swift */; };
 		636B6D7828FE82A7002C16D8 /* WeekTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B6D7728FE82A7002C16D8 /* WeekTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -49,7 +49,7 @@
 		636B6D4C28FD3496002C16D8 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		636B6D4F28FD34D1002C16D8 /* MovieListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListTableViewCell.swift; sourceTree = "<group>"; };
 		636B6D5428FD4647002C16D8 /* BoxOfficeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeAPI.swift; sourceTree = "<group>"; };
-		636B6D7228FE81FC002C16D8 /* MovieDatailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDatailAPI.swift; sourceTree = "<group>"; };
+		636B6D7228FE81FC002C16D8 /* MovieDetailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailAPI.swift; sourceTree = "<group>"; };
 		636B6D7428FE825E002C16D8 /* WeekViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewController.swift; sourceTree = "<group>"; };
 		636B6D7728FE82A7002C16D8 /* WeekTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,7 +143,7 @@
 			children = (
 				636B6D5428FD4647002C16D8 /* BoxOfficeAPI.swift */,
 				634C26EC290073F1006E6811 /* WeekAPI.swift */,
-				636B6D7228FE81FC002C16D8 /* MovieDatailAPI.swift */,
+				636B6D7228FE81FC002C16D8 /* MovieDetailAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -231,7 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				636B6D7328FE81FC002C16D8 /* MovieDatailAPI.swift in Sources */,
+				636B6D7328FE81FC002C16D8 /* MovieDetailAPI.swift in Sources */,
 				636B6D5528FD4647002C16D8 /* BoxOfficeAPI.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				636B6D7828FE82A7002C16D8 /* WeekTableViewCell.swift in Sources */,
@@ -395,7 +395,7 @@
 				DEVELOPMENT_TEAM = 6923PJ958M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BoxOffice/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "영화 순위";
+				INFOPLIST_KEY_CFBundleDisplayName = MovieList;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Splash;
@@ -425,7 +425,7 @@
 				DEVELOPMENT_TEAM = 6923PJ958M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BoxOffice/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "영화 순위";
+				INFOPLIST_KEY_CFBundleDisplayName = MovieList;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Splash;

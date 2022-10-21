@@ -80,9 +80,4 @@ class SecondViewController: UIViewController, UITextFieldDelegate {
         audienceLabel.text = "관객수: \(secondViewModel.audiAcc)명"
     }
     
-    @objc func pustButton(sender: UIButton) {
-        guard let thirdViewController = storyboard?.instantiateViewController(withIdentifier: "ThirdViewController") as? ThirdViewController else { return }
-        self.navigationController?.pushViewController(thirdViewController, animated: true)
-        
-    }
 }

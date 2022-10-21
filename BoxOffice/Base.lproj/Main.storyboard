@@ -377,7 +377,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CheckPassword" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nhT-lk-ThV">
                                 <rect key="frame" x="170" y="193" width="210" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bdj-7X-mWW">
                                 <rect key="frame" x="15" y="524" width="54" height="34.333333333333371"/>
@@ -403,6 +403,14 @@
                                     <constraint firstAttribute="width" constant="150" id="pJP-wp-TuI"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KgN-hx-N81">
+                                <rect key="frame" x="15" y="77" width="150" height="150"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="  "/>
+                                <connections>
+                                    <action selector="touchUpButton:" destination="Qsz-im-X6S" eventType="touchUpInside" id="Ppm-Qc-i7w"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EA7-uE-0ld">
                                 <rect key="frame" x="321" y="524" width="54" height="35"/>
                                 <state key="normal" title="Button"/>
@@ -411,12 +419,13 @@
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cqe-U6-fnz">
                                 <rect key="frame" x="170" y="136" width="210" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="brZ-7B-Clz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="KgN-hx-N81" firstAttribute="bottom" secondItem="57q-Sf-6OX" secondAttribute="bottom" id="1Qe-QE-iJr"/>
                             <constraint firstItem="o9U-nn-aMP" firstAttribute="leading" secondItem="brZ-7B-Clz" secondAttribute="leading" constant="15" id="5tm-0f-wIL"/>
                             <constraint firstAttribute="bottom" secondItem="o9U-nn-aMP" secondAttribute="bottom" constant="330" id="6yY-Jg-3om"/>
                             <constraint firstItem="brZ-7B-Clz" firstAttribute="trailing" secondItem="cqe-U6-fnz" secondAttribute="trailing" constant="10" id="7n6-dK-yUX"/>
@@ -429,11 +438,14 @@
                             <constraint firstItem="brZ-7B-Clz" firstAttribute="trailing" secondItem="E2S-xG-5Bf" secondAttribute="trailing" constant="10" id="R1O-6g-PeA"/>
                             <constraint firstItem="brZ-7B-Clz" firstAttribute="trailing" secondItem="EA7-uE-0ld" secondAttribute="trailing" constant="15" id="U3x-C4-RQT"/>
                             <constraint firstItem="Bdj-7X-mWW" firstAttribute="top" secondItem="o9U-nn-aMP" secondAttribute="bottom" constant="10" id="XUY-fz-QGe"/>
+                            <constraint firstItem="KgN-hx-N81" firstAttribute="top" secondItem="57q-Sf-6OX" secondAttribute="top" id="e34-zQ-HNA"/>
                             <constraint firstItem="Bdj-7X-mWW" firstAttribute="leading" secondItem="brZ-7B-Clz" secondAttribute="leading" constant="15" id="eSJ-Hh-og9"/>
                             <constraint firstItem="E2S-xG-5Bf" firstAttribute="leading" secondItem="57q-Sf-6OX" secondAttribute="trailing" constant="5" id="fpM-ta-aak"/>
                             <constraint firstItem="57q-Sf-6OX" firstAttribute="leading" secondItem="brZ-7B-Clz" secondAttribute="leading" constant="15" id="iE1-NO-mqH"/>
                             <constraint firstItem="EA7-uE-0ld" firstAttribute="top" secondItem="o9U-nn-aMP" secondAttribute="bottom" constant="10" id="iXG-ll-9fT"/>
                             <constraint firstItem="nhT-lk-ThV" firstAttribute="bottom" secondItem="57q-Sf-6OX" secondAttribute="bottom" id="oFB-qW-mAo"/>
+                            <constraint firstItem="KgN-hx-N81" firstAttribute="trailing" secondItem="57q-Sf-6OX" secondAttribute="trailing" id="rnu-uU-Xbf"/>
+                            <constraint firstItem="KgN-hx-N81" firstAttribute="leading" secondItem="57q-Sf-6OX" secondAttribute="leading" id="xBf-Wt-Xdd"/>
                             <constraint firstItem="brZ-7B-Clz" firstAttribute="trailing" secondItem="o9U-nn-aMP" secondAttribute="trailing" constant="15" id="xFp-VD-fDK"/>
                             <constraint firstItem="o9U-nn-aMP" firstAttribute="top" secondItem="nhT-lk-ThV" secondAttribute="bottom" constant="25" id="zlO-g2-hY8"/>
                         </constraints>
