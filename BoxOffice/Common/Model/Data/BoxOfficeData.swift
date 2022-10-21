@@ -15,12 +15,20 @@ struct BoxOfficeData {
     let openDt: String
     let audiCnt: String
     
-    init(boxOfficeResponse: BoxOfficeResponse) {
+    init(_ boxOfficeResponse: BoxOfficeResponse) {
         self.rank = boxOfficeResponse.rank
         self.rankInten = boxOfficeResponse.rankInten
         self.rankOldAndNew = boxOfficeResponse.rankOldAndNew
         self.movieNm = boxOfficeResponse.movieNm
         self.openDt = boxOfficeResponse.openDt
         self.audiCnt = boxOfficeResponse.audiCnt
+    }
+}
+
+extension BoxOfficeData: Equatable {
+    static func == (lhs: BoxOfficeData, rhs: BoxOfficeData) -> Bool {
+        return lhs.rank == rhs.rank &&
+        lhs.movieNm == rhs.movieNm &&
+        lhs.audiCnt == rhs.audiCnt
     }
 }

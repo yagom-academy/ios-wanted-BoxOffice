@@ -29,8 +29,8 @@ final class WeeklyViewController: UIViewController {
     }
     
     func setupUI() {
-        let listNib = UINib(nibName: ListCollectionViewCell.identifier, bundle: Bundle(for: self.classForCoder))
-        self.collectionView.register(listNib, forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
+        let listNib = UINib(nibName: BoxOfficeCell.identifier, bundle: Bundle(for: self.classForCoder))
+        self.collectionView.register(listNib, forCellWithReuseIdentifier: BoxOfficeCell.identifier)
     }
 }
 
@@ -41,7 +41,7 @@ extension WeeklyViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeCell.identifier, for: indexPath)
         return cell
     }
 }
