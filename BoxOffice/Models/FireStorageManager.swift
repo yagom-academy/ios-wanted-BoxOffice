@@ -9,8 +9,14 @@ import Foundation
 import Firebase
 import FirebaseStorage
 
+protocol FirestorageDelegate {
+  func didFetchedReviews(_ review: ReviewModel)
+}
+
 class FireStorageManager {
   static let shared = FireStorageManager()
+
+  var delegate: FirestorageDelegate?
 
   let storage = Storage.storage()
   let decoder = JSONDecoder()
@@ -36,12 +42,27 @@ class FireStorageManager {
         })
       }
     })
-
   }
 
   func fetchReview(movieCode: String) {
     let storageRef = storage.reference().child(movieCode)
 
+    storageRef.listAll(completion: { result, error in
+      if let error = error {
+        print("fetch review error: \(error)")
+      } else {
+        for item in result!.items {
+          item.getData(maxSize: 1024 * 1024, completion: { data, error in
+            if let error = error {
+              print("getdataerror: \(error)")
+            } else {
+              let decoded = self.decodeJSON(data!)
+              self.delegate?.didFetchedReviews(decoded!)
+            }
+          })
+        }
+      }
+    })
   }
 
   func deleteReview() {

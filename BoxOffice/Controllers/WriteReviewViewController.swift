@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol WriteReviewDelegate {
+  func addReview(review: ReviewModel)
+}
+
 class WriteReviewViewController: UIViewController {
+
+  var delegate: WriteReviewDelegate?
 
   let starFilled = UIImage(systemName: "star.fill")
   let starEmpty = UIImage(systemName: "star")
@@ -168,10 +174,10 @@ extension WriteReviewViewController {
                                password: password.text!,
                                review: reviewInput.text!, score: score)
 
+      delegate?.addReview(review: reviewInfo)
       FireStorageManager.shared.uploadReview(movieCode: movieCode,
                                              fileName: UUID().uuidString,
                                              reviewInfo: reviewInfo)
-
       self.navigationController?.popViewController(animated: true)
     }
 

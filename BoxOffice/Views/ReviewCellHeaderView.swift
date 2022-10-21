@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol WriteReviewDelegate {
+protocol ReviewHeaderDelegate {
   func showWriteReviewPage()
 }
 
@@ -15,7 +15,7 @@ class ReviewCellHeaderView: UITableViewHeaderFooterView {
 
   static let id = "reviewHeaderView"
 
-  var delegate: WriteReviewDelegate?
+  var delegate: ReviewHeaderDelegate?
 
   let titleLabel: UILabel = {
     let label = UILabel()
@@ -41,7 +41,7 @@ class ReviewCellHeaderView: UITableViewHeaderFooterView {
     label.font = UIFont.systemFont(ofSize: 14)
     label.textAlignment = .center
     label.sizeToFit()
-    label.text = "5/5"
+    label.text = "0"
 
     return label
   }()

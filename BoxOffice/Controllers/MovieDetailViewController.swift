@@ -13,6 +13,8 @@ class MovieDetailViewController: UIViewController {
 
   var rankInfo: RankListObject?
   var movieInfo: MovieInfo?
+  var reviewList = [ReviewModel]()
+  var totalScore = 0
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -28,9 +30,21 @@ class MovieDetailViewController: UIViewController {
     tableView.separatorStyle = .none
     tableView.delegate = self
     tableView.dataSource = self
+    FireStorageManager.shared.delegate = self
 
     addViews()
     setConstraints()
+
+    FireStorageManager.shared.fetchReview(movieCode: rankInfo!.movieCd)
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+//    print("view will")
+//    reviewList.removeAll()
+//    totalScore = 0
+//    FireStorageManager.shared.fetchReview(movieCode: rankInfo!.movieCd)
   }
 }
 
@@ -88,7 +102,7 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch section {
     case 1:
-      return 5
+      return reviewList.count
     default:
       return 1
     }
@@ -132,6 +146,14 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
                                                      for: indexPath) as? ReviewCell
       else { return UITableViewCell() }
 
+      let i = indexPath.row
+
+      if i < reviewList.count {
+        cell.review.text = reviewList[i].review
+        cell.rating.text = String(reviewList[i].score)
+        cell.nickname.text = reviewList[i].nickname
+      }
+
       return cell
 
     default:
@@ -148,6 +170,9 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
       }
 
       header.delegate = self
+      if !reviewList.isEmpty {
+        header.rating.text = String(totalScore / reviewList.count)
+      }
 
       return header
     } else {
@@ -161,12 +186,31 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
 
 // MARK: - WriteReviewDelegate
 
-extension MovieDetailViewController: WriteReviewDelegate {
+extension MovieDetailViewController: ReviewHeaderDelegate {
   func showWriteReviewPage() {
     let nextVC = WriteReviewViewController()
     nextVC.title = "리뷰작성"
     nextVC.movieCode = rankInfo?.movieCd ?? ""
+    nextVC.delegate = self
     navigationController?.pushViewController(nextVC, animated: true)
+  }
+}
+
+extension MovieDetailViewController: FirestorageDelegate {
+  func didFetchedReviews(_ review: ReviewModel) {
+    reviewList.append(review)
+    totalScore += review.score
+    DispatchQueue.main.async {
+      self.tableView.reloadData()
+    }
+  }
+}
+
+extension MovieDetailViewController: WriteReviewDelegate {
+  func addReview(review: ReviewModel) {
+    reviewList.append(review)
+    totalScore += review.score
+    tableView.reloadData()
   }
 }
 
