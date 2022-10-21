@@ -29,7 +29,8 @@ class CreateReviewPhotoView: UIView {
         imageView.layer.borderColor = UIColor(hex: "#707070").cgColor
         imageView.layer.borderWidth = 1
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .white
+        imageView.backgroundColor = .clear
+        imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView

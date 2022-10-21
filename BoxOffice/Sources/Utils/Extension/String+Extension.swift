@@ -14,4 +14,9 @@ extension String {
         
         return formatter.date(from: self)
     }
+    
+    func validatePassword() -> Bool {
+        let passwordRegex = #"^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$])[A-Za-z\d!@#$]{6,20}$"#
+        return self.range(of: passwordRegex, options: .regularExpression) != nil
+    }
 }

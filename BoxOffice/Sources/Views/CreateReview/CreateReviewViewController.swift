@@ -78,6 +78,18 @@ class CreateReviewViewController: UIViewController {
         return views
     }()
     
+    lazy var confirmButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 10
+        button.layer.borderColor = UIColor(hex: "#707070").cgColor
+        button.layer.borderWidth = 1
+        button.setTitle("작성 완료", for: .normal)
+        button.setTitleColor(UIColor(hex: "#DFDFDF"), for: .normal)
+        button.setTitleColor(UIColor(hex: "#DFDFDF").withAlphaComponent(0.2), for: .disabled)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     lazy var picker: PHPickerViewController = {
         var configuration = PHPickerConfiguration()
         configuration.filter = .any(of: [.images])
@@ -128,6 +140,7 @@ class CreateReviewViewController: UIViewController {
     func buildViewHierarchy() {
         self.view.addSubview(navigationView)
         self.view.addSubview(scrollView)
+        self.view.addSubview(confirmButton)
         scrollView.addSubview(contentView)
         contentView.addSubview(infoView)
         contentView.addSubview(ratingView)
@@ -157,7 +170,6 @@ class CreateReviewViewController: UIViewController {
             scrollView.topAnchor.constraint(equalTo: navigationView.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ]
         
         constraints += [
@@ -166,7 +178,6 @@ class CreateReviewViewController: UIViewController {
             contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
-            contentView.heightAnchor.constraint(equalToConstant: 2000),
         ]
         
         constraints += [
@@ -238,12 +249,28 @@ class CreateReviewViewController: UIViewController {
             photoView.topAnchor.constraint(equalTo: dividerViews[4].bottomAnchor),
             photoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             photoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            photoView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+        ]
+        
+        constraints += [
+            confirmButton.topAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            confirmButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            confirmButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            confirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            confirmButton.heightAnchor.constraint(equalToConstant: 56),
         ]
     }
     
     
     // MARK: Binding
     func bind(viewModel: ViewModel) {
+        view.gesture(.tap)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] _ in
+                guard let self else { return }
+                self.view.endEditing(true)
+            }).store(in: &subscriptions)
+        
         viewModel.viewAction
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] action in
@@ -255,6 +282,11 @@ class CreateReviewViewController: UIViewController {
                     self.present(self.picker, animated: true)
                 }
             }).store(in: &subscriptions)
+        
+        viewModel.$isValid
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.isEnabled, on: confirmButton)
+            .store(in: &subscriptions)
         
         navigationView.viewModel = viewModel
         infoView.viewModel = viewModel

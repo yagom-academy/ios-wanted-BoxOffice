@@ -23,7 +23,6 @@
 		46B170E229001415002A8735 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B170E129001415002A8735 /* Date+Extension.swift */; };
 		46B170E429001FD7002A8735 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B170E329001FD7002A8735 /* NSObject+Extension.swift */; };
 		46F91C462902A26F005D191F /* CreateReviewMovieInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F91C452902A26F005D191F /* CreateReviewMovieInfoView.swift */; };
-		46F91C482902A79F005D191F /* CreateReviewRatingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F91C472902A79F005D191F /* CreateReviewRatingViewModel.swift */; };
 		46F91C4A2902A811005D191F /* CreateReviewRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F91C492902A811005D191F /* CreateReviewRatingView.swift */; };
 		46F91C4C2902A846005D191F /* RatingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F91C4B2902A846005D191F /* RatingViewModel.swift */; };
 		46F91C4E2902A854005D191F /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F91C4D2902A854005D191F /* RatingView.swift */; };
@@ -92,7 +91,6 @@
 		46B170E129001415002A8735 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		46B170E329001FD7002A8735 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		46F91C452902A26F005D191F /* CreateReviewMovieInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewMovieInfoView.swift; sourceTree = "<group>"; };
-		46F91C472902A79F005D191F /* CreateReviewRatingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewRatingViewModel.swift; sourceTree = "<group>"; };
 		46F91C492902A811005D191F /* CreateReviewRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewRatingView.swift; sourceTree = "<group>"; };
 		46F91C4B2902A846005D191F /* RatingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewModel.swift; sourceTree = "<group>"; };
 		46F91C4D2902A854005D191F /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
@@ -391,7 +389,6 @@
 			isa = PBXGroup;
 			children = (
 				B0F7B04C2902872A00D02CC1 /* CreateReviewViewModel.swift */,
-				46F91C472902A79F005D191F /* CreateReviewRatingViewModel.swift */,
 			);
 			path = CreateReview;
 			sourceTree = "<group>";
@@ -512,7 +509,6 @@
 				B02D9CD228FF93BE005E717B /* OverlayedImageView.swift in Sources */,
 				46721FD22902AAA10080F39B /* ViewGesturePublisher.swift in Sources */,
 				46721FD42902B5300080F39B /* CreateReviewNicknameView.swift in Sources */,
-				46F91C482902A79F005D191F /* CreateReviewRatingViewModel.swift in Sources */,
 				B02D9CCD28FF9047005E717B /* UIColor+Extension.swift in Sources */,
 				B0F7B0512902885400D02CC1 /* CreateReviewNavigationView.swift in Sources */,
 				B008249829023C520072A987 /* TriSectoredStackViewModel.swift in Sources */,

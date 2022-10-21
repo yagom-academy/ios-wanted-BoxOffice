@@ -21,6 +21,7 @@ class CreateReviewViewModel {
     @Published var password: String?
     @Published var content: String?
     @Published var reviewImage: UIImage?
+    @Published var isValid: Bool = false
     
     @Published var ratingViewModel = RatingViewModel()
     
@@ -58,6 +59,19 @@ class CreateReviewViewModel {
                 guard let self else { return }
                 self.rating = rating
             }).store(in: &subscriptions)
+        
+        $rating
+            .combineLatest($nickname, $password, $content)
+            .map { (rating, nickname, password, content) in
+                guard
+                    rating > 0,
+                    nickname != nil && nickname!.count > 0,
+                    password != nil && password!.validatePassword(),
+                    content != nil && content!.count > 0
+                else { return false }
+                return true
+            }.assign(to: \.isValid, on: self)
+            .store(in: &subscriptions)
     }
     
     enum ViewAction {
