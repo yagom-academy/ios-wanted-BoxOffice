@@ -55,7 +55,7 @@ extension FirstViewController: Presentable {
     }
     
     func configureView() {
-        view.backgroundColor = .green
+        view.backgroundColor = .white
         navigationItem.title = "목록"
     }
     
