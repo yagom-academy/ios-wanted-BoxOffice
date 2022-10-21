@@ -13,13 +13,22 @@ struct ActivityDependency {
 
 struct ActivityFactory {
     private let dependency: ActivityDependency
+    private let superView: UIView?
     
-    init(dependency: ActivityDependency) {
+    init(dependency: ActivityDependency, superView: UIView?) {
         self.dependency = dependency
+        self.superView = superView
     }
     
     func createActivity() -> UIActivityViewController {
         let activityViewController: UIActivityViewController = UIActivityViewController(activityItems: dependency.actionSet, applicationActivities: nil)
+        
+        // This lines is for the popover you need to show in iPad
+        activityViewController.popoverPresentationController?.sourceView = superView
+        
+        // This line remove the arrow of the popover to show in iPad
+        activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
+        activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
         
         activityViewController.activityItemsConfiguration = [
             UIActivity.ActivityType.message

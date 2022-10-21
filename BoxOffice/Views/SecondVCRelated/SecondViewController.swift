@@ -10,6 +10,7 @@ import SwiftUI
 
 class SecondViewController: UIViewController, SecondViewControllerRoutable {
 
+    lazy var hostingVC = UIHostingController(rootView: contentView)
     lazy var contentView = SecondContentView(viewModel: self.model.secondContentViewModel)
     
     var model: SecondModel
@@ -51,8 +52,6 @@ class SecondViewController: UIViewController, SecondViewControllerRoutable {
 extension SecondViewController: Presentable {
     func initViewHierarchy() {
         self.view = UIView()
-        
-        let hostingVC = UIHostingController(rootView: contentView)
         
         self.addChild(hostingVC)
         hostingVC.view.frame = self.view.bounds

@@ -12,8 +12,11 @@ class SecondContentViewModel: ObservableObject {
     // TODO: 1번째 화면에서 선택한 엔티티도 받아오도록 추가?
     //input
     var didReceiveEntity: (_ entity: KoficMovieDetailEntity, _ previousEntity: DailyBoxOfficeList) -> () = { entity, previousEntity in }
+    @Published var didTapShareButton = { }
     
     //output
+    var propergateDidTapShareButton: (String) -> () = { info in }
+    
     @Published var boxOfficeRank: (title: String, data: String) = (title: "박스오피스 랭크", data: "")//박스오피스 순위
     @Published var movieName: (title: String, data: String) = (title: "영화이름", data: "") //영화명
     @Published var releasedDay: (title: String, data: String) = (title: "개봉일", data: "") //개봉일
@@ -44,6 +47,39 @@ class SecondContentViewModel: ObservableObject {
                 self.populateEntity(result: entity, previousEntity: cellModel)
             }
         }
+        
+        didTapShareButton = { [weak self] in
+            guard let self = self else { return }
+            print("didTapButton Tapped")
+            let info = self.gatherInfoForSharing()
+            self.propergateDidTapShareButton(info)
+        }
+    }
+    
+    private func gatherInfoForSharing() -> String {
+        
+        let joinedGenre = genre.data.joined(separator: "-")
+        let joinedDirector = director.data.joined(separator: "-")
+        let joinedActor = actors.data.joined(separator: "-")
+        let joinedRestrictionRate = restictionRate.data.joined(separator: "-")
+        
+        let info = """
+                \(boxOfficeRank.title) : \(boxOfficeRank.data)
+                \(movieName.title) : \(movieName.data)
+                \(releasedDay.title) : \(releasedDay.data)
+                \(audCount.title) : \(audCount.data)
+                \(rankIncrement.title) : \(rankIncrement.data)
+                \(rankApproached.title) : \(rankApproached.data)
+                \(makedYear.title) : \(makedYear.data)
+                \(releasedYear.title) : \(releasedYear.data)
+                \(runningTime.title) : \(runningTime.data)
+                \(genre.title) : \(joinedGenre)
+                \(director.title) : \(joinedDirector)
+                \(actors.title) : \(joinedActor)
+                \(restictionRate.title) : \(joinedRestrictionRate)
+        """
+        
+        return info
     }
     
     private func populateEntity(result: KoficMovieDetailEntity, previousEntity: DailyBoxOfficeList) {

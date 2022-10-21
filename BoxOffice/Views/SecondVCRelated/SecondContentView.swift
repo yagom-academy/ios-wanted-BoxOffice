@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+struct ButtonView: View {
+    
+    @Binding var action: () -> ()
+    
+    var body: some View {
+        Button {
+            action()
+        } label: {
+            Label("공유하기", systemImage: "square.and.arrow.up")
+        }
+
+    }
+}
+
 struct BasicDataView: View {
     
     @Binding var data: (title: String, data: String)
@@ -87,6 +101,7 @@ struct SecondContentView: View {
                     .padding()
                 ArrayDataView(data: $viewModel.restictionRate)
                     .padding()
+                ButtonView(action: $viewModel.didTapShareButton)
             }
         }
     }
