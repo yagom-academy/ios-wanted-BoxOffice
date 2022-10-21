@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol WriteReviewDelegate {
+  func showWriteReviewPage()
+}
+
 class ReviewCellHeaderView: UITableViewHeaderFooterView {
 
   static let id = "reviewHeaderView"
+
+  var delegate: WriteReviewDelegate?
 
   let titleLabel: UILabel = {
     let label = UILabel()
@@ -53,6 +59,7 @@ class ReviewCellHeaderView: UITableViewHeaderFooterView {
 
     addViews()
     setConstraints()
+    addTargets()
   }
 
   required init?(coder: NSCoder) {
@@ -83,5 +90,13 @@ extension ReviewCellHeaderView {
       write.centerYAnchor.constraint(equalTo: rating.centerYAnchor),
       write.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18),
     ])
+  }
+
+  func addTargets() {
+    write.addTarget(self, action: #selector(writeButtonPressed), for: .touchUpInside)
+  }
+
+  @objc func writeButtonPressed() {
+    self.delegate?.showWriteReviewPage()
   }
 }
