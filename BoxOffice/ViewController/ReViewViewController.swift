@@ -115,20 +115,28 @@ class ReViewViewController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
-    @IBAction func 삭제버튼(_ sender: UIButton) {
-        삭제(title: "삭제하시겠습니까?", message: "비밀번호를 입력해주세요")
+ 
+    @IBAction func reviewdeleteButton(_ sender: Any) {
+        reviewdelete(title: "삭제하시겠습니까?", message: "비밀번호를 입력해주세요")
     }
-    func 삭제(title: String, message: String) {
+    func reviewdelete(title: String, message: String) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addTextField()
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: {_ in
-                //삭제가 밑에꺼부터됨...
-                self.dataArry.remove(at: self.dataArry.count - 1)
-                self.tableView.reloadData()
-            })
-            alert.addAction(okAction)
-            self.present(alert, animated: true, completion: nil)
+            
+            if self.passWordTextField.text?.count != alert.textFields?[0].text?.count {
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: {bi in
+                    if self.passWordTextField.text == alert.textFields?[0].text {
+                        self.dataArry.remove(at: self.dataArry.count - 1)
+                        self.tableView.reloadData()
+                    }
+                
+                })
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+                
+            
         }
     }
     func validpassword(mypassword : String) -> Bool {

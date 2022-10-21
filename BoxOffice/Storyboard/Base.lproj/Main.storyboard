@@ -525,7 +525,7 @@
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <state key="normal" image="trash" catalog="system"/>
                                                             <connections>
-                                                                <action selector="삭제버튼:" destination="qVm-hn-mWB" eventType="touchUpInside" id="8wd-tF-fkt"/>
+                                                                <action selector="reviewdeleteButton:" destination="qVm-hn-mWB" eventType="touchUpInside" id="Nl0-9D-MKQ"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z7b-Rp-hwb">
