@@ -17,7 +17,8 @@ class CustomCell : UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubViews()
         setConstraints()
-       self.backgroundColor = .systemBackground
+        self.selectionStyle = .none
+        self.backgroundColor = .systemBackground
     }
     
     required init?(coder: NSCoder) {

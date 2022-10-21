@@ -18,13 +18,13 @@ class InfoGroupView : UIView{
         lbl.textColor = .label
         return lbl
     }()
-    let newLabel : UILabel = {
-        let lbl = UILabel()
+    let newLabel : PaddingLabel = {
+        let lbl = PaddingLabel(padding: UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5))
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = "New"
         lbl.textColor = .systemYellow
         lbl.backgroundColor = .systemBackground.withAlphaComponent(0.5)
-        lbl.font = .boldSystemFont(ofSize: 18)
+        lbl.font = .boldSystemFont(ofSize: 20)
         return lbl
     }()
     let posterView : UIImageView = {

@@ -20,6 +20,9 @@
 		3360895A28FEA31200BDFCE0 /* TableInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3360895928FEA31200BDFCE0 /* TableInfoView.swift */; };
 		3360895C28FEAAEB00BDFCE0 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3360895B28FEAAEB00BDFCE0 /* PaddingLabel.swift */; };
 		336417D628FEFBAF00F7EB4F /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336417D528FEFBAF00F7EB4F /* MovieService.swift */; };
+		3365856F2902923500F59AFC /* CustomReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3365856E2902923500F59AFC /* CustomReviewCell.swift */; };
+		336585722902B73B00F59AFC /* ReviewWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336585712902B73B00F59AFC /* ReviewWriteViewController.swift */; };
+		336585742902B77400F59AFC /* ReviewWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336585732902B77400F59AFC /* ReviewWriteView.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19EC28F9603900197BCC /* RankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* RankViewController.swift */; };
@@ -41,6 +44,9 @@
 		3360895928FEA31200BDFCE0 /* TableInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableInfoView.swift; sourceTree = "<group>"; };
 		3360895B28FEAAEB00BDFCE0 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		336417D528FEFBAF00F7EB4F /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
+		3365856E2902923500F59AFC /* CustomReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomReviewCell.swift; sourceTree = "<group>"; };
+		336585712902B73B00F59AFC /* ReviewWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWriteViewController.swift; sourceTree = "<group>"; };
+		336585732902B77400F59AFC /* ReviewWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWriteView.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,11 +95,21 @@
 			children = (
 				331AC1C128FDDC1D0060AD4A /* DetailViewController.swift */,
 				3360895028FE88CC00BDFCE0 /* DetailView.swift */,
+				3365856E2902923500F59AFC /* CustomReviewCell.swift */,
 				3360895528FE9EE500BDFCE0 /* RankGroupViewForDetailView.swift */,
 				3360895928FEA31200BDFCE0 /* TableInfoView.swift */,
 				3360895B28FEAAEB00BDFCE0 /* PaddingLabel.swift */,
 			);
 			path = DetailView;
+			sourceTree = "<group>";
+		};
+		336585702902B71400F59AFC /* ReviewWriteView */ = {
+			isa = PBXGroup;
+			children = (
+				336585712902B73B00F59AFC /* ReviewWriteViewController.swift */,
+				336585732902B77400F59AFC /* ReviewWriteView.swift */,
+			);
+			path = ReviewWriteView;
 			sourceTree = "<group>";
 		};
 		635A19DB28F9603900197BCC = {
@@ -117,8 +133,9 @@
 			children = (
 				331AC1B228FD9CA10060AD4A /* RankView */,
 				331AC1C028FDDBFB0060AD4A /* DetailView */,
-				635A19E728F9603900197BCC /* AppDelegate.swift */,
+				336585702902B71400F59AFC /* ReviewWriteView */,
 				635A19E928F9603900197BCC /* SceneDelegate.swift */,
+				635A19E728F9603900197BCC /* AppDelegate.swift */,
 				331AC1B728FDA2BA0060AD4A /* Extensions.swift */,
 				635A19F028F9603A00197BCC /* Assets.xcassets */,
 				635A19F228F9603A00197BCC /* LaunchScreen.storyboard */,
@@ -199,13 +216,16 @@
 			files = (
 				331AC1C228FDDC1D0060AD4A /* DetailViewController.swift in Sources */,
 				3360895128FE88CC00BDFCE0 /* DetailView.swift in Sources */,
+				336585722902B73B00F59AFC /* ReviewWriteViewController.swift in Sources */,
 				331AC1B128FD9C900060AD4A /* RankView.swift in Sources */,
 				635A19EC28F9603900197BCC /* RankViewController.swift in Sources */,
+				336585742902B77400F59AFC /* ReviewWriteView.swift in Sources */,
 				331AC1BB28FDA5270060AD4A /* InfoGroupView.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				3360895C28FEAAEB00BDFCE0 /* PaddingLabel.swift in Sources */,
 				3360895628FE9EE500BDFCE0 /* RankGroupViewForDetailView.swift in Sources */,
 				331AC1B428FD9E860060AD4A /* RankInfo.swift in Sources */,
+				3365856F2902923500F59AFC /* CustomReviewCell.swift in Sources */,
 				331AC1B628FDA0D00060AD4A /* CustomCell.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 				331AC1BD28FDA6DA0060AD4A /* RankGroupView.swift in Sources */,

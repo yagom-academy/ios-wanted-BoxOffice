@@ -61,3 +61,5 @@ class MovieService {
 }
 
 
+//Metacritic
+//value : "68/100"

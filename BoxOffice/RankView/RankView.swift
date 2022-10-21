@@ -51,8 +51,8 @@ class RankView : UIView {
         tableView.delegate = self
         tableView.register(CustomCell.self, forCellReuseIdentifier: CustomCell.id)
         tableView.register(CustomHeader.self, forHeaderFooterViewReuseIdentifier: CustomHeader.id)
-        let a = UIScreen.main.bounds.size.height / 3
-        tableView.rowHeight = a//UITableView.automaticDimension
+        let height = UIScreen.main.bounds.size.height / 3
+        tableView.rowHeight = height
         tableView.separatorStyle = .none
         tableView.backgroundColor = .systemBackground
     }
@@ -85,7 +85,6 @@ extension RankView : UITableViewDataSource{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.id, for: indexPath) as? CustomCell else { return UITableViewCell()}
         let movie = movie[indexPath.row]
         cell.infoGroupView.setInfo(posterImage:movie.poster ,title: movie.boxOfficeInfo.movieNm, releaseDate: movie.boxOfficeInfo.openDt, numOfAudience: movie.boxOfficeInfo.audiAcc, rank: movie.boxOfficeInfo.rank, upAndDown: movie.boxOfficeInfo.rankInten, isNew: movie.boxOfficeInfo.rankOldAndNew)
-        cell.selectionStyle = .none
         return cell
     }
     

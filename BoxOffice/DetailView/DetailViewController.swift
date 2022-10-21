@@ -18,6 +18,7 @@ class DetailViewController : UIViewController{
         setInfo()
         addSubViews()
         setConstraints()
+        detailView.delegate = self
     }
     
     func setInfo(){
@@ -36,5 +37,12 @@ class DetailViewController : UIViewController{
             detailView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             detailView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ])
+    }
+}
+
+extension DetailViewController : DetailViewProtocol{
+    func presentReviewWriteView() {
+        let vc = ReviewWriteViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
