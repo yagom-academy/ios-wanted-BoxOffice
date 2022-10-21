@@ -25,8 +25,7 @@ class MovieCellView: UIView, FirstViewStyling {
     var watchedCustomerCountLabel = UILabel() //관객수
     var rankIncrementLabel = UILabel() //전일대비 순위의 증감분
     var approachedRankIndexLabel = UILabel() //랭킹에 신규 진입 여부
-    
-    // TODO: viewmodel
+    private var privateCellViewModel: FirstMovieCellModel = FirstMovieCellModel()
     
     init() {
         
@@ -108,12 +107,21 @@ extension MovieCellView: Presentable {
     func bind() {
         didReceiveViewModel = { [weak self] model in
             guard let self = self else { return }
+            self.privateCellViewModel = model
             self.presentRankLabel.text = model.rank
             self.movieNameLabel.text = model.movieNm
             self.relesedDateLabel.text = model.openDt
             self.watchedCustomerCountLabel.text = model.audiCnt
             self.rankIncrementLabel.text = model.rankInten
             self.approachedRankIndexLabel.text = model.rankOldAndNew
+            
+            self.privateCellViewModel.shouldModelRequestImage()
+        }
+        
+        privateCellViewModel.propergateImageURL = { [weak self] string in
+            guard let self = self else { return }
+            
+            print("cell view string check : \(string)")
         }
     }
     

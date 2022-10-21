@@ -172,3 +172,19 @@ struct Nation: Codable {
 struct ShowType: Codable {
     let showTypeGroupNm, showTypeNm: String
 }
+
+/*****************************************************************************/
+// MARK: OMDB
+// MARK: - OmdbEntity
+struct OmdbEntity: Codable {
+    let poster: String
+
+    enum CodingKeys: String, CodingKey {
+        case poster = "Poster"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.poster = try container.decode(String.self, forKey: .poster)
+    }
+}
