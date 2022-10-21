@@ -252,21 +252,23 @@ final class MovieDetailViewController: UIViewController {
         navigationItem.title = ranking.name
         var snapshot = dataSource.snapshot()
         snapshot.appendItems(ranking.info, toSection: .info)
-        dataSource.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 
     private func updateView(with detail: MovieDetail) {
         var snapshot = dataSource.snapshot()
         snapshot.appendItems(detail.crew, toSection: .crew)
         snapshot.appendItems(detail.info, toSection: .info)
-        dataSource.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 
     private func updateView(with reviews: [MovieReview]) {
         var snapshot = dataSource.snapshot()
-        let beforeReviews = snapshot.itemIdentifiers(inSection: .review)
-        snapshot.deleteItems(beforeReviews)
-        snapshot.appendItems(reviews, toSection: .review)
+        snapshot.deleteSections([.review])
+        if !reviews.isEmpty {
+            snapshot.appendSections([.review])
+            snapshot.appendItems(reviews, toSection: .review)
+        }
         dataSource.apply(snapshot, animatingDifferences: true)
     }
 

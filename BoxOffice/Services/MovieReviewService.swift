@@ -25,6 +25,7 @@ final class MovieReviewService {
     }
 
     func reviews(for identifier: String) async throws -> [MovieReview] {
+        Logger.persistence.debug("Start fetch document: \(identifier)")
         let reference = reviewCollectionReference(for: identifier)
         let documents = try await reference.getDocuments()
         return documents.documents.map { snapshot -> MovieReview in
@@ -36,8 +37,9 @@ final class MovieReviewService {
         let reference = reviewCollectionReference(for: review.movieIdentifier)
         do {
             _ = try reference.addDocument(from: review)
+            Logger.persistence.debug("Success adding document: \(review.movieIdentifier) \(review.nickname)")
         } catch {
-            Logger.persistence.error("Error adding document: \(error)")
+            Logger.persistence.error("Failure adding document: \(error)")
         }
     }
 
