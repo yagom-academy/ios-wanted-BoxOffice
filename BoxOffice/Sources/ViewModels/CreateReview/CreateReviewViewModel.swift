@@ -8,10 +8,12 @@
 import Foundation
 import UIKit
 import Combine
+import FirebaseStorage
 
 class CreateReviewViewModel {
     // MARK: Subjects
     let viewAction = PassthroughSubject<ViewAction, Never>()
+    let submit = PassthroughSubject<Void, Never>()
     
     // MARK: Output
     @Published var movie: Movie
@@ -71,6 +73,29 @@ class CreateReviewViewModel {
                 else { return false }
                 return true
             }.assign(to: \.isValid, on: self)
+            .store(in: &subscriptions)
+        
+        submit
+            .drop(untilOutputFrom: $isValid.filter { $0 })
+            .setFailureType(to: Error.self)
+            .flatMap { [weak self] _ -> AnyPublisher<StorageMetadata, Error> in
+                guard
+                    let self,
+                    let nickname = self.nickname,
+                    let password = self.password,
+                    let content = self.content
+                else { return Empty().eraseToAnyPublisher()}
+                let review = Review(nickname: nickname, photo: self.reviewImage?.pngData(), rating: self.rating, password: password, content: content)
+                return self.repository.putMovieReviews(self.movie.movieCode, review: review)
+            }
+            .sink(receiveCompletion: { completion in
+                if case .failure(let error) = completion {
+                    debugPrint("😡Error Occured While Upload Review: \(error.localizedDescription)")
+                }
+            }, receiveValue: { [weak self] _ in
+                guard let self else { return }
+                self.viewAction.send(.dismiss)
+            })
             .store(in: &subscriptions)
     }
     
