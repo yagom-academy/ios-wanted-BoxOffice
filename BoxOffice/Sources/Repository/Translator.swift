@@ -78,6 +78,7 @@ enum Translator {
     
     static func translate(_ response: MoviePosterResponse) throws -> String {
         guard let poster = response.poster else { throw TranslatorError.zeroByteData }
+        guard poster.hasPrefix("http") else { throw TranslatorError.invalidPosterURL }
         return poster
     }
 }
