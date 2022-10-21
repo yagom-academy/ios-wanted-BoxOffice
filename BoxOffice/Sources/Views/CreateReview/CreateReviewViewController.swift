@@ -19,6 +19,34 @@ class CreateReviewViewController: UIViewController {
         return view
     }()
     
+    lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    lazy var contentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var infoView: CreateReviewMovieInfoView = {
+        let view = CreateReviewMovieInfoView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var dividerViews: [UIView] = {
+        var views = [UIView(), UIView(), UIView(), UIView(), UIView()]
+        views.forEach {
+            $0.backgroundColor = UIColor(hex: "#707070").withAlphaComponent(0.6)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        return views
+    }()
+    
     // MARK: Associated Types
     typealias ViewModel = CreateReviewViewModel
     
@@ -60,6 +88,12 @@ class CreateReviewViewController: UIViewController {
     // MARK: Build View Hierarchy
     func buildViewHierarchy() {
         self.view.addSubview(navigationView)
+        self.view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(infoView)
+        dividerViews.forEach {
+            contentView.addSubview($0)
+        }
     }
     
     // MARK: Layout Views
@@ -74,12 +108,51 @@ class CreateReviewViewController: UIViewController {
             navigationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             navigationView.heightAnchor.constraint(equalToConstant: 45),
         ]
+        
+        constraints += [
+            scrollView.topAnchor.constraint(equalTo: navigationView.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ]
+        
+        constraints += [
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: 2000),
+        ]
+        
+        constraints += [
+            infoView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            infoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            infoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+        ]
+        
+        constraints += [
+            dividerViews[0].topAnchor.constraint(equalTo: infoView.bottomAnchor),
+            dividerViews[0].leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            dividerViews[0].trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            dividerViews[0].heightAnchor.constraint(equalToConstant: 1),
+        ]
     }
     
     
     // MARK: Binding
     func bind(viewModel: ViewModel) {
         navigationView.viewModel = viewModel
+        infoView.viewModel = viewModel
+    }
+    
+    // MARK: Util
+    func getDividerView() -> UIView {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "#707070").withAlphaComponent(0.6)
+        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }
 }
 
