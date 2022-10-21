@@ -14,10 +14,12 @@ struct MoviesDetailItemViewModel {
     let audiAcc: String
     let rankInten: String
     let rankOldAndNew: String
+    let movieCd: String
     
-    let prdtYear: String = ""
-    let showTm: String = ""
-    let genreNm: String = ""
-    let peopleNm: String = ""
-    let watchGradeNm: String = ""
+    var prdtYear: String = ""
+    var showTm: String = ""
+    var genreNm: [String] = []
+    var directorsNm: [String] = []
+    var actorsNm: [String] = []
+    var watchGradeNm: [String] = []
 }

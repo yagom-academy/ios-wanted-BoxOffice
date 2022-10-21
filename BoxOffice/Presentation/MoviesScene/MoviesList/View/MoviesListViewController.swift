@@ -83,7 +83,7 @@ extension MoviesListViewController {
             switch response {
             case .success(let movieList):
                 self.viewModel?.items = Observable(movieList.map({
-                    MoviesListItemViewModel(rank: $0.rank, movieNm: $0.movieNm, openDt: $0.openDt, audiAcc: $0.audiAcc, rankInten: $0.rankInten, rankOldAndNew: $0.rankOldAndNew)
+                    MoviesListItemViewModel(rank: $0.rank, movieNm: $0.movieNm, openDt: $0.openDt, audiAcc: $0.audiAcc, rankInten: $0.rankInten, rankOldAndNew: $0.rankOldAndNew, movieCd: $0.movieCd)
                 }))
                
                 DispatchQueue.main.async {
@@ -109,5 +109,12 @@ extension MoviesListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.fill(viewModel: self.viewModel!.items.value[indexPath.row])
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let viewModel = self.viewModel?.items.value[indexPath.row] else { return }
+        let moviesDetailViewModel = MoviesDetailItemViewModel(rank: viewModel.rank, movieNm: viewModel.movieNm, openDt: viewModel.openDt, audiAcc: viewModel.audiAcc, rankInten: viewModel.rankInten, rankOldAndNew: viewModel.rankOldAndNew, movieCd: viewModel.movieCd)
+        let vc = MoviesDetailViewController(viewModel: moviesDetailViewModel, repository: repository!)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

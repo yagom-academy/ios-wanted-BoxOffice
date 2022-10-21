@@ -24,6 +24,7 @@ class MoviesDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
         
         fetchMovie()
         setupViews()
@@ -35,11 +36,6 @@ class MoviesDetailViewController: UIViewController {
 }
 
 extension MoviesDetailViewController {
-    
-    func fetchMovie() {
-        
-    }
-    
     func setupViews() {
         
     }
@@ -53,6 +49,25 @@ extension MoviesDetailViewController {
     }
     
     func setNavigationbar() {
-        
+        self.navigationController?.navigationBar.topItem?.backButtonTitle = ""
+    }
+}
+
+extension MoviesDetailViewController {
+    func fetchMovie() {
+        self.repository?.fetchMoviesDetail(movieId: self.viewModel?.movieCd ?? "", completion: { response in
+            switch response {
+            case .success(let movieDetail):
+                self.viewModel?.prdtYear = movieDetail.prdtYear
+                self.viewModel?.showTm = movieDetail.showTm
+                self.viewModel?.genreNm = movieDetail.genreNm
+                self.viewModel?.directorsNm = movieDetail.directorsNm
+                self.viewModel?.actorsNm = movieDetail.actorsNm
+                self.viewModel?.watchGradeNm = movieDetail.watchGradeNm
+                
+            case .failure(_):
+                print("FETCH ERROR")
+            }
+        })
     }
 }
