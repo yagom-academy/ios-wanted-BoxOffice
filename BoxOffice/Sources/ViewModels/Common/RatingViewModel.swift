@@ -13,13 +13,14 @@ class RatingViewModel {
     // MARK: Input
     
     // MARK: Output
-    @Published var rating: Int = 0
+    @Published var rating: Int
     
     // MARK: Properties
     var subscriptions = [AnyCancellable]()
     
     // MARK: Life Cycle
-    init() {
+    init(rating: Int = 0) {
+        self.rating = rating
         bind()
     }
     

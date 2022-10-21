@@ -24,6 +24,7 @@ class CreateReviewViewModel {
     @Published var content: String?
     @Published var reviewImage: UIImage?
     @Published var isValid: Bool = false
+    @Published var isLoading: Bool = false
     
     @Published var ratingViewModel = RatingViewModel()
     
@@ -78,23 +79,29 @@ class CreateReviewViewModel {
         submit
             .drop(untilOutputFrom: $isValid.filter { $0 })
             .setFailureType(to: Error.self)
+            .handleEvents(receiveOutput: { [weak self] _ in
+                guard let self else { return }
+                self.isLoading = true
+            })
             .flatMap { [weak self] _ -> AnyPublisher<StorageMetadata, Error> in
                 guard
                     let self,
                     let nickname = self.nickname,
-                    let password = self.password,
+                    let password = self.password?.sha256(),
                     let content = self.content
                 else { return Empty().eraseToAnyPublisher()}
-                let review = Review(nickname: nickname, photo: self.reviewImage?.pngData(), rating: self.rating, password: password, content: content)
+                let review = Review(nickname: nickname, photo: self.reviewImage?.jpegData(compressionQuality: 0.25), rating: self.rating, password: password, content: content)
                 return self.repository.putMovieReviews(self.movie.movieCode, review: review)
             }
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [weak self] completion in
                 if case .failure(let error) = completion {
                     debugPrint("😡Error Occured While Upload Review: \(error.localizedDescription)")
                 }
+                self?.isLoading = false
             }, receiveValue: { [weak self] _ in
                 guard let self else { return }
                 self.viewAction.send(.dismiss)
+                self.isLoading = false
             })
             .store(in: &subscriptions)
     }

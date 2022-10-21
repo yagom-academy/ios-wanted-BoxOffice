@@ -63,7 +63,7 @@ class Repository {
     
     func getMovieReviews(_ movieCode: String) -> AnyPublisher<[Review], Error> {
         return Storage.storage().reference().child("\(movieCode)")
-            .getData(maxSize: 1024 * 1024)
+            .getData(maxSize: 1024 * 1024 * 20)
             .subscribe(on: DispatchQueue.global())
             .decode(type: [Review].self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
@@ -71,7 +71,7 @@ class Repository {
     
     func putMovieReviews(_ movieCode: String, review: Review) -> AnyPublisher<StorageMetadata, Error> {
         return Storage.storage().reference().child("\(movieCode)")
-            .getData(maxSize: 1024 * 1024)
+            .getData(maxSize: 1024 * 1024 * 20)
             .subscribe(on: DispatchQueue.global())
             .decode(type: [Review].self, decoder: JSONDecoder())
             .catch { _ in

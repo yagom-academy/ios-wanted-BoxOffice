@@ -12,6 +12,7 @@ import Combine
 class MovieDetailViewModel {
     // MARK: Subject
     let share = PassthroughSubject<Void, Never>()
+    let createReview = PassthroughSubject<Void, Never>()
     let viewAction = PassthroughSubject<ViewAction, Never>()
     
     // MARK: Output
@@ -19,8 +20,11 @@ class MovieDetailViewModel {
     @Published var posterModel: MoviePosterViewModel?
     @Published var directorModel: TriSectoredStackViewModel?
     @Published var actorModel: TriSectoredStackViewModel?
+    @Published var reviews = [Review]()
+    @Published var averageRatingViewModel: RatingViewModel?
     
     // MARK: Properties
+    let repository = Repository()
     var subscriptions = [AnyCancellable]()
     
     // MARK: Life Cycle
@@ -43,10 +47,40 @@ class MovieDetailViewModel {
                 }
             }).store(in: &subscriptions)
         
+        $movie
+            .prefix(1)
+            .flatMap { [weak self] movie -> AnyPublisher<[Review], Error> in
+                guard let self else { return Empty().eraseToAnyPublisher() }
+                return self.repository.getMovieReviews(movie.movieCode)
+            }.sink(receiveCompletion: { completion in
+                if case .failure(let error) = completion {
+                    debugPrint("😡Error Occured While Fetching Review: \(error.localizedDescription)")
+                }
+            }, receiveValue: { [weak self] reviews in
+                guard let self else { return }
+                self.reviews = reviews
+                var averageRating: Int
+                if reviews.count > 0 {
+                    averageRating = reviews.map { $0.rating }.reduce(0, +) / reviews.count
+                } else {
+                    averageRating = 0
+                }
+                self.averageRatingViewModel = RatingViewModel(rating: averageRating)
+            }).store(in: &subscriptions)
+        
         share
             .compactMap { [weak self] _ in
                 guard let self else { return nil }
                 return .share(self.movie.prettify())
+            }.subscribe(viewAction)
+            .store(in: &subscriptions)
+        
+        createReview
+            .compactMap { [weak self] _ in
+                guard let self else { return nil }
+                let vc = CreateReviewViewController()
+                vc.viewModel = CreateReviewViewModel(movie: self.movie)
+                return ViewAction.push(vc)
             }.subscribe(viewAction)
             .store(in: &subscriptions)
     }
@@ -54,5 +88,6 @@ class MovieDetailViewModel {
     enum ViewAction {
         case dismiss
         case share(String)
+        case push(_ vc: UIViewController)
     }
 }

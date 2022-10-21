@@ -90,6 +90,14 @@ class CreateReviewViewController: UIViewController {
         return button
     }()
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .large)
+        view.color = .blue
+        view.backgroundColor = .white.withAlphaComponent(0.2)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var picker: PHPickerViewController = {
         var configuration = PHPickerConfiguration()
         configuration.filter = .any(of: [.images])
@@ -141,6 +149,7 @@ class CreateReviewViewController: UIViewController {
         self.view.addSubview(navigationView)
         self.view.addSubview(scrollView)
         self.view.addSubview(confirmButton)
+        self.view.addSubview(activityIndicator)
         scrollView.addSubview(contentView)
         contentView.addSubview(infoView)
         contentView.addSubview(ratingView)
@@ -259,6 +268,13 @@ class CreateReviewViewController: UIViewController {
             confirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             confirmButton.heightAnchor.constraint(equalToConstant: 56),
         ]
+        
+        constraints += [
+            activityIndicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            activityIndicator.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            activityIndicator.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            activityIndicator.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ]
     }
     
     
@@ -270,6 +286,10 @@ class CreateReviewViewController: UIViewController {
                 guard let self else { return }
                 self.view.endEditing(true)
             }).store(in: &subscriptions)
+        
+        confirmButton.controlEvent(.touchUpInside)
+            .subscribe(viewModel.submit)
+            .store(in: &subscriptions)
         
         viewModel.viewAction
             .receive(on: DispatchQueue.main)
@@ -287,6 +307,19 @@ class CreateReviewViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .assign(to: \.isEnabled, on: confirmButton)
             .store(in: &subscriptions)
+        
+        viewModel.$isLoading
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] isLoading in
+                guard let self else { return }
+                if isLoading {
+                    self.activityIndicator.isHidden = false
+                    self.activityIndicator.startAnimating()
+                } else {
+                    self.activityIndicator.isHidden = true
+                    self.activityIndicator.stopAnimating()
+                }
+            }).store(in: &subscriptions)
         
         navigationView.viewModel = viewModel
         infoView.viewModel = viewModel

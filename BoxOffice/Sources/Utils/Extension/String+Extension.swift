@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CryptoKit
 
 extension String {
     func asDate(format: DateFormat = .yyyyMMddHypen) -> Date? {
@@ -18,5 +19,14 @@ extension String {
     func validatePassword() -> Bool {
         let passwordRegex = #"^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$])[A-Za-z\d!@#$]{6,20}$"#
         return self.range(of: passwordRegex, options: .regularExpression) != nil
+    }
+    
+    func sha256() -> String? {
+        guard let data = self.data(using: .utf8) else { return nil }
+        var result = ""
+        SHA256.hash(data: data).forEach { byte in
+            result += String(format: "%02x", byte)
+        }
+        return result
     }
 }

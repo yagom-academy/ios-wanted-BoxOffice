@@ -63,7 +63,7 @@ class RepositoryTests: XCTestCase {
     
     func test_getMovieReviews() {
         // given
-        let movieCode = "20225729"
+        let movieCode = "20112207"
         let expectation = self.expectation(description: "Wait for API")
         var result: [Review]?
         
@@ -82,7 +82,7 @@ class RepositoryTests: XCTestCase {
     
     func test_putMovieReviews() {
         // given
-        let movieCode = "20225729"
+        let movieCode = "20112207"
         let review = Review(nickname: "다온솜", photo: UIImage(named: "circle")?.pngData(), rating: 5, password: "#123abcd", content: "안녕하세요")
         let expectation = self.expectation(description: "Wait for API")
         var result: StorageMetadata?

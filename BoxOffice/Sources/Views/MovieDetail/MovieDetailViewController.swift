@@ -55,6 +55,12 @@ class MovieDetailViewController: UIViewController {
         return view
     }()
     
+    lazy var reviewView: MovieDetailReviewView = {
+        let view = MovieDetailReviewView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // MARK: Associated Types
     typealias ViewModel = MovieDetailViewModel
     
@@ -101,6 +107,7 @@ class MovieDetailViewController: UIViewController {
         contentView.addSubview(detailInfoView)
         contentView.addSubview(directorView)
         contentView.addSubview(actorView)
+        contentView.addSubview(reviewView)
     }
     
     // MARK: Layout Views
@@ -155,7 +162,13 @@ class MovieDetailViewController: UIViewController {
             actorView.topAnchor.constraint(equalTo: directorView.bottomAnchor, constant: 36),
             actorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             actorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            actorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+        ]
+        
+        constraint += [
+            reviewView.topAnchor.constraint(equalTo: actorView.bottomAnchor, constant: 36),
+            reviewView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            reviewView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            reviewView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
         ]
     }
     
@@ -179,6 +192,8 @@ class MovieDetailViewController: UIViewController {
                 case .share(let item):
                     let vc = UIActivityViewController(activityItems: [item], applicationActivities: nil)
                     self.present(vc, animated: true)
+                case .push(let vc):
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
             }).store(in: &subscriptions)
         
@@ -186,6 +201,7 @@ class MovieDetailViewController: UIViewController {
         detailInfoView.viewModel = viewModel
         directorView.viewModel = viewModel
         actorView.viewModel = viewModel
+        reviewView.viewModel = viewModel
     }
 }
 
