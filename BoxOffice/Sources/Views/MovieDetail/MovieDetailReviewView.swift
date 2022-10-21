@@ -77,11 +77,14 @@ class MovieDetailReviewView: UIView {
         return button
     }()
     
-    lazy var reviewStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+    lazy var reviewTableView: ContentSizedTableView = {
+        let tableView = ContentSizedTableView()
+        tableView.backgroundColor = .clear
+        tableView.allowsSelection = false
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 180
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
     }()
     
     var reviewCells = [MovieDetailReviewCell]()
@@ -122,6 +125,8 @@ class MovieDetailReviewView: UIView {
     // MARK: Setup Views
     func setupViews() {
         self.backgroundColor = .clear
+        reviewTableView.dataSource = self
+        reviewTableView.register(MovieDetailReviewCell.self, forCellReuseIdentifier: MovieDetailReviewCell.className)
     }
     
     
@@ -134,7 +139,7 @@ class MovieDetailReviewView: UIView {
         averageRatingStackView.addArrangedSubview(averageRatingView)
         averageRatingStackView.addArrangedSubview(averageRatingLabel)
         self.addSubview(createReviewButton)
-        self.addSubview(reviewStackView)
+        self.addSubview(reviewTableView)
     }
     
     
@@ -179,10 +184,10 @@ class MovieDetailReviewView: UIView {
         ]
         
         constraints += [
-            reviewStackView.topAnchor.constraint(equalTo: createReviewButton.bottomAnchor, constant: 8),
-            reviewStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            reviewStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            reviewStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            reviewTableView.topAnchor.constraint(equalTo: createReviewButton.bottomAnchor, constant: 8),
+            reviewTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            reviewTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            reviewTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ]
         
     }
@@ -211,14 +216,7 @@ class MovieDetailReviewView: UIView {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] models in
                 guard let self else { return }
-                self.reviewCells.forEach { self.reviewStackView.removeArrangedSubview($0) }
-                self.reviewCells = []
-                models.forEach {
-                    let cell = self.createReviewCell()
-                    cell.viewModel = $0
-                    self.reviewCells.append(cell)
-                }
-                self.reviewCells.forEach { self.reviewStackView.addArrangedSubview($0) }
+                self.reviewTableView.reloadData()
             }).store(in: &subscriptions)
     }
     
@@ -227,6 +225,18 @@ class MovieDetailReviewView: UIView {
         let view = MovieDetailReviewCell()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }
+}
+
+extension MovieDetailReviewView: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel?.reviewCellModels?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieDetailReviewCell.className) as? MovieDetailReviewCell else { return UITableViewCell() }
+        cell.viewModel = viewModel?.reviewCellModels?[indexPath.row]
+        return cell
     }
 }
 

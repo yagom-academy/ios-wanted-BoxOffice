@@ -11,7 +11,7 @@ import Combine
 import SwiftUI
 
 // MARK: - View
-class MovieDetailReviewCell: UIView {
+class MovieDetailReviewCell: UITableViewCell {
     // MARK: View Components
     lazy var ratingView: RatingView = {
         let view = RatingView()
@@ -34,9 +34,6 @@ class MovieDetailReviewCell: UIView {
         label.font = .appleSDGothicNeo(weight: .regular, size: 12)
         label.textColor = UIColor(hex: "#DFDFDF")
         label.numberOfLines = 0
-        #if DEBUG
-        label.text = "리뷰 내용이 여기에 들어갑니다. 리뷰 내용은 여기에 들어가요. 리뷰 내용은 여기 들어갑니다. 리뷰 내용이 여기에 들어가요. 리뷰 내용은 여기에 들어가요. 리뷰 내용은 여기 들어간다구요."
-        #endif
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -48,7 +45,7 @@ class MovieDetailReviewCell: UIView {
         return stackView
     }()
     
-    lazy var imageView: UIImageView = {
+    lazy var photoView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 4
         imageView.clipsToBounds = true
@@ -61,9 +58,6 @@ class MovieDetailReviewCell: UIView {
         let label = UILabel()
         label.font = .appleSDGothicNeo(weight: .medium, size: 12)
         label.textColor = UIColor(hex: "#848484")
-        #if DEBUG
-        label.text = "별명이 들어갑니다"
-        #endif
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -93,8 +87,8 @@ class MovieDetailReviewCell: UIView {
     var subscriptions = [AnyCancellable]()
     
     // MARK: Life Cycle
-    init() {
-        super.init(frame: .zero)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
         buildViewHierarchy()
         self.setNeedsUpdateConstraints()
@@ -112,6 +106,17 @@ class MovieDetailReviewCell: UIView {
         super.updateConstraints()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        subscriptions = []
+//        ratingView.viewModel = nil
+//        ratingLabel.text = nil
+//        contentLabel.text = nil
+//        photoView.image = nil
+//        photoView.isHidden = true
+//        nicknameLabel.text = nil
+    }
+    
     // MARK: Setup Views
     func setupViews() {
         self.backgroundColor = .clear
@@ -120,13 +125,13 @@ class MovieDetailReviewCell: UIView {
     
     // MARK: Build View Hierarchy
     func buildViewHierarchy() {
-        self.addSubview(ratingView)
-        self.addSubview(ratingLabel)
-        self.addSubview(contentLabel)
-        self.addSubview(stackView)
-        stackView.addArrangedSubview(imageView)
-        self.addSubview(nicknameLabel)
-        self.addSubview(deleteButton)
+        self.contentView.addSubview(ratingView)
+        self.contentView.addSubview(ratingLabel)
+        self.contentView.addSubview(contentLabel)
+        self.contentView.addSubview(stackView)
+        stackView.addArrangedSubview(photoView)
+        self.contentView.addSubview(nicknameLabel)
+        self.contentView.addSubview(deleteButton)
     }
     
     
@@ -137,8 +142,8 @@ class MovieDetailReviewCell: UIView {
         defer { NSLayoutConstraint.activate(constraints) }
         
         constraints += [
-            ratingView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            ratingView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 28),
+            ratingView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            ratingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 28),
             ratingView.widthAnchor.constraint(equalToConstant: 100),
             ratingView.heightAnchor.constraint(equalToConstant: 18),
         ]
@@ -150,26 +155,26 @@ class MovieDetailReviewCell: UIView {
         
         constraints += [
             contentLabel.topAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: 8),
-            contentLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 28),
+            contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 28),
         ]
         
         constraints += [
-            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             stackView.leadingAnchor.constraint(equalTo: contentLabel.trailingAnchor, constant: 12),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -28),
-            imageView.widthAnchor.constraint(equalToConstant: 120),
-            imageView.heightAnchor.constraint(equalToConstant: 120),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -28),
+            photoView.widthAnchor.constraint(equalToConstant: 120),
+            photoView.heightAnchor.constraint(equalToConstant: 120),
         ]
         
         constraints += [
             nicknameLabel.topAnchor.constraint(greaterThanOrEqualTo: contentLabel.bottomAnchor, constant: 18),
             nicknameLabel.topAnchor.constraint(greaterThanOrEqualTo: stackView.bottomAnchor, constant: 18),
-            nicknameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 28),
-            nicknameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
+            nicknameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 28),
+            nicknameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
         ]
         
         constraints += [
-            deleteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -28),
+            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -28),
             deleteButton.centerYAnchor.constraint(equalTo: nicknameLabel.centerYAnchor),
             deleteButton.widthAnchor.constraint(equalToConstant: 24),
             deleteButton.heightAnchor.constraint(equalToConstant: 24),
@@ -196,10 +201,10 @@ class MovieDetailReviewCell: UIView {
                 guard let self else { return }
                 if let imageData,
                    let image = UIImage(data: imageData) {
-                    self.imageView.image = image
-                    self.imageView.isHidden = false
+                    self.photoView.image = image
+                    self.photoView.isHidden = false
                 } else {
-                    self.imageView.isHidden = true
+                    self.photoView.isHidden = true
                 }
             }).store(in: &subscriptions)
         
@@ -225,7 +230,7 @@ struct MovieDetailReviewCellPreview: PreviewProvider {
             view.viewModel = MovieDetailReviewCellModel(review: .dummyReview)
             return view
         }.background(Color(UIColor(hex: "#101010")))
-        .previewLayout(.sizeThatFits)
+        .previewLayout(.fixed(width: 2000, height: 500))
     }
 }
 #endif

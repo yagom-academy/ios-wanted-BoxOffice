@@ -100,6 +100,7 @@ class CreateReviewViewModel {
                 self?.isLoading = false
             }, receiveValue: { [weak self] _ in
                 guard let self else { return }
+                NotificationCenter.default.post(name: .reviewCreated, object: nil, userInfo: ["movieCode": self.movie.movieCode])
                 self.viewAction.send(.dismiss)
                 self.isLoading = false
             })

@@ -48,11 +48,22 @@ class MovieDetailViewModel {
                 }
             }).store(in: &subscriptions)
         
-        $movie
-            .prefix(1)
-            .flatMap { [weak self] movie -> AnyPublisher<[Review], Error> in
+        let movieSubscription = $movie.map { _ in }.prefix(1)
+        let reviewCreated = NotificationCenter.default.publisher(for: .reviewCreated)
+            .compactMap { $0.userInfo?["movieCode"] as? String }
+            .filter { [weak self] movieCode in
+                return self?.movie.movieCode == movieCode
+            }
+            .map { _ in }
+        
+        movieSubscription
+            .merge(with: reviewCreated)
+            .handleEvents(receiveOutput: { [weak self] _ in
+                self?.reviewCellModels = []
+            })
+            .flatMap { [weak self] _ -> AnyPublisher<[Review], Error> in
                 guard let self else { return Empty().eraseToAnyPublisher() }
-                return self.repository.getMovieReviews(movie.movieCode)
+                return self.repository.getMovieReviews(self.movie.movieCode)
             }.sink(receiveCompletion: { completion in
                 if case .failure(let error) = completion {
                     debugPrint("😡Error Occured While Fetching Review: \(error.localizedDescription)")
