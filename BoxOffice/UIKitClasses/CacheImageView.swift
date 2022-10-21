@@ -15,10 +15,18 @@ class CacheImageView: UIImageView {
     private let sharedHandler = CacheHandler.sharedInstance
     
     func loadImage(urlString: String) {
-        self.image = nil
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.image = nil
+        }
         self.lastImageURLString = urlString
         if let image = sharedHandler.object(forKey: urlString) as? UIImage {
-            self.image = image
+            
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.image = image
+            }
             return
         }
         Task {

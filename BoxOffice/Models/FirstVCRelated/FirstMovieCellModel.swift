@@ -13,7 +13,7 @@ class FirstMovieCellModel {
     var shouldModelRequestImage: () -> () = {  }
     
     //output
-    var propergateImageURL: ((String) -> ())?
+    var propergateImageURL: ((String, String) -> ())?
     
     //properties
     var rnum, rank, rankInten: String
@@ -55,7 +55,7 @@ class FirstMovieCellModel {
             Task {
                 guard let imageURLString = await self.requestImage() else { return }
                 print("5 \(imageURLString)")
-                self.propergateImageURL?(imageURLString)
+                self.propergateImageURL?(imageURLString, self.movieNm)
             }
         }
     }

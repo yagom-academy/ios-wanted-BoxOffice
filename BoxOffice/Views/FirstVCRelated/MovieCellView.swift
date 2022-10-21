@@ -12,7 +12,7 @@ class MovieCellView: UIView, FirstViewStyling {
 
     //input
     var didReceiveViewModel: (FirstMovieCellModel) -> () = { model in }
-    @MainThreadActor var didReceiveImageURL: ((String) -> ())?
+    var didReceiveImageURL: ((String, String) -> ())?
     //output
     
     //properties
@@ -118,10 +118,15 @@ extension MovieCellView: Presentable {
             self.privateCellViewModel.shouldModelRequestImage()
         }
         
-        didReceiveImageURL = { [weak self] string in
+        didReceiveImageURL = { [weak self] urlString, movieName in
             guard let self = self else { return }
             print("didReceiveImageURL")
-            self.posterImageView.loadImage(urlString: string)
+            
+            if movieName == self.privateCellViewModel.movieNm {
+                self.posterImageView.loadImage(urlString: urlString)
+            } else if movieName != self.privateCellViewModel.movieNm {
+                return
+            }
         }
     }
     
