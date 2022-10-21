@@ -18,9 +18,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let mainViewController = MoviesListViewController()
         
-        window?.rootViewController = mainViewController
+        let viewModel = MoviesListViewModel(items: Observable([]))
+        // TO-DO: 실제 repository 연결
+        let repository = DefaultMoviesRepository()
+        
+        let mainViewController = MoviesListViewController(viewModel: viewModel, repository: repository)
+        let navigationController = UINavigationController(rootViewController: mainViewController)
+        
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 
