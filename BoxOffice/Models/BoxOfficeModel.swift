@@ -23,6 +23,7 @@ struct BoxOfficeModel: Codable {
     var movieNm: String
     var openDt: String
     var audiCnt: String
+    var audiAcc: String
 //    var salesAmt: String
 //    var salesShare: String
 //    var salesInten: String
@@ -30,7 +31,6 @@ struct BoxOfficeModel: Codable {
 //    var salesAcc: String
 //    var audiInten: String
 //    var audiChange: String
-//    var audiAcc: String
 //    var scrnCnt: String
 //    var showCnt: String
     
@@ -43,6 +43,7 @@ struct BoxOfficeModel: Codable {
         case movieNm
         case openDt
         case audiCnt
+        case audiAcc
 //        case salesAmt
 //        case salesShare
 //        case salesInten
@@ -50,7 +51,6 @@ struct BoxOfficeModel: Codable {
 //        case salesAcc
 //        case audiInten
 //        case audiChange
-//        case audiAcc
 //        case scrnCnt
 //        case showCnt
     }
@@ -63,11 +63,13 @@ struct BoxOfficeResultRoot: Codable {
 struct BoxOfficeResult: Codable {
     var boxofficeType: String
     var showRange: String
-    var dailyBoxOfficeList: [BoxOfficeModel]
+    var dailyBoxOfficeList: [BoxOfficeModel]?
+    var weeklyBoxOfficeList: [BoxOfficeModel]?
     
     enum CodingKeys: String, CodingKey {
         case boxofficeType
         case showRange
         case dailyBoxOfficeList = "dailyBoxOfficeList"
+        case weeklyBoxOfficeList = "weeklyBoxOfficeList"
     }
 }

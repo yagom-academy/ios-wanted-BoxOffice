@@ -56,8 +56,6 @@ class MovieListViewCell: UITableViewCell {
         }
         rankDifferMark.setImage(image, for: .normal)
         rankDifferMark.tintColor = color
-//        rankDifferMark.image = image
-//        rankDifferMark.image = rankDifferMark.image?.withTintColor(color, renderingMode: .alwaysOriginal)
     }
     
     func initCell() {

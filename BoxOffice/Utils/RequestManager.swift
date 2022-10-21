@@ -13,6 +13,17 @@ class RequestManager {
         case error
     }
     
+    enum SearchOption: String {
+        case daily = "searchDailyBoxOfficeList"
+        case weekly = "searchWeeklyBoxOfficeList"
+    }
+    
+    enum WeeklySearchFilter: Int {
+        case weekly = 0
+        case weekend = 1 // default
+        case weekdays = 2
+    }
+    
     static let shared = RequestManager()
     private init () { }
      
@@ -23,31 +34,7 @@ class RequestManager {
         }
     }
     
-//    func getBoxOffice(_ date: Date = Date()) async throws {
-//        let baseUrl = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
-//        let targetDate = getDateForDaily(date: date)
-//        guard let url = URL(string: "\(baseUrl)?key=\(Bundle.main.apikey)&targetDt=\(targetDate)&itemPerPage=\(PER_PAGE)") else {
-//            print("Can not create url.")
-//            throw CustomError.error
-//        }
-//        
-//        let (data, httpResponse) = try await URLSession.shared.data(from: url)
-//        
-//        guard let response = httpResponse as? HTTPURLResponse, response.statusCode == 200 else {
-//            throw CustomError.error
-//        }
-//        
-//        let decoder = JSONDecoder()
-//        let result = try decoder.decode(BoxOfficeResultRoot.self, from: data)
-//        
-//        var boxOfficeViewModels = [BoxOfficeViewModel]()
-//        result.boxOfficeResult.dailyBoxOfficeList.forEach {
-//            boxOfficeViewModels.append(BoxOfficeViewModel(boxOffice: $0))
-//        }
-//        items = boxOfficeViewModels
-//    }
-    
-    func fetch(_ date: Date = Date(), _ completion: @escaping ([BoxOfficeModel]) -> Void) {
+    func getDailyBoxOffice(_ date: Date = Date(), _ completion: @escaping ([BoxOfficeModel]) -> Void) {
         let baseUrl = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
         let targetDate = getDateForDaily(date: date)
         guard let url = URL(string: "\(baseUrl)?key=\(Bundle.main.apikey)&targetDt=\(targetDate)&itemPerPage=\(PER_PAGE)") else {
@@ -60,7 +47,28 @@ class RequestManager {
                 let decoder = JSONDecoder()
                 let result = try decoder.decode(BoxOfficeResultRoot.self, from: data!)
                 
-                completion(result.boxOfficeResult.dailyBoxOfficeList)
+                completion(result.boxOfficeResult.dailyBoxOfficeList!)
+            } catch {
+                completion([])
+                print(error.localizedDescription)
+            }
+        }.resume()
+    }
+    
+    func getWeeklyBoxOffice(_ date: Date = Date(), weekGb: WeeklySearchFilter = .weekend, _ completion: @escaping ([BoxOfficeModel]) -> Void) {
+        let baseUrl = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json"
+        let targetDate = getDateForWeekly(date: date)
+        guard let url = URL(string: "\(baseUrl)?key=\(Bundle.main.apikey)&targetDt=\(targetDate)&weekGb=\(weekGb.rawValue)") else {
+            print("Can not create url.")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            do {
+                let decoder = JSONDecoder()
+                let result = try decoder.decode(BoxOfficeResultRoot.self, from: data!)
+                
+                completion(result.boxOfficeResult.weeklyBoxOfficeList!)
             } catch {
                 completion([])
                 print(error.localizedDescription)
@@ -76,7 +84,15 @@ class RequestManager {
         return "\(year)\(month)\(day)"
     }
     
-    func fetch(movieCd: String = "20124079") {
+    func getDateForWeekly(date: Date) -> String {
+        let calendar = Calendar.current.dateComponents([.year, .month, .day, .weekday], from: date)
+        let year = calendar.year!
+        let month = calendar.month!
+        let day = calendar.day! - calendar.weekday!
+        return "\(year)\(month)\(day)"
+    }
+    
+    func getMovieInfo(movieCd: String = "20124079", _ completion: @escaping (MovieInfoModel) -> Void) {
         let baseUrl = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
         guard let url = URL(string: "\(baseUrl)?key=\(Bundle.main.apikey)&movieCd=\(movieCd)") else {
             print("Can not create url.")
@@ -86,8 +102,7 @@ class RequestManager {
             do {
                 let decoder = JSONDecoder()
                 let result = try decoder.decode(MovieInfoResultModel.self, from: data!)
-                
-                print(result)
+                completion(result.movieInfoResult.movieInfo)
             } catch {
                 print(error.localizedDescription)
             }
