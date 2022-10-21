@@ -125,7 +125,7 @@ final class MovieDetailViewController: UIViewController {
                 completion(false)
                 return
             }
-            self?.deleteMovieReview(review)
+            self?.deleteMovieReviewIfAuthorized(review)
             completion(true)
         }
         deleteAction.image = UIImage(systemName: "trash")
@@ -294,12 +294,10 @@ final class MovieDetailViewController: UIViewController {
         }
     }
 
+
+
     private func deleteMovieReview(_ review: MovieReview) {
         Task {
-            // TODO: 암호 확인
-            // 암호를 입력받는다
-            // 맞으면 삭제
-            // 아니면 다시 입력받는다
             do {
                 try await movieReviewService.deleteReview(review)
                 fetchMovieReviews()
@@ -335,6 +333,44 @@ final class MovieDetailViewController: UIViewController {
         let shareTexts = [movieRanking.name, shareText]
         let activityViewController = UIActivityViewController(activityItems: shareTexts, applicationActivities: nil)
         present(activityViewController, animated: true)
+    }
+
+    private func deleteMovieReviewIfAuthorized(_ review: MovieReview) {
+        let alertController = UIAlertController(title: "리뷰 삭제", message: "삭제할 리뷰의 암호를 입력하십시오.", preferredStyle: .alert)
+        alertController.addTextField() { textField in
+            textField.textContentType = .password
+            textField.isSecureTextEntry = true
+            textField.autocorrectionType = .no
+            textField.autocapitalizationType = .none
+        }
+        let okAction = UIAlertAction(title: "확인", style: .default) { _ in
+            alertController.dismiss(animated: true)
+
+            if let textField = alertController.textFields?.first,
+               let password = textField.text {
+                if self.signIn(withReview: review, password: password) {
+                    self.deleteMovieReview(review)
+                } else {
+                    alertController.message = "암호가 올바르지 않습니다. 다시 시도하십시오."
+                    self.present(alertController, animated: true)
+                }
+                textField.clear()
+            }
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
+            alertController.dismiss(animated: true)
+        }
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
+    }
+
+    private func signIn(withReview review: MovieReview, password: String?) -> Bool {
+        if review.password == password {
+            return true
+        } else {
+            return false
+        }
     }
 
 }
