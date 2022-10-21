@@ -11,7 +11,7 @@ final class DailyViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let apiService = ApiService()
+    private let vm = DailyViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,16 +21,11 @@ final class DailyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        apiService.getRequestData(
-            type: DailyBoxOfficeResultResponse.self,
-            path: "searchDailyBoxOfficeList.json",
-            parameters: [
-                "key": "f5eef3421c602c6cb7ea224104795888",
-                "targetDt": "20120101",
-                "wideAreaCd": "0105001"
-            ]
-        )
+    
+        Task {
+            let result = try await self.vm.fetchDailyView()
+            print(result)
+        }
     }
     
     func setupUI() {

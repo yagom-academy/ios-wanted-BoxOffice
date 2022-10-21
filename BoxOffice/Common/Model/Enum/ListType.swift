@@ -7,7 +7,16 @@
 
 import Foundation
 
-enum ListType: String {
-    case daily = "Daily"
-    case weekly = "Weekly"
+enum ListType {
+    case daily
+    case weekly
+    
+    var path: String {
+        switch self {
+        case .daily:
+            return "searchDailyBoxOfficeList.json"
+        case .weekly:
+            return "searchWeeklyBoxOfficeList.json"
+        }
+    }
 }
