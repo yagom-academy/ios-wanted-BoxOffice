@@ -450,21 +450,21 @@
                     </view>
                     <navigationItem key="navigationItem" id="rce-OB-KMO"/>
                     <connections>
+                        <outlet property="actorNm" destination="VQX-cv-0xb" id="UYX-ZP-FH2"/>
+                        <outlet property="audiCnt" destination="POA-fa-FlE" id="0SF-Wt-n0P"/>
+                        <outlet property="directorsNm" destination="a2J-Fn-JyE" id="Z0i-TI-6Nh"/>
+                        <outlet property="genres" destination="zcI-Z4-Q9I" id="W6z-wO-1pK"/>
+                        <outlet property="movieNm" destination="2Fe-cc-wDg" id="NsL-Jp-Mo9"/>
+                        <outlet property="openDt" destination="itL-6I-1C2" id="1Ar-5L-x5g"/>
+                        <outlet property="openYear" destination="OOE-RI-LIe" id="Dsn-Ok-tdA"/>
+                        <outlet property="prdtYear" destination="W3X-h9-xAH" id="JbH-M3-Zrx"/>
+                        <outlet property="rank" destination="Zfs-DW-tfZ" id="nHW-mu-pY4"/>
+                        <outlet property="rankInten" destination="vKt-rI-zFf" id="GLw-tr-sg4"/>
+                        <outlet property="rankOldAndNew" destination="XbC-DZ-1ii" id="rU7-c2-tj3"/>
                         <outlet property="reviewButton" destination="YyO-jq-aqG" id="To8-34-3gx"/>
                         <outlet property="sharebutton" destination="5UF-Kx-75q" id="4qw-as-O50"/>
-                        <outlet property="감독명" destination="a2J-Fn-JyE" id="Z0i-TI-6Nh"/>
-                        <outlet property="개봉연도" destination="OOE-RI-LIe" id="OHU-QR-swW"/>
-                        <outlet property="개봉일" destination="itL-6I-1C2" id="9hu-Nn-6Td"/>
-                        <outlet property="관객수" destination="POA-fa-FlE" id="0SF-Wt-n0P"/>
-                        <outlet property="관람등급" destination="dbD-Lk-ePJ" id="92E-AB-OuU"/>
-                        <outlet property="랭킹신규진입" destination="XbC-DZ-1ii" id="rU7-c2-tj3"/>
-                        <outlet property="배우명" destination="VQX-cv-0xb" id="UYX-ZP-FH2"/>
-                        <outlet property="상영시간" destination="btP-u0-CbK" id="DDZ-83-T3b"/>
-                        <outlet property="영화명" destination="2Fe-cc-wDg" id="NsL-Jp-Mo9"/>
-                        <outlet property="영화순위" destination="Zfs-DW-tfZ" id="nHW-mu-pY4"/>
-                        <outlet property="장르" destination="zcI-Z4-Q9I" id="W6z-wO-1pK"/>
-                        <outlet property="전일대비" destination="vKt-rI-zFf" id="GLw-tr-sg4"/>
-                        <outlet property="제작연도" destination="W3X-h9-xAH" id="JbH-M3-Zrx"/>
+                        <outlet property="showTm" destination="btP-u0-CbK" id="DDZ-83-T3b"/>
+                        <outlet property="watchGradNm" destination="dbD-Lk-ePJ" id="92E-AB-OuU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Gs-Ge-TVj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

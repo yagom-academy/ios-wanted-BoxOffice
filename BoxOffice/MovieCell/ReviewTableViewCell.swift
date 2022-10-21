@@ -16,9 +16,9 @@ class ReviewTableViewCell: UITableViewCell {
     
     var model: ReviewModel? {
         didSet {
-            uesrImage.image = model?.이미지
-            nicName.text = model?.닉네임
-            reviewlabel.text = model?.리뷰
+            uesrImage.image = model?.uesrImage
+            nicName.text = model?.nickName
+            reviewlabel.text = model?.review
             reViewView.backgroundColor = .systemGray5
             reViewView.alpha = 0.8
             reViewView.layer.cornerRadius = 15

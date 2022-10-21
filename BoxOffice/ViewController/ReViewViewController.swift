@@ -17,10 +17,9 @@ class ReViewViewController: UIViewController, UITextFieldDelegate {
     var essentialFieldList = [UITextField]()
     let datasource = [ReviewModel]()
     lazy var dataArry: [ReviewModel] = [
-        .init(이미지: UIImage(named: "user"), 닉네임: "쏘롱1", 리뷰: "추천하는영화입니다."),
-        .init(이미지: UIImage(named: "user"), 닉네임: "쏘롱2", 리뷰: "이영화는 너무 졸려요."),
-        .init(이미지: UIImage(named: "user"), 닉네임: "쏘롱3", 리뷰: "영화 너무 재미있습니다.."),]
-    
+        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱1", review: "추천하는영화입니다."),
+        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱1", review: "이영화는 너무 졸려요."),
+        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱1", review: "영화 너무 재미있습니다.."),]
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
@@ -138,7 +137,7 @@ class ReViewViewController: UIViewController, UITextFieldDelegate {
         return passwordtesting.evaluate(with: mypassword)
     }
     @IBAction func saveButtonAction(_ sender: UIButton) {
-        dataArry.append(.init(이미지: UIImage(named: "user"), 닉네임: "\(idTextField.text!)", 리뷰: "\(reviewField.text!)"))
+        dataArry.append(.init(uesrImage: UIImage(named: "user"), nickName: "\(idTextField.text!)", review: "\(reviewField.text!)"))
         reviewField.text = nil
         tableView.reloadData()
     }

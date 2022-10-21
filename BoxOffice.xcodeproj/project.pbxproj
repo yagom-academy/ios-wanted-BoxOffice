@@ -80,7 +80,6 @@
 		635A19E628F9603900197BCC /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
-				D3CAAD132900EF2B003E7296 /* MovieInformationViewController */,
 				D354E3EA28FD4A1D00D8F5FB /* Api */,
 				D354E3E528FD3F4200D8F5FB /* Model */,
 				D38B417A28FD236C00EF4A3A /* ViewController */,
@@ -150,13 +149,6 @@
 				635A19ED28F9603900197BCC /* Main.storyboard */,
 			);
 			path = Storyboard;
-			sourceTree = "<group>";
-		};
-		D3CAAD132900EF2B003E7296 /* MovieInformationViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MovieInformationViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

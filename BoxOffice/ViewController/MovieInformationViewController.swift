@@ -8,19 +8,19 @@
 import UIKit
 
 class MovieInformationViewController: UIViewController {
-    @IBOutlet weak var 영화순위: UILabel!
-    @IBOutlet weak var 영화명: UILabel!
-    @IBOutlet weak var 개봉일: UILabel!
-    @IBOutlet weak var 관객수: UILabel!
-    @IBOutlet weak var 전일대비: UILabel!
-    @IBOutlet weak var 랭킹신규진입: UILabel!
-    @IBOutlet weak var 제작연도: UILabel!
-    @IBOutlet weak var 감독명: UILabel!
-    @IBOutlet weak var 배우명: UILabel?
-    @IBOutlet weak var 상영시간: UILabel!
-    @IBOutlet weak var 장르: UILabel!
-    @IBOutlet weak var 관람등급: UILabel!
-    @IBOutlet weak var 개봉연도: UILabel!
+    @IBOutlet weak var rank: UILabel!
+    @IBOutlet weak var movieNm: UILabel!
+    @IBOutlet weak var openDt: UILabel!
+    @IBOutlet weak var audiCnt: UILabel!
+    @IBOutlet weak var rankInten: UILabel!
+    @IBOutlet weak var rankOldAndNew: UILabel!
+    @IBOutlet weak var prdtYear: UILabel!
+    @IBOutlet weak var directorsNm: UILabel!
+    @IBOutlet weak var actorNm: UILabel?
+    @IBOutlet weak var showTm: UILabel!
+    @IBOutlet weak var genres: UILabel!
+    @IBOutlet weak var watchGradNm: UILabel!
+    @IBOutlet weak var openYear: UILabel!
     @IBOutlet weak var reviewButton: UIButton!
     @IBOutlet weak var sharebutton: UIButton!
     let mainVC = MainViewController()
@@ -35,24 +35,24 @@ class MovieInformationViewController: UIViewController {
     
     func dataSeting() {
         guard let movieModel = self.movieModel else {return}
-        movieInfomationApi.getData(myApiKey: mainVC.myApiKey, todays: mainVC.inquiryTime() ,itemPerPage: "\(mainVC.itemPerPageArry)", movieCd: movieModel.영화번호) { result in
-            self.영화명.text = "영화제목: \(movieModel.영화제목)"
-            self.영화순위.text = "영화 순위: \(movieModel.순위)"
-            self.랭킹신규진입.text = "신규진입: \(movieModel.신규진입)"
-            self.관객수.text = "관객수:\(movieModel.관객수)"
-            self.개봉일.text = "개봉일: \(movieModel.오픈날짜)"
-            self.전일대비.text = "전일대비: \(movieModel.순위증감)"
-            self.상영시간.text = "상영시간:\(result.movieInfoResult.movieInfo.showTm)분"
-            self.장르.text = "장르: \(result.movieInfoResult.movieInfo.genres[0].genreNm)"
-            self.관람등급.text = "관람등급: \(result.movieInfoResult.movieInfo.audits[0].watchGradeNm)"
-            self.개봉연도.text = "개봉연도: \(result.movieInfoResult.movieInfo.openDt)"
-            self.제작연도.text = "제작연도: \(result.movieInfoResult.movieInfo.prdtYear)"
+        movieInfomationApi.getData(myApiKey: mainVC.myApiKey, todays: mainVC.inquiryTime() ,itemPerPage: "\(mainVC.itemPerPageArry)", movieCd: movieModel.movieCD) { result in
+            self.movieNm.text = "영화제목: \(movieModel.movieNm)"
+            self.rank.text = "영화 순위: \(movieModel.rank)"
+            self.rankOldAndNew.text = "신규진입: \(movieModel.rankOldAndNew)"
+            self.audiCnt.text = "관객수:\(movieModel.audiCnt)"
+            self.openDt.text = "개봉일: \(movieModel.openDt)"
+            self.rankInten.text = "전일대비: \(movieModel.rankInten)"
+            self.showTm.text = "상영시간:\(result.movieInfoResult.movieInfo.showTm)분"
+            self.genres.text = "장르: \(result.movieInfoResult.movieInfo.genres[0].genreNm)"
+            self.watchGradNm.text = "관람등급: \(result.movieInfoResult.movieInfo.audits[0].watchGradeNm)"
+            self.openYear.text = "개봉연도: \(result.movieInfoResult.movieInfo.openDt)"
+            self.prdtYear.text = "제작연도: \(result.movieInfoResult.movieInfo.prdtYear)"
             if result.movieInfoResult.movieInfo.actors.count == 0 {
-                self.배우명?.text = "배우: "
+                self.actorNm?.text = "배우: "
             }else {
-                self.배우명?.text = "배우: \(result.movieInfoResult.movieInfo.actors[0].peopleNm),\(result.movieInfoResult.movieInfo.actors[1].peopleNm)"
+                self.actorNm?.text = "배우: \(result.movieInfoResult.movieInfo.actors[0].peopleNm),\(result.movieInfoResult.movieInfo.actors[1].peopleNm)"
             }
-            self.감독명.text = "감독: \(result.movieInfoResult.movieInfo.directors[0].peopleNm)"
+            self.directorsNm.text = "감독: \(result.movieInfoResult.movieInfo.directors[0].peopleNm)"
         }
     }
     func uiSetting() {

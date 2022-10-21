@@ -24,7 +24,7 @@ class WeekMovieViewController: UIViewController {
     func movieApi() {
         MovieApi.getData(myApiKey: mainVC.myApiKey, todays: mainVC.inquiryTime() ,itemPerPage: "\(mainVC.itemPerPageArry)&weekGb=0") {result in
             for i in 0..<self.mainVC.itemPerPageArry {
-                self.weekMovie.append(MovieModel(순위: result.boxOfficeResult.dailyBoxOfficeList[i].rank, 신규진입: result.boxOfficeResult.dailyBoxOfficeList[i].rankOldAndNew.rawValue , 영화제목: result.boxOfficeResult.dailyBoxOfficeList[i].movieNm, 오픈날짜: result.boxOfficeResult.dailyBoxOfficeList[i].openDt, 관객수: result.boxOfficeResult.dailyBoxOfficeList[i].audiCnt,순위증감: result.boxOfficeResult.dailyBoxOfficeList[i].rankInten,영화번호: result.boxOfficeResult.dailyBoxOfficeList[i].movieCD))
+                self.weekMovie.append(MovieModel(rank: result.boxOfficeResult.dailyBoxOfficeList[i].rank, rankOldAndNew: result.boxOfficeResult.dailyBoxOfficeList[i].rankOldAndNew.rawValue , movieNm: result.boxOfficeResult.dailyBoxOfficeList[i].movieNm, openDt: result.boxOfficeResult.dailyBoxOfficeList[i].openDt, audiCnt: result.boxOfficeResult.dailyBoxOfficeList[i].audiCnt,rankInten: result.boxOfficeResult.dailyBoxOfficeList[i].rankInten,movieCD: result.boxOfficeResult.dailyBoxOfficeList[i].movieCD))
                 self.tableVIew.reloadData()
             }
         }
