@@ -78,6 +78,8 @@ extension MovieDetailViewController {
   }
 }
 
+// MARK: - TableView Delegate, DataSource
+
 extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
     return 2
@@ -145,6 +147,8 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
         return UIView()
       }
 
+      header.delegate = self
+
       return header
     } else {
       // 왜 nil을 반환해도 빈 헤더뷰가 생길까
@@ -153,6 +157,17 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
     }
   }
 
+}
+
+// MARK: - WriteReviewDelegate
+
+extension MovieDetailViewController: WriteReviewDelegate {
+  func showWriteReviewPage() {
+    let nextVC = WriteReviewViewController()
+    nextVC.title = "리뷰작성"
+    nextVC.movieCode = rankInfo?.movieCd ?? ""
+    navigationController?.pushViewController(nextVC, animated: true)
+  }
 }
 
 #if canImport(SwiftUI) && DEBUG
