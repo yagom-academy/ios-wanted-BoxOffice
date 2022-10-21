@@ -16,6 +16,7 @@ class CreateReviewViewModel {
     // MARK: Output
     @Published var movie: Movie
     @Published var posterImage: UIImage?
+    @Published var nickname: String?
     
     // MARK: Properties
     let repository = Repository()

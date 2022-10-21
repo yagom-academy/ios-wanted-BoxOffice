@@ -44,6 +44,12 @@ class CreateReviewViewController: UIViewController {
         return view
     }()
     
+    lazy var nicknameView: CreateReviewNicknameView = {
+        let view = CreateReviewNicknameView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var dividerViews: [UIView] = {
         var views = [UIView(), UIView(), UIView(), UIView(), UIView()]
         views.forEach {
@@ -98,6 +104,7 @@ class CreateReviewViewController: UIViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(infoView)
         contentView.addSubview(ratingView)
+        contentView.addSubview(nicknameView)
         dividerViews.forEach {
             contentView.addSubview($0)
         }
@@ -157,6 +164,19 @@ class CreateReviewViewController: UIViewController {
             dividerViews[1].trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             dividerViews[1].heightAnchor.constraint(equalToConstant: 1),
         ]
+        
+        constraints += [
+            nicknameView.topAnchor.constraint(equalTo: dividerViews[1].bottomAnchor),
+            nicknameView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            nicknameView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+        ]
+        
+        constraints += [
+            dividerViews[2].topAnchor.constraint(equalTo: nicknameView.bottomAnchor),
+            dividerViews[2].leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            dividerViews[2].trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            dividerViews[2].heightAnchor.constraint(equalToConstant: 1),
+        ]
     }
     
     
@@ -164,6 +184,7 @@ class CreateReviewViewController: UIViewController {
     func bind(viewModel: ViewModel) {
         navigationView.viewModel = viewModel
         infoView.viewModel = viewModel
+        nicknameView.viewModel = viewModel
     }
     
     // MARK: Util

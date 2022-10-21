@@ -15,6 +15,8 @@
 		462CB235290150D300BA4A55 /* MoviePosterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462CB234290150D300BA4A55 /* MoviePosterViewModel.swift */; };
 		462CB2372901550D00BA4A55 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462CB2362901550D00BA4A55 /* Int+Extension.swift */; };
 		46721FD22902AAA10080F39B /* ViewGesturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46721FD12902AAA10080F39B /* ViewGesturePublisher.swift */; };
+		46721FD42902B5300080F39B /* CreateReviewNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46721FD32902B5300080F39B /* CreateReviewNicknameView.swift */; };
+		46721FD62902B7A80080F39B /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46721FD52902B7A80080F39B /* NSMutableAttributedString+Extension.swift */; };
 		46B170E229001415002A8735 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B170E129001415002A8735 /* Date+Extension.swift */; };
 		46B170E429001FD7002A8735 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B170E329001FD7002A8735 /* NSObject+Extension.swift */; };
 		46F91C462902A26F005D191F /* CreateReviewMovieInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F91C452902A26F005D191F /* CreateReviewMovieInfoView.swift */; };
@@ -79,6 +81,8 @@
 		462CB234290150D300BA4A55 /* MoviePosterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePosterViewModel.swift; sourceTree = "<group>"; };
 		462CB2362901550D00BA4A55 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		46721FD12902AAA10080F39B /* ViewGesturePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewGesturePublisher.swift; sourceTree = "<group>"; };
+		46721FD32902B5300080F39B /* CreateReviewNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewNicknameView.swift; sourceTree = "<group>"; };
+		46721FD52902B7A80080F39B /* NSMutableAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		46B170E129001415002A8735 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		46B170E329001FD7002A8735 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		46F91C452902A26F005D191F /* CreateReviewMovieInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewMovieInfoView.swift; sourceTree = "<group>"; };
@@ -328,6 +332,7 @@
 				462CB2362901550D00BA4A55 /* Int+Extension.swift */,
 				B0082495290225A90072A987 /* String+Extension.swift */,
 				B008249F290244AD0072A987 /* Publisher+Extension.swift */,
+				46721FD52902B7A80080F39B /* NSMutableAttributedString+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -368,6 +373,7 @@
 				B0F7B0502902885400D02CC1 /* CreateReviewNavigationView.swift */,
 				46F91C452902A26F005D191F /* CreateReviewMovieInfoView.swift */,
 				46F91C492902A811005D191F /* CreateReviewRatingView.swift */,
+				46721FD32902B5300080F39B /* CreateReviewNicknameView.swift */,
 			);
 			path = CreateReview;
 			sourceTree = "<group>";
@@ -492,8 +498,10 @@
 				462CB2372901550D00BA4A55 /* Int+Extension.swift in Sources */,
 				B02D9CC328FF8A83005E717B /* BoxOfficeListViewModel.swift in Sources */,
 				B00824A2290247BD0072A987 /* MovieDetailStaffView.swift in Sources */,
+				46721FD62902B7A80080F39B /* NSMutableAttributedString+Extension.swift in Sources */,
 				B02D9CD228FF93BE005E717B /* OverlayedImageView.swift in Sources */,
 				46721FD22902AAA10080F39B /* ViewGesturePublisher.swift in Sources */,
+				46721FD42902B5300080F39B /* CreateReviewNicknameView.swift in Sources */,
 				46F91C482902A79F005D191F /* CreateReviewRatingViewModel.swift in Sources */,
 				B02D9CCD28FF9047005E717B /* UIColor+Extension.swift in Sources */,
 				B0F7B0512902885400D02CC1 /* CreateReviewNavigationView.swift in Sources */,
