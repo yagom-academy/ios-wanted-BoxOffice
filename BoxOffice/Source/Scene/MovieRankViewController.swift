@@ -43,6 +43,7 @@ class MovieRankViewController: UIViewController {
                     let image = try await NetworkManager.shared.getPosterImage(englishName: movie.englishName)
                     cell.posterImageView.image = image
                 } catch {
+                    cell.posterImageView.image = UIImage(systemName: "video.fill")
                     print(error.localizedDescription)
                 }
                 cell.setData(movie)
