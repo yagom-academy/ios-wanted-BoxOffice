@@ -28,6 +28,8 @@
 		46721FEA2902F5CB0080F39B /* MovieDetailReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46721FE92902F5CB0080F39B /* MovieDetailReviewView.swift */; };
 		46B170E229001415002A8735 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B170E129001415002A8735 /* Date+Extension.swift */; };
 		46B170E429001FD7002A8735 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B170E329001FD7002A8735 /* NSObject+Extension.swift */; };
+		46D2F2B929030A6400217244 /* MovieDetailReviewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D2F2B829030A6400217244 /* MovieDetailReviewCellModel.swift */; };
+		46D2F2BB29030A7700217244 /* MovieDetailReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D2F2BA29030A7700217244 /* MovieDetailReviewCell.swift */; };
 		46F91C462902A26F005D191F /* CreateReviewMovieInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F91C452902A26F005D191F /* CreateReviewMovieInfoView.swift */; };
 		46F91C4A2902A811005D191F /* CreateReviewRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F91C492902A811005D191F /* CreateReviewRatingView.swift */; };
 		46F91C4C2902A846005D191F /* RatingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F91C4B2902A846005D191F /* RatingViewModel.swift */; };
@@ -100,6 +102,8 @@
 		46721FE92902F5CB0080F39B /* MovieDetailReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailReviewView.swift; sourceTree = "<group>"; };
 		46B170E129001415002A8735 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		46B170E329001FD7002A8735 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		46D2F2B829030A6400217244 /* MovieDetailReviewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailReviewCellModel.swift; sourceTree = "<group>"; };
+		46D2F2BA29030A7700217244 /* MovieDetailReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailReviewCell.swift; sourceTree = "<group>"; };
 		46F91C452902A26F005D191F /* CreateReviewMovieInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewMovieInfoView.swift; sourceTree = "<group>"; };
 		46F91C492902A811005D191F /* CreateReviewRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewRatingView.swift; sourceTree = "<group>"; };
 		46F91C4B2902A846005D191F /* RatingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewModel.swift; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 				B008249329021DAC0072A987 /* MovieDetailInfoCellView.swift */,
 				B00824A1290247BD0072A987 /* MovieDetailStaffView.swift */,
 				46721FE92902F5CB0080F39B /* MovieDetailReviewView.swift */,
+				46D2F2BA29030A7700217244 /* MovieDetailReviewCell.swift */,
 			);
 			path = MovieDetail;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				462CB22829014A3500BA4A55 /* MovieDetailViewModel.swift */,
+				46D2F2B829030A6400217244 /* MovieDetailReviewCellModel.swift */,
 			);
 			path = MovieDetail;
 			sourceTree = "<group>";
@@ -540,6 +546,7 @@
 				462CB2372901550D00BA4A55 /* Int+Extension.swift in Sources */,
 				B02D9CC328FF8A83005E717B /* BoxOfficeListViewModel.swift in Sources */,
 				B00824A2290247BD0072A987 /* MovieDetailStaffView.swift in Sources */,
+				46D2F2BB29030A7700217244 /* MovieDetailReviewCell.swift in Sources */,
 				46721FD62902B7A80080F39B /* NSMutableAttributedString+Extension.swift in Sources */,
 				46721FDA2902BC750080F39B /* CreateReviewParagraphView.swift in Sources */,
 				B02D9CD228FF93BE005E717B /* OverlayedImageView.swift in Sources */,
@@ -576,6 +583,7 @@
 				46F91C4C2902A846005D191F /* RatingViewModel.swift in Sources */,
 				46F91C4A2902A811005D191F /* CreateReviewRatingView.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
+				46D2F2B929030A6400217244 /* MovieDetailReviewCellModel.swift in Sources */,
 				B02D9CD428FF9622005E717B /* UIFont+Extension.swift in Sources */,
 				46721FE12902E4800080F39B /* Review.swift in Sources */,
 				462CB22B29014A4800BA4A55 /* MovieDetailViewController.swift in Sources */,

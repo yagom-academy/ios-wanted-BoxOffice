@@ -77,6 +77,15 @@ class MovieDetailReviewView: UIView {
         return button
     }()
     
+    lazy var reviewStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    var reviewCells = [MovieDetailReviewCell]()
+    
     // MARK: Associated Types
     typealias ViewModel = MovieDetailViewModel
     
@@ -125,6 +134,7 @@ class MovieDetailReviewView: UIView {
         averageRatingStackView.addArrangedSubview(averageRatingView)
         averageRatingStackView.addArrangedSubview(averageRatingLabel)
         self.addSubview(createReviewButton)
+        self.addSubview(reviewStackView)
     }
     
     
@@ -133,10 +143,6 @@ class MovieDetailReviewView: UIView {
         var constraints = [NSLayoutConstraint]()
         
         defer { NSLayoutConstraint.activate(constraints) }
-        
-        constraints += [
-            self.heightAnchor.constraint(equalToConstant: 775),
-        ]
         
         constraints += [
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
@@ -172,6 +178,13 @@ class MovieDetailReviewView: UIView {
             createReviewButton.heightAnchor.constraint(equalToConstant: 28),
         ]
         
+        constraints += [
+            reviewStackView.topAnchor.constraint(equalTo: createReviewButton.bottomAnchor, constant: 8),
+            reviewStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            reviewStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            reviewStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ]
+        
     }
     
     
@@ -192,6 +205,28 @@ class MovieDetailReviewView: UIView {
         viewModel.$averageRatingViewModel
             .assign(to: \.viewModel, on: averageRatingView)
             .store(in: &subscriptions)
+        
+        viewModel.$reviewCellModels
+            .compactMap { $0 }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] models in
+                guard let self else { return }
+                self.reviewCells.forEach { self.reviewStackView.removeArrangedSubview($0) }
+                self.reviewCells = []
+                models.forEach {
+                    let cell = self.createReviewCell()
+                    cell.viewModel = $0
+                    self.reviewCells.append(cell)
+                }
+                self.reviewCells.forEach { self.reviewStackView.addArrangedSubview($0) }
+            }).store(in: &subscriptions)
+    }
+    
+    // MARK: Util
+    func createReviewCell() -> MovieDetailReviewCell {
+        let view = MovieDetailReviewCell()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }
 }
 
@@ -202,8 +237,9 @@ struct MovieDetailReviewViewPreview: PreviewProvider {
             let view = MovieDetailReviewView()
             view.viewModel = MovieDetailViewModel(movie: .dummyMovie)
             return view
-        }.background(Color(UIColor(hex: "#101010")))
-        .previewLayout(.fixed(width: 390, height: 775))
+        }
+        .background(Color(UIColor(hex: "#101010")))
+        .previewLayout(.sizeThatFits)
     }
 }
 #endif

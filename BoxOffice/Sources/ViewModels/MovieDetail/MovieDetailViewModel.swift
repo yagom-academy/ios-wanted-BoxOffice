@@ -22,6 +22,7 @@ class MovieDetailViewModel {
     @Published var actorModel: TriSectoredStackViewModel?
     @Published var reviews = [Review]()
     @Published var averageRatingViewModel: RatingViewModel?
+    @Published var reviewCellModels: [MovieDetailReviewCellModel]?
     
     // MARK: Properties
     let repository = Repository()
@@ -66,6 +67,7 @@ class MovieDetailViewModel {
                     averageRating = 0
                 }
                 self.averageRatingViewModel = RatingViewModel(rating: averageRating)
+                self.reviewCellModels = self.reviews.map { MovieDetailReviewCellModel(review: $0) }
             }).store(in: &subscriptions)
         
         share
