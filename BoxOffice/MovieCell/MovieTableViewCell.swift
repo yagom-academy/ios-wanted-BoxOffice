@@ -17,7 +17,7 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var newRankingLabel: UILabel!
     
     func movieModel(_ model: MovieModel) {
-        rankingLabel.text = "영화순위: \(model.rank)"
+        rankingLabel.text = "오늘 순위: \(model.rank)"
         openingDateLabel.text = "개봉 날짜: \(model.openDt)"
         newRankingLabel.text = model.rankOldAndNew
         if newRankingLabel.text == "OLD"{
@@ -30,8 +30,8 @@ class MovieTableViewCell: UITableViewCell {
         movieNameLabel.text = "영화명: \(model.movieNm)"
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        guard let 관객수 = numberFormatter.string(from: NSNumber(value: Int(model.audiCnt) ?? 0)) else {return}
-        audienceLabel.text = "오늘의 관객수: \(관객수)명"
+        guard let audiCnt = numberFormatter.string(from: NSNumber(value: Int(model.audiCnt) ?? 0)) else {return}
+        audienceLabel.text = "오늘의 관객수: \(audiCnt)명"
         if model.rankInten > "0" {
             increaseRanking.textColor = .red
             increaseRanking.text = "전날 대비 순위: \(model.rankInten)"

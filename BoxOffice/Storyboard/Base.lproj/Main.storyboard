@@ -190,7 +190,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="Bkb-Fa-EwE">
                                                     <rect key="frame" x="20" y="50.333333333333329" width="350" height="210.66666666666669"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="영화명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bww-U4-fwy">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="영화명" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bww-U4-fwy">
                                                             <rect key="frame" x="0.0" y="0.0" width="65" height="86.666666666666671"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                                             <nil key="textColor"/>
@@ -228,12 +228,12 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="개봉일" destination="dd6-ut-bqJ" id="dYr-cy-UTk"/>
-                                            <outlet property="관객수" destination="UIc-WB-JCV" id="q9m-Rm-EkD"/>
-                                            <outlet property="순위" destination="yRP-Bb-Ps3" id="CU9-ph-SJl"/>
-                                            <outlet property="신규진입" destination="8Da-Uu-mq1" id="cd5-lQ-1pH"/>
-                                            <outlet property="영화명" destination="bww-U4-fwy" id="0M8-la-DnE"/>
-                                            <outlet property="전일대비순위" destination="8df-PD-b5V" id="w8W-VJ-gOI"/>
+                                            <outlet property="audienceLabel" destination="UIc-WB-JCV" id="q9m-Rm-EkD"/>
+                                            <outlet property="increaseRanking" destination="8df-PD-b5V" id="w8W-VJ-gOI"/>
+                                            <outlet property="movieNameLabel" destination="bww-U4-fwy" id="0M8-la-DnE"/>
+                                            <outlet property="newRankingLabel" destination="8Da-Uu-mq1" id="MxZ-Sc-2e4"/>
+                                            <outlet property="openingDateLabel" destination="dd6-ut-bqJ" id="dYr-cy-UTk"/>
+                                            <outlet property="rankingLabel" destination="yRP-Bb-Ps3" id="CU9-ph-SJl"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -414,6 +414,7 @@
                                             <constraint firstItem="VQX-cv-0xb" firstAttribute="top" secondItem="ZJ6-AM-x5K" secondAttribute="bottom" constant="30" id="evS-IP-3Po"/>
                                             <constraint firstItem="dbD-Lk-ePJ" firstAttribute="top" secondItem="itL-6I-1C2" secondAttribute="bottom" constant="20" id="f11-kB-Shg"/>
                                             <constraint firstAttribute="trailing" secondItem="Zfs-DW-tfZ" secondAttribute="trailing" constant="30" id="fEN-Ia-U9G"/>
+                                            <constraint firstItem="vKt-rI-zFf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="POA-fa-FlE" secondAttribute="trailing" constant="10" id="fZt-lf-VG6"/>
                                             <constraint firstItem="W3X-h9-xAH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="a2J-Fn-JyE" secondAttribute="trailing" constant="30" id="gQu-oO-72p"/>
                                             <constraint firstItem="vKt-rI-zFf" firstAttribute="centerY" secondItem="POA-fa-FlE" secondAttribute="centerY" id="gWt-zC-nuN"/>
                                             <constraint firstAttribute="height" constant="700" id="hwK-0Y-Vta"/>

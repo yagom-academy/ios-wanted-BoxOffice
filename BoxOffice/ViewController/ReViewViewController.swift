@@ -18,8 +18,8 @@ class ReViewViewController: UIViewController, UITextFieldDelegate {
     let datasource = [ReviewModel]()
     lazy var dataArry: [ReviewModel] = [
         .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱1", review: "추천하는영화입니다."),
-        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱1", review: "이영화는 너무 졸려요."),
-        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱1", review: "영화 너무 재미있습니다.."),]
+        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱2", review: "이영화는 너무 졸려요."),
+        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱3", review: "영화 너무 재미있습니다.."),]
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
