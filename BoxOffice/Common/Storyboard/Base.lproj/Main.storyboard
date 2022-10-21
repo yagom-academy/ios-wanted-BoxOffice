@@ -62,7 +62,7 @@
                                 </date>
                                 <locale key="locale" localeIdentifier="ko_KR"/>
                                 <connections>
-                                    <action selector="date:" destination="LAW-m4-Rfo" eventType="editingDidEnd" id="O5V-nY-vhK"/>
+                                    <action selector="didEndEditingDatePicker:" destination="LAW-m4-Rfo" eventType="editingDidEnd" id="OCq-fs-44j"/>
                                 </connections>
                             </datePicker>
                             <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uGZ-GH-34g">

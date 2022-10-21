@@ -32,9 +32,10 @@ class BoxOfficeCell: UICollectionViewCell {
     
     func set(data: BoxOfficeData) {
         rankingLabel.text = data.rank
-        if data.rankOldAndNew == "New" {
+        if data.rankOldAndNew == "NEW" {
             varianceImage.isHidden = true
             varianceLabel.text = data.rankOldAndNew
+            varianceLabel.textColor = .systemYellow
         } else {
             let rankInten = Int(data.rankInten) ?? .zero
             if rankInten < 0 {
