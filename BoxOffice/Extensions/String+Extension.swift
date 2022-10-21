@@ -27,6 +27,20 @@ extension String {
     static func emojiAndTitle(emojiValue: emoji) -> Self {
         return emojiValue.rawValue
     }
+    
+    func koficDateToYear() -> String? {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko")
+        formatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+        formatter.dateFormat = "yyyyMMdd"
+        guard let date = formatter.date(from: self) else { return nil }
+        
+        let yearFormatter = DateFormatter()
+        yearFormatter.locale = Locale(identifier: "ko")
+        yearFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+        yearFormatter.dateFormat = "yyyy"
+        return yearFormatter.string(from: date)
+    }
 }
 
 

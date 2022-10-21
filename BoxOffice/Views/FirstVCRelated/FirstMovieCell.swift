@@ -21,7 +21,7 @@ class FirstMovieCell: UITableViewCell {
             cellView.didReceiveViewModel(viewModel)
         }
     }
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initViewHierarchy()
@@ -40,7 +40,7 @@ class FirstMovieCell: UITableViewCell {
     }
     
     func configureCell(viewModel: FirstMovieCellModel) {
-        self.viewModel = viewModel
+        cellView.didReceiveViewModel(viewModel)
     }
 
 }

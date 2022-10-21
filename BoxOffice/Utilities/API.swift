@@ -21,7 +21,7 @@ import Foundation
 // TODO: kofic 박스오피스 기본 api --> movieCd 확인 --> movieCd + key로 영화 상세정보api 호출 --> movieNmEn 찾아서 omdb api로 이미지 가져오기?
 enum API {
     case kofic(koficBoxOffice)
-    case omdb(movieName: String)
+    case omdb(movieName: String, releasedYear: String)
     
     enum koficBoxOffice {
         case daily(date: String)
@@ -43,7 +43,7 @@ enum API {
             var baseURLSet = baseURLSet
             baseURLSet?.queryItems = [appIDSet] + getMethodQuerySet
             return baseURLSet
-        case .omdb(_):
+        case .omdb:
             var baseURLSet = baseURLSet
             baseURLSet?.queryItems = [appIDSet] + getMethodQuerySet
             return baseURLSet
@@ -58,7 +58,7 @@ enum API {
             return HTTPMethod.GET
         case .kofic(.detailMovieInfo(_)):
             return HTTPMethod.GET
-        case .omdb(_):
+        case .omdb:
             return HTTPMethod.GET
         }
     }
@@ -71,7 +71,7 @@ enum API {
             return URLComponents(string: " http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json")
         case .kofic(.detailMovieInfo(_)):
             return URLComponents(string: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json")
-        case .omdb(_):
+        case .omdb:
             return URLComponents(string: "http://www.omdbapi.com/")
         }
     }
@@ -80,7 +80,7 @@ enum API {
         switch self {
         case .kofic(_):
             return URLQueryItem(name: "key", value: "623a638bdd2e3b363693d35d04bd8468")
-        case .omdb(_):
+        case .omdb:
             return URLQueryItem(name: "apikey", value: "d591d06e")
         }
     }
@@ -103,9 +103,10 @@ enum API {
         case .kofic(.detailMovieInfo(let movieCd)):
             let movieCd = [URLQueryItem(name: "movieCd", value: movieCd)]
             return movieCd
-        case .omdb(let movieName):
+        case .omdb(let movieName, let releasedYear):
             let t = [URLQueryItem(name: "t", value: movieName)]
-            return t
+            let y = [URLQueryItem(name: "y", value: releasedYear)]
+            return t + y
         }
     }
     

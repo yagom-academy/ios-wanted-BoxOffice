@@ -8,12 +8,22 @@
 import Foundation
 
 class FirstMovieCellModel {
+    
+    //input
+    var shouldModelRequestImage: () -> () = {  }
+    
+    //output
+    var propergateImageURL: ((String, String) -> ())?
+    
+    //properties
     var rnum, rank, rankInten: String
     var rankOldAndNew: String
     var movieCd, movieNm, openDt, salesAmt: String
     var salesShare, salesInten, salesChange, salesAcc: String
     var audiCnt, audiInten, audiChange, audiAcc: String
     var scrnCnt, showCnt: String
+    
+    var repository: RepositoryProtocol = Repository(httpClient: HTTPClient())
     
     init() {
         self.rnum = "" //순번을 출력
@@ -34,5 +44,39 @@ class FirstMovieCellModel {
         self.audiAcc = "" //누적관객수
         self.scrnCnt = "" //해당일자에 상영한 스크린 수
         self.showCnt = "" //해당일자에 상영된 횟수
+        
+        bind()
     }
+    
+    private func bind() {
+        shouldModelRequestImage = { [weak self] in
+            guard let self = self else { return }
+            
+            Task {
+                guard let imageURLString = await self.requestImage() else { return }
+                print("5 \(imageURLString)")
+                self.propergateImageURL?(imageURLString, self.movieNm)
+            }
+        }
+    }
+    
+    func requestImage() async -> String? {
+        
+        do {
+            let entity: KoficMovieDetailEntity = try await repository.fetch(api: .kofic(.detailMovieInfo(movieCd: movieCd)))
+            print("1")
+            let movieName = entity.movieInfoResult.movieInfo.movieNmEn
+            print("2 \(movieName)")
+            let releasedYear = entity.movieInfoResult.movieInfo.openDt.koficDateToYear() ?? "2022"
+            print("3 \(releasedYear)")
+            let imageEntity: OmdbEntity = try await repository.fetch(api: .omdb(movieName: movieName, releasedYear: releasedYear))
+            print("4 \(imageEntity.poster)")
+            return imageEntity.poster
+        } catch let error {
+            let error = error as? HTTPError
+            print(error)
+            return nil
+        }
+    }
+    
 }
