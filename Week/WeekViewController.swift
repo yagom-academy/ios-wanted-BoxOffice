@@ -18,7 +18,13 @@ class WeekViewController: UIViewController {
         super.viewDidLoad()
         weekloader.alpha = 1.0
         weekTableView.alpha = 0.0
+       
+        weekTableView.backgroundColor = .clear
+        weekTableView.separatorStyle = .none
+        weekTableView.showsVerticalScrollIndicator = false
+        
         weekModelAPI()
+        
         
         UIView.animate(withDuration: 1.0) {
             self.weekTableView

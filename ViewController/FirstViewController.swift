@@ -19,6 +19,9 @@ class FirstViewController: UIViewController {
         loader.alpha = 1.0
         firstTableView.alpha = 0.0
         
+        firstTableView.backgroundColor = .clear
+        firstTableView.separatorStyle = .none
+        firstTableView.showsVerticalScrollIndicator = false
         officeapi()
         
         UIView.animate(withDuration: 1.0) {

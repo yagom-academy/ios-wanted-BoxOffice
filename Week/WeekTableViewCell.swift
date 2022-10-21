@@ -43,6 +43,14 @@ class WeekTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = .clear
+        weekRankLabel.textColor = .white
+        weekMovieTitleLabel.textColor = weekRankLabel.textColor
+        weekAudienceLabel.textColor = weekRankLabel.textColor
+        weekOpeningDateLabel.textColor = weekRankLabel.textColor
+        weekNewrankingLabel.textColor = weekRankLabel.textColor
+        weekComparedToYesterdayLabel.textColor = weekRankLabel.textColor
+//
      
     }
 
