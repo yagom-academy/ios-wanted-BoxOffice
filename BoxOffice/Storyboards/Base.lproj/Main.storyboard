@@ -186,7 +186,9 @@
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gHB-kS-QzI">
                                                                 <rect key="frame" x="0.0" y="42" width="398" height="34"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
+                                                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="new-password">
+                                                                    <passwordRules key="passwordRules" passwordRulesDescriptor="minlength: 6; maxlength: 20; required: lower; required: digit; required: [!#$@]; allowed: lower,digit,[!#$@]"/>
+                                                                </textInputTraits>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="O5U-Tq-URT" id="I3S-la-Kcl"/>
                                                                 </connections>

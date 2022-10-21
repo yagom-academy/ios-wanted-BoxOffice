@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 import OSLog
 
 final class AddMovieReviewViewController: UIViewController {
@@ -28,13 +29,28 @@ final class AddMovieReviewViewController: UIViewController {
 
     var review: MovieReview?
 
+    @Published private var nickname: String = ""
+    @Published private var password: String = ""
+
+    private var isValid: AnyPublisher<Bool, Never> {
+        return Publishers.CombineLatest($nickname, $password)
+            .map { nickname, password in
+                let isValidNickname = !nickname.isEmpty
+                let passwordRegex = "^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[a-z0-9!@#$]{6,20}"
+                let isValidPassword = NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
+                return isValidNickname && isValidPassword
+            }
+            .eraseToAnyPublisher()
+    }
+
+    private var cancellables = Set<AnyCancellable>()
+
     // MARK: View Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         subscribe()
-        updateSaveButtonState()
     }
 
     deinit {
@@ -42,6 +58,11 @@ final class AddMovieReviewViewController: UIViewController {
     }
 
     private func subscribe() {
+        isValid
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.isEnabled, on: saveButton)
+            .store(in: &cancellables)
+
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow(notification:)),
@@ -119,24 +140,37 @@ final class AddMovieReviewViewController: UIViewController {
 
 extension AddMovieReviewViewController: UITextFieldDelegate {
 
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let text = textField.text ?? ""
+        let replacementText = (text as NSString).replacingCharacters(in: range, with: string)
+
+        if textField == nicknameTextField { nickname = replacementText }
+        if textField == passwordTextField { password = replacementText }
+
+        return true
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+
         if textField == nicknameTextField {
             passwordTextField.becomeFirstResponder()
         } else if textField == passwordTextField {
             contentTextView.becomeFirstResponder()
         }
+
         return true
     }
 
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        updateSaveButtonState()
-    }
-
-    private func updateSaveButtonState() {
-        let nickname = nicknameTextField.text ?? ""
-        let password = passwordTextField.text ?? ""
-        saveButton.isEnabled = !nickname.isEmpty && !password.isEmpty
-    }
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        updateSaveButtonState()
+//    }
+//
+//    private func updateSaveButtonState() {
+//        let nickname = nicknameTextField.text ?? ""
+//        let password = passwordTextField.text ?? ""
+//        saveButton.isEnabled = !nickname.isEmpty && !password.isEmpty
+//    }
 
 }
 
