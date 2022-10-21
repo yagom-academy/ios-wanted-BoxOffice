@@ -10,15 +10,15 @@ import UIKit
 import Combine
 
 class MovieDetailViewModel {
-    // MARK: Input
+    // MARK: Subject
+    let share = PassthroughSubject<Void, Never>()
+    let viewAction = PassthroughSubject<ViewAction, Never>()
     
     // MARK: Output
     @Published var movie: Movie
     @Published var posterModel: MoviePosterViewModel?
     @Published var directorModel: TriSectoredStackViewModel?
     @Published var actorModel: TriSectoredStackViewModel?
-    
-    let viewAction = PassthroughSubject<ViewAction, Never>()
     
     // MARK: Properties
     var subscriptions = [AnyCancellable]()
@@ -42,10 +42,17 @@ class MovieDetailViewModel {
                     self.actorModel = TriSectoredStackViewModel(list: actors)
                 }
             }).store(in: &subscriptions)
+        
+        share
+            .compactMap { [weak self] _ in
+                guard let self else { return nil }
+                return .share(self.movie.prettify())
+            }.subscribe(viewAction)
+            .store(in: &subscriptions)
     }
     
     enum ViewAction {
         case dismiss
-        case share
+        case share(String)
     }
 }

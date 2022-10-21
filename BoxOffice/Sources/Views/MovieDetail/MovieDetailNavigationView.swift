@@ -122,8 +122,7 @@ class MovieDetailNavigationView: UIView {
             .store(in: &subscriptions)
         
         shareButton.controlEvent(.touchUpInside)
-            .map { ViewModel.ViewAction.share }
-            .subscribe(viewModel.viewAction)
+            .subscribe(viewModel.share)
             .store(in: &subscriptions)
         
         // State

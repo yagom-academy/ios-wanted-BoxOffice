@@ -176,8 +176,9 @@ class MovieDetailViewController: UIViewController {
                 switch action {
                 case .dismiss:
                     self.navigationController?.popViewController(animated: true)
-                case .share:
-                    break
+                case .share(let item):
+                    let vc = UIActivityViewController(activityItems: [item], applicationActivities: nil)
+                    self.present(vc, animated: true)
                 }
             }).store(in: &subscriptions)
         
