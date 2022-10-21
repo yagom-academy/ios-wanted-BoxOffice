@@ -13,13 +13,21 @@ struct DailyBoxOfficeResult: Codable {
   let boxOfficeResult: DailyResult
 }
 
-struct DailyResult: Codable {
-  let boxofficeType: String
-  let showRange: String
-  let dailyBoxOfficeList: [DailyListObject]
+struct WeeklyBoxOfficeResult: Codable {
+  let boxOfficeResult: WeeklyResult
 }
 
-struct DailyListObject: Codable {
+struct DailyResult: Codable {
+  let showRange: String
+  let dailyBoxOfficeList: [RankListObject]
+}
+
+struct WeeklyResult: Codable {
+  let showRange: String
+  let weeklyBoxOfficeList: [RankListObject]
+}
+
+struct RankListObject: Codable {
   let rank: String
   let rankInten: String
   let rankOldAndNew: String

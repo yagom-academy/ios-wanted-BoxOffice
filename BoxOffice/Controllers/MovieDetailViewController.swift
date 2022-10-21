@@ -11,7 +11,7 @@ class MovieDetailViewController: UIViewController {
 
   let tableView = UITableView(frame: .zero, style: .plain)
 
-  var rankInfo: DailyListObject?
+  var rankInfo: RankListObject?
   var movieInfo: MovieInfo?
 
   override func viewDidLoad() {
