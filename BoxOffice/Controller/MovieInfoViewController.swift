@@ -44,10 +44,12 @@ class MovieInfoViewController: UIViewController {
     }
     
     func fetchData() {
+        LoadingIndicator.showLoading()
         movieInfoViewModel.clearCellViewModel()
         movieInfoViewModel.fetchAPIData {
             self.mainView.movieInfoTableView.reloadData()
             self.setupNavigation()
+            LoadingIndicator.hideLoading()
             
         }
         movieInfoViewModel.requestFireBase {
@@ -59,14 +61,17 @@ class MovieInfoViewController: UIViewController {
         
         let alert = InputAlert(title: "비밀번호 입력", message: "암호를 입력해주세요", preferredStyle: .alert)
         alert.buttonAction = { password in
+            LoadingIndicator.showLoading()
             self.movieInfoViewModel.deleteReview(password: password,index: indexPath.row) { result in
                 
                 if result {
+                    LoadingIndicator.hideLoading()
                     let alert = UIAlertController(title: "삭제 완료", message: "리뷰가 삭제 되었습니다", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .cancel))
                     self.present(alert, animated: true)
                     self.fetchData()
                 } else {
+                    LoadingIndicator.hideLoading()
                     let alert = UIAlertController(title: "삭제 실패", message: "암호가 맞지 않습니다", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .cancel))
                     self.present(alert, animated: true)

@@ -9,6 +9,8 @@ import UIKit
 
 class ReviewView: UIView {
     
+    let textViewPlaceHolder = "리뷰를 입력해주세요"
+    
     let starScore: StarScore = {
         let view = StarScore()
         view.scoreTitleLabel.text = "별점"
@@ -69,8 +71,11 @@ class ReviewView: UIView {
     
     var asterisks: [UILabel] = []
     
-    let reviewTextView: UITextView = {
+    lazy var reviewTextView: UITextView = {
         let view = UITextView()
+        view.font = .systemFont(ofSize: 18)
+        view.text = textViewPlaceHolder
+        view.textColor = .lightGray
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor(red: 0.51, green: 0.51, blue: 0.51, alpha: 1.00).cgColor
         view.translatesAutoresizingMaskIntoConstraints = false

@@ -50,7 +50,9 @@ class ReviewViewController: UIViewController {
     }
     
     @objc func writeReview() {
+        LoadingIndicator.showLoading()
         let upload = reviewViewModel.sendData {
+            LoadingIndicator.hideLoading()
             let alert = UIAlertController(title: "업로드 완료", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "확인", style: .default, handler: {_ in
                 self.reviewWrite()
@@ -60,10 +62,12 @@ class ReviewViewController: UIViewController {
         }
         
         if upload == 1 {
+            LoadingIndicator.hideLoading()
             let alert = UIAlertController(title: "업로드 실패", message: "별명,암호,리뷰는 필수 내용 입니다", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "확인", style: .cancel))
             present(alert, animated: true)
-        } else if upload == 2{
+        } else if upload == 2 {
+            LoadingIndicator.hideLoading()
             let alert = UIAlertController(title: "업로드 실패", message: "암호는 6~20자 소문자, 숫자, 특수문자(!,@,#,$) 각 1개 이상 포함 되어야 합니다", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "확인", style: .cancel))
             present(alert, animated: true)
@@ -88,6 +92,20 @@ extension ReviewViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         reviewViewModel.text = textView.text ?? ""
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == mainView.textViewPlaceHolder {
+            textView.text = nil
+            textView.textColor = .black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = mainView.textViewPlaceHolder
+            textView.textColor = .lightGray
+        }
     }
 }
 
