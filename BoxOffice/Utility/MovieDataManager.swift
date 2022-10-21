@@ -52,11 +52,11 @@ enum MovieDataManager {
     static func searchItems(_ items: [DetailItem], for section: DetailSection) -> [DetailItem] {
         switch section {
         case .main:
-            return items.filter { $0.type == "main" }
+            return items.filter { $0.type == "mainInfo" }
         case .plot:
-            return items.filter { $0.type == "plot" }
+            return items.filter { $0.type == "plotInfo" }
         case .detail:
-            return items.filter { $0.type == "detail" }
+            return items.filter { $0.type == "detailInfo" }
         }
     }
     

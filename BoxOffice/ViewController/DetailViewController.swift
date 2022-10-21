@@ -26,17 +26,17 @@ final class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(#function)
+        print(detailItems)
         configureHierarchy()
         configureDataSource()
-        share()
+        configureSnapshot()
     }
     
     private func configureHierarchy() {
         view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
         view.addSubview(floatingView)
-        view.bringSubviewToFront(floatingView)
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -140,16 +140,19 @@ extension DetailViewController {
             guard kind == TextHeaderView.elementKind else { return nil }
             return self.collectionView.dequeueConfiguredReusableSupplementary(using: textHeaderRegistration, for: index)
         }
-
-        /// - Tag: Snapshot
-        let sections = DetailSection.allCases
+    }
+    
+    /// - Tag: Snapshot
+    private func configureSnapshot() {
+        let sections: [DetailSection] = DetailSection.allCases
         var snapshot = NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
         snapshot.appendSections(sections)
         dataSource.apply(snapshot)
 
         DetailSection.allCases.forEach { section in
             var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<DetailItem>()
-            sectionSnapshot.append(MovieDataManager.searchItems(detailItems, for: section))
+            let sectionItems = MovieDataManager.searchItems(detailItems, for: section)
+            sectionSnapshot.append(sectionItems)
             dataSource.apply(sectionSnapshot, to: section)
         }
     }
@@ -203,3 +206,4 @@ extension DetailViewController {
         present(activityController, animated: true)
     }
 }
+

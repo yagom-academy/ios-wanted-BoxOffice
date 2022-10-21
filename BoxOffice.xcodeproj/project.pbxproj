@@ -18,7 +18,7 @@
 		FD44782529024658002D02CA /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44782429024658002D02CA /* UIImageView+.swift */; };
 		FD447827290247B8002D02CA /* DetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD447826290247B8002D02CA /* DetailItem.swift */; };
 		FD447829290248EE002D02CA /* KobisResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD447828290248EE002D02CA /* KobisResponse.swift */; };
-		FD44782B2902490D002D02CA /* TMDBResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44782A2902490D002D02CA /* TMDBResponse.swift */; };
+		FD44782B2902490D002D02CA /* TmdbResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44782A2902490D002D02CA /* TmdbResponse.swift */; };
 		FD44785A2902DB64002D02CA /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4478592902DB64002D02CA /* URLManager.swift */; };
 		FD44785C2902DB96002D02CA /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44785B2902DB96002D02CA /* Error.swift */; };
 		FD44785E2902DC41002D02CA /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44785D2902DC41002D02CA /* Date+.swift */; };
@@ -61,7 +61,7 @@
 		FD44782429024658002D02CA /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		FD447826290247B8002D02CA /* DetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItem.swift; sourceTree = "<group>"; };
 		FD447828290248EE002D02CA /* KobisResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisResponse.swift; sourceTree = "<group>"; };
-		FD44782A2902490D002D02CA /* TMDBResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBResponse.swift; sourceTree = "<group>"; };
+		FD44782A2902490D002D02CA /* TmdbResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmdbResponse.swift; sourceTree = "<group>"; };
 		FD4478592902DB64002D02CA /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
 		FD44785B2902DB96002D02CA /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		FD44785D2902DC41002D02CA /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -175,7 +175,7 @@
 				FDAE1FB728FEB36D00F3DE22 /* MainItem.swift */,
 				FD447826290247B8002D02CA /* DetailItem.swift */,
 				FD447828290248EE002D02CA /* KobisResponse.swift */,
-				FD44782A2902490D002D02CA /* TMDBResponse.swift */,
+				FD44782A2902490D002D02CA /* TmdbResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -321,7 +321,7 @@
 				FDAE1FBF28FEEA9D00F3DE22 /* RankingCell.swift in Sources */,
 				FDFCF1F7290034AB000BA6EA /* DetailInformationCell.swift in Sources */,
 				FD4478642902DDD0002D02CA /* ParseManager.swift in Sources */,
-				FD44782B2902490D002D02CA /* TMDBResponse.swift in Sources */,
+				FD44782B2902490D002D02CA /* TmdbResponse.swift in Sources */,
 				FD4478622902DCE0002D02CA /* String+.swift in Sources */,
 				FD44785C2902DB96002D02CA /* Error.swift in Sources */,
 				FD447827290247B8002D02CA /* DetailItem.swift in Sources */,

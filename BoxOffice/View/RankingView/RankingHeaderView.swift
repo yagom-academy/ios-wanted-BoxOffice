@@ -16,11 +16,7 @@ final class RankingHeaderView: UICollectionReusableView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        calendarButton.setTitle("", for: .normal)
-    }
-    
-    func configure(with date: String) {
-        selectedDate.text = date
+        selectedDate.text = Date().yesterday.converToStringTypeForUI
     }
     
     static func nib() -> UINib {
@@ -29,6 +25,6 @@ final class RankingHeaderView: UICollectionReusableView {
     
     @IBAction func didTapCalendarButton(_ sender: UIButton) {
         print("Calendar button tapped!")
+        // TODO: - 선택된것처럼 보여지지 않음, 날짜전달
     }
-    
 }

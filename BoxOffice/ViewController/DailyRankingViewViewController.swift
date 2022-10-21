@@ -41,13 +41,15 @@ final class DailyRankingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         Task(priority: .userInitiated) {
             let movieItems = try await APIManager.fetchMainItems(date: Date().yesterday)
             items.append(contentsOf: movieItems)
             sortItems()
-            configureHierarchy()
-            configureDataSource()
+            configureSnapshot()
         }
+        configureHierarchy()
+        configureDataSource()
     }
     
     private func sortItems() {
@@ -128,7 +130,7 @@ extension DailyRankingViewController {
         /// - Tag: Registration
         let rankingHeaderRegistration = UICollectionView.SupplementaryRegistration<RankingHeaderView>(supplementaryNib: RankingHeaderView.nib(), elementKind: RankingHeaderView.elementKind) { rankingHeaderView, _, indexPath in
         guard MainSection(rawValue: indexPath.section) == .ranking else { return }
-        // TODO: -
+        // TODO: - calendar에서 선택한 날짜 전달
         }
         
         let onboardingCellRegistration = UICollectionView.CellRegistration<OnboardingCell, Banner>(cellNib: OnboardingCell.nib()) { cell, _, item in
@@ -154,8 +156,10 @@ extension DailyRankingViewController {
                   kind == RankingHeaderView.elementKind else { return nil }
             return self.collectionView.dequeueConfiguredReusableSupplementary(using: rankingHeaderRegistration, for: index)
         }
-        
-        /// - Tag: Snapshot
+    }
+    
+    /// - Tag: Snapshot
+    private func configureSnapshot() {
         let sections: [MainSection] = MainSection.allCases
         var snapshot = NSDiffableDataSourceSnapshot<MainSection, MainItem>()
         snapshot.appendSections(sections)
@@ -172,6 +176,13 @@ extension DailyRankingViewController {
 
 /// - Tag: UICollectionViewDelegate
 extension DailyRankingViewController: UICollectionViewDelegate {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToDetailViewController",
+           let items = sender as? [DetailItem],
+           let detailViewController = segue.destination as? DetailViewController {
+            detailViewController.detailItems = items
+        }
+    }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath),
@@ -180,11 +191,9 @@ extension DailyRankingViewController: UICollectionViewDelegate {
             collectionView.deselectItem(at: indexPath, animated: true)
             return
         }
-        let detailViewController = DetailViewController()
         let detailItems = MovieDataManager.convertDetailItemType(from: movie)
-        detailViewController.detailItems = detailItems
         configureBackBarButton(with: movie.name)
-        navigationController?.pushViewController(detailViewController, animated: true)
+        performSegue(withIdentifier: "goToDetailViewController", sender: detailItems)
     }
     
     private func configureBackBarButton(with title: String) {

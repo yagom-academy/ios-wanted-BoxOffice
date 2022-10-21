@@ -23,8 +23,12 @@ final class PlotCell: UICollectionViewCell {
         openAndCloseLabel.text = "...더보기"
     }
     
-    func configure(with mockData: PlotInfo) {
-        plotLabel.text = mockData.content
+    func configure(with item: PlotInfo) {
+        if item.content == nil {
+            plotLabel.text = "정보없음"
+        } else {
+            plotLabel.text = item.content
+        }
     }
     
     func appearanceLabel(isOpend: Bool) {

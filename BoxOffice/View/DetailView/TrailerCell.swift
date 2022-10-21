@@ -42,24 +42,28 @@ final class TrailerCell: UICollectionViewCell {
         slashImageView.isHidden = true
     }
     
-    func configure(with mockData: MainInfo) {
-        if mockData.posterPath == nil {
+    func configure(with item: MainInfo) {
+        if let posterPath = item.posterPath,
+           let backdropPath = item.backdropPath {
+            Task(priority: .userInitiated, operation: {
+                async let poster = try ImageManager.fetchImage(posterPath)
+                async let backdrop = try ImageManager.fetchImage(backdropPath)
+                posterImageView.image = try await poster
+                backdropImageView.image = try await backdrop
+            })
+        } else {
             posterImageView.image = UIImage(named: "noImage")
             slashImageView.isHidden = false
-        }
-        if mockData.backdropPath == nil {
             backdropImageView.image = UIImage(named: "noTrailer")
             playImageView.image = UIImage(systemName: "play.slash")
         }
-        backdropImageView.image = UIImage(named: "noTrailer")
-        posterImageView.image = UIImage(named: "noImage")
-        rankingLabel.text = "\(mockData.rank)"
-        ratioComparedToYesterdayLabel.text = "\(mockData.ratioComparedToYesterday)"
+        rankingLabel.text = "\(item.rank)"
+        ratioComparedToYesterdayLabel.text = "\(item.ratioComparedToYesterday)"
         isIncreasedLabel.text = "up↑↑"
-        koreanNameLabel.text = mockData.name
-        englishNameLabel.text = mockData.nameInEnglish
-        releasedDateLabel.text = mockData.releasedDate.converToStringTypeForUI
-        totalAttendanceLabel.text = "누적관객수 83,017명"
+        koreanNameLabel.text = item.name
+        englishNameLabel.text = item.nameInEnglish
+        releasedDateLabel.text = item.releasedDate.converToStringTypeForUI
+        totalAttendanceLabel.text = "누적관객수 \(item.totalAudience.convertDecimalStringType())명"
     }
     
     static func nib() -> UINib {
@@ -67,10 +71,8 @@ final class TrailerCell: UICollectionViewCell {
     }
     
     private func appearanceOfPosterImageView() {
-        posterImageView.layer.cornerRadius = 10
-        posterImageView.clipsToBounds = true
-        gradientBlackImageView.layer.cornerRadius = 10
-        gradientBlackImageView.clipsToBounds = true
+        posterImageView.isCorner(radius: 10)
+        gradientBlackImageView.isCorner(radius: 10)
         slashImageView.isHidden = true
     }
 }

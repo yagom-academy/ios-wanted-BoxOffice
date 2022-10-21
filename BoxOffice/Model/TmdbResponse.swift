@@ -1,5 +1,5 @@
 //
-//  TMDBResponse.swift
+//  Tmdbesponse.swift
 //  BoxOffice
 //
 //  Created by sole on 2022/10/21.
