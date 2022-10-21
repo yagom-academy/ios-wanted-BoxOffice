@@ -56,6 +56,12 @@ class CreateReviewViewController: UIViewController {
         return view
     }()
     
+    lazy var paragraphView: CreateReviewParagraphView = {
+        let view = CreateReviewParagraphView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var dividerViews: [UIView] = {
         var views = [UIView(), UIView(), UIView(), UIView(), UIView()]
         views.forEach {
@@ -112,6 +118,7 @@ class CreateReviewViewController: UIViewController {
         contentView.addSubview(ratingView)
         contentView.addSubview(nicknameView)
         contentView.addSubview(passwordView)
+        contentView.addSubview(paragraphView)
         dividerViews.forEach {
             contentView.addSubview($0)
         }
@@ -197,6 +204,19 @@ class CreateReviewViewController: UIViewController {
             dividerViews[3].trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             dividerViews[3].heightAnchor.constraint(equalToConstant: 1),
         ]
+        
+        constraints += [
+            paragraphView.topAnchor.constraint(equalTo: dividerViews[3].bottomAnchor),
+            paragraphView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            paragraphView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+        ]
+        
+        constraints += [
+            dividerViews[4].topAnchor.constraint(equalTo: paragraphView.bottomAnchor),
+            dividerViews[4].leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            dividerViews[4].trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            dividerViews[4].heightAnchor.constraint(equalToConstant: 1),
+        ]
     }
     
     
@@ -205,6 +225,8 @@ class CreateReviewViewController: UIViewController {
         navigationView.viewModel = viewModel
         infoView.viewModel = viewModel
         nicknameView.viewModel = viewModel
+        passwordView.viewModel = viewModel
+        paragraphView.viewModel = viewModel
     }
     
     // MARK: Util
