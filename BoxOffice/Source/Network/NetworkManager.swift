@@ -12,6 +12,7 @@ final class NetworkManager {
     var dailyBoxOfficeURL = URLComponents(string: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?")
     var detailMovieInfoURL = URLComponents(string: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?")
     var posterURL = URLComponents(string: "http://www.omdbapi.com/?")
+    var weekendBoxOfficeURL = URLComponents(string: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?")
         
     func getDailyMovieRank(date: String) async throws -> [SimpleMovieInfoEntity] {
         let queryItems = [URLQueryItem(name: "key", value: UserDefaults.standard.string(forKey: UserDefaultKey.BOX_OFFICE_KEY)),
@@ -155,5 +156,45 @@ final class NetworkManager {
                                                     watchGrade: result.movieInfoResult.movieInfo.audits.first?.watchGradeNm ?? "전체 이용가")
         
         return detailMovieInfo
+    }
+    
+    func getWeekendMovieRank(date: String) async throws -> [SimpleMovieInfoEntity] {
+        let queryItems = [URLQueryItem(name: "key", value: UserDefaults.standard.string(forKey: UserDefaultKey.BOX_OFFICE_KEY)),
+                          URLQueryItem(name: "targetDt", value: date),
+                          URLQueryItem(name: "wideAreaCd", value: "0105001")]
+        
+        weekendBoxOfficeURL?.queryItems = queryItems
+        
+        guard let weekendURL = weekendBoxOfficeURL?.url else { throw NetworkError.pathErr }
+        
+        let (data, response) = try await URLSession.shared.data(from: weekendURL)
+        
+        guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+            throw NetworkError.invalidErr
+        }
+        let successRange = 200..<300
+        
+        guard successRange.contains(statusCode) else {
+            throw NetworkError.serverErr
+        }
+        
+        let decoder = JSONDecoder()
+        let result = try decoder.decode(WeekendBoxOfficeDTO.self, from: data)
+        var movieList:[SimpleMovieInfoEntity] = []
+        
+        for weeklyBoxOffice in result.boxOfficeResult.weeklyBoxOfficeList {
+            let englishName = try await self.getEnglishName(movieCd: weeklyBoxOffice.movieCD)
+            
+            let simpleMovieInfo = SimpleMovieInfoEntity(movieId: weeklyBoxOffice.movieCD,
+                                                  englishName: englishName,
+                                                  rank: Int(weeklyBoxOffice.rank) ?? 0,
+                                                  name: weeklyBoxOffice.movieNm,
+                                                  inset: weeklyBoxOffice.rankInten,
+                                                  audience: weeklyBoxOffice.audiAcc,
+                                                  release: weeklyBoxOffice.openDt,
+                                                  oldAndNew: weeklyBoxOffice.rankOldAndNew)
+            movieList.append(simpleMovieInfo)
+        }
+        return movieList
     }
 }

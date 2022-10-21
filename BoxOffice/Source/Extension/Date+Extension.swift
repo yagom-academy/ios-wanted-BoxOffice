@@ -14,5 +14,12 @@ extension Date {
         dateFormatter.timeZone = TimeZone(abbreviation: "KST")
         return dateFormatter.string(from: self)
     }
+    
+    func toDay() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E"
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+        return dateFormatter.string(from: self)
+    }
 }
 

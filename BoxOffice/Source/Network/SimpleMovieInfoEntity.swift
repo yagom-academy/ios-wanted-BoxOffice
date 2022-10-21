@@ -8,6 +8,7 @@
 import UIKit
 
 struct SimpleMovieInfoEntity: Hashable {
+    var identifier = UUID()
     var movieId: String
     var englishName: String
     var rank: Int
@@ -18,6 +19,6 @@ struct SimpleMovieInfoEntity: Hashable {
     var oldAndNew: RankOldAndNew
     
     static func == (lhs: SimpleMovieInfoEntity, rhs: SimpleMovieInfoEntity) -> Bool {
-        lhs.movieId == rhs.movieId
+        lhs.identifier == rhs.identifier 
     }
 }

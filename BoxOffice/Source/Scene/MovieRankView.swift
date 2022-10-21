@@ -9,17 +9,9 @@ import UIKit
 
 class MovieRankView: UIView {
     
-    private let boxOfficeLabel: UILabel = {
-        let label = UILabel()
-        label.text = "일별 박스오피스 순위"
-        label.textColor = .label
-        label.textAlignment = .left
-        label.font = .systemFont(ofSize: 23, weight: .bold)
-        return label
-    }()
-    
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
     
@@ -40,23 +32,17 @@ class MovieRankView: UIView {
     }
     
     private func setViewHierarchy() {
-        addSubviews(boxOfficeLabel, collectionView)
+        addSubview(collectionView)
     }
 
     private func setConstraints() {
         let safeArea = self.safeAreaLayoutGuide
         
-        [boxOfficeLabel, collectionView].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-        
         NSLayoutConstraint.activate([
-            boxOfficeLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
-            boxOfficeLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
-            collectionView.topAnchor.constraint(equalTo: boxOfficeLabel.bottomAnchor, constant: 10),
+            collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
             collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: 400)
+            collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
     

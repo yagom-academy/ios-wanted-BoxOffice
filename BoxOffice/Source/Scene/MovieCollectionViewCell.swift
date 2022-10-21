@@ -102,6 +102,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        posterImageView.image = nil
         rankingLabel.text = ""
         rankingChangeButton.titleLabel?.text = ""
         newButton.isHidden = true

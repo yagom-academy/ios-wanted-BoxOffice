@@ -7,7 +7,7 @@
 
 import UIKit
 
-typealias SectionAndTitle = (title: String, section: SecondSection)
+typealias SecondSectionAndTitle = (title: String, section: SecondSection)
 
 class DetailInfoViewController: UIViewController {
     
@@ -16,7 +16,7 @@ class DetailInfoViewController: UIViewController {
     var simpleMovieInfo: SimpleMovieInfoEntity?
     var detailMovieInfo: DetailMovieInfoEntity?
     var standardInfoList: [StandardMovieInfoEntity] = []
-    var sectionList: [SectionAndTitle] = [("", .main), ("기본 정보", .standard), ("출연", .actors)]
+    var sectionList: [SecondSectionAndTitle] = [("", .main), ("기본 정보", .standard), ("출연", .actors)]
     
     override func loadView() {
         view = detailInfoView
