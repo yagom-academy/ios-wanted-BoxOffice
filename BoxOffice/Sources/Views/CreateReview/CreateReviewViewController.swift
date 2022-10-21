@@ -38,6 +38,12 @@ class CreateReviewViewController: UIViewController {
         return view
     }()
     
+    lazy var ratingView: CreateReviewRatingView = {
+        let view = CreateReviewRatingView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var dividerViews: [UIView] = {
         var views = [UIView(), UIView(), UIView(), UIView(), UIView()]
         views.forEach {
@@ -91,6 +97,7 @@ class CreateReviewViewController: UIViewController {
         self.view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(infoView)
+        contentView.addSubview(ratingView)
         dividerViews.forEach {
             contentView.addSubview($0)
         }
@@ -136,6 +143,19 @@ class CreateReviewViewController: UIViewController {
             dividerViews[0].leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             dividerViews[0].trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             dividerViews[0].heightAnchor.constraint(equalToConstant: 1),
+        ]
+        
+        constraints += [
+            ratingView.topAnchor.constraint(equalTo: dividerViews[0].bottomAnchor),
+            ratingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            ratingView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+        ]
+        
+        constraints += [
+            dividerViews[1].topAnchor.constraint(equalTo: ratingView.bottomAnchor),
+            dividerViews[1].leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            dividerViews[1].trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            dividerViews[1].heightAnchor.constraint(equalToConstant: 1),
         ]
     }
     
