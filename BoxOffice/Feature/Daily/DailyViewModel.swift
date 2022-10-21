@@ -10,8 +10,8 @@ import Foundation
 final class DailyViewModel {
     let apiService = ApiService()
     
-    func fetchDailyView() async throws -> DailyDTO {
-        let boxOfficeResultResponse = try await apiService.dailyBoxOfficeAPIService(targetDt: "20120101")
+    func fetchDailyView(_ targetDt: String) async throws -> DailyDTO {
+        let boxOfficeResultResponse = try await apiService.dailyBoxOfficeAPIService(targetDt: targetDt)
         
         var dto = DailyDTO(dataSource: [(section: .dateSelector, items: [.dateSelector])])
         

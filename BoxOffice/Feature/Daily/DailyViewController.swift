@@ -9,6 +9,7 @@ import UIKit
 
 final class DailyViewController: UIViewController {
 
+    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var collectionView: UICollectionView!
     
     private let vm = DailyViewModel()
@@ -23,19 +24,32 @@ final class DailyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
-        Task { [weak self] in
-            guard let self = self else { return }
-            
-            dto = try await self.vm.fetchDailyView()
-            self.collectionView.reloadData()
-        }
+        fetchData()
     }
     
     func setupUI() {
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
+        self.datePicker.date = yesterday
+        self.datePicker.maximumDate = yesterday
+        
         self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "emptyCell")
         
         let listNib = UINib(nibName: BoxOfficeCell.identifier, bundle: Bundle(for: self.classForCoder))
         self.collectionView.register(listNib, forCellWithReuseIdentifier: BoxOfficeCell.identifier)
+    }
+    
+    func fetchData() {
+        Task { [weak self] in
+            guard let self = self else { return }
+            
+            let targetDt = self.datePicker.date.dateString
+            dto = try await self.vm.fetchDailyView(targetDt)
+            self.collectionView.reloadData()
+        }
+    }
+    
+    @IBAction func didEndEditingDatePicker(_ sender: Any) {
+        fetchData()
     }
 }
 
