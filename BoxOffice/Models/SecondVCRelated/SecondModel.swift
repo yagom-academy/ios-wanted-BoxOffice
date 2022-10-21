@@ -39,7 +39,11 @@ class SecondModel: SceneActionReceiver {
     }
     
     private func bind() {
-        
+        privateSecondContentViewModel.propergateDidTapShareButton = { [weak self] info in
+            guard let self = self else { return }
+            let context = ActivityDependency(actionSet: [info])
+            self.routeSubject?(.activityScene(context))
+        }
     }
     
     private func requestAPI() async -> KoficMovieDetailEntity? {

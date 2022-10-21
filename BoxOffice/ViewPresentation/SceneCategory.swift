@@ -13,6 +13,7 @@ indirect enum SceneCategory {
     case close //그냥 닫기
     case closeWithAction(SceneCategory)
     case alert(alertScene)
+    case activityScene(ActivityDependency)
     
     enum mainScene {
         case firstViewController(context: SceneContext<FirstModel>)

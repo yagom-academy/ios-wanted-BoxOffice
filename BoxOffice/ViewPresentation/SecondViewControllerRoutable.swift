@@ -23,6 +23,10 @@ extension SecondViewControllerRoutable where Self: SecondViewController {
             guard let scene = buildScene(scene: Scene) else { return }
             guard let nextVC = scene as? UIViewController else { return }
             present(nextVC, animated: true)
+        case .activityScene:
+            guard let scene = buildScene(scene: Scene) else { return }
+            guard let nextVC = scene as? UIActivityViewController else { return }
+            present(nextVC, animated: true, completion: nil)
         default: break
         }
     }
@@ -44,12 +48,14 @@ protocol SecondViewControllerSceneBuildable: SceneBuildable {
     
 }
 
-extension SecondViewControllerSceneBuildable {
+extension SecondViewControllerSceneBuildable where Self: SecondViewController {
     func buildScene(scene: SceneCategory) -> Scenable? {
         var nextScene: Scenable?
         switch scene {
         case .alert(.networkAlert(.normalErrorAlert(let context))):
             nextScene = buildAlert(context: context)
+        case .activityScene(let context):
+            nextScene = buildActivity(context: context)
         default: break
         }
         
@@ -57,12 +63,20 @@ extension SecondViewControllerSceneBuildable {
     }
 }
 
-extension SecondViewControllerSceneBuildable {
+extension SecondViewControllerSceneBuildable where Self: SecondViewController {
     func buildAlert(context: AlertDependency) -> Scenable {
         let nextScene: Scenable
         
         let alert = AlertFactory(dependency: context).createAlert()
         nextScene = alert
+        return nextScene
+    }
+    
+    func buildActivity(context: ActivityDependency) -> Scenable {
+        let nextScene: Scenable
+        
+        let activityVC = ActivityFactory(dependency: context, superView: self.hostingVC.view).createActivity()
+        nextScene = activityVC
         return nextScene
     }
 }
