@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, FirstViewControllerRoutable {
+class FirstViewController: UIViewController, FirstViewControllerRoutable, BasicNavigationBarStyling {
 
     var model: FirstModel
     
@@ -57,6 +57,8 @@ extension FirstViewController: Presentable {
     func configureView() {
         view.backgroundColor = .white
         navigationItem.title = "목록"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: self, action: #selector(dateAction))
+        navigationItem.rightBarButtonItem?.addStyles(style: dateButtonStyle)
     }
     
     func bind() {
@@ -64,6 +66,10 @@ extension FirstViewController: Presentable {
             guard let self = self else { return }
             self.route(to: sceneCategory)
         }
+    }
+    
+    @objc func dateAction() {
+        
     }
     
     

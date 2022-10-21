@@ -14,13 +14,12 @@ extension FirstViewStyling {
     
     var cellPosterImageViewStyling: (UIImageView) -> () {
         {
-            // TODO: temp 컬러 제거
-            $0.backgroundColor = .red
             $0.layer.cornerRadius = 12
             $0.layer.shadowColor = UIColor(red: 0.271, green: 0.357, blue: 0.388, alpha: 0.2).cgColor
             $0.layer.shadowOpacity = 1
             $0.layer.shadowOffset = CGSize(width: 0, height: 1)
             $0.layer.shadowRadius = 8
+            $0.image = UIImage(systemName: .docImage)
         }
     }
     
