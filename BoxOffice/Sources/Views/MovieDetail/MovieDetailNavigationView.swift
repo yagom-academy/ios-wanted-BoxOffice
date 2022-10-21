@@ -25,6 +25,7 @@ class MovieDetailNavigationView: UIView {
         let label = UILabel()
         label.font = .appleSDGothicNeo(weight: .bold, size: 16)
         label.textColor = UIColor(hex: "#DFDFDF")
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -98,8 +99,9 @@ class MovieDetailNavigationView: UIView {
         ]
         
         constraints += [
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
             titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
         ]
         
         constraints += [

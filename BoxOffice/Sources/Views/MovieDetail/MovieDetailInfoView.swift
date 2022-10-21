@@ -136,7 +136,7 @@ class MovieDetailInfoView: UIView {
         constraints += [
             topBorderView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
             topBorderView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            topBorderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 16),
+            topBorderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             topBorderView.heightAnchor.constraint(equalToConstant: 1),
         ]
         
@@ -149,7 +149,7 @@ class MovieDetailInfoView: UIView {
         constraints += [
             bottomBorderView.topAnchor.constraint(equalTo: verticalStackView.bottomAnchor),
             bottomBorderView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            bottomBorderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 16),
+            bottomBorderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             bottomBorderView.bottomAnchor.constraint(equalTo: bottomAnchor),
             bottomBorderView.heightAnchor.constraint(equalToConstant: 1),
         ]

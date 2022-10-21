@@ -147,7 +147,7 @@ class BoxOfficeListCollectionViewCell: UICollectionViewCell {
             .store(in: &subscriptions)
         
         viewModel.$movie
-            .map { $0.openDate }
+            .map { $0.openDate.toString(.yyyyMMddDot) }
             .map { "\($0) 개봉" }
             .receive(on: DispatchQueue.main)
             .assign(to: \.text, on: openDateLabel)
