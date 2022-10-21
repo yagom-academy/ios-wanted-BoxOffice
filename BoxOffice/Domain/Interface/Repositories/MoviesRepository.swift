@@ -8,17 +8,5 @@
 import Foundation
 
 protocol MoviesRepository {
-    func fetchMoviesList(completion: @escaping ((Result<Movie, Error>) -> Void))
-}
-
-final class DefaultMoviesRepository {
-    
-    init() { }
-    
-}
-
-extension DefaultMoviesRepository: MoviesRepository {
-    func fetchMoviesList(completion: @escaping ((Result<Movie, Error>) -> Void)) {
-        <#code#>
-    }
+    func fetchMoviesList(completion: @escaping ((Result<[Movie], RepositoryError>) -> Void))
 }

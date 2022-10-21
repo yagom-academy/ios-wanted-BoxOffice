@@ -36,8 +36,6 @@ extension DefaultMoviesRepository: MoviesRepository {
         
         let url = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(koficKey)&targetDt=\(date)&wideAreaCd=0105001"
         
-        print(url)
-        
         network.request(request: .get, url: url, body: nil) { result in
             switch result {
             case .success(let data):
