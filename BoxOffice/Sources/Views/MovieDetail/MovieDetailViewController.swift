@@ -43,6 +43,18 @@ class MovieDetailViewController: UIViewController {
         return view
     }()
     
+    lazy var directorView: MovieDetailStaffView = {
+        let view = MovieDetailStaffView(type: .director)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var actorView: MovieDetailStaffView = {
+        let view = MovieDetailStaffView(type: .actor)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // MARK: Associated Types
     typealias ViewModel = MovieDetailViewModel
     
@@ -87,6 +99,8 @@ class MovieDetailViewController: UIViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(posterView)
         contentView.addSubview(detailInfoView)
+        contentView.addSubview(directorView)
+        contentView.addSubview(actorView)
     }
     
     // MARK: Layout Views
@@ -115,7 +129,6 @@ class MovieDetailViewController: UIViewController {
             contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
-            contentView.heightAnchor.constraint(equalToConstant: 2000),
         ]
         
         constraint += [
@@ -131,6 +144,19 @@ class MovieDetailViewController: UIViewController {
             detailInfoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             detailInfoView.heightAnchor.constraint(equalToConstant: 150),
         ]
+        
+        constraint += [
+            directorView.topAnchor.constraint(equalTo: detailInfoView.bottomAnchor, constant: 36),
+            directorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            directorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+        ]
+        
+        constraint += [
+            actorView.topAnchor.constraint(equalTo: directorView.bottomAnchor, constant: 36),
+            actorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            actorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            actorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+        ]
     }
     
     
@@ -145,6 +171,8 @@ class MovieDetailViewController: UIViewController {
         
         navigationView.viewModel = viewModel
         detailInfoView.viewModel = viewModel
+        directorView.viewModel = viewModel
+        actorView.viewModel = viewModel
     }
 }
 

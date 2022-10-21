@@ -15,6 +15,9 @@ class MovieDetailViewModel {
     // MARK: Output
     @Published var movie: Movie
     @Published var posterModel: MoviePosterViewModel?
+    @Published var directorModel: TriSectoredStackViewModel?
+    @Published var actorModel: TriSectoredStackViewModel?
+    
     let viewAction = PassthroughSubject<ViewAction, Never>()
     
     // MARK: Properties
@@ -32,6 +35,12 @@ class MovieDetailViewModel {
             .sink(receiveValue: { [weak self] movie in
                 guard let self else { return }
                 self.posterModel = MoviePosterViewModel(movie: movie)
+                if let directors = movie.detailInfo?.directors {
+                    self.directorModel = TriSectoredStackViewModel(list: directors)
+                }
+                if let actors = movie.detailInfo?.actors {
+                    self.actorModel = TriSectoredStackViewModel(list: actors)
+                }
             }).store(in: &subscriptions)
     }
     
