@@ -18,6 +18,8 @@ class BoxOfficeCell: UICollectionViewCell {
     @IBOutlet weak var openingDateLabel: UILabel!
     @IBOutlet weak var attendanceLabel: UILabel!
     
+    @IBOutlet weak var separatorView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -34,16 +36,39 @@ class BoxOfficeCell: UICollectionViewCell {
             varianceImage.isHidden = true
             varianceLabel.text = data.rankOldAndNew
         } else {
-            varianceImage.image = UIImage()
-            varianceLabel.text = data.rankInten
+            let rankInten = Int(data.rankInten) ?? .zero
+            if rankInten < 0 {
+                varianceImage.image = UIImage(systemName: "chevron.down")
+                varianceImage.tintColor = .systemBlue
+            } else if rankInten > 0 {
+                varianceImage.image = UIImage(systemName: "chevron.up")
+                varianceImage.tintColor = .systemRed
+            } else {
+                varianceImage.image = UIImage(systemName: "equal")
+                varianceImage.tintColor = .systemOrange
+            }
+            varianceLabel.text = "\(abs(rankInten))"
         }
         titleLabel.text = data.movieNm
-        openingDateLabel.text = data.openDt
+        openingDateLabel.text = "개봉일: \(data.openDt)"
         attendanceLabel.text = data.audiCnt
+    }
+    
+    func getEstimatedSize(data: BoxOfficeData) -> CGSize {
+        set(data: data)
+        
+        return self.systemLayoutSizeFitting(
+            CGSize(width: contentView.frame.width, height: contentView.frame.height),
+            withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .fittingSizeLevel)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        separatorView.layer.cornerRadius = 10
+        separatorView.layer.borderWidth = 2
+        separatorView.layer.borderColor = UIColor.systemGray.cgColor
         
         rankingLabel.text = ""
         varianceImage.isHidden = false

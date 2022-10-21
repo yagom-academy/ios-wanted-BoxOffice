@@ -49,7 +49,7 @@ extension DailyViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let dataSource = dto?.dataSource[indexPath.section] else { return  UICollectionViewCell() }
+        guard let dataSource = dto?.dataSource[indexPath.section] else { return UICollectionViewCell() }
         let row = dataSource.items[indexPath.row]
         
         switch row {
@@ -63,5 +63,26 @@ extension DailyViewController: UICollectionViewDataSource {
             }
             return cell
         }
+    }
+}
+
+extension DailyViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        guard let dataSource = dto?.dataSource[indexPath.section] else { return .zero }
+        let row = dataSource.items[indexPath.row]
+        
+        switch row {
+        case .dateSelector:
+            return .zero
+        case .boxOffice(let boxOfficeData):
+            let width = UIScreen.main.bounds.width - 16
+            guard let boxOfficeCell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeCell.identifier, for: indexPath) as? BoxOfficeCell else { return .zero }
+            let estimatedSize = boxOfficeCell.getEstimatedSize(data: boxOfficeData)
+            return CGSize(width: width, height: estimatedSize.height)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     }
 }

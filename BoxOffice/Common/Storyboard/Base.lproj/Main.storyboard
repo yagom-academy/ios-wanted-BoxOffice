@@ -53,10 +53,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uGZ-GH-34g">
+                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uGZ-GH-34g">
                                 <rect key="frame" x="0.0" y="91" width="390" height="670"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uXZ-n5-Gso">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uXZ-n5-Gso">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -65,6 +65,7 @@
                                 <cells/>
                                 <connections>
                                     <outlet property="dataSource" destination="LAW-m4-Rfo" id="JRT-Ui-gYe"/>
+                                    <outlet property="delegate" destination="LAW-m4-Rfo" id="bSg-4t-nsq"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -164,7 +165,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="xpL-oE-EF6"/>
+        <segue reference="9PJ-wt-PsC"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="list.number" catalog="system" width="128" height="97"/>
