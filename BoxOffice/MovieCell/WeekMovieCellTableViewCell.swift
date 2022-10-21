@@ -16,17 +16,7 @@ class WeekMovieCellTableViewCell: UITableViewCell {
     @IBOutlet weak var 순위: UILabel!
     @IBOutlet weak var 신규진입: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
-    
     func movieModel(_ model: MovieModel) {
-        
         순위.text = "영화순위: \(model.순위)"
         개봉일.text = "개봉 날짜: \(model.오픈날짜)"
         신규진입.text = model.신규진입

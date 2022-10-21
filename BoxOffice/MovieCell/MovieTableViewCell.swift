@@ -16,16 +16,6 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var increaseRanking: UILabel!
     @IBOutlet weak var newRankingLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
     func movieModel(_ model: MovieModel) {
         rankingLabel.text = "영화순위: \(model.순위)"
         openingDateLabel.text = "개봉 날짜: \(model.오픈날짜)"

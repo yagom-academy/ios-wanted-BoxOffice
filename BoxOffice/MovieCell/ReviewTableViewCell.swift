@@ -22,15 +22,11 @@ class ReviewTableViewCell: UITableViewCell {
             reViewView.backgroundColor = .systemGray5
             reViewView.alpha = 0.8
             reViewView.layer.cornerRadius = 15
-            
         }
     }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

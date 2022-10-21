@@ -20,7 +20,6 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         movieApi()
     }
-    
     func movieApi() {
         MovieApi.getData(myApiKey: myApiKey, todays: inquiryTime() ,itemPerPage: "\(itemPerPageArry)") {result in
             for i in 0..<self.itemPerPageArry {
@@ -37,7 +36,6 @@ class MainViewController: UIViewController {
         let date = dateFormatter.string(from: yesterday)
         return date
     }
-    
     @IBAction func 버튼클릭(_ sender: UIButton) {
         guard let WeekMovieViewController = storyboard?.instantiateViewController(withIdentifier: "WeekMovieViewController") as? WeekMovieViewController else {return}
         navigationController?.pushViewController(WeekMovieViewController, animated: true)

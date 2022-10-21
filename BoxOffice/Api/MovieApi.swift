@@ -28,13 +28,11 @@ class MovieApi {
                 let result = try decoder.decode(MovieCodable.self, from: data)
                 DispatchQueue.main.async {
                     completion(result)
-                  
                 }
             } catch {
                 print(error)
             }
         }
-        
         dataTask.resume()
     }
 }

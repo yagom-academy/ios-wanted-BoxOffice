@@ -8,11 +8,10 @@
 import UIKit
 
 class WeekMovieViewController: UIViewController {
-
+    
     @IBAction func 버튼(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
-    
     @IBOutlet weak var tableVIew: UITableView!
     let mainVC = MainViewController()
     var weekMovie : [MovieModel] = []
@@ -20,7 +19,7 @@ class WeekMovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "주간 영화"
-   movieApi()
+        movieApi()
     }
     func movieApi() {
         MovieApi.getData(myApiKey: mainVC.myApiKey, todays: mainVC.inquiryTime() ,itemPerPage: "\(mainVC.itemPerPageArry)&weekGb=0") {result in
@@ -35,7 +34,6 @@ extension WeekMovieViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return weekMovie.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeekMovieCellTableViewCell", for: indexPath) as? WeekMovieCellTableViewCell else {return UITableViewCell()}
         let data = weekMovie[indexPath.row]
@@ -43,7 +41,6 @@ extension WeekMovieViewController: UITableViewDataSource {
         return cell
     }
 }
-
 extension WeekMovieViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

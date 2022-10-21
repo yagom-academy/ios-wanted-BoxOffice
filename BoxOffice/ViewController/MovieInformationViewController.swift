@@ -22,7 +22,6 @@ class MovieInformationViewController: UIViewController {
     @IBOutlet weak var 관람등급: UILabel!
     @IBOutlet weak var 개봉연도: UILabel!
     @IBOutlet weak var reviewButton: UIButton!
-    
     @IBOutlet weak var sharebutton: UIButton!
     let mainVC = MainViewController()
     var movieModel : MovieModel?
@@ -51,8 +50,6 @@ class MovieInformationViewController: UIViewController {
             if result.movieInfoResult.movieInfo.actors.count == 0 {
                 self.배우명?.text = "배우: "
             }else {
-                //            self.배우명?.text = "배우: \(result.movieInfoResult.movieInfo.actors.reduce("") { "\($0) \($1.peopleNm)"})"
-                //            self.배우명?.text  = "배우: \(result.movieInfoResult.movieInfo.actors.first?.peopleNm ?? "")"
                 self.배우명?.text = "배우: \(result.movieInfoResult.movieInfo.actors[0].peopleNm),\(result.movieInfoResult.movieInfo.actors[1].peopleNm)"
             }
             self.감독명.text = "감독: \(result.movieInfoResult.movieInfo.directors[0].peopleNm)"
@@ -66,16 +63,12 @@ class MovieInformationViewController: UIViewController {
         sharebutton.tintColor = .white
         sharebutton.backgroundColor = .systemOrange
         sharebutton.layer.cornerRadius = 12
-        
     }
-
     func revieView() {
         reviewButton.addTarget(self, action: #selector(reviewButtonAtion), for: .touchUpInside)
     }
-    
     @objc func reviewButtonAtion() {
         guard let viewController = storyboard?.instantiateViewController(withIdentifier: "ReViewViewController") as? ReViewViewController else {return}
         navigationController?.pushViewController(viewController, animated: true)
-        
     }
 }
