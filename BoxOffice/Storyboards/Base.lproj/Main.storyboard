@@ -265,11 +265,11 @@
                     <connections>
                         <outlet property="contentTextView" destination="8Xn-2z-b2C" id="5DF-MH-oLk"/>
                         <outlet property="imageView" destination="fGP-2K-Rhk" id="DoF-Cj-clY"/>
-                        <outlet property="nicknameTextField" destination="0Ip-DA-h2L" id="7Mx-Kd-jOo"/>
                         <outlet property="passwordTextField" destination="gHB-kS-QzI" id="Bf9-Ge-TiF"/>
                         <outlet property="ratingControl" destination="MQR-Xo-h1J" id="JZc-D9-Hmu"/>
                         <outlet property="saveButton" destination="1vH-vV-rAk" id="KdF-eb-UdG"/>
                         <outlet property="scrollView" destination="gMT-AN-Sr4" id="BWj-4J-QiB"/>
+                        <outlet property="usernameTextField" destination="0Ip-DA-h2L" id="Y2X-2J-f9w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jmq-xK-6UZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

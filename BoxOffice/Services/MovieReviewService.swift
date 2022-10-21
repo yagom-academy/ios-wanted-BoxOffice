@@ -37,7 +37,7 @@ final class MovieReviewService {
         let reference = reviewCollectionReference(for: review.movieIdentifier)
         do {
             _ = try reference.addDocument(from: review)
-            Logger.persistence.debug("Success adding document: \(review.movieIdentifier) \(review.nickname)")
+            Logger.persistence.debug("Success adding document: \(review.movieIdentifier) \(review.username)")
         } catch {
             Logger.persistence.error("Failure adding document: \(error)")
         }

@@ -20,7 +20,7 @@ final class AddMovieReviewViewController: UIViewController {
     @IBOutlet private var scrollView: UIScrollView!
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var ratingControl: RatingControl!
-    @IBOutlet private var nicknameTextField: UITextField!
+    @IBOutlet private var usernameTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
     @IBOutlet private var contentTextView: UITextView!
     @IBOutlet private var saveButton: UIBarButtonItem!
@@ -29,18 +29,35 @@ final class AddMovieReviewViewController: UIViewController {
 
     var review: MovieReview?
 
-    @Published private var nickname: String = ""
+    @Published private var username: String = ""
     @Published private var password: String = ""
 
-    private var isValid: AnyPublisher<Bool, Never> {
-        return Publishers.CombineLatest($nickname, $password)
-            .map { nickname, password in
-                let isValidNickname = !nickname.isEmpty
-                let passwordRegex = "^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[a-z0-9!@#$]{6,20}"
-                let isValidPassword = NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
-                return isValidNickname && isValidPassword
+    private var validateUsername: AnyPublisher<String?, Never> {
+        return $username
+            .map { username in
+                if username.isEmpty { return nil }
+                return username
             }
             .eraseToAnyPublisher()
+    }
+
+    private var validatePassword: AnyPublisher<String?, Never> {
+        return $password
+            .map { password in
+                let passwordRegex = "^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[a-z0-9!@#$]{6,20}"
+                let isValid = NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
+                if !isValid { return nil }
+                return password
+            }
+            .eraseToAnyPublisher()
+    }
+
+    private var validatedCredentials: AnyPublisher<Bool, Never> {
+        return Publishers.CombineLatest(validateUsername, validatePassword).map { username, password in
+            if username != nil, password != nil { return true }
+            return false
+        }
+        .eraseToAnyPublisher()
     }
 
     private var cancellables = Set<AnyCancellable>()
@@ -58,7 +75,7 @@ final class AddMovieReviewViewController: UIViewController {
     }
 
     private func subscribe() {
-        isValid
+        validatedCredentials
             .receive(on: DispatchQueue.main)
             .assign(to: \.isEnabled, on: saveButton)
             .store(in: &cancellables)
@@ -121,13 +138,13 @@ final class AddMovieReviewViewController: UIViewController {
         guard let destination = segue.destination as? MovieDetailViewController else { return }
 
         let movieIdentifier = destination.movieRanking.identifier
-        let nickname = nicknameTextField.text!
+        let username = usernameTextField.text!
         let password = passwordTextField.text!
         let rating = ratingControl.rating
         let content = contentTextView.text
         review = MovieReview(
             movieIdentifier: movieIdentifier,
-            nickname: nickname,
+            username: username,
             password: password,
             rating: rating,
             content: content
@@ -144,7 +161,7 @@ extension AddMovieReviewViewController: UITextFieldDelegate {
         let text = textField.text ?? ""
         let replacementText = (text as NSString).replacingCharacters(in: range, with: string)
 
-        if textField == nicknameTextField { nickname = replacementText }
+        if textField == usernameTextField { username = replacementText }
         if textField == passwordTextField { password = replacementText }
 
         return true
@@ -153,7 +170,7 @@ extension AddMovieReviewViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
 
-        if textField == nicknameTextField {
+        if textField == usernameTextField {
             passwordTextField.becomeFirstResponder()
         } else if textField == passwordTextField {
             contentTextView.becomeFirstResponder()
@@ -161,16 +178,6 @@ extension AddMovieReviewViewController: UITextFieldDelegate {
 
         return true
     }
-
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        updateSaveButtonState()
-//    }
-//
-//    private func updateSaveButtonState() {
-//        let nickname = nicknameTextField.text ?? ""
-//        let password = passwordTextField.text ?? ""
-//        saveButton.isEnabled = !nickname.isEmpty && !password.isEmpty
-//    }
 
 }
 

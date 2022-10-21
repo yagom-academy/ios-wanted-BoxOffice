@@ -172,7 +172,7 @@ final class MovieDetailViewController: UIViewController {
             if let review = item as? MovieReview {
                 var content = UIListContentConfiguration.subtitleCell()
                 let ratingText = "\(String(repeating: "★", count: review.rating))\(String(repeating: "☆", count: 5 - review.rating))"
-                content.text = "\(review.nickname) \(ratingText)"
+                content.text = "\(review.username) \(ratingText)"
                 content.textProperties.font = .preferredFont(forTextStyle: .caption2)
                 content.textProperties.color = .secondaryLabel
                 content.secondaryText = review.content
@@ -296,6 +296,10 @@ final class MovieDetailViewController: UIViewController {
 
     private func deleteMovieReview(_ review: MovieReview) {
         Task {
+            // TODO: 암호 확인
+            // 암호를 입력받는다
+            // 맞으면 삭제
+            // 아니면 다시 입력받는다
             do {
                 try await movieReviewService.deleteReview(review)
                 fetchMovieReviews()

@@ -17,7 +17,7 @@ struct MovieReview: Codable {
     /// 영화코드
     let movieIdentifier: String
     /// 별명
-    let nickname: String
+    let username: String
     /// 암호
     let password: String
     /// 별점
@@ -33,7 +33,7 @@ struct MovieReview: Codable {
 
     init(
         movieIdentifier: String,
-        nickname: String,
+        username: String,
         password: String,
         rating: Int,
         content: String? = nil,
@@ -41,7 +41,7 @@ struct MovieReview: Codable {
     ) {
         self.uuidString = uuid.uuidString
         self.movieIdentifier = movieIdentifier
-        self.nickname = nickname
+        self.username = username
         self.password = password
         self.rating = rating
         self.content = content
