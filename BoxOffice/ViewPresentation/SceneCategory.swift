@@ -23,6 +23,7 @@ indirect enum SceneCategory {
     enum detailScene {
         case secondViewController(context: SceneContext<SecondModel>)
         case thirdViewController(context: SceneContext<ThirdModel>)
+        case fourthViewController(context: SceneContext<FourthModel>)
     }
     
     enum alertScene {
