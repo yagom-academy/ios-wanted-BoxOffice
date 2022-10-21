@@ -18,7 +18,6 @@ class FirstMovieCell: UITableViewCell {
 
     var viewModel: FirstMovieCellModel = FirstMovieCellModel() {
         didSet {
-            viewModel.modifyData()
             cellView.didReceiveViewModel(viewModel)
         }
     }

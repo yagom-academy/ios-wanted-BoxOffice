@@ -35,11 +35,4 @@ class FirstMovieCellModel {
         self.scrnCnt = "" //해당일자에 상영한 스크린 수
         self.showCnt = "" //해당일자에 상영된 횟수
     }
-    
-    func modifyData() {
-        self.openDt = String.emojiAndTitle(emojiValue: .releasedDay) + " " + self.openDt
-        self.audiCnt = String.emojiAndTitle(emojiValue: .audCount) + " " + self.audiCnt
-        self.rankInten = String.emojiAndTitle(emojiValue: .rankIncrement) + " " + self.rankInten
-        self.rankOldAndNew = String.emojiAndTitle(emojiValue: .rankApproach) + " " + self.rankOldAndNew
-    }
 }
