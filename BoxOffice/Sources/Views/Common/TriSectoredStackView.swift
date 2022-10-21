@@ -109,6 +109,7 @@ class TriSectoredStackView: UIView {
             bottomBorderView.topAnchor.constraint(equalTo: verticalStackView.bottomAnchor),
             bottomBorderView.leadingAnchor.constraint(equalTo: leadingAnchor),
             bottomBorderView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            bottomBorderView.bottomAnchor.constraint(equalTo: bottomAnchor),
             bottomBorderView.heightAnchor.constraint(equalToConstant: 1),
         ]
     }

@@ -169,6 +169,18 @@ class MovieDetailViewController: UIViewController {
                 self.posterView.viewModel = viewModel
             }).store(in: &subscriptions)
         
+        viewModel.viewAction
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] action in
+                guard let self else { return }
+                switch action {
+                case .dismiss:
+                    self.navigationController?.popViewController(animated: true)
+                case .share:
+                    break
+                }
+            }).store(in: &subscriptions)
+        
         navigationView.viewModel = viewModel
         detailInfoView.viewModel = viewModel
         directorView.viewModel = viewModel
