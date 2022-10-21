@@ -7,6 +7,7 @@
 
 import XCTest
 import Combine
+import FirebaseStorage
 @testable import BoxOffice
 
 class RepositoryTests: XCTestCase {
@@ -54,6 +55,45 @@ class RepositoryTests: XCTestCase {
                 result = boxOffice
                 expectation.fulfill()
             }).store(in: &subscriptions)
+        waitForExpectations(timeout: 10)
+        
+        // then
+        XCTAssertNotNil(result)
+    }
+    
+    func test_getMovieReviews() {
+        // given
+        let movieCode = "20225729"
+        let expectation = self.expectation(description: "Wait for API")
+        var result: [Review]?
+        
+        // when
+        repository.getMovieReviews(movieCode)
+            .sink(receiveCompletion: { print($0) }, receiveValue: {
+                result = $0
+                expectation.fulfill()
+            }).store(in: &subscriptions)
+        
+        waitForExpectations(timeout: 10)
+        
+        // then
+        XCTAssertNotNil(result)
+    }
+    
+    func test_putMovieReviews() {
+        // given
+        let movieCode = "20225729"
+        let review = Review(nickname: "다온솜", photo: UIImage(named: "circle")?.pngData(), rating: 5, password: "#123abcd", content: "안녕하세요")
+        let expectation = self.expectation(description: "Wait for API")
+        var result: StorageMetadata?
+        
+        // when
+        repository.putMovieReviews(movieCode, review: review)
+            .sink(receiveCompletion: { print($0) }, receiveValue: {
+                result = $0
+                expectation.fulfill()
+            }).store(in: &subscriptions)
+        
         waitForExpectations(timeout: 10)
         
         // then

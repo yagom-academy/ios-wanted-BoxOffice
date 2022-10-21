@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import UIKit
+import FirebaseStorage
 
 protocol RepositoryProtocol {
     
@@ -58,6 +59,31 @@ class Repository {
             .decode(type: MoviePosterResponse.self, decoder: JSONDecoder())
             .tryMap { try Translator.translate($0) }
             .eraseToAnyPublisher()
+    }
+    
+    func getMovieReviews(_ movieCode: String) -> AnyPublisher<[Review], Error> {
+        return Storage.storage().reference().child("\(movieCode)")
+            .getData(maxSize: 1024 * 1024)
+            .subscribe(on: DispatchQueue.global())
+            .decode(type: [Review].self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+    
+    func putMovieReviews(_ movieCode: String, review: Review) -> AnyPublisher<StorageMetadata, Error> {
+        return Storage.storage().reference().child("\(movieCode)")
+            .getData(maxSize: 1024 * 1024)
+            .subscribe(on: DispatchQueue.global())
+            .decode(type: [Review].self, decoder: JSONDecoder())
+            .catch { _ in
+                return Just([Review]())
+            }.map { reviews in
+                var reviews = reviews
+                reviews.append(review)
+                return reviews
+            }.encode(encoder: JSONEncoder())
+            .flatMap { data in
+                return Storage.storage().reference().child("\(movieCode)").putData(data)
+            }.eraseToAnyPublisher()
     }
     
     func loadImage(_ url: String) -> AnyPublisher<UIImage, Error> {
