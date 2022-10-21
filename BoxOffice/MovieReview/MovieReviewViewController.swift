@@ -72,11 +72,7 @@ final class MovieReviewViewController: UIViewController {
     
     var movieTitle: String = ""
     private var viewModel: MovieReviewViewModel = .init()
-    private var finalReview: ReviewModel = .init(nickname: "", password: "", starScore: 0, content: "") {
-        didSet {
-            print("리뷰 변경", finalReview)
-        }
-    }
+    private(set) var finalReview: ReviewModel = .init(nickname: "", password: "", starScore: 0, content: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()

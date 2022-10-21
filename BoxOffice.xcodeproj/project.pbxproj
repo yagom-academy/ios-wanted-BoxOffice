@@ -30,6 +30,7 @@
 		6CA3F6B52901A0A700DE1ABA /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA3F6B42901A0A700DE1ABA /* Observable.swift */; };
 		6CC4C3EF2902ACAE0054C3BA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6CC4C3EE2902ACAE0054C3BA /* FirebaseStorage */; };
 		6CC4C3F12902B2A30054C3BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CC4C3F02902B2A30054C3BA /* GoogleService-Info.plist */; };
+		6CC4C3F62902D0FB0054C3BA /* MovieReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4C3F52902D0FB0054C3BA /* MovieReviewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		6CA3F6B129019AB000DE1ABA /* MovieReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewViewModel.swift; sourceTree = "<group>"; };
 		6CA3F6B42901A0A700DE1ABA /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		6CC4C3F02902B2A30054C3BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../.Trash/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6CC4C3F52902D0FB0054C3BA /* MovieReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,8 +110,8 @@
 		6C21D01828FE92BB006227B2 /* MovieDetail */ = {
 			isa = PBXGroup;
 			children = (
+				6CC4C3F42902D0EE0054C3BA /* Cell */,
 				6C21D01928FE92E8006227B2 /* MovieDetailViewController.swift */,
-				6C21D01F28FEBABA006227B2 /* MovieDetailCell.swift */,
 				6C6E175228FECF19002CA63F /* MovieDetailViewModel.swift */,
 				6C6E175428FED365002CA63F /* MovieDetailModel.swift */,
 			);
@@ -171,6 +173,15 @@
 				6CA3F6B42901A0A700DE1ABA /* Observable.swift */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		6CC4C3F42902D0EE0054C3BA /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				6C21D01F28FEBABA006227B2 /* MovieDetailCell.swift */,
+				6CC4C3F52902D0FB0054C3BA /* MovieReviewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +263,7 @@
 			files = (
 				6CA3F6B52901A0A700DE1ABA /* Observable.swift in Sources */,
 				6C9DAC7F28FD4A39001C0D8B /* MovieListCell.swift in Sources */,
+				6CC4C3F62902D0FB0054C3BA /* MovieReviewCell.swift in Sources */,
 				6C64E40929005A230072706A /* ReviewTextView.swift in Sources */,
 				635A19EC28F9603900197BCC /* MovieListViewController.swift in Sources */,
 				6C6E175128FECC3F002CA63F /* MovieDetailEntity.swift in Sources */,

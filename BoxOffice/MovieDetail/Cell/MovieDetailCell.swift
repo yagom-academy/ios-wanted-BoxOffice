@@ -10,7 +10,7 @@ import UIKit
 final class MovieDetailCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 17, weight: .semibold)
+        label.font = .systemFont(ofSize: 15, weight: .semibold)
         label.textAlignment = .center
         return label
     }()
@@ -25,6 +25,7 @@ final class MovieDetailCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         self.setupLayouts()
     }
     
@@ -37,10 +38,6 @@ final class MovieDetailCell: UITableViewCell {
         titleLabel.text = title
         guard let model = model else { return }
         switch title {
-        case "개봉일":
-            infoLabel.text = model.openDate
-        case "상영시간":
-            infoLabel.text = model.showTime
         case "장르":
             infoLabel.text = model.genres
         case "관람등급":
@@ -75,28 +72,3 @@ final class MovieDetailCell: UITableViewCell {
 
 
 
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-struct UIViewPreview2: UIViewRepresentable {
-    typealias UIViewType = MovieDetailCell
-    
-    // MARK: - UIViewRepresentable
-    func makeUIView(context: Context) -> MovieDetailCell {
-        return MovieDetailCell()
-    }
-    
-    func updateUIView(_ view: MovieDetailCell, context: Context) {
-        
-    }
-}
-#endif
-
-#if canImport(SwiftUI) && DEBUG
-struct First2Preview: PreviewProvider {
-    static var previews: some View {
-        Group {
-            UIViewPreview2().frame(width: 300, height: 10)
-        }.previewLayout(.sizeThatFits)
-    }
-}
-#endif
