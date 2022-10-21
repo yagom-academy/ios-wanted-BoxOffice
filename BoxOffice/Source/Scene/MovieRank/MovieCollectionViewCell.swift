@@ -7,21 +7,21 @@
 
 import UIKit
 
-class MovieCollectionViewCell: UICollectionViewCell {
+final class MovieCollectionViewCell: UICollectionViewCell {
     
     let posterImageView: UIImageView = {
         let imageView = UIImageView()
         return imageView
     }()
     
-    let darkBackgroundView: UIView = {
+    private let darkBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         view.layer.cornerRadius = 2
         return view
     }()
     
-    let rankingLabel: UILabel = {
+    private let rankingLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemBackground
         label.textAlignment = .left
@@ -38,7 +38,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    lazy var rankingChangeButton: UIButton = {
+    private lazy var rankingChangeButton: UIButton = {
         let button = UIButton()
         let config = UIImage.SymbolConfiguration(pointSize: 20)
         button.setPreferredSymbolConfiguration(config, forImageIn: .normal)
@@ -49,7 +49,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
-    let newButton: UIButton = {
+    private let newButton: UIButton = {
         let button = UIButton()
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         button.setTitleColor(.systemRed, for: .normal)
@@ -66,7 +66,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    let movieNameLabel: UILabel = {
+    private let movieNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
         label.textAlignment = .left
@@ -74,7 +74,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let releaseDateLabel: UILabel = {
+    private let releaseDateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGray
         label.textAlignment = .left
@@ -82,7 +82,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let audienceLabel: UILabel = {
+    private let audienceLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGray
         label.textAlignment = .left
@@ -111,7 +111,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         audienceLabel.text = ""
     }
     
-    public func setData(_ movie: SimpleMovieInfoEntity) {
+    func setData(_ movie: SimpleMovieInfoEntity) {
         rankingLabel.text = "\(movie.rank)"
         if movie.inset.first == "-" {
             rankingChangeButton.tintColor = .systemBlue

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieRankView: UIView {
+final class MovieRankView: UIView {
     
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())

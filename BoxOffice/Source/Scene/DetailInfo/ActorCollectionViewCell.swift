@@ -7,10 +7,10 @@
 
 import UIKit
 
-class ActorCollectionViewCell: UICollectionViewCell {
+final class ActorCollectionViewCell: UICollectionViewCell {
     static let id = "ACTOR"
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
         label.textAlignment = .left
@@ -18,7 +18,7 @@ class ActorCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let nextButton: UIButton = {
+    private let nextButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         button.tintColor = .systemGray
@@ -41,7 +41,7 @@ class ActorCollectionViewCell: UICollectionViewCell {
         titleLabel.text = ""
     }
     
-    public func setData(title: String) {
+    func setData(title: String) {
         self.titleLabel.text = title
     }
     

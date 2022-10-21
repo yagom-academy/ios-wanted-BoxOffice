@@ -9,14 +9,14 @@ import UIKit
 
 typealias FirstSectionAndTitle = (title: String, section: FirstSection)
 
-class MovieRankViewController: UIViewController {
+final class MovieRankViewController: UIViewController {
     
-    let movieRankView = MovieRankView()
-    var dataSource: UICollectionViewDiffableDataSource<FirstSection, SimpleMovieInfoEntity>!
-    var dailyMovieList: [SimpleMovieInfoEntity] = []
-    var weekendMovieList: [SimpleMovieInfoEntity] = []
-    var weekDay: [String] = ["월", "화", "수", "목", "금"]
-    var sectionList: [FirstSectionAndTitle] = [("일별 박스오피스 순위", .daily), ("주말 박스오피스 순위", .weekend)]
+    private let movieRankView = MovieRankView()
+    private var dataSource: UICollectionViewDiffableDataSource<FirstSection, SimpleMovieInfoEntity>!
+    private var dailyMovieList: [SimpleMovieInfoEntity] = []
+    private var weekendMovieList: [SimpleMovieInfoEntity] = []
+    private var weekDay: [String] = ["월", "화", "수", "목", "금"]
+    private var sectionList: [FirstSectionAndTitle] = [("일별 박스오피스 순위", .daily), ("주말 박스오피스 순위", .weekend)]
     
     
     override func loadView() {

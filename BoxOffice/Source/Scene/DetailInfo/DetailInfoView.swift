@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailInfoView: UIView {
+final class DetailInfoView: UIView {
     
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())

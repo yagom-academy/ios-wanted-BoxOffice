@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainInfoCollectionViewCell: UICollectionViewCell {
+final class MainInfoCollectionViewCell: UICollectionViewCell {
     static let id = "MAIN"
 
     let posterImageView: UIImageView = {
@@ -15,14 +15,14 @@ class MainInfoCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    let darkBackgroundView: UIView = {
+    private let darkBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         view.layer.cornerRadius = 2
         return view
     }()
     
-    let rankingLabel: UILabel = {
+    private let rankingLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemBackground
         label.textAlignment = .left
@@ -39,7 +39,7 @@ class MainInfoCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    lazy var rankingChangeButton: UIButton = {
+    private lazy var rankingChangeButton: UIButton = {
         let button = UIButton()
         let config = UIImage.SymbolConfiguration(pointSize: 20)
         button.setPreferredSymbolConfiguration(config, forImageIn: .normal)
@@ -50,7 +50,7 @@ class MainInfoCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
-    let newButton: UIButton = {
+    private let newButton: UIButton = {
         let button = UIButton()
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         button.setTitleColor(.systemRed, for: .normal)
@@ -76,7 +76,7 @@ class MainInfoCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    let movieNameLabel: UILabel = {
+    private let movieNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
         label.textAlignment = .left
@@ -84,7 +84,7 @@ class MainInfoCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let openYearLabel: UILabel = {
+    private let openYearLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGray
         label.textAlignment = .left
@@ -92,7 +92,7 @@ class MainInfoCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let genreNameLabel: UILabel = {
+    private let genreNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGray
         label.textAlignment = .left
@@ -112,6 +112,7 @@ class MainInfoCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        posterImageView.image = nil
         rankingLabel.text = ""
         rankingChangeButton.titleLabel?.text = ""
         newButton.isHidden = true
@@ -120,7 +121,7 @@ class MainInfoCollectionViewCell: UICollectionViewCell {
         genreNameLabel.text = ""
     }
     
-    public func setData(_ movie: DetailMovieInfoEntity) {
+    func setData(_ movie: DetailMovieInfoEntity) {
         if let rank = movie.simpleInfo?.rank {
             rankingLabel.text = "\(rank)"
         }

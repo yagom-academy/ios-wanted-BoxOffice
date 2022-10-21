@@ -9,14 +9,14 @@ import UIKit
 
 typealias SecondSectionAndTitle = (title: String, section: SecondSection)
 
-class DetailInfoViewController: UIViewController {
+final class DetailInfoViewController: UIViewController {
     
-    var shareItems = [String]()
-    let detailInfoView = DetailInfoView()
+    private var shareItems = [String]()
+    private let detailInfoView = DetailInfoView()
+    private var sectionList: [SecondSectionAndTitle] = [("", .main), ("기본 정보", .standard), ("출연", .actors)]
+    private var standardInfoList: [StandardMovieInfoEntity] = []
+    private var detailMovieInfo: DetailMovieInfoEntity?
     var simpleMovieInfo: SimpleMovieInfoEntity?
-    var detailMovieInfo: DetailMovieInfoEntity?
-    var standardInfoList: [StandardMovieInfoEntity] = []
-    var sectionList: [SecondSectionAndTitle] = [("", .main), ("기본 정보", .standard), ("출연", .actors)]
     
     override func loadView() {
         view = detailInfoView

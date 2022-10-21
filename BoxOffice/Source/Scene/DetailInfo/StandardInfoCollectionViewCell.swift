@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StandardInfoCollectionViewCell: UICollectionViewCell {
+final class StandardInfoCollectionViewCell: UICollectionViewCell {
     static let id = "STANDARD"
     
     private let stackView: UIStackView = {
@@ -19,7 +19,7 @@ class StandardInfoCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
         label.textAlignment = .center
@@ -27,7 +27,7 @@ class StandardInfoCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let valueLabel: UILabel = {
+    private let valueLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGray
         label.textAlignment = .center
@@ -51,7 +51,7 @@ class StandardInfoCollectionViewCell: UICollectionViewCell {
         valueLabel.text = ""
     }
     
-    public func setData(data: StandardMovieInfoEntity) {
+    func setData(data: StandardMovieInfoEntity) {
         self.titleLabel.text = data.title
         self.valueLabel.text = data.value
     }
