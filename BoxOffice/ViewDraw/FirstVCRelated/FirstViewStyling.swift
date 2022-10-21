@@ -21,14 +21,13 @@ extension FirstViewStyling {
             $0.layer.shadowOpacity = 1
             $0.layer.shadowOffset = CGSize(width: 0, height: 1)
             $0.layer.shadowRadius = 8
-            $0.backgroundColor = .red
         }
     }
     
     var cellPresentRankLabelStyling: (UILabel) -> () {
         {
             $0.textColor = .graySecondary
-            $0.font = .appleSDGothicNeo(weight: .regular, size: 12)
+            $0.font = .appleSDGothicNeo(weight: .bold, size: 16)
             $0.textAlignment = .left
             $0.text = "1"
         }
@@ -46,7 +45,7 @@ extension FirstViewStyling {
     var cellRelesedDateLabelStyling: (UILabel) -> () {
         {
             $0.textColor = .grayPrimary
-            $0.font = .appleSDGothicNeo(weight: .regular, size: 12)
+            $0.font = .appleSDGothicNeo(weight: .regular, size: 14)
             $0.textAlignment = .left
             $0.text = "2022/09/08 14:50:43"
         }
@@ -55,7 +54,7 @@ extension FirstViewStyling {
     var cellWatchedCustomerCountLabelStyling: (UILabel) -> () {
         {
             $0.textColor = .graySecondary
-            $0.font = .appleSDGothicNeo(weight: .regular, size: 12)
+            $0.font = .appleSDGothicNeo(weight: .regular, size: 14)
             $0.textAlignment = .left
             $0.text = "100000000"
         }
@@ -64,7 +63,16 @@ extension FirstViewStyling {
     var cellRankIncrementLabelStyling: (UILabel) -> () {
         {
             $0.textColor = .grayPrimary
-            $0.font = .appleSDGothicNeo(weight: .regular, size: 12)
+            $0.font = .appleSDGothicNeo(weight: .regular, size: 14)
+            $0.textAlignment = .left
+            $0.text = "100000000"
+        }
+    }
+    
+    var cellApproachedRankIndexLabel: (UILabel) -> () {
+        {
+            $0.textColor = .graySecondary
+            $0.font = .appleSDGothicNeo(weight: .regular, size: 14)
             $0.textAlignment = .left
             $0.text = "100000000"
         }
@@ -75,7 +83,6 @@ extension FirstViewStyling {
             $0.axis = .vertical
             $0.alignment = .fill
             $0.spacing = 4.0
-            $0.backgroundColor = .yellow
         }
     }
     
