@@ -78,6 +78,8 @@
 			children = (
 				8C606B2D2903B6BC00ADC626 /* Resource */,
 				8C606B2C2903B65F00ADC626 /* Source */,
+				635A19F528F9603A00197BCC /* Info.plist */,
+				8C606B1628FEB55F00ADC626 /* KeyList.plist */,
 			);
 			path = BoxOffice;
 			sourceTree = "<group>";
@@ -155,8 +157,6 @@
 				8C606B0928FD8E9E00ADC626 /* Views */,
 				8C606B1028FE906C00ADC626 /* Model */,
 				8C606B1328FE959600ADC626 /* Service */,
-				635A19F528F9603A00197BCC /* Info.plist */,
-				8C606B1628FEB55F00ADC626 /* KeyList.plist */,
 			);
 			path = Source;
 			sourceTree = "<group>";
