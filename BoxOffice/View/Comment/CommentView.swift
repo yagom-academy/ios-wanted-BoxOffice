@@ -32,6 +32,7 @@ struct CommentView: View {
                 .frame(width: 60, alignment: .center)
                 VStack {
                     Text(comment.content)
+                        .font(Font.custom("NotoSansKR-Regular", size: 15))
                         .padding(.vertical, 6)
                         .padding(.horizontal, 9)
                         .background(ColorManager.cover)
