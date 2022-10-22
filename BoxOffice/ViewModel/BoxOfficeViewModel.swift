@@ -10,12 +10,24 @@ import Foundation
 class BoxOfficeViewModel {
     
     var cellViewModel = [Int : TableViewCellViewModel]()
-    var dd: [Int:Int] = [0:0]
     var BoxOfficeModel: BoxOfficeModel?
+    var segmentFlag: Int = 0
+    
+    func clearCellViewModel() {
+        cellViewModel = [Int : TableViewCellViewModel]()
+    }
     
     func requestBoxOfficeAPI(completion: @escaping ()->()) {
-        let today = Date().todayToString()
-        let url = "\(EndPoint.kdbDailyURL)?key=\(APIKey.KDB_KEY_ID)&targetDt=\(today)"
+        
+        var url = ""
+        if segmentFlag == 0 {
+            let today = Date().todayToString()
+            url = "\(EndPoint.kdbDailyURL)?key=\(APIKey.KDB_KEY_ID)&targetDt=\(today)&wideAreaCd=0105001"
+        } else {
+            let lastWeek = Date().lastWeekToString()
+            url = "\(EndPoint.kdbWeeklyURL)?key=\(APIKey.KDB_KEY_ID)&targetDt=\(lastWeek)&weekGb=0"
+        }
+        
         APIService.shared.fetchData(url: url) { (response: BoxOfficeModel?, error) in
             guard let response = response else { return }
             self.BoxOfficeModel = response

@@ -16,4 +16,13 @@ extension Date {
         let strDate = dateFormatter.string(from: day)
         return strDate
     }
+    
+    func lastWeekToString() -> String {
+        let lastWeek = Calendar.current.date(byAdding: .day, value: -7, to: self)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        guard let day = lastWeek else { return "20221010"}
+        let strDate = dateFormatter.string(from: day)
+        return strDate
+    }
 }

@@ -8,14 +8,30 @@
 import Foundation
 
 // MARK: - BoxOffice
-struct BoxOfficeModel: Codable {
+struct BoxOfficeModel: Decodable {
     let boxOfficeResult: BoxOfficeResult
 }
 
 // MARK: - BoxOfficeResult
-struct BoxOfficeResult: Codable {
+struct BoxOfficeResult: Decodable {
     let boxofficeType, showRange: String
     let dailyBoxOfficeList: [DailyBoxOfficeList]
+    
+    enum CodingKeys: String, CodingKey {
+        case boxofficeType, showRange, dailyBoxOfficeList, weeklyBoxOfficeList
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        boxofficeType = try container.decode(String.self, forKey: .boxofficeType)
+        showRange = try container.decode(String.self, forKey: .showRange)
+        if let id = try container.decodeIfPresent([DailyBoxOfficeList].self, forKey: .weeklyBoxOfficeList) {
+            dailyBoxOfficeList = id
+        } else {
+            dailyBoxOfficeList = try container.decode([DailyBoxOfficeList].self, forKey: .dailyBoxOfficeList)
+        }
+    }
+    
 }
 
 // MARK: - DailyBoxOfficeList
@@ -26,7 +42,7 @@ struct DailyBoxOfficeList: Codable {
     let salesShare, salesInten, salesChange, salesAcc: String
     let audiCnt, audiInten, audiChange, audiAcc: String
     let scrnCnt, showCnt: String
-
+    
     enum CodingKeys: String, CodingKey {
         case rnum, rank, rankInten, rankOldAndNew
         case movieCD = "movieCd"

@@ -146,7 +146,6 @@ class StarScore: UIView {
     func inputScore(score: Int) {
         
         self.score = score
-        print(score)
         
         for i in 0..<score {
             buttons[i].setImage(starFillImage, for: .normal)

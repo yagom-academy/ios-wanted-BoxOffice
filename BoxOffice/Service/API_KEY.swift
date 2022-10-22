@@ -19,5 +19,6 @@ struct EndPoint {
     static let naverURL = "https://openapi.naver.com/v1/search/movie.json"
     static let kdbDailyURL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
     static let kdbDetailURL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
+    static let kdbWeeklyURL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json"
 }
 

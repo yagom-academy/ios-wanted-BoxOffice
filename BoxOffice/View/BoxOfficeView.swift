@@ -16,6 +16,13 @@ class BoxOfficeView: UIView {
         return view
     }()
     
+    let segmentControl: UISegmentedControl = {
+        let view = UISegmentedControl(items: ["일간","주간"])
+        view.selectedSegmentIndex = 0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()
@@ -27,9 +34,14 @@ class BoxOfficeView: UIView {
     
     func setupConstraints() {
         addSubview(boxOfficeTableView)
+        addSubview(segmentControl)
         let safeArea = self.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            boxOfficeTableView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            segmentControl.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            segmentControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
+            segmentControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+            
+            boxOfficeTableView.topAnchor.constraint(equalTo: segmentControl.bottomAnchor, constant: 20),
             boxOfficeTableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             boxOfficeTableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             boxOfficeTableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)

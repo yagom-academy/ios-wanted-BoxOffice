@@ -38,12 +38,22 @@ class BoxOfficeViewController: UIViewController {
         mainView.boxOfficeTableView.delegate = self
         mainView.boxOfficeTableView.dataSource = self
         mainView.boxOfficeTableView.register(BoxOfficeTableViewCell.self, forCellReuseIdentifier: BoxOfficeCellViewModel.identifier)
+        mainView.segmentControl.addTarget(self, action: #selector(segmentControlDidChange(segment:)), for: .valueChanged)
+    }
+    
+    @objc func segmentControlDidChange(segment: UISegmentedControl) {
+        boxOfficeViewModel.segmentFlag = segment.selectedSegmentIndex
+        fetchData()
     }
     
     func fetchData() {
+        boxOfficeViewModel.clearCellViewModel()
+        
+        LoadingIndicator.showLoading()
         boxOfficeViewModel.fetchAPIData {
             self.mainView.boxOfficeTableView.reloadData()
             self.setupNavigation()
+            LoadingIndicator.hideLoading()
         }
     }
     

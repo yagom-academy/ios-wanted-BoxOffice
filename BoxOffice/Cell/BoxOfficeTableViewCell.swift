@@ -16,7 +16,7 @@ class BoxOfficeTableViewCell: UITableViewCell {
             rankLabel.text = viewModel.cellData.rank
             movieNameLabel.text = viewModel.cellData.movieNm
             audiAccLabel.text = viewModel.cellData.audiAcc
-            //posterView.setImageUrl(viewModel.posterURL)
+            posterView.setImageUrl(viewModel.posterURL)
             if viewModel.cellData.rankOldAndNew == .new {
                 rankIntenLabel.textColor = .red
                 rankIntenLabel.text = RankOldAndNew.new.rawValue
