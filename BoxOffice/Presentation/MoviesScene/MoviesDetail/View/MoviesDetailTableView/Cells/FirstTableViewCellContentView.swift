@@ -100,7 +100,7 @@ extension FirstTableViewCellContentView {
         ])
         
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: self.plusLabel.trailingAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: self.plusLabel.trailingAnchor, constant: 10),
             titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 30),
             titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -40),
