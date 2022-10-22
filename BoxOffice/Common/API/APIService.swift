@@ -11,7 +11,7 @@ final class ApiService {
     
     private func getRequestData<T: Codable>(type: T.Type, path: String, parameters: [String: Any]? = nil) async throws -> T {
         
-        let baseURL = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/"
+        let baseURL = "https://kobis.or.kr/kobisopenapi/webservice/rest/"
         let urlString = baseURL + path
         
         guard var urlComponents = URLComponents(string: urlString) else {
@@ -66,6 +66,17 @@ final class ApiService {
                 "targetDt" : targetDt,
                 "wideAreaCd" : "0105001",
                 "weekGb" : "\(weekGb)"
+            ]
+        )
+    }
+    
+    func movieInfoAPIService(movieCd: String) async throws -> MovieInfoResultResponse {
+        return try await getRequestData(
+            type: MovieInfoResultResponse.self,
+            path: ListType.info.path,
+            parameters: [
+                "key" : "f5eef3421c602c6cb7ea224104795888",
+                "movieCd" : movieCd
             ]
         )
     }

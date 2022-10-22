@@ -90,6 +90,7 @@ extension DailyViewController: UICollectionViewDelegate {
             return
         case .boxOffice(let boxOfficeData):
             guard let vc = storyboard?.instantiateViewController(withIdentifier: DetailViewController.identifier) as? DetailViewController else { return }
+            vc.boxOfficeData = boxOfficeData
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

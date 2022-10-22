@@ -16,6 +16,8 @@ struct MovieInfo: Codable {
 }
 
 struct MovieInfoResponse: Codable {
+    /// 영화번호
+    let movieCd: String
     /// 제작연도
     let prdtYear: String
     /// 상영시간
