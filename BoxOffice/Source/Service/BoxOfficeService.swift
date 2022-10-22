@@ -12,7 +12,6 @@ enum NetworkError: Error {
 }
 
 class BoxOfficeService {
-    //Plist에서 APIKEY 가져오기
     private var apiKey: String {
         get {
             guard let filePath = Bundle.main.path(forResource: "KeyList", ofType: "plist") else {
