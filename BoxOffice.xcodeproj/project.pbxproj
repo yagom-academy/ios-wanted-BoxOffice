@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		633E05502903AA2A00DECDC2 /* UISliderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633E054F2903AA2A00DECDC2 /* UISliderTest.swift */; };
 		634C26ED290073F1006E6811 /* WeekAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C26EC290073F1006E6811 /* WeekAPI.swift */; };
 		634C26EF29007838006E6811 /* WeekSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C26EE29007838006E6811 /* WeekSecondViewController.swift */; };
 		634C26F4290126AB006E6811 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C26F3290126AB006E6811 /* SplashViewController.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		633E054F2903AA2A00DECDC2 /* UISliderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISliderTest.swift; sourceTree = "<group>"; };
 		634C26EC290073F1006E6811 /* WeekAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekAPI.swift; sourceTree = "<group>"; };
 		634C26EE29007838006E6811 /* WeekSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSecondViewController.swift; sourceTree = "<group>"; };
 		634C26F3290126AB006E6811 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +67,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		633E054A2903A97900DECDC2 /* Slider */ = {
+			isa = PBXGroup;
+			children = (
+				633E054F2903AA2A00DECDC2 /* UISliderTest.swift */,
+			);
+			path = Slider;
+			sourceTree = "<group>";
+		};
 		634C26F229012687006E6811 /* Splash */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +144,7 @@
 				636B6D4F28FD34D1002C16D8 /* MovieListTableViewCell.swift */,
 				636B6D4C28FD3496002C16D8 /* SecondViewController.swift */,
 				634C26F92902A0AA006E6811 /* ThirdViewController.swift */,
+				633E054A2903A97900DECDC2 /* Slider */,
 			);
 			path = DailyViewController;
 			sourceTree = "<group>";
@@ -245,6 +256,7 @@
 				634C26FA2902A0AA006E6811 /* ThirdViewController.swift in Sources */,
 				636B6D5028FD34D1002C16D8 /* MovieListTableViewCell.swift in Sources */,
 				634C26EF29007838006E6811 /* WeekSecondViewController.swift in Sources */,
+				633E05502903AA2A00DECDC2 /* UISliderTest.swift in Sources */,
 				636B6D4B28FD3463002C16D8 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

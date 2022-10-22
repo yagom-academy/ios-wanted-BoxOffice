@@ -35,6 +35,28 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var checkPassword: UITextField!
     @IBOutlet weak var check: UIButton!
     
+    @IBOutlet weak var sliderLabel: UILabel!
+    @IBAction func sliderChanged(_ sender: UISlider) {
+        let floatValue = floor(sender.value * 10) / 10
+        let intValue = Int(floor(sender.value))
+        
+        for index in 1...5 {
+            if let starImage = view.viewWithTag(index) as? UIImageView {
+                if Float(index) <= floatValue {
+                    starImage.image = UIImage(named: "star_full")
+                }
+                else if (Float(index) - floatValue) <= 0.5 {
+                    starImage.image = UIImage(named: "star_half")
+                }
+                else {
+                    starImage.image = UIImage(named: "star_empty")
+                    
+                }
+            }
+        }
+        self.sliderLabel?.text = String(Int(floatValue))
+    }
+    
     @IBAction func cancel(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -151,9 +173,9 @@ extension ThirdViewController: UIImagePickerControllerDelegate, UINavigationCont
     
     func imagePicker(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        if let originalImage: UIImage = info[UIImagePickerController.InfoKey.originalImage] as?
+        if let nameImage: UIImage = info[UIImagePickerController.InfoKey.originalImage] as?
             UIImage {
-            self.nameImage.image = originalImage
+            self.nameImage.image = nameImage
         }
         self.dismiss(animated: true, completion: nil)
     }
