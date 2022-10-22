@@ -23,6 +23,7 @@ final class MovieListCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .semibold)
         label.textAlignment = .center
+        label.textColor = .systemBlue
         label.text = RankOldAndNew.new.rawValue
         return label
     }()
@@ -79,7 +80,7 @@ final class MovieListCell: UITableViewCell {
         self.rankOldAndNew.text = data.rankOldAndNew
         self.movieTitle.text = data.movieName
         self.openDate.text = data.openDate
-        self.audienceCount.text = "누적: \(data.audienceCount) / 전일대비: \(data.audienceInten)"
+        self.audienceCount.text = "누적: \(data.audienceCount)"
     }
     
     // MARK: - private
@@ -98,6 +99,7 @@ final class MovieListCell: UITableViewCell {
             //rank
             self.rankStateStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 40),
             self.rankStateStackView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            self.rankStateStackView.widthAnchor.constraint(equalToConstant: 40),
             self.movieInfoStackView.leadingAnchor.constraint(equalTo: self.rankStateStackView.trailingAnchor, constant: 30),
             self.movieInfoStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
             self.movieInfoStackView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)

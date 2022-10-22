@@ -39,8 +39,8 @@ struct MovieDetailModel {
         return movieModel.rankOldAndNew
     }
 
-    var audienceInten: String {
-        return movieModel.audienceInten
+    var rankInten: String {
+        return movieModel.rankInten
     }
 
     var productYear: String {

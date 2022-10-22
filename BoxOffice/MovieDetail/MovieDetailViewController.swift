@@ -168,7 +168,6 @@ final class MovieDetailViewController: UIViewController {
             self.mainInfoStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -50)
         ])
         
-        // TODO: 라인뷰 안보임
         NSLayoutConstraint.activate([
             self.lineView.topAnchor.constraint(equalTo: self.mainInfoStackView.bottomAnchor, constant: 20),
             self.lineView.heightAnchor.constraint(equalToConstant: 1),
@@ -180,7 +179,7 @@ final class MovieDetailViewController: UIViewController {
             self.movieDetailTableView.topAnchor.constraint(equalTo: self.lineView.topAnchor),
             self.movieDetailTableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             self.movieDetailTableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            self.movieDetailTableView.heightAnchor.constraint(equalToConstant: 320)
+            self.movieDetailTableView.heightAnchor.constraint(equalToConstant: 300)
         ])
         
         NSLayoutConstraint.activate([

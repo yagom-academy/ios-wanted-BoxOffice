@@ -51,8 +51,6 @@ final class MovieDetailCell: UITableViewCell {
             infoLabel.text = model.actors
         case "누적관객":
             infoLabel.text = model.audienceCount
-        case "전일대비":
-            infoLabel.text = model.audienceInten
         default:
             return
         }
