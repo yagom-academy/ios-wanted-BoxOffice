@@ -35,13 +35,17 @@ class MovieListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // MARK: TEST dummy data 박스오피스 순위
-        getDummy()
-        
         setupView()
         setConstraints()
         configureView()
         
+        RequestManager.shared.getDailyBoxOffice { [weak self] boxOffice in
+            guard let self = self else { return }
+            self.boxOffice = boxOffice
+            DispatchQueue.main.async {
+                self.updateItems()
+            }
+        }
         
         // FIXME: 적용 안됨.
         segment.layer.cornerRadius = 30
@@ -63,36 +67,33 @@ class MovieListViewController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             // 일별
-            getDummy()
-//            RequestManager.shared.getDailyBoxOffice { [weak self] boxOffice in
-//                guard let self = self else { return }
-//                self.boxOffice = boxOffice
-//                DispatchQueue.main.async {
-//                    self.updateItems()
-//                }
-//            }
+            RequestManager.shared.getDailyBoxOffice { [weak self] boxOffice in
+                guard let self = self else { return }
+                self.boxOffice = boxOffice
+                DispatchQueue.main.async {
+                    self.updateItems()
+                }
+            }
             break
         case 1:
             // 주간
-            getDummy()
-//            RequestManager.shared.getWeeklyBoxOffice(weekGb: .weekly) { [weak self] boxOffice in
-//                guard let self = self else { return }
-//                self.boxOffice = boxOffice
-//                DispatchQueue.main.async {
-//                    self.updateItems()
-//                }
-//            }
+            RequestManager.shared.getWeeklyBoxOffice(weekGb: .weekly) { [weak self] boxOffice in
+                guard let self = self else { return }
+                self.boxOffice = boxOffice
+                DispatchQueue.main.async {
+                    self.updateItems()
+                }
+            }
             break
         case 2:
             // 주말
-            getDummy()
-//            RequestManager.shared.getWeeklyBoxOffice(weekGb: .weekend) { [weak self] boxOffice in
-//                guard let self = self else { return }
-//                self.boxOffice = boxOffice
-//                DispatchQueue.main.async {
-//                    self.updateItems()
-//                }
-//            }
+            RequestManager.shared.getWeeklyBoxOffice(weekGb: .weekend) { [weak self] boxOffice in
+                guard let self = self else { return }
+                self.boxOffice = boxOffice
+                DispatchQueue.main.async {
+                    self.updateItems()
+                }
+            }
             break
         default:
             break

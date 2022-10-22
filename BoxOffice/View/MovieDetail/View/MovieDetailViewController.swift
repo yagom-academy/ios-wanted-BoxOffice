@@ -5,22 +5,25 @@
 //  Created by 유영훈 on 2022/10/19.
 //
 
+// FIXME: 코드가 너무 지저분함 수정 필요.
+
 import UIKit
 import SwiftUI
+
 class MovieDetailViewController: UIViewController {
 
-    @IBOutlet weak var actorNameLabel: NoPaddingUILabel!
-    @IBOutlet weak var directorNameLabel: NoPaddingUILabel!
-    
-    @IBOutlet weak var productYearLabel: NoPaddingUILabel!
+    @IBOutlet weak var rootScrollView: UIScrollView!
+    @IBOutlet weak var actorNameLabel: UILabel!
+    @IBOutlet weak var directorNameLabel: UILabel!
+    @IBOutlet weak var productYearLabel: UILabel!
     @IBOutlet weak var rankDifImage: UIImageView!
     @IBOutlet weak var rankDifLabel: UILabel!
     @IBOutlet weak var rankLabel: UILabel!
-    @IBOutlet weak var audienceAccLabel: NoPaddingUILabel!
-    @IBOutlet weak var openDateLabel: NoPaddingUILabel!
-    @IBOutlet weak var actorLabel: NoPaddingUILabel!
-    @IBOutlet weak var directorLabel: NoPaddingUILabel!
-    @IBOutlet weak var genresLabel: NoPaddingUILabel!
+    @IBOutlet weak var audienceAccLabel: UILabel!
+    @IBOutlet weak var openDateLabel: UILabel!
+    @IBOutlet weak var actorLabel: UILabel!
+    @IBOutlet weak var directorLabel: UILabel!
+    @IBOutlet weak var genresLabel: UILabel!
     @IBOutlet weak var isNewLabel: UILabel!
     @IBOutlet weak var watchGradeLabel: UILabel!
     @IBOutlet weak var showTimeMinuteLabel: UILabel!
@@ -32,6 +35,8 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var summaryLabelHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var reviewStar: UIImageView!
+    
+    var hostingController: UIHostingController<CommentListView>?
     
     var isFoldedSummaryLabel: Bool = true
     var movieInfo: MovieInfoModel?
@@ -45,18 +50,10 @@ class MovieDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         configureView()
         setLoadingCover()
-        
-        // MARK: TEST dummy data 박스오피스 순위
-        Dummy().getMovieInfo { [weak self] dummy in
-            guard let self = self else { return }
-            self.movieInfo = dummy
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.setupView()
-                self.unsetLoadingCover()
-            }
-        }
-        
+        getMovieIfo()
+    }
+    
+    func getMovieIfo() {
         RequestManager.shared.getMovieInfo(movieCd: self.movieCd!) { [weak self] movieInfo in
             guard let self = self else { return }
 
@@ -70,8 +67,35 @@ class MovieDetailViewController: UIViewController {
         }
     }
     
-    @IBSegueAction func swiftui(_ coder: NSCoder) -> UIViewController? {
-        let hostingController = UIHostingController(coder: coder, rootView: CommentListView(comments: Comment.sampleData))
+    func getDummy() {
+        // MARK: TEST dummy data 박스오피스 순위
+        Dummy().getMovieInfo { [weak self] dummy in
+            guard let self = self else { return }
+            self.movieInfo = dummy
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.setupView()
+                self.unsetLoadingCover()
+            }
+        }
+    }
+    
+    @IBAction func showAllCommentListView(_ sender: Any) {
+        let vc = UIHostingController(rootView: CommentListView(commentManager: CommentManager.shared))
+        self.navigationController?.navigationBar.backgroundColor = .clear
+        self.navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func showCommentWriteView(_ sender: Any) {
+        let vc = UIHostingController(rootView: CommentWriteView(commentManager: CommentManager.shared))
+        self.navigationController?.navigationBar.backgroundColor = .clear
+        self.navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBSegueAction func loadCommentListView(_ coder: NSCoder) -> UIViewController? {
+        hostingController = UIHostingController(coder: coder, rootView: CommentListView(commentManager: CommentManager.shared))
         hostingController!.view.translatesAutoresizingMaskIntoConstraints = false
         return hostingController
     }
@@ -151,6 +175,7 @@ extension MovieDetailViewController: DefaultViewSetupProtocol {
         audienceAccLabel.text = "\(changeToDecimal(daily!.audiAcc)!)명"
         rankLabel.text = "박스오피스 \(daily!.rank)위"
         rankDifLabel.text = abs(Int(daily!.rankInten)!).description
+        summaryLabel.text = "준비중"
     }
     
     @objc func shareMovieInfo() {
@@ -183,6 +208,7 @@ extension MovieDetailViewController: DefaultViewSetupProtocol {
     func configureView() {
         let shareButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareMovieInfo))
         self.navigationItem.rightBarButtonItem = shareButton
+        rootScrollView.decelerationRate = .fast
     }
 }
 
@@ -315,19 +341,7 @@ extension MovieDetailViewController {
     }
 }
 
-class NoPaddingUILabel: UILabel {
-    
-    override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
-        let rect = super.textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines)
-        return CGRect(x: bounds.origin.x, y: bounds.origin.y, width: rect.size.width, height: rect.size.height)
-    }
-    
-    override public func drawText(in rect: CGRect) {
-        let r = self.textRect(forBounds: rect, limitedToNumberOfLines: self.numberOfLines)
-        super.drawText(in: r)
-    }
-}
-
+// MARK: Share 기능 사용시 View를 Image로 바꾸고싶을때
 extension UIView {
     func transfromToImage() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(bounds.size, isOpaque, 0.0)

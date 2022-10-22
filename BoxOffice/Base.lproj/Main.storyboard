@@ -260,10 +260,10 @@
                                 <rect key="frame" x="0.0" y="47" width="390" height="763"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ner-Ux-Itx">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="1584.6666666666667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="1383.3333333333333"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="QTg-z3-0gD">
-                                                <rect key="frame" x="20" y="0.0" width="350" height="1584.6666666666667"/>
+                                                <rect key="frame" x="20" y="0.0" width="350" height="1383.3333333333333"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z4y-aJ-t4H">
                                                         <rect key="frame" x="0.0" y="0.0" width="350" height="240"/>
@@ -339,7 +339,7 @@
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="q9N-dy-mGC">
-                                                        <rect key="frame" x="0.0" y="299" width="350" height="1285.6666666666667"/>
+                                                        <rect key="frame" x="0.0" y="299" width="350" height="1084.3333333333333"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="91H-l3-oVh">
                                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="83.666666666666671"/>
@@ -436,13 +436,13 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wGT-bX-S0X">
                                                                         <rect key="frame" x="0.0" y="0.0" width="350" height="25"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장르" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnt-Rw-okn" customClass="NoPaddingUILabel" customModule="BoxOffice" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장르" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnt-Rw-okn">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="39" height="25"/>
                                                                                 <fontDescription key="fontDescription" name="NotoSansKR-Medium" family="Noto Sans KR" pointSize="15"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="액션, 코미디" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Qc-jI-Hf2" customClass="NoPaddingUILabel" customModule="BoxOffice" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="액션, 코미디" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Qc-jI-Hf2">
                                                                                 <rect key="frame" x="39" y="0.0" width="311" height="25"/>
                                                                                 <fontDescription key="fontDescription" name="NotoSansKR-Regular" family="Noto Sans KR" pointSize="15"/>
                                                                                 <color key="textColor" name="subTextColorAsset"/>
@@ -457,13 +457,13 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8kc-iz-fIt">
                                                                         <rect key="frame" x="0.0" y="29" width="350" height="25"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="감독" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRP-EB-zyT" customClass="NoPaddingUILabel" customModule="BoxOffice" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="감독" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRP-EB-zyT">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="39" height="25"/>
                                                                                 <fontDescription key="fontDescription" name="NotoSansKR-Medium" family="Noto Sans KR" pointSize="15"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="감독" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzZ-bl-O5c" customClass="NoPaddingUILabel" customModule="BoxOffice" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="감독" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzZ-bl-O5c">
                                                                                 <rect key="frame" x="39" y="0.0" width="311" height="25"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="43.5" id="STb-tQ-liS"/>
@@ -481,13 +481,13 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CQ0-ez-T6c">
                                                                         <rect key="frame" x="0.0" y="58" width="350" height="25"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="주연" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0Z-2H-M06" customClass="NoPaddingUILabel" customModule="BoxOffice" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="주연" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0Z-2H-M06">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="39" height="25"/>
                                                                                 <fontDescription key="fontDescription" name="NotoSansKR-Medium" family="Noto Sans KR" pointSize="15"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="주연" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2f4-3G-UtZ" customClass="NoPaddingUILabel" customModule="BoxOffice" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="주연" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2f4-3G-UtZ">
                                                                                 <rect key="frame" x="39" y="0.0" width="311" height="25"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="43.5" id="2Qu-j0-aSx"/>
@@ -505,13 +505,13 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="est-Mg-SaE">
                                                                         <rect key="frame" x="0.0" y="86.999999999999943" width="350" height="22"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개봉" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPN-g5-aPd" customClass="NoPaddingUILabel" customModule="BoxOffice" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개봉" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPN-g5-aPd">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="39" height="22"/>
                                                                                 <fontDescription key="fontDescription" name="NotoSansKR-Medium" family="Noto Sans KR" pointSize="15"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22.10.23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zB6-fc-2sx" customClass="NoPaddingUILabel" customModule="BoxOffice" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22.10.23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zB6-fc-2sx">
                                                                                 <rect key="frame" x="39" y="0.0" width="311" height="22"/>
                                                                                 <fontDescription key="fontDescription" name="NotoSansKR-Regular" family="Noto Sans KR" pointSize="15"/>
                                                                                 <color key="textColor" name="subTextColorAsset"/>
@@ -525,13 +525,13 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pmu-2j-ykl">
                                                                         <rect key="frame" x="0.0" y="112.99999999999994" width="350" height="22"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제작연도" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rM5-Kk-phm" customClass="NoPaddingUILabel" customModule="BoxOffice" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제작연도" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rM5-Kk-phm">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="65.333333333333329" height="22"/>
                                                                                 <fontDescription key="fontDescription" name="NotoSansKR-Medium" family="Noto Sans KR" pointSize="15"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44P-gH-bhZ" customClass="NoPaddingUILabel" customModule="BoxOffice" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44P-gH-bhZ">
                                                                                 <rect key="frame" x="65.333333333333343" y="0.0" width="284.66666666666663" height="22"/>
                                                                                 <fontDescription key="fontDescription" name="NotoSansKR-Regular" family="Noto Sans KR" pointSize="15"/>
                                                                                 <color key="textColor" name="subTextColorAsset"/>
@@ -545,13 +545,13 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q7g-bu-09q">
                                                                         <rect key="frame" x="0.0" y="138.99999999999994" width="350" height="22"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="누적관객" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKc-XL-NR4" customClass="NoPaddingUILabel" customModule="BoxOffice" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="누적관객" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKc-XL-NR4">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="65.333333333333329" height="22"/>
                                                                                 <fontDescription key="fontDescription" name="NotoSansKR-Medium" family="Noto Sans KR" pointSize="15"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10,442,012명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJt-jt-vJg" customClass="NoPaddingUILabel" customModule="BoxOffice" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10,442,012명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJt-jt-vJg">
                                                                                 <rect key="frame" x="65.333333333333343" y="0.0" width="284.66666666666663" height="22"/>
                                                                                 <fontDescription key="fontDescription" name="NotoSansKR-Regular" family="Noto Sans KR" pointSize="15"/>
                                                                                 <color key="textColor" name="subTextColorAsset"/>
@@ -597,28 +597,57 @@
                                                                     <constraint firstItem="DFw-vI-d2K" firstAttribute="width" secondItem="aIS-mz-9Ws" secondAttribute="width" multiplier="0.1" id="nCb-qS-cTG"/>
                                                                 </constraints>
                                                             </stackView>
-                                                            <view alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c8Y-F5-70k">
+                                                            <view alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c8Y-F5-70k" userLabel="separator">
                                                                 <rect key="frame" x="0.0" y="364.66666666666663" width="350" height="1"/>
-                                                                <color key="backgroundColor" name="backgroundColorAsset"/>
+                                                                <color key="backgroundColor" name="coverColorAsset"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="1" id="pph-Oj-YgJ"/>
                                                                 </constraints>
                                                             </view>
-                                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qFn-Be-okk">
-                                                                <rect key="frame" x="0.0" y="385.66666666666663" width="350" height="799.99999999999989"/>
-                                                                <color key="backgroundColor" name="backgroundColorAsset"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="e6r-HW-haU">
+                                                                <rect key="frame" x="0.0" y="385.66666666666663" width="350" height="34.333333333333314"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="리뷰" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JuH-kd-UTW">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="31.333333333333332" height="34.333333333333336"/>
+                                                                        <fontDescription key="fontDescription" name="NotoSansKR-Bold" family="Noto Sans KR" pointSize="17"/>
+                                                                        <color key="textColor" name="foregroundColorAsset"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XQA-6T-Vxp">
+                                                                        <rect key="frame" x="267" y="0.0" width="83" height="34.333333333333336"/>
+                                                                        <color key="tintColor" name="foregroundColorAsset"/>
+                                                                        <state key="normal" title="Button"/>
+                                                                        <buttonConfiguration key="configuration" style="plain" title="작성하기"/>
+                                                                        <connections>
+                                                                            <action selector="showCommentWriteView:" destination="IVj-gz-YBs" eventType="touchUpInside" id="s5l-Kk-NUg"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HKt-Us-7zL">
+                                                                <rect key="frame" x="0.0" y="440" width="350" height="520"/>
+                                                                <color key="backgroundColor" name="coverColorAsset"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="800" id="pLN-fb-Kan"/>
+                                                                    <constraint firstAttribute="height" constant="520" id="Vxl-9L-4tM"/>
                                                                 </constraints>
                                                                 <connections>
-                                                                    <segue destination="bHX-iz-4bQ" kind="embed" destinationCreationSelector="swiftui:" id="Ob1-CZ-k2s"/>
+                                                                    <segue destination="bHX-iz-4bQ" kind="embed" destinationCreationSelector="loadCommentListView:" id="3vx-WP-oM2"/>
                                                                 </connections>
                                                             </containerView>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xQK-WA-e05">
-                                                                <rect key="frame" x="0.0" y="1205.6666666666667" width="350" height="80"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fu4-jh-4jT">
+                                                                <rect key="frame" x="0.0" y="980" width="350" height="34.333333333333371"/>
+                                                                <color key="tintColor" name="foregroundColorAsset"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="모든 리뷰 보기"/>
+                                                                <connections>
+                                                                    <action selector="showAllCommentListView:" destination="IVj-gz-YBs" eventType="touchUpInside" id="YcA-nI-4fF"/>
+                                                                </connections>
+                                                            </button>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6IW-Kl-SE3">
+                                                                <rect key="frame" x="0.0" y="1034.3333333333333" width="350" height="50"/>
                                                                 <color key="backgroundColor" name="backgroundColorAsset"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="80" id="S71-uI-FUl"/>
+                                                                    <constraint firstAttribute="height" constant="50" id="8BV-NE-pRv"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
@@ -674,6 +703,7 @@
                         <outlet property="rankLabel" destination="X6L-dE-fP0" id="lJO-JD-Ipe"/>
                         <outlet property="reviewScoreLabel" destination="Uj3-ZG-SLz" id="T0k-3b-Rnd"/>
                         <outlet property="reviewStar" destination="jut-Es-Hpq" id="DzS-vF-9dA"/>
+                        <outlet property="rootScrollView" destination="gOU-ox-CA3" id="k6c-1e-r3h"/>
                         <outlet property="showTimeMinuteLabel" destination="3iQ-Ln-yea" id="FOQ-fN-VzH"/>
                         <outlet property="summaryLabel" destination="aIS-mz-9Ws" id="XQT-m7-4KS"/>
                         <outlet property="summaryLabelHeightConstraint" destination="Xxk-tK-n1R" id="kSq-JR-FM3"/>
@@ -683,7 +713,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gT0-Yb-VfO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1915" y="-2"/>
+            <point key="canvasLocation" x="1913.8461538461538" y="-2.1327014218009479"/>
         </scene>
         <!--Hosting Controller-->
         <scene sceneID="KFj-ct-7ta">
@@ -721,6 +751,9 @@
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <namedColor name="backgroundColorAsset">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="coverColorAsset">
+            <color red="0.90200001001358032" green="0.90200001001358032" blue="0.90200001001358032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="foregroundColorAsset">
             <color red="0.125" green="0.1289999932050705" blue="0.14100000262260437" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
