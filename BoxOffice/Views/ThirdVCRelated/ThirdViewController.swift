@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ThirdViewController: UIViewController {
 
     var model: ThirdModel
+    
+    lazy var contentView: ThirdContentView = ThirdContentView(viewModel: self.model.thirdContentViewModel)
+    lazy var hostingVC: UIHostingController = UIHostingController(rootView: contentView)
     
     init(viewModel: ThirdModel) {
         self.model = viewModel
@@ -21,7 +25,9 @@ class ThirdViewController: UIViewController {
     }
     
     override func loadView() {
-        
+        initViewHierarchy()
+        configureView()
+        bind()
     }
     
     override func viewDidLoad() {
@@ -41,4 +47,38 @@ class ThirdViewController: UIViewController {
     }
     */
 
+}
+
+extension ThirdViewController: Presentable {
+    func initViewHierarchy() {
+        self.view = UIView()
+        
+        self.addChild(hostingVC)
+        hostingVC.view.frame = self.view.bounds
+        self.view.addSubview(hostingVC.view)
+        hostingVC.didMove(toParent: self)
+        
+        hostingVC.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        var constraint: [NSLayoutConstraint] = []
+        defer { NSLayoutConstraint.activate(constraint) }
+        
+        constraint += [
+            hostingVC.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            hostingVC.view.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            hostingVC.view.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            hostingVC.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ]
+    }
+    
+    func configureView() {
+        self.view.backgroundColor = .white
+        self.title = "리뷰"
+    }
+    
+    func bind() {
+        
+    }
+    
+    
 }

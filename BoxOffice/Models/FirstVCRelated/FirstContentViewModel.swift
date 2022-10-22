@@ -24,11 +24,12 @@ class FirstContentViewModel {
     }
     
     //properties
-    var repository: RepositoryProtocol = Repository(httpClient: HTTPClient())
+    var repository: RepositoryProtocol
     private var privateDataSource: [FirstMovieCellModel] = []
     private var entity: KoficMovieEntity?
     
-    init() {
+    init(repository: RepositoryProtocol) {
+        self.repository = repository
         bind()
     }
     

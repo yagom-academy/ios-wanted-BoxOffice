@@ -25,7 +25,10 @@ class FirstModel: SceneActionReceiver {
     private var repository: RepositoryProtocol
     
     init(repository: RepositoryProtocol) {
-        self.privateFirstContentViewModel = FirstContentViewModel()
+        
+        let httpClient = HTTPClient()
+        let contentVMrepository = Repository(httpClient: httpClient)
+        self.privateFirstContentViewModel = FirstContentViewModel(repository: contentVMrepository)
         self.repository = repository
         bind()
     }

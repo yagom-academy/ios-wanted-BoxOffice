@@ -7,6 +7,21 @@
 
 import SwiftUI
 
+struct ReviewButtonView: View {
+    
+    @Binding var action: () -> ()
+    
+    var body: some View {
+        Button {
+            action()
+        } label: {
+            Image(systemName: "pencil.line")
+                .resizable(resizingMode: .stretch)
+                .frame(width: 40, height: 40)
+        }.padding()
+    }
+}
+
 struct ButtonView: View {
     
     @Binding var action: () -> ()
@@ -15,8 +30,10 @@ struct ButtonView: View {
         Button {
             action()
         } label: {
-            Label("공유하기", systemImage: "square.and.arrow.up")
-        }
+            Image(systemName: "square.and.arrow.up")
+                .resizable(resizingMode: .stretch)
+                .frame(width: 40, height: 40, alignment: .center)
+        }.padding()
 
     }
 }
@@ -102,6 +119,9 @@ struct SecondContentView: View {
                 ArrayDataView(data: $viewModel.restictionRate)
                     .padding()
                 ButtonView(action: $viewModel.didTapShareButton)
+                    .padding()
+                ReviewButtonView(action: $viewModel.didTapReviewButton)
+                    .padding()
             }
         }
     }

@@ -27,6 +27,9 @@ extension SecondViewControllerRoutable where Self: SecondViewController {
             guard let scene = buildScene(scene: Scene) else { return }
             guard let nextVC = scene as? UIActivityViewController else { return }
             present(nextVC, animated: true, completion: nil)
+        case .detail(.thirdViewController):
+            guard let nextScene = buildScene(scene: Scene) as? UIViewController else { return }
+            self.navigationController?.pushViewController(nextScene, animated: true)
         default: break
         }
     }
@@ -34,7 +37,6 @@ extension SecondViewControllerRoutable where Self: SecondViewController {
     func sendAction(scene: SceneCategory) {
         switch scene {
         case .main(.firstViewControllerWithAction(let context)):
-            // TODO: fix...?
             guard let firstVC = self.navigationController?.viewControllers.first(where: { $0 is FirstViewController }) as? FirstViewController else { return }
             let action = context.dependency
             firstVC.model.didReceiveSceneAction(action)
@@ -56,6 +58,8 @@ extension SecondViewControllerSceneBuildable where Self: SecondViewController {
             nextScene = buildAlert(context: context)
         case .activityScene(let context):
             nextScene = buildActivity(context: context)
+        case .detail(.thirdViewController(let context)):
+            nextScene = buildThirdScene(context: context)
         default: break
         }
         
@@ -64,6 +68,7 @@ extension SecondViewControllerSceneBuildable where Self: SecondViewController {
 }
 
 extension SecondViewControllerSceneBuildable where Self: SecondViewController {
+    
     func buildAlert(context: AlertDependency) -> Scenable {
         let nextScene: Scenable
         
@@ -77,6 +82,15 @@ extension SecondViewControllerSceneBuildable where Self: SecondViewController {
         
         let activityVC = ActivityFactory(dependency: context, superView: self.hostingVC.view).createActivity()
         nextScene = activityVC
+        return nextScene
+    }
+    
+    func buildThirdScene(context: SceneContext<ThirdModel>) -> Scenable {
+        var nextScene: Scenable
+        let thirdModel = context.dependency
+        let secondVC = ThirdViewController(viewModel: thirdModel)
+        nextScene = secondVC
+        
         return nextScene
     }
 }
