@@ -25,7 +25,7 @@ struct MovieReview: Codable {
     /// 내용
     let content: String?
     /// 사진
-    //    let image: String
+    var image: URL?
 
     private let uuid: UUID
 
@@ -37,6 +37,7 @@ struct MovieReview: Codable {
         password: String,
         rating: Int,
         content: String? = nil,
+        image: URL? = nil,
         uuid: UUID = UUID()
     ) {
         self.uuidString = uuid.uuidString
@@ -45,6 +46,7 @@ struct MovieReview: Codable {
         self.password = password
         self.rating = rating
         self.content = content
+        self.image = image
         self.uuid = uuid
     }
 

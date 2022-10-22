@@ -15,6 +15,7 @@ final class AddMovieReviewViewController: UIViewController {
     // MARK: Constants
 
     static let textViewPlaceHolder = "리뷰 (선택사항)"
+    static let imageViewPlaceHolder = "person.circle.fill"
 
     // MARK: UI
 
@@ -29,6 +30,7 @@ final class AddMovieReviewViewController: UIViewController {
     // MARK: Properties
 
     var review: MovieReview?
+    var image: UIImage?
 
     @Published private var username: String = ""
     @Published private var password: String = ""
@@ -152,6 +154,10 @@ final class AddMovieReviewViewController: UIViewController {
         var content = contentTextView.text
         if content == Self.textViewPlaceHolder {
             content = nil
+        }
+        image = imageView.image
+        if image == UIImage(systemName: Self.imageViewPlaceHolder) {
+            image = nil
         }
         review = MovieReview(
             movieIdentifier: movieIdentifier,

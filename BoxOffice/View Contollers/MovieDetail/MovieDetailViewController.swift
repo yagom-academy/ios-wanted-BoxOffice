@@ -178,8 +178,8 @@ final class MovieDetailViewController: UIViewController {
                 content.secondaryText = review.content
                 content.secondaryTextProperties.font = .preferredFont(forTextStyle: .caption1)
                 content.secondaryTextProperties.numberOfLines = 0
-                content.image = UIImage(systemName: "person.circle.fill")
                 content.imageProperties.tintColor = .secondarySystemFill
+                // TODO: image
                 cell.contentConfiguration = content
             }
         }
@@ -272,6 +272,13 @@ final class MovieDetailViewController: UIViewController {
         dataSource.apply(snapshot, animatingDifferences: true)
     }
 
+    private func addMovieReview(_ review: MovieReview, withImage image: UIImage?) {
+        Task {
+            await movieReviewService.addReview(review, withImage: image)
+            fetchMovieReviews()
+        }
+    }
+
     private func fetchMovieDetail() {
         Task {
             do {
@@ -294,8 +301,6 @@ final class MovieDetailViewController: UIViewController {
         }
     }
 
-
-
     private func deleteMovieReview(_ review: MovieReview) {
         Task {
             do {
@@ -313,8 +318,7 @@ final class MovieDetailViewController: UIViewController {
     func unwindToMovieDetail(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? AddMovieReviewViewController,
            let review = sourceViewController.review {
-            movieReviewService.addReview(review)
-            self.fetchMovieReviews()
+            addMovieReview(review, withImage: sourceViewController.image)
         }
     }
 
