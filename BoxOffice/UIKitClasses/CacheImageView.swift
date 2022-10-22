@@ -18,7 +18,7 @@ class CacheImageView: UIImageView {
         
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.image = nil
+            self.image = UIImage(systemName: .docImage)
         }
         self.lastImageURLString = urlString
         if let image = sharedHandler.object(forKey: urlString) as? UIImage {
@@ -54,7 +54,7 @@ class CacheImageView: UIImageView {
     }
     
     private func setErrorImage() {
-        self.image = UIImage(systemName: .errorImage)
+        self.image = UIImage(systemName: .docImage)
     }
     
     func handleError(error: Error) {
