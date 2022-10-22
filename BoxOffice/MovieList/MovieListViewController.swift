@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 final class MovieListViewController: UIViewController {
     
@@ -42,7 +41,7 @@ final class MovieListViewController: UIViewController {
     }
     
     private func settingNavigation() {
-        self.navigationItem.title = "\(viewModel.targetDate) 순위"
+        self.navigationItem.title = "🎥어제의 영화순위"
     }
     
     private func setupViewModel() {
@@ -57,7 +56,7 @@ final class MovieListViewController: UIViewController {
         self.viewModel.loadingEnd = { [weak self] in
             self?.indicator.stopAnimating()
         }
-        self.viewModel.requestMovieList(target: "20221017")
+        self.viewModel.requestMovieList()
         print("🍎 \(viewModel.movieList)")
     }
     
@@ -115,20 +114,3 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: self.view.frame.width, height: 120)
     }
 }
-//
-//struct MovieListViewController_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Container().edgesIgnoringSafeArea(.all)
-//    }
-//    
-//    struct Container: UIViewControllerRepresentable {
-//        func makeUIViewController(context: Context) -> UIViewController {
-//            let vc = MovieListViewController()
-//            return UINavigationController(rootViewController: vc)
-//        }
-//        
-//        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) { }
-//        
-//        typealias UIViewControllerType = UIViewController
-//    }
-//}

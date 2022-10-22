@@ -35,7 +35,6 @@
 		6CA3F6B52901A0A700DE1ABA /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA3F6B42901A0A700DE1ABA /* Observable.swift */; };
 		6CC4C3EF2902ACAE0054C3BA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6CC4C3EE2902ACAE0054C3BA /* FirebaseStorage */; };
 		6CC4C3F62902D0FB0054C3BA /* MovieReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4C3F52902D0FB0054C3BA /* MovieReviewCell.swift */; };
-		6CC4C3F82902F6F70054C3BA /* MovieFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4C3F72902F6F70054C3BA /* MovieFileManager.swift */; };
 		6CC4C3FA2902F7C60054C3BA /* FireStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4C3F92902F7C60054C3BA /* FireStorageManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +68,6 @@
 		6CA3F6B129019AB000DE1ABA /* MovieReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewViewModel.swift; sourceTree = "<group>"; };
 		6CA3F6B42901A0A700DE1ABA /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		6CC4C3F52902D0FB0054C3BA /* MovieReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewCell.swift; sourceTree = "<group>"; };
-		6CC4C3F72902F6F70054C3BA /* MovieFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFileManager.swift; sourceTree = "<group>"; };
 		6CC4C3F92902F7C60054C3BA /* FireStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,9 +86,6 @@
 		635A19DB28F9603900197BCC = {
 			isa = PBXGroup;
 			children = (
-				6C393A9F29030CB5005996E7 /* Review+CoreDataClass.swift */,
-				6C393AA029030CB5005996E7 /* Review+CoreDataProperties.swift */,
-				6C393A9A290308DB005996E7 /* Review.xcdatamodeld */,
 				635A19E628F9603900197BCC /* BoxOffice */,
 				635A19E528F9603900197BCC /* Products */,
 			);
@@ -118,8 +113,18 @@
 				635A19F228F9603A00197BCC /* LaunchScreen.storyboard */,
 				635A19F528F9603A00197BCC /* Info.plist */,
 				6C18CD502903996C00246953 /* GoogleService-Info.plist */,
+				6C393A9A290308DB005996E7 /* Review.xcdatamodeld */,
 			);
 			path = BoxOffice;
+			sourceTree = "<group>";
+		};
+		6C18CD552903AC8D00246953 /* Coredata */ = {
+			isa = PBXGroup;
+			children = (
+				6C393A9F29030CB5005996E7 /* Review+CoreDataClass.swift */,
+				6C393AA029030CB5005996E7 /* Review+CoreDataProperties.swift */,
+			);
+			path = Coredata;
 			sourceTree = "<group>";
 		};
 		6C21D01828FE92BB006227B2 /* MovieDetail */ = {
@@ -185,8 +190,8 @@
 		6CA3F6B32901A09D00DE1ABA /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				6C18CD552903AC8D00246953 /* Coredata */,
 				6CA3F6B42901A0A700DE1ABA /* Observable.swift */,
-				6CC4C3F72902F6F70054C3BA /* MovieFileManager.swift */,
 				6CC4C3F92902F7C60054C3BA /* FireStorageManager.swift */,
 				6C393A9D29030B62005996E7 /* CoredataManager.swift */,
 			);
@@ -283,7 +288,6 @@
 				6CC4C3FA2902F7C60054C3BA /* FireStorageManager.swift in Sources */,
 				6C9DAC7F28FD4A39001C0D8B /* MovieListCell.swift in Sources */,
 				6CC4C3F62902D0FB0054C3BA /* MovieReviewCell.swift in Sources */,
-				6CC4C3F82902F6F70054C3BA /* MovieFileManager.swift in Sources */,
 				6C64E40929005A230072706A /* ReviewTextView.swift in Sources */,
 				635A19EC28F9603900197BCC /* MovieListViewController.swift in Sources */,
 				6C393AA229030CB5005996E7 /* Review+CoreDataProperties.swift in Sources */,

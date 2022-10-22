@@ -10,7 +10,6 @@ import Foundation
 final class MovieListViewModel {
     
     private let repository: MovieReqeustable
-    let targetDate = "20221017"
     var movieList: [MovieListModel] = .init([])
     var boxofficeType: String = ""
     var showRange: String = ""
@@ -24,9 +23,9 @@ final class MovieListViewModel {
         self.repository = MovieRepository()
     }
     
-    func requestMovieList(target: String) {
+    func requestMovieList() {
         self.loadingStart()
-        repository.fetchMovieList(targetDate: targetDate) { [weak self] result in
+        repository.fetchMovieList(targetDate: getYesterday()) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let entity):
@@ -47,4 +46,15 @@ final class MovieListViewModel {
     func getMovieListCount() -> Int {
         return movieList.count
     }
+    
+    func getYesterday() -> String {
+        let calendar = Calendar.current
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: Date())!
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        let result = formatter.string(from: yesterday)
+        print("어제", result)
+        return result
+    }
 }
+

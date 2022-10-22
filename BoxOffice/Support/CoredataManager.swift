@@ -32,7 +32,6 @@ class CoreDataManager {
             let fetchResult = try self.context.fetch(request)
             //해당 영화의 리뷰만 가져와야함
             let filterResult = fetchResult.filter { $0.movieID == movieID }
-            print("🎃", movieID, filterResult, fetchResult.last?.movieID)
             return filterResult
         } catch {
             print(error.localizedDescription)
