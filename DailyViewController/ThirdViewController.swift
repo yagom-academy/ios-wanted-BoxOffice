@@ -6,6 +6,7 @@
 //
 
 import UIKit
+//import MobileCoreServices
 
 enum VideoHelper {
     static func startMediaBrowser(
@@ -17,7 +18,7 @@ enum VideoHelper {
 
         let mediaUI = UIImagePickerController()
         mediaUI.sourceType = sourceType
-//        mediaUI.mediaTypes = [kUTTypeMovie as String]
+//        mediaUI.mediaTypes = [kUTTypeMovie as String]  사진x동영상만가능
         mediaUI.allowsEditing = true
         mediaUI.delegate = delegate
         delegate.present(mediaUI, animated: true, completion: nil)
@@ -68,15 +69,19 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
         self.present(camera, animated: true)
     }
     @objc private func keepPhoto() {
+        let alert = UIAlertController(title: "무엇을?", message: "무엇을?", preferredStyle: .actionSheet)
+        let library = UIAlertAction(title: "사진앨범", style: .default) { (action) in self.openLibrary() }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        alert.addAction(library)
+        alert.addAction(cancel)
+        present(alert, animated: true)
         VideoHelper.startMediaBrowser(delegate: self, sourceType: .savedPhotosAlbum)
     }
+    
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = self.rightNavButton
-        self.navigationItem.leftBarButtonItem = self.firstNavButton
+        self.navigationItem.rightBarButtonItems = [rightNavButton, firstNavButton]
         self.idText.delegate = self
         self.passwordText.delegate = self
         self.checkPassword.delegate = self
@@ -116,6 +121,10 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
             updateButton(willActiove: false)
         }
         
+    }
+    func openLibrary() {
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: false)
     }
     
 }

@@ -256,9 +256,11 @@
                                                 <rect key="frame" x="0.0" y="591" width="390" height="40"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mux-pg-cts">
-                                                        <rect key="frame" x="297" y="2.6666666666666288" width="83" height="35"/>
+                                                        <rect key="frame" x="285.66666666666669" y="2.6666666666666288" width="94.333333333333314" height="35"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="리뷰하기"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="리뷰진행⎷">
+                                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </buttonConfiguration>
                                                         <connections>
                                                             <action selector="reviewButton:" destination="kpM-Wo-x7E" eventType="touchUpInside" id="3ds-UH-bfi"/>
                                                         </connections>

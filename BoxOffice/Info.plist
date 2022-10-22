@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>접근</string>
+	<string>사진첩 접근</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>접근</string>
 	<key>NSCameraUsageDescription</key>
-	<string>접근</string>
+	<string>카메라 접근</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
