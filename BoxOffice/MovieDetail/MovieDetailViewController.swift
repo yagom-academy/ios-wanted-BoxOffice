@@ -260,7 +260,10 @@ extension MovieDetailViewController: UITableViewDelegate {
                         self?.viewModel.reviewList.remove(at: indexPath.row)
                         self?.reviewTableView.reloadData()
                     } else {
-                        print("비밀번호 불일치 !!!")
+                        let failVC = UIAlertController(title: "비밀번호 불일치", message: "비밀번호가 틀렸습니다.", preferredStyle: .alert)
+                        let confirm = UIAlertAction(title: "확인", style: .default)
+                        failVC.addAction(confirm)
+                        self?.present(failVC, animated: true)
                     }
                 }
                
