@@ -38,7 +38,6 @@ final class MovieListViewModel {
                 }
                 self.updateMovieList()
                 self.loadingEnd()
-                print("💎 \(self.movieList)")
             case .failure(let error):
                 fatalError("🚨Error: \(error)")
             }

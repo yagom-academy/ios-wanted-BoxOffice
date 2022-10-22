@@ -72,6 +72,7 @@ final class MovieDetailViewController: UIViewController {
         tableView.backgroundColor = .systemGray6
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 50
+        tableView.isScrollEnabled = false
         return tableView
     }()
     
@@ -91,7 +92,9 @@ final class MovieDetailViewController: UIViewController {
     }()
     
     let viewModel: MovieDetailViewModel = .init()
-    var dummy = ["ㅋㅋㅋ", "시ㅏㄱㅈ[", "시ㅏㄱㅈ["]
+    private let coredataManager = CoreDataManager.shared
+    private(set) var inputPassword: String = ""
+    private var reviewList: [Review] = [] 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +103,12 @@ final class MovieDetailViewController: UIViewController {
         self.setupLayouts()
         self.setupViewModel()
         self.configureTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        reviewList = coredataManager.fetchReviews()
+        self.reviewTableView.reloadData()
     }
     
     private func setupViewModel() {
@@ -119,14 +128,12 @@ final class MovieDetailViewController: UIViewController {
         self.viewModel.loadingEnd = { [weak self] in
             self?.movieDetailTableView.reloadData()
             self?.indicator.stopAnimating()
-            
         }
     }
     
     private func configureTableView() {
         movieDetailTableView.register(MovieDetailCell.self, forCellReuseIdentifier: MovieDetailCell.identifier)
         movieDetailTableView.dataSource = self
-        movieDetailTableView.delegate = self
         reviewTableView.register(MovieReviewCell.self, forCellReuseIdentifier: MovieReviewCell.identifier)
         reviewTableView.dataSource = self
         reviewTableView.delegate = self
@@ -175,7 +182,7 @@ final class MovieDetailViewController: UIViewController {
             self.movieDetailTableView.topAnchor.constraint(equalTo: self.lineView.topAnchor),
             self.movieDetailTableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             self.movieDetailTableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            self.movieDetailTableView.heightAnchor.constraint(equalToConstant: 330)
+            self.movieDetailTableView.heightAnchor.constraint(equalToConstant: 320)
         ])
         
         NSLayoutConstraint.activate([
@@ -204,7 +211,7 @@ extension MovieDetailViewController: UITableViewDataSource {
         if tableView == movieDetailTableView {
             return viewModel.detailTitleList.count
         } else if tableView == reviewTableView {
-            return 3
+            return reviewList.count
         }
         return 0
     }
@@ -217,6 +224,7 @@ extension MovieDetailViewController: UITableViewDataSource {
             return cell
         } else if tableView == reviewTableView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieReviewCell.identifier, for: indexPath) as? MovieReviewCell else { fatalError("\(MovieReviewCell.identifier) can not dequeue cell") }
+            cell.configure(reviewList[indexPath.row])
             return cell
         }
         return UITableViewCell()
@@ -242,7 +250,18 @@ extension MovieDetailViewController: UITableViewDelegate {
     // TODO: 라벨 크기에 따른 동적 셀 구현해야됨
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            
+            let alertVC = UIAlertController(title: nil, message: "암호를 입력해주세요.", preferredStyle: .alert)
+            //비밀번호 입력 후 맞는지 확인
+            let confirm = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+                
+            }
+            //비밀번호 입력 후 temp에 저장
+            alertVC.addTextField { [weak self] textField in
+                self?.inputPassword = textField.text ?? ""
+                print("😗", textField.text)
+            }
+            alertVC.addAction(confirm)
+            self.present(alertVC, animated: true)
         }
     }
     

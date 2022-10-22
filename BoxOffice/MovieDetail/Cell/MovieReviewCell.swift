@@ -55,6 +55,12 @@ final class MovieReviewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(_ review: Review) {
+        self.nicknameLabel.text = "\(review.nickname ?? "")님"
+        self.starScoreLabel.text = "⭐️ \(review.starScore)"
+        self.contentLabel.text = review.content ?? ""
+    }
+    
     private func setupLayouts() {
         infoStackView.addArrangedSubviews(self.nicknameLabel, self.contentLabel)
         self.contentView.addSubViewsAndtranslatesFalse(infoStackView,

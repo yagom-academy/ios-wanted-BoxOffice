@@ -71,8 +71,10 @@ final class MovieReviewViewController: UIViewController {
     }()
     
     var movieTitle: String = ""
+    private let storageManager = FireStorageManager.shared
+    private let coredataManager = CoreDataManager.shared
     private var viewModel: MovieReviewViewModel = .init()
-    private(set) var finalReview: ReviewModel = .init(nickname: "", password: "", starScore: 0, content: "")
+    private(set) var finalReview: ReviewModel = .init(movieTitle: "", nickname: "", password: "", starScore: 0, content: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +85,8 @@ final class MovieReviewViewController: UIViewController {
         self.contentTextView.delegate = self
         self.registerButton.addTarget(self, action: #selector(registerButtonTapped(_:)), for: .touchUpInside)
         print("title: \(movieTitle)")
+        viewModel.movieTitle.value = movieTitle
+        print("❤️‍🔥", coredataManager.fetchReviews())
     }
     
     private func bind(_ viewmodel: MovieReviewViewModel) {
@@ -106,31 +110,10 @@ final class MovieReviewViewController: UIViewController {
         }
         
     }
-    
-    private func uploadReviewToStorage(_ review: ReviewModel) {
-        let reviewName = "[영화리뷰] : " + movieTitle
-        let jsonEncoder = JSONEncoder()
-        jsonEncoder.outputFormatting = .prettyPrinted
-        do {
-            let data = try jsonEncoder.encode(review)
-            let storageRef = Storage.storage().reference().child("\(reviewName)")
-            let metaData = StorageMetadata()
-            metaData.contentType = "txt"
-            storageRef.putData(data, metadata: metaData) { metaData, error in
-                if let error = error {
-                    print("metadata error: \(error)")
-                } else {
-                    print("🎉 Upload Success")
-                }
-            }
-        } catch {
-            fatalError("🚨ERROR: Review encode fail")
-        }
-        
-    }
-    
+
     @objc func registerButtonTapped(_ sender: UIButton) {
-        self.uploadReviewToStorage(finalReview)
+        storageManager.uploadReview(review: finalReview, movieTitle: movieTitle)
+        coredataManager.insertReviews(review: finalReview)
         let alertVC = UIAlertController(title: nil, message: "🎉 \(movieTitle) \n 영화 리뷰가 작성되었습니다!", preferredStyle: .alert)
         let confirm = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
