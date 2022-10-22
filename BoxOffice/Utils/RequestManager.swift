@@ -37,7 +37,7 @@ class RequestManager {
     func getDailyBoxOffice(_ date: Date = Date(), _ completion: @escaping ([BoxOfficeModel]) -> Void) {
         let baseUrl = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
         let targetDate = getDateForDaily(date: date)
-        guard let url = URL(string: "\(baseUrl)?key=\(Bundle.main.apikey)&targetDt=\(targetDate)&itemPerPage=\(PER_PAGE)") else {
+        guard let url = URL(string: "\(baseUrl)?key=\("212927ef7c291dbb9f53ebfae09d3e0d")&targetDt=\(targetDate)&itemPerPage=\(PER_PAGE)") else {
             print("Can not create url.")
             return
         }
