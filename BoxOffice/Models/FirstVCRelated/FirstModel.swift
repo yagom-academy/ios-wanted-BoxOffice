@@ -57,6 +57,18 @@ class FirstModel: SceneActionReceiver {
             let context = SceneContext(dependency: fourthModel)
             self.routeSubject?(.detail(.fourthViewController(context: context)))
         }
+        
+        didReceiveSceneAction = { [weak self] action in
+            guard let self else { return }
+            guard let action = action as? FirstSceneAction else { return }
+            switch action {
+            case .refresh:
+                break
+            case .reloadWithSelectedDate(let dateString):
+                self.populateDataWithSelectedDate(dateString: dateString)
+                break
+            }
+        }
     }
     
     private func requestAPI() async -> KoficMovieEntity? {
@@ -87,6 +99,28 @@ class FirstModel: SceneActionReceiver {
             routeSubject?(.alert(.networkAlert(.normalErrorAlert(alertDependency))))
         case .none:
             break
+        }
+    }
+}
+
+extension FirstModel {
+    func populateDataWithSelectedDate(dateString: String) {
+        print(#function)
+        Task {
+            guard let entity = await requestAPIWithSelectedDate(dateString: dateString) else { return }
+            privateFirstContentViewModel.didReceiveEntity(entity)
+        }
+    }
+    
+    private func requestAPIWithSelectedDate(dateString: String) async -> KoficMovieEntity? {
+        print(#function)
+        do {
+            print("dateString check : \(dateString)")
+            let entity: KoficMovieEntity = try await repository.fetch(api: .kofic(.daily(date: dateString)))
+            return entity
+        } catch let error {
+            handleError(error: error)
+            return nil
         }
     }
 }

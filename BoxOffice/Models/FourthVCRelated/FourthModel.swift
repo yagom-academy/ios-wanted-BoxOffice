@@ -20,9 +20,17 @@ class FourthModel {
     
     init() {
         self.privateFourthContentViewModel = FourthContentViewModel()
+        bind()
     }
     
     private func bind() {
-        
+        self.privateFourthContentViewModel.propergateNewDate = { [weak self] dateString in
+            guard let self = self else { return }
+            
+            
+            let context = SceneContext(dependency: FirstSceneAction.reloadWithSelectedDate(dateString: dateString))
+            
+            self.routeSubject?(.main(.firstViewControllerWithAction(context: context)))
+        }
     }
 }

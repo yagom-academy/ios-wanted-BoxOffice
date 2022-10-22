@@ -8,10 +8,10 @@
 import UIKit
 import SwiftUI
 
-class FourthViewController: UIViewController {
+class FourthViewController: UIViewController, FourthViewContollerRoutable {
 
     lazy var hostingVC = UIHostingController(rootView: contentView)
-    lazy var contentView = FourthContentView()
+    lazy var contentView = FourthContentView(viewModel: self.model.fourthContentViewModel)
     
     var model: FourthModel
     
@@ -75,7 +75,10 @@ extension FourthViewController: Presentable {
     }
     
     func bind() {
-        
+        model.routeSubject = { [weak self] scene in
+            guard let self else { return }
+            self.route(to: scene)
+        }
     }
     
     

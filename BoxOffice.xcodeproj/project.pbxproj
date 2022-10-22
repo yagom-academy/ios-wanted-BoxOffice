@@ -34,6 +34,7 @@
 		3676D23D29004F8F00807845 /* SecondContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3676D23C29004F8F00807845 /* SecondContentViewModel.swift */; };
 		3676D23F2900556200807845 /* Temp_SecondContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3676D23E2900556200807845 /* Temp_SecondContentView.swift */; };
 		3676D24129005BE300807845 /* Test_SecondContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3676D24029005BE300807845 /* Test_SecondContentView.swift */; };
+		36AEA98D2903A24300D89139 /* FourthViewControllerRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AEA98C2903A24300D89139 /* FourthViewControllerRoutable.swift */; };
 		36B1A8F1290278EC00E75ABC /* ActivityFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B1A8F0290278EC00E75ABC /* ActivityFactory.swift */; };
 		4CEA381E28FD570F007B86EE /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEA381D28FD570F007B86EE /* SecondViewController.swift */; };
 		4CEA382028FD571B007B86EE /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEA381F28FD571B007B86EE /* ThirdViewController.swift */; };
@@ -90,6 +91,7 @@
 		3676D23C29004F8F00807845 /* SecondContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondContentViewModel.swift; sourceTree = "<group>"; };
 		3676D23E2900556200807845 /* Temp_SecondContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp_SecondContentView.swift; sourceTree = "<group>"; };
 		3676D24029005BE300807845 /* Test_SecondContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_SecondContentView.swift; sourceTree = "<group>"; };
+		36AEA98C2903A24300D89139 /* FourthViewControllerRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthViewControllerRoutable.swift; sourceTree = "<group>"; };
 		36B1A8F0290278EC00E75ABC /* ActivityFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFactory.swift; sourceTree = "<group>"; };
 		4CEA381D28FD570F007B86EE /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		4CEA381F28FD571B007B86EE /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				4CEA383B28FD5A16007B86EE /* FirstViewControllerRoutable.swift */,
 				4CEA383D28FD5A31007B86EE /* SecondViewControllerRoutable.swift */,
 				4CEA383F28FD5A90007B86EE /* ThirdViewControllerRoutable.swift */,
+				36AEA98C2903A24300D89139 /* FourthViewControllerRoutable.swift */,
 				4CEA382628FD5785007B86EE /* SceneCategory.swift */,
 				4CEA382828FD57F2007B86EE /* SceneContext.swift */,
 				4CEA383928FD59F9007B86EE /* AlertFactory.swift */,
@@ -428,6 +431,7 @@
 				367520DB28FE7E1C0010437F /* HTTPClient.swift in Sources */,
 				3676D23D29004F8F00807845 /* SecondContentViewModel.swift in Sources */,
 				4CEA382928FD57F2007B86EE /* SceneContext.swift in Sources */,
+				36AEA98D2903A24300D89139 /* FourthViewControllerRoutable.swift in Sources */,
 				4CEA383428FD5862007B86EE /* SecondModel.swift in Sources */,
 				4CEA383228FD5855007B86EE /* FirstModel.swift in Sources */,
 				4CEA381E28FD570F007B86EE /* SecondViewController.swift in Sources */,
