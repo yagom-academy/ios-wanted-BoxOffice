@@ -54,5 +54,26 @@
 #### ViewModel 바인딩
 기존에는 MVVM 패턴의 구현 과정에서, ViewModel과 View의 의존성을 없애기 위해, didSet과 클로저를 통해서 구현했었습니다.
 
-하지만 이 방식은 ViewModel의 초기 상태를 View에 바인딩하기 불편하고, 하나의 객체를 여러다른 객체가 
- - viewModel의 Property가 변했음을, didSet과 didSet 안에서 실행할 클로저를 통해 View에 알리는 방식을 사용했었는데,
+하지만 이 방식을 사용하며 크게 두가지 단점을 느낄 수 있었습니다.
+ - ViewModel의 초기 상태를 View에 바인딩하기 불편하다.
+ - ViewModel의 Property를 여러 객체가 참조하는 경우, 객체의 수만큼 didSet 클로저 안에서 호출이 필요합니다.
+
+이러한 문제들을 해결하기 위해, ViewModel의 Property들을 Publisher 형태로 여러 객체들에서 관찰한다면 위 두가지 문제를 해결할 수 있을 것이라 생각하였습니다.
+
+<br/>
+
+<hr/>
+
+## URLCache 도입
+이번 프로젝트에서 사용하는 API들은 주로 캐싱 처리가 가능한 API들이라고 생각하고, 
+
+UX를 개선하기 위해, 영화 진흥위원회와 OMDb API관련 요청들을 URLCache를 활용해 캐싱처리 하였습니다.
+
+<br/>
+
+<hr/>
+
+## 리뷰 기능
+닉네임, 암호화된 비밀번호, 내용, 사진 데이터를 Data 형태로 Encoding하여, MovieCode를 이름으로 Firebase Storage에 저장하였습니다.
+
+영화에 대한 리뷰들을 받아올 때, 패스워드 정보까지 모두 받아오므로, Client 사이드에서는 다른 사람의 비밀번호를 알 수 없도록, 암호화하여 Firebase에 저장하였습니다.
