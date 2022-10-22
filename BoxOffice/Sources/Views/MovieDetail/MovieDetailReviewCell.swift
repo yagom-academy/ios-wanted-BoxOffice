@@ -114,12 +114,12 @@ class MovieDetailReviewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         subscriptions = []
-//        ratingView.viewModel = nil
-//        ratingLabel.text = nil
-//        contentLabel.text = nil
-//        photoView.image = nil
-//        photoView.isHidden = true
-//        nicknameLabel.text = nil
+        ratingView.viewModel = nil
+        ratingLabel.text = nil
+        contentLabel.text = nil
+        photoView.image = nil
+        photoView.isHidden = true
+        nicknameLabel.text = nil
     }
     
     // MARK: Setup Views
@@ -198,6 +198,10 @@ class MovieDetailReviewCell: UITableViewCell {
     
     // MARK: Binding
     func bind(viewModel: ViewModel) {
+        deleteButton.controlEvent(.touchUpInside)
+            .subscribe(viewModel.deleteReview)
+            .store(in: &subscriptions)
+        
         viewModel.$ratingViewModel
             .assign(to: \.viewModel, on: ratingView)
             .store(in: &subscriptions)

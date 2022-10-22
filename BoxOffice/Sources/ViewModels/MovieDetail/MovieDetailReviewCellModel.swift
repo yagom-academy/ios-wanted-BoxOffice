@@ -11,6 +11,7 @@ import Combine
 
 class MovieDetailReviewCellModel {
     // MARK: Input
+    let deleteReview = PassthroughSubject<Void, Never>()
     
     // MARK: Output
     @Published var review: Review

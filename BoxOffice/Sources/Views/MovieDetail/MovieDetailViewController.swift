@@ -194,6 +194,8 @@ class MovieDetailViewController: UIViewController {
                     self.present(vc, animated: true)
                 case .push(let vc):
                     self.navigationController?.pushViewController(vc, animated: true)
+                case .present(let vc):
+                    self.present(vc, animated: true)
                 }
             }).store(in: &subscriptions)
         

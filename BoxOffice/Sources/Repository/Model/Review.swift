@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct Review: Codable {
+struct Review: Codable, Equatable {
     var nickname: String
     var photo: Data?
     var rating: Int

@@ -86,6 +86,23 @@ class Repository {
             }.eraseToAnyPublisher()
     }
     
+    func deleteMovieReview(_ movieCode: String, review: Review) -> AnyPublisher<StorageMetadata, Error> {
+        return Storage.storage().reference().child("\(movieCode)")
+            .getData(maxSize: 1024 * 1024 * 20)
+            .subscribe(on: DispatchQueue.global())
+            .decode(type: [Review].self, decoder: JSONDecoder())
+            .catch { _ in
+                return Just([Review]())
+            }.map { reviews in
+                var reviews = reviews
+                reviews.removeAll(where: { $0 == review })
+                return reviews
+            }.encode(encoder: JSONEncoder())
+            .flatMap { data in
+                return Storage.storage().reference().child("\(movieCode)").putData(data)
+            }.eraseToAnyPublisher()
+    }
+    
     func loadImage(_ url: String) -> AnyPublisher<UIImage, Error> {
         return apiProvider.request(image: url)
     }
