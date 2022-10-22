@@ -7,10 +7,6 @@
 
 import UIKit
 
-//Poster: "https://m.media-amazon.com/images/M/MV5BYzZkOGUwMzMtMTgyNS00YjFlLTg5NzYtZTE3Y2E5YTA5NWIyXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_SX300.jpg")
-
-//Poster: "https://m.media-amazon.com/images/M/MV5BZjE2ZWIwMWEtNGFlMy00ZjYzLWEzOWEtYzQ0MDAwZDRhYzNjXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_SX300.jpg"
-
 extension UIImageView {
     //이미지 캐싱
     func setImageUrl(url: String, movieName: String){
@@ -26,7 +22,7 @@ extension UIImageView {
                 URLSession.shared.dataTask(with: url) { (data, result, error) in
                     if let _ = error {
                         DispatchQueue.main.async {
-//                            self.image = UIImage()
+                            self.image = UIImage()
                         }
                         return
                     }

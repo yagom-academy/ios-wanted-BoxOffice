@@ -24,7 +24,7 @@ class BoxOfficeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
         title = "박스오피스 순위"
 
         fetchData()
@@ -44,14 +44,11 @@ class BoxOfficeViewController: UIViewController {
                     let movieCode = boxOfficeDataList[index].movieCd
                     let movieDetailResponse = try await BoxOfficeService().getMovieDetailData(movieCode: movieCode).movieInfoResult.movieInfo
                     movieDetailDataList.append(movieDetailResponse)
-//                    let movieName = movieDetailResponse.movieNmEn
                     let movieName = boxOfficeHelper.movieNameHelper(boxOfficeDataList[index].movieNm)
-                    print(movieName)
                     do {
                         let posterResponse = try await BoxOfficeService().getMoviePosterData(movieName: movieName)
                         if posterResponse.results.count == 0 {
                             moviePosterData.append(posterBaseURL)
-                            print("포스터가 없어잉")
                         } else {
                             moviePosterData.append(posterResponse.results[0].poster_path ?? "")
                             print(posterResponse.results[0].poster_path ?? posterBaseURL)
@@ -60,8 +57,6 @@ class BoxOfficeViewController: UIViewController {
                     } catch {
                         print(error.localizedDescription)
                     }
-//                    print(moviePosterData)
-                    
                 }
             } catch {
                 print(error.localizedDescription)
@@ -137,45 +132,4 @@ extension BoxOfficeViewController: UITableViewDelegate, UITableViewDataSource {
     
         self.show(nextVC, sender: self)
     }
-    
 }
-
-//
-//    func fetchData() {
-//        BoxOfficeService().getBoxOfficeData(date: boxOfficeHelper.yesterdayDate()) { result in
-//            switch result {
-//            case .success(let boxOfficeData):
-//                self.boxOfficeDataList.append(contentsOf: boxOfficeData.boxOfficeResult.dailyBoxOfficeList)
-//                for i in 0..<self.boxOfficeDataList.count {
-//                    if self.boxOfficeDataList[i].movieNm == "공조2: 인터내셔날" {
-//                        self.fetchPosterData("공조 2: 인터내셔날")
-//                    } else {
-//                        self.fetchPosterData(self.boxOfficeDataList[i].movieNm)
-//                    }
-//                    print(self.boxOfficeDataList[i].movieNm)
-//                }
-//            case .failure(_):
-//                print("error")
-//            }
-//            DispatchQueue.main.async {
-//                self.boxOfficeView.boxOfficeTableView.reloadData()
-//            }
-//        }
-//    }
-    
-//
-//    func fetchPosterData(_ movieNm: String) {
-//        BoxOfficeService().getMoviePosterData(movieNm: movieNm) { result in
-//            switch result {
-//            case .success(let posterData):
-////                print("포스터 : \(posterData)")
-//                self.moviePosterData.append(posterData.results[0])
-//            case .failure(_):
-//                print(result)
-//            }
-////            DispatchQueue.main.async {
-////                self.boxOfficeView.boxOfficeTableView.reloadData()
-////            }
-//            print("arr: \(self.moviePosterData)")
-//        }
-//    }

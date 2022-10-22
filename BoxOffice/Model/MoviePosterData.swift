@@ -7,10 +7,6 @@
 
 import Foundation
 
-//struct MoviePosterData: Codable {
-//    let Poster: String
-//}
-
 struct MoviePosterData : Codable {
     let results : [Results]
 }

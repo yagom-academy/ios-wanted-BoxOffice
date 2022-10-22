@@ -285,7 +285,6 @@ class BoxOfficeDetailsView: UIView {
             lineView.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 10),
             lineView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             lineView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-//            lineView.widthAnchor.constraint(equalToConstant: 350),
             lineView.heightAnchor.constraint(equalToConstant: 100),
             
             movieInfoStackView.centerXAnchor.constraint(equalTo: lineView.centerXAnchor),
@@ -308,11 +307,7 @@ class BoxOfficeDetailsView: UIView {
             actorName.topAnchor.constraint(equalTo: actorLabel.bottomAnchor, constant: 10),
             actorName.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             actorName.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20)
-            
-            
-            
         ])
     }
-    
 }
 
