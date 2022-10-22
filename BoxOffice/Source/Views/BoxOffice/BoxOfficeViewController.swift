@@ -38,7 +38,6 @@ class BoxOfficeViewController: UIViewController {
             do {
                 let movieResponse = try await BoxOfficeService().getBoxOfficeData(date: boxOfficeHelper.yesterdayDate())
                 boxOfficeDataList.append(contentsOf: movieResponse.boxOfficeResult.dailyBoxOfficeList)
-                print(movieResponse)
                 boxOfficeView.boxOfficeTableView.reloadData()
                 for index in 0..<boxOfficeDataList.count {
                     let movieCode = boxOfficeDataList[index].movieCd
@@ -51,7 +50,6 @@ class BoxOfficeViewController: UIViewController {
                             moviePosterData.append(posterBaseURL)
                         } else {
                             moviePosterData.append(posterResponse.results[0].poster_path ?? "")
-                            print(posterResponse.results[0].poster_path ?? posterBaseURL)
                         }
                         
                     } catch {
