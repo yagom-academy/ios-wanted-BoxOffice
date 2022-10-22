@@ -3,11 +3,19 @@
 # BoxOffice App
 
 ---
-![IMG_4426121212](https://user-images.githubusercontent.com/24997407/197330870-7b748c5a-8029-4321-8863-c2b743dc8916.jpg)
-- 지준영
-    - YagomAcademy: JunYoungJee
-    - Discord: Bill
 
+<table>
+    <tr align="center">
+        <td><B>지준영<B></td>
+    </tr>
+    <tr align="center">
+        <td width= 170px>
+            <img src="https://user-images.githubusercontent.com/24997407/197330870-7b748c5a-8029-4321-8863-c2b743dc8916.jpg" width="73%">
+            <br>
+            <a href="https://github.com/gelb2"><I>JunYoungJee (Bill)</I></a>
+        </td>
+    </tr>
+</table>
 ---
 
 # 기본구조
@@ -124,12 +132,10 @@
 # 기능
 
 ## 일일 박스오피스 + 날짜 수정 후 다시 불러오기
-![IMG_0218](https://user-images.githubusercontent.com/24997407/197330731-48508a72-846e-4135-ac22-4f448ab4aa2d.jpg)
-![RPReplay_Final1666427296_MP4_AdobeExpress](https://user-images.githubusercontent.com/24997407/197330845-68e36546-9be5-4bba-a4b2-2c27d86cee23.gif)
-
+<img src="https://user-images.githubusercontent.com/24997407/197330731-48508a72-846e-4135-ac22-4f448ab4aa2d.jpg" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/24997407/197330845-68e36546-9be5-4bba-a4b2-2c27d86cee23.gif" width="30%"></img>
 
 ## 영화 선택 후 해당 영화 관련 디테일 정보 확인 + 공유
-![IMG_0220](https://user-images.githubusercontent.com/24997407/197330817-8d4212da-7641-4d68-9b59-7fec23d53336.PNG)
-![RPReplay_Final1666340340_AdobeExpress](https://user-images.githubusercontent.com/24997407/197330847-e99fe79b-7022-41eb-8c0e-079dee9f6e7b.gif)
-
+<img src="https://user-images.githubusercontent.com/24997407/197330817-8d4212da-7641-4d68-9b59-7fec23d53336.PNG" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/24997407/197330847-e99fe79b-7022-41eb-8c0e-079dee9f6e7b.gif" width="30%"></img>
 ---
