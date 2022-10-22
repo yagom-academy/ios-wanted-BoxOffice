@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="rkB-5q-pIy" customClass="Review" customModule="BoxOffice" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0DD-R4-fCL">
+                    <rect key="frame" x="312" y="33" width="83" height="34"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="리뷰쓰기"/>
+                </button>
+                <textField opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rsw-Mo-PB0">
+                    <rect key="frame" x="5" y="33" width="297" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2nY-vy-cU9">
+                    <rect key="frame" x="224" y="32.666666666666664" width="83" height="34.999999999999993"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="리뷰확정"/>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="cnf-0z-m49"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="0DD-R4-fCL" firstAttribute="leading" secondItem="2nY-vy-cU9" secondAttribute="trailing" constant="5" id="1w5-Vi-NWO"/>
+                <constraint firstItem="0DD-R4-fCL" firstAttribute="leading" secondItem="Rsw-Mo-PB0" secondAttribute="trailing" constant="10" id="2MY-0H-qzm"/>
+                <constraint firstItem="Rsw-Mo-PB0" firstAttribute="centerY" secondItem="rkB-5q-pIy" secondAttribute="centerY" id="2ub-u7-t41"/>
+                <constraint firstItem="cnf-0z-m49" firstAttribute="trailing" secondItem="0DD-R4-fCL" secondAttribute="trailing" constant="5" id="L47-JN-8qh"/>
+                <constraint firstItem="0DD-R4-fCL" firstAttribute="top" secondItem="rkB-5q-pIy" secondAttribute="top" constant="33" id="XeR-eO-1n5"/>
+                <constraint firstItem="2nY-vy-cU9" firstAttribute="centerY" secondItem="rkB-5q-pIy" secondAttribute="centerY" id="sEl-ET-YdI"/>
+                <constraint firstItem="0DD-R4-fCL" firstAttribute="centerY" secondItem="rkB-5q-pIy" secondAttribute="centerY" id="vYk-rq-IGQ"/>
+                <constraint firstItem="Rsw-Mo-PB0" firstAttribute="leading" secondItem="cnf-0z-m49" secondAttribute="leading" constant="5" id="yyP-I1-W0w"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="reviewText" destination="Rsw-Mo-PB0" id="MmU-jg-Bcf"/>
+                <outlet property="reviewtext" destination="0DD-R4-fCL" id="sbR-uv-vDn"/>
+                <outlet property="revireButton" destination="2nY-vy-cU9" id="W4C-d5-bcK"/>
+            </connections>
+            <point key="canvasLocation" x="-206.15384615384616" y="-77.488151658767762"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
