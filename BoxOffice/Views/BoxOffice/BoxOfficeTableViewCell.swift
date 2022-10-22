@@ -26,7 +26,9 @@ class BoxOfficeTableViewCell: UITableViewCell {
     //영화 이름
     let movieName: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.font = .systemFont(ofSize: 18)
+        label.lineBreakMode = .byCharWrapping
+        label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -35,6 +37,7 @@ class BoxOfficeTableViewCell: UITableViewCell {
     let openDate: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15)
+        label.textColor = .systemGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -165,14 +168,15 @@ class BoxOfficeTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             posterImageView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             posterImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            posterImageView.heightAnchor.constraint(equalToConstant: 100),
-            posterImageView.widthAnchor.constraint(equalToConstant: 70),
+            posterImageView.heightAnchor.constraint(equalToConstant: 120),
+            posterImageView.widthAnchor.constraint(equalToConstant: 80),
             
             rankOldAndNew.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             rankOldAndNew.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
             
             movieName.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            movieName.leadingAnchor.constraint(equalTo: rankOldAndNew.trailingAnchor, constant: 5),
+            movieName.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
+            movieName.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
             openDate.topAnchor.constraint(equalTo: movieName.bottomAnchor, constant: 5),
             openDate.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
