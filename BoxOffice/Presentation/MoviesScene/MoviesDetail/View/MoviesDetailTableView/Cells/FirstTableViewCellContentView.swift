@@ -20,6 +20,7 @@ class FirstTableViewCellContentView: UIView {
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         label.textColor = .black
+        label.sizeToFit()
         
         return label
     }()
@@ -31,6 +32,7 @@ class FirstTableViewCellContentView: UIView {
         label.font = UIFont.systemFont(ofSize: 15, weight: .heavy)
         label.textColor = .systemRed
         label.text = "New"
+        label.sizeToFit()
         
         return label
     }()
@@ -42,6 +44,7 @@ class FirstTableViewCellContentView: UIView {
         label.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         label.textColor = .darkGray
         label.text = "-"
+        label.sizeToFit()
         
         return label
     }()
@@ -52,6 +55,7 @@ class FirstTableViewCellContentView: UIView {
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 27, weight: .semibold)
         label.textColor = .black
+        label.sizeToFit()
         
         return label
     }()
@@ -82,17 +86,16 @@ extension FirstTableViewCellContentView {
         NSLayoutConstraint.activate([
             rankLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             rankLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 30),
-            rankLabel.widthAnchor.constraint(equalToConstant: 55)
+//            rankLabel.widthAnchor.constraint(equalToConstant: 55)
         ])
         
         NSLayoutConstraint.activate([
             newLabel.centerXAnchor.constraint(equalTo: rankLabel.centerXAnchor),
             newLabel.topAnchor.constraint(equalTo: rankLabel.bottomAnchor),
-            newLabel.widthAnchor.constraint(equalToConstant: 40)
         ])
         
         NSLayoutConstraint.activate([
-            plusLabel.leadingAnchor.constraint(equalTo: self.rankLabel.trailingAnchor),
+            plusLabel.leadingAnchor.constraint(equalTo: self.rankLabel.trailingAnchor, constant: 10),
             plusLabel.centerYAnchor.constraint(equalTo: self.rankLabel.centerYAnchor)
         ])
         
