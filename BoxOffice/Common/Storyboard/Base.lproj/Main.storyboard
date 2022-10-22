@@ -197,7 +197,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G0d-C1-jG9">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G0d-C1-jG9">
                                 <rect key="frame" x="0.0" y="90" width="390" height="670"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fvP-wu-cmL">
@@ -218,11 +218,17 @@
                         <constraints>
                             <constraint firstItem="m3l-Cd-JpW" firstAttribute="trailing" secondItem="G0d-C1-jG9" secondAttribute="trailing" id="HUz-o2-42d"/>
                             <constraint firstItem="G0d-C1-jG9" firstAttribute="leading" secondItem="m3l-Cd-JpW" secondAttribute="leading" id="W38-HC-gSt"/>
-                            <constraint firstItem="G0d-C1-jG9" firstAttribute="top" secondItem="m3l-Cd-JpW" secondAttribute="top" id="iJn-mU-HZW"/>
-                            <constraint firstItem="m3l-Cd-JpW" firstAttribute="bottom" secondItem="G0d-C1-jG9" secondAttribute="bottom" id="mlQ-q0-WNY"/>
+                            <constraint firstItem="G0d-C1-jG9" firstAttribute="top" secondItem="m3l-Cd-JpW" secondAttribute="top" constant="-1" id="iJn-mU-HZW"/>
+                            <constraint firstItem="m3l-Cd-JpW" firstAttribute="bottom" secondItem="G0d-C1-jG9" secondAttribute="bottom" constant="1" id="mlQ-q0-WNY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="OIP-8q-HqX"/>
+                    <navigationItem key="navigationItem" id="hDi-cG-wLg">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.arrow.up" catalog="system" id="3rZ-Ga-pBn">
+                            <connections>
+                                <action selector="didTapShareButton:" destination="Arw-ko-DA3" id="u7D-Tp-YFs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="G0d-C1-jG9" id="hbe-Mv-nEd"/>
                     </connections>
@@ -237,6 +243,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="list.number" catalog="system" width="128" height="97"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

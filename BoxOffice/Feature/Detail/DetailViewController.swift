@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MessageUI
 
 final class DetailViewController: UIViewController {
     static var identifier: String { String(describing: self) }
@@ -46,6 +47,77 @@ final class DetailViewController: UIViewController {
             dto = try await self.vm.fetchDetailView(boxOfficeData: boxOfficeData)
             self.collectionView.reloadData()
         }
+    }
+    
+    @IBAction func didTapShareButton(_ sender: Any) {
+        guard MFMessageComposeViewController.canSendText() else {
+            return
+        }
+        
+        let composeViewController = MFMessageComposeViewController()
+        
+        let data = dto?.dataSource.first?.items
+        let data2 = dto?.dataSource.last?.items
+        var rank = ""
+        var rankInten = ""
+        var rankOldAndNew = ""
+        var movieNm = ""
+        var openDt = ""
+        var audiCnt = ""
+        var movieCd = ""
+        var prdtYear = ""
+        var showTm = ""
+        var genres = ""
+        var directors = ""
+        var actors = ""
+        var audits = ""
+        
+        data?.forEach({ row in
+            switch row {
+            case .movieInfoWithBoxOffice(let boxOfficeData):
+                rank = boxOfficeData.rank
+                rankInten = boxOfficeData.rankInten
+                rankOldAndNew = boxOfficeData.rankOldAndNew
+                movieNm = boxOfficeData.movieNm
+                openDt = boxOfficeData.openDt
+                audiCnt = boxOfficeData.audiCnt
+                
+            default: print("")
+            }
+        })
+        
+        data2?.forEach({ row in
+            switch row {
+            case .movieInfo(let movieInfoData):
+                movieCd = movieInfoData.movieCd
+                prdtYear = movieInfoData.prdtYear
+                showTm = movieInfoData.showTm
+                genres = movieInfoData.genres.compactMap { $0.genreNm }.joined(separator: ", ")
+                directors = movieInfoData.directors.compactMap { $0.peopleNm }.joined(separator: ", ")
+                actors = movieInfoData.actors.compactMap { $0.peopleNm }.joined(separator: ", ")
+                audits = movieInfoData.audits.first?.watchGradeNm ?? ""
+                
+            default: print("")
+            }
+        })
+        
+        composeViewController.body = """
+            rank: \(rank)
+            rankInten: \(rankInten)
+            rankOldAndNew: \(rankOldAndNew)
+            movieNm: \(movieNm)
+            openDt: \(openDt)
+            audiCnt: \(audiCnt)
+            movieCd: \(movieCd)
+            prdtYear: \(prdtYear)
+            showTm: \(showTm)
+            genres: \(genres)
+            directors: \(directors)
+            actors: \(actors)
+            audits: \(audits)
+        """
+        
+        self.present(composeViewController, animated: true)
     }
 }
 
@@ -105,5 +177,16 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+    }
+}
+
+extension DetailViewController: MFMessageComposeViewControllerDelegate {
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        switch result {
+        case .cancelled, .sent, .failed:
+            self.dismiss(animated: true)
+        default:
+            self.dismiss(animated: true)
+        }
     }
 }
