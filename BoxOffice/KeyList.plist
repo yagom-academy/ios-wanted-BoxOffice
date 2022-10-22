@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Poster_API_KEY</key>
+	<string>ab318418ee513b352deb4c9ab21f7ed7</string>
+	<key>Movie_API_KEY</key>
+	<string>60c9b995596ead85ff6e59a8d3725e72</string>
+</dict>
+</plist>
