@@ -20,7 +20,7 @@ extension Review {
     @NSManaged public var nickname: String?
     @NSManaged public var starScore: Int16
     @NSManaged public var content: String?
-    @NSManaged public var movieTitle: String?
+    @NSManaged public var movieID: String?
 
 }
 

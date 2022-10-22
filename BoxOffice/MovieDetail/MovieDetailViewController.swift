@@ -95,7 +95,6 @@ final class MovieDetailViewController: UIViewController {
     private let coredataManager = CoreDataManager.shared
     private(set) var inputPassword: String = ""
     private(set) var movieID: String = ""
-    private var reviewList: [Review] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,7 +107,7 @@ final class MovieDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        reviewList = coredataManager.fetchReviews(movieID: movieID)
+        viewModel.reviewList = coredataManager.fetchReviews(movieID: movieID)
         self.reviewTableView.reloadData()
     }
     
@@ -125,6 +124,8 @@ final class MovieDetailViewController: UIViewController {
             self?.movieTitleEngAndproductYearLabel.text = "\(model.movieNameEng), \(model.productYear)"
             self?.movieOpenDateAndShowTime.text = "\(model.openDate), \(model.showTime)"
             self?.movieID = model.movieCode
+            self?.viewModel.reviewList = self?.coredataManager.fetchReviews(movieID: model.movieCode) ?? []
+            self?.reviewTableView.reloadData()
         }
         
         self.viewModel.loadingEnd = { [weak self] in
@@ -152,8 +153,8 @@ final class MovieDetailViewController: UIViewController {
     @objc func writeReview() {
         let reviewVC = MovieReviewViewController()
         reviewVC.movieTitle = self.movieTitleLabel.text ?? ""
-        reviewVC.movieID  = self.movieID
-        print("🎉", movieID)
+        reviewVC.movieID  = viewModel.movieID
+        print("🎉", viewModel.movieID)
         self.navigationController?.pushViewController(reviewVC, animated: true)
     }
     
@@ -215,7 +216,7 @@ extension MovieDetailViewController: UITableViewDataSource {
         if tableView == movieDetailTableView {
             return viewModel.detailTitleList.count
         } else if tableView == reviewTableView {
-            return reviewList.count
+            return viewModel.reviewList.count
         }
         return 0
     }
@@ -228,7 +229,7 @@ extension MovieDetailViewController: UITableViewDataSource {
             return cell
         } else if tableView == reviewTableView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieReviewCell.identifier, for: indexPath) as? MovieReviewCell else { fatalError("\(MovieReviewCell.identifier) can not dequeue cell") }
-            cell.configure(reviewList[indexPath.row])
+            cell.configure(viewModel.reviewList[indexPath.row])
             return cell
         }
         return UITableViewCell()

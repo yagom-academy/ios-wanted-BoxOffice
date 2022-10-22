@@ -10,7 +10,7 @@ import Foundation
 final class MovieDetailViewModel {
     
     let detailTitleList = ["장르", "관람등급", "감독", "출연", "누적관객", "전일대비"]
-
+    
     var movieDetailModel: MovieDetailModel? {
         didSet {
             guard let data = movieDetailModel else { return }
@@ -23,9 +23,19 @@ final class MovieDetailViewModel {
         didSet {
             guard let data = movieListModel else { return }
             requestMovieDetail(data: data)
+            movieID = data.movieCode
         }
     }
-
+    
+    var movieID: String = ""
+    
+    var reviewList: [Review] = []{
+        didSet {
+            print("리뷰 리스트 \(reviewList)")
+        }
+    }
+    
+    
     private let repository: MovieReqeustable
     
     var loadingStart: (() -> Void) = {}
