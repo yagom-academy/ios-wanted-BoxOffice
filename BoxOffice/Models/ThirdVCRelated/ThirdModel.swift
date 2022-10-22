@@ -8,5 +8,18 @@
 import Foundation
 
 class ThirdModel {
+    //input
+    
+    //output
+    var thirdContentViewModel: ThirdContentViewModel {
+        return privateThirdContentViewModel
+    }
+    
+    //properties
+    var privateThirdContentViewModel: ThirdContentViewModel = ThirdContentViewModel()
+    
+    init() {
+        
+    }
     
 }
