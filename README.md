@@ -2,7 +2,6 @@
 
 # BoxOffice App
 
----
 
 <table>
     <tr align="center">
@@ -16,7 +15,7 @@
         </td>
     </tr>
 </table>
----
+   
 
 # 기본구조
 
