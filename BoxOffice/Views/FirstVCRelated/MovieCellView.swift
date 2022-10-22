@@ -75,7 +75,7 @@ extension MovieCellView: Presentable {
         constraint += [
             presentRankLabel.centerYAnchor.constraint(equalTo: movieNameLabel.centerYAnchor),
             presentRankLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 8),
-            presentRankLabel.widthAnchor.constraint(equalToConstant: 16)
+            presentRankLabel.widthAnchor.constraint(equalToConstant: 24)
         ]
         
         constraint += [
