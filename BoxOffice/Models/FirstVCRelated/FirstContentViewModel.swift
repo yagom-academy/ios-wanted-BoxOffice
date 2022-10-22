@@ -22,6 +22,7 @@ class FirstContentViewModel {
     }
     
     //properties
+    var repository: RepositoryProtocol = Repository(httpClient: HTTPClient())
     private var privateDataSource: [FirstMovieCellModel] = []
     private var entity: KoficMovieEntity?
     
@@ -32,8 +33,11 @@ class FirstContentViewModel {
     private func bind() {
         didReceiveEntity = { [weak self] entity in
             guard let self = self else { return }
-            self.populateEntity(result: entity)
-            self.didReceiveViewModel?(())
+            
+            Task {
+                await self.populateEntity(result: entity)
+                self.didReceiveViewModel?(())
+            }
         }
         
         didSelectItemInTableView = { [weak self] indexPath in
@@ -43,12 +47,36 @@ class FirstContentViewModel {
         }
     }
     
-    
-    
-    // TODO: 엔티티를 모델로 매핑
-    private func populateEntity(result: KoficMovieEntity) {
+    private func populateEntity(result: KoficMovieEntity) async {
         print(#function)
         self.entity = result
+        
+        var closures: [() -> Task<String, Error>] = []
+        for value in result.boxOfficeResult.dailyBoxOfficeList {
+            async let closure: () -> Task<String, Error> = { () -> Task<String, Error> in
+               Task { () -> (String) in
+                    let detailed: KoficMovieDetailEntity = try await self.repository.fetch(api: .kofic(.detailMovieInfo(movieCd: value.movieCd)))
+                    let posterUrl: OmdbEntity = try await self.repository.fetch(api: .omdb(movieName: detailed.movieInfoResult.movieInfo.movieNmEn, releasedYear: detailed.movieInfoResult.movieInfo.openDt.koficDateToYear() ?? "2022"))
+                    return posterUrl.poster
+                }
+            }
+            await closures.append(closure)
+        }
+        
+        let mappedClosure = closures.map { value in
+            value()
+        }
+        
+        do {
+            let asyncMapped = try await mappedClosure.asyncMap { task in
+                let result = try await task.result.get()
+                return result
+            }
+        } catch {
+            // TODO: catch error
+            print("async mapped error")
+        }
+        
         privateDataSource = result.boxOfficeResult.dailyBoxOfficeList.map { dailyBoxOfficeValue -> FirstMovieCellModel in
             let cellModel = FirstMovieCellModel()
             cellModel.rnum = dailyBoxOfficeValue.rnum

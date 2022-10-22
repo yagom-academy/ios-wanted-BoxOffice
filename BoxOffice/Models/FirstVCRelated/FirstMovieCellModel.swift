@@ -23,6 +23,8 @@ class FirstMovieCellModel {
     var audiCnt, audiInten, audiChange, audiAcc: String
     var scrnCnt, showCnt: String
     
+    var imageURLString: String
+    
     var repository: RepositoryProtocol = Repository(httpClient: HTTPClient())
     
     init() {
@@ -44,7 +46,7 @@ class FirstMovieCellModel {
         self.audiAcc = "" //누적관객수
         self.scrnCnt = "" //해당일자에 상영한 스크린 수
         self.showCnt = "" //해당일자에 상영된 횟수
-        
+        self.imageURLString = ""
         bind()
     }
     
