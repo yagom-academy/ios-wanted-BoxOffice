@@ -17,7 +17,7 @@ class FirstTableViewCellContentView: UIView {
     let rankLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         label.textColor = .black
         
@@ -27,7 +27,7 @@ class FirstTableViewCellContentView: UIView {
     let newLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 15, weight: .heavy)
         label.textColor = .systemRed
         label.text = "New"
@@ -82,7 +82,7 @@ extension FirstTableViewCellContentView {
         NSLayoutConstraint.activate([
             rankLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             rankLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 30),
-            rankLabel.widthAnchor.constraint(equalToConstant: 40)
+            rankLabel.widthAnchor.constraint(equalToConstant: 55)
         ])
         
         NSLayoutConstraint.activate([
@@ -92,12 +92,12 @@ extension FirstTableViewCellContentView {
         ])
         
         NSLayoutConstraint.activate([
-            plusLabel.leadingAnchor.constraint(equalTo: self.rankLabel.trailingAnchor, constant: 10),
+            plusLabel.leadingAnchor.constraint(equalTo: self.rankLabel.trailingAnchor),
             plusLabel.centerYAnchor.constraint(equalTo: self.rankLabel.centerYAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: self.plusLabel.trailingAnchor, constant: 10),
+            titleLabel.leadingAnchor.constraint(equalTo: self.plusLabel.trailingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 30),
             titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -40),

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class MoviesDetailViewController: UIViewController {
     
@@ -13,6 +14,17 @@ class MoviesDetailViewController: UIViewController {
     var repository: MoviesRepository?
     
     lazy var moviesDetailTableView = MoviesDetailTableView()
+    
+    let shareButton: UIButton = {
+        let view = UIButton()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemBlue
+        view.layer.cornerRadius = 6
+        view.tintColor = .white
+        view.setTitle("공유하기", for: .normal)
+        
+        return view
+    }()
     
     init(viewModel: MoviesDetailItemViewModel, repository: MoviesRepository) {
         self.viewModel = viewModel
@@ -36,12 +48,11 @@ class MoviesDetailViewController: UIViewController {
         bind()
         setNavigationbar()
     }
-    
 }
 
 extension MoviesDetailViewController {
     func setupViews() {
-        let views = [moviesDetailTableView]
+        let views = [moviesDetailTableView, shareButton]
         views.forEach { self.view.addSubview($0) }
     }
     
@@ -52,10 +63,17 @@ extension MoviesDetailViewController {
             self.moviesDetailTableView.topAnchor.constraint(equalTo: self.view.topAnchor),
             self.moviesDetailTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
+        
+        NSLayoutConstraint.activate([
+            self.shareButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
+            self.shareButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
+            self.shareButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -40),
+            self.shareButton.heightAnchor.constraint(equalTo: self.shareButton.widthAnchor, multiplier: 0.15)
+        ])
     }
     
     func bind() {
-        
+        self.shareButton.addTarget(self, action: #selector(shareButtonTapped), for: .touchUpInside)
     }
     
     func setNavigationbar() {
@@ -122,4 +140,44 @@ extension MoviesDetailViewController: UITableViewDelegate, UITableViewDataSource
             return UITableViewCell()
         }
     }
+}
+
+extension MoviesDetailViewController: MFMessageComposeViewControllerDelegate {
+    @objc func shareButtonTapped() {
+        guard let viewModel = self.viewModel else { return }
+        let messageComposer = MFMessageComposeViewController()
+                messageComposer.messageComposeDelegate = self
+                if MFMessageComposeViewController.canSendText(){
+                    messageComposer.body = """
+                    \(viewModel.getRankString(viewModel.rank)) \(viewModel.movieNm)
+                    
+                    상세 정보
+                    \(viewModel.getDateString(viewModel.openDt)), \(viewModel.getProduceDateString(viewModel.prdtYear)), \(viewModel.getShowTimeString(viewModel.showTm))
+                    \(viewModel.getGenreString(viewModel.genreNm)), \(viewModel.getGradeString(viewModel.watchGradeNm))
+                    누적 관객  \(viewModel.getAudienceString(viewModel.audiAcc))
+                    
+                    감독 및 배우
+                    \(viewModel.getDirectorString(viewModel.directorsNm)) (감독)
+                    \(viewModel.getActorString(viewModel.actorsNm)) (배우)
+                    """
+                    self.present(messageComposer, animated: true, completion: nil)
+                }
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+            switch result {
+            case MessageComposeResult.sent:
+                print("전송 완료")
+                break
+            case MessageComposeResult.cancelled:
+                print("취소")
+                break
+            case MessageComposeResult.failed:
+                print("전송 실패")
+                break
+            @unknown default:
+                fatalError("Message Error")
+            }
+            controller.dismiss(animated: true, completion: nil)
+        }
 }
