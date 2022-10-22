@@ -164,7 +164,7 @@ class BoxOfficeDetailsView: UIView {
 
     let directorImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "user")
+        imageView.image = UIImage(named: "Director")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
