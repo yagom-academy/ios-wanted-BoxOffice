@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol ReviewCellDelegate {
+  func deleteReview(_ index: Int)
+}
+
 class ReviewCell: UITableViewCell {
 
   static let id = "reviewCell"
+
+  var delegate: ReviewCellDelegate?
 
   let profile: UIImageView = {
     let iv = UIImageView()
@@ -41,7 +47,7 @@ class ReviewCell: UITableViewCell {
 
   let nickname: UILabel = {
     let label = UILabel()
-    label.font = UIFont.systemFont(ofSize: 14)
+    label.font = UIFont.boldSystemFont(ofSize: 16)
     label.textAlignment = .center
     label.sizeToFit()
     label.text = "unknown"
@@ -52,9 +58,9 @@ class ReviewCell: UITableViewCell {
   let review: UILabel = {
     let label = UILabel()
     label.font = UIFont.systemFont(ofSize: 14)
-    label.textAlignment = .center
+    label.textAlignment = .natural
     label.sizeToFit()
-    label.text = "리뷰 내용sadfjlksadfjl;kasdjfl;asdjffdslafjsadl;kfjal;sdjflkajsdlfjalskdjflasjdflasjdfl;sa"
+    label.text = "리뷰 내용"
     label.numberOfLines = 0
 
     return label
@@ -75,6 +81,7 @@ class ReviewCell: UITableViewCell {
 
     addViews()
     setConstraints()
+    addTargets()
   }
 
   required init?(coder _: NSCoder) {
@@ -117,6 +124,14 @@ extension ReviewCell {
       review.trailingAnchor.constraint(equalTo: delete.trailingAnchor),
       review.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
     ])
+  }
+
+  func addTargets() {
+    delete.addTarget(self, action: #selector(deleteButtonPressed), for: .touchUpInside)
+  }
+
+  @objc func deleteButtonPressed() {
+    delegate?.deleteReview(self.tag)
   }
 }
 

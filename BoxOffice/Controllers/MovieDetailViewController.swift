@@ -13,6 +13,9 @@ class MovieDetailViewController: UIViewController {
 
   var rankInfo: RankListObject?
   var movieInfo: MovieInfo?
+  var reviewList = [ReviewModel]()
+  var reviewFileName = [String]()
+  var totalScore = 0
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -28,9 +31,21 @@ class MovieDetailViewController: UIViewController {
     tableView.separatorStyle = .none
     tableView.delegate = self
     tableView.dataSource = self
+    FireStorageManager.shared.delegate = self
 
     addViews()
     setConstraints()
+
+    FireStorageManager.shared.fetchReview(movieCode: rankInfo!.movieCd)
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+//    print("view will")
+//    reviewList.removeAll()
+//    totalScore = 0
+//    FireStorageManager.shared.fetchReview(movieCode: rankInfo!.movieCd)
   }
 }
 
@@ -88,7 +103,7 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch section {
     case 1:
-      return 5
+      return reviewList.count
     default:
       return 1
     }
@@ -132,6 +147,17 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
                                                      for: indexPath) as? ReviewCell
       else { return UITableViewCell() }
 
+      let i = indexPath.row
+
+      if i < reviewList.count {
+        cell.review.text = reviewList[i].review
+        cell.rating.text = String(reviewList[i].score)
+        cell.nickname.text = reviewList[i].nickname
+        cell.delegate = self
+      }
+
+      cell.tag = i
+
       return cell
 
     default:
@@ -148,6 +174,9 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
       }
 
       header.delegate = self
+      if !reviewList.isEmpty {
+        header.rating.text = String(totalScore / reviewList.count)
+      }
 
       return header
     } else {
@@ -161,12 +190,81 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
 
 // MARK: - WriteReviewDelegate
 
-extension MovieDetailViewController: WriteReviewDelegate {
+extension MovieDetailViewController: ReviewHeaderDelegate {
   func showWriteReviewPage() {
     let nextVC = WriteReviewViewController()
     nextVC.title = "리뷰작성"
     nextVC.movieCode = rankInfo?.movieCd ?? ""
+    nextVC.delegate = self
     navigationController?.pushViewController(nextVC, animated: true)
+  }
+}
+
+extension MovieDetailViewController: FirestorageDelegate {
+  func didFetchedReviews(_ review: ReviewModel, _ fileName: String) {
+    reviewList.append(review)
+    reviewFileName.append(fileName)
+    totalScore += review.score
+    DispatchQueue.main.async {
+      self.tableView.reloadData()
+    }
+  }
+}
+
+extension MovieDetailViewController: WriteReviewDelegate {
+  func addReview(review: ReviewModel, fileName: String) {
+    reviewList.append(review)
+    reviewFileName.append(fileName)
+    totalScore += review.score
+    tableView.reloadData()
+  }
+}
+
+extension MovieDetailViewController: ReviewCellDelegate {
+  func deleteReview(_ index: Int) {
+
+    let alert = UIAlertController(title: "리뷰 삭제",
+                                  message: "리뷰를 삭제하려면 비밀번호를 입력하세요.",
+                                  preferredStyle: .alert)
+
+    alert.addTextField { tf in
+      tf.placeholder = "비밀번호 입력"
+    }
+
+    let ok = UIAlertAction(title: "삭제", style: .destructive) { ok in
+      if self.reviewList[index].password == alert.textFields?[0].text! {
+        FireStorageManager.shared.deleteReview(movieCode: self.rankInfo!.movieCd,
+                                               fileName: self.reviewFileName[index])
+        self.reviewList.remove(at: index)
+        self.reviewFileName.remove(at: index)
+
+        DispatchQueue.main.async {
+          self.tableView.reloadData()
+        }
+
+        print("리뷰 삭제 완료")
+
+      } else {
+        let alert2 = UIAlertController(title: "비밀번호 불일치",
+                                       message: "비밀번호가 틀렸습니다.",
+                                       preferredStyle: .alert)
+
+        let ok2 = UIAlertAction(title: "확인", style: .default)
+
+        alert2.addAction(ok2)
+        self.present(alert2, animated: true, completion: nil)
+      }
+    }
+
+    let cancel = UIAlertAction(title: "취소", style: .cancel) { cancel in
+      print("리뷰 삭제 취소")
+    }
+
+    alert.addAction(ok)
+    alert.addAction(cancel)
+
+    self.present(alert, animated: true, completion: nil)
+
   }
 }
 
