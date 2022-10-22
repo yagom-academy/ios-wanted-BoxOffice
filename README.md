@@ -3,8 +3,18 @@
 # BoxOffice App
 
 ---
-
-![IMG_4426121212.jpg](README%20a8ec09395a5d4523821c6f6bb01e4dd0/IMG_4426121212.jpg)
+<table>
+    <tr align="center">
+        <td><B>지준영<B></td>
+    </tr>
+    <tr align="center">
+        <td width= 170px>
+            <img src="images/IMG_4426121212.jpg" width="73%">
+            <br>
+            <a href="https://github.com/gelb2"><I>JunYoungJee (Bill)</I></a>
+        </td>
+    </tr>
+</table>
 
 - 지준영
     - YagomAcademy: JunYoungJee
