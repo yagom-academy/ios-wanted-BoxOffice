@@ -11,7 +11,6 @@
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19EC28F9603900197BCC /* BoxOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* BoxOfficeViewController.swift */; };
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
-		635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F228F9603A00197BCC /* LaunchScreen.storyboard */; };
 		8C606B0D28FD903300ADC626 /* BoxOfficeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C606B0C28FD903300ADC626 /* BoxOfficeView.swift */; };
 		8C606B0F28FE557100ADC626 /* BoxOfficeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C606B0E28FE557100ADC626 /* BoxOfficeTableViewCell.swift */; };
 		8C606B1228FE909C00ADC626 /* BoxOfficeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C606B1128FE909C00ADC626 /* BoxOfficeData.swift */; };
@@ -32,7 +31,6 @@
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		635A19EB28F9603900197BCC /* BoxOfficeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeViewController.swift; sourceTree = "<group>"; };
 		635A19F028F9603A00197BCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		635A19F328F9603A00197BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		635A19F528F9603A00197BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C606B0C28FD903300ADC626 /* BoxOfficeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeView.swift; sourceTree = "<group>"; };
 		8C606B0E28FE557100ADC626 /* BoxOfficeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeTableViewCell.swift; sourceTree = "<group>"; };
@@ -78,15 +76,8 @@
 		635A19E628F9603900197BCC /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
-				8C606B272901789C00ADC626 /* Extensions */,
-				8C606B0828FD8E8B00ADC626 /* LifeCycles */,
-				8C606B1328FE959600ADC626 /* Service */,
-				8C606B1028FE906C00ADC626 /* Model */,
-				8C606B0928FD8E9E00ADC626 /* Views */,
-				635A19F028F9603A00197BCC /* Assets.xcassets */,
-				635A19F228F9603A00197BCC /* LaunchScreen.storyboard */,
-				635A19F528F9603A00197BCC /* Info.plist */,
-				8C606B1628FEB55F00ADC626 /* KeyList.plist */,
+				8C606B2D2903B6BC00ADC626 /* Resource */,
+				8C606B2C2903B65F00ADC626 /* Source */,
 			);
 			path = BoxOffice;
 			sourceTree = "<group>";
@@ -156,6 +147,28 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		8C606B2C2903B65F00ADC626 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				8C606B0828FD8E8B00ADC626 /* LifeCycles */,
+				8C606B272901789C00ADC626 /* Extensions */,
+				8C606B0928FD8E9E00ADC626 /* Views */,
+				8C606B1028FE906C00ADC626 /* Model */,
+				8C606B1328FE959600ADC626 /* Service */,
+				635A19F528F9603A00197BCC /* Info.plist */,
+				8C606B1628FEB55F00ADC626 /* KeyList.plist */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		8C606B2D2903B6BC00ADC626 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				635A19F028F9603A00197BCC /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -215,7 +228,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C606B1728FEB55F00ADC626 /* KeyList.plist in Resources */,
-				635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */,
 				635A19F128F9603A00197BCC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,17 +257,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		635A19F228F9603A00197BCC /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				635A19F328F9603A00197BCC /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		635A19F628F9603A00197BCC /* Debug */ = {
