@@ -12,8 +12,9 @@ class FireStorageManager {
     static let shared = FireStorageManager()
     private let storage = Storage.storage()
     
-    func uploadReview(review: ReviewModel, movieTitle: String) {
-        let reviewName = "\(review.nickname) : \(movieTitle)"
+    func uploadReview(review: ReviewModel) {
+        let reviewName = "\(review.nickname) : \(review.movieID)"
+        print("이름", reviewName)
         let jsonEncoder = JSONEncoder()
         jsonEncoder.outputFormatting = .prettyPrinted
         do {

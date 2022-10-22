@@ -27,10 +27,13 @@ class CoreDataManager {
         return self.persistentContainer.viewContext
     }
     
-    func fetchReviews()-> [Review] {
+    func fetchReviews(movieID: String)-> [Review] {
         do {
             let fetchResult = try self.context.fetch(request)
-            return fetchResult
+            //해당 영화의 리뷰만 가져와야함
+            let filterResult = fetchResult.filter { $0.movieID == movieID }
+            print("🎃", movieID, filterResult, fetchResult.last?.movieID)
+            return filterResult
         } catch {
             print(error.localizedDescription)
             return []
@@ -43,7 +46,7 @@ class CoreDataManager {
         
         if let entity = entity {
             let managedObject = NSManagedObject(entity: entity, insertInto: self.context)
-            
+            managedObject.setValue(review.movieID, forKey: "movieID")
             managedObject.setValue(review.nickname, forKey: "nickname")
             managedObject.setValue(review.password, forKey: "password")
             managedObject.setValue(review.starScore, forKey: "starScore")
@@ -72,6 +75,17 @@ class CoreDataManager {
         }
     }
     
+    @discardableResult
+    func deleteAll() -> Bool {
+        let request: NSFetchRequest<NSFetchRequestResult> = Review.fetchRequest()
+        let delete = NSBatchDeleteRequest(fetchRequest: request)
+        do {
+            try self.context.execute(delete)
+            return true
+        } catch {
+            return false
+        }
+    }
     
     func count() -> Int? {
         do {

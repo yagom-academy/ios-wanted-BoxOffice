@@ -71,10 +71,15 @@ final class MovieReviewViewController: UIViewController {
     }()
     
     var movieTitle: String = ""
+    var movieID: String = ""
     private let storageManager = FireStorageManager.shared
     private let coredataManager = CoreDataManager.shared
     private var viewModel: MovieReviewViewModel = .init()
-    private(set) var finalReview: ReviewModel = .init(movieTitle: "", nickname: "", password: "", starScore: 0, content: "")
+    private(set) var finalReview: ReviewModel = .init(movieID: "",
+                                                      nickname: "",
+                                                      password: "",
+                                                      starScore: 0,
+                                                      content: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,9 +89,8 @@ final class MovieReviewViewController: UIViewController {
         self.starPickerView.delegate = self
         self.contentTextView.delegate = self
         self.registerButton.addTarget(self, action: #selector(registerButtonTapped(_:)), for: .touchUpInside)
-        print("title: \(movieTitle)")
-        viewModel.movieTitle.value = movieTitle
-        print("❤️‍🔥", coredataManager.fetchReviews())
+        print("title: \(movieID)")
+        viewModel.movieID.value = movieID
     }
     
     private func bind(_ viewmodel: MovieReviewViewModel) {
@@ -112,7 +116,7 @@ final class MovieReviewViewController: UIViewController {
     }
 
     @objc func registerButtonTapped(_ sender: UIButton) {
-        storageManager.uploadReview(review: finalReview, movieTitle: movieTitle)
+        storageManager.uploadReview(review: finalReview)
         coredataManager.insertReviews(review: finalReview)
         let alertVC = UIAlertController(title: nil, message: "🎉 \(movieTitle) \n 영화 리뷰가 작성되었습니다!", preferredStyle: .alert)
         let confirm = UIAlertAction(title: "확인", style: .default) { [weak self] _ in

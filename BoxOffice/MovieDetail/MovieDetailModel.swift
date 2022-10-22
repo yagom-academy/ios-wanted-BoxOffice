@@ -10,6 +10,10 @@ import Foundation
 struct MovieDetailModel {
     let movieModel: MovieListModel
     let detailEntity: MovieInfo
+    
+    var movieCode: String {
+        return detailEntity.movieCD
+    }
 
     var rank: String {
         return movieModel.rank

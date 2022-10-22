@@ -94,7 +94,8 @@ final class MovieDetailViewController: UIViewController {
     let viewModel: MovieDetailViewModel = .init()
     private let coredataManager = CoreDataManager.shared
     private(set) var inputPassword: String = ""
-    private var reviewList: [Review] = [] 
+    private(set) var movieID: String = ""
+    private var reviewList: [Review] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,7 +108,7 @@ final class MovieDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        reviewList = coredataManager.fetchReviews()
+        reviewList = coredataManager.fetchReviews(movieID: movieID)
         self.reviewTableView.reloadData()
     }
     
@@ -123,6 +124,7 @@ final class MovieDetailViewController: UIViewController {
             self?.movieTitleLabel.text = model.movieName
             self?.movieTitleEngAndproductYearLabel.text = "\(model.movieNameEng), \(model.productYear)"
             self?.movieOpenDateAndShowTime.text = "\(model.openDate), \(model.showTime)"
+            self?.movieID = model.movieCode
         }
         
         self.viewModel.loadingEnd = { [weak self] in
@@ -150,6 +152,8 @@ final class MovieDetailViewController: UIViewController {
     @objc func writeReview() {
         let reviewVC = MovieReviewViewController()
         reviewVC.movieTitle = self.movieTitleLabel.text ?? ""
+        reviewVC.movieID  = self.movieID
+        print("🎉", movieID)
         self.navigationController?.pushViewController(reviewVC, animated: true)
     }
     
