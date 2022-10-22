@@ -11,6 +11,7 @@ struct BoxOfficeData {
     let rank: String
     let rankInten: String
     let rankOldAndNew: String
+    let movieCd: String
     let movieNm: String
     let openDt: String
     let audiCnt: String
@@ -19,6 +20,7 @@ struct BoxOfficeData {
         self.rank = boxOfficeResponse.rank
         self.rankInten = boxOfficeResponse.rankInten
         self.rankOldAndNew = boxOfficeResponse.rankOldAndNew
+        self.movieCd = boxOfficeResponse.movieCd
         self.movieNm = boxOfficeResponse.movieNm
         self.openDt = boxOfficeResponse.openDt
         self.audiCnt = boxOfficeResponse.audiCnt
@@ -28,7 +30,7 @@ struct BoxOfficeData {
 extension BoxOfficeData: Equatable {
     static func == (lhs: BoxOfficeData, rhs: BoxOfficeData) -> Bool {
         return lhs.rank == rhs.rank &&
-        lhs.movieNm == rhs.movieNm &&
+        lhs.movieCd == rhs.movieCd &&
         lhs.audiCnt == rhs.audiCnt
     }
 }

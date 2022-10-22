@@ -80,6 +80,21 @@ extension DailyViewController: UICollectionViewDataSource {
     }
 }
 
+extension DailyViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let dataSource = dto?.dataSource[indexPath.section] else { return }
+        let row = dataSource.items[indexPath.row]
+        
+        switch row {
+        case .dateSelector:
+            return
+        case .boxOffice(let boxOfficeData):
+            guard let vc = storyboard?.instantiateViewController(withIdentifier: DetailViewController.identifier) as? DetailViewController else { return }
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+}
+
 extension DailyViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let dataSource = dto?.dataSource[indexPath.section] else { return .zero }

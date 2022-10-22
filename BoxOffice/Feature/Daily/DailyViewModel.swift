@@ -13,13 +13,12 @@ final class DailyViewModel {
     func fetchDailyView(_ targetDt: String) async throws -> DailyDTO {
         let boxOfficeResultResponse = try await apiService.dailyBoxOfficeAPIService(targetDt: targetDt)
         
-        var dto = DailyDTO(dataSource: [(section: .dateSelector, items: [.dateSelector])])
+//        var dto = DailyDTO(dataSource: [(section: .dateSelector, items: [.dateSelector])])
         
-        dto.dataSource.append(
-            (section: .boxOffice, items:
-                boxOfficeResultResponse.boxOfficeResult.dailyBoxOfficeList.compactMap({ .boxOffice(BoxOfficeData($0)) })
-            )
-        )
+        let dto = DailyDTO(dataSource: [
+            (section: .boxOffice,
+             items: boxOfficeResultResponse.boxOfficeResult.dailyBoxOfficeList.compactMap({ .boxOffice(BoxOfficeData($0)) }))
+        ])
         
         return dto
     }
