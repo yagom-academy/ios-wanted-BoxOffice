@@ -33,9 +33,10 @@ final class DetailInformationCell: UICollectionViewCell {
     }
     
     func configure(with item: DetailInfo) {
-        productionYearLabel.text = "\(item.productionYear)"
-        releasedYearLabel.text = "\(item.releasedYear)"
-        runningTimeLabel.text = "\(item.runningTime)"
+        productionYearLabel.text = "\(item.productionYear)년"
+        releasedYearLabel.text = "\(item.releasedYear)년"
+        // TODO: - 시간단위
+        runningTimeLabel.text = "\(item.runningTime)분"
         genreLabel.text = item.genres
         directorsLabel.text = item.directors
         actorsLabel.text = item.actors

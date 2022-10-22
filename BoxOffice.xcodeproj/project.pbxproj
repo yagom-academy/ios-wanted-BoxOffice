@@ -13,7 +13,6 @@
 		635A19EF28F9603900197BCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19ED28F9603900197BCC /* Main.storyboard */; };
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
 		635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F228F9603A00197BCC /* LaunchScreen.storyboard */; };
-		FD44781B29015F51002D02CA /* PlotCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44781A29015F51002D02CA /* PlotCell2.swift */; };
 		FD44781D29017E90002D02CA /* FloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44781C29017E90002D02CA /* FloatingView.swift */; };
 		FD44782529024658002D02CA /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44782429024658002D02CA /* UIImageView+.swift */; };
 		FD447827290247B8002D02CA /* DetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD447826290247B8002D02CA /* DetailItem.swift */; };
@@ -43,7 +42,7 @@
 		FDFCF1FC290035EF000BA6EA /* TrailerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDFCF1FA290035EF000BA6EA /* TrailerCell.xib */; };
 		FDFCF1FF29006B89000BA6EA /* TextHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFCF1FD29006B89000BA6EA /* TextHeaderView.swift */; };
 		FDFCF20029006B89000BA6EA /* TextHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDFCF1FE29006B89000BA6EA /* TextHeaderView.xib */; };
-		FDFE295D29030D4E005991D1 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFE295C29030D4E005991D1 /* ImageManager.swift */; };
+		FDFE295D29030D4E005991D1 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFE295C29030D4E005991D1 /* CacheManager.swift */; };
 		FDFE295F29031889005991D1 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFE295E29031889005991D1 /* Int+.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +55,6 @@
 		635A19F028F9603A00197BCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		635A19F328F9603A00197BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		635A19F528F9603A00197BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FD44781A29015F51002D02CA /* PlotCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotCell2.swift; sourceTree = "<group>"; };
 		FD44781C29017E90002D02CA /* FloatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingView.swift; sourceTree = "<group>"; };
 		FD44782429024658002D02CA /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		FD447826290247B8002D02CA /* DetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItem.swift; sourceTree = "<group>"; };
@@ -86,7 +84,7 @@
 		FDFCF1FA290035EF000BA6EA /* TrailerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrailerCell.xib; sourceTree = "<group>"; };
 		FDFCF1FD29006B89000BA6EA /* TextHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextHeaderView.swift; sourceTree = "<group>"; };
 		FDFCF1FE29006B89000BA6EA /* TextHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextHeaderView.xib; sourceTree = "<group>"; };
-		FDFE295C29030D4E005991D1 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		FDFE295C29030D4E005991D1 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		FDFE295E29031889005991D1 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,7 +152,7 @@
 				FD4478632902DDD0002D02CA /* ParseManager.swift */,
 				FD4478652902DF59002D02CA /* MovieDataManager.swift */,
 				FD4478672902E1D9002D02CA /* APIManager.swift */,
-				FDFE295C29030D4E005991D1 /* ImageManager.swift */,
+				FDFE295C29030D4E005991D1 /* CacheManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -197,7 +195,6 @@
 				FDFCF1F9290035EF000BA6EA /* TrailerCell.swift */,
 				FDFCF1FA290035EF000BA6EA /* TrailerCell.xib */,
 				FDFCF1F129003491000BA6EA /* PlotCell.swift */,
-				FD44781A29015F51002D02CA /* PlotCell2.swift */,
 				FDFCF1F229003491000BA6EA /* PlotCell.xib */,
 				FDFCF1F5290034AB000BA6EA /* DetailInformationCell.swift */,
 				FDFCF1F6290034AB000BA6EA /* DetailInformationCell.xib */,
@@ -300,7 +297,7 @@
 				FD4478662902DF59002D02CA /* MovieDataManager.swift in Sources */,
 				FDAE1FC328FEF93800F3DE22 /* RankingHeaderView.swift in Sources */,
 				FD447829290248EE002D02CA /* KobisResponse.swift in Sources */,
-				FDFE295D29030D4E005991D1 /* ImageManager.swift in Sources */,
+				FDFE295D29030D4E005991D1 /* CacheManager.swift in Sources */,
 				635A19EC28F9603900197BCC /* DailyRankingViewViewController.swift in Sources */,
 				FDFCF1F329003491000BA6EA /* PlotCell.swift in Sources */,
 				FD44781D29017E90002D02CA /* FloatingView.swift in Sources */,
@@ -313,7 +310,6 @@
 				FDAE1FBC28FED0E800F3DE22 /* Sections.swift in Sources */,
 				FD44785E2902DC41002D02CA /* Date+.swift in Sources */,
 				FDAE1FC728FEFCE300F3DE22 /* OnboardingCell.swift in Sources */,
-				FD44781B29015F51002D02CA /* PlotCell2.swift in Sources */,
 				FD44785A2902DB64002D02CA /* URLManager.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				FDFE295F29031889005991D1 /* Int+.swift in Sources */,

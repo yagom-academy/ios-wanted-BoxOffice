@@ -38,18 +38,26 @@ final class RankingCell: UICollectionViewCell {
     }
     
     func configure(with item: Movie) {
-        // TODO: - cell은 그리는 역할만 하도록
+        // posterPath가 있으면
         if let posterPath = item.posterPath {
-            // TODO: - cache 있으면 동기, 없으면 비동기로
-            Task {
-                let poster = try await ImageManager.fetchImage(posterPath)
-                Task(priority: .userInitiated) {
-                    posterImageView.image = poster
-                }
+            // cached image 있으면
+            if let poster = CacheManager.searchCachedImage(with: posterPath) {
+                posterImageView.image = poster
+            // cache image 없으면
+            } else {
+                Task(priority: .userInitiated, operation: {
+                    async let poster = CacheManager.imageCacheAndGet(with: posterPath)
+                    posterImageView.image = try await poster
+                })
             }
-        } else {
-            posterImageView.image = UIImage(named: "noImage")
-            slashImageView.isHidden = false
+        }
+        
+        // posterPath가 없으면
+        if item.posterPath == nil {
+            Task(priority: .userInitiated) {
+                posterImageView.image = UIImage(named: "noImage")
+                slashImageView.isHidden = false
+            }
         }
         
         if item.isNewInRank == .new {
@@ -63,7 +71,7 @@ final class RankingCell: UICollectionViewCell {
         rankingLabel.text = "\(item.rank)"
         koreanNameLabel.text = item.name
         releasedDateLabel.text = item.releasedDate.converToStringTypeForUI + " 개봉"
-        dailyAttendanceLabel.text = item.dailyAudience.convertDecimalStringType() + "명 관람"
+        dailyAttendanceLabel.text = item.dailyAudience.convertDecimalStringType + "명 관람"
     }
     
     private func appearanceOfPosterImageView() {

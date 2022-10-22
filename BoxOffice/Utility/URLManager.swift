@@ -11,8 +11,7 @@ enum URLManager {
     case kobisBoxoffice
     case kobisMovieInfo
     case tmdbAssetInfo
-    
-    static let tmdbImageURL = "https://image.tmdb.org/t/p/w500/"
+    case tmdbPoster
     
     static func createKobisBoxOfficeURL(targetDate: Date) throws -> URL {
         var urlComponents = URLComponents(string: URLManager.kobisBoxoffice.baseURL)
@@ -47,15 +46,23 @@ enum URLManager {
         urlComponents?.queryItems?.append(contentsOf: [appIdQuery, movieNameQuery, languageQuery, yearQuery])
         
         guard let url: URL = urlComponents?.url else {
-            throw URLError.invalidKobisTmdbAssetURL
+            throw URLError.invalidTmdbAssetURL
         }
         return url
+    }
+    
+    static func createTmdbPosterURL(with path: String) throws -> URL {
+        guard let posterURL = URL(string: URLManager.tmdbPoster.baseURL + path) else {
+            throw URLError.invalidTmdbPosterURL
+        }
+        return posterURL
     }
     
     private var key: String {
         switch self {
         case .kobisBoxoffice, .kobisMovieInfo: return "b089f44ca1fabdcdc12ff5d0eef44052"
         case .tmdbAssetInfo: return "52b9f149066f4c2295ce7f935812e6de"
+        case .tmdbPoster: return ""
         }
     }
     
@@ -64,6 +71,7 @@ enum URLManager {
         case .kobisBoxoffice: return "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?"
         case .kobisMovieInfo: return "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?"
         case .tmdbAssetInfo: return "https://api.themoviedb.org/3/search/movie/?"
+        case .tmdbPoster: return "https://image.tmdb.org/t/p/w500/"
         }
     }
 }

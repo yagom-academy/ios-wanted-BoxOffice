@@ -26,17 +26,18 @@ final class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(#function)
-        print(detailItems)
+        
         configureHierarchy()
         configureDataSource()
         configureSnapshot()
+        share()
     }
     
     private func configureHierarchy() {
         view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
         view.addSubview(floatingView)
+        view.bringSubviewToFront(floatingView)
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -57,7 +58,7 @@ extension DetailViewController {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
             
             let section = DetailSection(rawValue: sectionIndex)!
-            
+
             let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                     heightDimension: .absolute(40))
             let textHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
@@ -67,7 +68,6 @@ extension DetailViewController {
             
             let defaultSpacing = CGFloat(15)
             let bottomSpacing = CGFloat(30)
-            let estimatedHeight = CGFloat(300)
             
             switch section {
             // trailer section layout
@@ -83,10 +83,10 @@ extension DetailViewController {
                 return section
                 
             // plot, detail section layout
-            // TODO: - estimated가 적용되지 않음
+            // TODO: - estimated가 적용되지 않음?
             case .plot, .detail:
                 let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                      heightDimension: .estimated(estimatedHeight))
+                                                        heightDimension: .estimated(100))
                 let item = NSCollectionLayoutItem(layoutSize: layoutSize)
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: layoutSize,
                                                              subitem: item,
@@ -116,7 +116,9 @@ extension DetailViewController {
         }
         
         let plotCellRegistration = UICollectionView.CellRegistration<PlotCell, PlotInfo>(cellNib: PlotCell.nib()) { cell, _, plot in
-            cell.appearanceLabel(isOpend: plot.isOpend)
+//            cell.appearanceLabel(isOpend: plot.isOpend)
+            cell.plotLabel.numberOfLines = 0
+            cell.openAndCloseLabel.isHidden = true
             cell.configure(with: plot)
         }
        
@@ -167,7 +169,8 @@ extension DetailViewController: UICollectionViewDelegate {
             // TODO: - play trailer
             print("display!")
         }
-        if DetailSection(rawValue: indexPath.section) == .plot {
+        if DetailSection(rawValue: indexPath.section) == .plot,
+           dataSource.itemIdentifier(for: indexPath)?.plot?.content != nil {
             updatePlotLabelAppearance(indexPath: indexPath, to: .plot)
         }
         collectionView.deselectItem(at: indexPath, animated: false)
@@ -191,18 +194,20 @@ extension DetailViewController {
     
     @objc
     private func didTapShareButton() {
-        guard let mainItem = detailItems.filter({ $0.type == "mainInfo" }).first?.main,
-              let detailItem = detailItems.filter({ $0.type == "detailInfo" }).first?.detail else { return }
-        let poster = UIImage(named: "poster")!
+        guard let mainItem = MovieDataManager.searchItems(detailItems, for: .main).first?.main ,
+              let detailItem = MovieDataManager.searchItems(detailItems, for: .detail).first?.detail ,
+            let path = mainItem.posterPath else { return }
+        let poster = CacheManager.searchCachedImage(with: path)
         let title = "\(mainItem.name)\n"
-        let totalAttendance = "2,135,334명 관람\n"
-        let dailyRanking = "\(String(describing: mainItem.rank))위\n"
-        let genres = "\(detailItem.genres.first!)\n"
-        let director = "감독: \(detailItem.directors.first!)\n"
-        let actors = "배우: 현빈, 손예진, 아무개\n\n"
+        let totalAttendance = "\(mainItem.totalAudience.convertDecimalStringType)명 관람\n"
+        let dailyRanking = "\(mainItem.rank)위\n"
+        let genres = "\(detailItem.genres)\n"
+        let director = "감독: \(detailItem.directors)\n"
+        let actors = "배우: \(detailItem.actors)\n"
         let message = "이거 봅시다🥳"
+        let noImageAvailableMessage = "[제공된 이미지 없음]\n"
         
-        let activityController = UIActivityViewController(activityItems: [poster, title, totalAttendance, dailyRanking, genres, director, actors, message], applicationActivities: nil)
+        let activityController = UIActivityViewController(activityItems: [poster ?? noImageAvailableMessage, title, totalAttendance, dailyRanking, genres, director, actors, message], applicationActivities: nil)
         present(activityController, animated: true)
     }
 }

@@ -19,13 +19,15 @@ final class PlotCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         plotLabel.text = nil
-        plotLabel.numberOfLines = 1
+        plotLabel.numberOfLines = 0
         openAndCloseLabel.text = "...더보기"
+        openAndCloseLabel.isHidden = false
     }
     
     func configure(with item: PlotInfo) {
         if item.content == nil {
             plotLabel.text = "정보없음"
+            openAndCloseLabel.isHidden = true
         } else {
             plotLabel.text = item.content
         }

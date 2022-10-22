@@ -5,7 +5,7 @@
 //  Created by sole on 2022/10/21.
 //
 
-import Foundation
+import UIKit 
 
 enum APIManager {
     static func fetchMainItems(date: Date) async throws -> [MainItem] {
@@ -36,7 +36,7 @@ enum APIManager {
         return mainItems
     }
     
-    private static func fetchData(url: URL) async throws -> Data {
+    static func fetchData(url: URL) async throws -> Data {
         let(data, response) = try await URLSession.shared.data(from: url)
         let optionalStatusCode = (response as? HTTPURLResponse)?.statusCode
         guard let statusCode = optionalStatusCode,

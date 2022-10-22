@@ -43,27 +43,42 @@ final class TrailerCell: UICollectionViewCell {
     }
     
     func configure(with item: MainInfo) {
+        // posterPath가 있으면
         if let posterPath = item.posterPath,
            let backdropPath = item.backdropPath {
-            Task(priority: .userInitiated, operation: {
-                async let poster = try ImageManager.fetchImage(posterPath)
-                async let backdrop = try ImageManager.fetchImage(backdropPath)
-                posterImageView.image = try await poster
-                backdropImageView.image = try await backdrop
-            })
-        } else {
-            posterImageView.image = UIImage(named: "noImage")
-            slashImageView.isHidden = false
-            backdropImageView.image = UIImage(named: "noTrailer")
-            playImageView.image = UIImage(systemName: "play.slash")
+            // cached image 있으면
+            if let poster = CacheManager.searchCachedImage(with: posterPath),
+               let backdrop = CacheManager.searchCachedImage(with: backdropPath) {
+                posterImageView.image = poster
+                backdropImageView.image = backdrop
+            // cache image 없으면
+            } else {
+                Task(priority: .userInitiated, operation: {
+                    async let poster = CacheManager.imageCacheAndGet(with: posterPath)
+                    async let backdrop = CacheManager.imageCacheAndGet(with: backdropPath)
+                    posterImageView.image = try await poster
+                    backdropImageView.image = try await backdrop
+                })
+            }
         }
+        
+        // posterPath가 없으면
+        if item.posterPath == nil {
+            Task(priority: .userInitiated) {
+                posterImageView.image = UIImage(named: "noImage")
+                slashImageView.isHidden = false
+                backdropImageView.image = UIImage(named: "noTrailer")
+                playImageView.image = UIImage(systemName: "play.slash")
+            }
+        }
+        
         rankingLabel.text = "\(item.rank)"
         ratioComparedToYesterdayLabel.text = "\(item.ratioComparedToYesterday)"
         isIncreasedLabel.text = "up↑↑"
         koreanNameLabel.text = item.name
         englishNameLabel.text = item.nameInEnglish
         releasedDateLabel.text = item.releasedDate.converToStringTypeForUI
-        totalAttendanceLabel.text = "누적관객수 \(item.totalAudience.convertDecimalStringType())명"
+        totalAttendanceLabel.text = "누적관객수 \(item.totalAudience.convertDecimalStringType)명"
     }
     
     static func nib() -> UINib {
