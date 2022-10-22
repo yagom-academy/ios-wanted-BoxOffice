@@ -34,6 +34,8 @@ class MovieDetailReviewCell: UITableViewCell {
         label.font = .appleSDGothicNeo(weight: .regular, size: 12)
         label.textColor = UIColor(hex: "#DFDFDF")
         label.numberOfLines = 0
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -58,6 +60,8 @@ class MovieDetailReviewCell: UITableViewCell {
         let label = UILabel()
         label.font = .appleSDGothicNeo(weight: .medium, size: 12)
         label.textColor = UIColor(hex: "#848484")
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -82,6 +86,7 @@ class MovieDetailReviewCell: UITableViewCell {
         didSet {
             guard let viewModel = viewModel else { return }
             bind(viewModel: viewModel)
+            layoutIfNeeded()
         }
     }
     var subscriptions = [AnyCancellable]()
@@ -166,9 +171,18 @@ class MovieDetailReviewCell: UITableViewCell {
             photoView.heightAnchor.constraint(equalToConstant: 120),
         ]
         
-        constraints += [
+        let spacingConstraints = [
             nicknameLabel.topAnchor.constraint(greaterThanOrEqualTo: contentLabel.bottomAnchor, constant: 18),
             nicknameLabel.topAnchor.constraint(greaterThanOrEqualTo: stackView.bottomAnchor, constant: 18),
+        ]
+        
+        spacingConstraints.forEach {
+            $0.priority = .defaultLow
+        }
+        
+        constraints += spacingConstraints
+        
+        constraints += [
             nicknameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 28),
             nicknameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
         ]

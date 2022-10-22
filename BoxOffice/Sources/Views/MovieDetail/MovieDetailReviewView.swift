@@ -81,8 +81,6 @@ class MovieDetailReviewView: UIView {
         let tableView = ContentSizedTableView()
         tableView.backgroundColor = .clear
         tableView.allowsSelection = false
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 180
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -126,6 +124,7 @@ class MovieDetailReviewView: UIView {
     func setupViews() {
         self.backgroundColor = .clear
         reviewTableView.dataSource = self
+        reviewTableView.delegate = self
         reviewTableView.register(MovieDetailReviewCell.self, forCellReuseIdentifier: MovieDetailReviewCell.className)
     }
     
@@ -228,7 +227,7 @@ class MovieDetailReviewView: UIView {
     }
 }
 
-extension MovieDetailReviewView: UITableViewDataSource {
+extension MovieDetailReviewView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.reviewCellModels?.count ?? 0
     }
@@ -237,6 +236,32 @@ extension MovieDetailReviewView: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieDetailReviewCell.className) as? MovieDetailReviewCell else { return UITableViewCell() }
         cell.viewModel = viewModel?.reviewCellModels?[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let viewModel = viewModel?.reviewCellModels?[indexPath.row] else { return .zero }
+        if viewModel.review.photo != nil && UIImage(data: viewModel.review.photo!) != nil {
+            let labelWidth = tableView.bounds.width - 188
+            let labelHeight = viewModel.review.content.height(withConstrainedWidth: labelWidth, font: .appleSDGothicNeo(weight: .regular, size: 12))
+            return max(labelHeight + 38, 132) + 44
+        } else {
+            let labelWidth = tableView.bounds.width - 56
+            let labelHeight = viewModel.review.content.height(withConstrainedWidth: labelWidth, font: .appleSDGothicNeo(weight: .regular, size: 12))
+            return labelHeight + 82
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let viewModel = viewModel?.reviewCellModels?[indexPath.row] else { return .zero }
+        if viewModel.review.photo != nil && UIImage(data: viewModel.review.photo!) != nil {
+            let labelWidth = tableView.bounds.width - 188
+            let labelHeight = viewModel.review.content.height(withConstrainedWidth: labelWidth, font: .appleSDGothicNeo(weight: .regular, size: 12))
+            return max(labelHeight + 38, 132) + 44
+        } else {
+            let labelWidth = tableView.bounds.width - 56
+            let labelHeight = viewModel.review.content.height(withConstrainedWidth: labelWidth, font: .appleSDGothicNeo(weight: .regular, size: 12))
+            return labelHeight + 82
+        }
     }
 }
 
