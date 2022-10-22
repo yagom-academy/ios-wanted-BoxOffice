@@ -925,7 +925,7 @@
         <image name="moon" width="2143" height="3000"/>
         <image name="night1" width="3871" height="5800"/>
         <image name="pencil.circle" catalog="system" width="128" height="123"/>
-        <image name="star_empty" width="800" height="800"/>
+        <image name="star_empty" width="400" height="400"/>
         <image name="ticket" catalog="system" width="128" height="86"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
