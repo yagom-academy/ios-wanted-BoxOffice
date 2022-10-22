@@ -1,21 +1,23 @@
 # ios-wanted-BoxOffice
-## 팀원 박현중(Tom)
-
-![증명사진](https://user-images.githubusercontent.com/101572902/197325764-a4ef54df-591c-4d1f-977b-54dec4ce6957.jpeg)
-
 
 ## 관련 영상
 
-https://user-images.githubusercontent.com/101572902/197324700-dbb0ab90-a8df-4640-a636-a1c4bf767c6b.mp4
-
-일별 영화 리스트
 
 
-https://user-images.githubusercontent.com/101572902/197324714-8191b10e-8686-4d4e-900f-294e56e619e6.mp4
+일별,주간 영화 리스트
 
-주간 영화 리스트
 
-https://user-images.githubusercontent.com/101572902/197324738-e8322728-1525-4646-9f96-ec76dfc96357.mp4
+![Simulator Screen Shot - iPhone 14 - 2022-10-22 at 16 30 48](https://user-images.githubusercontent.com/101572902/197326698-eb6855f3-9932-4e05-90dc-6533459ed4df.png)
+
+
+상세 영화 리스트
+![Simulator Screen Shot - iPhone 14 - 2022-10-22 at 16 30 52](https://user-images.githubusercontent.com/101572902/197326864-bccc4383-749b-4b2b-b2c1-0effcf42be8d.png)
+
+
+
+
+https://user-images.githubusercontent.com/101572902/197326874-4065aab7-1071-4cc6-bbe6-e7013fa5cf24.mp4
+
 
 
 # 기능 구현 BoxOffice.app
