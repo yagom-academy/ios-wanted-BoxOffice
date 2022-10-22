@@ -19,6 +19,7 @@ extension FirstViewStyling {
             $0.layer.shadowOpacity = 1
             $0.layer.shadowOffset = CGSize(width: 0, height: 1)
             $0.layer.shadowRadius = 8
+            $0.clipsToBounds = true
             $0.image = UIImage(systemName: .docImage)
         }
     }
