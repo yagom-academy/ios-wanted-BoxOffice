@@ -55,7 +55,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="Dzx-WS-1LH">
-                                <rect key="frame" x="0.0" y="91" width="390" height="34"/>
+                                <rect key="frame" x="8" y="91" width="374" height="34"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <date key="minimumDate" timeIntervalSinceReferenceDate="90241200">
                                     <!--2003-11-11 11:00:00 +0000-->
@@ -84,10 +84,10 @@
                         <viewLayoutGuide key="safeArea" id="9SE-Dz-1bN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Dzx-WS-1LH" firstAttribute="leading" secondItem="9SE-Dz-1bN" secondAttribute="leading" id="AFW-Gg-zX1"/>
+                            <constraint firstItem="Dzx-WS-1LH" firstAttribute="leading" secondItem="9SE-Dz-1bN" secondAttribute="leading" constant="8" id="AFW-Gg-zX1"/>
                             <constraint firstItem="uGZ-GH-34g" firstAttribute="top" secondItem="Dzx-WS-1LH" secondAttribute="bottom" id="UD5-yN-krj"/>
                             <constraint firstItem="Dzx-WS-1LH" firstAttribute="top" secondItem="9SE-Dz-1bN" secondAttribute="top" id="XeC-OS-xos"/>
-                            <constraint firstItem="9SE-Dz-1bN" firstAttribute="trailing" secondItem="Dzx-WS-1LH" secondAttribute="trailing" id="gVZ-T2-bgb"/>
+                            <constraint firstItem="9SE-Dz-1bN" firstAttribute="trailing" secondItem="Dzx-WS-1LH" secondAttribute="trailing" constant="8" id="gVZ-T2-bgb"/>
                             <constraint firstItem="9SE-Dz-1bN" firstAttribute="trailing" secondItem="uGZ-GH-34g" secondAttribute="trailing" id="h7R-2f-jZp"/>
                             <constraint firstItem="uGZ-GH-34g" firstAttribute="leading" secondItem="9SE-Dz-1bN" secondAttribute="leading" id="phB-gl-dqF"/>
                             <constraint firstItem="9SE-Dz-1bN" firstAttribute="bottom" secondItem="uGZ-GH-34g" secondAttribute="bottom" id="rpK-cX-Gqm"/>
@@ -112,6 +112,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="npk-Q3-uta">
                         <rect key="frame" x="0.0" y="47" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </navigationBar>
                     <connections>
                         <segue destination="ihQ-ai-FUz" kind="relationship" relationship="rootViewController" id="r9l-mc-krX"/>
@@ -129,10 +130,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="V9l-KI-05y">
-                                <rect key="frame" x="0.0" y="91" width="390" height="670"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dfm-lV-NMB">
+                                <rect key="frame" x="8" y="91" width="0.0" height="34.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="3Wa-eE-lK7">
+                                <rect key="frame" x="16" y="91" width="374" height="34"/>
+                                <date key="minimumDate" timeIntervalSinceReferenceDate="90241200">
+                                    <!--2003-11-11 11:00:00 +0000-->
+                                </date>
+                                <locale key="locale" localeIdentifier="ko_KR"/>
+                                <connections>
+                                    <action selector="didEndEditingDatePicker:" destination="ihQ-ai-FUz" eventType="editingDidEnd" id="bZv-CW-cZC"/>
+                                </connections>
+                            </datePicker>
+                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="V9l-KI-05y">
+                                <rect key="frame" x="0.0" y="125.33333333333331" width="390" height="635.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6ZC-9G-4sT">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6ZC-9G-4sT">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -141,21 +158,30 @@
                                 <cells/>
                                 <connections>
                                     <outlet property="dataSource" destination="ihQ-ai-FUz" id="e5l-Df-K3X"/>
+                                    <outlet property="delegate" destination="ihQ-ai-FUz" id="SPH-GQ-yxA"/>
                                 </connections>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wsa-t1-jS6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="V9l-KI-05y" firstAttribute="top" secondItem="wsa-t1-jS6" secondAttribute="top" id="3En-1F-bwo"/>
+                            <constraint firstItem="Dfm-lV-NMB" firstAttribute="leading" secondItem="wsa-t1-jS6" secondAttribute="leading" constant="8" id="1LV-Bg-epJ"/>
+                            <constraint firstItem="V9l-KI-05y" firstAttribute="top" secondItem="3Wa-eE-lK7" secondAttribute="bottom" id="3En-1F-bwo"/>
+                            <constraint firstItem="3Wa-eE-lK7" firstAttribute="leading" secondItem="Dfm-lV-NMB" secondAttribute="trailing" constant="8" id="Efz-Nm-hmJ"/>
+                            <constraint firstItem="Dfm-lV-NMB" firstAttribute="top" secondItem="wsa-t1-jS6" secondAttribute="top" id="Ioq-ku-NQ0"/>
                             <constraint firstItem="V9l-KI-05y" firstAttribute="leading" secondItem="wsa-t1-jS6" secondAttribute="leading" id="ONJ-Gx-dee"/>
+                            <constraint firstAttribute="trailing" secondItem="3Wa-eE-lK7" secondAttribute="trailing" id="UF9-dd-TAB"/>
                             <constraint firstItem="wsa-t1-jS6" firstAttribute="trailing" secondItem="V9l-KI-05y" secondAttribute="trailing" id="daL-H4-A51"/>
+                            <constraint firstItem="3Wa-eE-lK7" firstAttribute="top" secondItem="wsa-t1-jS6" secondAttribute="top" id="jpe-hK-Ama"/>
                             <constraint firstItem="wsa-t1-jS6" firstAttribute="bottom" secondItem="V9l-KI-05y" secondAttribute="bottom" id="msZ-88-tkX"/>
+                            <constraint firstItem="V9l-KI-05y" firstAttribute="top" secondItem="Dfm-lV-NMB" secondAttribute="bottom" id="zGk-m7-fGm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Weekly Box Office" id="fbE-nl-Xlo"/>
                     <connections>
                         <outlet property="collectionView" destination="V9l-KI-05y" id="tLy-eN-fFp"/>
+                        <outlet property="datePicker" destination="3Wa-eE-lK7" id="ylY-QC-a29"/>
+                        <outlet property="rangeLabel" destination="Dfm-lV-NMB" id="NU9-JF-2UF"/>
                         <segue destination="Arw-ko-DA3" kind="show" identifier="" id="xpL-oE-EF6"/>
                     </connections>
                 </viewController>
@@ -181,7 +207,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9PJ-wt-PsC"/>
+        <segue reference="xpL-oE-EF6"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="list.number" catalog="system" width="128" height="97"/>

@@ -27,6 +27,7 @@
 		C1A4E40F2900067000209C8B /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A4E40E2900067000209C8B /* APIError.swift */; };
 		C1A4E41129029F9D00209C8B /* WeeklyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A4E41029029F9D00209C8B /* WeeklyViewModel.swift */; };
 		C1A4E4132902A09E00209C8B /* DailyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A4E4122902A09E00209C8B /* DailyDTO.swift */; };
+		C1A4E4152903B72700209C8B /* WeeklyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A4E4142903B72700209C8B /* WeeklyDTO.swift */; };
 		C1CE9B9028FD56BC005D50D7 /* WeeklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE9B8F28FD56BC005D50D7 /* WeeklyViewController.swift */; };
 		C1CE9B9328FD57E0005D50D7 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE9B9228FD57E0005D50D7 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,7 @@
 		C1A4E40E2900067000209C8B /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		C1A4E41029029F9D00209C8B /* WeeklyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyViewModel.swift; sourceTree = "<group>"; };
 		C1A4E4122902A09E00209C8B /* DailyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDTO.swift; sourceTree = "<group>"; };
+		C1A4E4142903B72700209C8B /* WeeklyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyDTO.swift; sourceTree = "<group>"; };
 		C1CE9B8F28FD56BC005D50D7 /* WeeklyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyViewController.swift; sourceTree = "<group>"; };
 		C1CE9B9228FD57E0005D50D7 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -215,6 +217,7 @@
 			children = (
 				C1CE9B8F28FD56BC005D50D7 /* WeeklyViewController.swift */,
 				C1A4E41029029F9D00209C8B /* WeeklyViewModel.swift */,
+				C1A4E4142903B72700209C8B /* WeeklyDTO.swift */,
 			);
 			path = Weekly;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				C1A4E4132902A09E00209C8B /* DailyDTO.swift in Sources */,
 				C158EDBF28FDF5E8000FAE6E /* DailyBoxOfficeResponse.swift in Sources */,
 				C1CE9B9328FD57E0005D50D7 /* DetailViewController.swift in Sources */,
+				C1A4E4152903B72700209C8B /* WeeklyDTO.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				C1A4E40D28FF109C00209C8B /* DailyViewModel.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,

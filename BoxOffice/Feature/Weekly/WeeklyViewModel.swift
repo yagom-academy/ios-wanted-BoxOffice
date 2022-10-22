@@ -10,8 +10,14 @@ import Foundation
 final class WeeklyViewModel {
     let apiService = ApiService()
     
-    func fetchWeeklyView() async throws -> WeeklyBoxOfficeResultResponse {
-        let result = try await apiService.weeklyBoxOfficeAPIService(targetDt: "20120101")
-        return result
+    func fetchWeeklyView(targetDt: String, weekGb: Int) async throws -> (WeeklyDTO, String) {
+        let boxOfficeResultResponse = try await apiService.weeklyBoxOfficeAPIService(targetDt: targetDt, weekGb: weekGb)
+        let showRange = boxOfficeResultResponse.boxOfficeResult.showRange
+        let dto = WeeklyDTO(dataSource: [
+            (section: .boxOffice,
+             items: boxOfficeResultResponse.boxOfficeResult.weeklyBoxOfficeList.compactMap({ .boxOffice(BoxOfficeData($0)) }))
+        ])
+        
+        return (dto, showRange)
     }
 }

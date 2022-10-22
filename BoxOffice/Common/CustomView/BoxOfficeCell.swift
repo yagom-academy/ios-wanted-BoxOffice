@@ -52,7 +52,7 @@ class BoxOfficeCell: UICollectionViewCell {
         }
         titleLabel.text = data.movieNm
         openingDateLabel.text = "개봉일: \(data.openDt)"
-        attendanceLabel.text = data.audiCnt
+        attendanceLabel.text = "관객수: \(data.audiCnt)" 
     }
     
     func getEstimatedSize(data: BoxOfficeData) -> CGSize {

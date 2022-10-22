@@ -57,14 +57,15 @@ final class ApiService {
         )
     }
     
-    func weeklyBoxOfficeAPIService(targetDt: String) async throws -> WeeklyBoxOfficeResultResponse {
+    func weeklyBoxOfficeAPIService(targetDt: String, weekGb: Int) async throws -> WeeklyBoxOfficeResultResponse {
         return try await getRequestData(
             type: WeeklyBoxOfficeResultResponse.self,
             path: ListType.weekly.path,
             parameters: [
                 "key" : "f5eef3421c602c6cb7ea224104795888",
                 "targetDt" : targetDt,
-                "wideAreaCd" : "0105001"
+                "wideAreaCd" : "0105001",
+                "weekGb" : "\(weekGb)"
             ]
         )
     }
