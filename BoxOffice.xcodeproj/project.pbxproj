@@ -76,10 +76,9 @@
 		635A19E628F9603900197BCC /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
+				8C606B302903C7A800ADC626 /* Application */,
 				8C606B2D2903B6BC00ADC626 /* Resource */,
 				8C606B2C2903B65F00ADC626 /* Source */,
-				635A19F528F9603A00197BCC /* Info.plist */,
-				8C606B1628FEB55F00ADC626 /* KeyList.plist */,
 			);
 			path = BoxOffice;
 			sourceTree = "<group>";
@@ -152,7 +151,6 @@
 		8C606B2C2903B65F00ADC626 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				8C606B0828FD8E8B00ADC626 /* LifeCycles */,
 				8C606B272901789C00ADC626 /* Extensions */,
 				8C606B0928FD8E9E00ADC626 /* Views */,
 				8C606B1028FE906C00ADC626 /* Model */,
@@ -167,6 +165,16 @@
 				635A19F028F9603A00197BCC /* Assets.xcassets */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		8C606B302903C7A800ADC626 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				8C606B0828FD8E8B00ADC626 /* LifeCycles */,
+				8C606B1628FEB55F00ADC626 /* KeyList.plist */,
+				635A19F528F9603A00197BCC /* Info.plist */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,7 +390,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AH24YSXN5M;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BoxOffice/Info.plist;
+				INFOPLIST_FILE = BoxOffice/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -409,7 +417,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AH24YSXN5M;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BoxOffice/Info.plist;
+				INFOPLIST_FILE = BoxOffice/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
