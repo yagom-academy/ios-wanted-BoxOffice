@@ -12,6 +12,13 @@
 		635A19EF28F9603900197BCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19ED28F9603900197BCC /* Main.storyboard */; };
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
 		635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F228F9603A00197BCC /* LaunchScreen.storyboard */; };
+		F82CD1442903C15200819435 /* CommentWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82CD1432903C15200819435 /* CommentWriteView.swift */; };
+		F82CD1462903CD8E00819435 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82CD1452903CD8E00819435 /* ImagePicker.swift */; };
+		F84B0A7428FFE25A00692675 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84B0A7328FFE25A00692675 /* MovieDetailViewController.swift */; };
+		F851001E2901BB2C00B82DCA /* CommentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851001D2901BB2C00B82DCA /* CommentListView.swift */; };
+		F85100202901BE0100B82DCA /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851001F2901BE0100B82DCA /* CommentView.swift */; };
+		F85100222902434200B82DCA /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85100212902434200B82DCA /* Comment.swift */; };
+		F851002429024F5300B82DCA /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851002329024F5300B82DCA /* ColorManager.swift */; };
 		F86D54B328FEA5F100BD04AC /* MovieListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D54B228FEA5F100BD04AC /* MovieListViewCell.swift */; };
 		F86D54BF28FEB51400BD04AC /* NotoSansMono-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F86D54B628FEB51300BD04AC /* NotoSansMono-SemiBold.ttf */; };
 		F86D54C028FEB51400BD04AC /* NotoSansMono-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F86D54B728FEB51300BD04AC /* NotoSansMono-Light.ttf */; };
@@ -39,6 +46,13 @@
 		635A19F028F9603A00197BCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		635A19F328F9603A00197BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		635A19F528F9603A00197BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F82CD1432903C15200819435 /* CommentWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentWriteView.swift; sourceTree = "<group>"; };
+		F82CD1452903CD8E00819435 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		F84B0A7328FFE25A00692675 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		F851001D2901BB2C00B82DCA /* CommentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListView.swift; sourceTree = "<group>"; };
+		F851001F2901BE0100B82DCA /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		F85100212902434200B82DCA /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		F851002329024F5300B82DCA /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		F86D54B228FEA5F100BD04AC /* MovieListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewCell.swift; sourceTree = "<group>"; };
 		F86D54B628FEB51300BD04AC /* NotoSansMono-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansMono-SemiBold.ttf"; sourceTree = "<group>"; };
 		F86D54B728FEB51300BD04AC /* NotoSansMono-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansMono-Light.ttf"; sourceTree = "<group>"; };
@@ -103,6 +117,32 @@
 			path = BoxOffice;
 			sourceTree = "<group>";
 		};
+		F82CD1482903D6CB00819435 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				F851001D2901BB2C00B82DCA /* CommentListView.swift */,
+				F851001F2901BE0100B82DCA /* CommentView.swift */,
+				F82CD1432903C15200819435 /* CommentWriteView.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		F84B0A7028FFE23800692675 /* MovieDetail */ = {
+			isa = PBXGroup;
+			children = (
+				F84B0A7128FFE24000692675 /* View */,
+			);
+			path = MovieDetail;
+			sourceTree = "<group>";
+		};
+		F84B0A7128FFE24000692675 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F84B0A7328FFE25A00692675 /* MovieDetailViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F86D54AF28FEA5C200BD04AC /* MovieList */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +197,8 @@
 			children = (
 				F8C3346E28FE970300C8574E /* BoxOfficeModel.swift */,
 				F8C3347028FE972B00C8574E /* MovieInfoModel.swift */,
+				F85100212902434200B82DCA /* Comment.swift */,
+				F851002329024F5300B82DCA /* ColorManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -164,6 +206,8 @@
 		F8C3345F28FE94B600C8574E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F82CD1482903D6CB00819435 /* Comment */,
+				F84B0A7028FFE23800692675 /* MovieDetail */,
 				F86D54AF28FEA5C200BD04AC /* MovieList */,
 			);
 			path = View;
@@ -175,6 +219,7 @@
 				F8C3346B28FE96EF00C8574E /* ++Bundle.swift */,
 				F8C3346A28FE96EF00C8574E /* RequestManager.swift */,
 				F8C3347628FE9FAC00C8574E /* Dummy.swift */,
+				F82CD1452903CD8E00819435 /* ImagePicker.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -261,11 +306,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8C3347128FE972B00C8574E /* MovieInfoModel.swift in Sources */,
+				F85100202901BE0100B82DCA /* CommentView.swift in Sources */,
 				F8C3346128FE94DB00C8574E /* MovieListViewController.swift in Sources */,
+				F82CD1462903CD8E00819435 /* ImagePicker.swift in Sources */,
+				F85100222902434200B82DCA /* Comment.swift in Sources */,
 				F86D54B328FEA5F100BD04AC /* MovieListViewCell.swift in Sources */,
 				F8C3346D28FE96EF00C8574E /* ++Bundle.swift in Sources */,
+				F851002429024F5300B82DCA /* ColorManager.swift in Sources */,
+				F851001E2901BB2C00B82DCA /* CommentListView.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				F8C3346F28FE970300C8574E /* BoxOfficeModel.swift in Sources */,
+				F82CD1442903C15200819435 /* CommentWriteView.swift in Sources */,
+				F84B0A7428FFE25A00692675 /* MovieDetailViewController.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 				F8C3346C28FE96EF00C8574E /* RequestManager.swift in Sources */,
 				F8C3347728FE9FAC00C8574E /* Dummy.swift in Sources */,
