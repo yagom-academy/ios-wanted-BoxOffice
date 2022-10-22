@@ -9,9 +9,9 @@
     </tr>
     <tr align="center">
         <td width= 170px>
-            <img src="images/IMG_4426121212.jpg" width="73%">
+            <img src="ios-wanted-BoxOffice/blob/main/README/IMG_4426121212.jpg" width="73%">
             <br>
-            <a href="https://github.com/gelb2/ios-wanted-BoxOffice/blob/main/README/IMG_4426121212.jpg"><I>JunYoungJee (Bill)</I></a>
+            <a href="https://github.com/gelb2/"><I>JunYoungJee (Bill)</I></a>
         </td>
     </tr>
 </table>
