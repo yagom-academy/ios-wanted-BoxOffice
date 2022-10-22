@@ -7,6 +7,23 @@
 
 import UIKit
 
+enum VideoHelper {
+    static func startMediaBrowser(
+        delegate: UIViewController & UINavigationControllerDelegate & UIImagePickerControllerDelegate,
+        sourceType: UIImagePickerController.SourceType
+    ) {
+        guard UIImagePickerController.isSourceTypeAvailable(sourceType)
+        else { return }
+
+        let mediaUI = UIImagePickerController()
+        mediaUI.sourceType = sourceType
+//        mediaUI.mediaTypes = [kUTTypeMovie as String]
+        mediaUI.allowsEditing = true
+        mediaUI.delegate = delegate
+        delegate.present(mediaUI, animated: true, completion: nil)
+    }
+}
+
 class ThirdViewController: UIViewController, UITextFieldDelegate {
     
     
@@ -37,6 +54,12 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
         let button = UIBarButtonItem(title: "📷", style: .plain, target: self, action: #selector(add))
         return button
     }()
+    
+    lazy var firstNavButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: "🎞", style: .plain, target: self, action: #selector(keepPhoto))
+        return button
+    }()
+    
     @objc func add(_ sender: UIButton) {
         let camera = UIImagePickerController()
         camera.delegate = self
@@ -44,10 +67,16 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
         camera.mediaTypes = UIImagePickerController.availableMediaTypes(for: .camera) ?? []
         self.present(camera, animated: true)
     }
+    @objc private func keepPhoto() {
+        VideoHelper.startMediaBrowser(delegate: self, sourceType: .savedPhotosAlbum)
+    }
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = self.rightNavButton
+        self.navigationItem.leftBarButtonItem = self.firstNavButton
         self.idText.delegate = self
         self.passwordText.delegate = self
         self.checkPassword.delegate = self
@@ -79,7 +108,6 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func changed(_ sender: UITextField) {
-        print("test :", sender.text)
         if !(self.idText.text?.isEmpty ?? true)
             && !(self.passwordText.text?.isEmpty ?? true)
             && isSameBothTextField(passwordText, checkPassword) {
