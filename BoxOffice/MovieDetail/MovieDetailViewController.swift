@@ -70,7 +70,7 @@ final class MovieDetailViewController: UIViewController {
     private let movieDetailTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.backgroundColor = .systemGray6
-        tableView.separatorStyle = .none
+//        tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 50
         tableView.isScrollEnabled = false
         return tableView
@@ -93,7 +93,6 @@ final class MovieDetailViewController: UIViewController {
     
     let viewModel: MovieDetailViewModel = .init()
     private let coredataManager = CoreDataManager.shared
-    private(set) var inputPassword: String = ""
     private(set) var movieID: String = ""
     
     override func viewDidLoad() {
@@ -249,23 +248,35 @@ extension MovieDetailViewController: UITableViewDataSource {
         return nil
     }
     
+    
 }
 
 extension MovieDetailViewController: UITableViewDelegate {
     // TODO: 라벨 크기에 따른 동적 셀 구현해야됨
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            guard let userPassword = self.viewModel.reviewList[indexPath.row].password else { return }
+            print("비번", userPassword)
             let alertVC = UIAlertController(title: nil, message: "암호를 입력해주세요.", preferredStyle: .alert)
             //비밀번호 입력 후 맞는지 확인
             let confirm = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
-                
+                if let password = alertVC.textFields?.first, let inputPassword = password.text {
+                    if inputPassword == userPassword {
+                        print("리뷰 삭제!!")
+                        self?.coredataManager.delete(object: self?.viewModel.reviewList[indexPath.row] ?? Review())
+                        self?.viewModel.reviewList.remove(at: indexPath.row)
+                        self?.reviewTableView.reloadData()
+                    } else {
+                        print("비밀번호 불일치 !!!")
+                    }
+                }
+               
             }
+            let cancel = UIAlertAction(title: "취소", style: .cancel)
             //비밀번호 입력 후 temp에 저장
-            alertVC.addTextField { [weak self] textField in
-                self?.inputPassword = textField.text ?? ""
-                print("😗", textField.text)
-            }
+            alertVC.addTextField()
             alertVC.addAction(confirm)
+            alertVC.addAction(cancel)
             self.present(alertVC, animated: true)
         }
     }
