@@ -32,7 +32,7 @@ struct BoxOfficeHelper {
         }
     }
     
-    // 전일 대비
+    // 전일 대비 증감 계산
     func rankIntenCal(_ rankInten: String) -> String {
         if rankInten == "0" {
             return "-"
@@ -43,6 +43,7 @@ struct BoxOfficeHelper {
         }
     }
     
+    // 관람 등급 이미지
     func auditsImage(_ audits: String) -> String {
         if audits == "전체관람가" {
             return "zero"
@@ -55,6 +56,7 @@ struct BoxOfficeHelper {
         }
     }
 
+    // 배우 이름
     func actorNameHelper(_ actors: [Actors]) -> String {
         var actorArr = ""
         if actors.count != 0 {
@@ -66,6 +68,7 @@ struct BoxOfficeHelper {
         return actorArr
     }
     
+    // 영화 이름 띄어쓰기 때문에 Poster 못 불러오는거 
     func movieNameHelper(_ movieName: String) -> String {
         if movieName == "스마일" {
             return "Smile"
