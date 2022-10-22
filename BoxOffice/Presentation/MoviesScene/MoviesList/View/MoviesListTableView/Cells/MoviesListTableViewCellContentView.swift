@@ -154,7 +154,7 @@ extension MoviesListTableViewCellContentView {
             self.rankLabel.text = viewModel.getRankString(viewModel.rank)
             self.newLabel.isHidden = viewModel.isNewLabelHidden(viewModel.rankOldAndNew)
             self.titleLabel.text = viewModel.movieNm
-            self.dateLabel.text = viewModel.openDt
+            self.dateLabel.text = viewModel.getDateString(viewModel.openDt)
             self.audienceLabel.text = viewModel.audiAcc
             
             switch viewModel.isPlus(viewModel.rankInten) {

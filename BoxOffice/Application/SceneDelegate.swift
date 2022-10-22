@@ -22,6 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let viewModel = MoviesListViewModel(items: Observable([]))
         // TO-DO: 실제 repository 연결
         let repository = DefaultMoviesRepository()
+//        let repository = MockMoviesRepository()
         
         let mainViewController = MoviesListViewController(viewModel: viewModel, repository: repository)
         let navigationController = UINavigationController(rootViewController: mainViewController)

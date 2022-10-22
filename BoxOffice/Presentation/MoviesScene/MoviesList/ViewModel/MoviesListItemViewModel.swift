@@ -35,4 +35,9 @@ extension MoviesListItemViewModel {
             return 1
         }
     }
+    
+    func getDateString(_ date: String) -> String {
+        let ret = date.replacingOccurrences(of: "-", with: ".")
+        return ret + " 개봉"
+    }
 }
