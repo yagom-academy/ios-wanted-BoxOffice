@@ -40,7 +40,7 @@ class FirstMovieCell: UITableViewCell {
     }
     
     func configureCell(viewModel: FirstMovieCellModel) {
-        cellView.didReceiveViewModel(viewModel)
+        self.viewModel = viewModel
     }
 
 }

@@ -17,7 +17,7 @@ class ParkBenchTimer {
 
     func stop() -> CFAbsoluteTime {
         endTime = CFAbsoluteTimeGetCurrent()
-
+        print("ParkBenchTimer duration : \(duration)")
         return duration!
     }
 

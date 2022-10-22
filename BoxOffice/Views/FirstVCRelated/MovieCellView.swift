@@ -12,7 +12,6 @@ class MovieCellView: UIView, FirstViewStyling {
 
     //input
     var didReceiveViewModel: (FirstMovieCellModel) -> () = { model in }
-    var didReceiveImageURL: ((String, String) -> ())?
     //output
     
     //properties
@@ -114,19 +113,7 @@ extension MovieCellView: Presentable {
             self.watchedCustomerCountLabel.text = model.audiCnt
             self.rankIncrementLabel.text = model.rankInten
             self.approachedRankIndexLabel.text = model.rankOldAndNew
-            self.privateCellViewModel.propergateImageURL = self.didReceiveImageURL
-            self.privateCellViewModel.shouldModelRequestImage()
-        }
-        
-        didReceiveImageURL = { [weak self] urlString, movieName in
-            guard let self = self else { return }
-            print("didReceiveImageURL")
-            
-            if movieName == self.privateCellViewModel.movieNm {
-                self.posterImageView.loadImage(urlString: urlString)
-            } else if movieName != self.privateCellViewModel.movieNm {
-                return
-            }
+            self.posterImageView.loadImage(urlString: model.imageURLString)
         }
     }
     

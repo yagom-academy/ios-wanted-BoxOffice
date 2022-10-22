@@ -33,8 +33,10 @@ class FirstModel: SceneActionReceiver {
     func populateData() {
         print(#function)
         Task {
+            let parkBenchTimer = ParkBenchTimer()
             guard let entity = await requestAPI() else { return }
             privateFirstContentViewModel.didReceiveEntity(entity)
+            parkBenchTimer.stop()
         }
     }
     
@@ -78,7 +80,6 @@ class FirstModel: SceneActionReceiver {
             // TODO: 데이트피커 관련 뷰? 추가하고 해당 템프값 관련사항 수정
             let today = Date().addingTimeInterval(TimeInterval(-86400))
             let todayString = today.asString(.koficFormat)
-            print("today check : \(today) : \(Date())")
             let entity: KoficMovieEntity = try await repository.fetch(api: .kofic(.daily(date: todayString)))
             return entity
         } catch let error {

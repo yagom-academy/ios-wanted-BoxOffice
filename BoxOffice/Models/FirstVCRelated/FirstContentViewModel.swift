@@ -50,13 +50,14 @@ class FirstContentViewModel {
     private func populateEntity(result: KoficMovieEntity) async {
         print(#function)
         self.entity = result
-        
+        let timer = ParkBenchTimer()
         var closures: [() -> Task<String, Error>] = []
         for value in result.boxOfficeResult.dailyBoxOfficeList {
             async let closure: () -> Task<String, Error> = { () -> Task<String, Error> in
                Task { () -> (String) in
                     let detailed: KoficMovieDetailEntity = try await self.repository.fetch(api: .kofic(.detailMovieInfo(movieCd: value.movieCd)))
                     let posterUrl: OmdbEntity = try await self.repository.fetch(api: .omdb(movieName: detailed.movieInfoResult.movieInfo.movieNmEn, releasedYear: detailed.movieInfoResult.movieInfo.openDt.koficDateToYear() ?? "2022"))
+                   print("poster url check : \(posterUrl.poster)")
                     return posterUrl.poster
                 }
             }
@@ -67,40 +68,45 @@ class FirstContentViewModel {
             value()
         }
         
-        do {
-            let asyncMapped = try await mappedClosure.asyncMap { task in
-                let result = try await task.result.get()
-                return result
+//        do {
+//            let asyncMapped = try await mappedClosure.asyncMap { task in
+//                let result = try await task.result.get()
+//                print("async mapped result check \(result)")
+//                return result
+//            }
+//        } catch {
+//            // TODO: catch error
+//            print("async mapped error")
+//        }
+        
+        privateDataSource = await result.boxOfficeResult.dailyBoxOfficeList.enumerated().asyncMap { (index, dailyBoxOfficeValue) -> FirstMovieCellModel in
+            let cellModel = FirstMovieCellModel()
+            cellModel.rnum = dailyBoxOfficeValue.rnum
+            cellModel.rank = dailyBoxOfficeValue.rank
+            cellModel.rankInten = String.emojiAndTitle(emojiValue: .rankIncrement) + " " + dailyBoxOfficeValue.rankInten
+            cellModel.rankOldAndNew = String.emojiAndTitle(emojiValue: .rankApproach) + " " + dailyBoxOfficeValue.rankOldAndNew.rawValue
+            cellModel.movieCd = dailyBoxOfficeValue.movieCd
+            cellModel.movieNm = dailyBoxOfficeValue.movieNm
+            cellModel.openDt = String.emojiAndTitle(emojiValue: .releasedDay) + " " + dailyBoxOfficeValue.openDt
+            cellModel.salesAmt = dailyBoxOfficeValue.salesAmt
+            cellModel.salesShare = dailyBoxOfficeValue.salesShare
+            cellModel.salesInten = dailyBoxOfficeValue.salesInten
+            cellModel.salesChange = dailyBoxOfficeValue.salesChange
+            cellModel.salesAcc = dailyBoxOfficeValue.salesAcc
+            cellModel.audiCnt = String.emojiAndTitle(emojiValue: .audCount) + " " + dailyBoxOfficeValue.audiCnt
+            cellModel.audiInten = dailyBoxOfficeValue.audiInten
+            cellModel.audiChange = dailyBoxOfficeValue.audiChange
+            cellModel.audiAcc = dailyBoxOfficeValue.audiAcc
+            cellModel.scrnCnt = dailyBoxOfficeValue.scrnCnt
+            cellModel.showCnt = dailyBoxOfficeValue.showCnt
+            do {
+                cellModel.imageURLString = try await mappedClosure[index].result.get()
+            } catch {
+                cellModel.imageURLString = ""
             }
-            
-            privateDataSource = result.boxOfficeResult.dailyBoxOfficeList.enumerated().map { (index, dailyBoxOfficeValue) -> FirstMovieCellModel in
-                let cellModel = FirstMovieCellModel()
-                cellModel.rnum = dailyBoxOfficeValue.rnum
-                cellModel.rank = dailyBoxOfficeValue.rank
-                cellModel.rankInten = String.emojiAndTitle(emojiValue: .rankIncrement) + " " + dailyBoxOfficeValue.rankInten
-                cellModel.rankOldAndNew = String.emojiAndTitle(emojiValue: .rankApproach) + " " + dailyBoxOfficeValue.rankOldAndNew.rawValue
-                cellModel.movieCd = dailyBoxOfficeValue.movieCd
-                cellModel.movieNm = dailyBoxOfficeValue.movieNm
-                cellModel.openDt = String.emojiAndTitle(emojiValue: .releasedDay) + " " + dailyBoxOfficeValue.openDt
-                cellModel.salesAmt = dailyBoxOfficeValue.salesAmt
-                cellModel.salesShare = dailyBoxOfficeValue.salesShare
-                cellModel.salesInten = dailyBoxOfficeValue.salesInten
-                cellModel.salesChange = dailyBoxOfficeValue.salesChange
-                cellModel.salesAcc = dailyBoxOfficeValue.salesAcc
-                cellModel.audiCnt = String.emojiAndTitle(emojiValue: .audCount) + " " + dailyBoxOfficeValue.audiCnt
-                cellModel.audiInten = dailyBoxOfficeValue.audiInten
-                cellModel.audiChange = dailyBoxOfficeValue.audiChange
-                cellModel.audiAcc = dailyBoxOfficeValue.audiAcc
-                cellModel.scrnCnt = dailyBoxOfficeValue.scrnCnt
-                cellModel.showCnt = dailyBoxOfficeValue.showCnt
-                cellModel.imageURLString = asyncMapped[index]
-                return cellModel
-            }
-            
-        } catch {
-            // TODO: catch error
-            print("async mapped error")
+            return cellModel
         }
+        timer.stop()
     }
     
     private func findAndReturnSelectedItem(indexPathRow: Int) -> DailyBoxOfficeList? {
