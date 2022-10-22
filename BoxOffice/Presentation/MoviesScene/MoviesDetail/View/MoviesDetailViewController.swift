@@ -12,6 +12,8 @@ class MoviesDetailViewController: UIViewController {
     var viewModel: MoviesDetailItemViewModel?
     var repository: MoviesRepository?
     
+    lazy var moviesDetailTableView = MoviesDetailTableView()
+    
     init(viewModel: MoviesDetailItemViewModel, repository: MoviesRepository) {
         self.viewModel = viewModel
         self.repository = repository
@@ -24,7 +26,9 @@ class MoviesDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        
+        self.moviesDetailTableView.delegate = self
+        self.moviesDetailTableView.dataSource = self
         
         fetchMovie()
         setupViews()
@@ -37,11 +41,17 @@ class MoviesDetailViewController: UIViewController {
 
 extension MoviesDetailViewController {
     func setupViews() {
-        
+        let views = [moviesDetailTableView]
+        views.forEach { self.view.addSubview($0) }
     }
     
     func setupConstraints() {
-        
+        NSLayoutConstraint.activate([
+            self.moviesDetailTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.moviesDetailTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.moviesDetailTableView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.moviesDetailTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
     }
     
     func bind() {
@@ -65,9 +75,51 @@ extension MoviesDetailViewController {
                 self.viewModel?.actorsNm = movieDetail.actorsNm
                 self.viewModel?.watchGradeNm = movieDetail.watchGradeNm
                 
+                DispatchQueue.main.async {
+                    self.moviesDetailTableView.reloadData()
+                }
+                
             case .failure(_):
                 print("FETCH ERROR")
             }
         })
+    }
+}
+
+extension MoviesDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.section {
+        case 0:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: FirstTableViewCell.identifier, for: indexPath) as? FirstTableViewCell else {
+                return UITableViewCell()
+            }
+            
+            cell.fill(viewModel: self.viewModel!)
+            return cell
+        case 1:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SecondTableViewCell.identifier, for: indexPath) as? SecondTableViewCell else {
+                return UITableViewCell()
+            }
+            
+            cell.fill(viewModel: self.viewModel!)
+            return cell
+        case 2:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ThirdTableViewCell.identifier, for: indexPath) as? ThirdTableViewCell else {
+                return UITableViewCell()
+            }
+            
+            cell.fill(viewModel: self.viewModel!)
+            return cell
+        default:
+            return UITableViewCell()
+        }
     }
 }

@@ -45,7 +45,6 @@ extension MoviesListViewController {
     }
     
     func setupConstraints() {
-        self.moviesListTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             self.moviesListTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.moviesListTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
