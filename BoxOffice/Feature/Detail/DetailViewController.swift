@@ -32,8 +32,11 @@ final class DetailViewController: UIViewController {
     func setupUI() {
         self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "emptyCell")
         
-        let listNib = UINib(nibName: BoxOfficeCell.identifier, bundle: Bundle(for: self.classForCoder))
-        self.collectionView.register(listNib, forCellWithReuseIdentifier: BoxOfficeCell.identifier)
+        let boxOfficeNib = UINib(nibName: BoxOfficeCell.identifier, bundle: Bundle(for: self.classForCoder))
+        self.collectionView.register(boxOfficeNib, forCellWithReuseIdentifier: BoxOfficeCell.identifier)
+        
+        let movieInfoNib = UINib(nibName: MovieInfoCell.identifier, bundle: Bundle(for: self.classForCoder))
+        self.collectionView.register(movieInfoNib, forCellWithReuseIdentifier: MovieInfoCell.identifier)
     }
     
     func fetchData() {
@@ -71,7 +74,10 @@ extension DetailViewController: UICollectionViewDataSource {
             }
             return cell
         case .movieInfo(let movieInfoData):
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emptyCell", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieInfoCell.identifier, for: indexPath)
+            if let cell = cell as? MovieInfoCell {
+                cell.set(data: movieInfoData)
+            }
             return cell
         }
     }
@@ -90,7 +96,10 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: width, height: estimatedSize.height)
             
         case .movieInfo(let movieInfoData):
-            return .zero
+            let width = UIScreen.main.bounds.width - 16
+            guard let moviewInfoCell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieInfoCell.identifier, for: indexPath) as? MovieInfoCell else { return .zero }
+            let estimatedSize = moviewInfoCell.getEstimatedSize(data: movieInfoData)
+            return CGSize(width: width, height: estimatedSize.height)
         }
     }
     

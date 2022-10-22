@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MovieInfoCell" customModule="BoxOffice" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="180"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="400" height="180"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clU-Nt-hPN" userLabel="Separator View">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="180"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9Av-jL-eJl">
+                                <rect key="frame" x="8" y="8" width="384" height="164"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="g8b-pL-aQa">
+                                        <rect key="frame" x="0.0" y="0.0" width="384" height="35"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제작연도" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ep4-WR-s70">
+                                                <rect key="frame" x="0.0" y="0.0" width="125.33333333333333" height="35"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="러닝타임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BwJ-JZ-vQK">
+                                                <rect key="frame" x="129.33333333333334" y="0.0" width="125.33333333333334" height="35"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="등급" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bb-jM-7yl">
+                                                <rect key="frame" x="258.66666666666669" y="0.0" width="125.33333333333331" height="35"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장르" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="niH-5z-iQw">
+                                        <rect key="frame" x="0.0" y="43" width="384" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="감독" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R6s-GH-2aY">
+                                        <rect key="frame" x="0.0" y="86" width="384" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="배우" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htX-Et-MgW">
+                                        <rect key="frame" x="0.0" y="129" width="384" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="9Av-jL-eJl" firstAttribute="leading" secondItem="clU-Nt-hPN" secondAttribute="leading" constant="8" id="432-zl-auT"/>
+                            <constraint firstAttribute="trailing" secondItem="9Av-jL-eJl" secondAttribute="trailing" constant="8" id="9Kd-x2-ypY"/>
+                            <constraint firstAttribute="bottom" secondItem="9Av-jL-eJl" secondAttribute="bottom" constant="8" id="B9L-bi-LxT"/>
+                            <constraint firstItem="9Av-jL-eJl" firstAttribute="top" secondItem="clU-Nt-hPN" secondAttribute="top" constant="8" id="Vch-ke-u6z"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="clU-Nt-hPN" secondAttribute="bottom" id="GTQ-fe-gH6"/>
+                <constraint firstItem="clU-Nt-hPN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="PzL-KL-Vne"/>
+                <constraint firstItem="clU-Nt-hPN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jmr-uj-gRb"/>
+                <constraint firstAttribute="trailing" secondItem="clU-Nt-hPN" secondAttribute="trailing" id="o1t-Fo-pLc"/>
+            </constraints>
+            <size key="customSize" width="424" height="189"/>
+            <connections>
+                <outlet property="actorLabel" destination="htX-Et-MgW" id="oDy-Dg-IC9"/>
+                <outlet property="directorLabel" destination="R6s-GH-2aY" id="0ug-Sz-gMn"/>
+                <outlet property="genreLabel" destination="niH-5z-iQw" id="JWa-6X-aZg"/>
+                <outlet property="prdtLabel" destination="ep4-WR-s70" id="5g8-Sd-fqh"/>
+                <outlet property="separatorView" destination="clU-Nt-hPN" id="mzd-8s-1nL"/>
+                <outlet property="showTmLabel" destination="BwJ-JZ-vQK" id="Qkb-dT-cF4"/>
+                <outlet property="watchGradeLabel" destination="1bb-jM-7yl" id="hdV-Rp-tEO"/>
+            </connections>
+            <point key="canvasLocation" x="332.30769230769232" y="70.023696682464447"/>
+        </collectionViewCell>
+    </objects>
+</document>
