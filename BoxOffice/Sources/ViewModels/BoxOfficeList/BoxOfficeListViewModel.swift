@@ -15,7 +15,7 @@ class BoxOfficeListViewModel {
     
     // MARK: Output
     @Published var cellModels = [BoxOfficeListCollectionViewCellModel]()
-    @Published var filter: BoxOfficeFilter = .weekend
+    @Published var filter: BoxOfficeFilter = .daily
     let viewAction = PassthroughSubject<ViewAction, Never>()
     
     // MARK: Properties

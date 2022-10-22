@@ -44,6 +44,7 @@ struct BoxOfficeListRequest: Codable {
     var key: String
     var targetDt: String
     var weekGb: WeekGubun?
+    var wideAreaCd: String = "0105001"
     
     enum WeekGubun: String, Codable {
         case weekly = "0"
