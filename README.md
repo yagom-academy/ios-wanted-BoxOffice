@@ -3,19 +3,6 @@
 # BoxOffice App
 
 ---
-<table>
-    <tr align="center">
-        <td><B>지준영<B></td>
-    </tr>
-    <tr align="center">
-        <td width= 170px>
-            <img src="ios-wanted-BoxOffice/blob/main/README/IMG_4426121212.jpg" width="73%">
-            <br>
-            <a href="https://github.com/gelb2/"><I>JunYoungJee (Bill)</I></a>
-        </td>
-    </tr>
-</table>
-
 - 지준영
     - YagomAcademy: JunYoungJee
     - Discord: Bill
@@ -137,14 +124,6 @@
 
 ## 일일 박스오피스 + 날짜 수정 후 다시 불러오기
 
-![IMG_0218.jpg](README%20a8ec09395a5d4523821c6f6bb01e4dd0/IMG_0218.jpg)
-
-![RPReplay_Final1666427296_MP4_AdobeExpress.gif](README%20a8ec09395a5d4523821c6f6bb01e4dd0/RPReplay_Final1666427296_MP4_AdobeExpress.gif)
-
 ## 영화 선택 후 해당 영화 관련 디테일 정보 확인 + 공유
-
-![IMG_0220.PNG](README%20a8ec09395a5d4523821c6f6bb01e4dd0/IMG_0220.png)
-
-![RPReplay_Final1666340340_AdobeExpress.gif](README%20a8ec09395a5d4523821c6f6bb01e4dd0/RPReplay_Final1666340340_AdobeExpress.gif)
 
 ---
