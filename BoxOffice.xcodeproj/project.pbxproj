@@ -114,17 +114,10 @@
 				635A19F528F9603A00197BCC /* Info.plist */,
 				6C18CD502903996C00246953 /* GoogleService-Info.plist */,
 				6C393A9A290308DB005996E7 /* Review.xcdatamodeld */,
-			);
-			path = BoxOffice;
-			sourceTree = "<group>";
-		};
-		6C18CD552903AC8D00246953 /* Coredata */ = {
-			isa = PBXGroup;
-			children = (
 				6C393A9F29030CB5005996E7 /* Review+CoreDataClass.swift */,
 				6C393AA029030CB5005996E7 /* Review+CoreDataProperties.swift */,
 			);
-			path = Coredata;
+			path = BoxOffice;
 			sourceTree = "<group>";
 		};
 		6C21D01828FE92BB006227B2 /* MovieDetail */ = {
@@ -190,7 +183,6 @@
 		6CA3F6B32901A09D00DE1ABA /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				6C18CD552903AC8D00246953 /* Coredata */,
 				6CA3F6B42901A0A700DE1ABA /* Observable.swift */,
 				6CC4C3F92902F7C60054C3BA /* FireStorageManager.swift */,
 				6C393A9D29030B62005996E7 /* CoredataManager.swift */,

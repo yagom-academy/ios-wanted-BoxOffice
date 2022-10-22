@@ -9,15 +9,11 @@ import UIKit
 
 final class MovieListViewController: UIViewController {
     
-    private let movieListCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(
-            frame: .zero,
-            collectionViewLayout: layout
-        )
-        collectionView.backgroundColor = .white
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
+    private let movieListTableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.backgroundColor = .systemGray6
+        tableView.rowHeight = 100
+        return tableView
     }()
     
     private let indicator: UIActivityIndicatorView = {
@@ -35,7 +31,7 @@ final class MovieListViewController: UIViewController {
         self.view.backgroundColor = .white
         self.settingNavigation()
         self.setupLayouts()
-        self.configure(movieListCollectionView)
+        self.configure(movieListTableView)
         self.setupViewModel()
         
     }
@@ -50,7 +46,7 @@ final class MovieListViewController: UIViewController {
         }
         
         self.viewModel.updateMovieList = { [weak self] in
-            self?.movieListCollectionView.reloadData()
+            self?.movieListTableView.reloadData()
         }
         
         self.viewModel.loadingEnd = { [weak self] in
@@ -62,13 +58,13 @@ final class MovieListViewController: UIViewController {
     
     // MARK: - Private func
     private func setupLayouts() {
-        self.view.addSubViewsAndtranslatesFalse(movieListCollectionView,
+        self.view.addSubViewsAndtranslatesFalse(movieListTableView,
                                                 indicator)
         NSLayoutConstraint.activate([
-            movieListCollectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            movieListCollectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            movieListCollectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            movieListCollectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            movieListTableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            movieListTableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            movieListTableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            movieListTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             indicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             indicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
             indicator.widthAnchor.constraint(equalToConstant: 40),
@@ -78,39 +74,33 @@ final class MovieListViewController: UIViewController {
         
     }
     
-    private func configure(_ colletionView: UICollectionView) {
-        colletionView.register(MovieListCell.self, forCellWithReuseIdentifier: "MovieListCell")
-        colletionView.dataSource = self
-        colletionView.delegate = self
+    private func configure(_ tableView: UITableView) {
+        tableView.register(MovieListCell.self, forCellReuseIdentifier: MovieListCell.identifier)
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
 }
 
-extension MovieListViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension MovieListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.getMovieListCount()
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieListCell", for: indexPath) as? MovieListCell else { return UICollectionViewCell() }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieListCell.identifier, for: indexPath) as? MovieListCell else { fatalError("\(MovieListCell.identifier) can not dequeue cell")  }
         cell.configure(viewModel.movieList[indexPath.row])
         return cell
     }
     
-    
 }
 
-extension MovieListViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+extension MovieListViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = MovieDetailViewController()
         vc.viewModel.movieListModel = viewModel.movieList[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
-extension MovieListViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // TODO: dynamic height ~ing
-        return CGSize(width: self.view.frame.width, height: 120)
-    }
-}

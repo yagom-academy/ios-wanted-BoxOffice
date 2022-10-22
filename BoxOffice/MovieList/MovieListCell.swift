@@ -7,7 +7,10 @@
 
 import UIKit
 
-final class MovieListCell: UICollectionViewCell {
+final class MovieListCell: UITableViewCell {
+    
+    static let identifier: String = "MovieListCell"
+
     private let boxOfficeRank: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
@@ -52,7 +55,7 @@ final class MovieListCell: UICollectionViewCell {
     
     private let movieTitle: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.font = .systemFont(ofSize: 15, weight: .bold)
         label.text = "극장판 짱구는 못말려: 수수께끼! 꽃피는 천하떡잎학교"
         label.numberOfLines = 0
         return label
@@ -60,22 +63,22 @@ final class MovieListCell: UICollectionViewCell {
     
     private let openDate: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = .systemFont(ofSize: 13, weight: .medium)
         label.text = "2022/01/23"
         return label
     }()
     
     private let audienceCount: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.font = .systemFont(ofSize: 12, weight: .regular)
         label.text = "123214명"
         return label
     }()
         
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         self.setupLayouts()
-        self.configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -118,45 +121,6 @@ final class MovieListCell: UICollectionViewCell {
             self.movieInfoStackView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
         ])
     }
-    // TODO: Dynamic height 구현중
-    func fittingSize(width: CGFloat, item: MovieListModel) -> CGSize {
-        let cell = MovieListCell()
-        cell.configure(item)
-        let targetSize = CGSize(width: width
-                                , height: UIView.layoutFittingCompressedSize.height)
-        return self.contentView.systemLayoutSizeFitting(targetSize,
-                                                            withHorizontalFittingPriority:.fittingSizeLevel,
-                                                            verticalFittingPriority:.required)
-    }
+
 }
 
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-struct UIViewPreview<View: UIView>: UIViewRepresentable {
-    let view: View
-
-    init(_ builder: @escaping () -> View) {
-        view = builder()
-    }
-
-    // MARK: - UIViewRepresentable
-    func makeUIView(context: Context) -> UIView {
-        return view
-    }
-
-    func updateUIView(_ view: UIView, context: Context) {
-    
-    }
-}
-#endif
-
-#if canImport(SwiftUI) && DEBUG
-struct FirstSectionCellPreview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let cell = MovieListCell(frame: .zero)
-            return cell
-        }.previewLayout(.fixed(width: 200, height: 80))
-    }
-}
-#endif

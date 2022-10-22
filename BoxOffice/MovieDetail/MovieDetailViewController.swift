@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 final class MovieDetailViewController: UIViewController {
     
@@ -14,14 +13,12 @@ final class MovieDetailViewController: UIViewController {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30, weight: .bold)
         label.textAlignment = .center
-        label.text = "1"
         return label
     }()
     
     private let rankOldAndNewLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .semibold)
-        label.text = "NEW"
         label.textColor = .systemBlue
         label.numberOfLines = 0
         return label
@@ -30,7 +27,6 @@ final class MovieDetailViewController: UIViewController {
     private let movieTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
-        label.text = "극장판 짱구는 못말려: 수수께끼! 꽃피는 천하떡잎학교"
         label.numberOfLines = 0
         return label
     }()
@@ -38,7 +34,6 @@ final class MovieDetailViewController: UIViewController {
     private let movieTitleEngAndproductYearLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .semibold)
-        label.text = "Orphan: First Kill, 2022/01/23"
         label.numberOfLines = 0
         return label
     }()
@@ -46,7 +41,6 @@ final class MovieDetailViewController: UIViewController {
     private let movieOpenDateAndShowTime: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .semibold)
-        label.text = "개봉일, 상영시간"
         label.numberOfLines = 0
         return label
     }()
@@ -79,7 +73,6 @@ final class MovieDetailViewController: UIViewController {
     private let reviewTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.backgroundColor = .systemGray6
-        tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 50
         return tableView
     }()

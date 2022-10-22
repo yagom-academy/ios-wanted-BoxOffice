@@ -83,7 +83,7 @@ final class MovieReviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .systemGray6
         self.setupLayouts()
         self.starPickerView.dataSource = self
         self.starPickerView.delegate = self
