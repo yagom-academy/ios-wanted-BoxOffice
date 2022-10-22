@@ -72,7 +72,8 @@ extension ThirdViewController: Presentable {
     }
     
     func configureView() {
-        
+        self.view.backgroundColor = .white
+        self.title = "리뷰"
     }
     
     func bind() {

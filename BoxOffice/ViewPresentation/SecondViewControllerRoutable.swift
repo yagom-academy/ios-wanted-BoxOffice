@@ -27,6 +27,9 @@ extension SecondViewControllerRoutable where Self: SecondViewController {
             guard let scene = buildScene(scene: Scene) else { return }
             guard let nextVC = scene as? UIActivityViewController else { return }
             present(nextVC, animated: true, completion: nil)
+        case .detail(.thirdViewController):
+            guard let nextScene = buildScene(scene: Scene) as? UIViewController else { return }
+            self.navigationController?.pushViewController(nextScene, animated: true)
         default: break
         }
     }
@@ -34,14 +37,10 @@ extension SecondViewControllerRoutable where Self: SecondViewController {
     func sendAction(scene: SceneCategory) {
         switch scene {
         case .main(.firstViewControllerWithAction(let context)):
-            // TODO: fix...?
             guard let firstVC = self.navigationController?.viewControllers.first(where: { $0 is FirstViewController }) as? FirstViewController else { return }
             let action = context.dependency
             firstVC.model.didReceiveSceneAction(action)
             break
-        case .detail(.thirdViewController):
-            guard let nextScene = buildScene(scene: scene) as? UIViewController else { return }
-            self.navigationController?.pushViewController(nextScene, animated: true)
         default: break
         }
     }
