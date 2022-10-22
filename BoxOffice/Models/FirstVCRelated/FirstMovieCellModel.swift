@@ -19,8 +19,6 @@ class FirstMovieCellModel {
     
     var imageURLString: String
     
-    var repository: RepositoryProtocol = Repository(httpClient: HTTPClient())
-    
     init() {
         self.rnum = "" //순번을 출력
         self.rank = "" //해당일자의 박스오피스 순위를 출력
