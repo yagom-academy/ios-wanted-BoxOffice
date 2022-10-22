@@ -8,10 +8,12 @@
 import UIKit
 import SwiftUI
 
-class SecondViewController: UIViewController, SecondViewControllerRoutable {
+class SecondViewController: UIViewController, SecondViewControllerRoutable, ActivityIndicatorViewStyling {
 
     lazy var hostingVC = UIHostingController(rootView: contentView)
     lazy var contentView = SecondContentView(viewModel: self.model.secondContentViewModel)
+    
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     var model: SecondModel
     
@@ -58,7 +60,11 @@ extension SecondViewController: Presentable {
         self.view.addSubview(hostingVC.view)
         hostingVC.didMove(toParent: self)
         
+        self.view.addSubview(activityIndicator)
+        
         hostingVC.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         var constraint: [NSLayoutConstraint] = []
         defer { NSLayoutConstraint.activate(constraint) }
@@ -68,6 +74,11 @@ extension SecondViewController: Presentable {
             hostingVC.view.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             hostingVC.view.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
             hostingVC.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ]
+        
+        constraint += [
+            activityIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
         ]
     }
     
@@ -100,6 +111,8 @@ extension SecondViewController: Presentable {
     func configureView() {
         self.title = "상세정보"
         self.view.backgroundColor = .white
+        
+        activityIndicator.addStyles(style: indicatorStyle)
     }
     
     func bind() {
@@ -107,7 +120,17 @@ extension SecondViewController: Presentable {
             guard let self = self else { return }
             self.route(to: sceneCategory)
         }
+        
+        model.turnOnIndicator = { [weak self] _ in
+            guard let self = self else { return }
+            self.hostingVC.view.isHidden = true
+            self.activityIndicator.startAnimating()
+        }
+        
+        model.turnOffIndicator = { [weak self] _ in
+            guard let self = self else { return }
+            self.hostingVC.view.isHidden = false
+            self.activityIndicator.stopAnimating()
+        }
     }
-    
-    
 }
