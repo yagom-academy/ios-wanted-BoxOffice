@@ -13,9 +13,11 @@ class SecondContentViewModel: ObservableObject {
     //input
     var didReceiveEntity: (_ entity: KoficMovieDetailEntity, _ previousEntity: DailyBoxOfficeList) -> () = { entity, previousEntity in }
     @Published var didTapShareButton = { }
+    @Published var didTapReviewButton = { }
     
     //output
     var propergateDidTapShareButton: (String) -> () = { info in }
+    var propergateDidTapReviewButton = { }
     
     @Published var boxOfficeRank: (title: String, data: String) = (title: "박스오피스 랭크", data: "")//박스오피스 순위
     @Published var movieName: (title: String, data: String) = (title: "영화이름", data: "") //영화명
@@ -53,6 +55,11 @@ class SecondContentViewModel: ObservableObject {
             print("didTapButton Tapped")
             let info = self.gatherInfoForSharing()
             self.propergateDidTapShareButton(info)
+        }
+        
+        didTapReviewButton = { [weak self] in
+            guard let self = self else { return }
+            self.propergateDidTapReviewButton()
         }
     }
     

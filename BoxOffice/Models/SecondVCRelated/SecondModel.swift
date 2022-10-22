@@ -48,6 +48,14 @@ class SecondModel: SceneActionReceiver {
             let context = ActivityDependency(actionSet: [info])
             self.routeSubject?(.activityScene(context))
         }
+        
+        privateSecondContentViewModel.propergateDidTapReviewButton = { [weak self] in
+            guard let self = self else { return }
+            
+            let thirdModel = ThirdModel()
+            let context = SceneContext(dependency: thirdModel)
+            self.routeSubject?(.detail(.thirdViewController(context: context)))
+        }
     }
     
     private func requestAPI() async -> KoficMovieDetailEntity? {
