@@ -9,6 +9,7 @@ import UIKit
 
 class FirstTableViewCell: UITableViewCell {
     
+    @IBOutlet var rankIncreaseImageLabel: UILabel!
     @IBOutlet var boxOfficeRanking: UILabel!
     @IBOutlet var moiveName: UILabel!
     @IBOutlet var releaseDate: UILabel!
@@ -29,11 +30,22 @@ class FirstTableViewCell: UITableViewCell {
     }
     
     func setModel(model: DailyBoxOfficeList) {
-        boxOfficeRanking.text = model.rank
+        boxOfficeRanking.text = "영화 순위: \(model.rank)"
         moiveName.text = model.movieNm
-        releaseDate.text = model.openDt
-        audience.text = model.audiCnt
-        rankIncrease.text = model.audiInten
+        releaseDate.text = "\(model.openDt) 개봉"
+        audience.text = "\(model.audiCnt)명"
+        if Int(model.rankInten) == 0 {
+            rankIncreaseImageLabel.text = ""
+            rankIncrease.text = ""
+        } else if Int(model.rankInten) ?? 0 > 0 {
+            rankIncreaseImageLabel.text = "↑"
+            rankIncreaseImageLabel.textColor = .red
+            rankIncrease.text = model.rankInten
+        } else {
+            rankIncreaseImageLabel.text = "↓"
+            rankIncreaseImageLabel.textColor = .blue
+            rankIncrease.text = model.rankInten
+        }
         rankEntryOrNot.text = model.rankOldAndNew.rawValue
     }
 
