@@ -108,7 +108,6 @@ extension BoxOfficeViewController: UITableViewDelegate, UITableViewDataSource {
                 
             }else {
                 cell.posterImageView.setImageUrl(url: "\(self.posterBaseURL)"+"\(self.moviePosterData[indexPath.row])", movieName: data.movieNm)
-                
             }
         }
 

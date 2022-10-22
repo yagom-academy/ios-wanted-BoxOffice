@@ -32,6 +32,7 @@ class BoxOfficeView: UIView {
     
     func configure() {
         NSLayoutConstraint.activate([
+            
             boxOfficeTableView.topAnchor.constraint(equalTo: topAnchor),
             boxOfficeTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             boxOfficeTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
