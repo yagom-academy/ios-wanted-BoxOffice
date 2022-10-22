@@ -14,6 +14,7 @@ struct MoviesListItemViewModel {
     let audiAcc: String
     let rankInten: String
     let rankOldAndNew: String
+    let movieCd: String
 }
 
 extension MoviesListItemViewModel {

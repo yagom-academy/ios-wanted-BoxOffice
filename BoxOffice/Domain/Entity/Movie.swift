@@ -14,4 +14,5 @@ struct Movie: Codable {
     let audiAcc: String
     let rankInten: String
     let rankOldAndNew: String
+    let movieCd: String
 }

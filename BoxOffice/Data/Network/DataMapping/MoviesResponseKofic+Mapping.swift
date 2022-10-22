@@ -71,7 +71,6 @@ struct MoviesResponseKoficList: Decodable {
 
 struct MoviesReponseKoficSubList: Decodable {
     let boxofficeType: String
-    //    let showRange: String
     let dailyBoxOfficeList: [MoviesResponseKofic]
 }
 
@@ -82,20 +81,11 @@ struct MoviesResponseKofic: Decodable {
     let audiAcc: String
     let rankInten: String
     let rankOldAndNew: String
-    //
-    //    let rnum: String
-    //    let movieCd: String
-    //    let salesAmt: String
-    //    let salesShare: String
-    //    let salesAcc: String
-    //    let audiChange: String
-    //    let scrnCnt: String
-    //    let showCnt: String
-    //    let salesInten: String
+    let movieCd: String
 }
 
 extension MoviesResponseKofic {
     func toDomain() -> Movie {
-        return .init(rank: rank, movieNm: movieNm, openDt: openDt, audiAcc: audiAcc, rankInten: rankInten, rankOldAndNew: rankOldAndNew)
+        return .init(rank: rank, movieNm: movieNm, openDt: openDt, audiAcc: audiAcc, rankInten: rankInten, rankOldAndNew: rankOldAndNew, movieCd: movieCd)
     }
 }

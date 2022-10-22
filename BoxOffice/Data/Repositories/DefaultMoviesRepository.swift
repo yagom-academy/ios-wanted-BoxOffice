@@ -54,6 +54,29 @@ extension DefaultMoviesRepository: MoviesRepository {
             }
         }
     }
+    
+    func fetchMoviesDetail(movieId movieCd: String, completion: @escaping ((Result<MovieDetail, RepositoryError>) -> Void)) {
+        let url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=\(koficKey)&movieCd=\(movieCd)"
+        
+        network.request(request: .get, url: url, body: nil) { result in
+            switch result {
+            case .success(let data):
+                guard let responseList = try? JSONDecoder().decode(MoviesDetailResponseKoficList.self, from: data) else {
+                    completion(.failure(.decodeError))
+                    return
+                }
+                
+                let movieDetail = responseList.movieInfoResult.movieInfo.toDomain()
+                
+                print(movieDetail)
+                
+                completion(.success(movieDetail))
+                
+            case .failure(_):
+                completion(.failure(.networkError))
+            }
+        }
+    }
 }
 
 private let formatter: DateFormatter = {
