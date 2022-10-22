@@ -489,7 +489,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="리뷰를 써주세요" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="A31-Bu-oiF">
-                                <rect key="frame" x="20" y="760" width="296.33333333333331" height="40"/>
+                                <rect key="frame" x="20" y="760" width="190.66666666666666" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="W4L-ho-nFA"/>
                                 </constraints>
@@ -692,20 +692,38 @@
                                     <constraint firstItem="GvU-Z3-GaL" firstAttribute="leading" secondItem="4Y1-wJ-QGx" secondAttribute="leading" constant="15" id="viL-YO-DRt"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlN-Zf-pWK">
+                                <rect key="frame" x="312.66666666666669" y="760" width="11.666666666666686" height="50"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="ZsX-wi-iFd">
+                                <rect key="frame" x="214.66666666666663" y="766" width="94" height="44"/>
+                                <connections>
+                                    <action selector="reviewStarAtion:" destination="qVm-hn-mWB" eventType="valueChanged" id="M8s-d2-6Vn"/>
+                                </connections>
+                            </stepper>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dnv-Rj-D8q"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Oad-Vf-hb3" firstAttribute="leading" secondItem="A31-Bu-oiF" secondAttribute="trailing" constant="10" id="3DD-i3-rtP"/>
                             <constraint firstItem="4Y1-wJ-QGx" firstAttribute="leading" secondItem="dnv-Rj-D8q" secondAttribute="leading" id="Bva-8G-aaz"/>
                             <constraint firstItem="dnv-Rj-D8q" firstAttribute="trailing" secondItem="hEk-aQ-guv" secondAttribute="trailing" id="CgR-yy-W8U"/>
                             <constraint firstItem="Oad-Vf-hb3" firstAttribute="top" secondItem="A31-Bu-oiF" secondAttribute="top" id="N9M-Id-CdR"/>
                             <constraint firstItem="A31-Bu-oiF" firstAttribute="top" secondItem="hEk-aQ-guv" secondAttribute="bottom" id="OXM-1w-NFU"/>
+                            <constraint firstItem="dnv-Rj-D8q" firstAttribute="bottom" secondItem="ZsX-wi-iFd" secondAttribute="bottom" id="PgZ-vL-Cll"/>
+                            <constraint firstItem="nlN-Zf-pWK" firstAttribute="leading" secondItem="ZsX-wi-iFd" secondAttribute="trailing" constant="4" id="Pve-he-AFz"/>
+                            <constraint firstItem="ZsX-wi-iFd" firstAttribute="leading" secondItem="A31-Bu-oiF" secondAttribute="trailing" constant="4" id="Tuq-xu-5J3"/>
                             <constraint firstItem="hEk-aQ-guv" firstAttribute="top" secondItem="4Y1-wJ-QGx" secondAttribute="bottom" id="UAO-DP-LGQ"/>
                             <constraint firstItem="4Y1-wJ-QGx" firstAttribute="top" secondItem="dnv-Rj-D8q" secondAttribute="top" id="YSO-F4-Mae"/>
+                            <constraint firstItem="ZsX-wi-iFd" firstAttribute="top" secondItem="hEk-aQ-guv" secondAttribute="bottom" constant="6" id="aU0-Ux-Nrc"/>
                             <constraint firstItem="dnv-Rj-D8q" firstAttribute="trailing" secondItem="Oad-Vf-hb3" secondAttribute="trailing" constant="10" id="dsr-Wf-tG0"/>
                             <constraint firstItem="hEk-aQ-guv" firstAttribute="leading" secondItem="dnv-Rj-D8q" secondAttribute="leading" id="jGb-xh-xGf"/>
                             <constraint firstItem="dnv-Rj-D8q" firstAttribute="trailing" secondItem="4Y1-wJ-QGx" secondAttribute="trailing" id="mDm-aM-A2i"/>
+                            <constraint firstItem="nlN-Zf-pWK" firstAttribute="top" secondItem="hEk-aQ-guv" secondAttribute="bottom" id="nu6-pv-pDa"/>
+                            <constraint firstItem="dnv-Rj-D8q" firstAttribute="bottom" secondItem="nlN-Zf-pWK" secondAttribute="bottom" id="qIi-7n-fsf"/>
+                            <constraint firstItem="Oad-Vf-hb3" firstAttribute="leading" secondItem="nlN-Zf-pWK" secondAttribute="trailing" constant="2" id="u85-NX-oFh"/>
                             <constraint firstItem="A31-Bu-oiF" firstAttribute="leading" secondItem="dnv-Rj-D8q" secondAttribute="leading" constant="20" id="uXX-Ek-3X9"/>
                             <constraint firstItem="dnv-Rj-D8q" firstAttribute="bottom" secondItem="A31-Bu-oiF" secondAttribute="bottom" constant="10" id="y6l-wk-H93"/>
                             <constraint firstItem="dnv-Rj-D8q" firstAttribute="bottom" secondItem="Oad-Vf-hb3" secondAttribute="bottom" constant="10" id="zLC-zC-ARO"/>
@@ -716,6 +734,8 @@
                         <outlet property="idTextField" destination="NKP-4v-okH" id="cvY-6j-pao"/>
                         <outlet property="passWordTextField" destination="FGc-cQ-brL" id="EBD-YB-vay"/>
                         <outlet property="reviewField" destination="A31-Bu-oiF" id="9aR-Cz-yzX"/>
+                        <outlet property="reviewStar" destination="nlN-Zf-pWK" id="gjS-Pw-tab"/>
+                        <outlet property="reviewStarStepper" destination="ZsX-wi-iFd" id="ka7-EX-xzk"/>
                         <outlet property="saveButton" destination="Oad-Vf-hb3" id="yA5-Qy-8mw"/>
                         <outlet property="tableView" destination="hEk-aQ-guv" id="Fns-EM-rtg"/>
                     </connections>

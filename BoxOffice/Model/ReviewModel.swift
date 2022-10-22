@@ -13,6 +13,7 @@ struct ReviewModel {
     let nickName : String
     let review : String
     let reViewStar : String
+    
     init(uesrImage: UIImage?, nickName: String, review: String, reViewStar: String) {
         self.uesrImage = uesrImage
         self.nickName = nickName

@@ -14,13 +14,18 @@ class ReViewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var reviewField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var reviewStar: UILabel!
+    @IBOutlet weak var reviewStarStepper: UIStepper!
     var essentialFieldList = [UITextField]()
     let datasource = [ReviewModel]()
     lazy var dataArry: [ReviewModel] = [
-        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱1", review: "추천하는영화입니다.",reViewStar: "제별점은5점입니다"),
-        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱2", review: "이영화는 너무 졸려요.",reViewStar: "제별점은5점입니다"),
-        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱3", review: "영화 너무 재미있습니다..",reViewStar: "제별점은5점입니다"),]
+        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱1", review: "추천하는영화입니다.",reViewStar: "별 5 개"),
+        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱2", review: "이영화는 너무 졸려요.",reViewStar: "별 1 개"),
+        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱3", review: "영화 너무 재미있습니다..",reViewStar: "별 4 개"),]
     
+    @IBAction func reviewStarAtion(_ sender: UIStepper) {
+        reviewStar.text = Int(sender.value).description
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
@@ -57,6 +62,8 @@ class ReViewViewController: UIViewController, UITextFieldDelegate {
         checkPasswordTextField.isHidden = false
         self.reviewField.isHidden = true
         self.saveButton.isHidden = true
+        self.reviewStarStepper.isHidden = true
+        self.reviewStar.isHidden = true
     }
     func showInfoAlert(with message: String) {
         DispatchQueue.main.async {
@@ -68,6 +75,8 @@ class ReViewViewController: UIViewController, UITextFieldDelegate {
                 self.checkPasswordTextField.isHidden = true
                 self.reviewField.isHidden = false
                 self.saveButton.isHidden = false
+                self.reviewStarStepper.isHidden = false
+                self.reviewStar.isHidden = false
                 self.tableView.reloadData()
             }
             alert.addAction(okAction)
@@ -142,8 +151,10 @@ class ReViewViewController: UIViewController, UITextFieldDelegate {
         return passwordtesting.evaluate(with: mypassword)
     }
     @IBAction func saveButtonAction(_ sender: UIButton) {
-        dataArry.append(.init(uesrImage: UIImage(named: "user"), nickName: "\(idTextField.text!)", review: "\(reviewField.text!)", reViewStar: "별점은 몇점입니다."))
+        dataArry.append(.init(uesrImage: UIImage(named: "user"), nickName: "\(idTextField.text!)", review: "\(reviewField.text!)", reViewStar: " 별 \(reviewStar.text!) 개"))
         reviewField.text = nil
+        reviewStarStepper.value = 0
+        reviewStar.text = "0"
         tableView.reloadData()
     }
     func setView() {
@@ -153,6 +164,8 @@ class ReViewViewController: UIViewController, UITextFieldDelegate {
         reviewField.attributedPlaceholder = NSAttributedString(string: "리뷰를 작성해주세요!", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
         reviewField.isHidden = true
         saveButton.isHidden = true
+        reviewStar.isHidden = true
+        reviewStarStepper.isHidden = true
     }
 }
 extension ReViewViewController: UITableViewDataSource{
