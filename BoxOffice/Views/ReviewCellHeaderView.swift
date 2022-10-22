@@ -48,7 +48,10 @@ class ReviewCellHeaderView: UITableViewHeaderFooterView {
 
   let write: UIButton = {
     let button = UIButton()
-    button.setBackgroundImage(UIImage(systemName: "square.and.pencil"), for: .normal)
+//    button.setBackgroundImage(UIImage(systemName: "square.and.pencil"), for: .normal)
+    button.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
+    button.setTitle("리뷰작성", for: .normal)
+    button.setTitleColor(.systemPurple, for: .normal)
     button.tintColor = .systemPurple
 
     return button

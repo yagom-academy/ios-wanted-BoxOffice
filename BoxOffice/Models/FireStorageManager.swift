@@ -10,7 +10,7 @@ import Firebase
 import FirebaseStorage
 
 protocol FirestorageDelegate {
-  func didFetchedReviews(_ review: ReviewModel)
+  func didFetchedReviews(_ review: ReviewModel, _ fileName: String)
 }
 
 class FireStorageManager {
@@ -54,10 +54,10 @@ class FireStorageManager {
         for item in result!.items {
           item.getData(maxSize: 1024 * 1024, completion: { data, error in
             if let error = error {
-              print("getdataerror: \(error)")
+              print("get data error: \(error)")
             } else {
               let decoded = self.decodeJSON(data!)
-              self.delegate?.didFetchedReviews(decoded!)
+              self.delegate?.didFetchedReviews(decoded!, item.name)
             }
           })
         }
@@ -65,8 +65,16 @@ class FireStorageManager {
     })
   }
 
-  func deleteReview() {
+  func deleteReview(movieCode: String, fileName: String) {
+    let storageRef = storage.reference().child(movieCode).child(fileName)
 
+    storageRef.delete { error in
+      if let error = error {
+        print("delete review error in fireStorage: \(error)")
+      } else {
+        print("delete review success in fireStorage")
+      }
+    }
   }
 
   func encodeJSON(_ data: ReviewModel) -> Data? {

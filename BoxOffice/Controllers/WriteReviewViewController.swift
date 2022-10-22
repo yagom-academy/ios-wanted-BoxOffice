@@ -8,7 +8,7 @@
 import UIKit
 
 protocol WriteReviewDelegate {
-  func addReview(review: ReviewModel)
+  func addReview(review: ReviewModel, fileName: String)
 }
 
 class WriteReviewViewController: UIViewController {
@@ -173,10 +173,11 @@ extension WriteReviewViewController {
                                nickname: nickname.text!,
                                password: password.text!,
                                review: reviewInput.text!, score: score)
+      let fileName = UUID().uuidString
 
-      delegate?.addReview(review: reviewInfo)
+      delegate?.addReview(review: reviewInfo, fileName: fileName)
       FireStorageManager.shared.uploadReview(movieCode: movieCode,
-                                             fileName: UUID().uuidString,
+                                             fileName: fileName,
                                              reviewInfo: reviewInfo)
       self.navigationController?.popViewController(animated: true)
     }
