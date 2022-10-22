@@ -36,11 +36,13 @@ class FirstModel: SceneActionReceiver {
     func populateData() {
         print(#function)
         Task {
+            print("<<<<<<<")
+            let timer = ParkBenchTimer()
             privateFirstContentViewModel.turnOnIndicator?(())
-            let parkBenchTimer = ParkBenchTimer()
             guard let entity = await requestAPI() else { return }
             privateFirstContentViewModel.didReceiveEntity(entity)
-            parkBenchTimer.stop()
+            timer.stop()
+            print("<<<<<<<")
         }
     }
     
