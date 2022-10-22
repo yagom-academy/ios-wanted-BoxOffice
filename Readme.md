@@ -1,5 +1,14 @@
 # BoxOffice
 
+## 팀원
+
+### Eric
+<img src="https://user-images.githubusercontent.com/65443311/194688047-aef1f883-c1ae-4822-884c-028da5c4cc03.jpg" width="200" height="200"></img>
+
+<br/>
+
+<hr/>
+
 ## 기능
 
 #### 1. 박스 오피스 리스트
