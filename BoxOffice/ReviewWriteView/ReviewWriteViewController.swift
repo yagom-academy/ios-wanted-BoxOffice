@@ -7,13 +7,29 @@
 
 import UIKit
 import PhotosUI
+import FirebaseStorage
 
 class ReviewWriteViewController: UIViewController {
     
+    let storage = Storage.storage()
+    
     let reviewWriteView = ReviewWriteView()
+    
+    var movieTitle : String?
+    
+    var directoryPath : URL?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let fileManager = FileManager.default
+        let documentPath : URL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let directoryPath: URL = documentPath.appendingPathComponent(movieTitle?.makeItFitToURL() ?? "movie")
+        self.directoryPath = directoryPath
+        do{
+            try fileManager.createDirectory(at: directoryPath, withIntermediateDirectories: false)
+        }catch{
+            print(error.localizedDescription)
+        }
         self.view.backgroundColor = .systemBackground
         addSubViews()
         setConstraints()
@@ -44,7 +60,6 @@ class ReviewWriteViewController: UIViewController {
         var numbersOk = false
         let special = "!@#$"
         var specialOk = false
-        let testCase = capitals + smallCase + numbers + special
         for char in pw{
             if !capitalOk{
                 if capitals.contains(char){
@@ -72,13 +87,29 @@ class ReviewWriteViewController: UIViewController {
         }
         return false
     }
-
 }
 
 extension ReviewWriteViewController : ReviewWriteViewProtocol{
     func submit() {
-        if let pw = reviewWriteView.passwordTextField.text{
-            print(check(pw: pw))
+        if let pw = reviewWriteView.passwordTextField.text, check(pw: pw){
+            let filePath = UUID().uuidString + (movieTitle?.makeItFitToURL() ?? "movie")
+            FirebaseStorageManager.shared.uploadImage(image: reviewWriteView.profileView.image!, filePath: filePath)
+            let id = reviewWriteView.nickNameTextField.text ?? ""
+            let comment = reviewWriteView.reviewTextView.text ?? ""
+            let rating = reviewWriteView.numOfStars
+            FirebaseStorageManager.shared.uploadData(ReviewModel(id: id, pw: pw, comment: comment, rating: rating, profile: "imageName"), filePath: filePath)
+            if let directoryPath = directoryPath{
+                let path = directoryPath.appendingPathComponent(filePath)
+                if let data : Data = "1".data(using: .utf8){
+                    do{
+                        try data.write(to: path)
+                        dismiss(animated: true)
+                    }catch{
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+            
         }
     }
     

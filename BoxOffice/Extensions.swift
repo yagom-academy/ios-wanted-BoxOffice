@@ -32,6 +32,26 @@ extension String{
         print(str)
         return str
     }
+    
+    func extractRating() -> Self{
+        let endIndex = firstIndex(of: "/")
+        guard let endIndex = endIndex else { return self}
+        let idx = index(before: endIndex)
+        return String(self[...idx])
+    }
+    
+    func isOverTenThousand() -> Self{
+        if let num = Double(self), num >= 10000{
+            var result = String(format: "%.1f", num / 10000)
+            if result.last == "0"{
+                result.removeLast()
+                result.removeLast()
+            }
+            return result + "만명"
+        }else{
+            return self  + "명"
+        }
+    }
 }
 
 extension UIFont {

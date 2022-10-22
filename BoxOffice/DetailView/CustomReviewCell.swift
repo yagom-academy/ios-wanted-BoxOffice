@@ -50,12 +50,13 @@ class CustomReviewCell : UITableViewCell{
         return lbl
     }()
     
-    let deleteButton : UIButton = {
+    lazy var deleteButton : UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("삭제", for: .normal)
         btn.backgroundColor = .systemRed
         btn.layer.cornerRadius = 10
+        btn.addTarget(self, action: #selector(deleteReview), for: .touchUpInside)
         return btn
     }()
     
@@ -104,8 +105,12 @@ class CustomReviewCell : UITableViewCell{
     func makeProfileViewCircle(){
         let width = UIScreen.main.bounds.width * 0.1
         profileView.layer.cornerRadius = width / 2
-        profileView.backgroundColor = .green
+        profileView.clipsToBounds = true
         profileView.contentMode = .scaleAspectFill
+    }
+    
+    @objc func deleteReview(){
+        FirebaseStorageManager.shared.delete()
     }
     
 }

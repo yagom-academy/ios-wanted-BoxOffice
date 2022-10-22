@@ -24,38 +24,75 @@ class TableInfoView : UIView {
     let answerDirectorLabel = PaddingLabel()
     let answerActorLabel = PaddingLabel()
     let answerRateLabel = PaddingLabel()
-    let answerBumOfAudienceLabel = PaddingLabel()
-    
+    let answerNumOfAudienceLabel = PaddingLabel()
+
     lazy var labelArr = [releaseDateLabel,filmYearLabel,playTimeLabel,genreLabel,directorLabel,actorLabel,rateLabel,numOfAudienceLabel]
-    lazy var answerLabelArr = [answerReleaseDateLabel,answerFilmYearLabel,answerPlayTimeLabel,answerGenreLabel,answerDirectorLabel,answerActorLabel,answerRateLabel,answerBumOfAudienceLabel]
+    lazy var answerLabelArr = [answerReleaseDateLabel,answerFilmYearLabel,answerPlayTimeLabel,answerGenreLabel,answerDirectorLabel,answerActorLabel,answerRateLabel,answerNumOfAudienceLabel]
     
-    lazy var stackViewV : UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: labelArr)
+    lazy var releaseStack : UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [releaseDateLabel,answerReleaseDateLabel])
         stackView.distribution = .fill
-       // stackView.alignment = .center
-        stackView.axis = .vertical
-        stackView.spacing = 2
-        return stackView
-    }()
-    lazy var answerStackViewV : UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: answerLabelArr)
-        stackView.distribution = .fill
-        //stackView.alignment = .center
-        stackView.axis = .vertical
-        stackView.spacing = 2
-        return stackView
-    }()
-    lazy var stackViewH : UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [stackViewV,answerStackViewV])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.distribution = .fillEqually
-   //     stackView.alignment = .center
         stackView.axis = .horizontal
         stackView.spacing = 2
-      //  stackView.backgroundColor = .secondarySystemBackground
         return stackView
     }()
-
+    lazy var filmYearStack : UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [filmYearLabel,answerFilmYearLabel])
+        stackView.distribution = .fill
+        stackView.axis = .horizontal
+        stackView.spacing = 2
+        return stackView
+    }()
+    lazy var playTimeStack : UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [playTimeLabel,answerPlayTimeLabel])
+        stackView.distribution = .fill
+        stackView.axis = .horizontal
+        stackView.spacing = 2
+        return stackView
+    }()
+    lazy var genreStack : UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [genreLabel,answerGenreLabel])
+        stackView.distribution = .fill
+        stackView.axis = .horizontal
+        stackView.spacing = 2
+        return stackView
+    }()
+    lazy var directorStack : UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [directorLabel,answerDirectorLabel])
+        stackView.distribution = .fill
+        stackView.axis = .horizontal
+        stackView.spacing = 2
+        return stackView
+    }()
+    lazy var actorStack : UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [actorLabel,answerActorLabel])
+        stackView.distribution = .fill
+        stackView.axis = .horizontal
+        stackView.spacing = 2
+        return stackView
+    }()
+    lazy var rateStack : UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [rateLabel,answerRateLabel])
+        stackView.distribution = .fill
+        stackView.axis = .horizontal
+        stackView.spacing = 2
+        return stackView
+    }()
+    lazy var numOfAudienceStack : UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [numOfAudienceLabel,answerNumOfAudienceLabel])
+        stackView.distribution = .fill
+        stackView.axis = .horizontal
+        stackView.spacing = 2
+        return stackView
+    }()
+    lazy var stackViewV : UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [releaseStack,filmYearStack,playTimeStack,genreStack,directorStack,actorStack,rateStack,numOfAudienceStack])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .fill
+        stackView.axis = .vertical
+        stackView.spacing = 2
+        return stackView
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,15 +106,15 @@ class TableInfoView : UIView {
     }
     
     func addSubViews(){
-        self.addSubview(stackViewH)
+        self.addSubview(stackViewV)
     }
     
     func setConstraints(){
         NSLayoutConstraint.activate([
-            stackViewH.topAnchor.constraint(equalTo: self.topAnchor),
-            stackViewH.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            stackViewH.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            stackViewH.leadingAnchor.constraint(equalTo: self.leadingAnchor)
+            stackViewV.topAnchor.constraint(equalTo: self.topAnchor),
+            stackViewV.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            stackViewV.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            stackViewV.leadingAnchor.constraint(equalTo: self.leadingAnchor)
         ])
     }
     
@@ -90,22 +127,49 @@ class TableInfoView : UIView {
         actorLabel.text = "배우명"
         rateLabel.text = "관람등급"
         numOfAudienceLabel.text = "관객수"
-        _ = (labelArr + answerLabelArr).map{
+        labelArr.forEach{
+            $0.font = .systemFont(ofSize: 20)
+            $0.textAlignment = .center
+            $0.textColor = .secondaryLabel
             $0.backgroundColor = .secondarySystemBackground
-            $0.widthAnchor.constraint(equalTo: stackViewV.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: $0.heightAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: playTimeLabel.widthAnchor).isActive = true
+        }
+        answerLabelArr.forEach{
+            $0.backgroundColor = .secondarySystemBackground
             $0.textAlignment = .center
             $0.font = .systemFont(ofSize: 20)
-            //$0.numberOfLines = 0
-            $0.adjustsFontSizeToFitWidth = true
-            $0.minimumScaleFactor =  10 / $0.font.pointSize
-            //$0.lineBreakMode = .byCharWrapping //마지막 글자까지 다 쓰고 넘어가기
+            $0.numberOfLines = 0
+        }
+        
+    }
+    
+    func enumerateContents(_ stringArr:[String]) -> String{
+        if stringArr.count <= 1{
+            return stringArr.first ?? ""
+        }else{
+            var result = stringArr.reduce(""){$0 + ", " + $1}
+            result.removeFirst()
+            return result
         }
     }
     
-    func setInfo(releaseDate:String, filmYear:String, playTime:String, genre:String, director:String, actor:[PeopleNm], rate:String, numOfAudience:String){
+    func makeAnyArrToStringArr(_ anyArr:[Any]) -> [String]{
+        if let genre = anyArr as? [Genre]{
+            return genre.map{ $0.genreNm }
+        }else if let peopleNm = anyArr as? [PeopleNm]{
+            return peopleNm.map{ $0.peopleNm }
+        }else if let watchGrade = anyArr as? [WatchGrade]{
+            return watchGrade.map{ $0.watchGradeNm }
+        }
+        return [""]
+    }
+    
+    func setInfo(releaseDate:String, filmYear:String, playTime:String, genre:[Genre], director:[PeopleNm], actor:[PeopleNm], rate:[WatchGrade], numOfAudience:String, upAndDonw:String){
         
-        let actor = actor.count > 0 ?  actor[0].peopleNm : "없음"
+        let director = enumerateContents(makeAnyArrToStringArr(director))
+        let actor = enumerateContents(makeAnyArrToStringArr(actor))
+        let genre = enumerateContents(makeAnyArrToStringArr(genre))
+        let rate = enumerateContents(makeAnyArrToStringArr(rate))
         
         answerReleaseDateLabel.text = releaseDate
         answerFilmYearLabel.text = filmYear
@@ -114,6 +178,6 @@ class TableInfoView : UIView {
         answerDirectorLabel.text = director
         answerActorLabel.text = actor
         answerRateLabel.text = rate
-        answerBumOfAudienceLabel.text = "\(numOfAudience)명"
+        answerNumOfAudienceLabel.text = numOfAudience.isOverTenThousand()
     }
 }

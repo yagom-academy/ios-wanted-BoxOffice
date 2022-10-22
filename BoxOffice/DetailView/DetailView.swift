@@ -63,7 +63,6 @@ class DetailView : UIView {
     let reviewPointLabel : UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "3.8"
         lbl.font = .preferredFont(forTextStyle: .body)
         return lbl
     }()
@@ -123,6 +122,10 @@ class DetailView : UIView {
         return stackView
     }()
     
+    var reviews : [ReviewModel] = []
+
+    var profiles : [UIImage] = []
+                
     var delegate : DetailViewProtocol?
     
     override init(frame: CGRect) {
@@ -185,7 +188,37 @@ class DetailView : UIView {
         posterView.image = movie.poster
         titleLabel.text = movie.boxOfficeInfo.movieNm
         rankLabel.text = movie.boxOfficeInfo.rank
-        tableInfoView.setInfo(releaseDate: movie.boxOfficeInfo.openDt, filmYear: movie.detailInfo.prdtYear, playTime: movie.detailInfo.showTm, genre: movie.detailInfo.genres[0].genreNm, director: movie.detailInfo.directors[0].peopleNm, actor: movie.detailInfo.actors, rate: movie.detailInfo.audits[0].watchGradeNm, numOfAudience: movie.boxOfficeInfo.audiAcc)
+        tableInfoView.setInfo(releaseDate: movie.boxOfficeInfo.openDt, filmYear: movie.detailInfo.prdtYear, playTime: movie.detailInfo.showTm, genre: movie.detailInfo.genres, director: movie.detailInfo.directors, actor: movie.detailInfo.actors, rate: movie.detailInfo.audits, numOfAudience: movie.boxOfficeInfo.audiAcc,upAndDonw: movie.boxOfficeInfo.rankInten)
+        if let rating = movie.rating.last?.Value{
+            let stringToDouble = floor((Double(rating.extractRating()) ?? 5.0) / 10 ) / 2
+            setNumOfStars(numOfStars: stringToDouble)
+            reviewPointLabel.text = "\(stringToDouble)"
+        }else{
+            reviewPointLabel.text = "리뷰가 없습니다"
+            starStackH.isHidden = true
+        }
+    }
+    
+    func setNumOfStars(numOfStars:Double){
+        if numOfStars < 0{
+            _ = starArr.map{$0.image = UIImage(systemName: "star")}
+        }else if numOfStars > 5{
+            _ = starArr.map{$0.image = UIImage(systemName: "star.fill")}
+        }else{
+            var numOfFullStars = floor(numOfStars / 1)
+            var numOfHalfStars = numOfStars.truncatingRemainder(dividingBy: 1) == 0.5 ? 1 : 0
+            for star in starArr{
+                if numOfFullStars > 0{
+                    star.image = UIImage(systemName: "star.fill")
+                    numOfFullStars -= 1
+                }else if numOfHalfStars > 0{
+                    star.image = UIImage(systemName: "star.leadinghalf.filled")
+                    numOfHalfStars -= 1
+                }else{
+                    star.image = UIImage(systemName: "star")
+                }
+            }
+        }
     }
     
     @objc func presentWriteReviewView(){
@@ -195,20 +228,18 @@ class DetailView : UIView {
 
 extension DetailView : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        reviews.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomReviewCell.id, for: indexPath) as? CustomReviewCell else { return UITableViewCell()}
-        if indexPath.row == 2{
-            cell.nickNameLabel.text = "ecc414ecc414ecc414ecc414ecc414ecc414ecc414ecc414ecc414ecc414ecc414ecc414ecc414ecc414ecc414ecc414ecc414ecc414"
-            cell.reviewLabel.text = "최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!최고의 영화에요!!"
-        }else{
-            cell.nickNameLabel.text = "ecc414"
-            cell.reviewLabel.text = "최고의 영화에요!!"
+        let review = reviews[indexPath.row]
+        if profiles.count > indexPath.row{
+            cell.profileView.image = profiles[indexPath.row]
         }
-        cell.profileView.image = UIImage(named: "James")
+        cell.nickNameLabel.text = review.id
+        cell.reviewLabel.text = review.comment
         return cell
     }
 }

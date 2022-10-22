@@ -130,7 +130,7 @@ class InfoGroupView : UIView{
         rankLabel.text = rank
         titleLabel.text = title
         releaseDateLabel.text = releaseDate
-        numOfAudienceLabel.text = "\(numOfAudience)명"
+        numOfAudienceLabel.text = numOfAudience.isOverTenThousand()
         setUpAndDown(upAndDown:upAndDown)
         newLabel.isHidden = isNew == "NEW" ? false : true
     }
