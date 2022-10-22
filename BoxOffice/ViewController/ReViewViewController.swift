@@ -17,9 +17,10 @@ class ReViewViewController: UIViewController, UITextFieldDelegate {
     var essentialFieldList = [UITextField]()
     let datasource = [ReviewModel]()
     lazy var dataArry: [ReviewModel] = [
-        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱1", review: "추천하는영화입니다."),
-        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱2", review: "이영화는 너무 졸려요."),
-        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱3", review: "영화 너무 재미있습니다.."),]
+        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱1", review: "추천하는영화입니다.",reViewStar: "제별점은5점입니다"),
+        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱2", review: "이영화는 너무 졸려요.",reViewStar: "제별점은5점입니다"),
+        .init(uesrImage: UIImage(named: "user"), nickName: "쏘롱3", review: "영화 너무 재미있습니다..",reViewStar: "제별점은5점입니다"),]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
@@ -67,6 +68,7 @@ class ReViewViewController: UIViewController, UITextFieldDelegate {
                 self.checkPasswordTextField.isHidden = true
                 self.reviewField.isHidden = false
                 self.saveButton.isHidden = false
+                self.tableView.reloadData()
             }
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
@@ -115,7 +117,6 @@ class ReViewViewController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
- 
     @IBAction func reviewdeleteButton(_ sender: Any) {
         reviewdelete(title: "삭제하시겠습니까?", message: "비밀번호를 입력해주세요")
     }
@@ -123,29 +124,25 @@ class ReViewViewController: UIViewController, UITextFieldDelegate {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addTextField()
-            
             if self.passWordTextField.text?.count != alert.textFields?[0].text?.count {
                 let okAction = UIAlertAction(title: "OK", style: .default, handler: {bi in
                     if self.passWordTextField.text == alert.textFields?[0].text {
                         self.dataArry.remove(at: self.dataArry.count - 1)
                         self.tableView.reloadData()
                     }
-                
                 })
                 alert.addAction(okAction)
                 self.present(alert, animated: true, completion: nil)
             }
-                
-            
         }
     }
     func validpassword(mypassword : String) -> Bool {
-        let passwordreg =  ("^(?=.*[A-Za-z])(?=.*[0-9]).{8,20}$")
+        let passwordreg =  ("^(?=.*[A-Za-z])(?=.*[0-9]).{6,20}$")
         let passwordtesting = NSPredicate(format: "SELF MATCHES %@", passwordreg)
         return passwordtesting.evaluate(with: mypassword)
     }
     @IBAction func saveButtonAction(_ sender: UIButton) {
-        dataArry.append(.init(uesrImage: UIImage(named: "user"), nickName: "\(idTextField.text!)", review: "\(reviewField.text!)"))
+        dataArry.append(.init(uesrImage: UIImage(named: "user"), nickName: "\(idTextField.text!)", review: "\(reviewField.text!)", reViewStar: "별점은 몇점입니다."))
         reviewField.text = nil
         tableView.reloadData()
     }

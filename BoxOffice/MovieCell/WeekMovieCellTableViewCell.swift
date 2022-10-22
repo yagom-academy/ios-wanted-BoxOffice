@@ -30,8 +30,8 @@ class WeekMovieCellTableViewCell: UITableViewCell {
         movieNameLabel.text = "영화명: \(model.movieNm)"
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        guard let 관객수 = numberFormatter.string(from: NSNumber(value: Int(model.audiCnt) ?? 0)) else {return}
-        audienceLabel.text = "오늘의 관객수: \(관객수)명"
+        guard let audiCnt = numberFormatter.string(from: NSNumber(value: Int(model.audiCnt) ?? 0)) else {return}
+        audienceLabel.text = "오늘의 관객수: \(audiCnt)명"
         if model.rankInten > "0" {
             increaseRanking.textColor = .red
             increaseRanking.text = "전날 대비 순위: \(model.rankInten)"
