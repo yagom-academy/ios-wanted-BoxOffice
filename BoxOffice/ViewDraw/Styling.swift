@@ -11,6 +11,14 @@ import UIKit
 protocol BasicNavigationBarStyling { }
 
 extension BasicNavigationBarStyling {
+    
+    var dateButtonStyle: (UIBarButtonItem) -> () {
+        {
+            $0.image = UIImage(systemName: .calendar)
+            $0.tintColor = .black
+        }
+    }
+    
     var navigationBarStyle: (UINavigationBar) -> () {
         {
             $0.shadowImage = UIImage() //default: nil

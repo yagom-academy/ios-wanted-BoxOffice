@@ -9,6 +9,12 @@ import Foundation
 import UIKit
 
 extension UIImage {
+    enum ImageName: String {
+        case calendar = "calendar.circle.fill"
+        case docImage = "doc.text.image"
+        case errorImage = "exclamationmark.circle.fill"
+    }
+    
     convenience init?(systemName: ImageName) {
         self.init(systemName: systemName.rawValue)
     }
@@ -18,6 +24,4 @@ extension UIImage {
     }
 }
 
-enum ImageName: String {
-    case errorImage = "exclamationmark.circle.fill"
-}
+
