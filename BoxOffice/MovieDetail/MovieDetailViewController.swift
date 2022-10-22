@@ -64,7 +64,6 @@ final class MovieDetailViewController: UIViewController {
     private let movieDetailTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.backgroundColor = .systemGray6
-//        tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 50
         tableView.isScrollEnabled = false
         return tableView
@@ -73,6 +72,7 @@ final class MovieDetailViewController: UIViewController {
     private let reviewTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.backgroundColor = .systemGray6
+        tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 50
         return tableView
     }()
@@ -113,6 +113,7 @@ final class MovieDetailViewController: UIViewController {
         self.viewModel.updateMovieDetail = { [weak self] model in
             self?.boxOfficeRank.text = model.rank
             self?.movieTitleLabel.text = model.movieName
+            self?.rankOldAndNewLabel.text = model.rankOldAndNew
             self?.movieTitleEngAndproductYearLabel.text = "\(model.movieNameEng), \(model.productYear)"
             self?.movieOpenDateAndShowTime.text = "\(model.openDate), \(model.showTime)"
             self?.movieID = model.movieCode

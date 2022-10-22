@@ -31,12 +31,17 @@ struct MovieListModel {
     }
     
     var rankOldAndNew: String {
-        return movieEntity.rankOldAndNew.rawValue
+        switch movieEntity.rankOldAndNew {
+        case .new:
+            return "🔼"
+        case .old:
+            return "➖"
+        }
     }
     
     var audienceInten: String {
         guard let strToInt = Int(movieEntity.audiInten) else { return "0" }
-        return commaFormatter(strToInt) + "명"
+        return commaFormatter(strToInt)
     }
     
     var movieCode: String {

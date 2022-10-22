@@ -89,8 +89,12 @@ final class MovieReviewViewController: UIViewController {
         self.starPickerView.delegate = self
         self.contentTextView.delegate = self
         self.registerButton.addTarget(self, action: #selector(registerButtonTapped(_:)), for: .touchUpInside)
-        print("title: \(movieID)")
+        self.settingNavigation()
         viewModel.movieID.value = movieID
+    }
+    
+    private func settingNavigation() {
+        self.navigationItem.title = "✏️리뷰 작성"
     }
     
     private func bind(_ viewmodel: MovieReviewViewModel) {

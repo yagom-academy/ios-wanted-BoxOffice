@@ -27,14 +27,6 @@ final class MovieListCell: UITableViewCell {
         return label
     }()
     
-    private let rankInten: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.textAlignment = .center
-        label.text = "-1"
-        return label
-    }()
-    
     private let rankStateStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -56,22 +48,19 @@ final class MovieListCell: UITableViewCell {
     private let movieTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .bold)
-        label.text = "극장판 짱구는 못말려: 수수께끼! 꽃피는 천하떡잎학교"
         label.numberOfLines = 0
         return label
     }()
     
     private let openDate: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13, weight: .medium)
-        label.text = "2022/01/23"
+        label.font = .systemFont(ofSize: 12, weight: .medium)
         return label
     }()
     
     private let audienceCount: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .regular)
-        label.text = "123214명"
+        label.font = .systemFont(ofSize: 11, weight: .regular)
         return label
     }()
         
@@ -88,21 +77,14 @@ final class MovieListCell: UITableViewCell {
     func configure(_ data: MovieListModel) {
         self.boxOfficeRank.text = data.rank
         self.rankOldAndNew.text = data.rankOldAndNew
-        self.rankInten.text = data.audienceInten
         self.movieTitle.text = data.movieName
         self.openDate.text = data.openDate
-        self.audienceCount.text = data.audienceCount
+        self.audienceCount.text = "누적: \(data.audienceCount) / 전일대비: \(data.audienceInten)"
     }
     
     // MARK: - private
-    private func configureUI() {
-        self.contentView.layer.cornerRadius = 10 //안먹음
-        self.contentView.clipsToBounds = true
-        self.backgroundColor = .systemGray6
-    }
-   
-    private func setupLayouts() {
-        [self.boxOfficeRank, self.rankOldAndNew, self.rankInten].forEach {
+       private func setupLayouts() {
+        [self.boxOfficeRank, self.rankOldAndNew].forEach {
             self.rankStateStackView.addArrangedSubview($0)
         }
         [self.movieTitle, self.openDate, self.audienceCount].forEach {

@@ -48,6 +48,7 @@ final class MovieReviewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupLayouts()
+        self.selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {
@@ -76,29 +77,3 @@ final class MovieReviewCell: UITableViewCell {
     }
     
 }
-
-//#if canImport(SwiftUI) && DEBUG
-//import SwiftUI
-//struct UIViewPreddview2: UIViewRepresentable {
-//    typealias UIViewType = MovieReviewCell
-//
-//    // MARK: - UIViewRepresentable
-//    func makeUIView(context: Context) -> MovieReviewCell {
-//        return MovieReviewCell()
-//    }
-//
-//    func updateUIView(_ view: MovieReviewCell, context: Context) {
-//
-//    }
-//}
-//#endif
-//
-//#if canImport(SwiftUI) && DEBUG
-//struct First2Preview: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            UIViewPreddview2().frame(width: 300, height: 20)
-//        }.previewLayout(.sizeThatFits)
-//    }
-//}
-//#endif
