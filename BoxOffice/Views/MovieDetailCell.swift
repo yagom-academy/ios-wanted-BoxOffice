@@ -20,7 +20,7 @@ class MovieDetailCell: UITableViewCell {
 
   let ranking: UILabel = {
     let label = UILabel()
-    label.font = UIFont.systemFont(ofSize: 30)
+    label.font = UIFont.boldSystemFont(ofSize: 30)
     label.text = "1"
     label.sizeToFit()
 

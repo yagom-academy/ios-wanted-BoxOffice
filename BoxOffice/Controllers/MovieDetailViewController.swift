@@ -38,15 +38,6 @@ class MovieDetailViewController: UIViewController {
 
     FireStorageManager.shared.fetchReview(movieCode: rankInfo!.movieCd)
   }
-
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-
-//    print("view will")
-//    reviewList.removeAll()
-//    totalScore = 0
-//    FireStorageManager.shared.fetchReview(movieCode: rankInfo!.movieCd)
-  }
 }
 
 extension MovieDetailViewController {
@@ -175,7 +166,7 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
 
       header.delegate = self
       if !reviewList.isEmpty {
-        header.rating.text = String(totalScore / reviewList.count)
+        header.rating.text = String(format: "%.1f", (Double(totalScore) / Double(reviewList.count)))
       }
 
       return header

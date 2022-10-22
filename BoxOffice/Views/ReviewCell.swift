@@ -62,6 +62,10 @@ class ReviewCell: UITableViewCell {
     label.sizeToFit()
     label.text = "리뷰 내용"
     label.numberOfLines = 0
+    label.backgroundColor = UIColor(red: 0.913, green: 0.901, blue: 0.901, alpha: 1)
+    label.layer.cornerRadius = 8
+    label.clipsToBounds = true
+
 
     return label
   }()
