@@ -9,7 +9,7 @@ import UIKit
 
 class SecondViewController: UIViewController {
     
-    var model: Model?
+    var model2: Model?
     
     @IBOutlet var boxOfficeRank: UILabel!
     @IBOutlet var moiveName: UILabel!
@@ -31,20 +31,19 @@ class SecondViewController: UIViewController {
         setModel()
     }
     
-    func setModel() {
-        boxOfficeRank.text = "\(model?.boxOfficeRank2)순위"
-        moiveName.text = model?.moiveName2
-        openingDate.text = model?.openingDate2
-        audience.text = model?.audience2
-        rankIncrease.text = model?.rankIncrease2
-        newEntry.text = model?.newEntry2
-        yearOfmanufacture.text = model?.yearOfmanufacture2
-        releaseYear.text = model?.releaseYear2
-        movieTime.text = model?.movieTime2
-        genre.text = model?.genre2
-        actorName.text = model?.actorName2
-        directioName.text = model?.directioName2
-        viewingLevel.text = model?.viewingLevel2
+    func setModel(){
+        boxOfficeRank.text = "\(model2?.boxOfficeRank2)순위"
+        moiveName.text = model2?.moiveName2
+        openingDate.text = model2?.openingDate2
+        audience.text = model2?.audience2
+        rankIncrease.text = model2?.rankIncrease2
+        newEntry.text = model2?.newEntry2
+        yearOfmanufacture.text = model2?.yearOfmanufacture2
+        releaseYear.text = model2?.releaseYear2
+        movieTime.text = model2?.movieTime2
+        genre.text = model2?.genre2
+        actorName.text = model2?.actorName2
+        directioName.text = model2?.directioName2
+        viewingLevel.text = model2?.viewingLevel2
     }
-    
 }

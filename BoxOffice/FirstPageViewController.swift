@@ -13,14 +13,14 @@ class FirstPageViewController: UIViewController {
     
     var targetDay = ""
     var tagetdata = ""
-
+    
     @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         callAPI2()
-
+        
     }
     
     func callAPI2(){
@@ -63,16 +63,17 @@ extension FirstPageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "영화목록"
     }
-        
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "SecondViewController") as? SecondViewController else { return }
         
+        //        detailViewController.detailWeather = DetailWeather.init
+        
         let data = model[indexPath.row]
         DetailAPI.detailAPI(tagetdata: data.movieCD) { taget in
-            _ = Model.init(boxOfficeRank2: data.rank, moiveName2: data.movieNm, openingDate2: data.openDt, audience2: data.audiCnt, rankIncrease2: data.rankInten, newEntry2: data.rankOldAndNew.rawValue, yearOfmanufacture2: taget.movieInfoResult.movieInfo.prdtYear, releaseYear2: taget.movieInfoResult.movieInfo.openDt, movieTime2: taget.movieInfoResult.movieInfo.showTm, genre2: taget.movieInfoResult.movieInfo.genres.first?.genreNm ?? ""
-                                   , actorName2: taget.movieInfoResult.movieInfo.actors.first?.peopleNm ?? "", directioName2: taget.movieInfoResult.movieInfo.directors.first?.peopleNm ?? "", viewingLevel2: taget.movieInfoResult.movieInfo.audits.first?.watchGradeNm ?? "")
+            let initmodel = Model.init(boxOfficeRank2: data.rank, moiveName2: data.movieNm, openingDate2: data.openDt, audience2: data.audiCnt, rankIncrease2: data.rankInten, newEntry2: data.rankOldAndNew.rawValue, yearOfmanufacture2: taget.movieInfoResult.movieInfo.prdtYear, releaseYear2: taget.movieInfoResult.movieInfo.openDt, movieTime2: taget.movieInfoResult.movieInfo.showTm, genre2: taget.movieInfoResult.movieInfo.genres.first?.genreNm ?? ""
+                       ,actorName2: taget.movieInfoResult.movieInfo.actors.first?.peopleNm ?? "", directioName2: taget.movieInfoResult.movieInfo.directors.first?.peopleNm ?? "", viewingLevel2: taget.movieInfoResult.movieInfo.audits.first?.watchGradeNm ?? "")
         }
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
-    
 }
