@@ -54,6 +54,7 @@ class FirstContentViewModel {
     private func populateEntity(result: KoficMovieEntity) async {
         print(#function)
         self.entity = result
+        print(">>>>")
         let timer = ParkBenchTimer()
         var closures: [() -> Task<String, Error>] = []
         for value in result.boxOfficeResult.dailyBoxOfficeList {
@@ -61,7 +62,6 @@ class FirstContentViewModel {
                Task { () -> (String) in
                     let detailed: KoficMovieDetailEntity = try await self.repository.fetch(api: .kofic(.detailMovieInfo(movieCd: value.movieCd)))
                     let posterUrl: OmdbEntity = try await self.repository.fetch(api: .omdb(movieName: detailed.movieInfoResult.movieInfo.movieNmEn, releasedYear: detailed.movieInfoResult.movieInfo.openDt.koficDateToYear() ?? "2022"))
-                   print("poster url check : \(posterUrl.poster)")
                     return posterUrl.poster
                 }
             }
@@ -71,17 +71,15 @@ class FirstContentViewModel {
         let mappedClosure = closures.map { value in
             value()
         }
-        
-//        do {
-//            let asyncMapped = try await mappedClosure.asyncMap { task in
-//                let result = try await task.result.get()
-//                print("async mapped result check \(result)")
-//                return result
-//            }
-//        } catch {
-//            // TODO: catch error
-//            print("async mapped error")
-//        }
+
+        let asyncMapped = await mappedClosure.asyncMap { task in
+            do {
+                let result = try await task.result.get()
+                return result
+            } catch {
+                return ""
+            }
+        }
         
         privateDataSource = await result.boxOfficeResult.dailyBoxOfficeList.enumerated().asyncMap { (index, dailyBoxOfficeValue) -> FirstMovieCellModel in
             let cellModel = FirstMovieCellModel()
@@ -103,14 +101,11 @@ class FirstContentViewModel {
             cellModel.audiAcc = dailyBoxOfficeValue.audiAcc
             cellModel.scrnCnt = dailyBoxOfficeValue.scrnCnt
             cellModel.showCnt = dailyBoxOfficeValue.showCnt
-            do {
-                cellModel.imageURLString = try await mappedClosure[index].result.get()
-            } catch {
-                cellModel.imageURLString = ""
-            }
+            cellModel.imageURLString = asyncMapped[index]
             return cellModel
         }
         timer.stop()
+        print(">>>>")
     }
     
     private func findAndReturnSelectedItem(indexPathRow: Int) -> DailyBoxOfficeList? {
