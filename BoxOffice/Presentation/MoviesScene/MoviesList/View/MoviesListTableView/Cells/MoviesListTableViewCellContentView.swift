@@ -19,6 +19,7 @@ class MoviesListTableViewCellContentView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 23, weight: .bold)
         label.textColor = .black
+        label.sizeToFit()
         
         return label
     }()
@@ -39,6 +40,7 @@ class MoviesListTableViewCellContentView: UIView {
         label.font = UIFont.systemFont(ofSize: 15, weight: .heavy)
         label.textColor = .darkGray
         label.text = "-"
+        label.sizeToFit()
         
         return label
     }()

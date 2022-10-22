@@ -68,8 +68,6 @@ extension DefaultMoviesRepository: MoviesRepository {
                 
                 let movieDetail = responseList.movieInfoResult.movieInfo.toDomain()
                 
-                print(movieDetail)
-                
                 completion(.success(movieDetail))
                 
             case .failure(_):

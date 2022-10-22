@@ -12,6 +12,16 @@ class MoviesListViewController: UIViewController {
     var repository: MoviesRepository?
     
     lazy var moviesListTableView = MoviesListTableView()
+    
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .medium)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        view.color = .darkGray
+        view.startAnimating()
+        
+        return view
+    }()
 
     init(viewModel: MoviesListViewModel, repository: MoviesRepository) {
         self.viewModel = viewModel
@@ -40,7 +50,7 @@ class MoviesListViewController: UIViewController {
 
 extension MoviesListViewController {
     func setupViews() {
-        let views = [moviesListTableView]
+        let views = [moviesListTableView, activityIndicatorView]
         views.forEach { self.view.addSubview($0) }
     }
     
@@ -50,6 +60,13 @@ extension MoviesListViewController {
             self.moviesListTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.moviesListTableView.topAnchor.constraint(equalTo: self.view.topAnchor),
             self.moviesListTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            self.activityIndicatorView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.activityIndicatorView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.activityIndicatorView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.activityIndicatorView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
         ])
     }
     
@@ -86,6 +103,8 @@ extension MoviesListViewController {
                 }))
                
                 DispatchQueue.main.async {
+                    self.activityIndicatorView.stopAnimating()
+                    self.activityIndicatorView.isHidden = true
                     self.moviesListTableView.reloadData()
                 }
             case .failure(_):

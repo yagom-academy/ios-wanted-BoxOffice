@@ -15,6 +15,16 @@ class MoviesDetailViewController: UIViewController {
     
     lazy var moviesDetailTableView = MoviesDetailTableView()
     
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .medium)
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.color = .darkGray
+        view.startAnimating()
+        
+        return view
+    }()
+    
     let shareButton: UIButton = {
         let view = UIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +62,7 @@ class MoviesDetailViewController: UIViewController {
 
 extension MoviesDetailViewController {
     func setupViews() {
-        let views = [moviesDetailTableView, shareButton]
+        let views = [moviesDetailTableView, shareButton, activityIndicatorView]
         views.forEach { self.view.addSubview($0) }
     }
     
@@ -69,6 +79,13 @@ extension MoviesDetailViewController {
             self.shareButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
             self.shareButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -40),
             self.shareButton.heightAnchor.constraint(equalTo: self.shareButton.widthAnchor, multiplier: 0.15)
+        ])
+        
+        NSLayoutConstraint.activate([
+            self.activityIndicatorView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.activityIndicatorView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.activityIndicatorView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.activityIndicatorView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
         ])
     }
     
@@ -94,6 +111,8 @@ extension MoviesDetailViewController {
                 self.viewModel?.watchGradeNm = movieDetail.watchGradeNm
                 
                 DispatchQueue.main.async {
+                    self.activityIndicatorView.stopAnimating()
+                    self.activityIndicatorView.isHidden = true
                     self.moviesDetailTableView.reloadData()
                 }
                 
