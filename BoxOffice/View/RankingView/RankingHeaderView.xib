@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="U6b-Vx-4bR" customClass="RankingHeaderView" customModule="BoxOffice" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="557" height="59"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Ranking" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80Z-C9-RWl">
+                    <rect key="frame" x="0.0" y="38" width="108" height="21"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                    <color key="textColor" red="0.2476221025" green="0.32238948350000002" blue="0.62355870010000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZw-Jv-6oN">
+                    <rect key="frame" x="118.00000000000001" y="35.333333333333336" width="26.666666666666671" height="23.666666666666664"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="tintColor" red="0.28422497219999998" green="0.1067590726" blue="0.73457610610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal">
+                        <imageReference key="image" image="calendar" catalog="system" symbolScale="large"/>
+                    </state>
+                    <connections>
+                        <action selector="didTapCalendarButton:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="9be-bG-Kh9"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="서울" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hty-RA-ih4">
+                    <rect key="frame" x="222.66666666666666" y="43" width="334.33333333333337" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2022.10.18" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UwF-jN-sRs">
+                    <rect key="frame" x="147.66666666666666" y="43" width="70" height="16"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                    <color key="textColor" red="0.28422497219999998" green="0.1067590726" blue="0.73457610610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <constraints>
+                <constraint firstItem="hty-RA-ih4" firstAttribute="leading" secondItem="UwF-jN-sRs" secondAttribute="trailing" constant="5" id="Fbl-eb-LDe"/>
+                <constraint firstAttribute="bottom" secondItem="UwF-jN-sRs" secondAttribute="bottom" id="JQD-oU-oGN"/>
+                <constraint firstAttribute="bottom" secondItem="hty-RA-ih4" secondAttribute="bottom" id="JeA-1b-txO"/>
+                <constraint firstAttribute="bottom" secondItem="wZw-Jv-6oN" secondAttribute="bottom" id="Jn1-ei-pcG"/>
+                <constraint firstItem="wZw-Jv-6oN" firstAttribute="leading" secondItem="80Z-C9-RWl" secondAttribute="trailing" constant="10" id="Kb0-Yf-oNJ"/>
+                <constraint firstAttribute="bottom" secondItem="80Z-C9-RWl" secondAttribute="bottom" id="L4A-bP-BGq"/>
+                <constraint firstItem="UwF-jN-sRs" firstAttribute="leading" secondItem="wZw-Jv-6oN" secondAttribute="trailing" constant="3" id="SnV-OO-QeS"/>
+                <constraint firstItem="hty-RA-ih4" firstAttribute="trailing" secondItem="U6b-Vx-4bR" secondAttribute="trailing" id="fCP-t3-dL6"/>
+                <constraint firstItem="80Z-C9-RWl" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" id="uDY-Tq-a38"/>
+            </constraints>
+            <connections>
+                <outlet property="calendarButton" destination="wZw-Jv-6oN" id="i4M-K4-8YF"/>
+                <outlet property="selectedDate" destination="UwF-jN-sRs" id="j7h-4g-tbo"/>
+            </connections>
+            <point key="canvasLocation" x="313.07692307692309" y="-104.85781990521326"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="calendar" catalog="system" width="128" height="107"/>
+    </resources>
+</document>

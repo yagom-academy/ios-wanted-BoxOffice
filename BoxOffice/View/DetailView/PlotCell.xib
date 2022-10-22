@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="gTV-IL-0wX" customClass="PlotCell" customModule="BoxOffice" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="528" height="106"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="528" height="106"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="정보없음" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOt-Gx-vz6">
+                        <rect key="frame" x="0.0" y="0.0" width="528" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="...더보기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOt-iH-LS5">
+                        <rect key="frame" x="0.0" y="18" width="528" height="18"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                        <color key="textColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="highlightedColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="SOt-Gx-vz6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="UbZ-K4-g7S"/>
+                <constraint firstAttribute="trailing" secondItem="WOt-iH-LS5" secondAttribute="trailing" id="WzY-74-aQf"/>
+                <constraint firstItem="SOt-Gx-vz6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XNu-pJ-iyb"/>
+                <constraint firstItem="WOt-iH-LS5" firstAttribute="top" secondItem="SOt-Gx-vz6" secondAttribute="bottom" id="cEN-br-Mqh"/>
+                <constraint firstAttribute="trailing" secondItem="SOt-Gx-vz6" secondAttribute="trailing" id="hAF-fY-Txx"/>
+                <constraint firstItem="WOt-iH-LS5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ndu-F2-Thq"/>
+            </constraints>
+            <size key="customSize" width="528" height="106"/>
+            <connections>
+                <outlet property="openAndCloseLabel" destination="WOt-iH-LS5" id="GBP-Zf-hLn"/>
+                <outlet property="plotLabel" destination="SOt-Gx-vz6" id="Wd7-v5-hFk"/>
+            </connections>
+            <point key="canvasLocation" x="-307.69230769230768" y="225.35545023696682"/>
+        </collectionViewCell>
+    </objects>
+</document>
