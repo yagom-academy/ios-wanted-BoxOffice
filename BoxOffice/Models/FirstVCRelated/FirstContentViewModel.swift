@@ -15,6 +15,8 @@ class FirstContentViewModel {
     
     //output
     @MainThreadActor var didReceiveViewModel: ( ((Void)) -> () )?
+    @MainThreadActor var turnOnIndicator: ( ((Void)) -> () )?
+    @MainThreadActor var turnOffIndicator: ( ((Void)) -> () )?
     var propergateDidSelectItem: (_ entity: DailyBoxOfficeList) -> () = { entity in }
     
     var dataSource: [FirstMovieCellModel] {
@@ -37,6 +39,7 @@ class FirstContentViewModel {
             Task {
                 await self.populateEntity(result: entity)
                 self.didReceiveViewModel?(())
+                self.turnOffIndicator?(())
             }
         }
         

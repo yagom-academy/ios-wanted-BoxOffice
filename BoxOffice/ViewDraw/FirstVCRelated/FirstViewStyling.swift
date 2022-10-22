@@ -93,3 +93,16 @@ extension FirstViewStyling {
         }
     }
 }
+
+protocol ActivityIndicatorViewStyling: Styleable { }
+
+extension ActivityIndicatorViewStyling {
+    var indicatorStyle: (UIActivityIndicatorView) -> () {
+        {
+            $0.tintColor = .red
+            $0.hidesWhenStopped = true
+            $0.style = .large
+            $0.color = .red
+        }
+    }
+}

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FirstContentView: UIView {
+class FirstContentView: UIView, ActivityIndicatorViewStyling {
     
     //input
     
@@ -17,6 +17,7 @@ class FirstContentView: UIView {
     var tableView: UITableView = UITableView()
     private let movieCell_Identifier = "FirstMovieCell"
     
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
 
     var viewModel: FirstContentViewModel
     
@@ -38,7 +39,10 @@ class FirstContentView: UIView {
 extension FirstContentView: Presentable {
     func initViewHierarchy() {
         self.addSubview(tableView)
+        self.addSubview(activityIndicator)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         var constraint: [NSLayoutConstraint] = []
         defer { NSLayoutConstraint.activate(constraint) }
@@ -48,6 +52,11 @@ extension FirstContentView: Presentable {
             tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ]
+        
+        constraint += [
+            activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ]
     }
     
@@ -66,6 +75,8 @@ extension FirstContentView: Presentable {
         //        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))
         //        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))
         //        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -20, right: 0)
+        
+        activityIndicator.addStyles(style: indicatorStyle)
     }
     
     func bind() {
@@ -74,6 +85,19 @@ extension FirstContentView: Presentable {
             guard let self = self else { return }
             print("didReceiveViewModel")
             self.tableView.reloadData()
+            self.activityIndicator.stopAnimating()
+        }
+        
+        viewModel.turnOnIndicator = { [weak self] _ in
+            guard let self = self else { return }
+            self.tableView.isHidden = true
+            self.activityIndicator.startAnimating()
+        }
+        
+        viewModel.turnOffIndicator = { [weak self] _ in
+            guard let self = self else { return }
+            self.tableView.isHidden = false
+            self.activityIndicator.stopAnimating()
         }
     }
     

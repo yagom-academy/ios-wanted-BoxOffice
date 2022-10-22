@@ -33,6 +33,7 @@ class FirstModel: SceneActionReceiver {
     func populateData() {
         print(#function)
         Task {
+            privateFirstContentViewModel.turnOnIndicator?(())
             let parkBenchTimer = ParkBenchTimer()
             guard let entity = await requestAPI() else { return }
             privateFirstContentViewModel.didReceiveEntity(entity)
@@ -108,6 +109,7 @@ extension FirstModel {
     func populateDataWithSelectedDate(dateString: String) {
         print(#function)
         Task {
+            privateFirstContentViewModel.turnOnIndicator?(())
             guard let entity = await requestAPIWithSelectedDate(dateString: dateString) else { return }
             privateFirstContentViewModel.didReceiveEntity(entity)
         }

@@ -13,6 +13,8 @@ class SecondModel: SceneActionReceiver {
     var didReceiveSceneAction: (SceneAction) -> () = { action in }
     //output
     @MainThreadActor var routeSubject: ( (SceneCategory) -> () )?
+    @MainThreadActor var turnOnIndicator: ( ((Void)) -> () )?
+    @MainThreadActor var turnOffIndicator: ( ((Void)) -> () )?
     
     var secondContentViewModel: SecondContentViewModel {
         return privateSecondContentViewModel
@@ -32,9 +34,11 @@ class SecondModel: SceneActionReceiver {
     func populateData() {
         
         Task {
+            self.turnOnIndicator?(())
             print("secondModel populate Data")
             guard let entity = await requestAPI() else { return }
             privateSecondContentViewModel.didReceiveEntity(entity, previousSelectedMovieEntity)
+            self.turnOffIndicator?(())
         }
     }
     
