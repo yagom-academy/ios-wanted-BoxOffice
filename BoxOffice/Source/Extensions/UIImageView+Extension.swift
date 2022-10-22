@@ -8,7 +8,6 @@
 import UIKit
 
 extension UIImageView {
-    //이미지 캐싱
     func setImageUrl(url: String, movieName: String){
         let posterURL = url
         let cachedKey = NSString(string: movieName)

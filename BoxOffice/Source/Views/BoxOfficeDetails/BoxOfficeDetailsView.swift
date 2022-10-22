@@ -22,7 +22,6 @@ class BoxOfficeDetailsView: UIView {
          return imageView
      }()
     
-    //영화 이름
     let movieName: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .bold)
@@ -32,7 +31,6 @@ class BoxOfficeDetailsView: UIView {
         return label
     }()
     
-    //영화 이름(영문)
     let movieNameEn: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12)
@@ -43,7 +41,6 @@ class BoxOfficeDetailsView: UIView {
         return label
     }()
     
-    //장르
     let genres: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15)
@@ -51,7 +48,6 @@ class BoxOfficeDetailsView: UIView {
         return label
     }()
     
-    //영화 개봉일
     let openDate: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15)
@@ -59,7 +55,6 @@ class BoxOfficeDetailsView: UIView {
         return label
     }()
     
-    //영화 상영시간
     let showTime: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15)
@@ -67,7 +62,6 @@ class BoxOfficeDetailsView: UIView {
         return label
     }()
     
-    //제작년도
     let prdtYear: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15)
@@ -82,7 +76,6 @@ class BoxOfficeDetailsView: UIView {
         return view
     }()
     
-    //박스오피스 랭크
     let boxOfficeRank: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -106,7 +99,6 @@ class BoxOfficeDetailsView: UIView {
         return stackView
     }()
     
-    //누적 관객수
     let audiAcc: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
