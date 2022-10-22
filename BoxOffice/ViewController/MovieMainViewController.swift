@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MovieMainViewController: UIViewController {
     
     @IBOutlet weak var 버튼: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -41,7 +41,7 @@ class MainViewController: UIViewController {
         navigationController?.pushViewController(WeekMovieViewController, animated: true)
     }
 }
-extension MainViewController: UITableViewDataSource {
+extension MovieMainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movie.count
@@ -54,7 +54,7 @@ extension MainViewController: UITableViewDataSource {
         return cell
     }
 }
-extension MainViewController: UITableViewDelegate {
+extension MovieMainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let viewController = storyboard?.instantiateViewController(withIdentifier: "MovieInformationViewController") as? MovieInformationViewController else {return}

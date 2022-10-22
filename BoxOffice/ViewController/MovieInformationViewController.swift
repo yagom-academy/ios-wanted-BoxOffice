@@ -23,7 +23,7 @@ class MovieInformationViewController: UIViewController {
     @IBOutlet weak var openYear: UILabel!
     @IBOutlet weak var reviewButton: UIButton!
     @IBOutlet weak var sharebutton: UIButton!
-    let mainVC = MainViewController()
+    let mainVC = MovieMainViewController()
     var movieModel : MovieModel?
     
     override func viewDidLoad() {

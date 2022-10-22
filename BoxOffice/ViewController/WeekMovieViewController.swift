@@ -13,7 +13,7 @@ class WeekMovieViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @IBOutlet weak var tableVIew: UITableView!
-    let mainVC = MainViewController()
+    let mainVC = MovieMainViewController()
     var weekMovie : [MovieModel] = []
     
     override func viewDidLoad() {
