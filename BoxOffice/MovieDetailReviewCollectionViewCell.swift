@@ -18,4 +18,8 @@ final class MovieDetailReviewCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+
+    func setUpContents(review: MovieReview) {
+
+    }
 }

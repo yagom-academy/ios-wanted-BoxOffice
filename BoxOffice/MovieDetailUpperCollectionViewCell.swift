@@ -18,4 +18,8 @@ final class MovieDetailUpperCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+
+    func setUpContents(movieDetail: MovieDetail) {
+
+    }
 }
