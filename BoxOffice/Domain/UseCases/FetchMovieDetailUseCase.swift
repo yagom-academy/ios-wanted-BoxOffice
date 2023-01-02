@@ -15,7 +15,7 @@ final class FetchMovieDetailUseCase {
     }
     
     func execute(movieCode: String, completion: @escaping (Result<MovieDetail, Error>) -> Void) {
-        repository.fetchMovieDetail(of: movieCode) { result in
+        repository.fetchMovieDetail(movieCode: movieCode) { result in
             switch result {
             case .success(let movieDetail):
                 completion(.success(movieDetail))
