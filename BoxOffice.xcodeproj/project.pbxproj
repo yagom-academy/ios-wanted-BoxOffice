@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		203201FF29630CB000097F31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 203201FE29630CB000097F31 /* GoogleService-Info.plist */; };
+		2032020229630EED00097F31 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2032020129630EED00097F31 /* FirebaseAuth */; };
+		2032020429630EED00097F31 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2032020329630EED00097F31 /* FirebaseFirestore */; };
+		2032020629630EED00097F31 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2032020529630EED00097F31 /* FirebaseFirestoreSwift */; };
+		2032020829630EED00097F31 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2032020729630EED00097F31 /* FirebaseStorage */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19EC28F9603900197BCC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* ViewController.swift */; };
@@ -31,6 +35,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2032020229630EED00097F31 /* FirebaseAuth in Frameworks */,
+				2032020829630EED00097F31 /* FirebaseStorage in Frameworks */,
+				2032020429630EED00097F31 /* FirebaseFirestore in Frameworks */,
+				2032020629630EED00097F31 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +107,12 @@
 			dependencies = (
 			);
 			name = BoxOffice;
+			packageProductDependencies = (
+				2032020129630EED00097F31 /* FirebaseAuth */,
+				2032020329630EED00097F31 /* FirebaseFirestore */,
+				2032020529630EED00097F31 /* FirebaseFirestoreSwift */,
+				2032020729630EED00097F31 /* FirebaseStorage */,
+			);
 			productName = BoxOffice;
 			productReference = 635A19E428F9603900197BCC /* BoxOffice.app */;
 			productType = "com.apple.product-type.application";
@@ -127,6 +141,9 @@
 				Base,
 			);
 			mainGroup = 635A19DB28F9603900197BCC;
+			packageReferences = (
+				2032020029630EED00097F31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 635A19E528F9603900197BCC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -362,6 +379,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2032020029630EED00097F31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2032020129630EED00097F31 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2032020029630EED00097F31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		2032020329630EED00097F31 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2032020029630EED00097F31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		2032020529630EED00097F31 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2032020029630EED00097F31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		2032020729630EED00097F31 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2032020029630EED00097F31 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 635A19DC28F9603900197BCC /* Project object */;
 }
