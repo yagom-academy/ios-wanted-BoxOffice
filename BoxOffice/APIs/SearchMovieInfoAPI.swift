@@ -35,9 +35,9 @@ struct MovieInfo: Decodable {
     let movieNmEn: String
     let movieNmOg: String
     let showTm: String
-    let prdYear: String
+    let prdtYear: String
     let openDt: String
-    let prdStatNm: String
+    let prdtStatNm: String
     let typeNm: String
     let nations: [Nation]
     let genres: [Genre]
@@ -63,7 +63,7 @@ struct Actor: Decodable {
     let peopleNm: String
     let peopleNmEn: String
     let cast: String
-    let caseEn: String
+    let castEn: String
 }
 struct ShowType: Decodable {
     let showTypeGroupNm: String
