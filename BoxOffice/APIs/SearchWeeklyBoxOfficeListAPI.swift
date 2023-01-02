@@ -14,7 +14,7 @@ enum WeekOption: String {
 }
 
 struct SearchWeeklyBoxOfficeListAPI: API {
-    typealias ResponseType = WeeklyBoxOfficeResponseDTO
+    typealias ResponseType = WeeklyBoxOfficeListResponseDTO
     
     var configuration: APIConfiguration
     
@@ -32,7 +32,7 @@ struct SearchWeeklyBoxOfficeListAPI: API {
     }
 }
 
-struct WeeklyBoxOfficeResponseDTO: Decodable {
+struct WeeklyBoxOfficeListResponseDTO: Decodable {
     let boxOfficeResult: BoxOfficeResult
 }
 
