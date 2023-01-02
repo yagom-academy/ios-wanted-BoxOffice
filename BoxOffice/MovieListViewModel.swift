@@ -16,14 +16,35 @@ final class MovieListViewModel {
     var reloadMovieListTableView: (() -> Void)?
 
     func viewDidLoad() {
+        fetchMovieList()
+        reloadMovieListTableView?()
+    }
+
+    func dayTypeSegmentValueChanged(value: MovieListSegment) {
+        switch value {
+        case .day:
+            dayType = .weekdays
+        case .weekDaysAndWeekend:
+            dayType = .weekends
+        }
+
+        fetchMovieList()
+        reloadMovieListTableView?()
+    }
+
+    private func fetchMovieList() {
         fetchMovieListUseCase.execute(page: pageToLoad, dayType: dayType) { [weak self] result in
             switch result {
             case .success(let movieOverviewList):
                 self?.movieOverviewList = movieOverviewList
-                self?.reloadMovieListTableView?()
             case .failure(let error):
                 print(error)
             }
         }
     }
+}
+
+enum MovieListSegment {
+    case day
+    case weekDaysAndWeekend
 }
