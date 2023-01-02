@@ -9,7 +9,7 @@ import UIKit
 
 final class MovieDetailViewController: UIViewController {
 
-    private let viewModel = MovieDetailViewModel()
+    private let viewModel: MovieDetailViewModel
 
     private lazy var movieDetailCollectionView: UICollectionView = {
         let layout = movieDetailCollectionViewLayout()
@@ -26,6 +26,21 @@ final class MovieDetailViewController: UIViewController {
         setUpMovieDetailCollectionView()
         layout()
         applyDataSource()
+        viewModel.viewDidLoad()
+    }
+
+    init(movieCode: String) {
+        self.viewModel = MovieDetailViewModel(movieCode: movieCode)
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        self.viewModel = MovieDetailViewModel(movieCode: "")
+        super.init(coder: coder)
+    }
+
+    private func bind() {
+        viewModel.applyDataSource = { [weak self] in self?.applyDataSource() }
     }
 
     private func setUpMovieDetailCollectionView() {
@@ -109,8 +124,11 @@ final class MovieDetailViewController: UIViewController {
     private func applyDataSource() {
         var snapShot = NSDiffableDataSourceSnapshot<MovieDetailSection, MovieDetailItem>()
         snapShot.appendSections([.upper, .bottom])
-        snapShot.appendItems([], toSection: .upper)
-        snapShot.appendItems([], toSection: .bottom)
+        snapShot.appendItems([.upper(viewModel.movieDetail)], toSection: .upper)
+        snapShot.appendItems([.info(viewModel.movieDetail)], toSection: .bottom)
+        viewModel.movieReviews.forEach {
+            snapShot.appendItems([.review($0)], toSection: .bottom)
+        }
         movieDetailDataSource.apply(snapShot)
     }
 
