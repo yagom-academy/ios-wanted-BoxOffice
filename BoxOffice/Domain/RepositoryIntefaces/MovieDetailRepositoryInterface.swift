@@ -9,4 +9,8 @@ import Foundation
 
 protocol MovieDetailRepositoryInterface {
     func fetchMovieDetail(of movieCode: String, completion: @escaping (Result<MovieDetail, Error>) -> Void)
+
+    func fetchMovieReview(movieCode: String, completion: @escaping (Result<MovieReview, Error>) -> Void)
+
+    func deleteMovieReview(review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void)
 }
