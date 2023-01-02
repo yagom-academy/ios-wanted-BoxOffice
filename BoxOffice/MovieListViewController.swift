@@ -22,11 +22,11 @@ final class MovieListViewController: UIViewController {
         segmentControl.setAction(UIAction(handler: weekendSegmentSelected), forSegmentAt: 1)
         return segmentControl
     }()
-
-    private lazy var movieListTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.delegate = self
-        return tableView
+    
+    private lazy var movieListCollectionView: UICollectionView = {
+        let layout = movieListCollectionViewLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return collectionView
     }()
 
     override func viewDidLoad() {
@@ -34,16 +34,21 @@ final class MovieListViewController: UIViewController {
         view.backgroundColor = .systemBackground
         viewModel.viewDidLoad()
     }
+    
+    private func movieListCollectionViewLayout() -> UICollectionViewLayout {
+        return UICollectionViewLayout()
+    }
+    
 
     private func bind() {
         viewModel.applySnapShot = {
-            self.movieListTableView.reloadData()
+            self.movieListCollectionView.reloadData()
         }
     }
 }
 
-extension MovieListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+extension MovieListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == viewModel.movieOverviewList.count - 1 {
             viewModel.scrollEnded()
         }
