@@ -7,6 +7,7 @@
 import Foundation
 
 struct MovieOverview {
+    let movieCode: String
     let dayType: DayType
     let region: Region
     let rank: UInt
