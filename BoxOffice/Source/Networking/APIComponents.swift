@@ -8,6 +8,7 @@
 enum Query {
     case boxOffice(targetDt: String)
     case omdbApi(title: String)
+    case movieInfo(code: String)
     
     var dictionary: [String: String] {
         switch self {
@@ -15,6 +16,8 @@ enum Query {
             return ["targetDt": date]
         case .omdbApi(title: let title):
             return ["t": title]
+        case .movieInfo(code: let code):
+            return ["movieCd": code]
         }
     }
 }
@@ -35,6 +38,7 @@ enum Key {
 
 enum BaseURL: String {
     case boxOfficeURL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
+    case movieInfo = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
     case omdbFullDataURL = "http://www.omdbapi.com"
     case omdbImgURL = "http://img.omdbapi.com"
 }

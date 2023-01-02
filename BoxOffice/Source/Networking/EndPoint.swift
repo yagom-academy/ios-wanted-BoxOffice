@@ -29,6 +29,10 @@ struct EndPoints {
         return EndPoint(baseURL: .boxOfficeURL, key: .boxOffice(key: key), query: .boxOffice(targetDt: date))
     }
     
+    static func makeDetailMovieApi(key: String, code: String) -> APIRequest {
+        return EndPoint(baseURL: .movieInfo, key: .boxOffice(key: key), query: .movieInfo(code: code))
+    }
+    
     static func makeOMDBImageApi(key: String, title: String) -> APIRequest {
         return EndPoint(baseURL: .omdbImgURL, key: .omdbKey(key: key), query: .omdbApi(title: title))
     }
