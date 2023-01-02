@@ -12,7 +12,7 @@ final class MockMovieDetailRepository: MovieDetailRepositoryInterface {
         
     }
 
-    func fetchMovieReview(movieCode: String, completion: @escaping (Result<MovieReview, Error>) -> Void) {
+    func fetchMovieReview(movieCode: String, completion: @escaping (Result<[MovieReview], Error>) -> Void) {
 
     }
 

@@ -7,14 +7,14 @@
 
 import Foundation
 
-final class FetchMovieReviewUseCase {
+final class FetchMovieReviewsUseCase {
     private let repository: MovieDetailRepositoryInterface
 
     init(repository: MovieDetailRepositoryInterface = MockMovieDetailRepository()) {
         self.repository = repository
     }
 
-    func execute(movieCode: String, completion: @escaping (Result<MovieReview, Error>) -> Void) {
+    func execute(movieCode: String, completion: @escaping (Result<[MovieReview], Error>) -> Void) {
         repository.fetchMovieReview(movieCode: movieCode) { result in
             switch result {
             case .success(let movieReview):
