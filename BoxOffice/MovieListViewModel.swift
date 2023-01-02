@@ -13,11 +13,10 @@ final class MovieListViewModel {
     var movieOverviewList = [MovieOverview]()
     var dayType: DayType = .weekdays
 
-    var reloadMovieListTableView: (() -> Void)?
+    var applySnapShot: (() -> Void)?
 
     func viewDidLoad() {
         fetchMovieList()
-        reloadMovieListTableView?()
     }
 
     func dayTypeSegmentValueChanged(value: MovieListSegment) {
@@ -29,7 +28,11 @@ final class MovieListViewModel {
         }
 
         fetchMovieList()
-        reloadMovieListTableView?()
+    }
+
+    func scrollEnded() {
+        pageToLoad += 1
+        fetchMovieList()
     }
 
     private func fetchMovieList() {
@@ -37,6 +40,7 @@ final class MovieListViewModel {
             switch result {
             case .success(let movieOverviewList):
                 self?.movieOverviewList = movieOverviewList
+                self?.applySnapShot?()
             case .failure(let error):
                 print(error)
             }
