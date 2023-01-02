@@ -55,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				9BEA27FD29629F8C00FB7E73 /* Entry */,
+				9BEA28002962BA0100FB7E73 /* Network */,
 				9BEA27FF29629FB900FB7E73 /* Domain */,
 				9BEA27FE29629F9800FB7E73 /* SupportFile */,
 			);
@@ -86,6 +87,13 @@
 				635A19EB28F9603900197BCC /* ViewController.swift */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		9BEA28002962BA0100FB7E73 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
