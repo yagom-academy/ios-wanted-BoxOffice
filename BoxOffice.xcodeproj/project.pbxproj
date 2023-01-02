@@ -45,6 +45,14 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		32A6114729629FE2009A3BC1 /* RepositoryIntefaces */ = {
+			isa = PBXGroup;
+			children = (
+				32A6114529629EC8009A3BC1 /* MovieListRepositoryInterface.swift */,
+			);
+			path = RepositoryIntefaces;
+			sourceTree = "<group>";
+		};
 		635A19DB28F9603900197BCC = {
 			isa = PBXGroup;
 			children = (
@@ -66,7 +74,7 @@
 			children = (
 				635A19E728F9603900197BCC /* AppDelegate.swift */,
 				635A19EB28F9603900197BCC /* ViewController.swift */,
-				32A6114529629EC8009A3BC1 /* MovieListRepositoryInterface.swift */,
+				32A6114729629FE2009A3BC1 /* RepositoryIntefaces */,
 				32A6114429629B7B009A3BC1 /* Entities */,
 				635A19F028F9603A00197BCC /* Assets.xcassets */,
 				635A19F228F9603A00197BCC /* LaunchScreen.storyboard */,
