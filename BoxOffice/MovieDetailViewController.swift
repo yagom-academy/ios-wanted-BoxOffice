@@ -20,6 +20,9 @@ final class MovieDetailViewController: UIViewController {
                                 forCellWithReuseIdentifier: MovieDetailInfoCollectionViewCell.reuseIdentifier)
         collectionView.register(MovieDetailReviewCollectionViewCell.self,
                                 forCellWithReuseIdentifier: MovieDetailReviewCollectionViewCell.reuseIdentifier)
+        collectionView.register(MovieDetailTabBarHeaderView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: MovieDetailTabBarHeaderView.reuseIdentifier)
         return collectionView
     }()
 

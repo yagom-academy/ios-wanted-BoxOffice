@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3210F647296312B3004A8E59 /* MovieDetailTabBarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3210F646296312B3004A8E59 /* MovieDetailTabBarHeaderView.swift */; };
 		32406B912962F34900E94D7C /* UploadReviewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32406B902962F34900E94D7C /* UploadReviewUseCase.swift */; };
 		32406B932962FABE00E94D7C /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32406B922962FABE00E94D7C /* MovieDetailViewController.swift */; };
 		32406B95296304F100E94D7C /* MovieDetailUpperCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32406B94296304F100E94D7C /* MovieDetailUpperCollectionViewCell.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3210F646296312B3004A8E59 /* MovieDetailTabBarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailTabBarHeaderView.swift; sourceTree = "<group>"; };
 		32406B902962F34900E94D7C /* UploadReviewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadReviewUseCase.swift; sourceTree = "<group>"; };
 		32406B922962FABE00E94D7C /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		32406B94296304F100E94D7C /* MovieDetailUpperCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailUpperCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				635A19EB28F9603900197BCC /* ViewController.swift */,
 				32406B962963050C00E94D7C /* MovieDetailViewModel.swift */,
 				32406B922962FABE00E94D7C /* MovieDetailViewController.swift */,
+				3210F646296312B3004A8E59 /* MovieDetailTabBarHeaderView.swift */,
 				32406B982963053500E94D7C /* MovieDetailInfoCollectionViewCell.swift */,
 				32406B9A2963053E00E94D7C /* MovieDetailReviewCollectionViewCell.swift */,
 				32406B94296304F100E94D7C /* MovieDetailUpperCollectionViewCell.swift */,
@@ -215,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
+				3210F647296312B3004A8E59 /* MovieDetailTabBarHeaderView.swift in Sources */,
 				32406B932962FABE00E94D7C /* MovieDetailViewController.swift in Sources */,
 				32406B992963053500E94D7C /* MovieDetailInfoCollectionViewCell.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
