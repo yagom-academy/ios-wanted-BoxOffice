@@ -12,8 +12,8 @@ enum HTTPMethod {
 }
 
 enum BaseURL: String {
-    case kobis = "http://www.kobis.or.kr/kobisopenapi/webservice/rest"
-    case omdb = "http://www.omdbapi.com"
+    case kobis = "https://www.kobis.or.kr/kobisopenapi/webservice/rest"
+    case omdb = "https://www.omdbapi.com"
 }
 
 enum URLPath: String {
@@ -25,7 +25,7 @@ enum URLPath: String {
 
 struct APIConfiguration {
     private let baseUrl: String
-    private let param: String
+    private let paramList: [URLQueryItem]
     private let path: String
     private let httpMethod: String
     
@@ -36,13 +36,15 @@ struct APIConfiguration {
         httpMethod: String = HTTPMethod.get
     ) {
         self.baseUrl = baseUrl.rawValue
-        self.param = param.queryString
+        self.paramList = param.queryItems
         self.path = path.rawValue
         self.httpMethod = httpMethod
     }
     
     func makeURLRequest() -> URLRequest? {
-        guard let url = URL(string: baseUrl + path + "?" + param) else { return nil }
+        guard var urlComponent = URLComponents(string: baseUrl + path) else { return nil }
+        urlComponent.queryItems = paramList
+        guard let url = urlComponent.url else { return nil }
         var request = URLRequest(url: url)
         request.httpMethod = httpMethod
         return request
