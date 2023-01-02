@@ -8,20 +8,36 @@
 import SwiftUI
 
 struct MovieRankTapView: View {
+
+    enum Tab: String {
+        case daily = "일간"
+        case weekly = "주간"
+        case weekend = "주말"
+    }
+
+    @State private var selection: Tab = .daily
+
     var body: some View {
-        TabView {
-            MovieRankView(title: "일간")
-                .tabItem {
-                    Text("일간")
-                }
-            MovieRankView(title: "주간")
-                .tabItem {
-                    Text("주간")
-                }
-            MovieRankView(title: "주말")
-                .tabItem {
-                    Text("주말")
-                }
+        NavigationView {
+            TabView(selection: $selection) {
+                MovieRankView()
+                    .tabItem {
+                        Text("일간")
+                    }
+                    .tag(Tab.daily)
+                MovieRankView()
+                    .tabItem {
+                        Text("주간")
+                    }
+                    .tag(Tab.weekly)
+                MovieRankView()
+                    .tabItem {
+                        Text("주말")
+                    }
+                    .tag(Tab.weekend)
+            }
+            .navigationTitle("\(selection.rawValue)" + " 박스오피스 순위")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
