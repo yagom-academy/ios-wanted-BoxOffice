@@ -56,6 +56,38 @@ final class MovieDetailViewController: UIViewController {
         let dataSource = UICollectionViewDiffableDataSource<MovieDetailSection, MovieDetailItem>(
             collectionView: movieDetailCollectionView
         ) { collectionView, indexPath, itemIdentifier -> UICollectionViewCell? in
+
+            if indexPath.section == MovieDetailSection.upper.rawValue {
+                if case let .upper(movieDetail) = itemIdentifier,
+                   let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: MovieDetailUpperCollectionViewCell.reuseIdentifier,
+                    for: indexPath
+                   ) as? MovieDetailUpperCollectionViewCell {
+                    cell.setUpContents(movieDetail: movieDetail)
+                    return cell
+                }
+            }
+
+            switch self.viewModel.tabBarMode {
+            case .movieInfo:
+                if case let .info(movieDetail) = itemIdentifier,
+                   let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: MovieDetailInfoCollectionViewCell.reuseIdentifier,
+                    for: indexPath
+                   ) as? MovieDetailInfoCollectionViewCell {
+                    cell.setUpContents(movieDetail: movieDetail)
+                    return cell
+                }
+            case .review:
+                if case let .review(review) = itemIdentifier,
+                   let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: MovieDetailReviewCollectionViewCell.reuseIdentifier,
+                    for: indexPath
+                   ) as? MovieDetailReviewCollectionViewCell {
+                    cell.setUpContents(review: review)
+                    return cell
+                }
+            }
             return UICollectionViewCell()
         }
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -65,7 +97,9 @@ final class MovieDetailViewController: UIViewController {
                     withReuseIdentifier: MovieDetailTabBarHeaderView.reuseIdentifier,
                     for: indexPath
                   ) as? MovieDetailTabBarHeaderView else { return UICollectionReusableView() }
-
+            if indexPath.section != MovieDetailSection.upper.rawValue {
+                header.setUpContents()
+            }
             return header
         }
 
@@ -141,25 +175,19 @@ extension MovieDetailViewController {
         }
 
         var section: NSCollectionLayoutSection {
-            switch self {
-            case .upper:
-                let section = NSCollectionLayoutSection(group: group)
-                return section
-            case .bottom:
-                let section = NSCollectionLayoutSection(group: group)
-                let headerSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .estimated(100)
-                )
-                let header = NSCollectionLayoutBoundarySupplementaryItem(
-                    layoutSize: headerSize,
-                    elementKind: UICollectionView.elementKindSectionHeader,
-                    alignment: .top
-                )
-                header.pinToVisibleBounds = true
-                section.boundarySupplementaryItems = [header]
-                return section
-            }
+            let section = NSCollectionLayoutSection(group: group)
+            let headerSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .estimated(100)
+            )
+            let header = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: headerSize,
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .top
+            )
+            header.pinToVisibleBounds = true
+            section.boundarySupplementaryItems = [header]
+            return section
         }
     }
 }
