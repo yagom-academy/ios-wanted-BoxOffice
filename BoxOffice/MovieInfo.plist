@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>omdb_API_KEY</key>
+	<string>OMDb API_KEY를 입력 해주세요.</string>
+	<key>kobis_API_KEY</key>
+	<string>영화진흥위원회 API_KEY를 입력 해주세요.</string>
+</dict>
+</plist>
