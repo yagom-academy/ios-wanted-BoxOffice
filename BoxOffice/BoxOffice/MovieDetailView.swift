@@ -13,81 +13,106 @@ struct MovieDetailView: View {
 
     var body: some View {
         List {
-            HStack(alignment: .top) {
-                Image(uiImage: UIImage(named: "Avatar")!)
-                    .resizable()
-                    .aspectRatio(450/650, contentMode: .fit)
-                MovieInformationView(movie: movie)
-            }
-            VStack(alignment: .leading) {
-                HStack {
-                    Rectangle()
-                        .frame(width: 4, height: 20)
-                        .foregroundColor(.red)
-                    Text("박스오피스 순위")
-                        .bold()
-                        .font(.title3)
-                }
-                HStack {
-                    Text("현재 순위:")
-                        .foregroundColor(.gray)
-                        .shadow(radius: 0.2)
-                    Text("\(movie.rank) 위")
-                        .bold()
-                }
-                HStack {
-                    Text("전일 대비:")
-                        .foregroundColor(.gray)
-                        .shadow(radius: 0.2)
-                    if Int(movie.rankInten) == 0 {
+            Section(footer: HStack {
+                Button(action: {
+
+                }, label: {
+                    ZStack {
                         Rectangle()
-                            .frame(width: 13, height: 2)
-                    } else if Int(movie.rankInten) ?? 0 > 0 {
-                        HStack(spacing: 2) {
-                            Text("↑")
-                                .foregroundColor(.red)
-                                .bold()
-                            Text(movie.rankInten)
-                        }
-                    } else {
-                        HStack(spacing: 2) {
-                            Text("↓")
-                                .foregroundColor(.blue)
-                                .bold()
-                            Text(movie.rankInten)
+                            .frame(width: 170, height: 40)
+                        Text("실관람평")
+                            .foregroundColor(.white)
+                            .background(RoundedRectangle(cornerRadius: 10))
+                    }
+                })
+                Button(action: {
+
+                }, label: {
+                    ZStack {
+                        Rectangle()
+                            .frame(width: 170, height: 40)
+                        Text("공유하기")
+                            .foregroundColor(.white)
+                            .background(RoundedRectangle(cornerRadius: 10))
+                    }
+                })
+            }) {
+                HStack(alignment: .top) {
+                    Image(uiImage: UIImage(named: "Avatar")!)
+                        .resizable()
+                        .aspectRatio(450/650, contentMode: .fit)
+                    MovieInformationView(movie: movie)
+                }
+                VStack(alignment: .leading) {
+                    HStack {
+                        Rectangle()
+                            .frame(width: 4, height: 20)
+                            .foregroundColor(.red)
+                        Text("박스오피스 순위")
+                            .bold()
+                            .font(.title3)
+                    }
+                    HStack {
+                        Text("현재 순위:")
+                            .foregroundColor(.gray)
+                            .shadow(radius: 0.2)
+                        Text("\(movie.rank) 위")
+                            .bold()
+                    }
+                    HStack {
+                        Text("전일 대비:")
+                            .foregroundColor(.gray)
+                            .shadow(radius: 0.2)
+                        if Int(movie.rankInten) == 0 {
+                            Rectangle()
+                                .frame(width: 13, height: 2)
+                        } else if Int(movie.rankInten) ?? 0 > 0 {
+                            HStack(spacing: 2) {
+                                Text("↑")
+                                    .foregroundColor(.red)
+                                    .bold()
+                                Text(movie.rankInten)
+                            }
+                        } else {
+                            HStack(spacing: 2) {
+                                Text("↓")
+                                    .foregroundColor(.blue)
+                                    .bold()
+                                Text(movie.rankInten)
+                            }
                         }
                     }
+                    HStack {
+                        Text("현재 순위:")
+                            .foregroundColor(.gray)
+                            .shadow(radius: 0.2)
+                        Text("\(movie.rank) 위")
+                            .bold()
+                    }
                 }
-                HStack {
-                    Text("현재 순위:")
-                        .foregroundColor(.gray)
-                        .shadow(radius: 0.2)
-                    Text("\(movie.rank) 위")
-                        .bold()
-                }
-            }
-            VStack(alignment: .leading) {
-                HStack {
-                    Rectangle()
-                        .frame(width: 4, height: 20)
-                        .foregroundColor(.red)
-                    Text("제작 정보")
-                        .bold()
-                        .font(.title3)
-                }
-                HStack {
-                    Text("제작 연도:")
-                        .foregroundColor(.gray)
-                        .shadow(radius: 0.2)
-                    Text(movie.prdtYear)
-                        .bold()
-                }
-                HStack {
-                    Text("개봉 연도:")
-                        .foregroundColor(.gray)
-                        .shadow(radius: 0.2)
-                    Text(movie.openDtYear)
-                        .bold()
+                VStack(alignment: .leading) {
+                    HStack {
+                        Rectangle()
+                            .frame(width: 4, height: 20)
+                            .foregroundColor(.red)
+                        Text("제작 정보")
+                            .bold()
+                            .font(.title3)
+                    }
+                    HStack {
+                        Text("제작 연도:")
+                            .foregroundColor(.gray)
+                            .shadow(radius: 0.2)
+                        Text(movie.prdtYear)
+                            .bold()
+                    }
+                    HStack {
+                        Text("개봉 연도:")
+                            .foregroundColor(.gray)
+                            .shadow(radius: 0.2)
+                        Text(movie.openDtYear)
+                            .bold()
+                    }
                 }
             }
         }
@@ -149,6 +174,7 @@ struct MovieInformationView: View {
         }
     }
 }
+
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
         MovieDetailView(movie: Movie(rank: "1", movieName: "아바타", openDtDay: "2022/12/15", spectators: "10000000", rankInten: "0", rankOldAndNew: "Old", prdtYear: "2021", openDtYear: "2022", showTm: "3시간", genreNm: "판타지", directorNm: "제임스카메룬", actorNm: "나비족", watchGradeNm: "15세"))
