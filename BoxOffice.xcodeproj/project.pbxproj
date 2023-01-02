@@ -12,6 +12,10 @@
 		635A19EC28F9603900197BCC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* ViewController.swift */; };
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
 		635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F228F9603A00197BCC /* LaunchScreen.storyboard */; };
+		72E59D94296292C7000BBCE5 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E59D93296292C7000BBCE5 /* APIRequest.swift */; };
+		72E59D962962B072000BBCE5 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E59D952962B072000BBCE5 /* EndPoint.swift */; };
+		72E59D982962B83F000BBCE5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E59D972962B83F000BBCE5 /* NetworkManager.swift */; };
+		72E59D9A2962C366000BBCE5 /* APIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E59D992962C366000BBCE5 /* APIComponents.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		635A19F028F9603A00197BCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		635A19F328F9603A00197BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		635A19F528F9603A00197BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		72E59D93296292C7000BBCE5 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		72E59D952962B072000BBCE5 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		72E59D972962B83F000BBCE5 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		72E59D992962C366000BBCE5 /* APIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIComponents.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +108,10 @@
 		72E59D9229628880000BBCE5 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				72E59D972962B83F000BBCE5 /* NetworkManager.swift */,
+				72E59D93296292C7000BBCE5 /* APIRequest.swift */,
+				72E59D992962C366000BBCE5 /* APIComponents.swift */,
+				72E59D952962B072000BBCE5 /* EndPoint.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -174,8 +186,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72E59D9A2962C366000BBCE5 /* APIComponents.swift in Sources */,
+				72E59D982962B83F000BBCE5 /* NetworkManager.swift in Sources */,
 				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
+				72E59D962962B072000BBCE5 /* EndPoint.swift in Sources */,
+				72E59D94296292C7000BBCE5 /* APIRequest.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
