@@ -14,6 +14,7 @@
 		635A19EC28F9603900197BCC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* ViewController.swift */; };
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
 		635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F228F9603A00197BCC /* LaunchScreen.storyboard */; };
+		FD2EF8FF2962A820004B8FEC /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2EF8FE2962A820004B8FEC /* MovieDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		635A19F028F9603A00197BCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		635A19F328F9603A00197BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		635A19F528F9603A00197BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD2EF8FE2962A820004B8FEC /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +45,7 @@
 			isa = PBXGroup;
 			children = (
 				32A6114229629B76009A3BC1 /* MovieOverview.swift */,
+				FD2EF8FE2962A820004B8FEC /* MovieDetail.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				32A6114629629EC8009A3BC1 /* MovieListRepositoryInterface.swift in Sources */,
+				FD2EF8FF2962A820004B8FEC /* MovieDetail.swift in Sources */,
 				32A6114329629B76009A3BC1 /* MovieOverview.swift in Sources */,
 				32A6114E2962A42D009A3BC1 /* FetchMovieListUseCase.swift in Sources */,
 			);
