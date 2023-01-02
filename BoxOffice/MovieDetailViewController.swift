@@ -14,16 +14,7 @@ final class MovieDetailViewController: UIViewController {
     private lazy var movieDetailCollectionView: UICollectionView = {
         let layout = movieDetailCollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(MovieDetailUpperCollectionViewCell.self,
-                                forCellWithReuseIdentifier: MovieDetailUpperCollectionViewCell.reuseIdentifier)
-        collectionView.register(MovieDetailInfoCollectionViewCell.self,
-                                forCellWithReuseIdentifier: MovieDetailInfoCollectionViewCell.reuseIdentifier)
-        collectionView.register(MovieDetailReviewCollectionViewCell.self,
-                                forCellWithReuseIdentifier: MovieDetailReviewCollectionViewCell.reuseIdentifier)
-        collectionView.register(MovieDetailTabBarHeaderView.self,
-                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: MovieDetailTabBarHeaderView.reuseIdentifier)
-        collectionView.dataSource = movieDetailDataSource
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
 
@@ -31,7 +22,23 @@ final class MovieDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+        setUpMovieDetailCollectionView()
         layout()
+        applyDataSource()
+    }
+
+    private func setUpMovieDetailCollectionView() {
+        movieDetailCollectionView.register(MovieDetailUpperCollectionViewCell.self,
+                                           forCellWithReuseIdentifier: MovieDetailUpperCollectionViewCell.reuseIdentifier)
+        movieDetailCollectionView.register(MovieDetailInfoCollectionViewCell.self,
+                                           forCellWithReuseIdentifier: MovieDetailInfoCollectionViewCell.reuseIdentifier)
+        movieDetailCollectionView.register(MovieDetailReviewCollectionViewCell.self,
+                                           forCellWithReuseIdentifier: MovieDetailReviewCollectionViewCell.reuseIdentifier)
+        movieDetailCollectionView.register(MovieDetailTabBarHeaderView.self,
+                                           forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                           withReuseIdentifier: MovieDetailTabBarHeaderView.reuseIdentifier)
+        movieDetailCollectionView.dataSource = movieDetailDataSource
     }
 
     private func layout() {
