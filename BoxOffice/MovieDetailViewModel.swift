@@ -8,5 +8,12 @@
 import Foundation
 
 final class MovieDetailViewModel {
+    var tabBarMode: TabBarMode = .movieInfo
+}
 
+extension MovieDetailViewModel {
+    enum TabBarMode {
+        case movieInfo
+        case review
+    }
 }
