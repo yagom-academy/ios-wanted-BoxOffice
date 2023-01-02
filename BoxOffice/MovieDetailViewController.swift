@@ -178,7 +178,7 @@ extension MovieDetailViewController {
             let section = NSCollectionLayoutSection(group: group)
             let headerSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(100)
+                heightDimension: .estimated(0)
             )
             let header = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: headerSize,
