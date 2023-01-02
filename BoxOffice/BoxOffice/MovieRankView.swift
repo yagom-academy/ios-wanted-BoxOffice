@@ -33,21 +33,25 @@ struct MovieList {
 
 struct MovieRankView: View {
     var movieList: [Movie] = [Movie(rank: "1", movieName: "아바타", openDtDay: "2022/12/15", spectators: "10000000", rankInten: "0", rankOldAndNew: "Old", prdtYear: "2022", openDtYear: "2022", showTm: "3시간", genreNm: "판타지", directorNm: "제임스카메룬", actorNm: "나비족", watchGradeNm: "15세"), Movie(rank: "1", movieName: "아바타", openDtDay: "2022/12/15", spectators: "10000000", rankInten: "0", rankOldAndNew: "Old", prdtYear: "2022", openDtYear: "2022", showTm: "3시간", genreNm: "판타지", directorNm: "제임스카메룬", actorNm: "나비족", watchGradeNm: "15세"), Movie(rank: "1", movieName: "아바타", openDtDay: "2022/12/15", spectators: "10000000", rankInten: "0", rankOldAndNew: "Old", prdtYear: "2022", openDtYear: "2022", showTm: "3시간", genreNm: "판타지", directorNm: "제임스카메룬", actorNm: "나비족", watchGradeNm: "15세")]
+    var title: String
 
     var body: some View {
         NavigationView {
             Group {
                 List(movieList, id: \.self) { movie in
-                    MovieRankRowView(movie: movie)
+                    NavigationLink(destination: MovieDetailView()) {
+                        MovieRankRowView(movie: movie)
+                    }
                 }
-                .listStyle(.automatic)
+                .listStyle(.plain)
             }
+            .navigationTitle("\(title)" + " 박스오피스 순위")
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieRankView()
+        MovieRankView(title: "일간")
     }
 }

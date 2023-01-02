@@ -51,7 +51,7 @@ struct MovieRankRowView: View {
     }
 }
 
-struct MoviewRankRowView_Previews: PreviewProvider {
+struct MovieRankRowView_Previews: PreviewProvider {
     static var previews: some View {
         MovieRankRowView(movie: Movie(rank: "1", movieName: "아바타", openDtDay: "2022/12/15", spectators: "10000000", rankInten: "0", rankOldAndNew: "Old", prdtYear: "2022", openDtYear: "2022", showTm: "3시간", genreNm: "판타지", directorNm: "제임스카메룬", actorNm: "나비족", watchGradeNm: "15세"))
     }
