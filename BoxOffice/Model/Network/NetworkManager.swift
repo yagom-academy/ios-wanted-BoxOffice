@@ -7,9 +7,17 @@
 
 import Foundation
 
-class NetworkManager {
-    func getFilmData(completion: @escaping (Result<FilmDetails, Error>) -> Void) {
-        self.getData(url: "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=635cb0b1404820f91c8a45fcdf831615&movieCd=20225061", completion: completion)
+class NetworkManager: NetworkProtocol {
+    func getFilmDetailData(completion: @escaping (Result<FilmDetails, Error>) -> Void) {
+        <#code#>
+    }
+    
+    func getBoxOfficeData(completion: @escaping (Result<DailyBoxOffice, Error>) -> Void) {
+        <#code#>
+    }
+    
+    func getPosterData(completion: @escaping (Result<FilmPoster, Error>) -> Void) {
+        <#code#>
     }
 }
 
