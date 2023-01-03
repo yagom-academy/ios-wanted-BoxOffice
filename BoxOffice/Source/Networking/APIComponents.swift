@@ -40,5 +40,9 @@ enum BaseURL: String {
     case boxOfficeURL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
     case movieInfo = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
     case omdbFullDataURL = "http://www.omdbapi.com"
-    case omdbImgURL = "http://img.omdbapi.com"
+}
+
+enum APIKey: String {
+    case movieInfo = "163b881c74f65476e77bd131ab3dee65"
+    case omdb = "116dd1d6"
 }
