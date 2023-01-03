@@ -33,10 +33,12 @@ final class MovieDetailReviewCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-    private let deleteButton: UIButton = {
+    private lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         button.tintColor = .systemGray
+        button.addAction(UIAction {[weak self] _ in self?.deleteButtonTapped?() },
+                         for: .touchUpInside)
         return button
     }()
 
@@ -45,6 +47,8 @@ final class MovieDetailReviewCollectionViewCell: UICollectionViewCell {
         line.backgroundColor = .systemGray4
         return line
     }()
+
+    var deleteButtonTapped: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)

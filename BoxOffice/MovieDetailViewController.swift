@@ -47,6 +47,9 @@ final class MovieDetailViewController: UIViewController {
                 self?.movieDetailCollectionView.scrollToItem(at: upperMovieInfoIndexPath, at: .top, animated: false)
             }
         }
+        viewModel.showDeleteActionSheet = { [weak self] alert in
+            self?.present(alert, animated: true)
+        }
     }
 
     private func setUpMovieDetailCollectionView() {
@@ -108,6 +111,9 @@ final class MovieDetailViewController: UIViewController {
                     for: indexPath
                    ) as? MovieDetailReviewCollectionViewCell {
                     cell.setUpContents(review: review)
+                    cell.deleteButtonTapped = { [weak self] in
+                        self?.viewModel.deleteReviewButtonTapped(review: review)
+                    }
                     return cell
                 }
             }

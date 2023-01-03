@@ -5,7 +5,7 @@
 //  Created by 천수현 on 2023/01/02.
 //
 
-import Foundation
+import UIKit
 
 final class MovieDetailViewModel {
 
@@ -22,6 +22,7 @@ final class MovieDetailViewModel {
     // MARK: - Actions
     var applyDataSource: (() -> Void)?
     var scrollToUpper: (() -> Void)?
+    var showDeleteActionSheet: ((UIAlertController) -> Void)?
 
     // MARK: - Private properties
     private let movieCode: String
@@ -45,7 +46,13 @@ extension MovieDetailViewModel {
     }
 
     func deleteReviewButtonTapped(review: MovieReview) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
+            self?.deleteReviewButtonTapped(review: review)
+        })
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
 
+        showDeleteActionSheet?(alert)
     }
 
     func shareButtonTapped() {
