@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A0B33622963FE7600D2766D /* BoxOfficeListContentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B33612963FE7600D2766D /* BoxOfficeListContentConfiguration.swift */; };
+		3A0B33642963FE9100D2766D /* BoxOfficeListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B33632963FE9100D2766D /* BoxOfficeListContentView.swift */; };
+		3A4A73472962A46000C78334 /* BoxOfficeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A73462962A46000C78334 /* BoxOfficeListViewController.swift */; };
+		3A4A73492962B44A00C78334 /* BoxOfficeListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A73482962B44A00C78334 /* BoxOfficeListCellViewModel.swift */; };
+		3A4A734B2962BDD000C78334 /* BoxOfficeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A734A2962BDD000C78334 /* BoxOfficeListCell.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EC28F9603900197BCC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* ViewController.swift */; };
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
@@ -14,6 +19,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A0B33612963FE7600D2766D /* BoxOfficeListContentConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListContentConfiguration.swift; sourceTree = "<group>"; };
+		3A0B33632963FE9100D2766D /* BoxOfficeListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListContentView.swift; sourceTree = "<group>"; };
+		3A4A73462962A46000C78334 /* BoxOfficeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListViewController.swift; sourceTree = "<group>"; };
+		3A4A73482962B44A00C78334 /* BoxOfficeListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListCellViewModel.swift; sourceTree = "<group>"; };
+		3A4A734A2962BDD000C78334 /* BoxOfficeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListCell.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19EB28F9603900197BCC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -33,6 +43,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A0B33652963FEED00D2766D /* BoxOfficeList */ = {
+			isa = PBXGroup;
+			children = (
+				3A4A73462962A46000C78334 /* BoxOfficeListViewController.swift */,
+				3A4A73482962B44A00C78334 /* BoxOfficeListCellViewModel.swift */,
+				3A4A734A2962BDD000C78334 /* BoxOfficeListCell.swift */,
+				3A0B33612963FE7600D2766D /* BoxOfficeListContentConfiguration.swift */,
+				3A0B33632963FE9100D2766D /* BoxOfficeListContentView.swift */,
+			);
+			path = BoxOfficeList;
+			sourceTree = "<group>";
+		};
 		635A19DB28F9603900197BCC = {
 			isa = PBXGroup;
 			children = (
@@ -52,6 +74,7 @@
 		635A19E628F9603900197BCC /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
+				3A0B33652963FEED00D2766D /* BoxOfficeList */,
 				635A19E728F9603900197BCC /* AppDelegate.swift */,
 				635A19EB28F9603900197BCC /* ViewController.swift */,
 				635A19F028F9603A00197BCC /* Assets.xcassets */,
@@ -131,7 +154,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A0B33642963FE9100D2766D /* BoxOfficeListContentView.swift in Sources */,
+				3A0B33622963FE7600D2766D /* BoxOfficeListContentConfiguration.swift in Sources */,
+				3A4A73492962B44A00C78334 /* BoxOfficeListCellViewModel.swift in Sources */,
 				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
+				3A4A73472962A46000C78334 /* BoxOfficeListViewController.swift in Sources */,
+				3A4A734B2962BDD000C78334 /* BoxOfficeListCell.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
