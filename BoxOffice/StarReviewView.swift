@@ -28,6 +28,8 @@ final class StarReviewView: UIView {
     }
 
     func setUpContents(grade: Double, maxGrade: Double, color: UIColor) {
+        starStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
         let starColor = color
         let filledStarCount = Int(maxGrade * grade / maxGrade)
         let shouldAddHalfStar = (maxGrade * grade / maxGrade) - Double(filledStarCount) > 0
