@@ -142,7 +142,7 @@ final class MovieDetailViewController: UIViewController {
             case MovieDetailSection.upper.rawValue:
                 return MovieDetailSection.upper.section
             case MovieDetailSection.bottom.rawValue:
-                return MovieDetailSection.upper.section
+                return MovieDetailSection.bottom.section
             default:
                 return MovieDetailSection.upper.section
             }
