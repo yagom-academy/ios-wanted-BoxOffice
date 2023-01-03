@@ -25,48 +25,6 @@ class BoxOfficeListViewController: UIViewController {
         return segmentedControl
     }()
     private let stackView = UIStackView()
-    private let testDatasForDay: [BoxOfficeListCellViewModel] = [
-        BoxOfficeListCellViewModel(movieName: "Avatar: The Way of Water",
-                                   lank: 1,
-                                   openDate: "2022-12-14",
-                                   audienceCount: 1,
-                                   increaseOrDecreaseInRank: 1,
-                                   isNewEntryToRank: true),
-        BoxOfficeListCellViewModel(movieName: "title2",
-                                   lank: 2,
-                                   openDate: "",
-                                   audienceCount: 12,
-                                   increaseOrDecreaseInRank: 0,
-                                   isNewEntryToRank: false)
-    ]
-    private let testDatasForWeek: [BoxOfficeListCellViewModel] = [
-        BoxOfficeListCellViewModel(movieName: "Avatar: The Way of Water",
-                                   lank: 1,
-                                   openDate: "2022-12-14",
-                                   audienceCount: 2,
-                                   increaseOrDecreaseInRank: 1,
-                                   isNewEntryToRank: true),
-        BoxOfficeListCellViewModel(movieName: "title2",
-                                   lank: 2,
-                                   openDate: "",
-                                   audienceCount: 12,
-                                   increaseOrDecreaseInRank: 0,
-                                   isNewEntryToRank: false)
-    ]
-    private let testDatasForWeekend: [BoxOfficeListCellViewModel] = [
-        BoxOfficeListCellViewModel(movieName: "Avatar: The Way of Water",
-                                   lank: 1,
-                                   openDate: "2022-12-14",
-                                   audienceCount: 3,
-                                   increaseOrDecreaseInRank: 1,
-                                   isNewEntryToRank: true),
-        BoxOfficeListCellViewModel(movieName: "title2",
-                                   lank: 2,
-                                   openDate: "",
-                                   audienceCount: 12,
-                                   increaseOrDecreaseInRank: -2,
-                                   isNewEntryToRank: false)
-    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,5 +99,56 @@ class BoxOfficeListViewController: UIViewController {
 extension BoxOfficeListViewController {
     private enum Section: CaseIterable {
         case main
+    }
+}
+
+extension BoxOfficeListViewController {
+    private var testDatasForDay: [BoxOfficeListCellViewModel] {
+        return [
+            BoxOfficeListCellViewModel(movieName: "Avatar: The Way of Water",
+                                       lank: 1,
+                                       openDate: "2022-12-14",
+                                       audienceCount: 1,
+                                       increaseOrDecreaseInRank: 1,
+                                       isNewEntryToRank: true),
+            BoxOfficeListCellViewModel(movieName: "title2",
+                                       lank: 2,
+                                       openDate: "",
+                                       audienceCount: 12,
+                                       increaseOrDecreaseInRank: 0,
+                                       isNewEntryToRank: false)
+        ]
+    }
+    private var testDatasForWeek: [BoxOfficeListCellViewModel] {
+        return [
+            BoxOfficeListCellViewModel(movieName: "Avatar: The Way of Water",
+                                       lank: 1,
+                                       openDate: "2022-12-14",
+                                       audienceCount: 2,
+                                       increaseOrDecreaseInRank: 1,
+                                       isNewEntryToRank: true),
+            BoxOfficeListCellViewModel(movieName: "title2",
+                                       lank: 2,
+                                       openDate: "",
+                                       audienceCount: 12,
+                                       increaseOrDecreaseInRank: 0,
+                                       isNewEntryToRank: false)
+        ]
+    }
+    private var testDatasForWeekend: [BoxOfficeListCellViewModel] {
+        return [
+            BoxOfficeListCellViewModel(movieName: "Avatar: The Way of Water",
+                                       lank: 1,
+                                       openDate: "2022-12-14",
+                                       audienceCount: 3,
+                                       increaseOrDecreaseInRank: 1,
+                                       isNewEntryToRank: true),
+            BoxOfficeListCellViewModel(movieName: "title2",
+                                       lank: 2,
+                                       openDate: "",
+                                       audienceCount: 12,
+                                       increaseOrDecreaseInRank: -2,
+                                       isNewEntryToRank: false)
+        ]
     }
 }
