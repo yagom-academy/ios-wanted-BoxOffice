@@ -13,10 +13,11 @@ import Combine
 protocol FirebaseManagerable {
     func upload(data: FireStoreDatable, errorHandler: @escaping (Error) -> Void)
     func read(collection: String, completion: @escaping (QuerySnapshot?, Error?) -> Void)
+    func delete(data: FireStoreDatable, errorHandler: @escaping (Error) -> Void)
 }
 
 enum FireStoreError: Error {
-    case uploadError, readError
+    case uploadError, readError, deleteError
 }
 
 final class FirebaseManager: FirebaseManagerable {
@@ -42,6 +43,14 @@ final class FirebaseManager: FirebaseManagerable {
                 completion(querySnapshot, nil)
             } else {
                 completion(nil, error)
+            }
+        }
+    }
+    
+    func delete(data: FireStoreDatable, errorHandler: @escaping (Error) -> Void) {
+        db.collection(data.collection).document(data.document).delete() { error in
+            if error != nil {
+                errorHandler(FireStoreError.deleteError)
             }
         }
     }

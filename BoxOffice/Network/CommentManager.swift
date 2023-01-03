@@ -13,6 +13,7 @@ import Combine
 protocol CommentManagerable {
     func uploadComment(comment: Comment, errorHandler: @escaping (Error) -> Void)
     func getComments(movieCd: String, completion: @escaping ([Comment]?, Error?) -> Void)
+    func deleteComment(comment: Comment, errorHandler: @escaping (Error) -> Void)
 }
 
 final class CommentManager: CommentManagerable {
@@ -51,6 +52,10 @@ final class CommentManager: CommentManagerable {
     
     func uploadComment(comment: Comment, errorHandler: @escaping (Error) -> Void) {
         firebaseManager.upload(data: comment, errorHandler: errorHandler)
+    }
+    
+    func deleteComment(comment: Comment, errorHandler: @escaping (Error) -> Void) {
+        firebaseManager.delete(data: comment, errorHandler: errorHandler)
     }
 }
 
