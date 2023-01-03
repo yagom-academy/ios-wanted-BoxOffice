@@ -18,8 +18,8 @@ class BoxOfficeListViewController: UIViewController {
 
     private let periodSegmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
-        ["일별", "주간", "주말"].enumerated().forEach { index, mode in
-            segmentedControl.insertSegment(withTitle: mode, at: index, animated: false)
+        Period.allCases.enumerated().forEach { index, mode in
+            segmentedControl.insertSegment(withTitle: nil, at: index, animated: false)
         }
         segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
@@ -41,7 +41,7 @@ class BoxOfficeListViewController: UIViewController {
     }
 
     private func setupSegmentControll() {
-        let segment1 = UIAction(title: "일별") { [weak self] _ in
+        let segment1 = UIAction(title: Period.day.title) { [weak self] _ in
             guard let self = self else { return }
             var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeListCellViewModel>()
             snapshot.appendSections([.main])
@@ -50,7 +50,7 @@ class BoxOfficeListViewController: UIViewController {
         }
         periodSegmentedControl.setAction(segment1, forSegmentAt: 0)
 
-        let segment2 = UIAction(title: "주간") { [weak self] _ in
+        let segment2 = UIAction(title: Period.week.title) { [weak self] _ in
             guard let self = self else { return }
             var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeListCellViewModel>()
             snapshot.appendSections([.main])
@@ -59,7 +59,7 @@ class BoxOfficeListViewController: UIViewController {
         }
         periodSegmentedControl.setAction(segment2, forSegmentAt: 1)
 
-        let segment3 = UIAction(title: "주말") { [weak self] _ in
+        let segment3 = UIAction(title: Period.weekEnd.title) { [weak self] _ in
             guard let self = self else { return }
             var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeListCellViewModel>()
             snapshot.appendSections([.main])
@@ -99,6 +99,23 @@ class BoxOfficeListViewController: UIViewController {
 extension BoxOfficeListViewController {
     private enum Section: CaseIterable {
         case main
+    }
+
+    private enum Period: CaseIterable {
+        case day
+        case week
+        case weekEnd
+
+        var title: String {
+            switch self {
+            case .day:
+                return "일"
+            case .week:
+                return "주"
+            case .weekEnd:
+                return "주말"
+            }
+        }
     }
 }
 
