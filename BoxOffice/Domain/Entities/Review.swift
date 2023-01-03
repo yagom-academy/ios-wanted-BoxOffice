@@ -12,5 +12,5 @@ struct Review {
     let password: String
     let rating: Double
     let content: String
-    let photo: UIImage?
+    let hasImage: Bool
 }

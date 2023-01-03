@@ -64,11 +64,12 @@ extension ReviewFirebaseUseCase {
         storageManager.fetch(with: password) { image in
             photo = image
         }
+              let hasPhoto = document["hasPhoto"] as? Bool else { return nil }
         
         return Review(nickName: nickName,
                       password: password,
                       rating: rating,
                       content: content,
-                      photo: photo)
+                      hasImage: hasPhoto)
     }
 }
