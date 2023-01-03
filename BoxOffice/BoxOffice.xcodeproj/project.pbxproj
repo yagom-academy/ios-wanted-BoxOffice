@@ -7,27 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
-		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
-		635A19EC28F9603900197BCC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* ViewController.swift */; };
-		635A19EF28F9603900197BCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19ED28F9603900197BCC /* Main.storyboard */; };
-		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
-		635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F228F9603A00197BCC /* LaunchScreen.storyboard */; };
+		A36F38EB2963C294009D15E6 /* BoxOfficeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36F38EA2963C294009D15E6 /* BoxOfficeApp.swift */; };
+		A36F38ED2963C294009D15E6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36F38EC2963C294009D15E6 /* ContentView.swift */; };
+		A36F38EF2963C295009D15E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A36F38EE2963C295009D15E6 /* Assets.xcassets */; };
+		A36F38F22963C295009D15E6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A36F38F12963C295009D15E6 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		635A19EB28F9603900197BCC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		635A19EE28F9603900197BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		635A19F028F9603A00197BCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		635A19F328F9603A00197BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		635A19F528F9603A00197BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A36F38E72963C294009D15E6 /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A36F38EA2963C294009D15E6 /* BoxOfficeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeApp.swift; sourceTree = "<group>"; };
+		A36F38EC2963C294009D15E6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A36F38EE2963C295009D15E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A36F38F12963C295009D15E6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		635A19E128F9603900197BCC /* Frameworks */ = {
+		A36F38E42963C294009D15E6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,46 +32,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		635A19DB28F9603900197BCC = {
+		A36F38DE2963C294009D15E6 = {
 			isa = PBXGroup;
 			children = (
-				635A19E628F9603900197BCC /* BoxOffice */,
-				635A19E528F9603900197BCC /* Products */,
+				A36F38E92963C294009D15E6 /* BoxOffice */,
+				A36F38E82963C294009D15E6 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		635A19E528F9603900197BCC /* Products */ = {
+		A36F38E82963C294009D15E6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				635A19E428F9603900197BCC /* BoxOffice.app */,
+				A36F38E72963C294009D15E6 /* BoxOffice.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		635A19E628F9603900197BCC /* BoxOffice */ = {
+		A36F38E92963C294009D15E6 /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
-				635A19E728F9603900197BCC /* AppDelegate.swift */,
-				635A19E928F9603900197BCC /* SceneDelegate.swift */,
-				635A19EB28F9603900197BCC /* ViewController.swift */,
-				635A19ED28F9603900197BCC /* Main.storyboard */,
-				635A19F028F9603A00197BCC /* Assets.xcassets */,
-				635A19F228F9603A00197BCC /* LaunchScreen.storyboard */,
-				635A19F528F9603A00197BCC /* Info.plist */,
+				A36F38EA2963C294009D15E6 /* BoxOfficeApp.swift */,
+				A36F38EC2963C294009D15E6 /* ContentView.swift */,
+				A36F38EE2963C295009D15E6 /* Assets.xcassets */,
+				A36F38F02963C295009D15E6 /* Preview Content */,
 			);
 			path = BoxOffice;
+			sourceTree = "<group>";
+		};
+		A36F38F02963C295009D15E6 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A36F38F12963C295009D15E6 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		635A19E328F9603900197BCC /* BoxOffice */ = {
+		A36F38E62963C294009D15E6 /* BoxOffice */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 635A19F828F9603A00197BCC /* Build configuration list for PBXNativeTarget "BoxOffice" */;
+			buildConfigurationList = A36F38F52963C295009D15E6 /* Build configuration list for PBXNativeTarget "BoxOffice" */;
 			buildPhases = (
-				635A19E028F9603900197BCC /* Sources */,
-				635A19E128F9603900197BCC /* Frameworks */,
-				635A19E228F9603900197BCC /* Resources */,
+				A36F38E32963C294009D15E6 /* Sources */,
+				A36F38E42963C294009D15E6 /* Frameworks */,
+				A36F38E52963C294009D15E6 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -84,25 +84,25 @@
 			);
 			name = BoxOffice;
 			productName = BoxOffice;
-			productReference = 635A19E428F9603900197BCC /* BoxOffice.app */;
+			productReference = A36F38E72963C294009D15E6 /* BoxOffice.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		635A19DC28F9603900197BCC /* Project object */ = {
+		A36F38DF2963C294009D15E6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1400;
-				LastUpgradeCheck = 1400;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
-					635A19E328F9603900197BCC = {
-						CreatedOnToolsVersion = 14.0.1;
+					A36F38E62963C294009D15E6 = {
+						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
-			buildConfigurationList = 635A19DF28F9603900197BCC /* Build configuration list for PBXProject "BoxOffice" */;
+			buildConfigurationList = A36F38E22963C294009D15E6 /* Build configuration list for PBXProject "BoxOffice" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -110,63 +110,42 @@
 				en,
 				Base,
 			);
-			mainGroup = 635A19DB28F9603900197BCC;
-			productRefGroup = 635A19E528F9603900197BCC /* Products */;
+			mainGroup = A36F38DE2963C294009D15E6;
+			productRefGroup = A36F38E82963C294009D15E6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				635A19E328F9603900197BCC /* BoxOffice */,
+				A36F38E62963C294009D15E6 /* BoxOffice */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		635A19E228F9603900197BCC /* Resources */ = {
+		A36F38E52963C294009D15E6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */,
-				635A19F128F9603A00197BCC /* Assets.xcassets in Resources */,
-				635A19EF28F9603900197BCC /* Main.storyboard in Resources */,
+				A36F38F22963C295009D15E6 /* Preview Assets.xcassets in Resources */,
+				A36F38EF2963C295009D15E6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		635A19E028F9603900197BCC /* Sources */ = {
+		A36F38E32963C294009D15E6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
-				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
-				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
+				A36F38ED2963C294009D15E6 /* ContentView.swift in Sources */,
+				A36F38EB2963C294009D15E6 /* BoxOfficeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		635A19ED28F9603900197BCC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				635A19EE28F9603900197BCC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		635A19F228F9603A00197BCC /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				635A19F328F9603A00197BCC /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		635A19F628F9603A00197BCC /* Debug */ = {
+		A36F38F32963C295009D15E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -216,7 +195,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -226,7 +205,7 @@
 			};
 			name = Debug;
 		};
-		635A19F728F9603A00197BCC /* Release */ = {
+		A36F38F42963C295009D15E6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -270,7 +249,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -280,18 +259,19 @@
 			};
 			name = Release;
 		};
-		635A19F928F9603A00197BCC /* Debug */ = {
+		A36F38F62963C295009D15E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BoxOffice/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BoxOffice/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -299,7 +279,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.BoxOffice;
+				PRODUCT_BUNDLE_IDENTIFIER = BradHeo.BoxOffice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -307,18 +287,19 @@
 			};
 			name = Debug;
 		};
-		635A19FA28F9603A00197BCC /* Release */ = {
+		A36F38F72963C295009D15E6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BoxOffice/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BoxOffice/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -326,7 +307,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.BoxOffice;
+				PRODUCT_BUNDLE_IDENTIFIER = BradHeo.BoxOffice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -337,25 +318,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		635A19DF28F9603900197BCC /* Build configuration list for PBXProject "BoxOffice" */ = {
+		A36F38E22963C294009D15E6 /* Build configuration list for PBXProject "BoxOffice" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				635A19F628F9603A00197BCC /* Debug */,
-				635A19F728F9603A00197BCC /* Release */,
+				A36F38F32963C295009D15E6 /* Debug */,
+				A36F38F42963C295009D15E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		635A19F828F9603A00197BCC /* Build configuration list for PBXNativeTarget "BoxOffice" */ = {
+		A36F38F52963C295009D15E6 /* Build configuration list for PBXNativeTarget "BoxOffice" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				635A19F928F9603A00197BCC /* Debug */,
-				635A19FA28F9603A00197BCC /* Release */,
+				A36F38F62963C295009D15E6 /* Debug */,
+				A36F38F72963C295009D15E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 635A19DC28F9603900197BCC /* Project object */;
+	rootObject = A36F38DF2963C294009D15E6 /* Project object */;
 }
