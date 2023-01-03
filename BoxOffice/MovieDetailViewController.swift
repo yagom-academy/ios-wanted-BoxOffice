@@ -88,7 +88,7 @@ final class MovieDetailViewController: UIViewController {
             movieDetailCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             movieDetailCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             movieDetailCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            movieDetailCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            movieDetailCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 
