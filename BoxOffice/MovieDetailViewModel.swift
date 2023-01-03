@@ -21,6 +21,7 @@ final class MovieDetailViewModel {
 
     // MARK: - Actions
     var applyDataSource: (() -> Void)?
+    var scrollToUpper: (() -> Void)?
 
     // MARK: - Private properties
     private let movieCode: String
@@ -40,6 +41,7 @@ extension MovieDetailViewModel {
     func tabBarModeChanged(mode: TabBarMode) {
         tabBarMode = mode
         applyDataSource?()
+        scrollToUpper?()
     }
 
     func deleteReviewButtonTapped(review: MovieReview) {

@@ -41,6 +41,12 @@ final class MovieDetailViewController: UIViewController {
 
     private func bind() {
         viewModel.applyDataSource = { [weak self] in self?.applyDataSource() }
+        viewModel.scrollToUpper = { [weak self] in
+            let upperMovieInfoIndexPath = IndexPath(row: 0, section: 0)
+            if self?.movieDetailCollectionView.cellForItem(at: upperMovieInfoIndexPath) != nil {
+                self?.movieDetailCollectionView.scrollToItem(at: upperMovieInfoIndexPath, at: .top, animated: false)
+            }
+        }
     }
 
     private func setUpMovieDetailCollectionView() {
@@ -221,7 +227,7 @@ extension MovieDetailViewController {
 
 extension MovieDetailViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let isShowingUpperInfoview = movieDetailCollectionView.indexPathsForVisibleItems.contains(IndexPath(row: 0, section: 0))
+        let isShowingUpperInfoview = scrollView.contentOffset.y <= 0
         movieDetailCollectionView.contentInsetAdjustmentBehavior = isShowingUpperInfoview ? .never : .automatic
     }
 }
