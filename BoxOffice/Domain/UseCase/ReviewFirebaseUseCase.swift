@@ -18,7 +18,7 @@ final class ReviewFirebaseUseCase {
             "password": reivew.password,
             "rating": String(reivew.rating),
             "content": reivew.content,
-            "hasPhoto": reivew.hasImage
+            "hasImage": reivew.hasImage
         ]
 
         firestoreManager.save(reviewData, with: reivew.password, completion: completion)
@@ -52,12 +52,12 @@ extension ReviewFirebaseUseCase {
               let ratingValue = document["rating"] as? String,
               let rating = Double(ratingValue),
               let content = document["content"] as? String,
-              let hasPhoto = document["hasPhoto"] as? Bool else { return nil }
+              let hasImage = document["hasImage"] as? Bool else { return nil }
         
         return Review(nickName: nickName,
                       password: password,
                       rating: rating,
                       content: content,
-                      hasImage: hasPhoto)
+                      hasImage: hasImage)
     }
 }
