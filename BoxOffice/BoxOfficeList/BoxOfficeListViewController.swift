@@ -9,7 +9,8 @@ import UIKit
 
 class BoxOfficeListViewController: UIViewController {
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, BoxOfficeListCellViewModel>
-    
+    private typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeListCellViewModel>
+
     private var dataSource: DataSource? = nil
     private let listView: UICollectionView = {
         let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
@@ -28,7 +29,7 @@ class BoxOfficeListViewController: UIViewController {
         setupListView()
         layout()
         // initial data
-        var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeListCellViewModel>()
+        var snapshot = DataSourceSnapshot()
         snapshot.appendSections([.main])
         snapshot.appendItems(testDatasForDay)
         dataSource?.apply(snapshot, animatingDifferences: false)
@@ -37,7 +38,7 @@ class BoxOfficeListViewController: UIViewController {
     private func setupSegmentControll() {
         let segment1 = UIAction(title: Period.day.title) { [weak self] _ in
             guard let self = self else { return }
-            var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeListCellViewModel>()
+            var snapshot = DataSourceSnapshot()
             snapshot.appendSections([.main])
             snapshot.appendItems(self.testDatasForDay)
             self.dataSource?.apply(snapshot, animatingDifferences: false)
@@ -46,7 +47,7 @@ class BoxOfficeListViewController: UIViewController {
 
         let segment2 = UIAction(title: Period.week.title) { [weak self] _ in
             guard let self = self else { return }
-            var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeListCellViewModel>()
+            var snapshot = DataSourceSnapshot()
             snapshot.appendSections([.main])
             snapshot.appendItems(self.testDatasForWeek)
             self.dataSource?.apply(snapshot, animatingDifferences: false)
@@ -55,7 +56,7 @@ class BoxOfficeListViewController: UIViewController {
 
         let segment3 = UIAction(title: Period.weekEnd.title) { [weak self] _ in
             guard let self = self else { return }
-            var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeListCellViewModel>()
+            var snapshot = DataSourceSnapshot()
             snapshot.appendSections([.main])
             snapshot.appendItems(self.testDatasForWeekend)
             self.dataSource?.apply(snapshot, animatingDifferences: false)
