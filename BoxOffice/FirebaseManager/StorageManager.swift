@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseStorage
 
-class StorageManager {
+final class StorageManager {
     static let shared = StorageManager()
     private let storageReference = Storage.storage().reference()
     private let deviceID: String
