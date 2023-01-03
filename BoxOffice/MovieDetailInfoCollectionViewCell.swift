@@ -10,9 +10,15 @@ import UIKit
 final class MovieDetailInfoCollectionViewCell: UICollectionViewCell {
 
     static let reuseIdentifier = "movieDetailInfoCollectionViewCell"
+    private let openDateLabel = MovieInfoView()
+    private let genreLabel = MovieInfoView()
+    private let playTimeLabel = MovieInfoView()
+    private let directorLabel = MovieInfoView()
+    private let actorLabel = MovieInfoView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        layout()
     }
 
     required init?(coder: NSCoder) {
@@ -20,6 +26,37 @@ final class MovieDetailInfoCollectionViewCell: UICollectionViewCell {
     }
 
     func setUpContents(movieDetail: MovieDetail) {
+        openDateLabel.setUpContents(name: "개봉", description: movieDetail.openingDay.toString())
+        genreLabel.setUpContents(name: "장르", description: movieDetail.genre)
+        playTimeLabel.setUpContents(name: "상영시간", description: "\(Int(movieDetail.playTime))분")
+        directorLabel.setUpContents(name: "감독", description: movieDetail.directorsName)
+        actorLabel.setUpContents(name: "출연", description: movieDetail.actorsName)
+    }
 
+    private func layout() {
+        [openDateLabel, genreLabel, playTimeLabel, directorLabel, actorLabel].forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                $0.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10)
+            ])
+        }
+
+        NSLayoutConstraint.activate([
+            openDateLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            genreLabel.topAnchor.constraint(equalTo: openDateLabel.bottomAnchor, constant: 10),
+            playTimeLabel.topAnchor.constraint(equalTo: genreLabel.bottomAnchor, constant: 10),
+            directorLabel.topAnchor.constraint(equalTo: playTimeLabel.bottomAnchor, constant: 10),
+            actorLabel.topAnchor.constraint(equalTo: directorLabel.bottomAnchor, constant: 10),
+            actorLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+        ])
+    }
+}
+
+fileprivate extension Date {
+    func toString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        return dateFormatter.string(from: self)
     }
 }
