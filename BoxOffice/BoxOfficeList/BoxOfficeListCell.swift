@@ -16,7 +16,7 @@ class BoxOfficeListCell: UICollectionViewListCell {
             lank: viewModel?.lank,
             openDate: viewModel?.openDate,
             audienceCount: viewModel?.audienceCount,
-            increaseOrDecreaseInRank: viewModel?.increaseOrDecreaseInRank,
+            increaseOrDecreaseInRank: viewModel?.rankingChange,
             isNewEntryToRank: viewModel?.isNewEntryToRank
         ).updated(for: state)
         contentConfiguration = config

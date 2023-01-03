@@ -109,13 +109,13 @@ extension BoxOfficeListViewController {
                                        lank: 1,
                                        openDate: "2022-12-14",
                                        audienceCount: 1,
-                                       increaseOrDecreaseInRank: 1,
+                                       rankingChange: 1,
                                        isNewEntryToRank: true),
             BoxOfficeListCellViewModel(movieName: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                                        lank: 2,
                                        openDate: "",
                                        audienceCount: 12,
-                                       increaseOrDecreaseInRank: 0,
+                                       rankingChange: 0,
                                        isNewEntryToRank: false)
         ]
     }
@@ -125,13 +125,13 @@ extension BoxOfficeListViewController {
                                        lank: 1,
                                        openDate: "2022-12-14",
                                        audienceCount: 2,
-                                       increaseOrDecreaseInRank: 1,
+                                       rankingChange: 1,
                                        isNewEntryToRank: true),
             BoxOfficeListCellViewModel(movieName: "title2",
                                        lank: 3,
                                        openDate: "",
                                        audienceCount: 12,
-                                       increaseOrDecreaseInRank: -3,
+                                       rankingChange: -3,
                                        isNewEntryToRank: false)
         ]
     }
@@ -141,13 +141,13 @@ extension BoxOfficeListViewController {
                                        lank: 1,
                                        openDate: "2022-12-14",
                                        audienceCount: 3,
-                                       increaseOrDecreaseInRank: 1,
+                                       rankingChange: 1,
                                        isNewEntryToRank: true),
             BoxOfficeListCellViewModel(movieName: "title2",
                                        lank: 2,
                                        openDate: "",
                                        audienceCount: 12,
-                                       increaseOrDecreaseInRank: -2,
+                                       rankingChange: -2,
                                        isNewEntryToRank: false)
         ]
     }

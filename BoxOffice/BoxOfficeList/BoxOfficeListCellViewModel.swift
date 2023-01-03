@@ -13,7 +13,7 @@ struct BoxOfficeListCellViewModel {
     var lank: Int
     var openDate: Date
     var audienceCount: Int
-    var increaseOrDecreaseInRank: Int
+    var rankingChange: Int
     var isNewEntryToRank: Bool
 }
 
@@ -29,7 +29,7 @@ extension BoxOfficeListCellViewModel: Hashable {
 }
 
 extension BoxOfficeListCellViewModel {
-    init(movieName: String, lank: Int, openDate: String, audienceCount: Int, increaseOrDecreaseInRank: Int, isNewEntryToRank: Bool) {
+    init(movieName: String, lank: Int, openDate: String, audienceCount: Int, rankingChange: Int, isNewEntryToRank: Bool) {
         let dateFommater = ISO8601DateFormatter()
         dateFommater.timeZone = TimeZone(identifier: "Asia/Seoul")
         dateFommater.formatOptions = .withFullDate
@@ -39,7 +39,7 @@ extension BoxOfficeListCellViewModel {
         self.lank = lank
         self.openDate = dateFromString  ?? Date(timeIntervalSince1970: .nan)
         self.audienceCount = audienceCount
-        self.increaseOrDecreaseInRank = increaseOrDecreaseInRank
+        self.rankingChange = rankingChange
         self.isNewEntryToRank = isNewEntryToRank
     }
 }
