@@ -13,7 +13,7 @@ final class MovieDetailTabBarHeaderView: UICollectionReusableView {
     private let movieInfoButton: UIButton = {
         let button = UIButton()
         button.setTitle("영화정보", for: .normal)
-        button.setTitleColor(.label, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -21,21 +21,21 @@ final class MovieDetailTabBarHeaderView: UICollectionReusableView {
     private let reviewButton: UIButton = {
         let button = UIButton()
         button.setTitle("실관람평", for: .normal)
-        button.setTitleColor(.label, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
     private let movieInfoSelectLine: UIView = {
         let line = UIView(frame: .zero)
-        line.backgroundColor = .black
+        line.backgroundColor = .white
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
 
     private let reviewSelectLine: UIView = {
         let line = UIView(frame: .zero)
-        line.backgroundColor = .black
+        line.backgroundColor = .white
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
@@ -70,7 +70,7 @@ final class MovieDetailTabBarHeaderView: UICollectionReusableView {
     }
 
     func setUpContents() {
-        backgroundColor = .white
+        backgroundColor = ColorAsset.detailBackgroundColor
         layout()
         addButtonTargets()
         setTabForMovieInfo()

@@ -14,6 +14,7 @@ final class MovieDetailViewController: UIViewController {
     private lazy var movieDetailCollectionView: UICollectionView = {
         let layout = movieDetailCollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = ColorAsset.detailBackgroundColor
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -22,7 +23,8 @@ final class MovieDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorAsset.detailBackgroundColor
+        setUpNavigationBar()
         bind()
         setUpMovieDetailCollectionView()
         layout()
@@ -37,6 +39,18 @@ final class MovieDetailViewController: UIViewController {
     required init?(coder: NSCoder) {
         self.viewModel = MovieDetailViewModel(movieCode: "")
         super.init(coder: coder)
+    }
+
+    private func setUpNavigationBar() {
+        let button = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"),
+                                     style: .plain, target: self, action: #selector(shareButtonTapped(_:)))
+        button.tintColor = .white
+        navigationItem.setRightBarButton(button, animated: false)
+
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundColor = ColorAsset.detailBackgroundColor
+        navigationController?.navigationBar.standardAppearance = appearance
     }
 
     private func bind() {
@@ -168,6 +182,11 @@ final class MovieDetailViewController: UIViewController {
         }, configuration: configuration)
 
         return compositionalLayout
+    }
+
+    @objc
+    private func shareButtonTapped(_ sender: UIBarButtonItem) {
+        viewModel.shareButtonTapped()
     }
 }
 

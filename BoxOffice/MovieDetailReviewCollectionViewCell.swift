@@ -22,6 +22,7 @@ final class MovieDetailReviewCollectionViewCell: UICollectionViewCell {
     private let userNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .white
         return label
     }()
 
@@ -30,6 +31,7 @@ final class MovieDetailReviewCollectionViewCell: UICollectionViewCell {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.textColor = .white
         return label
     }()
 

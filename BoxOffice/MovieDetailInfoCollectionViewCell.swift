@@ -18,6 +18,7 @@ final class MovieDetailInfoCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        contentView.backgroundColor = ColorAsset.detailBackgroundColor
         layout()
     }
 

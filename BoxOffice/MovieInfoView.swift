@@ -21,13 +21,14 @@ final class MovieInfoView: UIView {
         let label = UILabel()
         label.text = "내용"
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = .black
+        label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = ColorAsset.detailBackgroundColor
         layout()
     }
 

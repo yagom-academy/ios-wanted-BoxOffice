@@ -59,7 +59,7 @@ final class MovieDetailUpperCollectionViewCell: UICollectionViewCell {
 
     private let newlyRankedLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .heavy)
         label.textColor = .systemRed
         label.translatesAutoresizingMaskIntoConstraints = false
         label.transform = CGAffineTransform(rotationAngle: CGFloat.pi / -6)
