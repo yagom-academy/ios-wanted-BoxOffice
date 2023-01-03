@@ -7,6 +7,14 @@
 
 import Foundation
 
+struct MovieOverviewWeeklyContainerDTO: Decodable {
+    let movieOverviewWeeklyDTO: MovieOverviewWeeklyDTO
+    
+    enum CodingKeys: String, CodingKey {
+        case movieOverviewWeeklyDTO = "boxOfficeResult"
+    }
+}
+
 struct MovieOverviewWeeklyDTO: Decodable {
     let movieOverviewDTOs: [MovieOverviewDTO]
     
