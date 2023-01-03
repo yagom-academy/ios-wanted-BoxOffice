@@ -28,15 +28,35 @@ final class BoxOfficeListCoordinator: Coordinator {
 
 private extension BoxOfficeListCoordinator {
     
-    private func makeBoxOfficeListViewController() -> UIViewController {
+    func makeBoxOfficeListViewController() -> UIViewController {
         let viewController = BoxOfficeListViewController(
             viewModel: DefaultBoxOfficeListViewModel(),
             coordinator: self
         )
         return viewController
     }
+    
+    func makeMovieDetailViewController() -> UIViewController {
+        let viewController = UIViewController()
+        return viewController
+    }
+    
+    func makeCreateReviewViewController() -> UIViewController {
+        let viewController = UIViewController()
+        return viewController
+    }
 }
 
 extension BoxOfficeListCoordinator: BoxOfficeListCoordinatorInterface {
+    
+    func showMovieDetailView(movie: Movie) {
+        let viewController = makeMovieDetailViewController()
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func showMovieDetailView(movie: Movie) {
+        let viewController = makeCreateReviewViewController()
+        navigationController.pushViewController(viewController, animated: true)
+    }
     
 }
