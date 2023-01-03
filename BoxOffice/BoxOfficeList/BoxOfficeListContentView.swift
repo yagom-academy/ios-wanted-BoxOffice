@@ -118,17 +118,17 @@ class BoxOfficeListContentView: UIView, UIContentView {
     }
 
     private func layout() {
-        lankTitleStackView.addArrangedSubview(lankLabel)
-        lankTitleStackView.addArrangedSubview(rankingChangeLabel)
+        [lankLabel, rankingChangeLabel].forEach {
+            lankTitleStackView.addArrangedSubview($0)
+        }
 
         openDateStackView.insertArrangedSubview(openDateLabel, at: 0)
         audienceCountStackView.insertArrangedSubview(audienceCountLabel, at: 0)
         lankStackView.insertArrangedSubview(lankTitleStackView, at: 0)
 
-        lankAndAudienceCountStackView.addArrangedSubview(openDateStackView)
-        lankAndAudienceCountStackView.addArrangedSubview(audienceCountStackView)
-        lankAndAudienceCountStackView.addArrangedSubview(lankStackView)
-
+        [openDateStackView, audienceCountStackView, lankStackView].forEach {
+            lankAndAudienceCountStackView.addArrangedSubview($0)
+        }
         [movieNameLabel, lankAndAudienceCountStackView].forEach {
             rootStackView.addArrangedSubview($0)
         }
