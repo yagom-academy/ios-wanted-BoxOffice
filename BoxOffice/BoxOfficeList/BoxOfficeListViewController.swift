@@ -9,6 +9,7 @@ import UIKit
 
 class BoxOfficeListViewController: UIViewController {
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, BoxOfficeListCellViewModel>
+    
     private var dataSource: DataSource? = nil
     private let listView: UICollectionView = {
         let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
@@ -60,7 +61,7 @@ class BoxOfficeListViewController: UIViewController {
             self.dataSource?.apply(snapshot, animatingDifferences: false)
         }
         periodSegmentedControl.insertSegment(action: segment3, at: 2, animated: false)
-        
+
         periodSegmentedControl.selectedSegmentIndex = 0
     }
 
