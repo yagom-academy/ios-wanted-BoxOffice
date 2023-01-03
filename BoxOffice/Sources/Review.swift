@@ -7,9 +7,13 @@
 
 import Foundation
 
-struct Review: Codable {
+struct Review: Codable, FirebaseModel {
     let userImage: String
     let stars: Double
     let nickname: String
     let password: String
+}
+
+protocol FirebaseModel {
+    
 }
