@@ -11,17 +11,20 @@ final class MovieListRepository: MovieListRepositoryInterface {
     private let networkService = NetworkService.shared
     
     func fetchMovieList(page: Int, dayType: DayType, completion: @escaping (Result<[MovieOverview], Error>) -> Void) {
-        
-        var urlComponents = URLComponents(string: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice")
-        
         switch dayType {
         case .weekdays:
-            urlComponents?.path = "/searchDailyBoxOfficeList"
+            fetchDailyMovieList { result in
+                completion(result)
+            }
         case .weekends:
-            urlComponents?.path = "/searchWeeklyBoxOfficeList"
+            fetchWeeklyMovieList { result in
+                completion(result)
+            }
         default:
             break
         }
+    }
+    
     private func fetchDailyMovieList(completion: @escaping (Result<[MovieOverview], Error>) -> Void) { // 하루빼기
         let day: Double = 86400
         let yesterday = Date(timeIntervalSinceNow: -day)
