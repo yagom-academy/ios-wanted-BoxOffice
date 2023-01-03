@@ -71,8 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				72E59D8F2962885D000BBCE5 /* Source */,
-				05A8C34D2962B75E009E422C /* MovieDetailView.swift */,
-				05A8C34F2962F95B009E422C /* MembersCollectionViewCell.swift */,
 				72E59D8E29628819000BBCE5 /* Resource */,
 			);
 			path = BoxOffice;
@@ -93,8 +91,10 @@
 			children = (
 				635A19E928F9603900197BCC /* SceneDelegate.swift */,
 				635A19E728F9603900197BCC /* AppDelegate.swift */,
+				72E59D9B2962DA93000BBCE5 /* Model */,
 				72E59D9229628880000BBCE5 /* Networking */,
 				72E59D9029628866000BBCE5 /* Controller */,
+				72F4D49D2963BA5D00116530 /* View */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -115,7 +115,6 @@
 				72E59D93296292C7000BBCE5 /* APIRequest.swift */,
 				72E59D992962C366000BBCE5 /* APIComponents.swift */,
 				72E59D952962B072000BBCE5 /* EndPoint.swift */,
-				72E59D9B2962DA93000BBCE5 /* Model */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -126,6 +125,15 @@
 				72E59D9C2962DAB3000BBCE5 /* DailyBoxOffice.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		72F4D49D2963BA5D00116530 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				05A8C34D2962B75E009E422C /* MovieDetailView.swift */,
+				05A8C34F2962F95B009E422C /* MembersCollectionViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,7 +205,7 @@
 		635A19E028F9603900197BCC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
-			files = (	
+			files = (
 				72E59D9A2962C366000BBCE5 /* APIComponents.swift in Sources */,
 				72E59D982962B83F000BBCE5 /* NetworkManager.swift in Sources */,
 				05A8C34E2962B75E009E422C /* MovieDetailView.swift in Sources */,
