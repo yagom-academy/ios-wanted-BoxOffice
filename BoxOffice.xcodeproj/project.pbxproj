@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3A0B33622963FE7600D2766D /* BoxOfficeListContentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B33612963FE7600D2766D /* BoxOfficeListContentConfiguration.swift */; };
 		3A0B33642963FE9100D2766D /* BoxOfficeListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B33632963FE9100D2766D /* BoxOfficeListContentView.swift */; };
+		3A0B336B29640C2200D2766D /* BoxOfficeListRankingChangeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B336A29640C2200D2766D /* BoxOfficeListRankingChangeLabel.swift */; };
 		3A4A73472962A46000C78334 /* BoxOfficeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A73462962A46000C78334 /* BoxOfficeListViewController.swift */; };
 		3A4A73492962B44A00C78334 /* BoxOfficeListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A73482962B44A00C78334 /* BoxOfficeListCellViewModel.swift */; };
 		3A4A734B2962BDD000C78334 /* BoxOfficeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A734A2962BDD000C78334 /* BoxOfficeListCell.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		3A0B33612963FE7600D2766D /* BoxOfficeListContentConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListContentConfiguration.swift; sourceTree = "<group>"; };
 		3A0B33632963FE9100D2766D /* BoxOfficeListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListContentView.swift; sourceTree = "<group>"; };
+		3A0B336A29640C2200D2766D /* BoxOfficeListRankingChangeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListRankingChangeLabel.swift; sourceTree = "<group>"; };
 		3A4A73462962A46000C78334 /* BoxOfficeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListViewController.swift; sourceTree = "<group>"; };
 		3A4A73482962B44A00C78334 /* BoxOfficeListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListCellViewModel.swift; sourceTree = "<group>"; };
 		3A4A734A2962BDD000C78334 /* BoxOfficeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListCell.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 				3A4A734A2962BDD000C78334 /* BoxOfficeListCell.swift */,
 				3A0B33612963FE7600D2766D /* BoxOfficeListContentConfiguration.swift */,
 				3A0B33632963FE9100D2766D /* BoxOfficeListContentView.swift */,
+				3A0B336A29640C2200D2766D /* BoxOfficeListRankingChangeLabel.swift */,
 			);
 			path = BoxOfficeList;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A0B336B29640C2200D2766D /* BoxOfficeListRankingChangeLabel.swift in Sources */,
 				3A0B33642963FE9100D2766D /* BoxOfficeListContentView.swift in Sources */,
 				3A0B33622963FE7600D2766D /* BoxOfficeListContentConfiguration.swift in Sources */,
 				3A4A73492962B44A00C78334 /* BoxOfficeListCellViewModel.swift in Sources */,

@@ -24,13 +24,20 @@ class BoxOfficeListContentView: UIView, UIContentView {
     private let lankAndAudienceCountStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fillEqually
         return stackView
     }()
 
     private let lankStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.alignment = .center
+        return stackView
+    }()
+
+    private let lankNumberStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
         stackView.alignment = .center
         return stackView
     }()
@@ -76,7 +83,7 @@ class BoxOfficeListContentView: UIView, UIContentView {
     }()
     private let openDateLabel = UILabel()
     private let audienceCountLabel = UILabel()
-    private let increaseOrDecreaseInRankLabel = UILabel()
+    private let increaseOrDecreaseRankingLabel = BoxOfficeListRankingChangeLabel(rankingChange: 0)
     private let isNewEntryToRankLabel = UILabel()
 
     init(configuration: BoxOfficeListContentConfiguration) {
@@ -93,19 +100,22 @@ class BoxOfficeListContentView: UIView, UIContentView {
     private func layout() {
         let audienceCountCaption = UILabel()
         audienceCountCaption.text = "당일 관객수"
-        audienceCountCaption.font = .preferredFont(forTextStyle: .headline)
+        audienceCountCaption.font = .preferredFont(forTextStyle: .caption1)
+        audienceCountLabel.font = .preferredFont(forTextStyle: .headline)
         audienceCountStackView.addArrangedSubview(audienceCountLabel)
         audienceCountStackView.addArrangedSubview(audienceCountCaption)
+
+        lankNumberStackView.addArrangedSubview(lankLabel)
+        lankNumberStackView.addArrangedSubview(increaseOrDecreaseRankingLabel)
 
         let lankCaption = UILabel()
         lankCaption.text = "박스오피스"
         lankCaption.font = .preferredFont(forTextStyle: .caption1)
-        lankStackView.addArrangedSubview(lankLabel)
+        lankStackView.addArrangedSubview(lankNumberStackView)
         lankStackView.addArrangedSubview(lankCaption)
 
-        increaseOrDecreaseInRankLabel.font = .preferredFont(forTextStyle: .largeTitle)
+        increaseOrDecreaseRankingLabel.font = .preferredFont(forTextStyle: .subheadline)
         isNewEntryToRankLabel.font = .preferredFont(forTextStyle: .caption1)
-        rankChangeStackView.addArrangedSubview(increaseOrDecreaseInRankLabel)
         rankChangeStackView.addArrangedSubview(isNewEntryToRankLabel)
 
         lankAndAudienceCountStackView.addArrangedSubview(audienceCountStackView)
@@ -145,7 +155,7 @@ class BoxOfficeListContentView: UIView, UIContentView {
         movieNameLabel.text = configuration.movieName
         lankLabel.text = "\(configuration.lank ?? 0)위"
         audienceCountLabel.text = configuration.audienceCount?.description
-        increaseOrDecreaseInRankLabel.text = configuration.increaseOrDecreaseInRank?.description
+        increaseOrDecreaseRankingLabel.rankingChange = configuration.increaseOrDecreaseInRank ?? 0
         guard let isNewEntryToRank = configuration.isNewEntryToRank else { return }
         isNewEntryToRankLabel.text = isNewEntryToRank ? "New" : "Old"
     }

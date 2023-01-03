@@ -21,15 +21,15 @@ class BoxOfficeListViewController: UIViewController {
         ["일별", "주간", "주말"].enumerated().forEach { index, mode in
             segmentedControl.insertSegment(withTitle: mode, at: index, animated: false)
         }
-        segmentedControl.selectedSegmentIndex = 1
+        segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
     }()
     private let stackView = UIStackView()
-    private let testDatas: [BoxOfficeListCellViewModel] = [
+    private let testDatasForDay: [BoxOfficeListCellViewModel] = [
         BoxOfficeListCellViewModel(movieName: "Avatar: The Way of Water",
                                    lank: 1,
                                    openDate: "2022-12-14",
-                                   audienceCount: 123,
+                                   audienceCount: 1,
                                    increaseOrDecreaseInRank: 1,
                                    isNewEntryToRank: true),
         BoxOfficeListCellViewModel(movieName: "title2",
@@ -39,6 +39,34 @@ class BoxOfficeListViewController: UIViewController {
                                    increaseOrDecreaseInRank: 0,
                                    isNewEntryToRank: false)
     ]
+    private let testDatasForWeek: [BoxOfficeListCellViewModel] = [
+        BoxOfficeListCellViewModel(movieName: "Avatar: The Way of Water",
+                                   lank: 1,
+                                   openDate: "2022-12-14",
+                                   audienceCount: 2,
+                                   increaseOrDecreaseInRank: 1,
+                                   isNewEntryToRank: true),
+        BoxOfficeListCellViewModel(movieName: "title2",
+                                   lank: 2,
+                                   openDate: "",
+                                   audienceCount: 12,
+                                   increaseOrDecreaseInRank: 0,
+                                   isNewEntryToRank: false)
+    ]
+    private let testDatasForWeekend: [BoxOfficeListCellViewModel] = [
+        BoxOfficeListCellViewModel(movieName: "Avatar: The Way of Water",
+                                   lank: 1,
+                                   openDate: "2022-12-14",
+                                   audienceCount: 3,
+                                   increaseOrDecreaseInRank: 1,
+                                   isNewEntryToRank: true),
+        BoxOfficeListCellViewModel(movieName: "title2",
+                                   lank: 2,
+                                   openDate: "",
+                                   audienceCount: 12,
+                                   increaseOrDecreaseInRank: -2,
+                                   isNewEntryToRank: false)
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +74,41 @@ class BoxOfficeListViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setupListView()
         layout()
+        setupSegmentControll()
         // initial data
         var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeListCellViewModel>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(testDatas)
+        snapshot.appendItems(testDatasForDay)
         dataSource?.apply(snapshot, animatingDifferences: false)
+    }
+
+    private func setupSegmentControll() {
+        let segment1 = UIAction(title: "일별") { [weak self] _ in
+            guard let self = self else { return }
+            var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeListCellViewModel>()
+            snapshot.appendSections([.main])
+            snapshot.appendItems(self.testDatasForDay)
+            self.dataSource?.apply(snapshot, animatingDifferences: false)
+        }
+        periodSegmentedControl.setAction(segment1, forSegmentAt: 0)
+
+        let segment2 = UIAction(title: "주간") { [weak self] _ in
+            guard let self = self else { return }
+            var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeListCellViewModel>()
+            snapshot.appendSections([.main])
+            snapshot.appendItems(self.testDatasForWeek)
+            self.dataSource?.apply(snapshot, animatingDifferences: false)
+        }
+        periodSegmentedControl.setAction(segment2, forSegmentAt: 1)
+
+        let segment3 = UIAction(title: "주말") { [weak self] _ in
+            guard let self = self else { return }
+            var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeListCellViewModel>()
+            snapshot.appendSections([.main])
+            snapshot.appendItems(self.testDatasForWeekend)
+            self.dataSource?.apply(snapshot, animatingDifferences: false)
+        }
+        periodSegmentedControl.setAction(segment3, forSegmentAt: 2)
     }
 
     private func setupListView() {
