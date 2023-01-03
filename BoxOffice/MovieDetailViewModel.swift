@@ -48,7 +48,7 @@ extension MovieDetailViewModel {
     func deleteReviewButtonTapped(review: MovieReview) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
-            self?.deleteReviewButtonTapped(review: review)
+            self?.deleteMovieReview(review: review)
         })
         alert.addAction(UIAlertAction(title: "취소", style: .cancel))
 
