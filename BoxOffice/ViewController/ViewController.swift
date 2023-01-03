@@ -19,6 +19,16 @@ class ViewController: UIViewController {
                 print(failure.localizedDescription)
             }
         }
+        
+        print(getCurrentDate())
+    }
+    
+    private func getCurrentDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        let currentDate = formatter.string(from: Date())
+        
+        return currentDate
     }
 
 

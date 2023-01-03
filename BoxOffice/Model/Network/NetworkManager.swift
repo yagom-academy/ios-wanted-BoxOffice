@@ -9,15 +9,15 @@ import Foundation
 
 class NetworkManager: NetworkProtocol {
     func getFilmDetailData(completion: @escaping (Result<FilmDetails, Error>) -> Void) {
-        <#code#>
+        
     }
     
     func getBoxOfficeData(completion: @escaping (Result<DailyBoxOffice, Error>) -> Void) {
-        <#code#>
+        
     }
     
     func getPosterData(completion: @escaping (Result<FilmPoster, Error>) -> Void) {
-        <#code#>
+        
     }
 }
 
