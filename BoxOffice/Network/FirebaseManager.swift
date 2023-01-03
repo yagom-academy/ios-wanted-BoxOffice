@@ -11,8 +11,8 @@ import Combine
 
 
 protocol FirebaseManagerable {
-    func upload(data: FireStoreDatable) -> AnyPublisher<Bool, FireStoreError>
-    func read(collection: String) -> AnyPublisher<QuerySnapshot, FireStoreError>
+    func upload(data: FireStoreDatable, errorHandler: @escaping (Error) -> Void)
+    func read(collection: String, completion: @escaping (QuerySnapshot?, Error?) -> Void)
 }
 
 enum FireStoreError: Error {
@@ -28,27 +28,21 @@ final class FirebaseManager: FirebaseManagerable {
         db = Firestore.firestore()
     }
     
-    func upload(data: FireStoreDatable) -> AnyPublisher<Bool, FireStoreError> {
-        return Future<Bool, FireStoreError> { [weak self] promise in
-            self?.db.collection(data.collection).document(data.document).setData(data.toTupleData) { error in
-                if error != nil {
-                    promise(.failure(.uploadError))
-                } else {
-                    promise(.success(true))
-                }
+    func upload(data: FireStoreDatable, errorHandler: @escaping (Error) -> Void) {
+        db.collection(data.collection).document(data.document).setData(data.toTupleData) { error in
+            if let error = error {
+                errorHandler(error)
             }
-        }.eraseToAnyPublisher()
+        }
     }
     
-    func read(collection: String) -> AnyPublisher<QuerySnapshot, FireStoreError> {
-        return Future<QuerySnapshot, FireStoreError> { [weak self] promise in
-            self?.db.collection(collection).getDocuments() { (querySnapshot, error) in
-                if let querySnapshot = querySnapshot, error == nil {
-                    promise(.success(querySnapshot))
-                } else {
-                    promise(.failure(.readError))
-                }
+    func read(collection: String, completion: @escaping (QuerySnapshot?, Error?) -> Void) {
+        db.collection(collection).getDocuments() { (querySnapshot, error) in
+            if let querySnapshot = querySnapshot, error == nil {
+                completion(querySnapshot, nil)
+            } else {
+                completion(nil, error)
             }
-        }.eraseToAnyPublisher()
+        }
     }
 }

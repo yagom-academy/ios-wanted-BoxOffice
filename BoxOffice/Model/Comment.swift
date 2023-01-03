@@ -13,10 +13,12 @@ protocol FireStoreDatable: Codable {
     var toTupleData: [String: Any] { get }
 }
 
+
+
 struct Comment: FireStoreDatable {
     
-    let id: UUID
-    let date: Date
+    let id: String
+    let date: String
     let movieCd: String
     let nickName: String
     let password: String
@@ -24,17 +26,28 @@ struct Comment: FireStoreDatable {
     let info: String
     let picture: String
     
+    init(id: String = UUID().uuidString, date: String = Date().now, movieCd: String, nickName: String, password: String, rate: Double, info: String, picture: String) {
+        self.id = id
+        self.date = date
+        self.movieCd = movieCd
+        self.nickName = nickName
+        self.password = password
+        self.rate = rate
+        self.info = info
+        self.picture = picture
+    }
+    
     var collection: String {
         return movieCd
     }
     
     var document: String {
-        return id.uuidString
+        return id
     }
     
     var toTupleData: [String : Any] {
         let data: [String : Any]  = [
-            "id" : id.uuidString,
+            "id" : id,
             "date" : date,
             "movieCd" : movieCd,
             "nickName" : nickName,

@@ -7,18 +7,19 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 import Combine
 
 protocol CommentManagerable {
-    func getComments(movieCd: String) -> AnyPublisher<[Comment], FireStoreError>
-    func uploadComment(comment: Comment) -> AnyPublisher<Bool, FireStoreError>
+    func uploadComment(comment: Comment, errorHandler: @escaping (Error) -> Void)
+    func getComments(movieCd: String, completion: @escaping ([Comment]?, Error?) -> Void)
 }
 
 final class CommentManager: CommentManagerable {
     
     private let firebaseManager: FirebaseManagerable
     private let jsonDecoder: JSONDecoder
-
+    
     init(
         firebaseManager: FirebaseManagerable = FirebaseManager.share,
         jsonDecoder: JSONDecoder = JSONDecoder()
@@ -27,26 +28,30 @@ final class CommentManager: CommentManagerable {
         self.jsonDecoder = jsonDecoder
     }
     
-    func getComments(movieCd: String) -> AnyPublisher<[Comment], FireStoreError> {
-        return Future<[Comment], FireStoreError> { [weak self] promise in
-            let publisher = self?.firebaseManager.read(collection: movieCd)
-            _ = publisher?.sink(receiveCompletion: { _ in
-                promise(.failure(.readError))
-            }, receiveValue: { snapshot in
-                do {
-                    let jsonData = try JSONSerialization.data(withJSONObject: snapshot)
-                    if let commentArray = try self?.jsonDecoder.decode([Comment].self, from: jsonData) {
-                        promise(.success(commentArray))
-                    }
-                } catch {
-                    promise(.failure(.readError))
+    func getComments(movieCd: String, completion: @escaping ([Comment]?, Error?) -> Void) {
+        let newCompletion: (QuerySnapshot?, Error?) -> Void = { query, error in
+            do {
+                guard let query = query else {
+                    completion(nil, FireStoreError.readError)
+                    return
                 }
+                let queryArray = query.documents
+                var commentArray: [Comment] = []
+                for query in queryArray {
+                    let data = try query.data(as: Comment.self)
+                    commentArray.append(data)
+                }
+                completion(commentArray, nil)
+            } catch {
+                completion(nil, FireStoreError.readError)
             }
-            )
-       }.eraseToAnyPublisher()
+        }
+        firebaseManager.read(collection: movieCd, completion: newCompletion)
     }
-                            
-    func uploadComment(comment: Comment) -> AnyPublisher<Bool, FireStoreError> {
-        return firebaseManager.upload(data: comment)
+    
+    func uploadComment(comment: Comment, errorHandler: @escaping (Error) -> Void) {
+        firebaseManager.upload(data: comment, errorHandler: errorHandler)
     }
 }
+
+
