@@ -11,26 +11,15 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NetworkManager().getFilmData { result in
-            switch result {
-            case .success(let success):
-                print(success)
-            case .failure(let failure):
-                print(failure.localizedDescription)
-            }
-        }
-        
-        print(getCurrentDate())
+//        NetworkManager().getFilmData { result in
+//            switch result {
+//            case .success(let success):
+//                print(success)
+//            case .failure(let failure):
+//                print(failure.localizedDescription)
+//            }
+//        }
+        print(DateManager().getCurrentDate())
     }
-    
-    private func getCurrentDate() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
-        let currentDate = formatter.string(from: Date())
-        
-        return currentDate
-    }
-
-
 }
 

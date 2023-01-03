@@ -8,12 +8,16 @@
 import Foundation
 
 class NetworkManager: NetworkProtocol {
-    func getFilmDetailData(completion: @escaping (Result<FilmDetails, Error>) -> Void) {
-        
-    }
+    let appKey = "635cb0b1404820f91c8a45fcdf831615"
+    let currentDate = DateManager().getCurrentDate()
     
     func getBoxOfficeData(completion: @escaping (Result<DailyBoxOffice, Error>) -> Void) {
-        
+        let url = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(appKey)&targetDt=\(currentDate)"
+        self.getData(url: url, completion: completion)
+    }
+    
+    func getFilmDetailData(completion: @escaping (Result<FilmDetails, Error>) -> Void) {
+        let url = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=\(appKey)&movieCd=20225061"
     }
     
     func getPosterData(completion: @escaping (Result<FilmPoster, Error>) -> Void) {
@@ -51,8 +55,6 @@ extension NetworkManager {
                     completion(.failure(error))
                 }
             }
-            
-            
         }
         task.resume()
     }
