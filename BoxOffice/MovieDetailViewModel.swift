@@ -13,6 +13,12 @@ final class MovieDetailViewModel {
     var tabBarMode: TabBarMode = .movieInfo
     var movieDetail = dummyMovieDetail
     var movieReviews = [MovieReview]()
+    var averageRating: Double {
+        let average: Double = movieReviews.reduce(into: 0) { previous, review in
+            previous += review.rating
+        } / Double(movieReviews.count)
+        return average
+    }
 
     // MARK: - UseCases
     private let fetchMovieDetailUseCase = FetchMovieDetailUseCase()
