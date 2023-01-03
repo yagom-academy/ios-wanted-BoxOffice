@@ -16,6 +16,9 @@
 		E11E3DA62963527C00C736A2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E11E3DA52963527C00C736A2 /* FirebaseFirestore */; };
 		E11E3DA82963527C00C736A2 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E11E3DA72963527C00C736A2 /* FirebaseFirestoreCombine-Community */; };
 		E11E3DAA2963527C00C736A2 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E11E3DA92963527C00C736A2 /* FirebaseFirestoreSwift */; };
+		E19B5DAF2963D8CD001B2DB4 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DAE2963D8CD001B2DB4 /* FirebaseManager.swift */; };
+		E19B5DB22963D960001B2DB4 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DB12963D960001B2DB4 /* Comment.swift */; };
+		E19B5DB429643A14001B2DB4 /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DB329643A14001B2DB4 /* CommentManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		635A19F328F9603A00197BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		635A19F528F9603A00197BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E11E3DA229634C1F00C736A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E19B5DAE2963D8CD001B2DB4 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		E19B5DB12963D960001B2DB4 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		E19B5DB329643A14001B2DB4 /* CommentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,8 @@
 		635A19E628F9603900197BCC /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
+				E19B5DB02963D94F001B2DB4 /* Model */,
+				E19B5DAD2963D82A001B2DB4 /* Network */,
 				9BEA27FD29629F8C00FB7E73 /* Entry */,
 				9BEA27FF29629FB900FB7E73 /* Domain */,
 				9BEA27FE29629F9800FB7E73 /* SupportFile */,
@@ -95,6 +103,23 @@
 				635A19EB28F9603900197BCC /* ViewController.swift */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		E19B5DAD2963D82A001B2DB4 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E19B5DAE2963D8CD001B2DB4 /* FirebaseManager.swift */,
+				E19B5DB329643A14001B2DB4 /* CommentManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E19B5DB02963D94F001B2DB4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E19B5DB12963D960001B2DB4 /* Comment.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,7 +201,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E19B5DB22963D960001B2DB4 /* Comment.swift in Sources */,
+				E19B5DAF2963D8CD001B2DB4 /* FirebaseManager.swift in Sources */,
 				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
+				E19B5DB429643A14001B2DB4 /* CommentManager.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 			);
