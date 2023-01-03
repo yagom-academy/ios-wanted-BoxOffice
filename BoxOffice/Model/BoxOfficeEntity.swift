@@ -8,8 +8,16 @@
 import Foundation
 
 struct BoxOfficeEntity: Decodable {
+    let boxOfficeResult: BoxOffice
+}
+
+struct BoxOffice: Decodable {
     let boxofficeType: String
     let showRange: String
+    let dailyBoxOfficeList: [DailyBoxoffice]
+}
+
+struct DailyBoxoffice: Decodable {
     let rnum: String
     let rank: String
     let rankInten: String
