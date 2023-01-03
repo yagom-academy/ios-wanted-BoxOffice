@@ -29,7 +29,7 @@ final class FireStoreManager {
         }
     }
     
-    func delete(id: String) {
+    func delete(with id: String) {
         database.collection(deviceID).document(id).delete { error in
             if let error = error {
                 print("Error removing document: \(error)")
