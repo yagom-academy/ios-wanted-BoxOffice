@@ -48,6 +48,13 @@ final class StarReviewView: UIView {
             starView.contentMode = .scaleAspectFill
             starStackView.addArrangedSubview(starView)
         }
+
+        while starStackView.arrangedSubviews.count < 5 {
+            let starView = UIImageView(image: UIImage(systemName: "star"))
+            starView.tintColor = starColor
+            starView.contentMode = .scaleAspectFill
+            starStackView.addArrangedSubview(starView)
+        }
     }
 
     private func layout() {
