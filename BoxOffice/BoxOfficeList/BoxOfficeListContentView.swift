@@ -32,10 +32,17 @@ class BoxOfficeListContentView: UIView, UIContentView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
+
+        let footer = UILabel()
+        footer.text = "박스오피스"
+        footer.textColor = .secondaryLabel
+        footer.font = .preferredFont(forTextStyle: .caption1)
+
+        stackView.addArrangedSubview(footer)
         return stackView
     }()
 
-    private let lankNumberStackView = {
+    private let lankTitleStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .center
@@ -46,26 +53,35 @@ class BoxOfficeListContentView: UIView, UIContentView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
+
+        let footer = UILabel()
+        footer.text = "당일 관객수"
+        footer.textColor = .secondaryLabel
+        footer.font = .preferredFont(forTextStyle: .caption1)
+
+        stackView.addArrangedSubview(footer)
         return stackView
     }()
 
     private let openDateStackView = {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .leading
-        stackView.spacing = 5.0
+        stackView.axis = .vertical
+        stackView.alignment = .center
 
-        let header = UILabel()
-        header.text = "개봉일"
-        header.textColor = .secondaryLabel
-        header.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        let footer = UILabel()
+        footer.text = "개봉일"
+        footer.textColor = .secondaryLabel
+        footer.font = .preferredFont(forTextStyle: .caption1)
+        footer.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
-        stackView.addArrangedSubview(header)
+        stackView.addArrangedSubview(footer)
         return stackView
     }()
 
     private let movieNameLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.font = .preferredFont(forTextStyle: .largeTitle)
         return label
     }()
@@ -74,9 +90,21 @@ class BoxOfficeListContentView: UIView, UIContentView {
         label.font = .preferredFont(forTextStyle: .headline)
         return label
     }()
-    private let openDateLabel = UILabel()
-    private let audienceCountLabel = UILabel()
-    private let rankingChangeLabel = RankingChangeLabel()
+    private let openDateLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .headline)
+        return label
+    }()
+    private let audienceCountLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .headline)
+        return label
+    }()
+    private let rankingChangeLabel: RankingChangeLabel = {
+        let label = RankingChangeLabel()
+        label.font = .preferredFont(forTextStyle: .subheadline)
+        return label
+    }()
 
     init(configuration: BoxOfficeListContentConfiguration) {
         self.configuration = configuration
@@ -90,35 +118,20 @@ class BoxOfficeListContentView: UIView, UIContentView {
     }
 
     private func layout() {
-        let audienceCountCaption = UILabel()
-        audienceCountCaption.text = "당일 관객수"
-        audienceCountCaption.font = .preferredFont(forTextStyle: .caption1)
-        audienceCountLabel.font = .preferredFont(forTextStyle: .headline)
-        audienceCountStackView.addArrangedSubview(audienceCountLabel)
-        audienceCountStackView.addArrangedSubview(audienceCountCaption)
+        lankTitleStackView.addArrangedSubview(lankLabel)
+        lankTitleStackView.addArrangedSubview(rankingChangeLabel)
 
-        lankNumberStackView.addArrangedSubview(lankLabel)
-        lankNumberStackView.addArrangedSubview(rankingChangeLabel)
+        openDateStackView.insertArrangedSubview(openDateLabel, at: 0)
+        audienceCountStackView.insertArrangedSubview(audienceCountLabel, at: 0)
+        lankStackView.insertArrangedSubview(lankTitleStackView, at: 0)
 
-        let lankCaption = UILabel()
-        lankCaption.text = "박스오피스"
-        lankCaption.font = .preferredFont(forTextStyle: .caption1)
-        lankStackView.addArrangedSubview(lankNumberStackView)
-        lankStackView.addArrangedSubview(lankCaption)
-
-        rankingChangeLabel.font = .preferredFont(forTextStyle: .subheadline)
-
+        lankAndAudienceCountStackView.addArrangedSubview(openDateStackView)
         lankAndAudienceCountStackView.addArrangedSubview(audienceCountStackView)
         lankAndAudienceCountStackView.addArrangedSubview(lankStackView)
-        openDateStackView.addArrangedSubview(openDateLabel)
-
-        let countStack = UIStackView()
-        countStack.axis = .horizontal
 
         [
             movieNameLabel,
-            lankAndAudienceCountStackView,
-            openDateStackView
+            lankAndAudienceCountStackView
         ].forEach {
             rootStackView.addArrangedSubview($0)
         }
@@ -126,7 +139,7 @@ class BoxOfficeListContentView: UIView, UIContentView {
         addSubview(rootStackView)
         NSLayoutConstraint.activate([
             rootStackView.topAnchor.constraint(equalTo: topAnchor),
-            rootStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            rootStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
             rootStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             rootStackView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
