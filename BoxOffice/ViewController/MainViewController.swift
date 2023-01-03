@@ -18,32 +18,39 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUiLayout()
+    }
+}
+
+extension MainViewController {
+    func setUiLayout() {
         NetworkManager().getBoxOfficeData { result in
             switch result {
-            case .success(let success):
-                DispatchQueue.main.async {
+            case .success(let boxOfficeData):
+                DispatchQueue.main.sync {
                     self.createBoxOfficeCollectionView()
-                    self.configBoxOfficeDataSource(data: success.boxOfficeResult.dailyBoxOfficeList)
+                    self.configBoxOfficeDataSource(data: boxOfficeData.boxOfficeResult.dailyBoxOfficeList)
                     self.boxOfficeCollectionView.reloadData()
                 }
             case .failure(let failure):
                 print(failure.localizedDescription)
             }
         }
-        print(DateManager().getCurrentDate())
     }
-}
-
-extension MainViewController {
+    
     func createBoxOfficeLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(100), heightDimension: .absolute(100))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, repeatingSubitem: item, count: 3)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(135), heightDimension: .absolute(self.view.frame.height * 0.25))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 3)
+        group.interItemSpacing = .fixed(5)
+        
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 10
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+        section.interGroupSpacing = CGFloat(5)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0)
+        
         let layout = UICollectionViewCompositionalLayout(section: section)
+        
         
         return layout
     }
@@ -51,12 +58,14 @@ extension MainViewController {
     func createBoxOfficeCollectionView() {
         boxOfficeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createBoxOfficeLayout())
         self.view.addSubview(boxOfficeCollectionView)
+
+        boxOfficeCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             boxOfficeCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
             boxOfficeCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            boxOfficeCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             boxOfficeCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            boxOfficeCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ])
     }
     

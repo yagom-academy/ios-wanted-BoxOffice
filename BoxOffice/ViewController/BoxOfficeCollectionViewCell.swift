@@ -18,31 +18,31 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     
     let rankFluctuationsLabel: UILabel = {
         let label = UILabel()
-        
+
         return label
     }()
-    
+
     let filmNameLabel: UILabel = {
         let label = UILabel()
-        
+
         return label
     }()
-    
+
     let releaseDateLabel: UILabel = {
         let label = UILabel()
-        
+
         return label
     }()
-    
+
     let spectatorsLabel: UILabel = {
         let label = UILabel()
-        
+
         return label
     }()
-    
+
     let posterImageView: UIImageView = {
         let imageView = UIImageView()
-        
+
         return imageView
     }()
     
@@ -54,15 +54,16 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     func createBoxOfficeCell() {
         [rankLabel, rankFluctuationsLabel, filmNameLabel, releaseDateLabel, spectatorsLabel, posterImageView].forEach {
-            self.contentView.addSubview($0)
+            contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        
         NSLayoutConstraint.activate([
-            rankLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            rankLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor)
+            rankLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            rankLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
         ])
     }
     
