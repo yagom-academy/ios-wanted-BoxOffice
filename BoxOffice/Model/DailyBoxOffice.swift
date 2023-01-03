@@ -8,13 +8,13 @@
 import Foundation
 
 struct DailyBoxOffice: Decodable {
-    let movieCode: String?
-    let rank: String?
-    let title: String?
-    let openDate: String?
-    let audienceCount: String?
-    let rankInTen: String?
-    let isNewRank: String?
+    let movieCode: String
+    let rank: String
+    let title: String
+    let openDate: String
+    let audienceCount: String
+    let rankInTen: String
+    let isNewRank: String
     
     enum CodingKeys: String, CodingKey {
         case movieCode = "movieCd"
