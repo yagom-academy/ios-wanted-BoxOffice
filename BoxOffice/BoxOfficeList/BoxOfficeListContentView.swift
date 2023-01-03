@@ -129,12 +129,10 @@ class BoxOfficeListContentView: UIView, UIContentView {
         lankAndAudienceCountStackView.addArrangedSubview(audienceCountStackView)
         lankAndAudienceCountStackView.addArrangedSubview(lankStackView)
 
-        [
-            movieNameLabel,
-            lankAndAudienceCountStackView
-        ].forEach {
+        [movieNameLabel, lankAndAudienceCountStackView].forEach {
             rootStackView.addArrangedSubview($0)
         }
+
         rootStackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(rootStackView)
         NSLayoutConstraint.activate([
