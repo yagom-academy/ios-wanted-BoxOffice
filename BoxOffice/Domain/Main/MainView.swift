@@ -12,6 +12,7 @@ enum BoxOfficeConstraint {
     static let deviceHeight = UIScreen.main.bounds.height
     static let minimumInteritemSpacing: CGFloat = 10
     static let numberOfCells: CGFloat = 2.5
+    static let inset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
 }
 
 final class MainView: UIView {
@@ -31,24 +32,24 @@ final class MainView: UIView {
     
     private lazy var sheetView: UIView = {
         let view = UIView(frame: .zero)
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray6
         return view
     }()
     
     private lazy var boxOfficeLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.text = "BOX OFFICE"
-        label.font = .preferredFont(forTextStyle: .headline)
+        label.font = .preferredFont(forTextStyle: .title1)
         return label
     }()
     
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let layout = configureFlowLayout()
         let collectionView = UICollectionView(
             frame: .zero,
             collectionViewLayout: layout
         )
-        collectionView.backgroundColor = .gray
+        collectionView.backgroundColor = .systemGray6
         return collectionView
     }()
     
@@ -71,6 +72,8 @@ final class MainView: UIView {
     }
     
     private func setup() {
+        collectionView.register(MainViewCell.self, forCellWithReuseIdentifier: MainViewCell.identifier)
+        collectionView.showsHorizontalScrollIndicator = false
         addSubviews(
             backgroundImage,
             diminishView,
@@ -121,9 +124,9 @@ final class MainView: UIView {
         boxOfficeLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            boxOfficeLabel.topAnchor.constraint(equalTo: sheetView.topAnchor, constant: 50),
+            boxOfficeLabel.topAnchor.constraint(equalTo: sheetView.topAnchor, constant: 40),
             boxOfficeLabel.leadingAnchor.constraint(equalTo: sheetView.leadingAnchor, constant: 30),
-            boxOfficeLabel.trailingAnchor.constraint(equalTo: sheetView.trailingAnchor, constant: -30),
+            boxOfficeLabel.trailingAnchor.constraint(equalTo: sheetView.trailingAnchor, constant: -10),
         ])
         
         // MARK: - collectionView
@@ -149,14 +152,14 @@ final class MainView: UIView {
 }
 
 extension MainView {
-    // TODO: 데이터 받아온 후 변경 필요
     private func configureFlowLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumInteritemSpacing = BoxOfficeConstraint.minimumInteritemSpacing
         flowLayout.itemSize.width = (BoxOfficeConstraint.deviceWidth
-                                     - BoxOfficeConstraint.minimumInteritemSpacing) / 2
-        flowLayout.itemSize.height = BoxOfficeConstraint.deviceHeight
-                                     / BoxOfficeConstraint.numberOfCells
+                                     - BoxOfficeConstraint.minimumInteritemSpacing) / 2.5
+        flowLayout.itemSize.height = 330
+        flowLayout.sectionInset = BoxOfficeConstraint.inset
+        flowLayout.scrollDirection = .horizontal
         return flowLayout
     }
 }
