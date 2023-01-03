@@ -17,6 +17,7 @@
 		20BB8C192963B40300801668 /* ReviewFirebaseUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BB8C182963B40300801668 /* ReviewFirebaseUseCase.swift */; };
 		20BB8C1C2963B54400801668 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BB8C1B2963B54400801668 /* Review.swift */; };
 		20BB8C202963C2DA00801668 /* FirebaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BB8C1F2963C2DA00801668 /* FirebaseError.swift */; };
+		20C7D43729641D8200D87350 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C7D43629641D8200D87350 /* Observable.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19EC28F9603900197BCC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* ViewController.swift */; };
@@ -58,6 +59,7 @@
 		20BB8C182963B40300801668 /* ReviewFirebaseUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFirebaseUseCase.swift; sourceTree = "<group>"; };
 		20BB8C1B2963B54400801668 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		20BB8C1F2963C2DA00801668 /* FirebaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseError.swift; sourceTree = "<group>"; };
+		20C7D43629641D8200D87350 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				20BB8C162963B37D00801668 /* Domain */,
 				2073EB18296317BF00216565 /* FirebaseManager */,
 				635A19EB28F9603900197BCC /* ViewController.swift */,
+				20C7D43629641D8200D87350 /* Observable.swift */,
 			);
 			path = BoxOffice;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20C7D43729641D8200D87350 /* Observable.swift in Sources */,
 				2073EB17296311F100216565 /* FirestoreManager.swift in Sources */,
 				20BB8C202963C2DA00801668 /* FirebaseError.swift in Sources */,
 				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
