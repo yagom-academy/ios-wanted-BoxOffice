@@ -14,6 +14,14 @@ struct MovieInfoResponse: Codable {
     
 }
 
+extension MovieInfoResponse {
+    
+    func toMovieDetailInfo() -> MovieDetailInfo {
+        return movieInfoResult.movieInfo.toMovieDetailInfo()
+    }
+    
+}
+
 struct MovieInfoResult: Codable {
     
     let movieInfo: MovieInfo
@@ -75,5 +83,21 @@ struct Company: Codable {
     let companyNm: String
     let companyNmEn: String
     let companyPartNm: String
+    
+}
+
+extension MovieInfo {
+    
+    func toMovieDetailInfo() -> MovieDetailInfo {
+        return MovieDetailInfo(
+            movieNameEnglish: movieNmEn,
+            showTime: Int(showTm) ?? 0,
+            productionYear: prdtYear,
+            genres: genres.map { $0.genreNm },
+            directors: directors.map { $0.peopleNm },
+            actors: actors.map { $0.peopleNm } ,
+            audit: audits.first?.watchGradeNm ?? ""
+        )
+    }
     
 }

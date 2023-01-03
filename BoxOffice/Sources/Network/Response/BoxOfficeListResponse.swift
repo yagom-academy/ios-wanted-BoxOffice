@@ -22,6 +22,14 @@ struct DailyBoxOfficeResult: Codable {
     
 }
 
+extension DailyBoxOfficeListResponse {
+    
+    func toMovies() -> [Movie] {
+        return boxOfficeResult.dailyBoxOfficeList.map { $0.toMovie() }
+    }
+    
+}
+
 // MARK: - WeeklyBoxOfficeListResponse
 struct WeeklyBoxOfficeListResponse: Codable {
     
@@ -35,6 +43,14 @@ struct WeeklyBoxOfficeResult: Codable {
     let showRange: String?
     let yearWeekTime: String
     let weeklyBoxOfficeList: [BoxOfficeList]
+    
+}
+
+extension WeeklyBoxOfficeListResponse {
+    
+    func toMovies() -> [Movie] {
+        return boxOfficeResult.weeklyBoxOfficeList.map { $0.toMovie() }
+    }
     
 }
 
@@ -67,4 +83,21 @@ enum RankOldAndNew: String, Codable {
     case new = "NEW"
     case old = "OLD"
     
+}
+
+
+extension BoxOfficeList {
+    func toMovie() -> Movie {
+        return Movie(
+            code: movieCd,
+            name: movieNm,
+            openDate: openDt.asDate() ?? Date(),
+            boxOfficeInfo: BoxOfficeInfo(
+                rank: Int(rank) ?? 0,
+                rankInten: Int(rankInten) ?? 0,
+                rankOldAndNew: rankOldAndNew,
+                audienceAccumulation: Int(audiAcc) ?? 0
+            )
+        )
+    }
 }
