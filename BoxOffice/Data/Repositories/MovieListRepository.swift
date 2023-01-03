@@ -35,12 +35,32 @@ final class MovieListRepository: MovieListRepositoryInterface {
         
         let urlRequest = URLRequest(url: url)
     
+    private func fetchWeeklyMovieList(completion: @escaping (Result<[MovieOverview], Error>) -> Void) {
+        let day: Double = 86400
+        let lastWeek = Date(timeIntervalSinceNow: -(7 * day))
+        
+        var urlComponents = URLComponents(string: "https://www.kobis.or.kr")
+        urlComponents?.path = "/kobisopenapi/webservice/rest/boxoffice"
+        urlComponents?.path += "/searchWeeklyBoxOfficeList"
+        
+        urlComponents?.queryItems = [
+            // TODO: Key 등록
+            .init(name: "key", value: ""),
+            .init(name: "targetDt", value: lastWeek.toString())
+        ]
+        
+        guard let url = urlComponents?.url else {
+            return
+        }
+        
+        let urlRequest = URLRequest(url: url)
+        
         let dataTask = networkService.dataTask(request: urlRequest) { result in
             switch result {
             case .success(let data):
                 do {
-                    let movieOverviewWeeklyDTO = try JSONDecoder().decode(MovieOverviewWeeklyDTO.self, from: data)
-                    let movieOverviews: [MovieOverview] = movieOverviewWeeklyDTO.toDomain()
+                    let movieOverviewWeeklyContainerDTO = try JSONDecoder().decode(MovieOverviewWeeklyContainerDTO.self, from: data)
+                    let movieOverviews = movieOverviewWeeklyContainerDTO.toDomain()
                     completion(.success(movieOverviews))
                 } catch {
                     completion(.failure(error))
