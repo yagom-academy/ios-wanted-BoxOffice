@@ -12,9 +12,9 @@
 		2032020429630EED00097F31 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2032020329630EED00097F31 /* FirebaseFirestore */; };
 		2032020629630EED00097F31 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2032020529630EED00097F31 /* FirebaseFirestoreSwift */; };
 		2032020829630EED00097F31 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2032020729630EED00097F31 /* FirebaseStorage */; };
-		2073EB17296311F100216565 /* FireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2073EB16296311F100216565 /* FireStoreManager.swift */; };
+		2073EB17296311F100216565 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2073EB16296311F100216565 /* FirestoreManager.swift */; };
 		2073EB1C29631F8C00216565 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2073EB1B29631F8C00216565 /* StorageManager.swift */; };
-		20BB8C192963B40300801668 /* ReviewFirestoreUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BB8C182963B40300801668 /* ReviewFirestoreUseCase.swift */; };
+		20BB8C192963B40300801668 /* ReviewFirebaseUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BB8C182963B40300801668 /* ReviewFirebaseUseCase.swift */; };
 		20BB8C1C2963B54400801668 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BB8C1B2963B54400801668 /* Review.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
@@ -25,9 +25,9 @@
 
 /* Begin PBXFileReference section */
 		203201FE29630CB000097F31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		2073EB16296311F100216565 /* FireStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreManager.swift; sourceTree = "<group>"; };
+		2073EB16296311F100216565 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		2073EB1B29631F8C00216565 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		20BB8C182963B40300801668 /* ReviewFirestoreUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFirestoreUseCase.swift; sourceTree = "<group>"; };
+		20BB8C182963B40300801668 /* ReviewFirebaseUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFirebaseUseCase.swift; sourceTree = "<group>"; };
 		20BB8C1B2963B54400801668 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 		2073EB18296317BF00216565 /* FirebaseManager */ = {
 			isa = PBXGroup;
 			children = (
-				2073EB16296311F100216565 /* FireStoreManager.swift */,
+				2073EB16296311F100216565 /* FirestoreManager.swift */,
 				2073EB1B29631F8C00216565 /* StorageManager.swift */,
 			);
 			path = FirebaseManager;
@@ -92,7 +92,7 @@
 		20BB8C172963B3B800801668 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				20BB8C182963B40300801668 /* ReviewFirestoreUseCase.swift */,
+				20BB8C182963B40300801668 /* ReviewFirebaseUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -215,13 +215,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2073EB17296311F100216565 /* FireStoreManager.swift in Sources */,
+				2073EB17296311F100216565 /* FirestoreManager.swift in Sources */,
 				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
 				20BB8C1C2963B54400801668 /* Review.swift in Sources */,
 				2073EB1C29631F8C00216565 /* StorageManager.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
-				20BB8C192963B40300801668 /* ReviewFirestoreUseCase.swift in Sources */,
+				20BB8C192963B40300801668 /* ReviewFirebaseUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

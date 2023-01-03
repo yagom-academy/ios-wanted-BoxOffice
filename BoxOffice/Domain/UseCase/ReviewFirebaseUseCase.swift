@@ -8,8 +8,8 @@
 import UIKit
 import FirebaseFirestore
 
-final class ReviewFirestoreUseCase {
-    private let firestoreManager = FireStoreManager.shared
+final class ReviewFirebaseUseCase {
+    private let firestoreManager = FirestoreManager.shared
     private let storageManager = StorageManager.shared
     
     func save(_ reivew: Review) {
@@ -48,7 +48,7 @@ final class ReviewFirestoreUseCase {
     }
 }
 
-extension ReviewFirestoreUseCase {
+extension ReviewFirebaseUseCase {
     private func toReview(from document: QueryDocumentSnapshot) -> Review? {
         guard let nickName = document["nickName"] as? String,
               let password = document["password"] as? String,

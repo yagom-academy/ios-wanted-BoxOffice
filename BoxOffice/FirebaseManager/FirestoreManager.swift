@@ -8,8 +8,8 @@
 import UIKit
 import FirebaseFirestore
 
-final class FireStoreManager {
-    static let shared = FireStoreManager()
+final class FirestoreManager {
+    static let shared = FirestoreManager()
     private let database = Firestore.firestore()
     private let deviceID: String
     
