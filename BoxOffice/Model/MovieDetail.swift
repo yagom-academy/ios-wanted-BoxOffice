@@ -10,9 +10,9 @@ import Foundation
 struct MovieDetail {
     let currentRank: String
     let title: String
-    let openData: String
+    let openDate: String
     let totalAudience: String
-    let rankInten: String
+    let rankChange: String
     let isNewEntry: Bool
     let productionYear: String
     let openYear: String
