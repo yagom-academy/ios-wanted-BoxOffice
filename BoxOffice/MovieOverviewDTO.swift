@@ -25,12 +25,12 @@ struct MovieOverviewDailyDTO: Decodable {
 
 struct MovieOverviewDTO: Decodable {
     let movieCode: String
-    let rank: UInt
+    let rank: String
     let title: String
     let openingDay: String
-    let audienceNumber: UInt
-    let rankFluctuation: Int
-    let isNewlyRanked: Bool
+    let audienceNumber: String
+    let rankFluctuation: String
+    let isNewlyRanked: String
 
     enum CodingKeys: String, CodingKey {
         case movieCode = "movieCd"
@@ -74,12 +74,12 @@ extension MovieOverviewDTO {
             movieCode: movieCode,
             dayType: dayType,
             region: .Seoul,
-            rank: rank,
+            rank: UInt(rank) ?? 0,
             title: title,
             openingDay: openingDay.toDate(),
-            audienceNumber: audienceNumber,
-            rankFluctuation: rankFluctuation,
-            isNewlyRanked: isNewlyRanked
+            audienceNumber: UInt(audienceNumber) ?? 0,
+            rankFluctuation: Int(rankFluctuation) ?? 0,
+            isNewlyRanked: isNewlyRanked == "NEW" ? true : false
         )
     }
 }
