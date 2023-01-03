@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B667AA12963F0FA00B1FC50 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B667AA02963F0FA00B1FC50 /* Network.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19EC28F9603900197BCC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B667AA02963F0FA00B1FC50 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				AA50ED662963E94600BC26F0 /* ViewController */,
 				AA50ED652963E94300BC26F0 /* View */,
 				635A19F528F9603A00197BCC /* Info.plist */,
+				2B667AA02963F0FA00B1FC50 /* Network.swift */,
 			);
 			path = BoxOffice;
 			sourceTree = "<group>";
@@ -176,6 +179,7 @@
 			files = (
 				AA50ED682963E99400BC26F0 /* DailyBoxOffice.swift in Sources */,
 				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
+				2B667AA12963F0FA00B1FC50 /* Network.swift in Sources */,
 				FBC2EDBA2963EE26009F21C9 /* PeopleName.swift in Sources */,
 				FBC2EDB82963EC58009F21C9 /* FilmDetails.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
