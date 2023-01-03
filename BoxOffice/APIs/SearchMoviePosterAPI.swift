@@ -22,19 +22,33 @@ struct SearchMoviePosterAPI: API {
 }
 
 struct MoviePosterResponseDTO: Decodable {
-    let Search: [Movie]
+    let search: [Movie]
     let totalResults: String
-    let Response: String
+    let response: String
+    
+    enum CodingKeys: String, CodingKey {
+        case search = "Search"
+        case totalResults
+        case response = "Response"
+    }
     
     func posterURLString() -> String {
-        return Search[0].Poster
+        return search[0].poster
     }
 }
 
 struct Movie: Decodable {
-    let Title: String
-    let Year: String
+    let title: String
+    let year: String
     let imdbID: String
-    let `Type`: String
-    let Poster: String
+    let type: String
+    let poster: String
+    
+    enum CodingKeys: String, CodingKey {
+        case title = "Title"
+        case year = "Year"
+        case imdbID
+        case type = "Type"
+        case poster = "Poster"
+    }
 }
