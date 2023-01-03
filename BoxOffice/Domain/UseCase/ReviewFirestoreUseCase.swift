@@ -10,6 +10,7 @@ import FirebaseFirestore
 
 final class ReviewFirestoreUseCase {
     private let firestoreManager = FireStoreManager.shared
+    private let storageManager = StorageManager.shared
     
     func save(_ reivew: Review) {
         var reviewData: [String: Any] = [
@@ -20,26 +21,30 @@ final class ReviewFirestoreUseCase {
         ]
         
         if let photo = reivew.photo {
-            reviewData.updateValue(photo, forKey: "photo")
+            storageManager.save(photo, id: reivew.password)
         }
         
         firestoreManager.save(reviewData, with: reivew.password)
     }
 
-    func fetch(_ id: String) -> [Review]? {
+    func fetch() -> [Review]? {
         var reviews: [Review]?
         
-        firestoreManager.fetch { queryDocumentSnapshots in
+        firestoreManager.fetch { [weak self] queryDocumentSnapshots in
             reviews = queryDocumentSnapshots.compactMap {
-                self.toReview(from: $0)
+                return self?.toReview(from: $0)
             }
         }
-        
+
         return reviews
     }
 
-    func delete(_ id: String) {
-        firestoreManager.delete(with: id)
+    func delete(_ review: Review) {
+        firestoreManager.delete(with: review.password)
+        
+        if review.photo != nil {
+            storageManager.delete(widh: review.password)
+        }
     }
 }
 
@@ -50,7 +55,10 @@ extension ReviewFirestoreUseCase {
               let rating = document["rating"] as? Double,
               let content = document["content"] as? String else { return nil }
         
-        let photo = document["photo"] as? UIImage
+        var photo: UIImage?
+        storageManager.fetch(with: password) { image in
+            photo = image
+        }
         
         return Review(nickName: nickName,
                       password: password,

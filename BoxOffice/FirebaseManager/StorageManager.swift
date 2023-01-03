@@ -31,7 +31,7 @@ final class StorageManager {
         }
     }
     
-    func delete(id: String) {
+    func delete(widh id: String) {
         storageReference.child("\(deviceID)/\(id)").delete { error in
             if let error = error {
                 print("Error removing image: \(error)")
@@ -39,7 +39,7 @@ final class StorageManager {
         }
     }
     
-    func fetch(id: String, completion: @escaping (UIImage?) -> Void) {
+    func fetch(with id: String, completion: @escaping (UIImage?) -> Void) {
         let size: Int64 = 1 * 1024 * 1024
         
         storageReference.child("\(deviceID)/\(id)").getData(maxSize: size) { data, error in
