@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DailyBoxOfficeList: Decodable {
+struct DailyBoxOfficeList: Decodable, Hashable {
     let rank: String
     let rankInten: String
     let rankOldAndNew: String

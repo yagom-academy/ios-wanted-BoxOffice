@@ -12,7 +12,7 @@ class NetworkManager: NetworkProtocol {
     let currentDate = DateManager().getCurrentDate()
     
     func getBoxOfficeData(completion: @escaping (Result<DailyBoxOffice, Error>) -> Void) {
-        let url = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(appKey)&targetDt=\(currentDate)"
+        let url = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(appKey)&targetDt=20230102"
         self.getData(url: url, completion: completion)
     }
     
