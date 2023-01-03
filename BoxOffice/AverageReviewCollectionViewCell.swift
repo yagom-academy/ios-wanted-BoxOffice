@@ -63,7 +63,7 @@ final class AverageReviewCollectionViewCell: UICollectionViewCell {
             titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
 
-            starReview.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            starReview.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -20),
             starReview.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             starReview.heightAnchor.constraint(equalToConstant: 80),
             starReview.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5),
