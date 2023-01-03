@@ -143,7 +143,7 @@ final class MovieDetailViewController: UIViewController {
 
     private func movieDetailCollectionViewLayout() -> UICollectionViewLayout {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
-        configuration.interSectionSpacing = 20
+        configuration.interSectionSpacing = 0
         configuration.scrollDirection = .vertical
 
         let compositionalLayout = UICollectionViewCompositionalLayout(sectionProvider: { section, environment in
@@ -183,8 +183,10 @@ extension MovieDetailViewController {
                 let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(1))
                 return NSCollectionLayoutItem(layoutSize: size)
             case .bottom:
-                let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
-                return NSCollectionLayoutItem(layoutSize: size)
+                let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(300))
+                let item = NSCollectionLayoutItem(layoutSize: size)
+                item.edgeSpacing = .init(leading: .fixed(0), top: .fixed(10), trailing: .fixed(0), bottom: .fixed(10))
+                return item
             }
         }
 
@@ -195,7 +197,7 @@ extension MovieDetailViewController {
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: size, subitems: [item])
                 return group
             case .bottom:
-                let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
+                let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(300))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: size, subitems: [item])
                 return group
             }
@@ -205,7 +207,7 @@ extension MovieDetailViewController {
             let section = NSCollectionLayoutSection(group: group)
             let headerSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(0)
+                heightDimension: .estimated(0.1)
             )
             let header = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: headerSize,
