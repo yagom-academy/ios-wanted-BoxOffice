@@ -111,6 +111,12 @@ fileprivate extension String {
     }
 }
 
+extension MovieOverviewDailyContainerDTO {
+    func toDomain() -> [MovieOverview] {
+        return movieOverviewDailyDTO.toDomain()
+    }
+}
+
 extension MovieOverviewWeeklyContainerDTO {
     func toDomain() -> [MovieOverview] {
         return movieOverviewWeeklyDTO.toDomain()
