@@ -34,6 +34,7 @@ final class MovieDetailViewModel {
 extension MovieDetailViewModel {
     func viewDidLoad() {
         fetchMovieDetail(movieCode: movieCode)
+        fetchMovieReview(movieCode: movieCode)
     }
 
     func tabBarModeChanged(mode: TabBarMode) {
