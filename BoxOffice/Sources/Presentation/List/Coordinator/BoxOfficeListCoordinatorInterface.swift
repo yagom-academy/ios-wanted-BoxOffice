@@ -10,6 +10,6 @@ import Foundation
 protocol BoxOfficeListCoordinatorInterface: AnyObject {
     
     func showMovieDetailView(movie: Movie)
-    func showMovieDetailView(movie: Movie)
+    func showCreateReviewView(movie: Movie)
     
 }

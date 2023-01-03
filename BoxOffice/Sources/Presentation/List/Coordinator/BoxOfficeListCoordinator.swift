@@ -54,7 +54,7 @@ extension BoxOfficeListCoordinator: BoxOfficeListCoordinatorInterface {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func showMovieDetailView(movie: Movie) {
+    func showCreateReviewView(movie: Movie) {
         let viewController = makeCreateReviewViewController()
         navigationController.pushViewController(viewController, animated: true)
     }
