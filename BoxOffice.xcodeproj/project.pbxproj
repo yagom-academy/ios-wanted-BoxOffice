@@ -66,13 +66,9 @@
 			isa = PBXGroup;
 			children = (
 				02F855272963B217004B76DD /* App */,
+				02F855422963E6E4004B76DD /* Extensions */,
+				02F855452963E70B004B76DD /* Network */,
 				635A19EB28F9603900197BCC /* ViewController.swift */,
-				02F855332963BDB3004B76DD /* TargetType.swift */,
-				02F8553B2963C9E8004B76DD /* Encodable+extension.swift */,
-				02F855392963C90C004B76DD /* KobisAPI.swift */,
-				02F855372963C290004B76DD /* DefaultAPIProvider.swift */,
-				02F8553F2963E31B004B76DD /* BoxOfficeListResponse.swift */,
-				02F8553D2963E264004B76DD /* APIProvider.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -84,6 +80,50 @@
 				635A19F228F9603A00197BCC /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		02F855412963E6DD004B76DD /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				02F855332963BDB3004B76DD /* TargetType.swift */,
+				02F8553D2963E264004B76DD /* APIProvider.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		02F855422963E6E4004B76DD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				02F8553B2963C9E8004B76DD /* Encodable+extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		02F855432963E6F0004B76DD /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				02F8553F2963E31B004B76DD /* BoxOfficeListResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		02F855442963E700004B76DD /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				02F855392963C90C004B76DD /* KobisAPI.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		02F855452963E70B004B76DD /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				02F855412963E6DD004B76DD /* Protocol */,
+				02F855442963E700004B76DD /* Request */,
+				02F855432963E6F0004B76DD /* Response */,
+				02F855372963C290004B76DD /* DefaultAPIProvider.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		635A19DB28F9603900197BCC = {
