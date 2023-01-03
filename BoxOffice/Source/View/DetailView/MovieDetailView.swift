@@ -9,14 +9,19 @@ import UIKit
 
 class MovieDetailView: UIView {
     // MARK: properties
-    let posterImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
+    let posterView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
-    
+
+    let ageLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title3, compatibleWith: .none)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1, compatibleWith: .none)
@@ -47,7 +52,14 @@ class MovieDetailView: UIView {
         stackView.alignment = .leading
         stackView.distribution = .equalSpacing
         stackView.axis = .horizontal
-        stackView.spacing = 20
+        stackView.setContentCompressionResistancePriority(
+            .required,
+            for: .vertical
+        )
+        stackView.setContentHuggingPriority(
+            .required,
+            for: .vertical
+        )
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -55,11 +67,8 @@ class MovieDetailView: UIView {
     let labelStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .fill
-        stackView.distribution = .fill
+        stackView.distribution = .fillEqually
         stackView.axis = .vertical
-        stackView.spacing = 5
-        stackView.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-        stackView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -71,6 +80,21 @@ class MovieDetailView: UIView {
         stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
+    }()
+
+    let releaseDateLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title2)
+        label.setContentHuggingPriority(.defaultLow, for: .vertical)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let numberOfSpectatorsLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title2)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     let blackStackView: UIStackView = {
@@ -89,21 +113,7 @@ class MovieDetailView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
-    let releaseDateLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title2)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let numberOfSpectatorsLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title2)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
+
     let productionYearLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -119,6 +129,23 @@ class MovieDetailView: UIView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
+    
+    let bottomStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.setContentCompressionResistancePriority(
+            .defaultLow,
+            for: .vertical
+        )
+        stackView.setContentHuggingPriority(
+            .defaultLow,
+            for: .vertical
+        )
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
 
     // MARK: init
     override init(frame: CGRect) {
@@ -127,6 +154,11 @@ class MovieDetailView: UIView {
         
         configureView()
         configureUI()
+        setPoster(
+            name: "testPost",
+            age: "15",
+            color: .orange
+        )
         setupData()
         self.backgroundColor = .white
 
@@ -154,11 +186,12 @@ class MovieDetailView: UIView {
     private func configureView() {
         self.addSubview(topStackView)
         self.addSubview(blackStackView)
-        self.addSubview(productionYearLabel)
-        self.addSubview(nameCollectionView)
+        self.addSubview(bottomStackView)
         
-        topStackView.addArrangedSubview(posterImageView)
+        topStackView.addArrangedSubview(posterView)
         topStackView.addArrangedSubview(labelStackView)
+        
+        posterView.addSubview(ageLabel)
         
         labelStackView.addArrangedSubview(titleLabel)
         labelStackView.addArrangedSubview(genreAndRuntimeStackView)
@@ -169,21 +202,38 @@ class MovieDetailView: UIView {
         
         blackStackView.addArrangedSubview(releaseDateLabel)
         blackStackView.addArrangedSubview(numberOfSpectatorsLabel)
+        
+        bottomStackView.addArrangedSubview(productionYearLabel)
+        bottomStackView.addArrangedSubview(nameCollectionView)
     }
     
     private func configureUI() {
         NSLayoutConstraint.activate([
             topStackView.topAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.topAnchor,
+                equalTo: self.topAnchor,
                 constant: 20
             ),
             topStackView.trailingAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.trailingAnchor,
+                equalTo: self.trailingAnchor,
                 constant: -20
             ),
             topStackView.leadingAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.leadingAnchor,
+                equalTo: self.leadingAnchor,
                 constant: 10
+            ),
+            
+            posterView.widthAnchor.constraint(
+                equalTo: topStackView.widthAnchor,
+                multiplier: 0.35
+            ),
+            
+            ageLabel.centerYAnchor.constraint(
+                equalTo: posterView.centerYAnchor,
+                constant: -80
+            ),
+            ageLabel.centerXAnchor.constraint(
+                equalTo: posterView.centerXAnchor,
+                constant: 50
             ),
             
             blackStackView.topAnchor.constraint(
@@ -191,43 +241,60 @@ class MovieDetailView: UIView {
                 constant: 10
             ),
             blackStackView.trailingAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.trailingAnchor
+                equalTo: self.trailingAnchor
             ),
             blackStackView.leadingAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.leadingAnchor
+                equalTo: self.leadingAnchor
             ),
-            
-            productionYearLabel.topAnchor.constraint(
+
+            bottomStackView.topAnchor.constraint(
                 equalTo: blackStackView.bottomAnchor,
                 constant: 10
             ),
-            productionYearLabel.trailingAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.trailingAnchor,
+            bottomStackView.trailingAnchor.constraint(
+                equalTo: self.trailingAnchor,
                 constant: -20
             ),
-            productionYearLabel.leadingAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.leadingAnchor,
+            bottomStackView.leadingAnchor.constraint(
+                equalTo: self.leadingAnchor,
                 constant: 20
             ),
             
-            nameCollectionView.leadingAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.leadingAnchor,
-                constant: 20
-            ),
-            nameCollectionView.topAnchor.constraint(
-                equalTo: productionYearLabel.bottomAnchor,
-                constant: 20
-            ),
-            nameCollectionView.trailingAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.trailingAnchor,
-                constant: -20
-            ),
-            nameCollectionView.bottomAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.bottomAnchor,
-                constant: -350
-            ),
-            
-            nameCollectionView.heightAnchor.constraint(equalToConstant: 70)
+            nameCollectionView.heightAnchor.constraint(
+                equalToConstant: 50
+            )
         ])
+    }
+
+    private func setPoster(name: String, age: String, color: UIColor) {
+        var image = UIImage(named: name)
+        image = image?.resize(
+            newWidth: UIScreen.main.bounds.width/UIScreen.main.scale
+        )
+        posterView.backgroundColor = UIColor(patternImage: image!)
+        ageLabel.text = age
+        ageLabel.backgroundColor = color
+    
+        NSLayoutConstraint.activate([
+            posterView.heightAnchor.constraint(
+                equalToConstant: image?.size.height ?? 100
+            )
+        ])
+    }
+}
+
+// TODO: 파일분리
+extension UIImage {
+    func resize(newWidth: CGFloat) -> UIImage {
+        let scale = newWidth / self.size.width
+        let newHeight = self.size.height * scale
+
+        let size = CGSize(width: newWidth, height: newHeight)
+        let render = UIGraphicsImageRenderer(size: size)
+        let renderImage = render.image { context in
+            self.draw(in: CGRect(origin: .zero, size: size))
+        }
+
+        return renderImage
     }
 }
