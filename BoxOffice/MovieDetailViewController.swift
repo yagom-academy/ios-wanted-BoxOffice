@@ -201,7 +201,25 @@ final class MovieDetailViewController: UIViewController {
 
     @objc
     private func shareButtonTapped(_ sender: UIBarButtonItem) {
-        viewModel.shareButtonTapped()
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "포스터 이미지 공유하기", style: .default) { [weak self] _ in
+            guard let urlString = self?.viewModel.movieDetail.posterImageURL,
+                  let url = URL(string: urlString) else { return }
+            let activityViewController = UIActivityViewController(
+                activityItems: [url],
+                applicationActivities: nil)
+            self?.present(activityViewController, animated: true, completion: nil)
+        })
+        alert.addAction(UIAlertAction(title: "현재 화면 저장하기", style: .default) { [weak self] _ in
+            guard let screenImage = self?.movieDetailCollectionView.convertToImage() else { return }
+            let activityViewController = UIActivityViewController(
+                activityItems: [screenImage],
+                applicationActivities: nil)
+            self?.present(activityViewController, animated: true, completion: nil)
+        })
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+
+        present(alert, animated: true)
     }
 }
 
@@ -269,5 +287,14 @@ extension MovieDetailViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let isShowingUpperInfoview = scrollView.contentOffset.y <= 0
         movieDetailCollectionView.contentInsetAdjustmentBehavior = isShowingUpperInfoview ? .never : .automatic
+    }
+}
+
+fileprivate extension UIView {
+  func convertToImage() -> UIImage? {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
     }
 }

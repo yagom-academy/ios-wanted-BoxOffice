@@ -60,10 +60,6 @@ extension MovieDetailViewModel {
 
         showDeleteActionSheet?(alert)
     }
-
-    func shareButtonTapped() {
-
-    }
 }
 
 // MARK: - Private functions
