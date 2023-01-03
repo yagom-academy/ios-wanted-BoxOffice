@@ -82,6 +82,7 @@ class WriteReviewViewController: UIViewController {
     private func setupView() {
         addSubView()
         setupConstraint()
+        setupNavigationItem()
         view.backgroundColor = .systemBackground
     }
     
@@ -112,5 +113,24 @@ class WriteReviewViewController: UIViewController {
             photoView.widthAnchor.constraint(equalTo: photoView.heightAnchor)
         ])
     }
+}
+
+//MARK: NavigationItem Setting
+extension WriteReviewViewController {
+    private func setupNavigationItem() {
+        let saveBarButton = UIBarButtonItem(title: "저장",
+                                            style: .done,
+                                            target: self,
+                                            action: #selector(saveBarButtonTapped))
+        
+        navigationItem.rightBarButtonItem = saveBarButton
+        //TODO: 영화 제목 넘겨받기
+        navigationItem.title = "영화 제목"
+    }
     
+    @objc private func saveBarButtonTapped() {
+        //TODO: 리뷰 저장하기
+        
+        navigationController?.popViewController(animated: true)
+    }
 }
