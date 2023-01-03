@@ -15,6 +15,14 @@ struct MovieOverviewWeeklyContainerDTO: Decodable {
     }
 }
 
+struct MovieOverviewDailyContainerDTO: Decodable {
+    let movieOverviewDailyDTO: MovieOverviewDailyDTO
+    
+    enum CodingKeys: String, CodingKey {
+        case movieOverviewDailyDTO = "boxOfficeResult"
+    }
+}
+
 struct MovieOverviewWeeklyDTO: Decodable {
     let movieOverviewDTOs: [MovieOverviewDTO]
     
