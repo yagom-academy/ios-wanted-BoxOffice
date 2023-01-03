@@ -111,7 +111,7 @@ extension BoxOfficeListViewController {
                                        audienceCount: 1,
                                        increaseOrDecreaseInRank: 1,
                                        isNewEntryToRank: true),
-            BoxOfficeListCellViewModel(movieName: "title2",
+            BoxOfficeListCellViewModel(movieName: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                                        lank: 2,
                                        openDate: "",
                                        audienceCount: 12,
@@ -128,10 +128,10 @@ extension BoxOfficeListViewController {
                                        increaseOrDecreaseInRank: 1,
                                        isNewEntryToRank: true),
             BoxOfficeListCellViewModel(movieName: "title2",
-                                       lank: 2,
+                                       lank: 3,
                                        openDate: "",
                                        audienceCount: 12,
-                                       increaseOrDecreaseInRank: 0,
+                                       increaseOrDecreaseInRank: -3,
                                        isNewEntryToRank: false)
         ]
     }
