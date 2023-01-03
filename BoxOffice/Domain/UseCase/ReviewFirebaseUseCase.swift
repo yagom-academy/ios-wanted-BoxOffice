@@ -49,9 +49,9 @@ extension ReviewFirebaseUseCase {
     private func toReview(from document: QueryDocumentSnapshot) -> Review? {
         guard let nickName = document["nickName"] as? String,
               let password = document["password"] as? String,
-              let rating = document["rating"] as? Double,
-              let content = document["content"] as? String else { return nil }
               let ratingValue = document["rating"] as? String,
+              let rating = Double(ratingValue),
+              let content = document["content"] as? String,
               let hasPhoto = document["hasPhoto"] as? Bool else { return nil }
         
         return Review(nickName: nickName,
