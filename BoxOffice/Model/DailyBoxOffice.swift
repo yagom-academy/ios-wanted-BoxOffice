@@ -7,7 +7,23 @@
 
 import Foundation
 
-struct DailyBoxOffice: Decodable {
+struct DailyBoxOfficeConnection: Decodable {
+    let boxOfficeResult: BoxOfficeResult
+    
+    enum CodingKeys: String, CodingKey {
+        case boxOfficeResult = "boxOfficeResult"
+    }
+}
+
+struct BoxOfficeResult: Decodable {
+    let boxOfficeList: [DailyBoxOffice]
+    
+    enum CodingKeys: String, CodingKey {
+        case boxOfficeList = "dailyBoxOfficeList"
+    }
+}
+
+struct DailyBoxOffice: Decodable, Hashable {
     let movieCode: String
     let rank: String
     let title: String
