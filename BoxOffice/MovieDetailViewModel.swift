@@ -58,6 +58,7 @@ extension MovieDetailViewModel {
             switch result {
             case .success(let movieDetail):
                 self?.movieDetail = movieDetail
+                self?.applyDataSource?()
             case .failure(let error):
                 print(error)
             }

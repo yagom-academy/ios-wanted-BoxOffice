@@ -26,7 +26,6 @@ final class MovieDetailViewController: UIViewController {
         bind()
         setUpMovieDetailCollectionView()
         layout()
-        applyDataSource()
         viewModel.viewDidLoad()
     }
 
