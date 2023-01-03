@@ -12,8 +12,10 @@
 		02F855322963B7E1004B76DD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 02F855312963B7E1004B76DD /* FirebaseFirestoreSwift */; };
 		02F855342963BDB3004B76DD /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F855332963BDB3004B76DD /* TargetType.swift */; };
 		02F855382963C290004B76DD /* DefaultAPIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F855372963C290004B76DD /* DefaultAPIProvider.swift */; };
+		02F8553A2963C90C004B76DD /* KobisAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F855392963C90C004B76DD /* KobisAPI.swift */; };
 		02F8553C2963C9E8004B76DD /* Encodable+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8553B2963C9E8004B76DD /* Encodable+extension.swift */; };
 		02F8553E2963E264004B76DD /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8553D2963E264004B76DD /* APIProvider.swift */; };
+		02F855402963E31B004B76DD /* BoxOfficeListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8553F2963E31B004B76DD /* BoxOfficeListResponse.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19EC28F9603900197BCC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* ViewController.swift */; };
@@ -24,8 +26,10 @@
 /* Begin PBXFileReference section */
 		02F855332963BDB3004B76DD /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		02F855372963C290004B76DD /* DefaultAPIProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPIProvider.swift; sourceTree = "<group>"; };
+		02F855392963C90C004B76DD /* KobisAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisAPI.swift; sourceTree = "<group>"; };
 		02F8553B2963C9E8004B76DD /* Encodable+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+extension.swift"; sourceTree = "<group>"; };
 		02F8553D2963E264004B76DD /* APIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProvider.swift; sourceTree = "<group>"; };
+		02F8553F2963E31B004B76DD /* BoxOfficeListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListResponse.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +69,9 @@
 				635A19EB28F9603900197BCC /* ViewController.swift */,
 				02F855332963BDB3004B76DD /* TargetType.swift */,
 				02F8553B2963C9E8004B76DD /* Encodable+extension.swift */,
+				02F855392963C90C004B76DD /* KobisAPI.swift */,
 				02F855372963C290004B76DD /* DefaultAPIProvider.swift */,
+				02F8553F2963E31B004B76DD /* BoxOfficeListResponse.swift */,
 				02F8553D2963E264004B76DD /* APIProvider.swift */,
 			);
 			path = Sources;
@@ -185,12 +191,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				02F855342963BDB3004B76DD /* TargetType.swift in Sources */,
+				02F855402963E31B004B76DD /* BoxOfficeListResponse.swift in Sources */,
 				02F8553E2963E264004B76DD /* APIProvider.swift in Sources */,
 				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				02F8553C2963C9E8004B76DD /* Encodable+extension.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 				02F855382963C290004B76DD /* DefaultAPIProvider.swift in Sources */,
+				02F8553A2963C90C004B76DD /* KobisAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
