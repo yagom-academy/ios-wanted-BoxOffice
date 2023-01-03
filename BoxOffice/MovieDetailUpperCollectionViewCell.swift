@@ -82,7 +82,7 @@ final class MovieDetailUpperCollectionViewCell: UICollectionViewCell {
         rankUpDownLabel.textColor = movieDetail.rankFluctuation > 0 ? .systemRed : .systemBlue
         rankUpDownLabel.text = movieDetail.rankFluctuation > 0 ?  "▲ \(movieDetail.rankFluctuation)" : "▼ \(-movieDetail.rankFluctuation)"
         newlyRankedLabel.text = movieDetail.isNewlyRanked ? "New" : ""
-        posterImageView.image = dummyPosterImage
+        posterImageView.image = movieDetail.posterImage
     }
 
     private func layout() {
