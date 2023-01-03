@@ -28,7 +28,7 @@ final class MovieDetailViewModel {
     // MARK: - Actions
     var applyDataSource: (() -> Void)?
     var scrollToUpper: (() -> Void)?
-    var showDeleteActionSheet: ((UIAlertController) -> Void)?
+    var showAlert: ((UIAlertController) -> Void)?
 
     // MARK: - Private properties
     private let movieCode: String
@@ -52,13 +52,29 @@ extension MovieDetailViewModel {
     }
 
     func deleteReviewButtonTapped(review: MovieReview) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
-            self?.deleteMovieReview(review: review)
-        })
-        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let passwordTextFieldAlert = UIAlertController(title: "암호를 입력해주세요", message: nil, preferredStyle: .alert)
+        passwordTextFieldAlert.addTextField { textField in
+            textField.isSecureTextEntry = true
+        }
+        let wrongPasswordAlert = UIAlertController(title: "비밀번호가 틀렸습니다", message: nil, preferredStyle: .alert)
+        wrongPasswordAlert.addAction(UIAlertAction(title: "확인", style: .cancel))
 
-        showDeleteActionSheet?(alert)
+        passwordTextFieldAlert.addAction(UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
+            guard let password = passwordTextFieldAlert.textFields?.first?.text else { return }
+            if review.password == password {
+                self?.deleteMovieReview(review: review)
+            } else {
+                self?.showAlert?(wrongPasswordAlert)
+            }
+        })
+
+        actionSheet.addAction(UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
+            self?.showAlert?(passwordTextFieldAlert)
+        })
+        actionSheet.addAction(UIAlertAction(title: "취소", style: .cancel))
+
+        showAlert?(actionSheet)
     }
 }
 

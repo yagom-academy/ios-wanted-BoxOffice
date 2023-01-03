@@ -61,7 +61,7 @@ final class MovieDetailViewController: UIViewController {
                 self?.movieDetailCollectionView.scrollToItem(at: upperMovieInfoIndexPath, at: .top, animated: false)
             }
         }
-        viewModel.showDeleteActionSheet = { [weak self] alert in
+        viewModel.showAlert = { [weak self] alert in
             self?.present(alert, animated: true)
         }
     }
