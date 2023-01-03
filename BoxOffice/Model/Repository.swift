@@ -15,9 +15,9 @@ final class Repository {
     private let apiUrl = "http://www.omdbapi.com/?i=tt3896198"
     private let posterUrl = "http://img.omdbapi.com/?"
     
-    typealias MovieResult = Result<Data, Error>
+    typealias FetchResult = Result<Data, Error>
     
-    func fetch(completion: @escaping (MovieResult) -> Void) {
+    func fetch(completion: @escaping (FetchResult) -> Void) {
         let urlString = apiUrl + firstApiKey
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
