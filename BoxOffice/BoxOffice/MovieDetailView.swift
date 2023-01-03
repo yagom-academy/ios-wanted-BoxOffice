@@ -9,31 +9,56 @@ import SwiftUI
 
 struct MovieDetailView: View {
     @Environment(\.presentationMode) var presentationMode
+    @State var isPresented = false
     var movie: Movie
 
     var body: some View {
         List {
             Section(footer: HStack {
                 Button(action: {
-
+                    isPresented = true
                 }, label: {
                     ZStack {
                         Rectangle()
                             .frame(width: 170, height: 40)
-                        Text("실관람평")
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
+                        Text("🖋️ 리뷰 등록하기")
                             .foregroundColor(.white)
-                            .background(RoundedRectangle(cornerRadius: 10))
                     }
                 })
+                .sheet(isPresented: $isPresented) {
+                    MovieReviewPostView()
+                }
                 Button(action: {
-
+                    let sharePoster = UIImage(named: "Avatar")
+                    let shareInformation = """
+                                            영화명: \(movie.movieName)
+                                            박스오피스 순위: \(movie.rank)
+                                            개봉일: \(movie.openDtDay)
+                                            관객수: \(movie.spectators)
+                                            전일대비 순위: \(movie.rankInten)
+                                            랭킹에 신규진입 여부: \(movie.rankOldAndNew)
+                                            제작연도: \(movie.prdtYear)
+                                            개봉연도: \(movie.openDtYear)
+                                            상영시간: \(movie.showTm)
+                                            장르: \(movie.genreNm)
+                                            감독명: \(movie.directorNm)
+                                            배우명: \(movie.actorNm)
+                                            관람등급: \(movie.watchGradeNm)
+                                            리뷰 별점 평균: 4.4
+                                            리뷰리스트:?
+                                            """
+                    let activityVC = UIActivityViewController(activityItems: [sharePoster as Any ,shareInformation], applicationActivities: nil)
+                    UIApplication.shared.windows.first?.rootViewController!.present(activityVC, animated: true, completion: nil)
                 }, label: {
                     ZStack {
                         Rectangle()
                             .frame(width: 170, height: 40)
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
                         Text("공유하기")
                             .foregroundColor(.white)
-                            .background(RoundedRectangle(cornerRadius: 10))
                     }
                 })
             }) {
