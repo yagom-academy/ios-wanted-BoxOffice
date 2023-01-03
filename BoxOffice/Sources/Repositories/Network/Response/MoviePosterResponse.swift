@@ -8,6 +8,7 @@
 import Foundation
 
 struct MoviePosterResponse: Codable {
+    
     let response: String
     let poster: String?
     
@@ -15,4 +16,5 @@ struct MoviePosterResponse: Codable {
         case response = "Response"
         case poster = "Poster"
     }
+    
 }

@@ -87,6 +87,7 @@ enum RankOldAndNew: String, Codable {
 
 
 extension BoxOfficeList {
+    
     func toMovie() -> Movie {
         return Movie(
             code: movieCd,
@@ -100,4 +101,5 @@ extension BoxOfficeList {
             )
         )
     }
+    
 }

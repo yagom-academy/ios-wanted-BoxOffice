@@ -53,5 +53,7 @@ extension TargetType {
 }
 
 enum HTTPMethod: String {
+    
     case get = "GET"
+    
 }

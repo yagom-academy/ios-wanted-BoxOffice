@@ -41,4 +41,5 @@ struct MoviePosterRequest: Codable {
     
     let apiKey: String
     let t: String
+    
 }
