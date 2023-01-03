@@ -114,12 +114,11 @@ final class MovieDetailViewController: UIViewController {
                     withReuseIdentifier: MovieDetailTabBarHeaderView.reuseIdentifier,
                     for: indexPath
                   ) as? MovieDetailTabBarHeaderView else { return UICollectionReusableView() }
-            if indexPath.section != MovieDetailSection.upper.rawValue {
-                header.setUpContents()
-                header.tabBarButtonTapped = { [weak self] mode in
-                    self?.viewModel.tabBarModeChanged(mode: mode)
-                }
+            header.tabBarButtonTapped = { [weak self] mode in
+                self?.viewModel.tabBarModeChanged(mode: mode)
             }
+
+            indexPath.section == MovieDetailSection.upper.rawValue ? header.removeSubviews() : header.setUpContents()
             return header
         }
 

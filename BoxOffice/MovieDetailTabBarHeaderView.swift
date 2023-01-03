@@ -63,7 +63,14 @@ final class MovieDetailTabBarHeaderView: UICollectionReusableView {
         super.init(coder: coder)
     }
 
+    func removeSubviews() {
+        [movieInfoButton, reviewButton, divisionLine, movieInfoSelectLine, reviewSelectLine].forEach {
+            if subviews.contains($0) { $0.removeFromSuperview() }
+        }
+    }
+
     func setUpContents() {
+        backgroundColor = .white
         layout()
         addButtonTargets()
         setTabForMovieInfo()
@@ -91,12 +98,12 @@ final class MovieDetailTabBarHeaderView: UICollectionReusableView {
 
         NSLayoutConstraint.activate([
             movieInfoButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-            movieInfoButton.topAnchor.constraint(equalTo: topAnchor),
+            movieInfoButton.topAnchor.constraint(equalTo: topAnchor, constant: Constraint.topInset),
             movieInfoButton.bottomAnchor.constraint(equalTo: bottomAnchor),
             movieInfoButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
 
             reviewButton.leadingAnchor.constraint(equalTo: movieInfoSelectLine.trailingAnchor),
-            reviewButton.topAnchor.constraint(equalTo: topAnchor),
+            reviewButton.topAnchor.constraint(equalTo: topAnchor, constant: Constraint.topInset),
             reviewButton.bottomAnchor.constraint(equalTo: bottomAnchor),
             reviewButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
 
@@ -143,5 +150,6 @@ extension MovieDetailTabBarHeaderView {
         static let selectLineHeight: CGFloat = 2
         static let divisionLineHeight: CGFloat = 1
         static let selectLineMultiplier: CGFloat = 1
+        static let topInset: CGFloat = 10
     }
 }
