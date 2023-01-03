@@ -25,6 +25,8 @@
 		02F855592963FE13004B76DD /* DefaultBoxOfficeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F855582963FE13004B76DD /* DefaultBoxOfficeRepository.swift */; };
 		02F8555D2963FEF4004B76DD /* Bundle+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8555C2963FEF4004B76DD /* Bundle+extension.swift */; };
 		02F8555F296401DA004B76DD /* BoxOfficeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8555E296401DA004B76DD /* BoxOfficeRepository.swift */; };
+		02F855612964053D004B76DD /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F855602964053D004B76DD /* ImageCacheManager.swift */; };
+		02F8556529640F16004B76DD /* UIImageView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8556429640F16004B76DD /* UIImageView+extension.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19EC28F9603900197BCC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* ViewController.swift */; };
@@ -48,6 +50,8 @@
 		02F855582963FE13004B76DD /* DefaultBoxOfficeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBoxOfficeRepository.swift; sourceTree = "<group>"; };
 		02F8555C2963FEF4004B76DD /* Bundle+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+extension.swift"; sourceTree = "<group>"; };
 		02F8555E296401DA004B76DD /* BoxOfficeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeRepository.swift; sourceTree = "<group>"; };
+		02F855602964053D004B76DD /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		02F8556429640F16004B76DD /* UIImageView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+extension.swift"; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 				02F855502963F938004B76DD /* String+extension.swift */,
 				02F855542963F99B004B76DD /* Date+extension.swift */,
 				02F8555C2963FEF4004B76DD /* Bundle+extension.swift */,
+				02F8556429640F16004B76DD /* UIImageView+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -164,6 +169,7 @@
 				02F855562963FD64004B76DD /* Model */,
 				02F855452963E70B004B76DD /* Network */,
 				02F855582963FE13004B76DD /* DefaultBoxOfficeRepository.swift */,
+				02F855602964053D004B76DD /* ImageCacheManager.swift */,
 				02F8555E296401DA004B76DD /* BoxOfficeRepository.swift */,
 			);
 			path = Repositories;
@@ -282,6 +288,7 @@
 				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
 				02F855492963E9A0004B76DD /* OmdbAPI.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
+				02F855612964053D004B76DD /* ImageCacheManager.swift in Sources */,
 				02F855592963FE13004B76DD /* DefaultBoxOfficeRepository.swift in Sources */,
 				02F8554D2963F176004B76DD /* Movie.swift in Sources */,
 				02F8553C2963C9E8004B76DD /* Encodable+extension.swift in Sources */,
@@ -290,6 +297,7 @@
 				02F8555D2963FEF4004B76DD /* Bundle+extension.swift in Sources */,
 				02F8555F296401DA004B76DD /* BoxOfficeRepository.swift in Sources */,
 				02F855382963C290004B76DD /* DefaultAPIProvider.swift in Sources */,
+				02F8556529640F16004B76DD /* UIImageView+extension.swift in Sources */,
 				02F8553A2963C90C004B76DD /* KobisAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
