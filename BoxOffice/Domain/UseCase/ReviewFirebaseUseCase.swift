@@ -12,8 +12,9 @@ final class ReviewFirebaseUseCase {
     private let firestoreManager = FirestoreManager.shared
     private let storageManager = StorageManager.shared
     
-    func save(_ reivew: Review) {
-        var reviewData: [String: Any] = [
+    func save(_ reivew: Review,
+              completion: @escaping (Result<Void, FirebaseError>) -> Void) {
+        let reviewData: [String: Any] = [
             "nickName": reivew.nickName,
             "password": reivew.password,
             "rating": String(reivew.rating),
@@ -21,29 +22,33 @@ final class ReviewFirebaseUseCase {
         ]
         
         if let photo = reivew.photo {
-            storageManager.save(photo, id: reivew.password)
+            storageManager.save(photo, id: reivew.password, completion: completion)
         }
         
-        firestoreManager.save(reviewData, with: reivew.password)
+        firestoreManager.save(reviewData, with: reivew.password, completion: completion)
     }
 
-    func fetch() -> [Review]? {
-        var reviews: [Review]?
-        
-        firestoreManager.fetch { [weak self] queryDocumentSnapshots in
-            reviews = queryDocumentSnapshots.compactMap {
-                return self?.toReview(from: $0)
+    func fetch(completion: @escaping (Result<[Review], FirebaseError>) -> Void) {
+        firestoreManager.fetch { [weak self] result in
+            switch result {
+            case .success(let documents):
+                let reviews = documents.compactMap {
+                    return self?.toReview(from: $0)
+                }
+                
+                completion(.success(reviews))
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
-
-        return reviews
     }
 
-    func delete(_ review: Review) {
-        firestoreManager.delete(with: review.password)
+    func delete(_ review: Review,
+                completion: @escaping (Result<Void, FirebaseError>) -> Void) {
+        firestoreManager.delete(with: review.password, completion: completion)
         
         if review.photo != nil {
-            storageManager.delete(widh: review.password)
+            storageManager.delete(widh: review.password, completion: completion)
         }
     }
 }

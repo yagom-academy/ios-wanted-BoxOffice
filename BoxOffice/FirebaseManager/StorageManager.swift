@@ -21,21 +21,28 @@ final class StorageManager {
         deviceID = deviceIdentifier
     }
     
-    func save(_ image: UIImage, id: String) {
+    func save(_ image: UIImage,
+              id: String,
+              completion: @escaping (Result<Void, FirebaseError>) -> Void) {
         guard let imageData = image.jpegData(compressionQuality: 1.0) else { return }
         
         storageReference.child("\(deviceID)/\(id)").putData(imageData, metadata: nil) { _, error in
-            if let error = error {
-                print(error.localizedDescription)
+            if error != nil {
+                completion(.failure(.save))
             }
+            
+            completion(.success(()))
         }
     }
     
-    func delete(widh id: String) {
+    func delete(widh id: String,
+                completion: @escaping (Result<Void, FirebaseError>) -> Void) {
         storageReference.child("\(deviceID)/\(id)").delete { error in
-            if let error = error {
-                print("Error removing image: \(error)")
+            if error != nil {
+                completion(.failure(.delete))
             }
+            
+            completion(.success(()))
         }
     }
     

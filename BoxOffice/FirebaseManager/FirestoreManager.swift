@@ -21,31 +21,37 @@ final class FirestoreManager {
         deviceID = deviceIdentifier
     }
     
-    func save(_ data: [String: Any], with id: String) {
+    func save(_ data: [String: Any],
+              with id: String,
+              completion: @escaping (Result<Void, FirebaseError>) -> Void) {
         database.collection(deviceID).document(id).setData(data) { error in
-            if let error = error {
-                print("Error writing document: \(error)")
+            if error != nil {
+                completion(.failure(.save))
             }
+            
+            completion(.success(()))
         }
     }
     
-    func delete(with id: String) {
+    func delete(with id: String,
+                completion: @escaping (Result<Void, FirebaseError>) -> Void) {
         database.collection(deviceID).document(id).delete { error in
-            if let error = error {
-                print("Error removing document: \(error)")
+            if error != nil {
+                completion(.failure(.delete))
             }
+            
+            completion(.success(()))
         }
     }
     
-    func fetch(completionHandler: @escaping ([QueryDocumentSnapshot]) -> Void) {
+    func fetch(completion: @escaping (Result<[QueryDocumentSnapshot], FirebaseError>) -> Void) {
         database.collection(deviceID).getDocuments { querySnapshot, error in
-            if let error = error {
-                print("Error fetching document: \(error)")
-                return
+            if error != nil {
+                completion(.failure(.fetch))
             }
             
             if let documents = querySnapshot?.documents {
-                completionHandler(documents)
+                completion(.success(documents))
             }
         }
     }
