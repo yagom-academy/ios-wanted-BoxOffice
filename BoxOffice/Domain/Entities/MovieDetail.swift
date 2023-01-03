@@ -5,7 +5,7 @@
 //  Created by minsson on 2023/01/02.
 //
 
-import Foundation
+import UIKit
 
 struct MovieDetail: Hashable {
     let movieCode: String
@@ -21,4 +21,6 @@ struct MovieDetail: Hashable {
     let directorsName: String
     let actorsName: String
     let watchGrade: UInt
+    let posterImage: UIImage?
+    let posterImageURL: String
 }
