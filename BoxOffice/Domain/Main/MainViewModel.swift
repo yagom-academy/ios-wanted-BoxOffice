@@ -43,16 +43,15 @@ final class MainViewModel: MainViewModelInterface, MainViewModelOutputInterface 
 extension MainViewModel: MainViewModelInputInterface {
     func onViewDidLoad() {
         
-        networkHandler?.request(
-            BoxOfficeAPI.dailyBoxOffice(key: "d9346d4d74e3d01826d92e2a0ebfaf6e",
-                                        targetDate: currentDate,
-                                       itemPerPage: itemPerPage,
-                                       isMultiMovie: "N"),
-            dataType: DailyBoxOfficeConnection.self
+        networkHandler?.request(BoxOfficeAPI.dailyBoxOffice(
+            key: "d9346d4d74e3d01826d92e2a0ebfaf6e",
+            targetDate: currentDate,
+            itemPerPage: itemPerPage,
+            isMultiMovie: "N")
         )
         .sink(receiveCompletion: { error in
             print(error)
-        }, receiveValue: { [weak self] model in
+        }, receiveValue: { [weak self] (model: DailyBoxOfficeConnection) in
             guard let self = self else { return }
             self.boxOfficePublisher.send(model.boxOfficeResult.boxOfficeList)
         })
