@@ -55,6 +55,7 @@ final class MovieDetailViewController: UIViewController {
                                            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                            withReuseIdentifier: MovieDetailTabBarHeaderView.reuseIdentifier)
         movieDetailCollectionView.dataSource = movieDetailDataSource
+        movieDetailCollectionView.delegate = self
         movieDetailCollectionView.contentInsetAdjustmentBehavior = .never
     }
 
@@ -215,5 +216,12 @@ extension MovieDetailViewController {
             section.boundarySupplementaryItems = [header]
             return section
         }
+    }
+}
+
+extension MovieDetailViewController: UICollectionViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let isShowingUpperInfoview = movieDetailCollectionView.indexPathsForVisibleItems.contains(IndexPath(row: 0, section: 0))
+        movieDetailCollectionView.contentInsetAdjustmentBehavior = isShowingUpperInfoview ? .never : .automatic
     }
 }
