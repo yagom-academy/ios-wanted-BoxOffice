@@ -8,6 +8,10 @@
 import Foundation
 
 struct DailyBoxOffice: Decodable {
+    let boxOfficeResult: BoxOfficeResult
+}
+
+struct BoxOfficeResult: Decodable {
     let boxofficeType: String
     let dailyBoxOfficeList: [DailyBoxOfficeList]
 }

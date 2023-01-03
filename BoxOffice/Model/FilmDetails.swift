@@ -8,12 +8,19 @@
 import Foundation
 
 struct FilmDetails: Decodable {
-    let dailyBoxOfficeList: DailyBoxOfficeList
+    let movieInfoResult: MovieInfoResult
+}
+
+struct MovieInfoResult: Decodable {
+    let movieInfo: MovieInfo
+}
+
+struct MovieInfo: Decodable {
     let prdtYear: String
     let openDt: String
     let showTm: String
-    let genreNm: String
+    let genres: [Genres]
     let directors: [PeopleName]
     let actors: [PeopleName]
-    let watchGradeNm: String
+    let audits: [Audits]
 }

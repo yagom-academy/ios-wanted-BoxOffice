@@ -7,11 +7,13 @@
 
 import Foundation
 
-class Network {
-    
+class NetworkManager {
+    func getFilmData(completion: @escaping (Result<FilmDetails, Error>) -> Void) {
+        self.getData(url: "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=635cb0b1404820f91c8a45fcdf831615&movieCd=20225061", completion: completion)
+    }
 }
 
-extension Network {
+extension NetworkManager {
     func getData<T: Decodable>(url: String, completion: @escaping (Result<T, Error>) -> Void) {
         guard let url = URL(string: url) else {
             return
