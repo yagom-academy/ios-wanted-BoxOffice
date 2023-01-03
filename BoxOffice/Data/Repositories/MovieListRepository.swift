@@ -52,3 +52,12 @@ final class MovieListRepository: MovieListRepositoryInterface {
         dataTask.resume()
     }
 }
+
+fileprivate extension Date {
+    func toString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        
+        return formatter.string(from: self)
+    }
+}
