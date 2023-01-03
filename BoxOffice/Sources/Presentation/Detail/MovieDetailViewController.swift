@@ -1,5 +1,5 @@
 //
-//  movieDetailViewController.swift
+//  MovieDetailViewController.swift
 //  BoxOffice
 //
 //  Created by 이예은 on 2023/01/03.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class movieDetailViewController: UIViewController {
+class MovieDetailViewController: UIViewController {
     private lazy var posterImageView: UIImageView = {
         let view = UIImageView(image: UIImage(named: "ironman.jpg"))
         view.backgroundColor = .purple
