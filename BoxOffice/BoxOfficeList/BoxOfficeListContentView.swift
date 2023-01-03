@@ -76,7 +76,7 @@ class BoxOfficeListContentView: UIView, UIContentView {
     }()
     private let openDateLabel = UILabel()
     private let audienceCountLabel = UILabel()
-    private let increaseOrDecreaseRankingLabel = RankingChangeLabel()
+    private let rankingChangeLabel = RankingChangeLabel()
 
     init(configuration: BoxOfficeListContentConfiguration) {
         self.configuration = configuration
@@ -98,7 +98,7 @@ class BoxOfficeListContentView: UIView, UIContentView {
         audienceCountStackView.addArrangedSubview(audienceCountCaption)
 
         lankNumberStackView.addArrangedSubview(lankLabel)
-        lankNumberStackView.addArrangedSubview(increaseOrDecreaseRankingLabel)
+        lankNumberStackView.addArrangedSubview(rankingChangeLabel)
 
         let lankCaption = UILabel()
         lankCaption.text = "박스오피스"
@@ -106,7 +106,7 @@ class BoxOfficeListContentView: UIView, UIContentView {
         lankStackView.addArrangedSubview(lankNumberStackView)
         lankStackView.addArrangedSubview(lankCaption)
 
-        increaseOrDecreaseRankingLabel.font = .preferredFont(forTextStyle: .subheadline)
+        rankingChangeLabel.font = .preferredFont(forTextStyle: .subheadline)
 
         lankAndAudienceCountStackView.addArrangedSubview(audienceCountStackView)
         lankAndAudienceCountStackView.addArrangedSubview(lankStackView)
@@ -114,7 +114,6 @@ class BoxOfficeListContentView: UIView, UIContentView {
 
         let countStack = UIStackView()
         countStack.axis = .horizontal
-
 
         [
             movieNameLabel,
@@ -146,6 +145,6 @@ class BoxOfficeListContentView: UIView, UIContentView {
         audienceCountLabel.text = configuration.audienceCount?.description
         let rankingChange = configuration.increaseOrDecreaseInRank ?? 0
         let isNewEntryToRank = configuration.isNewEntryToRank ?? false
-        increaseOrDecreaseRankingLabel.rankingChange = isNewEntryToRank ? .new : .old(change: rankingChange)
+        rankingChangeLabel.rankingChange = isNewEntryToRank ? .new : .old(change: rankingChange)
     }
 }
