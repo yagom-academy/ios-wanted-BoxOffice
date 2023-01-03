@@ -37,7 +37,7 @@ final class MovieDetailUpperCollectionViewCell: UICollectionViewCell {
     private let gradeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGreen
-        label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -45,14 +45,14 @@ final class MovieDetailUpperCollectionViewCell: UICollectionViewCell {
     private let rankingLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     private let rankUpDownLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .caption2)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
