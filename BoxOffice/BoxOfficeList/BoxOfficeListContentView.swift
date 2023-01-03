@@ -147,9 +147,8 @@ class BoxOfficeListContentView: UIView, UIContentView {
 
     private func apply(_ configuration: BoxOfficeListContentConfiguration) {
         if let date = configuration.openDate {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .long
-            dateFormatter.timeStyle = .none
+            let dateFormatter = ISO8601DateFormatter()
+            dateFormatter.formatOptions = .withFullDate
             let dateString = dateFormatter.string(from: date)
             openDateLabel.text = dateString
         }
