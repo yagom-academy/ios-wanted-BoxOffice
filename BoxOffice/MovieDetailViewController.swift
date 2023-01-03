@@ -73,6 +73,8 @@ final class MovieDetailViewController: UIViewController {
                                            forCellWithReuseIdentifier: MovieDetailInfoCollectionViewCell.reuseIdentifier)
         movieDetailCollectionView.register(MovieDetailReviewCollectionViewCell.self,
                                            forCellWithReuseIdentifier: MovieDetailReviewCollectionViewCell.reuseIdentifier)
+        movieDetailCollectionView.register(AverageReviewCollectionViewCell.self,
+                                           forCellWithReuseIdentifier: AverageReviewCollectionViewCell.reuseIdentifier)
         movieDetailCollectionView.register(MovieDetailTabBarHeaderView.self,
                                            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                            withReuseIdentifier: MovieDetailTabBarHeaderView.reuseIdentifier)
@@ -95,8 +97,8 @@ final class MovieDetailViewController: UIViewController {
     private func movieDetailCollectionViewDataSource() -> UICollectionViewDiffableDataSource<MovieDetailSection, MovieDetailItem> {
         let dataSource = UICollectionViewDiffableDataSource<MovieDetailSection, MovieDetailItem>(
             collectionView: movieDetailCollectionView
-        ) { collectionView, indexPath, itemIdentifier -> UICollectionViewCell? in
-
+        ) { [weak self] collectionView, indexPath, itemIdentifier -> UICollectionViewCell? in
+            guard let self = self else { return UICollectionViewCell() }
             if indexPath.section == MovieDetailSection.upper.rawValue {
                 if case let .upper(movieDetail) = itemIdentifier,
                    let cell = collectionView.dequeueReusableCell(
@@ -119,8 +121,10 @@ final class MovieDetailViewController: UIViewController {
                     return cell
                 }
             case .review:
-                if case let .review(review) = itemIdentifier,
-                   let cell = collectionView.dequeueReusableCell(
+                guard case let .review(review) = itemIdentifier else { return UICollectionViewCell() }
+
+                if indexPath.row != 0,
+                    let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: MovieDetailReviewCollectionViewCell.reuseIdentifier,
                     for: indexPath
                    ) as? MovieDetailReviewCollectionViewCell {
@@ -128,6 +132,16 @@ final class MovieDetailViewController: UIViewController {
                     cell.deleteButtonTapped = { [weak self] in
                         self?.viewModel.deleteReviewButtonTapped(review: review)
                     }
+                    return cell
+                }
+
+                if indexPath.row == 0,
+                    let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: AverageReviewCollectionViewCell.reuseIdentifier,
+                    for: indexPath
+                   ) as? AverageReviewCollectionViewCell {
+                    cell.setUpContents(averageRating: self.viewModel.averageRating,
+                                       movieTitle: self.viewModel.movieDetail.title)
                     return cell
                 }
             }
@@ -158,6 +172,7 @@ final class MovieDetailViewController: UIViewController {
         if viewModel.tabBarMode == .movieInfo {
             snapShot.appendItems([.info(viewModel.movieDetail)], toSection: .bottom)
         } else {
+            snapShot.appendItems([.review(dummyMovieReview)], toSection: .bottom)
             viewModel.movieReviews.forEach {
                 snapShot.appendItems([.review($0)], toSection: .bottom)
             }
