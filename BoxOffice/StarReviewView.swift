@@ -13,7 +13,8 @@ final class StarReviewView: UIView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.backgroundColor = .clear
-        stackView.alignment = .leading
+        stackView.alignment = .center
+        stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -37,12 +38,14 @@ final class StarReviewView: UIView {
         for _ in 0..<filledStarCount {
             let starView = UIImageView(image: UIImage(systemName: "star.fill"))
             starView.tintColor = starColor
+            starView.contentMode = .scaleAspectFill
             starStackView.addArrangedSubview(starView)
         }
 
         if shouldAddHalfStar {
             let starView = UIImageView(image: UIImage(systemName: "star.leadinghalf.filled"))
             starView.tintColor = starColor
+            starView.contentMode = .scaleAspectFill
             starStackView.addArrangedSubview(starView)
         }
     }
