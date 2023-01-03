@@ -79,9 +79,8 @@
 			children = (
 				02F855272963B217004B76DD /* App */,
 				02F855422963E6E4004B76DD /* Extensions */,
-				02F855452963E70B004B76DD /* Network */,
+				02F855572963FDE3004B76DD /* Repositories */,
 				635A19EB28F9603900197BCC /* ViewController.swift */,
-				02F8554C2963F176004B76DD /* Movie.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -142,6 +141,23 @@
 				02F855372963C290004B76DD /* DefaultAPIProvider.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		02F855562963FD64004B76DD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				02F8554C2963F176004B76DD /* Movie.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		02F855572963FDE3004B76DD /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				02F855562963FD64004B76DD /* Model */,
+				02F855452963E70B004B76DD /* Network */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		635A19DB28F9603900197BCC = {
