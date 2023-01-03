@@ -28,22 +28,7 @@ struct APIClient {
             completionHandler(.success(data))
         }.resume()
     }
-    
-    func requestData(with url: URL,
-                     completionHandler: @escaping CompletionHandler) {
-        session.dataTask(with: url) { (data, _, error)  in
-            guard let data = data else {
-                DispatchQueue.main.async {
-                    completionHandler(.failure(error ?? APIError.unknown))
-                }
-                return
-            }
-            DispatchQueue.main.async {
-                completionHandler(.success(data))
-            }
-        }.resume()
-    }
-    
+
     init(sesseion: URLSession) {
         self.session = sesseion
     }
