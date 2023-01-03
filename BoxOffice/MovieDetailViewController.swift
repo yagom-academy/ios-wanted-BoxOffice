@@ -23,6 +23,7 @@ final class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        bind()
         setUpMovieDetailCollectionView()
         layout()
         applyDataSource()
@@ -114,6 +115,9 @@ final class MovieDetailViewController: UIViewController {
                   ) as? MovieDetailTabBarHeaderView else { return UICollectionReusableView() }
             if indexPath.section != MovieDetailSection.upper.rawValue {
                 header.setUpContents()
+                header.tabBarButtonTapped = { [weak self] mode in
+                    self?.viewModel.tabBarModeChanged(mode: mode)
+                }
             }
             return header
         }
@@ -125,9 +129,12 @@ final class MovieDetailViewController: UIViewController {
         var snapShot = NSDiffableDataSourceSnapshot<MovieDetailSection, MovieDetailItem>()
         snapShot.appendSections([.upper, .bottom])
         snapShot.appendItems([.upper(viewModel.movieDetail)], toSection: .upper)
-        snapShot.appendItems([.info(viewModel.movieDetail)], toSection: .bottom)
-        viewModel.movieReviews.forEach {
-            snapShot.appendItems([.review($0)], toSection: .bottom)
+        if viewModel.tabBarMode == .movieInfo {
+            snapShot.appendItems([.info(viewModel.movieDetail)], toSection: .bottom)
+        } else {
+            viewModel.movieReviews.forEach {
+                snapShot.appendItems([.review($0)], toSection: .bottom)
+            }
         }
         movieDetailDataSource.apply(snapShot)
     }

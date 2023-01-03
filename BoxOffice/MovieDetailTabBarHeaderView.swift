@@ -53,8 +53,7 @@ final class MovieDetailTabBarHeaderView: UICollectionReusableView {
         }
     }
 
-    var movieInfoButtonTapped: (() -> Void)?
-    var reviewButtonTapped: (() -> Void)?
+    var tabBarButtonTapped: ((MovieDetailViewModel.TabBarMode) -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -124,14 +123,14 @@ final class MovieDetailTabBarHeaderView: UICollectionReusableView {
 
     @objc
     private func productListButtonTapped(_ sender: UIButton) {
-        movieInfoButtonTapped?()
         mode = .movieInfo
+        tabBarButtonTapped?(mode)
     }
 
     @objc
     private func reviewButtonTapped(_ sender: UIButton) {
-        reviewButtonTapped?()
         mode = .review
+        tabBarButtonTapped?(mode)
     }
 }
 

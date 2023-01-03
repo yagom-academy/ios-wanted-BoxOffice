@@ -36,6 +36,11 @@ extension MovieDetailViewModel {
         fetchMovieDetail(movieCode: movieCode)
     }
 
+    func tabBarModeChanged(mode: TabBarMode) {
+        tabBarMode = mode
+        applyDataSource?()
+    }
+
     func deleteReviewButtonTapped(review: MovieReview) {
 
     }
