@@ -20,7 +20,14 @@ extension Encodable {
     
     func asURLQuerys() throws -> [URLQueryItem] {
         let dictionary = try asDictionary()
-        return dictionary.sorted{ $0.key < $1.key }.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+        return dictionary
+            .sorted{ $0.key < $1.key }
+            .map {
+                return URLQueryItem(
+                    name: $0.key,
+                    value: "\($0.value)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                )
+            }
     }
     
 }
