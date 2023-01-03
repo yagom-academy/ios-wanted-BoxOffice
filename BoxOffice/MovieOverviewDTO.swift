@@ -7,6 +7,22 @@
 
 import Foundation
 
+struct MovieOverviewWeeklyDTO: Decodable {
+    let movieOverviewDTOs: [MovieOverviewDTO]
+    
+    enum CodingKeys: String, CodingKey {
+        case movieOverviewDTOs = "weeklyBoxOfficeList"
+    }
+}
+
+struct MovieOverviewDailyDTO: Decodable {
+    let movieOverviewDTOs: [MovieOverviewDTO]
+    
+    enum CodingKeys: String, CodingKey {
+        case movieOverviewDTOs = "dailyBoxOfficeList"
+    }
+}
+
 struct MovieOverviewDTO: Decodable {
     let movieCode: String
     let rank: UInt
