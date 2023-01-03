@@ -9,10 +9,35 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 final class FirebaseManager {
+    let db = Firestore.firestore()
     
-    func save() {}
+    func save(review: Review) {
+        db.collection("review").document(review.password).setData(review.asDictionary!)
+    }
     
-    func subscribe() {}
+    func update(review: Review) {
+        db.collection("review").document(review.password).setData(
+            review.asDictionary!,
+            merge: true
+        )
+    }
+    
+    func delete(review: Review) {
+        db.collection("review").document(review.password).delete()
+    }
+    
+    func fetchAll() {
+        db.collection("review").getDocuments { (snapshot, error) in
+            if error == nil && snapshot != nil {
+                for document in snapshot!.documents {
+                    print(document.documentID)
+                    print(document.data())
+                }
+            } else {
+                
+            }
+        }
+    }
 }
 
 
