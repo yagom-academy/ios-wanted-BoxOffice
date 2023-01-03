@@ -102,3 +102,9 @@ fileprivate extension String {
         return date
     }
 }
+
+extension MovieOverviewWeeklyContainerDTO {
+    func toDomain() -> [MovieOverview] {
+        return movieOverviewWeeklyDTO.toDomain()
+    }
+}
