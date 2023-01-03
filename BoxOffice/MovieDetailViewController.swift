@@ -55,6 +55,7 @@ final class MovieDetailViewController: UIViewController {
                                            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                            withReuseIdentifier: MovieDetailTabBarHeaderView.reuseIdentifier)
         movieDetailCollectionView.dataSource = movieDetailDataSource
+        movieDetailCollectionView.contentInsetAdjustmentBehavior = .never
     }
 
     private func layout() {
@@ -63,7 +64,7 @@ final class MovieDetailViewController: UIViewController {
         NSLayoutConstraint.activate([
             movieDetailCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             movieDetailCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            movieDetailCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            movieDetailCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             movieDetailCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
