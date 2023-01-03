@@ -42,7 +42,7 @@ class BoxOfficeListContentView: UIView, UIContentView {
         return stackView
     }()
 
-    private let lankTitleStackView = {
+    private let lankingHeaderStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .center
@@ -119,12 +119,12 @@ class BoxOfficeListContentView: UIView, UIContentView {
 
     private func layout() {
         [lankLabel, rankingChangeLabel].forEach {
-            lankTitleStackView.addArrangedSubview($0)
+            lankingHeaderStackView.addArrangedSubview($0)
         }
 
         openDateStackView.insertArrangedSubview(openDateLabel, at: 0)
         audienceCountStackView.insertArrangedSubview(audienceCountLabel, at: 0)
-        lankStackView.insertArrangedSubview(lankTitleStackView, at: 0)
+        lankStackView.insertArrangedSubview(lankingHeaderStackView, at: 0)
 
         [openDateStackView, audienceCountStackView, lankStackView].forEach {
             lankAndAudienceCountStackView.addArrangedSubview($0)
