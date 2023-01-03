@@ -42,3 +42,55 @@ struct MovieOverviewDTO: Decodable {
         case isNewlyRanked = "rankOldAndNew"
     }
 }
+
+extension MovieOverviewWeeklyDTO {
+    func toDomain() -> [MovieOverview] {
+        var movieOverviews = [MovieOverview]()
+        
+        self.movieOverviewDTOs.forEach { movieOverviewDTO in
+            // TODO: dayType 주말로 바꾸기
+            movieOverviews.append(movieOverviewDTO.toDomain(dayType: .weekends))
+        }
+        
+        return movieOverviews
+    }
+}
+
+extension MovieOverviewDailyDTO {
+    func toDomain() -> [MovieOverview] {
+        var movieOverviews = [MovieOverview]()
+        
+        self.movieOverviewDTOs.forEach { movieOverviewDTO in
+            movieOverviews.append(movieOverviewDTO.toDomain(dayType: .weekdays))
+        }
+        
+        return movieOverviews
+    }
+}
+
+extension MovieOverviewDTO {
+    func toDomain(dayType: DayType) -> MovieOverview {
+        return MovieOverview(
+            movieCode: movieCode,
+            dayType: dayType,
+            region: .Seoul,
+            rank: rank,
+            title: title,
+            openingDay: openingDay.toDate(),
+            audienceNumber: audienceNumber,
+            rankFluctuation: rankFluctuation,
+            isNewlyRanked: isNewlyRanked
+        )
+    }
+}
+
+fileprivate extension String {
+    func toDate() -> Date {
+        let formatter = DateFormatter()
+        guard let date = formatter.date(from: self) else {
+            return Date()
+        }
+        
+        return date
+    }
+}
