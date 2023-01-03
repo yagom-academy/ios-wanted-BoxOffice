@@ -64,13 +64,6 @@ class BoxOfficeListContentView: UIView, UIContentView {
         return stackView
     }()
 
-    private let rankChangeStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        return stackView
-    }()
-
     private let movieNameLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .largeTitle)
@@ -83,8 +76,7 @@ class BoxOfficeListContentView: UIView, UIContentView {
     }()
     private let openDateLabel = UILabel()
     private let audienceCountLabel = UILabel()
-    private let increaseOrDecreaseRankingLabel = BoxOfficeListRankingChangeLabel(rankingChange: 0)
-    private let isNewEntryToRankLabel = UILabel()
+    private let increaseOrDecreaseRankingLabel = RankingChangeLabel()
 
     init(configuration: BoxOfficeListContentConfiguration) {
         self.configuration = configuration
@@ -115,12 +107,9 @@ class BoxOfficeListContentView: UIView, UIContentView {
         lankStackView.addArrangedSubview(lankCaption)
 
         increaseOrDecreaseRankingLabel.font = .preferredFont(forTextStyle: .subheadline)
-        isNewEntryToRankLabel.font = .preferredFont(forTextStyle: .caption1)
-        rankChangeStackView.addArrangedSubview(isNewEntryToRankLabel)
 
         lankAndAudienceCountStackView.addArrangedSubview(audienceCountStackView)
         lankAndAudienceCountStackView.addArrangedSubview(lankStackView)
-        lankAndAudienceCountStackView.addArrangedSubview(rankChangeStackView)
         openDateStackView.addArrangedSubview(openDateLabel)
 
         let countStack = UIStackView()
@@ -155,8 +144,8 @@ class BoxOfficeListContentView: UIView, UIContentView {
         movieNameLabel.text = configuration.movieName
         lankLabel.text = "\(configuration.lank ?? 0)위"
         audienceCountLabel.text = configuration.audienceCount?.description
-        increaseOrDecreaseRankingLabel.rankingChange = configuration.increaseOrDecreaseInRank ?? 0
-        guard let isNewEntryToRank = configuration.isNewEntryToRank else { return }
-        isNewEntryToRankLabel.text = isNewEntryToRank ? "New" : "Old"
+        let rankingChange = configuration.increaseOrDecreaseInRank ?? 0
+        let isNewEntryToRank = configuration.isNewEntryToRank ?? false
+        increaseOrDecreaseRankingLabel.rankingChange = isNewEntryToRank ? .new : .old(change: rankingChange)
     }
 }
