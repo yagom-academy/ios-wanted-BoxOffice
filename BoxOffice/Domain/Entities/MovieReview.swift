@@ -11,8 +11,9 @@ struct MovieReview: Hashable {
     let id: UUID
     let user: User
     let password: String
-    let rating: UInt
+    let rating: Double
     let image: UIImage
+    let description: String
 }
 
 struct User: Hashable {
