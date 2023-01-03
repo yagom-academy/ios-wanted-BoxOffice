@@ -10,7 +10,6 @@ import FirebaseFirestore
 
 final class ReviewFirebaseUseCase {
     private let firestoreManager = FirestoreManager.shared
-    private let storageManager = StorageManager.shared
     
     func save(_ reivew: Review,
               completion: @escaping (Result<Void, FirebaseError>) -> Void) {
@@ -19,12 +18,9 @@ final class ReviewFirebaseUseCase {
             "password": reivew.password,
             "rating": String(reivew.rating),
             "content": reivew.content,
+            "hasPhoto": reivew.hasImage
         ]
-        
-        if let photo = reivew.photo {
-            storageManager.save(photo, id: reivew.password, completion: completion)
-        }
-        
+
         firestoreManager.save(reviewData, with: reivew.password, completion: completion)
     }
 
@@ -46,10 +42,6 @@ final class ReviewFirebaseUseCase {
     func delete(_ review: Review,
                 completion: @escaping (Result<Void, FirebaseError>) -> Void) {
         firestoreManager.delete(with: review.password, completion: completion)
-        
-        if review.photo != nil {
-            storageManager.delete(widh: review.password, completion: completion)
-        }
     }
 }
 
@@ -59,11 +51,7 @@ extension ReviewFirebaseUseCase {
               let password = document["password"] as? String,
               let rating = document["rating"] as? Double,
               let content = document["content"] as? String else { return nil }
-        
-        var photo: UIImage?
-        storageManager.fetch(with: password) { image in
-            photo = image
-        }
+              let ratingValue = document["rating"] as? String,
               let hasPhoto = document["hasPhoto"] as? Bool else { return nil }
         
         return Review(nickName: nickName,
