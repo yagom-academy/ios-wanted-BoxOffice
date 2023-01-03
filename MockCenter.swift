@@ -58,3 +58,4 @@ var dummyMovieReview: MovieReview {
     return MovieReview(id: UUID(), user: User(id: UUID(), nickname: "Neph"), password: "1234", rating: 5, image: UIImage(systemName: "person")!)
 }
 
+let dummyPosterImage = UIImage(named: "dummyPosterImage")

@@ -11,12 +11,19 @@ final class MovieDetailUpperCollectionViewCell: UICollectionViewCell {
 
     static let reuseIdentifier = "movieDetailUpperCollectionViewCell"
 
-    private let imageView: UIImageView = {
+    private let posterImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .systemGray
-        imageView.alpha = 0.3
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }()
+
+    private let posterImageMaskView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black.withAlphaComponent(0.5)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
 
     private let titleLabel: UILabel = {
@@ -75,15 +82,21 @@ final class MovieDetailUpperCollectionViewCell: UICollectionViewCell {
         rankUpDownLabel.textColor = movieDetail.rankFluctuation > 0 ? .systemRed : .systemBlue
         rankUpDownLabel.text = movieDetail.rankFluctuation > 0 ?  "▲ \(movieDetail.rankFluctuation)" : "▼ \(-movieDetail.rankFluctuation)"
         newlyRankedLabel.text = movieDetail.isNewlyRanked ? "New" : ""
+        posterImageView.image = dummyPosterImage
     }
 
     private func layout() {
-        [imageView, titleLabel, gradeLabel, rankingLabel, rankUpDownLabel, newlyRankedLabel].forEach { contentView.addSubview($0) }
+        [posterImageView, posterImageMaskView, titleLabel, gradeLabel, rankingLabel, rankUpDownLabel, newlyRankedLabel].forEach { contentView.addSubview($0) }
         NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            posterImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+
+            posterImageMaskView.leadingAnchor.constraint(equalTo: posterImageView.leadingAnchor),
+            posterImageMaskView.trailingAnchor.constraint(equalTo: posterImageView.trailingAnchor),
+            posterImageMaskView.topAnchor.constraint(equalTo: posterImageView.topAnchor),
+            posterImageMaskView.bottomAnchor.constraint(equalTo: posterImageView.bottomAnchor),
 
             rankingLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             rankingLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
