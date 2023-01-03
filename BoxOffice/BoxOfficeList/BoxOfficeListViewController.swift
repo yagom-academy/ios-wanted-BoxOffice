@@ -16,23 +16,16 @@ class BoxOfficeListViewController: UIViewController {
         return UICollectionView(frame: .zero, collectionViewLayout: layout)
     }()
 
-    private let periodSegmentedControl: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl()
-        Period.allCases.enumerated().forEach { index, mode in
-            segmentedControl.insertSegment(withTitle: nil, at: index, animated: false)
-        }
-        segmentedControl.selectedSegmentIndex = 0
-        return segmentedControl
-    }()
+    private let periodSegmentedControl = UISegmentedControl()
     private let stackView = UIStackView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "첫 화면"
         view.backgroundColor = .systemBackground
+        setupSegmentControll()
         setupListView()
         layout()
-        setupSegmentControll()
         // initial data
         var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeListCellViewModel>()
         snapshot.appendSections([.main])
@@ -48,7 +41,7 @@ class BoxOfficeListViewController: UIViewController {
             snapshot.appendItems(self.testDatasForDay)
             self.dataSource?.apply(snapshot, animatingDifferences: false)
         }
-        periodSegmentedControl.setAction(segment1, forSegmentAt: 0)
+        periodSegmentedControl.insertSegment(action: segment1, at: 0, animated: false)
 
         let segment2 = UIAction(title: Period.week.title) { [weak self] _ in
             guard let self = self else { return }
@@ -57,7 +50,7 @@ class BoxOfficeListViewController: UIViewController {
             snapshot.appendItems(self.testDatasForWeek)
             self.dataSource?.apply(snapshot, animatingDifferences: false)
         }
-        periodSegmentedControl.setAction(segment2, forSegmentAt: 1)
+        periodSegmentedControl.insertSegment(action: segment2, at: 1, animated: false)
 
         let segment3 = UIAction(title: Period.weekEnd.title) { [weak self] _ in
             guard let self = self else { return }
@@ -66,7 +59,9 @@ class BoxOfficeListViewController: UIViewController {
             snapshot.appendItems(self.testDatasForWeekend)
             self.dataSource?.apply(snapshot, animatingDifferences: false)
         }
-        periodSegmentedControl.setAction(segment3, forSegmentAt: 2)
+        periodSegmentedControl.insertSegment(action: segment3, at: 2, animated: false)
+        
+        periodSegmentedControl.selectedSegmentIndex = 0
     }
 
     private func setupListView() {
