@@ -18,6 +18,7 @@
 		20BB8C1C2963B54400801668 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BB8C1B2963B54400801668 /* Review.swift */; };
 		20BB8C202963C2DA00801668 /* FirebaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BB8C1F2963C2DA00801668 /* FirebaseError.swift */; };
 		20C7D43729641D8200D87350 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C7D43629641D8200D87350 /* Observable.swift */; };
+		20C7D43929641DDA00D87350 /* WriteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C7D43829641DDA00D87350 /* WriteReviewViewController.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19EC28F9603900197BCC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* ViewController.swift */; };
@@ -60,6 +61,7 @@
 		20BB8C1B2963B54400801668 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		20BB8C1F2963C2DA00801668 /* FirebaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseError.swift; sourceTree = "<group>"; };
 		20C7D43629641D8200D87350 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		20C7D43829641DDA00D87350 /* WriteReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewViewController.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				2073EB18296317BF00216565 /* FirebaseManager */,
 				635A19EB28F9603900197BCC /* ViewController.swift */,
 				20C7D43629641D8200D87350 /* Observable.swift */,
+				20C7D43829641DDA00D87350 /* WriteReviewViewController.swift */,
 			);
 			path = BoxOffice;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				20BB8C192963B40300801668 /* ReviewFirebaseUseCase.swift in Sources */,
 				AF6C3A552962EA0B0074574D /* Bundle+Extension.swift in Sources */,
 				AF6C3A442962D5E00074574D /* APIError.swift in Sources */,
+				20C7D43929641DDA00D87350 /* WriteReviewViewController.swift in Sources */,
 				AF6C3A462962D5E70074574D /* API.swift in Sources */,
 				AF6C3A5C2962F4FF0074574D /* MovieDetail.swift in Sources */,
 				AF6C3A422962D5C80074574D /* APIConfiguration.swift in Sources */,
