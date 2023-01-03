@@ -12,5 +12,5 @@ struct MovieCellData {
     let title: String
     let openDate: String
     let isNewEntry: Bool
-    let rankInten: String
+    let rankChange: String
 }
