@@ -43,7 +43,7 @@ protocol Networkerable {
     ) -> AnyPublisher<T, Error>
 }
 
-class Networker {
+final class Networker {
     
     private var baseURL: String = ""
     
@@ -75,8 +75,12 @@ extension Networker: Networkerable {
             
             urlComponents?.queryItems = parameters
             
-            var urlRequest = URLRequest(url: urlComponents!.url!)
-            
+            guard let url: URL = urlComponents?.url else {
+                return Fail(error: NSError(domain: "", code: -44)).eraseToAnyPublisher()
+            }
+                        
+            var urlRequest = URLRequest(url: url)
+                        
             urlRequest.httpMethod = api.method.rawValue
             
             header.forEach { key, value in
@@ -88,7 +92,11 @@ extension Networker: Networkerable {
         case .post, .put, .delete:
             let urlComponents = URLComponents(string: baseURL + api.path)
             
-            var urlRequest = URLRequest(url: urlComponents!.url!)
+            guard let url: URL = urlComponents?.url else {
+                return Fail(error: NSError(domain: "", code: -44)).eraseToAnyPublisher()
+            }
+            
+            var urlRequest = URLRequest(url: url)
             
             urlRequest.httpMethod = api.method.rawValue
             
