@@ -11,6 +11,7 @@
 		3250DD0629656F3600D597C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3250DD0529656F3600D597C2 /* GoogleService-Info.plist */; };
 		3250DD0929656FC500D597C2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3250DD0829656FC500D597C2 /* FirebaseFirestore */; };
 		3250DD0B2965700100D597C2 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3250DD0A2965700100D597C2 /* FirebaseService.swift */; };
+		32645AA52965A7AD00E021B1 /* MoviewReviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32645AA42965A7AD00E021B1 /* MoviewReviewDTO.swift */; };
 		32645AA72965AB3300E021B1 /* MovieDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32645AA62965AB3300E021B1 /* MovieDetailRepository.swift */; };
 		32A6114329629B76009A3BC1 /* MovieOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A6114229629B76009A3BC1 /* MovieOverview.swift */; };
 		32A6114629629EC8009A3BC1 /* MovieListRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A6114529629EC8009A3BC1 /* MovieListRepositoryInterface.swift */; };
@@ -37,6 +38,7 @@
 		32406B902962F34900E94D7C /* UploadReviewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadReviewUseCase.swift; sourceTree = "<group>"; };
 		3250DD0529656F3600D597C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3250DD0A2965700100D597C2 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		32645AA42965A7AD00E021B1 /* MoviewReviewDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviewReviewDTO.swift; sourceTree = "<group>"; };
 		32645AA62965AB3300E021B1 /* MovieDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailRepository.swift; sourceTree = "<group>"; };
 		32A6114229629B76009A3BC1 /* MovieOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieOverview.swift; sourceTree = "<group>"; };
 		32A6114529629EC8009A3BC1 /* MovieListRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListRepositoryInterface.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				FD733FBF2963C06000AFC901 /* Repositories */,
 				FD733FC22963D16900AFC901 /* NetworkService.swift */,
 				3250DD0A2965700100D597C2 /* FirebaseService.swift */,
+				32645AA42965A7AD00E021B1 /* MoviewReviewDTO.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				FDE33C782962ACD500620E1F /* MovieDetailRepositoryInterface.swift in Sources */,
 				32406B912962F34900E94D7C /* UploadReviewUseCase.swift in Sources */,
 				32C5D8752962EE8B00FD7260 /* FetchMovieReviewUseCase.swift in Sources */,
+				32645AA52965A7AD00E021B1 /* MoviewReviewDTO.swift in Sources */,
 				FDE33C7A2962AD8500620E1F /* FetchMovieDetailUseCase.swift in Sources */,
 				32A6114E2962A42D009A3BC1 /* FetchMovieListUseCase.swift in Sources */,
 				FD733FC12963C07600AFC901 /* MovieListRepository.swift in Sources */,
