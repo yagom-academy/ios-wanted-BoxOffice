@@ -69,15 +69,7 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
         label.textColor = .systemGray
         return label
     }()
-    
-    private let rankFluctuationLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "순위변동"
-        label.textColor = .secondaryLabel
-        return label
-    }()
-    
+        
     private let rankFluctuationValueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
