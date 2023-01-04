@@ -146,6 +146,31 @@ extension WriteReviewViewController: UITextFieldDelegate {
         passwordTextField.delegate = self
     }
     
+    private func validatePassword() -> Bool {
+        let number = convert("0123456789")
+        let specialCharacters = convert("!@#$")
+        let alphabet = convert("abcdefghijklmnopqrstuvwxyz")
+        let checkingPassword = convert(password)
+        
+        guard checkingPassword.intersection(number).isEmpty == false,
+              checkingPassword.intersection(specialCharacters).isEmpty == false,
+              checkingPassword.intersection(alphabet).isEmpty == false else {
+            return false
+        }
+        
+        return true
+    }
+    
+    private func convert(_ text: String) -> Set<String> {
+        var newSet: Set<String> = []
+        
+        text.forEach {
+            newSet.update(with: String($0))
+        }
+        
+        return newSet
+    }
+    
     //TODO: text를 지우는 경우 password에서 지워지지 않고 그대로 쌓임
     private func setupPassword(with textField: UITextField) {
         if let text = textField.text, let lastText = text.last {
