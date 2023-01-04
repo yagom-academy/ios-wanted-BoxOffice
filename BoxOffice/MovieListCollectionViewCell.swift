@@ -118,7 +118,7 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
         rankValueLabel.text = "\(movieOverview.rank)"
         newlyRankedLabel.text = movieOverview.isNewlyRanked ? "New" : ""
         audienceNumberValueLabel.text = "\(movieOverview.audienceNumber)"
-        openingDayValueLabel.text = "\(movieOverview.openingDay)"
+        openingDayValueLabel.text = movieOverview.openingDay.toStringWithDateFormat()
         
         if movieOverview.rankFluctuation > 0 {
             rankFluctuationValueLabel.text = "▲ \(movieOverview.rankFluctuation)"
@@ -189,5 +189,14 @@ private extension MovieListCollectionViewCell {
         static let outerSpacing: CGFloat = 16
         static let imageViewWidth: CGFloat = 120
         static let imageViewHeight: CGFloat = 160
+    }
+}
+
+fileprivate extension Date {
+    func toStringWithDateFormat() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        return formatter.string(from: self)
     }
 }
