@@ -19,6 +19,12 @@ final class MovieDetailViewController: UIViewController {
         return collectionView
     }()
 
+    private let loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
+
     private lazy var movieDetailDataSource = movieDetailCollectionViewDataSource()
 
     override func viewDidLoad() {
@@ -64,6 +70,8 @@ final class MovieDetailViewController: UIViewController {
         viewModel.presentViewController = { [weak self] viewController in
             self?.present(viewController, animated: true)
         }
+        viewModel.startLoadingIndicator = { [weak self] in self?.loadingIndicator.startAnimating() }
+        viewModel.stopLoadingIndicator = { [weak self] in self?.loadingIndicator.stopAnimating() }
     }
 
     private func setUpMovieDetailCollectionView() {
@@ -84,13 +92,18 @@ final class MovieDetailViewController: UIViewController {
     }
 
     private func layout() {
-        view.addSubview(movieDetailCollectionView)
+        [movieDetailCollectionView, loadingIndicator].forEach {
+            view.addSubview($0)
+        }
 
         NSLayoutConstraint.activate([
             movieDetailCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             movieDetailCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             movieDetailCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            movieDetailCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            movieDetailCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 

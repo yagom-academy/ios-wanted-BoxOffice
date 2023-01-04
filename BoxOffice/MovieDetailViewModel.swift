@@ -29,6 +29,8 @@ final class MovieDetailViewModel {
     var applyDataSource: (() -> Void)?
     var scrollToUpper: (() -> Void)?
     var presentViewController: ((UIViewController) -> Void)?
+    var startLoadingIndicator: (() -> Void)?
+    var stopLoadingIndicator: (() -> Void)?
 
     // MARK: - Private properties
     private let movieCode: String
@@ -102,6 +104,7 @@ extension MovieDetailViewModel {
 // MARK: - Private functions
 extension MovieDetailViewModel {
     private func fetchMovieDetail(movieCode: String) {
+        startLoadingIndicator?()
         fetchMovieDetailUseCase.execute(movieCode: movieCode) { [weak self] result in
             switch result {
             case .success(let movieDetail):
@@ -110,10 +113,12 @@ extension MovieDetailViewModel {
             case .failure(let error):
                 print(error)
             }
+            self?.stopLoadingIndicator?()
         }
     }
 
     private func fetchMovieReview(movieCode: String) {
+        startLoadingIndicator?()
         fetchMovieReviewUseCase.execute(movieCode: movieCode) { [weak self] result in
             switch result {
             case .success(let reviews):
@@ -122,17 +127,20 @@ extension MovieDetailViewModel {
             case .failure(let error):
                 print(error)
             }
+            self?.stopLoadingIndicator?()
         }
     }
 
     private func deleteMovieReview(review: MovieReview) {
-        deleteMovieReviewUseCase.execute(review: review) { result in
+        startLoadingIndicator?()
+        deleteMovieReviewUseCase.execute(review: review) { [weak self] result in
             switch result {
             case .success:
                 break
             case .failure(let error):
                 print(error)
             }
+            self?.stopLoadingIndicator?()
         }
     }
 }
