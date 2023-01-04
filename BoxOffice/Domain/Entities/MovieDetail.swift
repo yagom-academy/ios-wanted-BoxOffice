@@ -11,6 +11,7 @@ struct MovieDetail: Hashable {
     let movieCode: String
     let rank: UInt
     let title: String
+    let englishTitle: String
     let openingDay: Date
     let audienceNumber: UInt
     let rankFluctuation: Int
@@ -21,6 +22,5 @@ struct MovieDetail: Hashable {
     let directorsName: String
     let actorsName: String
     let watchGrade: UInt
-    let posterImage: UIImage?
     let posterImageURL: String
 }
