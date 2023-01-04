@@ -136,7 +136,7 @@ extension MovieDetailViewModel {
         deleteMovieReviewUseCase.execute(review: review) { [weak self] result in
             switch result {
             case .success:
-                break
+                self?.applyDataSource?()
             case .failure(let error):
                 print(error)
             }
