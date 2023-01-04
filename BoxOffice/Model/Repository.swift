@@ -12,14 +12,56 @@ final class Repository {
     private let firstApiKey = "325ca562"
     private let secondApiKey = ""
     
-    private let apiUrl = "http://www.omdbapi.com/?i=tt3896198"
-    private let posterUrl = "http://img.omdbapi.com/?"
+    private let boxOfficeApiKey = "42067899a1fd583566eb123ec528802d"
+    
+    private let omdbAPIUrl = "https://www.omdbapi.com/"
+    private let posterUrl = "https://img.omdbapi.com/"
+    
+    private let boxOfficeUrl = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
+    private let moviewDetail = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
     
     typealias FetchResult = Result<Data, Error>
     
-    func fetch(completion: @escaping (FetchResult) -> Void) {
-        let urlString = apiUrl + firstApiKey
-        guard let url = URL(string: urlString) else { return }
+    func fetchPoster(title: String, completion: @escaping (FetchResult) -> Void) {
+        var urlComponent = URLComponents(string: omdbAPIUrl)
+        urlComponent?.queryItems = [
+            URLQueryItem(name: "apikey", value: firstApiKey),
+            URLQueryItem(name: "t", value: title)
+        ]
+        
+        guard let url = urlComponent?.url else { return }
+        
+        fetch(url) { result in
+            switch result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchBoxOffice(date: String, completion: @escaping (FetchResult) -> Void) {
+        var urlComponent = URLComponents(string: boxOfficeUrl)
+        urlComponent?.queryItems = [
+            URLQueryItem(name: "key", value: boxOfficeApiKey),
+            URLQueryItem(name: "targetDt", value: date),
+            URLQueryItem(name: "comCode", value: "0105000000")
+        ]
+        
+        guard let url = urlComponent?.url else { return }
+        
+        fetch(url) { result in
+            switch result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    private func fetch(_ url: URL, _ completion: @escaping (FetchResult) -> Void) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard error == nil else {
                 completion(.failure(error!))

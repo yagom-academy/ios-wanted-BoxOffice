@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1898A4722963F32600BF1B62 /* MovieEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1898A4712963F32600BF1B62 /* MovieEntity.swift */; };
+		1898A4742964376D00BF1B62 /* MovieInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1898A4732964376D00BF1B62 /* MovieInfo.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19EF28F9603900197BCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19ED28F9603900197BCC /* Main.storyboard */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1898A4712963F32600BF1B62 /* MovieEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieEntity.swift; sourceTree = "<group>"; };
+		1898A4732964376D00BF1B62 /* MovieInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfo.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,7 +87,9 @@
 		FFC6EC012962F1A30042FC8E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1898A4712963F32600BF1B62 /* MovieEntity.swift */,
 				FFC6EC082962F1D90042FC8E /* BoxOfficeEntity.swift */,
+				1898A4732964376D00BF1B62 /* MovieInfo.swift */,
 				FFC6EC0A2962F1E30042FC8E /* Repository.swift */,
 				FFC6EC0C2962F1EF0042FC8E /* APIService.swift */,
 			);
@@ -191,6 +197,8 @@
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 				FFC6EC052962F1B30042FC8E /* MovieListViewController.swift in Sources */,
 				FFC6EC0D2962F1EF0042FC8E /* APIService.swift in Sources */,
+				1898A4722963F32600BF1B62 /* MovieEntity.swift in Sources */,
+				1898A4742964376D00BF1B62 /* MovieInfo.swift in Sources */,
 				FFC6EC072962F1CC0042FC8E /* MovieListViewModel.swift in Sources */,
 				FFC6EC102963E7500042FC8E /* Constants.swift in Sources */,
 			);
