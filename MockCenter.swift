@@ -17,6 +17,10 @@ final class MockMovieListRepository: MovieListRepositoryInterface {
 }
 
 final class MockMovieDetailRepository: MovieDetailRepositoryInterface {
+    func fetchMoviePoster(englishMovieName: String, completion: @escaping (Result<UIImage?, Error>) -> Void) {
+
+    }
+
     func fetchMovieDetail(movieCode: String, completion: @escaping (Result<MovieDetail, Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             completion(.success(dummyMovieDetail))

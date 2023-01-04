@@ -5,7 +5,7 @@
 //  Created by 천수현 on 2023/01/04.
 //
 
-import Foundation
+import UIKit
 
 final class MovieDetailRepository: MovieDetailRepositoryInterface {
 
@@ -30,7 +30,6 @@ final class MovieDetailRepository: MovieDetailRepositoryInterface {
                 } catch {
                     completion(.failure(error))
                 }
-                break
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -55,9 +54,61 @@ final class MovieDetailRepository: MovieDetailRepositoryInterface {
 
     func deleteMovieReview(review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void) {
     }
+
+    func fetchMoviePoster(englishMovieName: String, completion: @escaping (Result<UIImage?, Error>) -> Void) {
+        let dispatchGroup = DispatchGroup()
+        dispatchGroup.enter()
+        var urlString = ""
+        fetchMoviePosterURL(englishMovieName: englishMovieName) { result in
+            switch result {
+            case .success(let result):
+                urlString = result
+            case .failure:
+                break
+            }
+            dispatchGroup.leave()
+        }
+
+        dispatchGroup.notify(queue: DispatchQueue.global()) {
+            guard let url = URL(string: urlString) else { return }
+
+            let task = self.neworkService.dataTask(request: URLRequest(url: url)) { result in
+                switch result {
+                case .success(let data):
+                    completion(.success(UIImage(data: data)))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+
+            task.resume()
+        }
+    }
 }
 
 // MARK: - Private Functions
 extension MovieDetailRepository {
-
+    private func fetchMoviePosterURL(englishMovieName: String, completion: @escaping (Result<String, Error>) -> Void) {
+        var urlComponents = URLComponents(string: "http://www.omdbapi.com/")
+        urlComponents?.queryItems = [
+            .init(name: "apikey", value: neworkService.omdbAPIKey),
+            .init(name: "t", value: englishMovieName)
+        ]
+        guard let url = urlComponents?.url else { return }
+        let urlRequest = URLRequest(url: url)
+        let task = neworkService.dataTask(request: urlRequest) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let posterDTO = try JSONDecoder().decode(PosterDTO.self, from: data)
+                    completion(.success(posterDTO.posterURL))
+                } catch {
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+        task.resume()
+    }
 }
