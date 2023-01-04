@@ -60,7 +60,11 @@ final class MovieDetailViewController: UIViewController {
     }
 
     private func bind() {
-        viewModel.applyDataSource = { [weak self] in self?.applyDataSource() }
+        viewModel.applyDataSource = { [weak self] in
+            DispatchQueue.main.async {
+                self?.applyDataSource()
+            }
+        }
         viewModel.scrollToUpper = { [weak self] in
             let upperMovieInfoIndexPath = IndexPath(row: 0, section: 0)
             if self?.movieDetailCollectionView.cellForItem(at: upperMovieInfoIndexPath) != nil {
@@ -70,8 +74,16 @@ final class MovieDetailViewController: UIViewController {
         viewModel.presentViewController = { [weak self] viewController in
             self?.present(viewController, animated: true)
         }
-        viewModel.startLoadingIndicator = { [weak self] in self?.loadingIndicator.startAnimating() }
-        viewModel.stopLoadingIndicator = { [weak self] in self?.loadingIndicator.stopAnimating() }
+        viewModel.startLoadingIndicator = { [weak self] in
+            DispatchQueue.main.async {
+                self?.loadingIndicator.startAnimating()
+            }
+        }
+        viewModel.stopLoadingIndicator = { [weak self] in
+            DispatchQueue.main.async {
+                self?.loadingIndicator.stopAnimating()
+            }
+        }
     }
 
     private func setUpMovieDetailCollectionView() {
