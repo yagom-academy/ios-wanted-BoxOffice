@@ -75,10 +75,12 @@ class WriteReviewViewController: UIViewController {
     }()
     
     private let ratingStarView = StarRatingView()
+    private var password = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupDelegate()
     }
     
     private func setupView() {
@@ -135,5 +137,32 @@ extension WriteReviewViewController {
         //TODO: 리뷰 저장하기
         
         navigationController?.popViewController(animated: true)
+    }
+}
+
+//MARK: Password Process
+extension WriteReviewViewController: UITextFieldDelegate {
+    private func setupDelegate() {
+        passwordTextField.delegate = self
+    }
+    
+    //TODO: text를 지우는 경우 password에서 지워지지 않고 그대로 쌓임
+    private func setupPassword(with textField: UITextField) {
+        if let text = textField.text, let lastText = text.last {
+            password += String(lastText)
+            textField.text = String(repeating: "*", count: text.count)
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        setupPassword(with: textField)
+    }
+    
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        setupPassword(with: textField)
+        
+        return true
     }
 }
