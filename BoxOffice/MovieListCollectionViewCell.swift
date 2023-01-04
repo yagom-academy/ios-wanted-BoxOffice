@@ -150,7 +150,7 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
     private func setupLayout() {
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constraint.outerSpacing),
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constraint.outerSpacing),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constraint.outerSpacing + Constraint.subtleInnerSpacing),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constraint.outerSpacing),
             imageView.widthAnchor.constraint(equalToConstant: Constraint.imageViewWidth),
             imageView.heightAnchor.constraint(equalToConstant: Constraint.imageViewHeight),
@@ -160,16 +160,13 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
 
             titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: Constraint.innerSpacing),
             titleLabel.topAnchor.constraint(equalTo: imageView.topAnchor),
-            
-            newlyRankedLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            newlyRankedLabel.topAnchor.constraint(greaterThanOrEqualTo: titleLabel.bottomAnchor, constant: Constraint.innerSpacing),
-            newlyRankedLabel.bottomAnchor.constraint(equalTo: rankFluctuationLabel.topAnchor, constant: -Constraint.innerSpacing),
-            
-            rankFluctuationLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            rankFluctuationLabel.bottomAnchor.constraint(equalTo: audienceNumberLabel.topAnchor, constant: -Constraint.innerSpacing),
 
-            rankFluctuationValueLabel.leadingAnchor.constraint(equalTo: rankFluctuationLabel.trailingAnchor, constant: Constraint.innerSpacing),
-            rankFluctuationValueLabel.topAnchor.constraint(equalTo: rankFluctuationLabel.topAnchor),
+            rankFluctuationValueLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            rankFluctuationValueLabel.topAnchor.constraint(greaterThanOrEqualTo: titleLabel.bottomAnchor, constant: Constraint.innerSpacing),
+            rankFluctuationValueLabel.bottomAnchor.constraint(equalTo: audienceNumberLabel.topAnchor, constant: -Constraint.innerSpacing),
+            
+            newlyRankedLabel.leadingAnchor.constraint(equalTo: rankFluctuationValueLabel.trailingAnchor, constant: Constraint.innerSpacing),
+            newlyRankedLabel.bottomAnchor.constraint(equalTo: audienceNumberLabel.topAnchor, constant: -Constraint.innerSpacing),
             
             audienceNumberLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             audienceNumberLabel.bottomAnchor.constraint(equalTo: openingDayLabel.topAnchor, constant: -Constraint.innerSpacing),
@@ -189,6 +186,7 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
 private extension MovieListCollectionViewCell {
     enum Constraint {
         static let innerSpacing: CGFloat = 8
+        static let subtleInnerSpacing: CGFloat = 4
         static let outerSpacing: CGFloat = 16
         static let imageViewWidth: CGFloat = 120
         static let imageViewHeight: CGFloat = 160
