@@ -86,16 +86,7 @@ extension MovieDetailViewModel {
 
     func shareButtonTapped(screenImage: UIImage?) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        // TODO: Need to fix
-//        alert.addAction(UIAlertAction(title: "포스터 이미지 공유하기", style: .default) { [weak self] _ in
-//            guard let urlString = self?.movieDetail.posterImageURL,
-//                  let url = URL(string: urlString) else { return }
-//            let activityViewController = UIActivityViewController(
-//                activityItems: [url],
-//                applicationActivities: nil)
-//            self?.presentViewController?(activityViewController)
-//        })
-        alert.addAction(UIAlertAction(title: "현재 화면 저장하기", style: .default) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: "현재 화면 공유하기", style: .default) { [weak self] _ in
             guard let screenImage = screenImage else { return }
             let activityViewController = UIActivityViewController(
                 activityItems: [screenImage],
