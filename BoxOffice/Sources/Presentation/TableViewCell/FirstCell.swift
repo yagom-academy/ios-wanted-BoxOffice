@@ -11,7 +11,6 @@ class FirstCell: UITableViewCell {
     private lazy var posterImageView: UIImageView = {
         let view = UIImageView(image: UIImage(named: "ironman.jpg"))
         view.heightAnchor.constraint(equalToConstant: 325).isActive = true
-        view.widthAnchor.constraint(equalToConstant: 263).isActive = true
         view.backgroundColor = .purple
         return view
     }()
@@ -132,8 +131,7 @@ class FirstCell: UITableViewCell {
         NSLayoutConstraint.activate([
             posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
             posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 64),
-            posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -64),
-            posterImageView.heightAnchor.constraint(equalToConstant: 290)
+            posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -64)
         ])
         
         NSLayoutConstraint.activate([
