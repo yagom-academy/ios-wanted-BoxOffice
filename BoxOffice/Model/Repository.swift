@@ -61,6 +61,26 @@ final class Repository {
         }
     }
     
+    func fetchMovieDetail(movieCd: String, completion: @escaping (FetchResult) -> Void) {
+        var urlComponent = URLComponents(string: moviewDetail)
+        urlComponent?.queryItems = [
+            URLQueryItem(name: "key", value: boxOfficeApiKey),
+            URLQueryItem(name: "movieCd", value: movieCd),
+            URLQueryItem(name: "wideAreaCd", value: "0105001")
+        ]
+        
+        guard let url = urlComponent?.url else { return }
+        
+        fetch(url) { result in
+            switch result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
     private func fetch(_ url: URL, _ completion: @escaping (FetchResult) -> Void) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard error == nil else {

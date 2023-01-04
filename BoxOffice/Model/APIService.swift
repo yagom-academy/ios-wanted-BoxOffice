@@ -13,7 +13,7 @@ final class APIService {
     
     typealias PosterResult = Result<MovieEntity, Error>
     typealias BoxOfficeResult = Result<BoxOfficeEntity, Error>
-    typealias MovieInfoResult = Result<MovieInfo, Error>
+    typealias MovieInfoResult = Result<MovieInfoEntity, Error>
     
     func fetchPoster(title: String, completion: @escaping (PosterResult) -> Void) {
         repository.fetchPoster(title: title) { result in
@@ -33,6 +33,18 @@ final class APIService {
             case let .success(data):
                 guard let movieList = self.parseJson(from: data, to: BoxOfficeEntity.self) else { return }
                 completion(.success(movieList))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchMovieDetail(movieCd: String, completion: @escaping (MovieInfoResult) -> Void) {
+        repository.fetchMovieDetail(movieCd: movieCd) { result in
+            switch result {
+            case let .success(data):
+                guard let movieDetail = self.parseJson(from: data, to: MovieInfoEntity.self) else { return }
+                completion(.success(movieDetail))
             case let .failure(error):
                 completion(.failure(error))
             }

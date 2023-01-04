@@ -8,5 +8,9 @@
 import UIKit
 
 final class MovieListViewController: UIViewController {
+    private let viewModel = MovieListViewModel()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }
