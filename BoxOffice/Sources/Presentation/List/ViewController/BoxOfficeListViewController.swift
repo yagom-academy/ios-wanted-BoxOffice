@@ -21,8 +21,10 @@ class BoxOfficeListViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.rowHeight = 100
-        tableView.backgroundColor = .clear
+        tableView.rowHeight = 130
+        tableView.backgroundColor = .boBackground
+        tableView.register(MovieCell.self)
+        tableView.dataSource = self
         return tableView
     }()
     
@@ -78,7 +80,10 @@ private extension BoxOfficeListViewController {
 extension BoxOfficeListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(MovieCell.self, for: indexPath) else {
+            return UITableViewCell()
+        }
+        return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
