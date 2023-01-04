@@ -18,6 +18,15 @@ final class NetworkService {
         }
         return key
     }
+
+    var omdbAPIKey: String {
+        guard let path = Bundle.main.path(forResource: "APIKeys", ofType: "plist"),
+              let dictionary = NSDictionary(contentsOfFile: path),
+              let key = dictionary["omdb"] as? String else {
+            return ""
+        }
+        return key
+    }
     
     private init() { }
     
