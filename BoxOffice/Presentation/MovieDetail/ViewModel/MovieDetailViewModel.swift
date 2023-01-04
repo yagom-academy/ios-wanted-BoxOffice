@@ -20,11 +20,13 @@ final class MovieDetailViewModel {
         } / Double(movieReviews.count)
         return average
     }
+    var posterImage: UIImage?
 
     // MARK: - UseCases
     private let fetchMovieDetailUseCase = FetchMovieDetailUseCase()
     private let fetchMovieReviewUseCase = FetchMovieReviewsUseCase()
     private let deleteMovieReviewUseCase = DeleteMovieReviewUseCase()
+    private let fetchPosterImageUseCase = FetchPosterImageUseCase()
 
     // MARK: - Actions
     var applyDataSource: (() -> Void)?
@@ -110,7 +112,7 @@ extension MovieDetailViewModel {
             switch result {
             case .success(let movieDetail):
                 self?.movieDetail = movieDetail
-                self?.applyDataSource?()
+                self?.fetchPosterImage()
             case .failure(let error):
                 print(error)
             }
@@ -142,6 +144,18 @@ extension MovieDetailViewModel {
                 print(error)
             }
             self?.stopLoadingIndicator?()
+        }
+    }
+
+    private func fetchPosterImage() {
+        fetchPosterImageUseCase.execute(englishMovieTitle: movieDetail.englishTitle) { [weak self] result in
+            switch result {
+            case .success(let image):
+                self?.posterImage = image
+                self?.applyDataSource?()
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 }

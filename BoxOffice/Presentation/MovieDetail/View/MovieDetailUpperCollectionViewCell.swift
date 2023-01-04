@@ -75,14 +75,14 @@ final class MovieDetailUpperCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
     }
 
-    func setUpContents(movieDetail: MovieDetail) {
+    func setUpContents(movieDetail: MovieDetail, posterImage: UIImage?) {
         titleLabel.text = movieDetail.title
         gradeLabel.text = movieDetail.watchGrade
         rankingLabel.text = "\(movieDetail.rank)위"
         rankUpDownLabel.textColor = movieDetail.rankFluctuation > 0 ? .systemRed : .systemBlue
         rankUpDownLabel.text = movieDetail.rankFluctuation > 0 ?  "▲ \(movieDetail.rankFluctuation)" : "▼ \(-movieDetail.rankFluctuation)"
         newlyRankedLabel.text = movieDetail.isNewlyRanked ? "New" : ""
-        posterImageView.image = dummyPosterImage
+        posterImageView.image = posterImage
     }
 
     private func layout() {

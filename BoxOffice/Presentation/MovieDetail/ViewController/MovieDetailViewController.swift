@@ -131,7 +131,7 @@ final class MovieDetailViewController: UIViewController {
                     withReuseIdentifier: MovieDetailUpperCollectionViewCell.reuseIdentifier,
                     for: indexPath
                    ) as? MovieDetailUpperCollectionViewCell {
-                    cell.setUpContents(movieDetail: movieDetail)
+                    cell.setUpContents(movieDetail: movieDetail, posterImage: self.viewModel.posterImage)
                     return cell
                 }
             }
