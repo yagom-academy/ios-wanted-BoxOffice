@@ -20,7 +20,8 @@ class FirstCell: UITableViewCell {
         let stackview = UIStackView()
         stackview.axis = .vertical
         stackview.alignment = .leading
-        stackview.distribution = .fill
+        stackview.distribution = .equalSpacing
+        stackview.spacing = 2
         return stackview
     }()
     
@@ -60,7 +61,6 @@ class FirstCell: UITableViewCell {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-//        label.font = .preferredFont(forTextStyle: .title3)
         label.font = .boldSystemFont(ofSize: 20)
         label.textColor = .white
         label.text = "가디언즈 오브 갤럭시"
