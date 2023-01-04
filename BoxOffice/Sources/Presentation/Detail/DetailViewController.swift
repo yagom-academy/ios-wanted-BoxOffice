@@ -36,6 +36,8 @@ class DetailViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ])
+
+        navigationItem.largeTitleDisplayMode = .never
     }
 }
 
