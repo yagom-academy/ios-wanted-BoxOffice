@@ -25,7 +25,10 @@ final class MovieListViewController: UIViewController {
     
     private lazy var movieListCollectionView: UICollectionView = {
         let layout = movieListCollectionViewLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: movieListCollectionViewLayout()
+        )
         return collectionView
     }()
 
