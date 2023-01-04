@@ -36,6 +36,7 @@ final class MovieListViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         viewModel.viewDidLoad()
+        registerCollectionViewCells()
         addViews()
         setupUILayouts()
     }
@@ -85,6 +86,11 @@ extension MovieListViewController {
         case main
     }
 }
+extension MovieListViewController {
+    private func registerCollectionViewCells() {
+        self.movieListCollectionView.register(MovieListCollectionViewCell.self, forCellWithReuseIdentifier: MovieListCollectionViewCell.reuseIdentifier)
+    }
+    
     func addViews() {
         view.addSubview(movieListCollectionView)
     }
@@ -97,3 +103,4 @@ extension MovieListViewController {
             movieListCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
+}
