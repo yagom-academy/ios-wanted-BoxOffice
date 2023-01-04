@@ -36,7 +36,7 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
     private let rankValueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .systemGray
+        label.textColor = Color.valueLabel
         return label
     }()
     
@@ -44,14 +44,14 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "개봉일"
-        label.textColor = .secondaryLabel
+        label.textColor = Color.valueTitleLabel
         return label
     }()
     
     private let openingDayValueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .systemGray
+        label.textColor = Color.valueLabel
         return label
     }()
     
@@ -59,28 +59,28 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "관객수"
-        label.textColor = .secondaryLabel
+        label.textColor = Color.valueTitleLabel
         return label
     }()
     
     private let audienceNumberValueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .systemGray
+        label.textColor = Color.valueLabel
         return label
     }()
         
     private let rankFluctuationValueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .red
+        label.textColor = Color.positiveAccent
         return label
     }()
     
     private let newlyRankedLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .red
+        label.textColor = Color.positiveAccent
         return label
     }()
     
@@ -122,13 +122,13 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
         
         if movieOverview.rankFluctuation > 0 {
             rankFluctuationValueLabel.text = "▲ \(movieOverview.rankFluctuation)"
-            rankFluctuationValueLabel.textColor = .red
+            rankFluctuationValueLabel.textColor = Color.positiveAccent
         } else if movieOverview.rankFluctuation < 0 {
             rankFluctuationValueLabel.text = "▼ \(-movieOverview.rankFluctuation)"
-            rankFluctuationValueLabel.textColor = .blue
+            rankFluctuationValueLabel.textColor = Color.negativeAccent
         } else {
             rankFluctuationValueLabel.text = ""
-            rankFluctuationValueLabel.textColor = .secondaryLabel
+            rankFluctuationValueLabel.textColor = Color.valueTitleLabel
         }
     }
     
@@ -189,6 +189,13 @@ private extension MovieListCollectionViewCell {
         static let outerSpacing: CGFloat = 16
         static let imageViewWidth: CGFloat = 120
         static let imageViewHeight: CGFloat = 160
+    }
+    
+    enum Color {
+        static let valueTitleLabel: UIColor = .secondaryLabel
+        static let valueLabel: UIColor = .label
+        static let positiveAccent: UIColor = .red
+        static let negativeAccent: UIColor = .blue
     }
 }
 
