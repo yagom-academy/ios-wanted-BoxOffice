@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DeleteMovieReviewUseCaes {
+final class DeleteMovieReviewUseCase {
     private let repository: MovieDetailRepositoryInterface
 
     init(repository: MovieDetailRepositoryInterface = MockMovieDetailRepository()) {
