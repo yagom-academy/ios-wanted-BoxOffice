@@ -77,6 +77,7 @@ class WriteReviewViewController: UIViewController {
     private let ratingStarView = StarRatingView()
     private let imagePicker = UIImagePickerController()
     private var password = String()
+    private var imageURL = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -173,6 +174,10 @@ extension WriteReviewViewController: UINavigationControllerDelegate, UIImagePick
             selectedImage = image
         }
         
+        if let selectedImageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+            imageURL = selectedImageURL.path()
+        }
+              
         photoButton.setImage(selectedImage, for: .normal)
         self.dismiss(animated: true, completion: nil)
     }
