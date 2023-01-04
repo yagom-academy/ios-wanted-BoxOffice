@@ -10,7 +10,7 @@ import UIKit
 final class BoxOfficeInputView: UIView {
     
     override var intrinsicContentSize: CGSize {
-        return .init(width: 292 + titleLabel.intrinsicContentSize.width, height: 44)
+        return .init(width: -1.0, height: 44)
     }
     
     private lazy var backgroundStackView: UIStackView = {

@@ -12,7 +12,7 @@ class CreateReviewViewController: UIViewController {
     weak var coordinator: CreateReviewCoordinatorInterface?
     private let viewModel: CreateReviewViewModel
     
-    private let reviewPlaceHolder = "이 영화를 감상하면서 느꼈던 부분을 자유롭게 작성해주세요."
+    private let reviewPlaceHolder = "감상평을 자유롭게 작성해주세요."
     
     private lazy var cancelButton: UIButton = {
         let button = UIButton()
@@ -26,20 +26,22 @@ class CreateReviewViewController: UIViewController {
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.addSubviews(backgroundStackView)
+        scrollView.keyboardDismissMode = .onDrag
         return scrollView
     }()
     
     private lazy var backgroundStackView: UIStackView = {
-        let stackView = UIStackView(axis: .vertical, alignment: .center, distribution: .fill, spacing: 30)
+        let stackView = UIStackView(axis: .vertical, alignment: .center, distribution: .fill, spacing: 25)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20)
-        stackView.addArrangedSubviews(ratingView, createImageButton, textFieldsView, reviewInputTextView)
+        stackView.addArrangedSubviews(createImageButton, textFieldsView, reviewInputTextView, ratingView, crateButton)
         return stackView
     }()
     
     
     private lazy var createImageButton: ProfileImageButton = {
         let button = ProfileImageButton(size: 125)
+        button.addTarget(self, action: #selector(didTapProfileButton(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -58,17 +60,19 @@ class CreateReviewViewController: UIViewController {
     
     private lazy var nickNameInputView: BoxOfficeInputView = {
         let inputView = BoxOfficeInputView(title: "별명", placeholder: "별명을 입력해주세요.")
+        inputView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 60).isActive = true
         return inputView
     }()
     
     private lazy var passwordInputView: BoxOfficeInputView = {
         let inputView = BoxOfficeInputView(title: "암호", placeholder: "비밀번호를 입력해주세요.")
+        inputView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 60).isActive = true
         return inputView
     }()
     
     private lazy var reviewInputTextView: UITextView = {
         let textView = UITextView()
-        textView.widthAnchor.constraint(equalToConstant: 320).isActive = true
+        textView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 60).isActive = true
         textView.heightAnchor.constraint(equalToConstant: 250).isActive = true
         textView.backgroundColor = .white.withAlphaComponent(0.8)
         textView.clipsToBounds = true
@@ -81,6 +85,21 @@ class CreateReviewViewController: UIViewController {
         textView.text = reviewPlaceHolder
         textView.delegate = self
         return textView
+    }()
+    
+    private lazy var crateButton: UIButton = {
+        let button = UIButton()
+        button.tintColor = .label
+        let config = UIImage.SymbolConfiguration(textStyle: .callout, scale: .large)
+        button.setTitle("리뷰 등록하기", for: .normal)
+        button.backgroundColor = .systemIndigo
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 12
+        button.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 60).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        button.titleLabel?.font = .preferredFont(for: .body, weight: .semibold)
+        button.addTarget(self, action: #selector(didTapCreateButton(_:)), for: .touchUpInside)
+        return button
     }()
     
     override func viewDidLoad() {
@@ -135,6 +154,14 @@ private extension CreateReviewViewController {
         dismiss(animated: true) { [weak self] in
             self?.coordinator?.finish()
         }
+    }
+    
+    @objc func didTapProfileButton(_ sender: ProfileImageButton) {
+        print(#function)
+    }
+    
+    @objc func didTapCreateButton(_ sender: UIButton) {
+        print(#function)
     }
     
 }
