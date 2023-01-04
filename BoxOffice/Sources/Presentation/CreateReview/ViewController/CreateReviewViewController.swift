@@ -12,6 +12,8 @@ class CreateReviewViewController: UIViewController {
     weak var coordinator: CreateReviewCoordinatorInterface?
     private let viewModel: CreateReviewViewModel
     
+    private let reviewPlaceHolder = "이 영화를 감상하면서 느꼈던 부분을 자유롭게 작성해주세요."
+    
     private lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.tintColor = .label
@@ -28,10 +30,10 @@ class CreateReviewViewController: UIViewController {
     }()
     
     private lazy var backgroundStackView: UIStackView = {
-        let stackView = UIStackView(axis: .vertical, alignment: .center, distribution: .fill, spacing: 20)
+        let stackView = UIStackView(axis: .vertical, alignment: .center, distribution: .fill, spacing: 30)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20)
-        stackView.addArrangedSubviews(createImageButton, ratingView)
+        stackView.addArrangedSubviews(ratingView, createImageButton, textFieldsView, reviewInputTextView)
         return stackView
     }()
     
@@ -46,6 +48,39 @@ class CreateReviewViewController: UIViewController {
             config: UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .largeTitle), scale: .large)
         )
         return view
+    }()
+    
+    private lazy var textFieldsView: UIStackView = {
+        let stackView = UIStackView(axis: .vertical, alignment: .center, distribution: .fill, spacing: 8)
+        stackView.addArrangedSubviews(nickNameInputView, passwordInputView)
+        return stackView
+    }()
+    
+    private lazy var nickNameInputView: BoxOfficeInputView = {
+        let inputView = BoxOfficeInputView(title: "별명", placeholder: "별명을 입력해주세요.")
+        return inputView
+    }()
+    
+    private lazy var passwordInputView: BoxOfficeInputView = {
+        let inputView = BoxOfficeInputView(title: "암호", placeholder: "비밀번호를 입력해주세요.")
+        return inputView
+    }()
+    
+    private lazy var reviewInputTextView: UITextView = {
+        let textView = UITextView()
+        textView.widthAnchor.constraint(equalToConstant: 320).isActive = true
+        textView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        textView.backgroundColor = .white.withAlphaComponent(0.8)
+        textView.clipsToBounds = true
+        textView.layer.cornerRadius = 12
+        textView.layer.borderColor = UIColor.systemGray.cgColor
+        textView.layer.borderWidth = 1
+        textView.font = .preferredFont(forTextStyle: .subheadline)
+        textView.textColor = .darkGray
+        textView.tintColor = .black
+        textView.text = reviewPlaceHolder
+        textView.delegate = self
+        return textView
     }()
     
     override func viewDidLoad() {
@@ -99,6 +134,24 @@ private extension CreateReviewViewController {
     @objc func didTapCancelButton(_ sender: UIButton) {
         dismiss(animated: true) { [weak self] in
             self?.coordinator?.finish()
+        }
+    }
+    
+}
+
+extension CreateReviewViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == reviewPlaceHolder {
+            textView.text = nil
+            textView.textColor = .black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = reviewPlaceHolder
+            textView.textColor = .darkGray
         }
     }
     

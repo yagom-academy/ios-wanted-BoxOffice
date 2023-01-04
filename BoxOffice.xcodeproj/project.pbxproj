@@ -16,6 +16,7 @@
 		0287415A2965A4AB00B2D021 /* CreateReviewCoordinatorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028741592965A4AB00B2D021 /* CreateReviewCoordinatorInterface.swift */; };
 		028741602965BA9000B2D021 /* ProfileImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0287415F2965BA9000B2D021 /* ProfileImageButton.swift */; };
 		028741622965BECE00B2D021 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028741612965BECE00B2D021 /* RatingView.swift */; };
+		028741662965C9EC00B2D021 /* BoxOfficeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028741652965C9EC00B2D021 /* BoxOfficeInputView.swift */; };
 		02F8552E2963B7E1004B76DD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 02F8552D2963B7E1004B76DD /* FirebaseFirestore */; };
 		02F855302963B7E1004B76DD /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 02F8552F2963B7E1004B76DD /* FirebaseFirestoreCombine-Community */; };
 		02F855322963B7E1004B76DD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 02F855312963B7E1004B76DD /* FirebaseFirestoreSwift */; };
@@ -76,6 +77,7 @@
 		028741592965A4AB00B2D021 /* CreateReviewCoordinatorInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewCoordinatorInterface.swift; sourceTree = "<group>"; };
 		0287415F2965BA9000B2D021 /* ProfileImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageButton.swift; sourceTree = "<group>"; };
 		028741612965BECE00B2D021 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		028741652965C9EC00B2D021 /* BoxOfficeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeInputView.swift; sourceTree = "<group>"; };
 		02F855332963BDB3004B76DD /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		02F855372963C290004B76DD /* DefaultAPIProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPIProvider.swift; sourceTree = "<group>"; };
 		02F855392963C90C004B76DD /* KobisAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisAPI.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				0287415C2965B0F300B2D021 /* ViewModel */,
 				0287415F2965BA9000B2D021 /* ProfileImageButton.swift */,
 				028741612965BECE00B2D021 /* RatingView.swift */,
+				028741652965C9EC00B2D021 /* BoxOfficeInputView.swift */,
 			);
 			path = CreateReview;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				028741502965A06500B2D021 /* MovieDetailViewModel.swift in Sources */,
 				02F855512963F938004B76DD /* String+extension.swift in Sources */,
 				02F8555D2963FEF4004B76DD /* Bundle+extension.swift in Sources */,
+				028741662965C9EC00B2D021 /* BoxOfficeInputView.swift in Sources */,
 				02F8555F296401DA004B76DD /* BoxOfficeRepository.swift in Sources */,
 				425D26D5296433DE00967454 /* DetailViewController.swift in Sources */,
 				02F855382963C290004B76DD /* DefaultAPIProvider.swift in Sources */,
