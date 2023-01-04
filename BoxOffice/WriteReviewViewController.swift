@@ -147,6 +147,22 @@ extension WriteReviewViewController {
         
         navigationController?.popViewController(animated: true)
     }
+    
+    private func createReview() -> Review? {
+        guard let nickName = nickNameTextField.text,
+              let rating = ratingStarView.rating,
+              let content = contentTextView.text else { return nil }
+        
+        if validatePassword() == false {
+            return nil
+        }
+        
+        return Review(nickName: nickName,
+                      password: password,
+                      rating: rating,
+                      content: content,
+                      imageURL: imageURL)
+    }
 }
 
 extension WriteReviewViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
