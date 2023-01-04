@@ -21,11 +21,32 @@ class CreateReviewViewController: UIViewController {
         return button
     }()
     
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.addSubviews(backgroundStackView)
+        return scrollView
+    }()
+    
+    private lazy var backgroundStackView: UIStackView = {
+        let stackView = UIStackView(axis: .vertical, alignment: .center, distribution: .fill, spacing: 20)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20)
+        stackView.addArrangedSubviews(createImageButton)
+        return stackView
+    }()
+    
+    
+    private lazy var createImageButton: ProfileImageButton = {
+        let button = ProfileImageButton(size: 125)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
     }
-ㅍ
+
     init(viewModel: CreateReviewViewModel, coordinator: CreateReviewCoordinatorInterface) {
         self.viewModel = viewModel
         self.coordinator = coordinator
@@ -52,6 +73,21 @@ private extension CreateReviewViewController {
     
     func setUpView() {
         view.backgroundColor = .boBackground
+        view.addSubviews(scrollView)
+        let height = backgroundStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
+        height.priority = .defaultLow
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            backgroundStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            backgroundStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            backgroundStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            backgroundStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            backgroundStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            height
+        ])
     }
     
     @objc func didTapCancelButton(_ sender: UIButton) {
