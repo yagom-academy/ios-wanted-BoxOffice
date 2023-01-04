@@ -102,6 +102,21 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        imageView.image = UIImage()
+        titleLabel.text = ""
+        rankValueLabel.text = ""
+        newlyRankedLabel.text = ""
+        
+        audienceNumberValueLabel.text = ""
+        openingDayValueLabel.text = ""
+        
+        rankFluctuationValueLabel.text = ""
+    }
+    
     func setupContents(movieOverview: MovieOverview) {
         movieCode = movieOverview.movieCode
         dayType = movieOverview.dayType
