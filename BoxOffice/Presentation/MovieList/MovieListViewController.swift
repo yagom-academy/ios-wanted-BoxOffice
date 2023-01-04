@@ -120,10 +120,12 @@ private extension MovieListViewController {
     }
     
     func applySnapshot(movieOverviews: [MovieOverview]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, MovieOverview>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(movieOverviews)
-        self.diffableDataSource.apply(snapshot, animatingDifferences: true)
+        DispatchQueue.main.async {
+            var snapshot = NSDiffableDataSourceSnapshot<Section, MovieOverview>()
+            snapshot.appendSections([.main])
+            snapshot.appendItems(movieOverviews)
+            self.diffableDataSource.apply(snapshot, animatingDifferences: true)
+        }
     }
     
     func bind() {
