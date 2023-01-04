@@ -230,10 +230,10 @@ final class SecondView: UIView {
             self.movieInfomationStackView.leadingAnchor.constraint(equalTo: self.verticalStackView.leadingAnchor),
             self.movieInfomationStackView.trailingAnchor.constraint(equalTo: self.verticalStackView.trailingAnchor),
 
-            self.audienceInfomationStackView.topAnchor.constraint(equalTo: self.movieInfomationStackView.bottomAnchor),
-            self.audienceInfomationStackView.leadingAnchor.constraint(equalTo: self.movieInfomationStackView.leadingAnchor),
-            self.audienceInfomationStackView.trailingAnchor.constraint(equalTo: self.movieInfomationStackView.trailingAnchor),
-            self.audienceInfomationStackView.widthAnchor.constraint(equalTo: self.movieInfomationStackView.widthAnchor),
+//            self.audienceInfomationStackView.topAnchor.constraint(equalTo: self.movieInfomationStackView.bottomAnchor),
+//            self.audienceInfomationStackView.leadingAnchor.constraint(equalTo: self.movieInfomationStackView.leadingAnchor),
+//            self.audienceInfomationStackView.trailingAnchor.constraint(equalTo: self.movieInfomationStackView.trailingAnchor),
+//            self.audienceInfomationStackView.widthAnchor.constraint(equalTo: self.movieInfomationStackView.widthAnchor),
             
         ])
     }

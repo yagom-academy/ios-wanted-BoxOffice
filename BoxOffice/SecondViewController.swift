@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SecondViewController: UIViewController {
     
     let movieDetailView: SecondView = {
         let view = SecondView()
@@ -37,7 +37,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController {
+extension SecondViewController {
     private func configureUI() {
         self.view.addSubview(self.movieDetailView)
         setUpBaseUIConstraints()
