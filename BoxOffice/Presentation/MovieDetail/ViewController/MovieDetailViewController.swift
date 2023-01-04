@@ -37,13 +37,13 @@ final class MovieDetailViewController: UIViewController {
         viewModel.viewDidLoad()
     }
 
-    init(movieCode: String) {
-        self.viewModel = MovieDetailViewModel(movieCode: movieCode)
+    init(movieOverview: MovieOverview) {
+        self.viewModel = MovieDetailViewModel(movieOverview: movieOverview)
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
-        self.viewModel = MovieDetailViewModel(movieCode: "")
+        self.viewModel = MovieDetailViewModel(movieOverview: dummyMovieOverview)
         super.init(coder: coder)
     }
 
@@ -131,7 +131,7 @@ final class MovieDetailViewController: UIViewController {
                     withReuseIdentifier: MovieDetailUpperCollectionViewCell.reuseIdentifier,
                     for: indexPath
                    ) as? MovieDetailUpperCollectionViewCell {
-                    cell.setUpContents(movieDetail: movieDetail, posterImage: self.viewModel.posterImage)
+                    cell.setUpContents(movieDetail: movieDetail, movieOverview: self.viewModel.movieOverview, posterImage: self.viewModel.posterImage)
                     return cell
                 }
             }
@@ -143,7 +143,7 @@ final class MovieDetailViewController: UIViewController {
                     withReuseIdentifier: MovieDetailInfoCollectionViewCell.reuseIdentifier,
                     for: indexPath
                    ) as? MovieDetailInfoCollectionViewCell {
-                    cell.setUpContents(movieDetail: movieDetail)
+                    cell.setUpContents(movieDetail: movieDetail, movieOverview: self.viewModel.movieOverview)
                     return cell
                 }
             case .review:

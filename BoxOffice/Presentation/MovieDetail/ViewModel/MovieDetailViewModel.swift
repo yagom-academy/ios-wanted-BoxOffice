@@ -12,6 +12,7 @@ final class MovieDetailViewModel {
     // MARK: - Outputs
     var tabBarMode: TabBarMode = .movieInfo
     var movieDetail = dummyMovieDetail
+    var movieOverview = dummyMovieOverview
     var movieReviews = [MovieReview]()
     var averageRating: Double {
         if movieReviews.isEmpty { return 0 }
@@ -38,8 +39,9 @@ final class MovieDetailViewModel {
     // MARK: - Private properties
     private let movieCode: String
 
-    init(movieCode: String) {
-        self.movieCode = movieCode
+    init(movieOverview: MovieOverview) {
+        self.movieCode = movieOverview.movieCode
+        self.movieOverview = movieOverview
     }
 }
 
@@ -84,14 +86,15 @@ extension MovieDetailViewModel {
 
     func shareButtonTapped(screenImage: UIImage?) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "포스터 이미지 공유하기", style: .default) { [weak self] _ in
-            guard let urlString = self?.movieDetail.posterImageURL,
-                  let url = URL(string: urlString) else { return }
-            let activityViewController = UIActivityViewController(
-                activityItems: [url],
-                applicationActivities: nil)
-            self?.presentViewController?(activityViewController)
-        })
+        // TODO: Need to fix
+//        alert.addAction(UIAlertAction(title: "포스터 이미지 공유하기", style: .default) { [weak self] _ in
+//            guard let urlString = self?.movieDetail.posterImageURL,
+//                  let url = URL(string: urlString) else { return }
+//            let activityViewController = UIActivityViewController(
+//                activityItems: [url],
+//                applicationActivities: nil)
+//            self?.presentViewController?(activityViewController)
+//        })
         alert.addAction(UIAlertAction(title: "현재 화면 저장하기", style: .default) { [weak self] _ in
             guard let screenImage = screenImage else { return }
             let activityViewController = UIActivityViewController(

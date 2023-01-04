@@ -73,20 +73,14 @@ extension MovieDetailDTO {
     func toDomain() -> MovieDetail {
         return MovieDetail(
             movieCode: movieCode,
-            rank: 0,
             title: title,
             englishTitle: englishTitle,
-            openingDay: openingDay.toDate(),
-            audienceNumber: 0,
-            rankFluctuation: 0,
-            isNewlyRanked: false,
             productionYear: UInt(productionYear) ?? 0,
             playTime: Double(playTime) ?? 0,
-            genre: genres.map { $0.genreName }.joined(separator: ", "), // TODO: 해결하기
+            genre: genres.map { $0.genreName }.joined(separator: ", "),
             directorsName: directors.map { $0.peopleName }.joined(separator: ", "),
             actorsName: actors.map { $0.peopleName }.joined(separator: ", "),
-            watchGrade: audits.first?.watchGrade ?? "",
-            posterImageURL: "") // TODO: 여기서 fetch하기
+            watchGrade: audits.first?.watchGrade ?? "")
     }
 }
 

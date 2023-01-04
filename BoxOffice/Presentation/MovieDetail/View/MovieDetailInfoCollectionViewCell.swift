@@ -26,8 +26,8 @@ final class MovieDetailInfoCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
     }
 
-    func setUpContents(movieDetail: MovieDetail) {
-        openDateLabel.setUpContents(name: "개봉", description: movieDetail.openingDay.toString())
+    func setUpContents(movieDetail: MovieDetail, movieOverview: MovieOverview) {
+        openDateLabel.setUpContents(name: "개봉", description: movieOverview.openingDay.toString())
         genreLabel.setUpContents(name: "장르", description: movieDetail.genre)
         playTimeLabel.setUpContents(name: "상영시간", description: "\(Int(movieDetail.playTime))분")
         directorLabel.setUpContents(name: "감독", description: movieDetail.directorsName)

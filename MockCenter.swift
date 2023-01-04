@@ -59,9 +59,9 @@ var dummyMovieOverview: MovieOverview {
 }
 
 var dummyMovieDetail: MovieDetail {
-    return MovieDetail(movieCode: UUID().description, rank: 1, title: "아바타", englishTitle: "Avatar", openingDay: Date(), audienceNumber: 10000, rankFluctuation: 1, isNewlyRanked: true, productionYear: 2023, playTime: 123.5, genre: "SF", directorsName: "봉준호", actorsName: "이병헌", watchGrade: "13", posterImageURL: "https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_SX300.jpg") }
+    return MovieDetail(movieCode: "", title: "", englishTitle: "", productionYear: 0, playTime: 0, genre: "", directorsName: "", actorsName: "", watchGrade: "") }
 
-var dummyMovieDetails: [MovieDetail] = Array.init(repeating: MovieDetail(movieCode: UUID().description, rank: 1, title: "아바타", englishTitle: "Avatar", openingDay: Date(), audienceNumber: 10000, rankFluctuation: 1, isNewlyRanked: true, productionYear: 2023, playTime: 123.5, genre: "SF", directorsName: "봉준호", actorsName: "이병헌", watchGrade: "13", posterImageURL: "https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_SX300.jpg"), count: 10)
+var dummyMovieDetails: [MovieDetail] = []
 
 var dummyMovieReview: MovieReview {
     return MovieReview(id: UUID(), movieCode: "", user: User(nickname: "Neph"), password: "1234", rating: 5, image: "", description: "와 정말 재밌어요")
