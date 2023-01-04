@@ -95,8 +95,8 @@ class WriteReviewViewController: UIViewController {
         photoStackView.addArrangedSubview(photoView)
         photoStackView.addArrangedSubview(textFieldStackView)
         
-        entireStackView.addArrangedSubview(photoStackView)
         entireStackView.addArrangedSubview(ratingStarView)
+        entireStackView.addArrangedSubview(photoStackView)
         entireStackView.addArrangedSubview(contentTextView)
         
         view.addSubview(entireStackView)
@@ -112,10 +112,7 @@ class WriteReviewViewController: UIViewController {
                                                  constant: 16),
             entireStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
                                                  constant: -16),
-            
-//            ratingStarView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor,
-//                                                   multiplier: 1/6),
-    
+        
             photoView.widthAnchor.constraint(equalTo: photoView.heightAnchor)
         ])
     }

@@ -12,7 +12,7 @@ class StarRatingView: UIView {
     
     private let ratingLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title2)
+        label.font = .preferredFont(forTextStyle: .title1)
         label.text = "0.0"
         label.textAlignment = .center
         label.font = .boldSystemFont(ofSize: label.font.pointSize)
@@ -137,16 +137,16 @@ extension StarRatingView {
             entireStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
             entireStackView.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             entireStackView.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor,
-                                                   multiplier: 7/10),
+                                                   multiplier: 4/5),
             
             starImages[0].heightAnchor.constraint(equalTo: starImages[0].widthAnchor),
             ratingLabel.widthAnchor.constraint(equalTo: starStackView.widthAnchor,
-                                               multiplier: 1/6),
+                                               multiplier: 1/4),
             
             starSlider.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             starSlider.leadingAnchor.constraint(equalTo: entireStackView.leadingAnchor),
             starSlider.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor,
-                                              multiplier: 7/12)
+                                              multiplier: 3/5)
         ])
     }
     
