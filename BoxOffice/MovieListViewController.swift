@@ -44,15 +44,23 @@ final class MovieListViewController: UIViewController {
         viewModel.viewDidLoad()
         bind()
         
-        registerCollectionViewCells()
-        setupCellProvider()
-        applySnapshot(movieOverviews: self.viewModel.movieOverviewList)
+        setupModernCollectionView()
         
         addViews()
         setupUILayouts()
     }
-    
-    private func movieListCollectionViewLayout() -> UICollectionViewLayout {
+}
+
+extension MovieListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == viewModel.movieOverviewList.count - 1 {
+            viewModel.scrollEnded()
+        }
+    }
+}
+
+private extension MovieListViewController {
+    func movieListCollectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .fractionalHeight(1.0)
@@ -76,29 +84,18 @@ final class MovieListViewController: UIViewController {
         
         return compositionalLayout
     }
-
-    private func bind() {
-        viewModel.applySnapShot = {
-            self.applySnapshot(movieOverviews: self.viewModel.movieOverviewList)
-        }
+    
+    func setupModernCollectionView() {
+        registerCollectionViewCells()
+        setupCellProvider()
+        applySnapshot(movieOverviews: self.viewModel.movieOverviewList)
     }
-}
 
-extension MovieListViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == viewModel.movieOverviewList.count - 1 {
-            viewModel.scrollEnded()
-        }
+    func registerCollectionViewCells() {
+        self.movieListCollectionView.register(MovieListCollectionViewCell.self, forCellWithReuseIdentifier: MovieListCollectionViewCell.reuseIdentifier)
     }
-}
-
-extension MovieListViewController {
-    enum Section {
-        case main
-    }
-}
-extension MovieListViewController {
-    private func setupCellProvider() {
+    
+    func setupCellProvider() {
         self.diffableDataSource = UICollectionViewDiffableDataSource<Section, MovieOverview>(collectionView: self.movieListCollectionView)
         { collectionView, indexPath, itemIdentifier in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieListCollectionViewCell.reuseIdentifier, for: indexPath) as? MovieListCollectionViewCell else {
@@ -113,16 +110,17 @@ extension MovieListViewController {
         }
     }
     
-    private func registerCollectionViewCells() {
-        self.movieListCollectionView.register(MovieListCollectionViewCell.self, forCellWithReuseIdentifier: MovieListCollectionViewCell.reuseIdentifier)
-    }
-    
-    
-    private func applySnapshot(movieOverviews: [MovieOverview]) {
+    func applySnapshot(movieOverviews: [MovieOverview]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, MovieOverview>()
         snapshot.appendSections([.main])
         snapshot.appendItems(movieOverviews)
         self.diffableDataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    func bind() {
+        viewModel.applySnapShot = {
+            self.applySnapshot(movieOverviews: self.viewModel.movieOverviewList)
+        }
     }
     
     func addViews() {
@@ -142,5 +140,11 @@ extension MovieListViewController {
             movieListCollectionView.topAnchor.constraint(equalTo: dayTypeSegmentedControl.safeAreaLayoutGuide.bottomAnchor, constant: 16),
             movieListCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
+    }
+}
+
+extension MovieListViewController {
+    enum Section {
+        case main
     }
 }
