@@ -35,7 +35,6 @@
 		02F8557729642818004B76DD /* BoxOfficeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8557629642818004B76DD /* BoxOfficeListViewController.swift */; };
 		421113B32963CE4C003D5BF5 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421113B22963CE4C003D5BF5 /* FirebaseManager.swift */; };
 		421113B52963D227003D5BF5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 421113B42963D227003D5BF5 /* GoogleService-Info.plist */; };
-		421113B72963D422003D5BF5 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421113B62963D422003D5BF5 /* Encodable+Extension.swift */; };
 		421113B92963D500003D5BF5 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421113B82963D500003D5BF5 /* Review.swift */; };
 		425D26BF2963FCC100967454 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D26BE2963FCC100967454 /* UIView+Extension.swift */; };
 		425D26C1296413F000967454 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D26C0296413F000967454 /* UIColor+Extension.swift */; };
@@ -80,7 +79,6 @@
 		02F8557629642818004B76DD /* BoxOfficeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxOfficeListViewController.swift; sourceTree = "<group>"; };
 		421113B22963CE4C003D5BF5 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		421113B42963D227003D5BF5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		421113B62963D422003D5BF5 /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Encodable+Extension.swift"; path = "../Encodable+Extension.swift"; sourceTree = "<group>"; };
 		421113B82963D500003D5BF5 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		425D26BE2963FCC100967454 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		425D26C0296413F000967454 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 		02F855422963E6E4004B76DD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				421113B62963D422003D5BF5 /* Encodable+Extension.swift */,
 				425D26BE2963FCC100967454 /* UIView+Extension.swift */,
 				425D26C0296413F000967454 /* UIColor+Extension.swift */,
 				02F8553B2963C9E8004B76DD /* Encodable+extension.swift */,
@@ -412,7 +409,6 @@
 				421113B32963CE4C003D5BF5 /* FirebaseManager.swift in Sources */,
 				425D26BF2963FCC100967454 /* UIView+Extension.swift in Sources */,
 				425D26C1296413F000967454 /* UIColor+Extension.swift in Sources */,
-				421113B72963D422003D5BF5 /* Encodable+Extension.swift in Sources */,
 				02F8556929641B68004B76DD /* AppCoordinator.swift in Sources */,
 				02F855342963BDB3004B76DD /* TargetType.swift in Sources */,
 				02F855402963E31B004B76DD /* BoxOfficeListResponse.swift in Sources */,

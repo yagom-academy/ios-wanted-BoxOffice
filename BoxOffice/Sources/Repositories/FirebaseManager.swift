@@ -17,22 +17,23 @@ final class FirebaseManager {
     }
     
     func save(review: Review) {
-        guard let reviewDictionary = review.asDictionary else {
-            return
+        do {
+            let reviewDictionary = try review.asDictionary()
+            
+            database.collection("review").document(review.password).setData(reviewDictionary)
+        } catch {
+            print(error)
         }
-        
-        database.collection("review").document(review.password).setData(reviewDictionary)
     }
     
     func update(review: Review) {
-        guard let reviewDictionary = review.asDictionary else {
-            return
+        do {
+            let reviewDictionary = try review.asDictionary()
+            
+            database.collection("review").document(review.password).setData(reviewDictionary, merge: true)
+        } catch let error {
+            print(error)
         }
-        
-        database.collection("review").document(review.password).setData(
-            reviewDictionary,
-            merge: true
-        )
     }
     
     func delete(review: Review) {
