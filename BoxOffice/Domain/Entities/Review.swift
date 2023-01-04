@@ -10,7 +10,7 @@ import UIKit
 struct Review {
     let nickName: String
     let password: String
-    let rating: Double
+    let rating: String
     let content: String
-    let hasImage: Bool
+    let imageURL: String
 }

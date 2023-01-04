@@ -16,9 +16,9 @@ final class ReviewFirebaseUseCase {
         let reviewData: [String: Any] = [
             "nickName": reivew.nickName,
             "password": reivew.password,
-            "rating": String(reivew.rating),
+            "rating": reivew.rating,
             "content": reivew.content,
-            "hasImage": reivew.hasImage
+            "imageURL": reivew.imageURL
         ]
 
         firestoreManager.save(reviewData, with: reivew.password, completion: completion)
@@ -49,15 +49,14 @@ extension ReviewFirebaseUseCase {
     private func toReview(from document: QueryDocumentSnapshot) -> Review? {
         guard let nickName = document["nickName"] as? String,
               let password = document["password"] as? String,
-              let ratingValue = document["rating"] as? String,
-              let rating = Double(ratingValue),
+              let rating = document["rating"] as? String,
               let content = document["content"] as? String,
-              let hasImage = document["hasImage"] as? Bool else { return nil }
+              let imageURL = document["hasImage"] as? String else { return nil }
         
         return Review(nickName: nickName,
                       password: password,
                       rating: rating,
                       content: content,
-                      hasImage: hasImage)
+                      imageURL: imageURL)
     }
 }
