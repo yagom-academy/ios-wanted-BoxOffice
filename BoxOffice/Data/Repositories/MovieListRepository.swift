@@ -34,8 +34,7 @@ final class MovieListRepository: MovieListRepositoryInterface {
         urlComponents?.path += "/searchDailyBoxOfficeList"
         
         urlComponents?.queryItems = [
-            // TODO: Key 등록
-            .init(name: "key", value: ""),
+            .init(name: "key", value: networkService.koficAPIKey),
             .init(name: "targetDt", value: yesterday.toString())
         ]
         
