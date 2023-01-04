@@ -24,5 +24,4 @@ final class ImageCacheManager {
         let itemURL = NSString(string: key)
         cache.setObject(image, forKey: itemURL)
     }
-    
 }

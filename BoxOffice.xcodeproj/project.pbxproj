@@ -39,14 +39,10 @@
 		425D26BF2963FCC100967454 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D26BE2963FCC100967454 /* UIView+Extension.swift */; };
 		425D26C1296413F000967454 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D26C0296413F000967454 /* UIColor+Extension.swift */; };
 		425D26CA2964327B00967454 /* FirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D26C82964327B00967454 /* FirstCell.swift */; };
-		425D26CB2964327B00967454 /* FirstCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425D26C92964327B00967454 /* FirstCell.xib */; };
 		425D26CE2964328900967454 /* SecondCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D26CC2964328900967454 /* SecondCell.swift */; };
-		425D26CF2964328900967454 /* SecondCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425D26CD2964328900967454 /* SecondCell.xib */; };
 		425D26D22964329500967454 /* ThirdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D26D02964329500967454 /* ThirdCell.swift */; };
-		425D26D32964329500967454 /* ThirdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425D26D12964329500967454 /* ThirdCell.xib */; };
 		425D26D5296433DE00967454 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D26D4296433DE00967454 /* DetailViewController.swift */; };
 		425D26FC2964757D00967454 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D26FA2964757D00967454 /* ReviewCell.swift */; };
-		425D26FD2964757D00967454 /* ReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425D26FB2964757D00967454 /* ReviewCell.xib */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
@@ -83,14 +79,10 @@
 		425D26BE2963FCC100967454 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		425D26C0296413F000967454 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		425D26C82964327B00967454 /* FirstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCell.swift; sourceTree = "<group>"; };
-		425D26C92964327B00967454 /* FirstCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstCell.xib; sourceTree = "<group>"; };
 		425D26CC2964328900967454 /* SecondCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCell.swift; sourceTree = "<group>"; };
-		425D26CD2964328900967454 /* SecondCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondCell.xib; sourceTree = "<group>"; };
 		425D26D02964329500967454 /* ThirdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdCell.swift; sourceTree = "<group>"; };
-		425D26D12964329500967454 /* ThirdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThirdCell.xib; sourceTree = "<group>"; };
 		425D26D4296433DE00967454 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		425D26FA2964757D00967454 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
-		425D26FB2964757D00967454 /* ReviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewCell.xib; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -284,13 +276,9 @@
 			isa = PBXGroup;
 			children = (
 				425D26C82964327B00967454 /* FirstCell.swift */,
-				425D26C92964327B00967454 /* FirstCell.xib */,
 				425D26CC2964328900967454 /* SecondCell.swift */,
-				425D26CD2964328900967454 /* SecondCell.xib */,
 				425D26D02964329500967454 /* ThirdCell.swift */,
-				425D26D12964329500967454 /* ThirdCell.xib */,
 				425D26FA2964757D00967454 /* ReviewCell.swift */,
-				425D26FB2964757D00967454 /* ReviewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -388,12 +376,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				425D26CF2964328900967454 /* SecondCell.xib in Resources */,
 				635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */,
-				425D26FD2964757D00967454 /* ReviewCell.xib in Resources */,
 				635A19F128F9603A00197BCC /* Assets.xcassets in Resources */,
-				425D26D32964329500967454 /* ThirdCell.xib in Resources */,
-				425D26CB2964327B00967454 /* FirstCell.xib in Resources */,
 				421113B52963D227003D5BF5 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

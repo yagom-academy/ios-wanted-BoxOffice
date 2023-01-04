@@ -27,9 +27,9 @@ class FirstCell: UITableViewCell {
     private lazy var updownRankingStackView: UIStackView = {
         let stackview = UIStackView()
         stackview.axis = .horizontal
-        stackview.alignment = .bottom
+        stackview.alignment = .center
         stackview.distribution = .equalSpacing
-        stackview.spacing = 5
+        stackview.spacing = 4
         return stackview
     }()
     
@@ -53,7 +53,8 @@ class FirstCell: UITableViewCell {
         let stackview = UIStackView()
         stackview.axis = .horizontal
         stackview.alignment = .top
-        stackview.distribution = .fill
+        stackview.distribution = .equalSpacing
+        stackview.spacing = 9
         return stackview
     }()
     
@@ -132,19 +133,18 @@ class FirstCell: UITableViewCell {
             posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
             posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 64),
             posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -64),
-            posterImageView.heightAnchor.constraint(equalToConstant: 290),
-//            posterImageView.bottomAnchor.constraint(equalTo: titledatetimeageStackView.topAnchor, constant: -30)
+            posterImageView.heightAnchor.constraint(equalToConstant: 290)
         ])
         
         NSLayoutConstraint.activate([
             titledatetimeageStackView.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 29),
-            titledatetimeageStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            titledatetimeageStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             titledatetimeageStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15)
         ])
         
         NSLayoutConstraint.activate([
-            shareImageView.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 29),
-            shareImageView.leadingAnchor.constraint(equalTo: titledatetimeageStackView.trailingAnchor, constant: 100),
+            shareImageView.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 34),
+            shareImageView.leadingAnchor.constraint(equalTo: titledatetimeageStackView.trailingAnchor, constant: 110),
             shareImageView.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             shareImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
         ])

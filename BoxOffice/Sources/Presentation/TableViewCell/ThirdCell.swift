@@ -150,32 +150,32 @@ class ThirdCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             genreStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            genreStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            genreStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             genreStackView.heightAnchor.constraint(equalToConstant: 20)
         ])
         
         NSLayoutConstraint.activate([
             directorStackView.topAnchor.constraint(equalTo: genreStackView.bottomAnchor, constant: 4),
-            directorStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            directorStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             directorStackView.heightAnchor.constraint(equalToConstant: 20)
         ])
         
         NSLayoutConstraint.activate([
             actorStackView.topAnchor.constraint(equalTo: directorStackView.bottomAnchor, constant: 4),
-            actorStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            actorStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             actorStackView.heightAnchor.constraint(equalToConstant: 20)
         ])
         
         NSLayoutConstraint.activate([
             productionyearStackView.topAnchor.constraint(equalTo: actorStackView.bottomAnchor, constant: 4),
-            productionyearStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            productionyearStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             productionyearStackView.heightAnchor.constraint(equalToConstant: 20)
         ])
         
         NSLayoutConstraint.activate([
             reviewButton.topAnchor.constraint(equalTo: productionyearStackView.bottomAnchor, constant: 15),
-            reviewButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 7),
-            reviewButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -7),
+            reviewButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            reviewButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             reviewButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }

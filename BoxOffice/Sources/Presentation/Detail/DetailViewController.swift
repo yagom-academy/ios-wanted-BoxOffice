@@ -11,6 +11,7 @@ class DetailViewController: UIViewController {
     private let tableView: UITableView = {
         let tableView = UITableView()
         
+        tableView.backgroundColor = UIColor(r: 26, g: 26, b: 26)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorColor = .gray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
@@ -20,6 +21,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor(r: 26, g: 26, b: 26)
         self.view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -34,11 +36,7 @@ class DetailViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ])
-        
-//        tableView.estimatedRowHeight = 190
     }
-    
-    
 }
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -64,9 +62,54 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-           
-           
            return UITableView.automaticDimension
        }
-    
+}
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+struct Content_Previews: PreviewProvider {
+    static var previews: some View {
+        return DetailViewController().showPrieview()
+    }
+}
+#endif
+
+import UIKit
+import SwiftUI
+
+extension DetailViewController {
+    public struct Preview: UIViewControllerRepresentable {
+        let viewController: UIViewController
+        public func makeUIViewController(context: Context) -> some UIViewController { viewController }
+        public func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) { }
+    }
+
+    @ViewBuilder
+    public func showPrieview(deviceName: String? = nil) -> some View {
+        if let deviceName {
+            let device = PreviewDevice(rawValue: deviceName)
+            Preview(viewController: self).previewDevice(device)
+        } else {
+            Preview(viewController: self)
+        }
+    }
+}
+
+extension UIView {
+    public struct Preview: UIViewRepresentable {
+        let view: UIView
+        public func makeUIView(context: Context) -> some UIView { view }
+        public func updateUIView(_ uiView: UIViewType, context: Context) { }
+    }
+
+    @ViewBuilder
+    public func showPrieview(deviceName: String? = nil) -> some View {
+        if let deviceName {
+            let device = PreviewDevice(rawValue: deviceName)
+            Preview(view: self).previewDevice(device)
+        } else {
+            Preview(view: self)
+        }
+    }
 }
