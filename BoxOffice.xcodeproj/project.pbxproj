@@ -138,12 +138,44 @@
 		0287414C29659FFC00B2D021 /* CreateReview */ = {
 			isa = PBXGroup;
 			children = (
+				0287415D2965B0F900B2D021 /* Coordinator */,
+				0287415B2965B0E700B2D021 /* ViewController */,
+				0287415C2965B0F300B2D021 /* ViewModel */,
+			);
+			path = CreateReview;
+			sourceTree = "<group>";
+		};
+		0287415B2965B0E700B2D021 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
 				0287414A29659F7A00B2D021 /* CreateReviewViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0287415C2965B0F300B2D021 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
 				0287414D2965A00D00B2D021 /* CreateReviewViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0287415D2965B0F900B2D021 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
 				028741552965A44A00B2D021 /* CreateReviewCoordinator.swift */,
 				028741592965A4AB00B2D021 /* CreateReviewCoordinatorInterface.swift */,
 			);
-			path = CreateReview;
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		0287415E2965B11700B2D021 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				02F8558429656550004B76DD /* MovieCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		02F855272963B217004B76DD /* App */ = {
@@ -261,8 +293,7 @@
 				02F8557329641D91004B76DD /* Coordinator */,
 				02F8557429641DA5004B76DD /* ViewController */,
 				02F8557529641DAA004B76DD /* ViewModel */,
-				02F8558429656550004B76DD /* MovieCell.swift */,
-				0287414C29659FFC00B2D021 /* CreateReview */,
+				0287415E2965B11700B2D021 /* Views */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -279,10 +310,11 @@
 		02F8557229641D4D004B76DD /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				425D26C72964324C00967454 /* TableViewCell */,
 				02F8557129641D41004B76DD /* Coordinator */,
+				0287414C29659FFC00B2D021 /* CreateReview */,
 				02F85578296428C5004B76DD /* Detail */,
 				02F8557029641D37004B76DD /* List */,
+				425D26C72964324C00967454 /* TableViewCell */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
