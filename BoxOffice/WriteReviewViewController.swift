@@ -192,10 +192,6 @@ extension WriteReviewViewController: UINavigationControllerDelegate, UIImagePick
         } else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             selectedImage = image
         }
-        
-        if let selectedImageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-            imageURL = selectedImageURL.path()
-        }
               
         photoButton.setImage(selectedImage, for: .normal)
         self.dismiss(animated: true, completion: nil)
