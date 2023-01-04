@@ -15,7 +15,5 @@ final class FirebaseService {
 
     private let database = Firestore.firestore()
 
-    private init() {
-        FirebaseApp.configure()
-    }
+    private init() { }
 }
