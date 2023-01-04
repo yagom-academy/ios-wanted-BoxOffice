@@ -34,6 +34,7 @@ final class MovieListViewController: UIViewController {
             frame: .zero,
             collectionViewLayout: movieListCollectionViewLayout()
         )
+        collectionView.delegate = self
         collectionView.showsVerticalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -57,6 +58,13 @@ extension MovieListViewController: UICollectionViewDelegate {
         if indexPath.row == viewModel.movieOverviewList.count - 1 {
             viewModel.scrollEnded()
         }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        navigationController?.pushViewController(
+            MovieDetailViewController(movieOverview: viewModel.movieOverviewList[indexPath.row]),
+            animated: true
+        )
     }
 }
 
