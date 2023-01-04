@@ -37,6 +37,8 @@ final class MovieListViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         viewModel.viewDidLoad()
+        bind()
+        
         registerCollectionViewCells()
         setupCellProvider()
         applySnapshot(movieOverviews: self.viewModel.movieOverviewList)
@@ -72,7 +74,7 @@ final class MovieListViewController: UIViewController {
 
     private func bind() {
         viewModel.applySnapShot = {
-            self.movieListCollectionView.reloadData()
+            self.applySnapshot(movieOverviews: self.viewModel.movieOverviewList)
         }
     }
 }
