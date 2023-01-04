@@ -36,9 +36,29 @@ final class MovieListViewController: UIViewController {
     }
     
     private func movieListCollectionViewLayout() -> UICollectionViewLayout {
-        return UICollectionViewLayout()
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(200.0)
+        )
+        
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitem: item,
+            count: 1
+        )
+        
+        let section = NSCollectionLayoutSection(group: group)
+        let compositionalLayout = UICollectionViewCompositionalLayout(section: section)
+        
+        return compositionalLayout
     }
-    
 
     private func bind() {
         viewModel.applySnapShot = {
