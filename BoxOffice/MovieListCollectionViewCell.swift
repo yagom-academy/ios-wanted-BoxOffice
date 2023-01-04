@@ -11,6 +11,9 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
     
     static let reuseIdentifier = "movieListCollectionViewCell"
     
+    private var movieCode: String?
+    private var dayType: DayType?
+    private var region: Region?
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
