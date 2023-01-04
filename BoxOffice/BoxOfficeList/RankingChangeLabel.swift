@@ -37,7 +37,6 @@ class RankingChangeLabel: UIView {
     }
 
     private func addLabel() {
-        label.font = font
         updateLabel(with: rankingChange)
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
