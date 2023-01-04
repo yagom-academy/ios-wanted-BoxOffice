@@ -12,15 +12,15 @@ class BoxOfficeListView: UIView {
     //TODO: Compositional Layout 사용하면 일일 주간 박스오피스 순위 View 구현이 편함
     let typeLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title3)
-        label.text = "일일 박스오피스 순위"
+        label.font = .boldSystemFont(ofSize: 14)
+        label.text = "\(DateFormatterManager.shared.convertToDateTitle()) 순위"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let boxOfficeCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
+        flowLayout.scrollDirection = .vertical
         let collectionView = UICollectionView(
             frame: .zero,
             collectionViewLayout: flowLayout

@@ -8,7 +8,7 @@
 import Foundation
 //MARK: poster
 struct MoviePoster: Decodable {
-    let poster: String
+    let poster: String?
     
     enum CodingKeys: String, CodingKey {
         case poster = "Poster"

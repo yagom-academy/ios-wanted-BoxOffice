@@ -11,12 +11,29 @@ class DateFormatterManager {
     static let shared = DateFormatterManager()
     private let formatter = DateFormatter()
     
-    var dateFormatter: DateFormatter {
+    var dateFormatterForKey: DateFormatter {
         self.formatter.dateFormat = "yyyyMMdd"
         return formatter
     }
     
-    func convertToDateString(from date: Date) -> String {
-        return self.dateFormatter.string(from: date)
+    var dateFormatterForSectionHeader: DateFormatter {
+        self.formatter.dateFormat = "yy년 M월 d일"
+        return formatter
+    }
+    
+    func convertToDateTitle() -> String {
+        let date = Date()
+        let calendar = Calendar(identifier: .gregorian)
+        let yesterDay = calendar.date(byAdding: .day, value: -1, to: date)
+        
+        return self.dateFormatterForSectionHeader.string(from: yesterDay!)
+    }
+    
+    func convertToDateKey() -> String {
+        let date = Date()
+        let calendar = Calendar(identifier: .gregorian)
+        let yesterDay = calendar.date(byAdding: .day, value: -1, to: date)
+        
+        return self.dateFormatterForKey.string(from: yesterDay!)
     }
 }
