@@ -147,9 +147,7 @@
 				0287415D2965B0F900B2D021 /* Coordinator */,
 				0287415B2965B0E700B2D021 /* ViewController */,
 				0287415C2965B0F300B2D021 /* ViewModel */,
-				0287415F2965BA9000B2D021 /* ProfileImageButton.swift */,
-				028741612965BECE00B2D021 /* RatingView.swift */,
-				028741652965C9EC00B2D021 /* BoxOfficeInputView.swift */,
+				028741672965DA3700B2D021 /* Views */,
 			);
 			path = CreateReview;
 			sourceTree = "<group>";
@@ -183,6 +181,16 @@
 			isa = PBXGroup;
 			children = (
 				02F8558429656550004B76DD /* MovieCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		028741672965DA3700B2D021 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0287415F2965BA9000B2D021 /* ProfileImageButton.swift */,
+				028741612965BECE00B2D021 /* RatingView.swift */,
+				028741652965C9EC00B2D021 /* BoxOfficeInputView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
