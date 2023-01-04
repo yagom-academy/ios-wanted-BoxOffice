@@ -144,7 +144,7 @@ private extension MovieListCollectionViewCell {
             audienceNumberValueLabel,
             rankFluctuationValueLabel,
             newlyRankedLabel
-        ].forEach { addSubview($0) }
+        ].forEach { contentView.addSubview($0) }
     }
     
     func setupLayout() {
