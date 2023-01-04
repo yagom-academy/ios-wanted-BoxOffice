@@ -77,7 +77,7 @@ final class MovieDetailUpperCollectionViewCell: UICollectionViewCell {
 
     func setUpContents(movieDetail: MovieDetail) {
         titleLabel.text = movieDetail.title
-        gradeLabel.text = "\(movieDetail.watchGrade)세 이상 관람가"
+        gradeLabel.text = movieDetail.watchGrade
         rankingLabel.text = "\(movieDetail.rank)위"
         rankUpDownLabel.textColor = movieDetail.rankFluctuation > 0 ? .systemRed : .systemBlue
         rankUpDownLabel.text = movieDetail.rankFluctuation > 0 ?  "▲ \(movieDetail.rankFluctuation)" : "▼ \(-movieDetail.rankFluctuation)"
