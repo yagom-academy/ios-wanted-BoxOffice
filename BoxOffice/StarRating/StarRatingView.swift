@@ -9,6 +9,17 @@ import UIKit
 
 class StarRatingView: UIView {
     private let starImages = (1...5).map { _ in StarImageView(frame: .zero) }
+    
+    private let ratingLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title2)
+        label.text = "0.0"
+        label.textAlignment = .center
+        label.font = .boldSystemFont(ofSize: label.font.pointSize)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let starSlider: StarRatingUISlider = {
         let slider = StarRatingUISlider()
         slider.maximumValue = 5.0
@@ -26,6 +37,16 @@ class StarRatingView: UIView {
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
         stackView.spacing = 0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let entireStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -67,8 +88,13 @@ class StarRatingView: UIView {
 
         if halfRating >= 0.5 {
             starImages[rateValue].image = UIImage(systemName: "star.leadinghalf.fill")
-        } else if rateValue != 5 {
-            starImages[rateValue].image = UIImage(systemName: "star")
+            ratingLabel.text = "\(rateValue).5"
+        } else {
+            ratingLabel.text = "\(rateValue).0"
+            
+            if rateValue != 5 {
+                starImages[rateValue].image = UIImage(systemName: "star")
+            }
         }
     }
 
@@ -88,26 +114,39 @@ class StarRatingView: UIView {
 //MARK: Setup View
 extension StarRatingView {
     private func setupView() {
+        addSubView()
         setupConstraint()
         addSliderTarget()
     }
     
-    private func setupConstraint() {
+    private func addSubView() {
         starImages.forEach {
             starStackView.addArrangedSubview($0)
         }
         
-        self.addSubview(starStackView)
-        self.addSubview(starSlider)
+        entireStackView.addArrangedSubview(starStackView)
+        entireStackView.addArrangedSubview(ratingLabel)
         
+        self.addSubview(entireStackView)
+        self.addSubview(starSlider)
+    }
+    
+    private func setupConstraint() {
         NSLayoutConstraint.activate([
-            starStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            starStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-            starStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            starStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-   
+            entireStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            entireStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            entireStackView.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            entireStackView.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor,
+                                                   multiplier: 7/10),
+            
+            starImages[0].heightAnchor.constraint(equalTo: starImages[0].widthAnchor),
+            ratingLabel.widthAnchor.constraint(equalTo: starStackView.widthAnchor,
+                                               multiplier: 1/6),
+            
             starSlider.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            starSlider.widthAnchor.constraint(equalTo: starStackView.widthAnchor)
+            starSlider.leadingAnchor.constraint(equalTo: entireStackView.leadingAnchor),
+            starSlider.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor,
+                                              multiplier: 7/12)
         ])
     }
     

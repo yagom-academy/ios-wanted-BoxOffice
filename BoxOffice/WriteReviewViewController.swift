@@ -69,7 +69,7 @@ class WriteReviewViewController: UIViewController {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .fill
-        stackView.spacing = 8
+        stackView.spacing = 16
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -113,9 +113,9 @@ class WriteReviewViewController: UIViewController {
             entireStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
                                                  constant: -16),
             
-            ratingStarView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor,
-                                                   multiplier: 0.7),
-            ratingStarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            ratingStarView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor,
+//                                                   multiplier: 1/6),
+    
             photoView.widthAnchor.constraint(equalTo: photoView.heightAnchor)
         ])
     }
