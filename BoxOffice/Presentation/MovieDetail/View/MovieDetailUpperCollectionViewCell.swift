@@ -82,6 +82,7 @@ final class MovieDetailUpperCollectionViewCell: UICollectionViewCell {
         gradeLabel.text = movieDetail.watchGrade
         rankingLabel.text = "\(movieOverview.rank)위"
         rankUpDownLabel.textColor = movieOverview.rankFluctuation > 0 ? .systemRed : .systemBlue
+        rankUpDownLabel.isHidden =  movieOverview.rankFluctuation == 0
         rankUpDownLabel.text = movieOverview.rankFluctuation > 0 ?  "▲ \(movieOverview.rankFluctuation)" : "▼ \(-movieOverview.rankFluctuation)"
         newlyRankedLabel.text = movieOverview.isNewlyRanked ? "New" : ""
         posterImageView.image = posterImage
@@ -108,15 +109,16 @@ final class MovieDetailUpperCollectionViewCell: UICollectionViewCell {
 
             titleLabel.bottomAnchor.constraint(equalTo: gradeLabel.topAnchor, constant: -5),
             titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(greaterThanOrEqualTo: contentView.trailingAnchor, constant: -20),
+            titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 40),
+            titleLabel.trailingAnchor.constraint(greaterThanOrEqualTo: contentView.trailingAnchor, constant: -40),
 
 
             rankUpDownLabel.leadingAnchor.constraint(equalTo: rankingLabel.trailingAnchor, constant: 10),
             rankUpDownLabel.centerYAnchor.constraint(equalTo: rankingLabel.centerYAnchor),
 
-            newlyRankedLabel.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -2),
-            newlyRankedLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -5)
+            newlyRankedLabel.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: 10),
+            newlyRankedLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -5),
+            newlyRankedLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 10)
         ])
     }
 }

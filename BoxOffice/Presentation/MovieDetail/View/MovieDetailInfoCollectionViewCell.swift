@@ -39,7 +39,8 @@ final class MovieDetailInfoCollectionViewCell: UICollectionViewCell {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                $0.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10)
+                $0.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+                $0.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
             ])
         }
 

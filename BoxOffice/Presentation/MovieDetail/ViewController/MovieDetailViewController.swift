@@ -60,13 +60,15 @@ final class MovieDetailViewController: UIViewController {
     private func setUpNavigationBar() {
         let button = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"),
                                      style: .plain, target: self, action: #selector(shareButtonTapped(_:)))
-        button.tintColor = .white
+//        button.tintColor = .white
         navigationItem.setRightBarButton(button, animated: false)
 
         let appearance = UINavigationBarAppearance()
         appearance.configureWithDefaultBackground()
         appearance.backgroundColor = ColorAsset.detailBackgroundColor
         navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
     }
 
     private func bind() {
