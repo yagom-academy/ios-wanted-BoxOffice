@@ -15,6 +15,8 @@ class MainViewController: UIViewController {
     var boxOfficeCollectionView: UICollectionView!
     var boxOfficeDatasource: UICollectionViewDiffableDataSource<Section, DailyBoxOfficeList>!
     var boxOfficeData: [DailyBoxOffice] = []
+    static var movieCodeData: [String] = []
+    static var posterData: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,15 +24,26 @@ class MainViewController: UIViewController {
     }
 }
 
+// MARK: - ui 작업
 extension MainViewController {
     func setUiLayout() {
         NetworkManager().getBoxOfficeData { result in
             switch result {
             case .success(let boxOfficeData):
                 DispatchQueue.main.sync {
+                    self.getMovieCodeData(data: boxOfficeData.boxOfficeResult.dailyBoxOfficeList)
                     self.createBoxOfficeCollectionView()
                     self.configBoxOfficeDataSource(data: boxOfficeData.boxOfficeResult.dailyBoxOfficeList)
                     self.boxOfficeCollectionView.reloadData()
+                    
+                    NetworkManager().getFilmDetailData { result in
+                        switch result {
+                        case .success(let success):
+                            print(success)
+                        case .failure(let failure):
+                            print(failure.localizedDescription)
+                        }
+                    }
                 }
             case .failure(let failure):
                 print(failure.localizedDescription)
@@ -41,7 +54,7 @@ extension MainViewController {
     func createBoxOfficeLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(135), heightDimension: .absolute(self.view.frame.height * 0.25))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(135), heightDimension: .absolute(230))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 3)
         group.interItemSpacing = .fixed(5)
         
@@ -60,6 +73,7 @@ extension MainViewController {
         self.view.addSubview(boxOfficeCollectionView)
 
         boxOfficeCollectionView.translatesAutoresizingMaskIntoConstraints = false
+
         
         NSLayoutConstraint.activate([
             boxOfficeCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
@@ -82,5 +96,16 @@ extension MainViewController {
         snapShot.appendSections([.main])
         snapShot.appendItems(data)
         boxOfficeDatasource.apply(snapShot)
+    }
+    
+    func getMovieCodeData(data: [DailyBoxOfficeList]) {
+        for i in 0...9 {
+            MainViewController.movieCodeData.append(data[i].movieCd)
+        }
+        print(MainViewController.movieCodeData)
+    }
+    
+    func getPosterData(data: []) {
+        
     }
 }
