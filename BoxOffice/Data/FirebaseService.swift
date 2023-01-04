@@ -40,4 +40,16 @@ final class FirebaseService {
                 completion(.success(data))
             }
     }
+
+    func uploadReview(review: MovieReview, completion: @escaping (Result<Void, FirebaseError>) -> Void) {
+        let data = review.toDTO().reviewData
+        guard let id = data["id"] as? String else { return }
+        movieReviewReference.document(id).setData(data) { error in
+            guard error == nil else {
+                completion(.failure(FirebaseError.internalError))
+                return
+            }
+            completion(.success(()))
+        }
+    }
 }
