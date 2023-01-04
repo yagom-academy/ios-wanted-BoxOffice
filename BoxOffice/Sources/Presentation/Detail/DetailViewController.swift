@@ -8,10 +8,14 @@
 import UIKit
 
 class DetailViewController: UIViewController {
+    
+    weak var coordinator: BoxOfficeListCoordinatorInterface?
+    private let viewModel: MovieDetailViewModel
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         
-        tableView.backgroundColor = UIColor(r: 26, g: 26, b: 26)
+        tableView.backgroundColor = .boBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorColor = .gray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
@@ -21,7 +25,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(r: 26, g: 26, b: 26)
+        self.view.backgroundColor = .boBackground
         self.view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -39,6 +43,34 @@ class DetailViewController: UIViewController {
 
         navigationItem.largeTitleDisplayMode = .never
     }
+    
+    init(viewModel: MovieDetailViewModel, coordinator: BoxOfficeListCoordinatorInterface) {
+        self.viewModel = viewModel
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+private extension DetailViewController {
+    
+    func setUp() {
+        
+    }
+    
+    func setUpReviewButton(_ cell: ThirdCell) {
+        cell.reviewButton.addTarget(self, action: #selector(didTapReviewButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc func didTapReviewButton(_ sender: UIButton) {
+        let dummy = Movie(code: "", name: "", openDate: Date())
+        coordinator?.showCreateReviewView(movie: dummy)
+    }
+    
 }
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -56,6 +88,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdCell", for: indexPath) as! ThirdCell
+            setUpReviewButton(cell)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! ReviewCell

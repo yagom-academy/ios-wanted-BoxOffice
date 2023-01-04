@@ -10,10 +10,10 @@ import UIKit
 final public class AppCoordinator: Coordinator {
     
     var type: CoordinatorType { .root }
-    var finishDelegate: CoordinatorFinishDelegate?
     var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
+    weak var finishDelegate: CoordinatorFinishDelegate?
     
     public init(navigationConrtoller: UINavigationController) {
         self.navigationController = navigationConrtoller

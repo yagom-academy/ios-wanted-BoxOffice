@@ -112,7 +112,7 @@ class ThirdCell: UITableViewCell {
         return label
     }()
     
-    private lazy var reviewButton: UIButton = {
+    private(set) lazy var reviewButton: UIButton = {
         let button = UIButton()
         button.tintColor = .white
         button.backgroundColor = UIColor(r: 50, g: 50, b: 50)
