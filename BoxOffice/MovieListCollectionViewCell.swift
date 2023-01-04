@@ -8,7 +8,6 @@
 import UIKit
 
 final class MovieListCollectionViewCell: UICollectionViewCell {
-    
     static let reuseIdentifier = "movieListCollectionViewCell"
     
     private var movieCode: String?
@@ -18,7 +17,6 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "image.fill")
         imageView.backgroundColor = .systemGray4
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 10
@@ -83,7 +81,7 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
         label.textColor = Color.positiveAccent
         return label
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -94,7 +92,9 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+}
+
+extension MovieListCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -128,11 +128,12 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
             rankFluctuationValueLabel.textColor = Color.negativeAccent
         } else {
             rankFluctuationValueLabel.text = ""
-            rankFluctuationValueLabel.textColor = Color.valueTitleLabel
         }
     }
-    
-    private func addViews() {
+}
+
+private extension MovieListCollectionViewCell {
+    func addViews() {
         [
             imageView,
             titleLabel,
@@ -146,7 +147,7 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
         ].forEach { addSubview($0) }
     }
     
-    private func setupLayout() {
+    func setupLayout() {
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constraint.outerSpacing),
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constraint.outerSpacing + Constraint.subtleInnerSpacing),
