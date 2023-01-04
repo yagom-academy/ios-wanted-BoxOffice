@@ -39,6 +39,8 @@ final class MovieListViewController: UIViewController {
         viewModel.viewDidLoad()
         registerCollectionViewCells()
         setupCellProvider()
+        applySnapshot(movieOverviews: self.viewModel.movieOverviewList)
+        
         addViews()
         setupUILayouts()
     }
@@ -104,6 +106,14 @@ extension MovieListViewController {
     
     private func registerCollectionViewCells() {
         self.movieListCollectionView.register(MovieListCollectionViewCell.self, forCellWithReuseIdentifier: MovieListCollectionViewCell.reuseIdentifier)
+    }
+    
+    
+    private func applySnapshot(movieOverviews: [MovieOverview]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, MovieOverview>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(movieOverviews)
+        self.diffableDataSource.apply(snapshot, animatingDifferences: true)
     }
     
     func addViews() {
