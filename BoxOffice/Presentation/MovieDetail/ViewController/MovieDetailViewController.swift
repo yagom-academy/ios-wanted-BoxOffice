@@ -30,11 +30,21 @@ final class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = ColorAsset.detailBackgroundColor
-        setUpNavigationBar()
         bind()
         setUpMovieDetailCollectionView()
         layout()
         viewModel.viewDidLoad()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        setUpNavigationBar()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundColor = .clear
+        navigationController?.navigationBar.standardAppearance = appearance
     }
 
     init(movieOverview: MovieOverview) {
