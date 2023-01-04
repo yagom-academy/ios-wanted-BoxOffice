@@ -102,6 +102,26 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    func setupContents(movieOverview: MovieOverview) {
+        movieCode = movieOverview.movieCode
+        dayType = movieOverview.dayType
+        region = movieOverview.region
+        
+        titleLabel.text = movieOverview.title
+        rankValueLabel.text = "\(movieOverview.rank)"
+        newlyRankedLabel.text = movieOverview.isNewlyRanked ? "New" : ""
+        audienceNumberValueLabel.text = "\(movieOverview.audienceNumber)"
+        openingDayValueLabel.text = "\(movieOverview.openingDay)"
+        
+        if movieOverview.rankFluctuation > 0 {
+            rankFluctuationValueLabel.text = "▲ \(movieOverview.rankFluctuation)"
+        } else if movieOverview.rankFluctuation < 0 {
+            rankFluctuationValueLabel.text = "▼ \(-movieOverview.rankFluctuation)"
+        } else {
+            rankFluctuationValueLabel.text = ""
+        }
+    }
+    
     private func addViews() {
         [
             imageView,
