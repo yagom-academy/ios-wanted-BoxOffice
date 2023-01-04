@@ -8,6 +8,10 @@
 import UIKit
 
 class DetailViewController: UIViewController {
+    
+    weak var coordinator: BoxOfficeListCoordinatorInterface?
+    private let viewModel: MovieDetailViewModel
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         
@@ -39,6 +43,32 @@ class DetailViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
     }
     
+    init(viewModel: MovieDetailViewModel, coordinator: BoxOfficeListCoordinatorInterface) {
+        self.viewModel = viewModel
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+private extension DetailViewController {
+    
+    func setUp() {
+        
+    }
+    
+    func setUpReviewButton(_ cell: ThirdCell) {
+        cell.reviewButton.addTarget(self, action: #selector(didTapReviewButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc func didTapReviewButton(_ sender: UIButton) {
+        let dummy = Movie(code: "", name: "", openDate: Date())
+        coordinator?.showCreateReviewView(movie: dummy)
+    }
     
 }
 
@@ -57,6 +87,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdCell", for: indexPath) as! ThirdCell
+            setUpReviewButton(cell)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! ReviewCell
