@@ -25,9 +25,9 @@ final class MockMovieDetailRepository: MovieDetailRepositoryInterface {
 
     func fetchMovieReview(movieCode: String, completion: @escaping (Result<[MovieReview], Error>) -> Void) {
         var reviews = [MovieReview]()
-        reviews.append(MovieReview(id: UUID(), user: User(id: UUID(), nickname: "Neph"), password: "1234", rating: 5, image: UIImage(systemName: "person")!, description: "와 정말 재밌어요 길어요 길어요 와 정말 재밌어요 길어요 길어요와 정말 재밌어요 길어요 길어요"))
+        reviews.append(MovieReview(id: UUID(), movieCode: "", user: User(nickname: "Neph"), password: "1234", rating: 5, image: "", description: "와 정말 재밌어요 길어요 길어요 와 정말 재밌어요 길어요 길어요와 정말 재밌어요 길어요 길어요"))
         for _ in 0..<20 {
-            reviews.append(MovieReview(id: UUID(), user: User(id: UUID(), nickname: "Neph"), password: "1234", rating: 5, image: UIImage(systemName: "person")!, description: "와 정말 재밌어요"))
+            reviews.append(MovieReview(id: UUID(), movieCode: "", user: User(nickname: "Neph"), password: "1234", rating: 5, image: "", description: "와 정말 재밌어요"))
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -60,7 +60,7 @@ var dummyMovieDetail: MovieDetail {
 var dummyMovieDetails: [MovieDetail] = Array.init(repeating: MovieDetail(movieCode: UUID().description, rank: 1, title: "아바타", openingDay: Date(), audienceNumber: 10000, rankFluctuation: 1, isNewlyRanked: true, productionYear: 2023, playTime: 123.5, genre: "SF", directorsName: "봉준호", actorsName: "이병헌", watchGrade: 13, posterImage: dummyPosterImage, posterImageURL: "https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_SX300.jpg"), count: 10)
 
 var dummyMovieReview: MovieReview {
-    return MovieReview(id: UUID(), user: User(id: UUID(), nickname: "Neph"), password: "1234", rating: 5, image: UIImage(systemName: "person")!, description: "와 정말 재밌어요")
+    return MovieReview(id: UUID(), movieCode: "", user: User(nickname: "Neph"), password: "1234", rating: 5, image: "", description: "와 정말 재밌어요")
 }
 
 let dummyPosterImage = UIImage(named: "dummyPosterImage")

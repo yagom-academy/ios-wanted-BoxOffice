@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct MovieOverview {
+struct MovieOverview: Hashable {
     let movieCode: String
     let dayType: DayType
     let region: Region
