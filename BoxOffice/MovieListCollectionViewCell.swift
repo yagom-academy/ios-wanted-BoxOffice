@@ -122,10 +122,13 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
         
         if movieOverview.rankFluctuation > 0 {
             rankFluctuationValueLabel.text = "▲ \(movieOverview.rankFluctuation)"
+            rankFluctuationValueLabel.textColor = .red
         } else if movieOverview.rankFluctuation < 0 {
             rankFluctuationValueLabel.text = "▼ \(-movieOverview.rankFluctuation)"
+            rankFluctuationValueLabel.textColor = .blue
         } else {
             rankFluctuationValueLabel.text = ""
+            rankFluctuationValueLabel.textColor = .secondaryLabel
         }
     }
     
