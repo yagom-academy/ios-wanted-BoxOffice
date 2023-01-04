@@ -69,10 +69,12 @@ class WriteReviewViewController: UIViewController {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .fill
-        stackView.spacing = 16
+        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    private let ratingStarView = StarRatingView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +96,7 @@ class WriteReviewViewController: UIViewController {
         photoStackView.addArrangedSubview(textFieldStackView)
         
         entireStackView.addArrangedSubview(photoStackView)
+        entireStackView.addArrangedSubview(ratingStarView)
         entireStackView.addArrangedSubview(contentTextView)
         
         view.addSubview(entireStackView)
@@ -110,6 +113,9 @@ class WriteReviewViewController: UIViewController {
             entireStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
                                                  constant: -16),
             
+            ratingStarView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor,
+                                                   multiplier: 0.7),
+            ratingStarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             photoView.widthAnchor.constraint(equalTo: photoView.heightAnchor)
         ])
     }
