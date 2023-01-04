@@ -141,7 +141,6 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
             openingDayValueLabel,
             audienceNumberLabel,
             audienceNumberValueLabel,
-            rankFluctuationLabel,
             rankFluctuationValueLabel,
             newlyRankedLabel
         ].forEach { addSubview($0) }
