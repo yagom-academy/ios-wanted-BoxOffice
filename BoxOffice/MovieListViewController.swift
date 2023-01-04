@@ -100,6 +100,8 @@ extension MovieListViewController {
                 return MovieListCollectionViewCell()
             }
             
+            cell.layer.borderWidth = 0.2
+            cell.layer.borderColor = UIColor.lightGray.cgColor
             cell.setupContents(movieOverview: itemIdentifier)
             
             return cell
