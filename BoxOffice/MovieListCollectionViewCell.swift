@@ -157,7 +157,7 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
             rankValueLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: Constraint.innerSpacing),
             rankValueLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: Constraint.innerSpacing),
 
-            titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: Constraint.innerSpacing),
+            titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: Constraint.innerSpacing + Constraint.subtleInnerSpacing),
             titleLabel.topAnchor.constraint(equalTo: imageView.topAnchor),
 
             rankFluctuationValueLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
