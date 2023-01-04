@@ -94,10 +94,25 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addViews()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    private func addViews() {
+        [
+            imageView,
+            titleLabel,
+            rankValueLabel,
+            openingDayLabel,
+            openingDayValueLabel,
+            audienceNumberLabel,
+            audienceNumberValueLabel,
+            rankFluctuationLabel,
+            rankFluctuationValueLabel,
+            newlyRankedLabel
+        ].forEach { addSubview($0) }
     }
 private extension MovieListCollectionViewCell {
     enum Constraint {
