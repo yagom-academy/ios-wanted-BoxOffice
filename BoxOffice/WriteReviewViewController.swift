@@ -8,13 +8,13 @@
 import UIKit
 
 class WriteReviewViewController: UIViewController {
-    private let photoView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "photo.on.rectangle.angled")
-        imageView.tintColor = .black
-        imageView.backgroundColor = .systemGray6
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
+    private let photoButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "photo.on.rectangle.angled"), for: .normal)
+        button.tintColor = .black
+        button.backgroundColor = .systemGray6
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private let nickNameTextField: UITextField = {
@@ -75,12 +75,18 @@ class WriteReviewViewController: UIViewController {
     }()
     
     private let ratingStarView = StarRatingView()
+    private let imagePicker = UIImagePickerController()
     private var password = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupDelegate()
+    }
+    
+    private func setupDelegate() {
+        setupTextFieldDelegate()
+        setupImagePicker()
     }
     
     private func setupView() {
@@ -94,7 +100,7 @@ class WriteReviewViewController: UIViewController {
         textFieldStackView.addArrangedSubview(nickNameTextField)
         textFieldStackView.addArrangedSubview(passwordTextField)
         
-        photoStackView.addArrangedSubview(photoView)
+        photoStackView.addArrangedSubview(photoButton)
         photoStackView.addArrangedSubview(textFieldStackView)
         
         entireStackView.addArrangedSubview(ratingStarView)
@@ -114,8 +120,10 @@ class WriteReviewViewController: UIViewController {
                                                  constant: 16),
             entireStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
                                                  constant: -16),
-        
-            photoView.widthAnchor.constraint(equalTo: photoView.heightAnchor)
+            
+            photoButton.widthAnchor.constraint(equalTo: photoButton.heightAnchor),
+            photoButton.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor,
+                                                multiplier: 1/8)
         ])
     }
 }
@@ -140,9 +148,39 @@ extension WriteReviewViewController {
     }
 }
 
+extension WriteReviewViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    private func setupImagePicker() {
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = true
+        
+        photoButton.addTarget(self,
+                              action: #selector(photoButtonTapped),
+                              for: .touchUpInside)
+    }
+    
+    @objc private func photoButtonTapped() {
+        present(imagePicker, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        var selectedImage: UIImage? = nil
+        
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            selectedImage = image
+        } else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            selectedImage = image
+        }
+        
+        photoButton.setImage(selectedImage, for: .normal)
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+
 //MARK: Password Process
 extension WriteReviewViewController: UITextFieldDelegate {
-    private func setupDelegate() {
+    private func setupTextFieldDelegate() {
         passwordTextField.delegate = self
     }
     
