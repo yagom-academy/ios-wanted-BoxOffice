@@ -156,6 +156,7 @@ extension WriteReviewViewController {
               let content = contentTextView.text else { return nil }
         
         if validatePassword() == false {
+            //TODO: 암호 유효성 실패 얼럿 띄우기
             return nil
         }
         
@@ -208,12 +209,13 @@ extension WriteReviewViewController: UITextFieldDelegate {
     }
     
     private func validatePassword() -> Bool {
-        let number = convert("0123456789")
-        let specialCharacters = convert("!@#$")
-        let alphabet = convert("abcdefghijklmnopqrstuvwxyz")
-        let checkingPassword = convert(password)
+        let number = convertToSet("0123456789")
+        let specialCharacters = convertToSet("!@#$")
+        let alphabet = convertToSet("abcdefghijklmnopqrstuvwxyz")
+        let checkingPassword = convertToSet(password)
         
-        guard checkingPassword.intersection(number).isEmpty == false,
+        guard (6...20).contains(password.count),
+              checkingPassword.intersection(number).isEmpty == false,
               checkingPassword.intersection(specialCharacters).isEmpty == false,
               checkingPassword.intersection(alphabet).isEmpty == false else {
             return false
@@ -222,7 +224,7 @@ extension WriteReviewViewController: UITextFieldDelegate {
         return true
     }
     
-    private func convert(_ text: String) -> Set<String> {
+    private func convertToSet(_ text: String) -> Set<String> {
         var newSet: Set<String> = []
         
         text.forEach {
@@ -232,23 +234,28 @@ extension WriteReviewViewController: UITextFieldDelegate {
         return newSet
     }
     
-    //TODO: text를 지우는 경우 password에서 지워지지 않고 그대로 쌓임
-    private func setupPassword(with textField: UITextField) {
-        if let text = textField.text, let lastText = text.last {
-            password += String(lastText)
+    private func hidePasswordText(with textField: UITextField) {
+        if let text = textField.text {
             textField.text = String(repeating: "*", count: text.count)
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        setupPassword(with: textField)
+        hidePasswordText(with: textField)
     }
     
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
-        setupPassword(with: textField)
+        if range.length > 0 {
+            (1...range.length).forEach { _ in
+                _ = password.popLast()
+            }
+            return true
+        }
         
+        hidePasswordText(with: textField)
+        password += string
         return true
     }
 }
