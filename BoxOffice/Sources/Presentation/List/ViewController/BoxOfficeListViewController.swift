@@ -25,6 +25,7 @@ class BoxOfficeListViewController: UIViewController {
         tableView.backgroundColor = .boBackground
         tableView.register(MovieCell.self)
         tableView.dataSource = self
+        tableView.delegate = self
         return tableView
     }()
     
@@ -88,6 +89,15 @@ extension BoxOfficeListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
+    }
+    
+}
+
+extension BoxOfficeListViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let dummy = Movie(code: "", name: "", openDate: Date())
+        coordinator?.showMovieDetailView(movie: dummy)
     }
     
 }

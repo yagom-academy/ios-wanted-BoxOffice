@@ -36,6 +36,7 @@ class DetailViewController: UIViewController {
         ])
         
 //        tableView.estimatedRowHeight = 190
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     
