@@ -61,8 +61,8 @@ final class MovieDetailViewController: UIViewController {
                 self?.movieDetailCollectionView.scrollToItem(at: upperMovieInfoIndexPath, at: .top, animated: false)
             }
         }
-        viewModel.showAlert = { [weak self] alert in
-            self?.present(alert, animated: true)
+        viewModel.presentViewController = { [weak self] viewController in
+            self?.present(viewController, animated: true)
         }
     }
 
@@ -203,25 +203,7 @@ final class MovieDetailViewController: UIViewController {
 
     @objc
     private func shareButtonTapped(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "포스터 이미지 공유하기", style: .default) { [weak self] _ in
-            guard let urlString = self?.viewModel.movieDetail.posterImageURL,
-                  let url = URL(string: urlString) else { return }
-            let activityViewController = UIActivityViewController(
-                activityItems: [url],
-                applicationActivities: nil)
-            self?.present(activityViewController, animated: true, completion: nil)
-        })
-        alert.addAction(UIAlertAction(title: "현재 화면 저장하기", style: .default) { [weak self] _ in
-            guard let screenImage = self?.movieDetailCollectionView.convertToImage() else { return }
-            let activityViewController = UIActivityViewController(
-                activityItems: [screenImage],
-                applicationActivities: nil)
-            self?.present(activityViewController, animated: true, completion: nil)
-        })
-        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
-
-        present(alert, animated: true)
+        viewModel.shareButtonTapped(screenImage: movieDetailCollectionView.convertToImage())
     }
 }
 

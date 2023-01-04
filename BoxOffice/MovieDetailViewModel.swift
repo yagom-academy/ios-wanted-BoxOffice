@@ -28,7 +28,7 @@ final class MovieDetailViewModel {
     // MARK: - Actions
     var applyDataSource: (() -> Void)?
     var scrollToUpper: (() -> Void)?
-    var showAlert: ((UIAlertController) -> Void)?
+    var presentViewController: ((UIViewController) -> Void)?
 
     // MARK: - Private properties
     private let movieCode: String
@@ -65,16 +65,37 @@ extension MovieDetailViewModel {
             if review.password == password {
                 self?.deleteMovieReview(review: review)
             } else {
-                self?.showAlert?(wrongPasswordAlert)
+                self?.presentViewController?(wrongPasswordAlert)
             }
         })
 
         actionSheet.addAction(UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
-            self?.showAlert?(passwordTextFieldAlert)
+            self?.presentViewController?(passwordTextFieldAlert)
         })
         actionSheet.addAction(UIAlertAction(title: "취소", style: .cancel))
 
-        showAlert?(actionSheet)
+        presentViewController?(actionSheet)
+    }
+
+    func shareButtonTapped(screenImage: UIImage?) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "포스터 이미지 공유하기", style: .default) { [weak self] _ in
+            guard let urlString = self?.movieDetail.posterImageURL,
+                  let url = URL(string: urlString) else { return }
+            let activityViewController = UIActivityViewController(
+                activityItems: [url],
+                applicationActivities: nil)
+            self?.presentViewController?(activityViewController)
+        })
+        alert.addAction(UIAlertAction(title: "현재 화면 저장하기", style: .default) { [weak self] _ in
+            guard let screenImage = screenImage else { return }
+            let activityViewController = UIActivityViewController(
+                activityItems: [screenImage],
+                applicationActivities: nil)
+            self?.presentViewController?(activityViewController)
+        })
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+        presentViewController?(alert)
     }
 }
 
