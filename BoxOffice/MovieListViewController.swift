@@ -130,14 +130,14 @@ private extension MovieListViewController {
     
     func setupUILayouts() {
         NSLayoutConstraint.activate([
-            dayTypeSegmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            dayTypeSegmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            dayTypeSegmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constraint.outerSpacing),
+            dayTypeSegmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Constraint.outerSpacing),
             dayTypeSegmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            dayTypeSegmentedControl.heightAnchor.constraint(equalToConstant: 30),
+            dayTypeSegmentedControl.heightAnchor.constraint(equalToConstant: Constraint.segmentedControlHeight),
             
-            movieListCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            movieListCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            movieListCollectionView.topAnchor.constraint(equalTo: dayTypeSegmentedControl.safeAreaLayoutGuide.bottomAnchor, constant: 16),
+            movieListCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constraint.outerSpacing),
+            movieListCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Constraint.outerSpacing),
+            movieListCollectionView.topAnchor.constraint(equalTo: dayTypeSegmentedControl.safeAreaLayoutGuide.bottomAnchor, constant: Constraint.outerSpacing),
             movieListCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
@@ -146,6 +146,15 @@ private extension MovieListViewController {
 extension MovieListViewController {
     enum Section {
         case main
+    }
+}
+
+private extension MovieListViewController {
+    enum Constraint {
+        static let segmentedControlHeight: CGFloat = 30
+        static let innerSpacing: CGFloat = 8
+        static let subtleInnerSpacing: CGFloat = 4
+        static let outerSpacing: CGFloat = 16
     }
 }
 
