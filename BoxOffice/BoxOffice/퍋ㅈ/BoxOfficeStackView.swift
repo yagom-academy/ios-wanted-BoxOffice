@@ -11,7 +11,7 @@ struct BoxOfficeStackView: View {
     
     @StateObject private var imageLoader = URLImageLoader()
 
-    var dailyModel: BoxOfficeListViewModel
+    var dailyModel: BoxOfficeMainViewModel
     var dailyBoxOfficeList: DailyBoxOfficeList
     var myIndex: Int
     

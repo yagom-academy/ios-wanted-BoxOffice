@@ -1,5 +1,5 @@
 //
-//  JsonDecoder.swift
+//  BoxOfficeMainViewModel.swift
 //  BoxOffice
 //
 //  Created by 유한석 on 2023/01/03.
@@ -8,9 +8,8 @@
 import Foundation
 import SwiftUI
 
-// TODO: 이게 뭐하는 친구?
 enum GetDateType {
-    case get
+    case daily
 }
 
 enum BoxOfficeListViewModelConstants: String {
@@ -24,23 +23,29 @@ enum PosterImageError: Error {
 
 protocol BoxOfficeListProtocol {
     var movieList: [DailyBoxOfficeList] { get }
-    var images: [UIImage] { get }
     
     func fetchDailyBoxOfficeList(dateType: GetDateType, targetDate: String)
-    func fetchImage()
 }
 
-final class BoxOfficeListViewModel: ObservableObject, BoxOfficeListProtocol {
+final class BoxOfficeMainViewModel: ObservableObject, BoxOfficeListProtocol {
     
-    //var boxOfficeAPI = BoxOfficeAPI()
+    @Published var movieList = [DailyBoxOfficeList]()
+    
     let boxOfficeDirector = MovieRequestDirector()
     let posterImageDirector = OMDbRequestDirector()
     let networkManager = NetworkManager()
     
-    @Published var movieList = [DailyBoxOfficeList]()
-    @Published var images = [UIImage]()
-    
     var url: [String] = []
+    
+    func getYesterdayDate() -> String {
+        let calendar = Calendar.current
+        let dateFormatter = DateFormatter()
+
+        let date = dateFormatter.date(from: Date().translateToString())
+        let beforeDay = calendar.date(byAdding: .day, value: -1, to: date ?? Date())
+
+        return beforeDay?.translateToString() ?? ""
+    }
     
     func fetchDailyBoxOfficeList(dateType: GetDateType, targetDate: String) { //  완료시에 뭐 할거면 컴플리션 달아도됨
         let queryItems: [String: String] = [
@@ -150,34 +155,6 @@ final class BoxOfficeListViewModel: ObservableObject, BoxOfficeListProtocol {
                 debugPrint("BoxOfficeListViewModel - fetchMoviePoster : NetworkError - \(failure.localizedDescription)")
             }
         }
-    }
-    
-//    func getYesterdayDate() -> String {
-//        let calendar = Calendar.current
-//        let dateFormatter = DateFormatter()
-//
-//        let date = dateFormatter.date(from: Date().translateToString())
-//        let beforeDay = calendar.date(byAdding: .day, value: -1, to: date ?? Date())
-//
-//        return beforeDay?.translateToString() ?? ""
-//    }
-    
-    func fetchImage() {
-        url.map { element in
-            setImageFromStringrURL(stringUrl: element)
-        }
-    }
-    
-    func setImageFromStringrURL(stringUrl: String) {
-        guard let url = URL(string: stringUrl) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let imageData = data else { return }
-            
-            DispatchQueue.main.async {
-                self.images.append(UIImage(data: imageData) ?? UIImage())
-            }
-        }.resume()
     }
 }
 

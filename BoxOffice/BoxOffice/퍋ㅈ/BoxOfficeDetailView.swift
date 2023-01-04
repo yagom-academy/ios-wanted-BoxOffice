@@ -11,7 +11,7 @@ struct BoxOfficeDetailView: View {
     
     @StateObject private var imageLoader = URLImageLoader()
 
-    var viewModel: BoxOfficeListViewModel
+    var viewModel: BoxOfficeMainViewModel
     var myIndex: Int
 
     var body: some View {
@@ -58,7 +58,7 @@ struct BoxOfficeDetailView: View {
 struct BoxOfficeDetailView_Previews: PreviewProvider {
     static var previews: some View {
         BoxOfficeDetailView(
-            viewModel: BoxOfficeListViewModel(),
+            viewModel: BoxOfficeMainViewModel(),
             myIndex: 0
         )
     }

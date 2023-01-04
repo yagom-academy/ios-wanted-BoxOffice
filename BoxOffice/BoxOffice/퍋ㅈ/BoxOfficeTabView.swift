@@ -11,7 +11,7 @@ struct BoxOfficeTabView: View {
     
     @StateObject private var imageLoader = URLImageLoader()
     
-    var viewModel: BoxOfficeListViewModel
+    var viewModel: BoxOfficeMainViewModel
     var myIndex: Int
 
     var body: some View {
@@ -36,7 +36,7 @@ struct BoxOfficeTabView: View {
 struct BoxOfficeTabView_Previews: PreviewProvider {
     static var previews: some View {
         BoxOfficeTabView(
-            viewModel: BoxOfficeListViewModel(),
+            viewModel: BoxOfficeMainViewModel(),
             myIndex: 0
         )
     }
