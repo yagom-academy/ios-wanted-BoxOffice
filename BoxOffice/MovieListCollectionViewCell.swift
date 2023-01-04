@@ -18,4 +18,11 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+private extension MovieListCollectionViewCell {
+    enum Constraint {
+        static let innerSpacing: CGFloat = 8
+        static let outerSpacing: CGFloat = 16
+        static let imageViewWidth: CGFloat = 120
+        static let imageViewHeight: CGFloat = 160
+    }
 }
