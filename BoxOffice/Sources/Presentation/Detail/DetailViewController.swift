@@ -15,6 +15,7 @@ class DetailViewController: UIViewController {
     private let tableView: UITableView = {
         let tableView = UITableView()
         
+        tableView.backgroundColor = .boBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorColor = .gray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
@@ -24,6 +25,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = .boBackground
         self.view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -38,8 +40,7 @@ class DetailViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ])
-        
-//        tableView.estimatedRowHeight = 190
+
         navigationItem.largeTitleDisplayMode = .never
     }
     
@@ -96,9 +97,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-           
-           
            return UITableView.automaticDimension
        }
-    
 }
