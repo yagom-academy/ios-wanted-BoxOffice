@@ -8,7 +8,7 @@
 import UIKit
 
 class StarRatingView: UIView {
-    private var starImages: [UIImageView] = []
+    private let starImages = (1...5).map { _ in StarImageView(frame: .zero) }
     private let starSlider: StarRatingUISlider = {
         let slider = StarRatingUISlider()
         slider.maximumValue = 5.0
@@ -38,48 +38,6 @@ class StarRatingView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
-    }
-    
-    private func setupView() {
-        setupButtons()
-        addSliderTarget()
-        setupConstraint()
-    }
-    
-    private func setupConstraint() {
-        starImages.forEach {
-            starStackView.addArrangedSubview($0)
-        }
-        
-        self.addSubview(starStackView)
-        self.addSubview(starSlider)
-        
-        NSLayoutConstraint.activate([
-            starStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            starStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-            starStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            starStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            
-            starImages[0].heightAnchor.constraint(equalTo: starImages[0].widthAnchor),
-            starSlider.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            starSlider.widthAnchor.constraint(equalTo: starStackView.widthAnchor)
-        ])
-    }
-    
-    private func setupButtons() {
-        for _ in 1...5 {
-            let starImage = UIImageView()
-            starImage.image = UIImage(systemName: "star")
-            starImage.tintColor = .systemYellow
-            starImage.translatesAutoresizingMaskIntoConstraints = false
-            starImages.append(starImage)
-        }
-    }
-    
-    func addSliderTarget() {
-        starSlider.addTarget(self,
-                         action: #selector(sliderStar),
-                         for: .valueChanged)
     }
     
     func setupStars(to rating: Float) {
@@ -124,5 +82,38 @@ class StarRatingView: UIView {
         for clearIndex in stride(from: starImages.count - 1, to: index, by: -1) {
             starImages[clearIndex].image = UIImage(systemName: "star")
         }
+    }
+}
+
+//MARK: Setup View
+extension StarRatingView {
+    private func setupView() {
+        setupConstraint()
+        addSliderTarget()
+    }
+    
+    private func setupConstraint() {
+        starImages.forEach {
+            starStackView.addArrangedSubview($0)
+        }
+        
+        self.addSubview(starStackView)
+        self.addSubview(starSlider)
+        
+        NSLayoutConstraint.activate([
+            starStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            starStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            starStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            starStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+   
+            starSlider.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            starSlider.widthAnchor.constraint(equalTo: starStackView.widthAnchor)
+        ])
+    }
+    
+    private func addSliderTarget() {
+        starSlider.addTarget(self,
+                             action: #selector(sliderStar),
+                             for: .valueChanged)
     }
 }
