@@ -84,6 +84,7 @@ class WriteReviewViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupDelegate()
+        bind()
     }
     
     private func setupDelegate() {
@@ -127,6 +128,13 @@ class WriteReviewViewController: UIViewController {
             photoButton.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor,
                                                 multiplier: 1/8)
         ])
+    }
+    
+    private func bind() {
+        reviewViewModel.error
+            .bind { error in
+                //TODO: 저장 실패 얼럿
+            }
     }
 }
 
