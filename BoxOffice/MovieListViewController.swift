@@ -102,8 +102,8 @@ private extension MovieListViewController {
                 return MovieListCollectionViewCell()
             }
             
-            cell.layer.borderWidth = 0.2
-            cell.layer.borderColor = UIColor.lightGray.cgColor
+            cell.layer.addBottomDivisionLine(width: 1)
+
             cell.setupContents(movieOverview: itemIdentifier)
             
             return cell
@@ -146,5 +146,21 @@ private extension MovieListViewController {
 extension MovieListViewController {
     enum Section {
         case main
+    }
+}
+
+fileprivate extension CALayer {
+    func addBottomDivisionLine(width: CGFloat) {
+        let border = CALayer()
+        
+        border.frame = CGRect.init(
+            x: 0,
+            y: frame.height-width,
+            width: bounds.width,
+            height: width
+        )
+        
+        border.backgroundColor = UIColor.systemGray5.cgColor
+        self.addSublayer(border)
     }
 }
