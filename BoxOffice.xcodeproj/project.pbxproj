@@ -24,6 +24,16 @@
 		9BEA28022962D00700FB7E73 /* BoxOfficeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA28012962D00700FB7E73 /* BoxOfficeAPI.swift */; };
 		9BEA28042962D04F00FB7E73 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA28032962D04F00FB7E73 /* HTTPMethod.swift */; };
 		9BEA28062962E41400FB7E73 /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA28052962E41400FB7E73 /* NetworkHandler.swift */; };
+		E11E3DA329634C1F00C736A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E11E3DA229634C1F00C736A2 /* GoogleService-Info.plist */; };
+		E11E3DA62963527C00C736A2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E11E3DA52963527C00C736A2 /* FirebaseFirestore */; };
+		E11E3DA82963527C00C736A2 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E11E3DA72963527C00C736A2 /* FirebaseFirestoreCombine-Community */; };
+		E11E3DAA2963527C00C736A2 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E11E3DA92963527C00C736A2 /* FirebaseFirestoreSwift */; };
+		E19B5DAF2963D8CD001B2DB4 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DAE2963D8CD001B2DB4 /* FirebaseManager.swift */; };
+		E19B5DB22963D960001B2DB4 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DB12963D960001B2DB4 /* Comment.swift */; };
+		E19B5DB429643A14001B2DB4 /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DB329643A14001B2DB4 /* CommentManager.swift */; };
+		E19B5DB729645160001B2DB4 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DB629645160001B2DB4 /* UIImage+Extension.swift */; };
+		E19B5DB929645189001B2DB4 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DB829645189001B2DB4 /* String+Extension.swift */; };
+		E19B5DCA29647B10001B2DB4 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DC929647B10001B2DB4 /* Date+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +56,13 @@
 		9BEA28012962D00700FB7E73 /* BoxOfficeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeAPI.swift; sourceTree = "<group>"; };
 		9BEA28032962D04F00FB7E73 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		9BEA28052962E41400FB7E73 /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
+		E11E3DA229634C1F00C736A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E19B5DAE2963D8CD001B2DB4 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		E19B5DB12963D960001B2DB4 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		E19B5DB329643A14001B2DB4 /* CommentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentManager.swift; sourceTree = "<group>"; };
+		E19B5DB629645160001B2DB4 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		E19B5DB829645189001B2DB4 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		E19B5DC929647B10001B2DB4 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +70,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E11E3DA62963527C00C736A2 /* FirebaseFirestore in Frameworks */,
+				E11E3DA82963527C00C736A2 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				E11E3DAA2963527C00C736A2 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +98,9 @@
 		635A19E628F9603900197BCC /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
+				E19B5DB529645148001B2DB4 /* Extension */,
+				E19B5DB02963D94F001B2DB4 /* Model */,
+				E19B5DAD2963D82A001B2DB4 /* Network */,
 				9BEA27FD29629F8C00FB7E73 /* Entry */,
 				9B335C172963BFA600C8F339 /* Model */,
 				9BEA28002962BA0100FB7E73 /* Network */,
@@ -133,6 +156,7 @@
 				635A19F028F9603A00197BCC /* Assets.xcassets */,
 				635A19F228F9603A00197BCC /* LaunchScreen.storyboard */,
 				635A19F528F9603A00197BCC /* Info.plist */,
+				E11E3DA229634C1F00C736A2 /* GoogleService-Info.plist */,
 			);
 			path = SupportFile;
 			sourceTree = "<group>";
@@ -156,6 +180,33 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		E19B5DAD2963D82A001B2DB4 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E19B5DAE2963D8CD001B2DB4 /* FirebaseManager.swift */,
+				E19B5DB329643A14001B2DB4 /* CommentManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E19B5DB02963D94F001B2DB4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E19B5DB12963D960001B2DB4 /* Comment.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E19B5DB529645148001B2DB4 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E19B5DB629645160001B2DB4 /* UIImage+Extension.swift */,
+				E19B5DB829645189001B2DB4 /* String+Extension.swift */,
+				E19B5DC929647B10001B2DB4 /* Date+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -172,6 +223,11 @@
 			dependencies = (
 			);
 			name = BoxOffice;
+			packageProductDependencies = (
+				E11E3DA52963527C00C736A2 /* FirebaseFirestore */,
+				E11E3DA72963527C00C736A2 /* FirebaseFirestoreCombine-Community */,
+				E11E3DA92963527C00C736A2 /* FirebaseFirestoreSwift */,
+			);
 			productName = BoxOffice;
 			productReference = 635A19E428F9603900197BCC /* BoxOffice.app */;
 			productType = "com.apple.product-type.application";
@@ -200,6 +256,9 @@
 				Base,
 			);
 			mainGroup = 635A19DB28F9603900197BCC;
+			packageReferences = (
+				E11E3DA42963527C00C736A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 635A19E528F9603900197BCC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -216,6 +275,7 @@
 			files = (
 				635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */,
 				635A19F128F9603A00197BCC /* Assets.xcassets in Resources */,
+				E11E3DA329634C1F00C736A2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,7 +290,12 @@
 				9B335C1B2963D87900C8F339 /* DetailBoxOffice.swift in Sources */,
 				9B335C242963E68B00C8F339 /* MainView.swift in Sources */,
 				9BEA28022962D00700FB7E73 /* BoxOfficeAPI.swift in Sources */,
+				E19B5DB929645189001B2DB4 /* String+Extension.swift in Sources */,
+				E19B5DB22963D960001B2DB4 /* Comment.swift in Sources */,
+				E19B5DB729645160001B2DB4 /* UIImage+Extension.swift in Sources */,
+				E19B5DAF2963D8CD001B2DB4 /* FirebaseManager.swift in Sources */,
 				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
+				E19B5DB429643A14001B2DB4 /* CommentManager.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				9BEA28042962D04F00FB7E73 /* HTTPMethod.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
@@ -241,6 +306,7 @@
 				9B335C272963F47900C8F339 /* UIView+Extension.swift in Sources */,
 				9B335C1F2963E22400C8F339 /* MainViewController.swift in Sources */,
 				9B335C212963E24C00C8F339 /* MainViewModel.swift in Sources */,
+				E19B5DCA29647B10001B2DB4 /* Date+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +374,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -362,7 +428,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -448,6 +514,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E11E3DA42963527C00C736A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E11E3DA52963527C00C736A2 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E11E3DA42963527C00C736A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		E11E3DA72963527C00C736A2 /* FirebaseFirestoreCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E11E3DA42963527C00C736A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreCombine-Community";
+		};
+		E11E3DA92963527C00C736A2 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E11E3DA42963527C00C736A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 635A19DC28F9603900197BCC /* Project object */;
 }
