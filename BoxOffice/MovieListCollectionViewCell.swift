@@ -149,7 +149,7 @@ private extension MovieListCollectionViewCell {
     
     func setupLayout() {
         NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constraint.outerSpacing),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constraint.outerSpacing + Constraint.subtleInnerSpacing),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constraint.outerSpacing),
             imageView.widthAnchor.constraint(equalToConstant: Constraint.imageViewWidth),
