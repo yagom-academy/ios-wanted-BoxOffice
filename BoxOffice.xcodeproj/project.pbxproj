@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		028741492965693C00B2D021 /* UIFont+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028741482965693C00B2D021 /* UIFont+extension.swift */; };
 		02F8552E2963B7E1004B76DD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 02F8552D2963B7E1004B76DD /* FirebaseFirestore */; };
 		02F855302963B7E1004B76DD /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 02F8552F2963B7E1004B76DD /* FirebaseFirestoreCombine-Community */; };
 		02F855322963B7E1004B76DD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 02F855312963B7E1004B76DD /* FirebaseFirestoreSwift */; };
@@ -33,6 +34,10 @@
 		02F8556D29641C59004B76DD /* BoxOfficeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8556C29641C59004B76DD /* BoxOfficeListViewModel.swift */; };
 		02F8556F29641CD0004B76DD /* BoxOfficeListCoordinatorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8556E29641CD0004B76DD /* BoxOfficeListCoordinatorInterface.swift */; };
 		02F8557729642818004B76DD /* BoxOfficeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8557629642818004B76DD /* BoxOfficeListViewController.swift */; };
+		02F8558529656550004B76DD /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8558429656550004B76DD /* MovieCell.swift */; };
+		02F855872965658B004B76DD /* UIStackView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F855862965658B004B76DD /* UIStackView+extension.swift */; };
+		02F85589296565CE004B76DD /* UITableView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F85588296565CE004B76DD /* UITableView+extension.swift */; };
+		02F8558B296565E4004B76DD /* NSObject+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8558A296565E4004B76DD /* NSObject+extension.swift */; };
 		421113B32963CE4C003D5BF5 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421113B22963CE4C003D5BF5 /* FirebaseManager.swift */; };
 		421113B52963D227003D5BF5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 421113B42963D227003D5BF5 /* GoogleService-Info.plist */; };
 		421113B92963D500003D5BF5 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421113B82963D500003D5BF5 /* Review.swift */; };
@@ -54,6 +59,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		028741482965693C00B2D021 /* UIFont+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+extension.swift"; sourceTree = "<group>"; };
 		02F855332963BDB3004B76DD /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		02F855372963C290004B76DD /* DefaultAPIProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPIProvider.swift; sourceTree = "<group>"; };
 		02F855392963C90C004B76DD /* KobisAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisAPI.swift; sourceTree = "<group>"; };
@@ -77,6 +83,10 @@
 		02F8556C29641C59004B76DD /* BoxOfficeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListViewModel.swift; sourceTree = "<group>"; };
 		02F8556E29641CD0004B76DD /* BoxOfficeListCoordinatorInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListCoordinatorInterface.swift; sourceTree = "<group>"; };
 		02F8557629642818004B76DD /* BoxOfficeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxOfficeListViewController.swift; sourceTree = "<group>"; };
+		02F8558429656550004B76DD /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		02F855862965658B004B76DD /* UIStackView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+extension.swift"; sourceTree = "<group>"; };
+		02F85588296565CE004B76DD /* UITableView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+extension.swift"; sourceTree = "<group>"; };
+		02F8558A296565E4004B76DD /* NSObject+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+extension.swift"; sourceTree = "<group>"; };
 		421113B22963CE4C003D5BF5 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		421113B42963D227003D5BF5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		421113B82963D500003D5BF5 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
@@ -155,12 +165,16 @@
 			isa = PBXGroup;
 			children = (
 				425D26BE2963FCC100967454 /* UIView+Extension.swift */,
+				02F855862965658B004B76DD /* UIStackView+extension.swift */,
+				028741482965693C00B2D021 /* UIFont+extension.swift */,
 				425D26C0296413F000967454 /* UIColor+Extension.swift */,
 				02F8553B2963C9E8004B76DD /* Encodable+extension.swift */,
 				02F855502963F938004B76DD /* String+extension.swift */,
 				02F855542963F99B004B76DD /* Date+extension.swift */,
 				02F8555C2963FEF4004B76DD /* Bundle+extension.swift */,
 				02F8556429640F16004B76DD /* UIImageView+extension.swift */,
+				02F85588296565CE004B76DD /* UITableView+extension.swift */,
+				02F8558A296565E4004B76DD /* NSObject+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -223,6 +237,7 @@
 				02F8557329641D91004B76DD /* Coordinator */,
 				02F8557429641DA5004B76DD /* ViewController */,
 				02F8557529641DAA004B76DD /* ViewModel */,
+				02F8558429656550004B76DD /* MovieCell.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -421,11 +436,13 @@
 				02F855552963F99B004B76DD /* Date+extension.swift in Sources */,
 				02F855492963E9A0004B76DD /* OmdbAPI.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
+				028741492965693C00B2D021 /* UIFont+extension.swift in Sources */,
 				02F855612964053D004B76DD /* ImageCacheManager.swift in Sources */,
 				02F855592963FE13004B76DD /* DefaultBoxOfficeRepository.swift in Sources */,
 				02F8554D2963F176004B76DD /* Movie.swift in Sources */,
 				425D26CA2964327B00967454 /* FirstCell.swift in Sources */,
 				02F8553C2963C9E8004B76DD /* Encodable+extension.swift in Sources */,
+				02F855872965658B004B76DD /* UIStackView+extension.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 				421113B92963D500003D5BF5 /* Review.swift in Sources */,
 				02F855512963F938004B76DD /* String+extension.swift in Sources */,
@@ -433,11 +450,14 @@
 				02F8555F296401DA004B76DD /* BoxOfficeRepository.swift in Sources */,
 				425D26D5296433DE00967454 /* DetailViewController.swift in Sources */,
 				02F855382963C290004B76DD /* DefaultAPIProvider.swift in Sources */,
+				02F8558529656550004B76DD /* MovieCell.swift in Sources */,
 				02F8557729642818004B76DD /* BoxOfficeListViewController.swift in Sources */,
 				02F8556D29641C59004B76DD /* BoxOfficeListViewModel.swift in Sources */,
 				02F8556F29641CD0004B76DD /* BoxOfficeListCoordinatorInterface.swift in Sources */,
 				02F8556529640F16004B76DD /* UIImageView+extension.swift in Sources */,
 				02F8553A2963C90C004B76DD /* KobisAPI.swift in Sources */,
+				02F8558B296565E4004B76DD /* NSObject+extension.swift in Sources */,
+				02F85589296565CE004B76DD /* UITableView+extension.swift in Sources */,
 				02F8556729641B55004B76DD /* Coordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

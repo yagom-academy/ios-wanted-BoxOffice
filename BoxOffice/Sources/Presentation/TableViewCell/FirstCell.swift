@@ -101,7 +101,7 @@ class FirstCell: UITableViewCell {
     
     private lazy var shareImageView: UIImageView = {
         let view = UIImageView(image: UIImage(systemName: "square.and.arrow.up"))
-        view.backgroundColor = UIColor(r: 26, g: 26, b: 26)
+        view.backgroundColor = .boBackground
         view.tintColor = .white
         return view
     }()
@@ -110,7 +110,7 @@ class FirstCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setAutolayout()
-        contentView.backgroundColor = UIColor(r: 26, g: 26, b: 26)
+        contentView.backgroundColor = .boBackground
     }
     
     required init?(coder: NSCoder) {

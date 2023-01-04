@@ -96,7 +96,7 @@ class SecondCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setAutolayout()
-        contentView.backgroundColor = UIColor(r: 26, g: 26, b: 26)
+        contentView.backgroundColor = .boBackground
     }
     
     required init?(coder: NSCoder) {
