@@ -7,6 +7,14 @@
 
 import Foundation
 
+struct MovieDetailResponseDTO: Decodable {
+    let movieInfoResult: MovieDetailContainerDTO
+}
+
+struct MovieDetailContainerDTO: Decodable {
+    let movieInfo: MovieDetailDTO
+}
+
 struct MovieDetailDTO: Decodable {
     let movieCode: String
     let title: String
@@ -14,10 +22,10 @@ struct MovieDetailDTO: Decodable {
     let openingDay: String
     let productionYear: String
     let playTime: String
-    let genre: String
-    let directorsName: String
-    let actorsName: String
-    let watchGrade: String
+    let genres: [Genre]
+    let directors: [Director]
+    let actors: [Actor]
+    let audits: [Audit]
 
     enum CodingKeys: String, CodingKey {
         case movieCode = "movieCd"
@@ -26,10 +34,38 @@ struct MovieDetailDTO: Decodable {
         case openingDay = "openDt"
         case productionYear = "prdtYear"
         case playTime = "showTm"
-        case genre = "genreNm"
-        case directorsName = "directors"
-        case actorsName = "actors"
-        case watchGrade = "watchGradeNm"
+        case genres = "genres"
+        case directors = "directors"
+        case actors = "actors"
+        case audits
+    }
+
+    struct Genre: Decodable {
+        let genreName: String
+        enum CodingKeys: String, CodingKey {
+            case genreName = "genreNm"
+        }
+    }
+
+    struct Director: Decodable {
+        let peopleName: String
+        enum CodingKeys: String, CodingKey {
+            case peopleName = "peopleNm"
+        }
+    }
+
+    struct Actor: Decodable {
+        let peopleName: String
+        enum CodingKeys: String, CodingKey {
+            case peopleName = "peopleNm"
+        }
+    }
+
+    struct Audit: Decodable {
+        let watchGrade: String
+        enum CodingKeys: String, CodingKey {
+            case watchGrade = "watchGradeNm"
+        }
     }
 }
 
@@ -46,10 +82,10 @@ extension MovieDetailDTO {
             isNewlyRanked: false,
             productionYear: UInt(productionYear) ?? 0,
             playTime: Double(playTime) ?? 0,
-            genre: genre,
-            directorsName: directorsName,
-            actorsName: actorsName,
-            watchGrade: UInt(watchGrade) ?? 0,
+            genre: genres.map { $0.genreName }.joined(separator: ", "), // TODO: 해결하기
+            directorsName: directors.map { $0.peopleName }.joined(separator: ", "),
+            actorsName: actors.map { $0.peopleName }.joined(separator: ", "),
+            watchGrade: audits.first?.watchGrade ?? "",
             posterImageURL: "") // TODO: 여기서 fetch하기
     }
 }
