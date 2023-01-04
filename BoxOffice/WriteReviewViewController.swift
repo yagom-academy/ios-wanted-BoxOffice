@@ -74,6 +74,7 @@ class WriteReviewViewController: UIViewController {
         return stackView
     }()
     
+    private let reviewViewModel = WriteReviewViewModel()
     private let ratingStarView = StarRatingView()
     private let imagePicker = UIImagePickerController()
     private var password = String()
@@ -143,8 +144,9 @@ extension WriteReviewViewController {
     }
     
     @objc private func saveBarButtonTapped() {
-        //TODO: 리뷰 저장하기
+        guard let newReview = createReview() else { return }
         
+        reviewViewModel.save(newReview)
         navigationController?.popViewController(animated: true)
     }
     
