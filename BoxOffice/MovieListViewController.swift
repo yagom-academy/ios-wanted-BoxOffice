@@ -127,6 +127,7 @@ extension MovieListViewController {
     
     func addViews() {
         view.addSubview(movieListCollectionView)
+        view.addSubview(dayTypeSegmentedControl)
     }
     
     func setupUILayouts() {
