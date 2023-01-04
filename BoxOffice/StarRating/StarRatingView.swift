@@ -51,6 +51,10 @@ class StarRatingView: UIView {
         return stackView
     }()
     
+    var rating: String? {
+        return ratingLabel.text
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()

@@ -16,7 +16,7 @@ final class ReviewFirebaseUseCase {
         let reviewData: [String: Any] = [
             "nickName": reivew.nickName,
             "password": reivew.password,
-            "rating": String(reivew.rating),
+            "rating": reivew.rating,
             "content": reivew.content,
             "imageURL": reivew.imageURL
         ]
@@ -49,8 +49,7 @@ extension ReviewFirebaseUseCase {
     private func toReview(from document: QueryDocumentSnapshot) -> Review? {
         guard let nickName = document["nickName"] as? String,
               let password = document["password"] as? String,
-              let ratingValue = document["rating"] as? String,
-              let rating = Double(ratingValue),
+              let rating = document["rating"] as? String,
               let content = document["content"] as? String,
               let imageURL = document["hasImage"] as? String else { return nil }
         
