@@ -44,12 +44,12 @@ final class MovieDetailInfoCollectionViewCell: UICollectionViewCell {
         }
 
         NSLayoutConstraint.activate([
-            openDateLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            genreLabel.topAnchor.constraint(equalTo: openDateLabel.bottomAnchor, constant: 10),
-            playTimeLabel.topAnchor.constraint(equalTo: genreLabel.bottomAnchor, constant: 10),
-            directorLabel.topAnchor.constraint(equalTo: playTimeLabel.bottomAnchor, constant: 10),
-            actorLabel.topAnchor.constraint(equalTo: directorLabel.bottomAnchor, constant: 10),
-            actorLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+            openDateLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constraint.inset),
+            genreLabel.topAnchor.constraint(equalTo: openDateLabel.bottomAnchor, constant: Constraint.inset),
+            playTimeLabel.topAnchor.constraint(equalTo: genreLabel.bottomAnchor, constant: Constraint.inset),
+            directorLabel.topAnchor.constraint(equalTo: playTimeLabel.bottomAnchor, constant: Constraint.inset),
+            actorLabel.topAnchor.constraint(equalTo: directorLabel.bottomAnchor, constant: Constraint.inset),
+            actorLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constraint.inset)
         ])
     }
 }
@@ -59,5 +59,11 @@ fileprivate extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         return dateFormatter.string(from: self)
+    }
+}
+
+extension MovieDetailInfoCollectionViewCell {
+    enum Constraint {
+        static let inset: CGFloat = 10
     }
 }

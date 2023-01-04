@@ -94,11 +94,11 @@ final class MovieDetailReviewCollectionViewCell: UICollectionViewCell {
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constraint.inset),
             descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
 
-            divisionLine.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 15),
+            divisionLine.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: Constraint.bottomInset),
             divisionLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             divisionLine.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constraint.inset),
             divisionLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constraint.inset),
-            divisionLine.heightAnchor.constraint(equalToConstant: 1)
+            divisionLine.heightAnchor.constraint(equalToConstant: Constraint.divisionLineHeight)
         ])
     }
 }
@@ -108,5 +108,7 @@ extension MovieDetailReviewCollectionViewCell {
         static let inset: CGFloat = 10
         static let starReviewHeight: CGFloat = 30
         static let photoReviewHeight: CGFloat = 200
+        static let bottomInset: CGFloat = 15
+        static let divisionLineHeight: CGFloat = 1
     }
 }

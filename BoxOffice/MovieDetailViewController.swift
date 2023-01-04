@@ -94,6 +94,7 @@ final class MovieDetailViewController: UIViewController {
         ])
     }
 
+    // MARK: - DataSource
     private func movieDetailCollectionViewDataSource() -> UICollectionViewDiffableDataSource<MovieDetailSection, MovieDetailItem> {
         let dataSource = UICollectionViewDiffableDataSource<MovieDetailSection, MovieDetailItem>(
             collectionView: movieDetailCollectionView
@@ -180,6 +181,7 @@ final class MovieDetailViewController: UIViewController {
         movieDetailDataSource.apply(snapShot)
     }
 
+    // MARK: - CollectionViewLayout
     private func movieDetailCollectionViewLayout() -> UICollectionViewLayout {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         configuration.interSectionSpacing = 0
@@ -223,7 +225,7 @@ final class MovieDetailViewController: UIViewController {
     }
 }
 
-// MARK: - MoviewDetailDiffableDataSource
+// MARK: - MoviewDetailDiffableDataSource Item Wrapper
 extension MovieDetailViewController {
     /// Wrapper Enum to use DiffableDataSource
     enum MovieDetailItem: Hashable {
@@ -283,6 +285,7 @@ extension MovieDetailViewController {
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension MovieDetailViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let isShowingUpperInfoview = scrollView.contentOffset.y <= 0
@@ -290,6 +293,7 @@ extension MovieDetailViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - UIView extension
 fileprivate extension UIView {
   func convertToImage() -> UIImage? {
         let renderer = UIGraphicsImageRenderer(bounds: bounds)

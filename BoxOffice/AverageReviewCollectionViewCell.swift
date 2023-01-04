@@ -61,20 +61,31 @@ final class AverageReviewCollectionViewCell: UICollectionViewCell {
 
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constraint.topInset),
 
-            starReview.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -20),
-            starReview.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            starReview.heightAnchor.constraint(equalToConstant: 80),
-            starReview.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5),
+            starReview.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -2 * Constraint.contentSpacing),
+            starReview.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constraint.contentSpacing),
+            starReview.heightAnchor.constraint(equalToConstant: Constraint.starReviewHeight),
+            starReview.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: Constraint.starReviewWidthMultiplier),
 
-            reviewAverageLabel.leadingAnchor.constraint(equalTo: starReview.trailingAnchor, constant: 10),
+            reviewAverageLabel.leadingAnchor.constraint(equalTo: starReview.trailingAnchor, constant: Constraint.contentSpacing),
             reviewAverageLabel.centerYAnchor.constraint(equalTo: starReview.centerYAnchor),
 
             reviewWriteButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            reviewWriteButton.topAnchor.constraint(equalTo: starReview.bottomAnchor, constant: 5),
-            reviewWriteButton.widthAnchor.constraint(equalToConstant: 150),
-            reviewWriteButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+            reviewWriteButton.topAnchor.constraint(equalTo: starReview.bottomAnchor, constant: Constraint.contentSpacing),
+            reviewWriteButton.widthAnchor.constraint(equalToConstant: Constraint.reviewWriteButtonWidth),
+            reviewWriteButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constraint.bottomInset)
         ])
+    }
+}
+
+extension AverageReviewCollectionViewCell {
+    enum Constraint {
+        static let topInset: CGFloat = 20
+        static let starReviewHeight: CGFloat = 80
+        static let starReviewWidthMultiplier: CGFloat = 0.5
+        static let reviewWriteButtonWidth: CGFloat = 150
+        static let contentSpacing: CGFloat = 10
+        static let bottomInset: CGFloat = 10
     }
 }
