@@ -175,8 +175,8 @@
 		20F38AF92965112200415749 /* StarRating */ = {
 			isa = PBXGroup;
 			children = (
-				20F38AFA2965113700415749 /* SubViews */,
 				20C7D43B29642F0400D87350 /* StarRatingView.swift */,
+				20F38AFA2965113700415749 /* SubViews */,
 			);
 			path = StarRating;
 			sourceTree = "<group>";
@@ -188,6 +188,23 @@
 				20F38AFE296511A700415749 /* StarImageView.swift */,
 			);
 			path = SubViews;
+			sourceTree = "<group>";
+		};
+		20F38B032965BB1000415749 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				20F38B042965BB2D00415749 /* WriteReviewScene */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		20F38B042965BB2D00415749 /* WriteReviewScene */ = {
+			isa = PBXGroup;
+			children = (
+				20C7D43829641DDA00D87350 /* WriteReviewViewController.swift */,
+				20F38B0029654EB800415749 /* WriteReviewViewModel.swift */,
+			);
+			path = WriteReviewScene;
 			sourceTree = "<group>";
 		};
 		635A19DB28F9603900197BCC = {
@@ -224,8 +241,7 @@
 				635A19EB28F9603900197BCC /* ViewController.swift */,
 				20C7D43629641D8200D87350 /* Observable.swift */,
 				20F38AF92965112200415749 /* StarRating */,
-				20C7D43829641DDA00D87350 /* WriteReviewViewController.swift */,
-				20F38B0029654EB800415749 /* WriteReviewViewModel.swift */,
+				20F38B032965BB1000415749 /* Scene */,
 			);
 			path = BoxOffice;
 			sourceTree = "<group>";
