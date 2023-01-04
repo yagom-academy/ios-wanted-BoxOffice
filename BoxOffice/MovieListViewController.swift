@@ -37,6 +37,7 @@ final class MovieListViewController: UIViewController {
         view.backgroundColor = .systemBackground
         viewModel.viewDidLoad()
         addViews()
+        setupUILayouts()
     }
     
     private func movieListCollectionViewLayout() -> UICollectionViewLayout {
@@ -86,4 +87,13 @@ extension MovieListViewController {
 }
     func addViews() {
         view.addSubview(movieListCollectionView)
+    }
+    
+    func setupUILayouts() {
+        NSLayoutConstraint.activate([
+            movieListCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            movieListCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            movieListCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            movieListCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+        ])
     }
