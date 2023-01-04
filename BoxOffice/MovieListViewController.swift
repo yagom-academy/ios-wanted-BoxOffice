@@ -36,6 +36,7 @@ final class MovieListViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         viewModel.viewDidLoad()
+        addViews()
     }
     
     private func movieListCollectionViewLayout() -> UICollectionViewLayout {
@@ -83,3 +84,6 @@ extension MovieListViewController {
         case main
     }
 }
+    func addViews() {
+        view.addSubview(movieListCollectionView)
+    }
