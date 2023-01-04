@@ -29,7 +29,7 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: 16)
+        label.font = .preferredFont(forTextStyle: .title3)
         return label
     }()
         
