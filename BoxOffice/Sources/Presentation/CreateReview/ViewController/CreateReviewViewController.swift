@@ -29,10 +29,9 @@ class CreateReviewViewController: UIViewController {
     
     private lazy var backgroundStackView: UIStackView = {
         let stackView = UIStackView(axis: .vertical, alignment: .center, distribution: .fill, spacing: 20)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20)
-        stackView.addArrangedSubviews(createImageButton)
+        stackView.addArrangedSubviews(createImageButton, ratingView)
         return stackView
     }()
     
@@ -40,6 +39,13 @@ class CreateReviewViewController: UIViewController {
     private lazy var createImageButton: ProfileImageButton = {
         let button = ProfileImageButton(size: 125)
         return button
+    }()
+    
+    private lazy var ratingView: RatingView = {
+        let view = RatingView(
+            config: UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .largeTitle), scale: .large)
+        )
+        return view
     }()
     
     override func viewDidLoad() {

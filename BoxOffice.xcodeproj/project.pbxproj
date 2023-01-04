@@ -15,6 +15,7 @@
 		028741562965A44A00B2D021 /* CreateReviewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028741552965A44A00B2D021 /* CreateReviewCoordinator.swift */; };
 		0287415A2965A4AB00B2D021 /* CreateReviewCoordinatorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028741592965A4AB00B2D021 /* CreateReviewCoordinatorInterface.swift */; };
 		028741602965BA9000B2D021 /* ProfileImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0287415F2965BA9000B2D021 /* ProfileImageButton.swift */; };
+		028741622965BECE00B2D021 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028741612965BECE00B2D021 /* RatingView.swift */; };
 		02F8552E2963B7E1004B76DD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 02F8552D2963B7E1004B76DD /* FirebaseFirestore */; };
 		02F855302963B7E1004B76DD /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 02F8552F2963B7E1004B76DD /* FirebaseFirestoreCombine-Community */; };
 		02F855322963B7E1004B76DD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 02F855312963B7E1004B76DD /* FirebaseFirestoreSwift */; };
@@ -74,6 +75,7 @@
 		028741552965A44A00B2D021 /* CreateReviewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewCoordinator.swift; sourceTree = "<group>"; };
 		028741592965A4AB00B2D021 /* CreateReviewCoordinatorInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewCoordinatorInterface.swift; sourceTree = "<group>"; };
 		0287415F2965BA9000B2D021 /* ProfileImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageButton.swift; sourceTree = "<group>"; };
+		028741612965BECE00B2D021 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		02F855332963BDB3004B76DD /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		02F855372963C290004B76DD /* DefaultAPIProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPIProvider.swift; sourceTree = "<group>"; };
 		02F855392963C90C004B76DD /* KobisAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisAPI.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				0287415B2965B0E700B2D021 /* ViewController */,
 				0287415C2965B0F300B2D021 /* ViewModel */,
 				0287415F2965BA9000B2D021 /* ProfileImageButton.swift */,
+				028741612965BECE00B2D021 /* RatingView.swift */,
 			);
 			path = CreateReview;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				0287415A2965A4AB00B2D021 /* CreateReviewCoordinatorInterface.swift in Sources */,
 				028741602965BA9000B2D021 /* ProfileImageButton.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
+				028741622965BECE00B2D021 /* RatingView.swift in Sources */,
 				028741492965693C00B2D021 /* UIFont+extension.swift in Sources */,
 				028741562965A44A00B2D021 /* CreateReviewCoordinator.swift in Sources */,
 				02F855612964053D004B76DD /* ImageCacheManager.swift in Sources */,
