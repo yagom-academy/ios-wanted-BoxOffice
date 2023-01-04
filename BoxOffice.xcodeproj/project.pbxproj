@@ -121,16 +121,10 @@
 		32645AAC2965BF8000E021B1 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				32BEE086296602110095FB30 /* MovieList */,
 				32645AA82965BF5A00E021B1 /* MovieDetail */,
 			);
 			path = Presentation;
-			sourceTree = "<group>";
-		};
-		32645AAD2965BF8600E021B1 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		32A6114429629B7B009A3BC1 /* Entities */ = {
@@ -184,6 +178,16 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		32BEE086296602110095FB30 /* MovieList */ = {
+			isa = PBXGroup;
+			children = (
+				635A19EB28F9603900197BCC /* MovieListViewController.swift */,
+				FDFF58F629632B8200184562 /* MovieListCollectionViewCell.swift */,
+				32A611502962B343009A3BC1 /* MovieListViewModel.swift */,
+			);
+			path = MovieList;
+			sourceTree = "<group>";
+		};
 		635A19DB28F9603900197BCC = {
 			isa = PBXGroup;
 			children = (
@@ -205,11 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				635A19E728F9603900197BCC /* AppDelegate.swift */,
-				635A19EB28F9603900197BCC /* MovieListViewController.swift */,
-				FDFF58F629632B8200184562 /* MovieListCollectionViewCell.swift */,
-				32A611502962B343009A3BC1 /* MovieListViewModel.swift */,
 				32BEE0852966017B0095FB30 /* Common */,
-				32645AAD2965BF8600E021B1 /* Common */,
 				32645AAC2965BF8000E021B1 /* Presentation */,
 				FD733FBE2963C04D00AFC901 /* Data */,
 				32A6114F2962A43B009A3BC1 /* Domain */,
