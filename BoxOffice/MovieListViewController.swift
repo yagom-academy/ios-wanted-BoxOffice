@@ -34,6 +34,7 @@ final class MovieListViewController: UIViewController {
             frame: .zero,
             collectionViewLayout: movieListCollectionViewLayout()
         )
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
