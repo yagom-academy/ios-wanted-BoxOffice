@@ -15,7 +15,7 @@ class BoxOfficeListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        view.backgroundColor = .systemGreen
+        view.backgroundColor = .boBackground
     }
 
     init(viewModel: BoxOfficeListViewModel, coordinator: BoxOfficeListCoordinatorInterface) {
