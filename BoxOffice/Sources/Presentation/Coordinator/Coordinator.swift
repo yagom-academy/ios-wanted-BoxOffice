@@ -39,4 +39,5 @@ protocol CoordinatorFinishDelegate: AnyObject {
 enum CoordinatorType {
     case root
     case list
+    case review
 }

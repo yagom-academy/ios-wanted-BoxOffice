@@ -13,7 +13,7 @@ final class BoxOfficeListCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var type: CoordinatorType { .list }
-    var finishDelegate: CoordinatorFinishDelegate?
+    weak var finishDelegate: CoordinatorFinishDelegate?
     
     init(navigationConrtoller: UINavigationController) {
         self.navigationController = navigationConrtoller
@@ -45,11 +45,13 @@ private extension BoxOfficeListCoordinator {
     }
     
     func makeCreateReviewViewController() -> UIViewController {
-        let viewController = CreateReviewViewController(
-            viewModel: DefaultCreateReviewViewModel(),
-            coordinator: self
-        )
-        return viewController
+        let navigationController = UINavigationController()
+        let coordinator = CreateReviewCoordinator(navigationConrtoller: navigationController)
+        coordinator.finishDelegate = self
+        coordinator.parentCoordinator = self
+        coordinator.start()
+        childCoordinators.append(coordinator)
+        return navigationController
     }
 }
 
@@ -62,7 +64,16 @@ extension BoxOfficeListCoordinator: BoxOfficeListCoordinatorInterface {
     
     func showCreateReviewView(movie: Movie) {
         let viewController = makeCreateReviewViewController()
-        navigationController.pushViewController(viewController, animated: true)
+        viewController.isModalInPresentation = true
+        navigationController.visibleViewController?.present(viewController, animated: true)
+    }
+    
+}
+
+extension BoxOfficeListCoordinator: CoordinatorFinishDelegate {
+    
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
     }
     
 }
