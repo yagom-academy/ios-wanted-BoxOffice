@@ -27,9 +27,10 @@ struct MovieDetailView: View {
                             .foregroundColor(.white)
                     }
                 })
-                .sheet(isPresented: $isPresented) {
-                    MovieReviewPostView()
+                .fullScreenCover(isPresented: $isPresented) {
+                    MovieReviewPostView(isPresented: $isPresented)
                 }
+
                 Button(action: {
                     let sharePoster = UIImage(named: "Avatar")
                     let shareInformation = """
