@@ -10,6 +10,7 @@ import UIKit
 final class MovieListViewController: UIViewController {
     private let viewModel = MovieListViewModel()
 
+    private var diffableDataSource: UICollectionViewDiffableDataSource<Section, MovieOverview>!
     private lazy var segmentControl: UISegmentedControl = {
         let segmentControl = UISegmentedControl()
         let daySegmentSelected: ((UIAction) -> Void) = { [weak self] _ in
@@ -37,6 +38,7 @@ final class MovieListViewController: UIViewController {
         view.backgroundColor = .systemBackground
         viewModel.viewDidLoad()
         registerCollectionViewCells()
+        setupCellProvider()
         addViews()
         setupUILayouts()
     }
@@ -87,6 +89,19 @@ extension MovieListViewController {
     }
 }
 extension MovieListViewController {
+    private func setupCellProvider() {
+        self.diffableDataSource = UICollectionViewDiffableDataSource<Section, MovieOverview>(collectionView: self.movieListCollectionView)
+        { collectionView, indexPath, itemIdentifier in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieListCollectionViewCell.reuseIdentifier, for: indexPath) as? MovieListCollectionViewCell else {
+                return MovieListCollectionViewCell()
+            }
+            
+            cell.setupContents(movieOverview: itemIdentifier)
+            
+            return cell
+        }
+    }
+    
     private func registerCollectionViewCells() {
         self.movieListCollectionView.register(MovieListCollectionViewCell.self, forCellWithReuseIdentifier: MovieListCollectionViewCell.reuseIdentifier)
     }
