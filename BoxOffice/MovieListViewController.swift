@@ -11,16 +11,21 @@ final class MovieListViewController: UIViewController {
     private let viewModel = MovieListViewModel()
 
     private var diffableDataSource: UICollectionViewDiffableDataSource<Section, MovieOverview>!
+    
     private lazy var dayTypeSegmentedControl: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl()
+        let segmentedControl = UISegmentedControl(items: ["주간", "주말"])
+        
         let daySegmentSelected: ((UIAction) -> Void) = { [weak self] _ in
             self?.viewModel.dayTypeSegmentValueChanged(value: .day)
         }
         let weekendSegmentSelected: ((UIAction) -> Void) = { [weak self] _ in
             self?.viewModel.dayTypeSegmentValueChanged(value: .weekDaysAndWeekend)
         }
-        segmentedControl.setAction(UIAction(handler: daySegmentSelected), forSegmentAt: 0)
-        segmentedControl.setAction(UIAction(handler: weekendSegmentSelected), forSegmentAt: 1)
+        segmentedControl.setAction(UIAction(title: "주간", handler: daySegmentSelected), forSegmentAt: 0)
+        segmentedControl.setAction(UIAction(title: "주말", handler: weekendSegmentSelected), forSegmentAt: 1)
+        segmentedControl.selectedSegmentIndex = 0
+        
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         return segmentedControl
     }()
     
