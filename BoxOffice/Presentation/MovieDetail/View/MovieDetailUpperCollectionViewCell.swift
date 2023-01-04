@@ -30,6 +30,8 @@ final class MovieDetailUpperCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.numberOfLines = 0
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -106,6 +108,9 @@ final class MovieDetailUpperCollectionViewCell: UICollectionViewCell {
 
             titleLabel.bottomAnchor.constraint(equalTo: gradeLabel.topAnchor, constant: -5),
             titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(greaterThanOrEqualTo: contentView.trailingAnchor, constant: -20),
+
 
             rankUpDownLabel.leadingAnchor.constraint(equalTo: rankingLabel.trailingAnchor, constant: 10),
             rankUpDownLabel.centerYAnchor.constraint(equalTo: rankingLabel.centerYAnchor),
