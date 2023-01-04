@@ -62,6 +62,23 @@
 			path = BoxOfficeList;
 			sourceTree = "<group>";
 		};
+		3A406FE32965528200D536FB /* KobisRequest */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = KobisRequest;
+			sourceTree = "<group>";
+		};
+		3A406FE4296552E600D536FB /* BoxOfficeDetail */ = {
+			isa = PBXGroup;
+			children = (
+				635A19EB28F9603900197BCC /* SecondViewController.swift */,
+				8ADDFA192964018C00085D72 /* MovieDetailInfo.swift */,
+				8ADDFA152962FC5C00085D72 /* SecondView.swift */,
+			);
+			path = BoxOfficeDetail;
+			sourceTree = "<group>";
+		};
 		635A19DB28F9603900197BCC = {
 			isa = PBXGroup;
 			children = (
@@ -81,32 +98,15 @@
 		635A19E628F9603900197BCC /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
-				8ADDFA182964010900085D72 /* SecondViewModel */,
-				8ADDFA142962FC3700085D72 /* SecondView */,
+				3A406FE4296552E600D536FB /* BoxOfficeDetail */,
 				3A0B33652963FEED00D2766D /* BoxOfficeList */,
+				3A406FE32965528200D536FB /* KobisRequest */,
 				635A19E728F9603900197BCC /* AppDelegate.swift */,
-				635A19EB28F9603900197BCC /* SecondViewController.swift */,
 				635A19F028F9603A00197BCC /* Assets.xcassets */,
 				635A19F228F9603A00197BCC /* LaunchScreen.storyboard */,
 				635A19F528F9603A00197BCC /* Info.plist */,
 			);
 			path = BoxOffice;
-			sourceTree = "<group>";
-		};
-		8ADDFA142962FC3700085D72 /* SecondView */ = {
-			isa = PBXGroup;
-			children = (
-				8ADDFA152962FC5C00085D72 /* SecondView.swift */,
-			);
-			path = SecondView;
-			sourceTree = "<group>";
-		};
-		8ADDFA182964010900085D72 /* SecondViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				8ADDFA192964018C00085D72 /* MovieDetailInfo.swift */,
-			);
-			path = SecondViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,7 +185,7 @@
 				3A0B33642963FE9100D2766D /* BoxOfficeListContentView.swift in Sources */,
 				3A0B33622963FE7600D2766D /* BoxOfficeListContentConfiguration.swift in Sources */,
 				3A4A73492962B44A00C78334 /* BoxOfficeListCellViewModel.swift in Sources */,
-				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
+				635A19EC28F9603900197BCC /* SecondViewController.swift in Sources */,
 				3A4A73472962A46000C78334 /* BoxOfficeListViewController.swift in Sources */,
 				3A4A734B2962BDD000C78334 /* BoxOfficeListCell.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
