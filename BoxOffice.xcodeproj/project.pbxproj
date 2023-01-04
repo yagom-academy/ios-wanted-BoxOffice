@@ -11,6 +11,7 @@
 		0287414B29659F7A00B2D021 /* CreateReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0287414A29659F7A00B2D021 /* CreateReviewViewController.swift */; };
 		0287414E2965A00D00B2D021 /* CreateReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0287414D2965A00D00B2D021 /* CreateReviewViewModel.swift */; };
 		028741502965A06500B2D021 /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0287414F2965A06500B2D021 /* MovieDetailViewModel.swift */; };
+		028741542965A35100B2D021 /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028741532965A35100B2D021 /* AppAppearance.swift */; };
 		02F8552E2963B7E1004B76DD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 02F8552D2963B7E1004B76DD /* FirebaseFirestore */; };
 		02F855302963B7E1004B76DD /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 02F8552F2963B7E1004B76DD /* FirebaseFirestoreCombine-Community */; };
 		02F855322963B7E1004B76DD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 02F855312963B7E1004B76DD /* FirebaseFirestoreSwift */; };
@@ -66,6 +67,7 @@
 		0287414A29659F7A00B2D021 /* CreateReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewViewController.swift; sourceTree = "<group>"; };
 		0287414D2965A00D00B2D021 /* CreateReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewViewModel.swift; sourceTree = "<group>"; };
 		0287414F2965A06500B2D021 /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
+		028741532965A35100B2D021 /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
 		02F855332963BDB3004B76DD /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		02F855372963C290004B76DD /* DefaultAPIProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPIProvider.swift; sourceTree = "<group>"; };
 		02F855392963C90C004B76DD /* KobisAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisAPI.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				635A19E728F9603900197BCC /* AppDelegate.swift */,
+				028741532965A35100B2D021 /* AppAppearance.swift */,
 				635A19E928F9603900197BCC /* SceneDelegate.swift */,
 			);
 			path = App;
@@ -474,6 +477,7 @@
 				02F8556D29641C59004B76DD /* BoxOfficeListViewModel.swift in Sources */,
 				02F8556F29641CD0004B76DD /* BoxOfficeListCoordinatorInterface.swift in Sources */,
 				02F8556529640F16004B76DD /* UIImageView+extension.swift in Sources */,
+				028741542965A35100B2D021 /* AppAppearance.swift in Sources */,
 				0287414E2965A00D00B2D021 /* CreateReviewViewModel.swift in Sources */,
 				02F8553A2963C90C004B76DD /* KobisAPI.swift in Sources */,
 				02F8558B296565E4004B76DD /* NSObject+extension.swift in Sources */,
