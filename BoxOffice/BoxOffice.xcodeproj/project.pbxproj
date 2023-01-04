@@ -24,6 +24,7 @@
 		A36F38ED2963C294009D15E6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36F38EC2963C294009D15E6 /* ContentView.swift */; };
 		A36F38EF2963C295009D15E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A36F38EE2963C295009D15E6 /* Assets.xcassets */; };
 		A36F38F22963C295009D15E6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A36F38F12963C295009D15E6 /* Preview Assets.xcassets */; };
+		A38E78222965711A005F636B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E78212965711A005F636B /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		A36F38EC2963C294009D15E6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A36F38EE2963C295009D15E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A36F38F12963C295009D15E6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A38E78212965711A005F636B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B02CD299DC5100CE0C8D59AE /* Pods-BoxOffice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoxOffice.release.xcconfig"; path = "Target Support Files/Pods-BoxOffice/Pods-BoxOffice.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				45FB1A5D2963CC2700A9D43B /* NetworkManager.swift */,
+				A38E78212965711A005F636B /* NetworkService.swift */,
 				45FB1A612963D02800A9D43B /* BoxOffice */,
 				45FB1A6D2964201800A9D43B /* JsonDecoderManager */,
 			);
@@ -309,6 +312,7 @@
 				A36F38ED2963C294009D15E6 /* ContentView.swift in Sources */,
 				45FB1A5E2963CC2700A9D43B /* NetworkManager.swift in Sources */,
 				45FB1A582963C71400A9D43B /* DailyMovieBoxOfficeModel.swift in Sources */,
+				A38E78222965711A005F636B /* NetworkService.swift in Sources */,
 				A36F38EB2963C294009D15E6 /* BoxOfficeApp.swift in Sources */,
 				45FB1A6C29641F4600A9D43B /* BoxOfficeURL.swift in Sources */,
 				45FB1A6929641A8F00A9D43B /* APIRequest.swift in Sources */,
