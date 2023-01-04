@@ -21,6 +21,6 @@ struct MovieDetail: Hashable {
     let genre: String
     let directorsName: String
     let actorsName: String
-    let watchGrade: UInt
+    let watchGrade: String
     let posterImageURL: String
 }
