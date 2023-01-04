@@ -72,14 +72,14 @@ private extension MovieListViewController {
     func movieListCollectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
+            heightDimension: .estimated(200.0)
         )
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(200.0)
+            heightDimension: .estimated(200.0)
         )
         
         let group = NSCollectionLayoutGroup.horizontal(
@@ -110,7 +110,7 @@ private extension MovieListViewController {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieListCollectionViewCell.reuseIdentifier, for: indexPath) as? MovieListCollectionViewCell else {
                 return MovieListCollectionViewCell()
             }
-            
+
             cell.layer.addBottomDivisionLine(width: 1)
 
             cell.setupContents(movieOverview: itemIdentifier)
@@ -172,14 +172,14 @@ private extension MovieListViewController {
 fileprivate extension CALayer {
     func addBottomDivisionLine(width: CGFloat) {
         let border = CALayer()
-        
+
         border.frame = CGRect.init(
             x: 0,
             y: frame.height-width,
             width: bounds.width,
             height: width
         )
-        
+
         border.backgroundColor = UIColor.systemGray5.cgColor
         self.addSublayer(border)
     }

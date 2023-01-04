@@ -153,7 +153,6 @@ private extension MovieListCollectionViewCell {
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constraint.outerSpacing + Constraint.subtleInnerSpacing),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constraint.outerSpacing),
             imageView.widthAnchor.constraint(equalToConstant: Constraint.imageViewWidth),
-            imageView.heightAnchor.constraint(equalToConstant: Constraint.imageViewHeight),
             
             rankValueLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: Constraint.innerSpacing),
             rankValueLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: Constraint.innerSpacing),
