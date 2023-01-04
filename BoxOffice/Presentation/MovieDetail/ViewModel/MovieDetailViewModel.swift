@@ -14,6 +14,7 @@ final class MovieDetailViewModel {
     var movieDetail = dummyMovieDetail
     var movieReviews = [MovieReview]()
     var averageRating: Double {
+        if movieReviews.isEmpty { return 0 }
         let average: Double = movieReviews.reduce(into: 0) { previous, review in
             previous += review.rating
         } / Double(movieReviews.count)
