@@ -11,7 +11,10 @@ final class MovieReviewViewController: UIViewController {
 
     private let questionLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "영화 어떠셨나요?"
+        label.textColor = .label
+        label.font = .preferredFont(forTextStyle: .title3)
         return label
     }()
     
@@ -67,6 +70,21 @@ final class MovieReviewViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
+        
+        addViews()
+        setupLayout()
     }
 
+    private func addViews() {
+        [
+            questionLabel
+        ].forEach( { view.addSubview($0) })
+    }
+    
+    private func setupLayout() {
+        NSLayoutConstraint.activate([
+            questionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
+            questionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
+        ])
+    }
 }
