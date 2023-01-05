@@ -71,6 +71,18 @@ final class MovieReviewViewController: UIViewController {
         return textField
     }()
     
+    private let passwordRuleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = """
+        비밀번호는 알파벳 소문자, 숫자, 그리고 특수 문자(!, @, #, $)를 각 1개 이상 포함하고, 6자리 이상, 20자리 이하여야 합니다.
+        """
+        label.numberOfLines = 0
+        label.textColor = .secondaryLabel
+        label.font = .preferredFont(forTextStyle: .caption2)
+        return label
+    }()
+    
     private let reviewTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -138,6 +150,7 @@ final class MovieReviewViewController: UIViewController {
             nicknameTextField,
             passwordLabel,
             passwordTextField,
+            passwordRuleLabel,
         ].forEach( { view.addSubview($0) })
     }
     
@@ -174,8 +187,11 @@ final class MovieReviewViewController: UIViewController {
 
             passwordTextField.topAnchor.constraint(equalTo: passwordLabel.topAnchor),
             passwordTextField.leadingAnchor.constraint(equalTo: passwordLabel.trailingAnchor, constant: 16),
-            passwordTextField.widthAnchor.constraint(equalToConstant: 200)
+            passwordTextField.widthAnchor.constraint(equalToConstant: 200),
             
+            passwordRuleLabel.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 16),
+            passwordRuleLabel.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
+            passwordRuleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
         ])
     }
 }
