@@ -22,6 +22,9 @@ enum BoxOfficeAPI {
     case detailBoxOffice(
         movieCode: String
     )
+    case posterURL(
+        movietitle: String
+    )
 }
 
 extension BoxOfficeAPI: ServerAPI {
@@ -30,6 +33,8 @@ extension BoxOfficeAPI: ServerAPI {
         case .dailyBoxOffice:
             return .get
         case .detailBoxOffice:
+            return .get
+        case .posterURL:
             return .get
         }
     }
@@ -40,6 +45,8 @@ extension BoxOfficeAPI: ServerAPI {
             return "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
         case .detailBoxOffice:
             return "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
+        case .posterURL:
+            return "http://www.omdbapi.com/"
         }
     }
     
@@ -62,6 +69,13 @@ extension BoxOfficeAPI: ServerAPI {
             return [
                 "key": "55b408ed2fa0cf90fe16095fc05ab3b3",
                 "movieCd": movieCode
+            ]
+        case .posterURL(
+            let movieTitle
+        ):
+            return [
+                "apikey": "5462de1b",
+                "t": movieTitle
             ]
         }
     }
