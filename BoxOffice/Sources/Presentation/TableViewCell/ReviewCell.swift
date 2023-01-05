@@ -85,11 +85,12 @@ class ReviewCell: UITableViewCell {
         return imageView
     }()
     
-    private lazy var deleteReviewImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(systemName: "trash"))
-        imageView.tintColor = .white
-        imageView.tintColor = UIColor(r: 100, g: 100, b: 100)
-        return imageView
+    lazy var deleteButton: UIButton = {
+       let button = UIButton()
+        button.imageView?.image = UIImage(systemName: "trash")
+        imageView?.tintColor = .white
+        imageView?.tintColor = UIColor(r: 100, g: 100, b: 100)
+        return button
     }()
     
     private lazy var writingLabel: UILabel = {
@@ -138,7 +139,7 @@ class ReviewCell: UITableViewCell {
     }
     
     func setAutolayout() {
-        contentView.addSubviews(userImageView, reviewStackView, deleteReviewImageView)
+        contentView.addSubviews(userImageView, reviewStackView, deleteButton)
         
         reviewStackView.addArrangedSubviews(starsStackView, writingLabel, userInfoStackView)
         userInfoStackView.addArrangedSubviews(nicknameLabel, dateLabel)
@@ -156,10 +157,18 @@ class ReviewCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            deleteReviewImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            deleteReviewImageView.leadingAnchor.constraint(equalTo: reviewStackView.trailingAnchor, constant: 8),
-            deleteReviewImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            deleteReviewImageView.heightAnchor.constraint(equalToConstant: 20)
+            deleteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            deleteButton.leadingAnchor.constraint(equalTo: reviewStackView.trailingAnchor, constant: 8),
+            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            deleteButton.heightAnchor.constraint(equalToConstant: 20)
         ])
+    }
+    
+    func setData(_ reviews: [Review], _ index: Int) {
+        userImageView.image = reviews[index].userImage.toUIImage()
+        // star..
+        writingLabel.text = reviews[index].review
+        nicknameLabel.text = reviews[index].nickname
+        dateLabel.text = reviews[index].date.toString(DateFormat(rawValue: "yyyy.mm.dd")!)
     }
 }

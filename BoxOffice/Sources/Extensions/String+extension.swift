@@ -5,7 +5,7 @@
 //  Created by Ari on 2023/01/03.
 //
 
-import Foundation
+import UIKit
 
 extension String {
     
@@ -15,6 +15,14 @@ extension String {
         return formatter.date(from: self)
     }
     
+    func toUIImage() -> UIImage? {
+        guard let data = Data(base64Encoded: self) else {
+            return nil
+        }
+        return UIImage(data: data)
+    }
+
+
 }
 
 enum DateFormat: String {

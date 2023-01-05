@@ -38,7 +38,7 @@ private extension BoxOfficeListCoordinator {
     
     func makeMovieDetailViewController(_ movie: Movie) -> UIViewController {
         let viewController = DetailViewController(
-            viewModel: DefaultMovieDetailViewModel(),
+            viewModel: MovieDetailViewModel(movie: movie),
             coordinator: self
         )
         return viewController

@@ -8,10 +8,13 @@
 import Foundation
 
 struct Review: Codable, FirebaseModel {
+    let movieName: String
     let userImage: String
     let stars: Double
     let nickname: String
     let password: String
+    let review: String
+    let date: Date
 }
 
 protocol FirebaseModel {

@@ -40,18 +40,29 @@ final class FirebaseManager {
         database.collection("review").document(review.password).delete()
     }
     
-    func fetchAll() {
-        database.collection("review").getDocuments { (snapshot, error) in
-            if error == nil && snapshot != nil {
-                guard let snapshot = snapshot else {
+    func fetchAll(completionHandler: @escaping ([Review]) -> Void) {
+        database.collection("review").getDocuments { (querySnapshot, error) in
+            var reviews: [Review] = []
+            
+            if error == nil && querySnapshot != nil {
+                guard let documents = querySnapshot?.documents else {
                     return
                 }
                 
-                for document in snapshot.documents {
-                    print(document.documentID)
-                    print(document.data())
+                let decoder = JSONDecoder()
+                
+                for document in documents {
+                    do {
+                        let data = document.data()
+                        let jsonData = try JSONSerialization.data(withJSONObject: data)
+                        let review = try decoder.decode(Review.self, from: jsonData)
+                        reviews.append(review)
+                    } catch let error {
+                        print(error)
+                    }
                 }
-            } 
+                completionHandler(reviews)
+            }
         }
     }
 }

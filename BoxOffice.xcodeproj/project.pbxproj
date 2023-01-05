@@ -19,7 +19,6 @@
 		028741662965C9EC00B2D021 /* BoxOfficeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028741652965C9EC00B2D021 /* BoxOfficeInputView.swift */; };
 		02B4805B2966614900F3E31C /* MovieCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B4805A2966614800F3E31C /* MovieCellViewModel.swift */; };
 		02B4805D2966679900F3E31C /* Int+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B4805C2966679900F3E31C /* Int+extension.swift */; };
-		02B4805F296668A100F3E31C /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02B4805E296668A100F3E31C /* Secrets.plist */; };
 		02B4806129666EF000F3E31C /* Publisher+MainThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B4806029666EF000F3E31C /* Publisher+MainThread.swift */; };
 		02B480632966923800F3E31C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B480622966923800F3E31C /* LoadingView.swift */; };
 		02F8552E2963B7E1004B76DD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 02F8552D2963B7E1004B76DD /* FirebaseFirestore */; };
@@ -62,6 +61,7 @@
 		425D26D22964329500967454 /* ThirdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D26D02964329500967454 /* ThirdCell.swift */; };
 		425D26D5296433DE00967454 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D26D4296433DE00967454 /* DetailViewController.swift */; };
 		425D26FC2964757D00967454 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D26FA2964757D00967454 /* ReviewCell.swift */; };
+		425D270B2966F29200967454 /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D270A2966F29200967454 /* UIImage+extension.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
@@ -81,7 +81,6 @@
 		028741652965C9EC00B2D021 /* BoxOfficeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeInputView.swift; sourceTree = "<group>"; };
 		02B4805A2966614800F3E31C /* MovieCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellViewModel.swift; sourceTree = "<group>"; };
 		02B4805C2966679900F3E31C /* Int+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+extension.swift"; sourceTree = "<group>"; };
-		02B4805E296668A100F3E31C /* Secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		02B4806029666EF000F3E31C /* Publisher+MainThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+MainThread.swift"; sourceTree = "<group>"; };
 		02B480622966923800F3E31C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		02F855332963BDB3004B76DD /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
@@ -121,6 +120,7 @@
 		425D26D02964329500967454 /* ThirdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdCell.swift; sourceTree = "<group>"; };
 		425D26D4296433DE00967454 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		425D26FA2964757D00967454 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		425D270A2966F29200967454 /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +152,7 @@
 				02F855862965658B004B76DD /* UIStackView+extension.swift */,
 				02F85588296565CE004B76DD /* UITableView+extension.swift */,
 				425D26BE2963FCC100967454 /* UIView+Extension.swift */,
+				425D270A2966F29200967454 /* UIImage+extension.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -417,7 +418,6 @@
 				02F855292963B22D004B76DD /* Resources */,
 				02F855282963B226004B76DD /* Sources */,
 				635A19F528F9603A00197BCC /* Info.plist */,
-				02B4805E296668A100F3E31C /* Secrets.plist */,
 				421113B42963D227003D5BF5 /* GoogleService-Info.plist */,
 			);
 			path = BoxOffice;
@@ -489,7 +489,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02B4805F296668A100F3E31C /* Secrets.plist in Resources */,
 				635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */,
 				635A19F128F9603A00197BCC /* Assets.xcassets in Resources */,
 				421113B52963D227003D5BF5 /* GoogleService-Info.plist in Resources */,
@@ -512,6 +511,7 @@
 				02F855402963E31B004B76DD /* BoxOfficeListResponse.swift in Sources */,
 				425D26D22964329500967454 /* ThirdCell.swift in Sources */,
 				0287414B29659F7A00B2D021 /* CreateReviewViewController.swift in Sources */,
+				425D270B2966F29200967454 /* UIImage+extension.swift in Sources */,
 				02B4806129666EF000F3E31C /* Publisher+MainThread.swift in Sources */,
 				02F8556B29641B7E004B76DD /* BoxOfficeListCoordinator.swift in Sources */,
 				02F8553E2963E264004B76DD /* APIProvider.swift in Sources */,
@@ -693,6 +693,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6T62MU29CF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BoxOffice/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -720,6 +721,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6T62MU29CF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BoxOffice/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
