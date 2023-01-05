@@ -166,8 +166,53 @@ final class MovieReviewViewController: UIViewController {
             star.setImage(UIImage(systemName: "star.fill", withConfiguration: sizeConfiguration), for: .selected)
             star.tintColor = .systemYellow
         }
+        
+        configureStarButtonsAction()
     }
     
+
+    private func configureStarButtonsAction() {
+        starButton1.addAction(UIAction(handler: { action in
+            self.starButton1.isSelected = true
+            self.starButton2.isSelected = false
+            self.starButton3.isSelected = false
+            self.starButton4.isSelected = false
+            self.starButton5.isSelected = false
+        }), for: .touchUpInside)
+        
+        starButton2.addAction(UIAction(handler: { action in
+            self.starButton1.isSelected = true
+            self.starButton2.isSelected = true
+            self.starButton3.isSelected = false
+            self.starButton4.isSelected = false
+            self.starButton5.isSelected = false
+        }), for: .touchUpInside)
+        
+        starButton3.addAction(UIAction(handler: { action in
+            self.starButton1.isSelected = true
+            self.starButton2.isSelected = true
+            self.starButton3.isSelected = true
+            self.starButton4.isSelected = false
+            self.starButton5.isSelected = false
+        }), for: .touchUpInside)
+        
+        starButton4.addAction(UIAction(handler: { action in
+            self.starButton1.isSelected = true
+            self.starButton2.isSelected = true
+            self.starButton3.isSelected = true
+            self.starButton4.isSelected = true
+            self.starButton5.isSelected = false
+        }), for: .touchUpInside)
+        
+        starButton5.addAction(UIAction(handler: { action in
+            self.starButton1.isSelected = true
+            self.starButton2.isSelected = true
+            self.starButton3.isSelected = true
+            self.starButton4.isSelected = true
+            self.starButton5.isSelected = true
+        }), for: .touchUpInside)
+    }
+
     private func addViews() {
         [
             questionLabel,
