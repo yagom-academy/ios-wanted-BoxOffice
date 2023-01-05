@@ -103,9 +103,8 @@ extension MainViewController {
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! BoxOfficeCollectionViewCell
-        SecondViewController.data = cell.boxofficeData
+        SecondViewController.boxofficeData = cell.boxofficeData
         let secondVC = SecondViewController()
-        secondVC.modalTransitionStyle = .coverVertical
-        self.present(secondVC, animated: true)
+        self.navigationController?.pushViewController(secondVC, animated: true)
     }
 }
