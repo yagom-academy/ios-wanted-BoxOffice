@@ -8,25 +8,17 @@
 import Foundation
 
 struct APIClient {
-    typealias CompletionHandler = (Result<Data, Error>) -> Void
     static let shared = APIClient(sesseion: URLSession.shared)
     private let session: URLSession
     
-    func requestData(with urlRequest: URLRequest,
-                     completionHandler: @escaping CompletionHandler) {
-        session.dataTask(with: urlRequest) { (data, response, error) in
-            let successRange = 200..<300
-            if let statusCode = (response as? HTTPURLResponse)?.statusCode,
-            !successRange.contains(statusCode) {
-                completionHandler(.failure(APIError.response(statusCode)))
-                return
-            }
-            guard let data = data else {
-                completionHandler(.failure(error ?? APIError.unknown))
-                return
-            }
-            completionHandler(.success(data))
-        }.resume()
+    func requestData(with urlRequest: URLRequest) async throws -> Data {
+        let (data, response) = try await session.data(for: urlRequest)
+        let successRange = 200..<300
+        if let statusCode = (response as? HTTPURLResponse)?.statusCode,
+           !successRange.contains(statusCode) {
+            
+        }
+        return data
     }
 
     init(sesseion: URLSession) {
