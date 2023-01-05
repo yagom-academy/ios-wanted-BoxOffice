@@ -9,6 +9,7 @@ import UIKit
 
 class BoxOfficeCollectionViewCell: UICollectionViewCell {
     static let identify = "cell"
+    var count = 0
     var boxofficeData: DailyBoxOfficeList?
     
     let rankLabel: UILabel = {
@@ -39,7 +40,6 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
 
     let posterImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .blue
         return imageView
     }()
     
@@ -111,10 +111,44 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
         ])
     }
     
+    
+    func getFilmDetailData(movieCode: String, completion: @escaping (Result<FilmDetails, Error>) -> Void) {
+//        print(movieCode)
+        let url = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=635cb0b1404820f91c8a45fcdf831615&movieCd=\(movieCode)"
+        NetworkManager().getData(url: url, completion: completion)
+        
+    }
+    
+    func getPosterData(movieName: String, completion: @escaping (Result<FilmPoster, Error>) -> Void) {
+//        filmEnglishName?.replacingOccurrences(of: " ", with: "+")
+        let url = "https://omdbapi.com/?apikey=54346b2b&t=\(movieName.replacingOccurrences(of: " ", with: "+"))"
+        NetworkManager().getData(url: url, completion: completion)
+        
+    }
+    
+    
     func configBoxOfficeCell(data: DailyBoxOfficeList) {
         boxofficeData = data
         guard let rankInten = Int(data.rankInten) else {
             return
+        }
+        
+        getFilmDetailData(movieCode: data.movieCd) { result in
+            switch result {
+            case .success(let success):
+                self.getPosterData(movieName: success.movieInfoResult.movieInfo.movieNmEn) { result in
+                    switch result {
+                    case .success(let success):
+                        ImageManager.loadImage(from: success.poster) { image in
+                            self.posterImageView.image = image
+                        }
+                    case .failure(let failure):
+                        print(failure   )
+                    }
+                }
+            case .failure(let failure):
+                print(failure   )
+            }
         }
         
         rankLabel.text = data.rank

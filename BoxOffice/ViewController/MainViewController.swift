@@ -34,7 +34,6 @@ extension MainViewController {
                     self.getMovieCode(data: boxOfficeData.boxOfficeResult.dailyBoxOfficeList)
                     self.createBoxOfficeCollectionView()
                     self.configBoxOfficeDataSource(data: boxOfficeData.boxOfficeResult.dailyBoxOfficeList)
-                    self.boxOfficeCollectionView.reloadData()
                 }
             case .failure(let failure):
                 print(failure.localizedDescription)
@@ -80,6 +79,7 @@ extension MainViewController {
     func configBoxOfficeDataSource(data: [DailyBoxOfficeList]) {
         let cellRegistration = UICollectionView.CellRegistration<BoxOfficeCollectionViewCell, DailyBoxOfficeList> { cell, indexPath, data in
             cell.configBoxOfficeCell(data: data)
+            cell.count = indexPath.row
         }
         
         boxOfficeDatasource = UICollectionViewDiffableDataSource<Section, DailyBoxOfficeList>(collectionView: boxOfficeCollectionView, cellProvider: { (collectionView, indexPath, itemIdentifier) -> UICollectionViewCell? in

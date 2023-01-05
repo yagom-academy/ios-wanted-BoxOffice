@@ -15,6 +15,8 @@ class NetworkManager: NetworkProtocol {
         let url = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(appKey)&targetDt=\(currentDate)"
         self.getData(url: url, completion: completion)
     }
+    
+    
 }
 
 extension NetworkManager {
