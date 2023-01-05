@@ -17,6 +17,28 @@ final class CalendarPresentationController: UIPresentationController {
         dimmingView.translatesAutoresizingMaskIntoConstraints = false
         return dimmingView
     }()
+    
+    override var frameOfPresentedViewInContainerView: CGRect {
+        let size = CGSize(width: UIScreen.main.bounds.width-100,
+                          height: UIScreen.main.bounds.height/4)
+        let origin = CGPoint(x: 100, y: 50)
+        return CGRect(origin: origin, size: size)
+    }
+    
+    override init(presentedViewController: UIViewController,
+                  presenting presentingViewController: UIViewController?) {
+        super.init(presentedViewController: presentedViewController,
+                   presenting: presentingViewController)
+
+        presentedView?.autoresizingMask = [
+            .flexibleTopMargin,
+            .flexibleBottomMargin,
+            .flexibleLeftMargin,
+            .flexibleRightMargin
+        ]
+
+        presentedView?.translatesAutoresizingMaskIntoConstraints = true
+    }
 
     override func presentationTransitionWillBegin() {
         super.presentationTransitionWillBegin()
@@ -42,29 +64,7 @@ final class CalendarPresentationController: UIPresentationController {
             self.dimmingView.removeFromSuperview()
         })
     }
-    
-    override var frameOfPresentedViewInContainerView: CGRect {
-        let size = CGSize(width: UIScreen.main.bounds.width-100,
-                          height: UIScreen.main.bounds.height/4)
-        let origin = CGPoint(x: 100, y: 50)
-        return CGRect(origin: origin, size: size)
-    }
 
-    override init(presentedViewController: UIViewController,
-                  presenting presentingViewController: UIViewController?) {
-        super.init(presentedViewController: presentedViewController,
-                   presenting: presentingViewController)
-
-        presentedView?.autoresizingMask = [
-            .flexibleTopMargin,
-            .flexibleBottomMargin,
-            .flexibleLeftMargin,
-            .flexibleRightMargin
-        ]
-
-        presentedView?.translatesAutoresizingMaskIntoConstraints = true
-    }
-    
     private func adoptTapGestureRecognizer() {
         let adoptedView = containerView!
         let tapGestureRecognizer = UITapGestureRecognizer(
