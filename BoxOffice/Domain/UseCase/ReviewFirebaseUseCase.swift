@@ -51,7 +51,7 @@ extension ReviewFirebaseUseCase {
               let password = document["password"] as? String,
               let rating = document["rating"] as? String,
               let content = document["content"] as? String,
-              let imageURL = document["hasImage"] as? String else { return nil }
+              let imageURL = document["imageURL"] as? String else { return nil }
         
         return Review(nickName: nickName,
                       password: password,
