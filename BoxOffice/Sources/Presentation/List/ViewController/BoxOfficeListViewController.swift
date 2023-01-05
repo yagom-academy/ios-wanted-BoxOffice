@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class BoxOfficeListViewController: UIViewController {
 
     weak var coordinator: BoxOfficeListCoordinatorInterface?
     private let viewModel: BoxOfficeListViewModel
+    private var cancellables: Set<AnyCancellable> = .init()
     
     private lazy var segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["일간", "주간", "주말"])
@@ -32,6 +34,8 @@ class BoxOfficeListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
+        bind()
+        viewModel.input.viewDidLoad()
     }
 
     init(viewModel: BoxOfficeListViewModel, coordinator: BoxOfficeListCoordinatorInterface) {
@@ -51,6 +55,13 @@ private extension BoxOfficeListViewController {
     func setUp() {
         setUpNavigationBar()
         setUpView()
+    }
+    
+    func bind() {
+        viewModel.output.movies
+            .sinkOnMainThread { [weak self] _ in
+                self?.tableView.reloadData()
+            }.store(in: &cancellables)
     }
     
     func setUpNavigationBar() {
@@ -74,7 +85,7 @@ private extension BoxOfficeListViewController {
     }
     
     @objc func didTapSegmented(_ sender: UISegmentedControl) {
-        print(sender.selectedSegmentIndex)
+        viewModel.input.didTapSegmentControl(sender.selectedSegmentIndex)
     }
 }
 
@@ -84,11 +95,12 @@ extension BoxOfficeListViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(MovieCell.self, for: indexPath) else {
             return UITableViewCell()
         }
+        cell.setUp(viewModel: viewModel.output.cellModels[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModel.output.cellModels.count
     }
     
 }
