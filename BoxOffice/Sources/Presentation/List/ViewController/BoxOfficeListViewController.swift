@@ -108,8 +108,8 @@ extension BoxOfficeListViewController: UITableViewDataSource {
 extension BoxOfficeListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let dummy = Movie(code: "", name: "", openDate: Date())
-        coordinator?.showMovieDetailView(movie: dummy)
+        let movie = viewModel.output.cellModels[indexPath.row].output.movie
+        coordinator?.showMovieDetailView(movie: movie)
     }
     
 }
