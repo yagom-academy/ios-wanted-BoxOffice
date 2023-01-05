@@ -34,6 +34,9 @@ final class HomeViewController: UIViewController {
         setupCollectionView()
         setupButton()
         setupViewModel()
+        Task {
+            try await requestInitialData()
+        }
     }
     
     private func setupInitialView() {
@@ -72,39 +75,31 @@ final class HomeViewController: UIViewController {
     }
     
     private func setupViewModel() {
-        homeViewModel.dailyMovieCellDatas.bind { cellDatas in
+        homeViewModel.dailyMovieCellDatas.bind { cellDatas in // MARK: 기다렸다가 한번에 순위별로 띄우는 방법
             guard cellDatas.count == 10 else { return }
             let rankSortedCellDatas = cellDatas.sorted { a, b in
                 Int(a.currentRank) ?? 0 < Int(b.currentRank) ?? 0
             }
             DispatchQueue.main.async {
                 self.homeCollectionView.appendDailySnapshot(with: rankSortedCellDatas)
-                self.homeCollectionView.reloadData()
             }
         }
-        homeViewModel.allWeekMovieCellDatas.bind { cellDatas in
-            guard cellDatas.count == 10 else { return }
-            let rankSortedCellDatas = cellDatas.sorted { a, b in
-                Int(a.currentRank) ?? 0 < Int(b.currentRank) ?? 0
-            }
+        homeViewModel.allWeekMovieCellDatas.bind { cellDatas in // MARK: 받아오는 즉시 무작위로 띄우는 방법
             DispatchQueue.main.async {
-                self.homeCollectionView.appendAllWeekSnapshot(data: rankSortedCellDatas)
-                self.homeCollectionView.reloadData()
+                self.homeCollectionView.appendAllWeekSnapshot(data: cellDatas)
             }
         }
         homeViewModel.weekEndMovieCellDatas.bind { cellDatas in
-            guard cellDatas.count == 10 else { return }
-            let rankSortedCellDatas = cellDatas.sorted { a, b in
-                Int(a.currentRank) ?? 0 < Int(b.currentRank) ?? 0
-            }
             DispatchQueue.main.async {
-                self.homeCollectionView.appendWeekEndSnapshot(data: rankSortedCellDatas)
-                self.homeCollectionView.reloadData()
+                self.homeCollectionView.appendWeekEndSnapshot(data: cellDatas)
             }
         }
         
         homeCollectionView.currentDate = searchingDate.toString()
-        homeViewModel.requestDailyData(with: searchingDate.toString())
+    }
+    
+    private func requestInitialData() async throws {
+        try await homeViewModel.requestDailyData(with: searchingDate.toString())
     }
     
     @objc private func viewModeChangeButtonTapped() {
@@ -148,30 +143,41 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: ModalView Delegate
 extension HomeViewController: ModeSelectViewControllerDelegate {
-    func didSelectedRowAt(indexPath: Int) {
+    func didSelectedRowAt(indexPath: Int) async throws {
         let mode = BoxOfficeMode.allCases[indexPath]
         viewModeChangeButton.setTitle("▼ \(mode.rawValue)", for: .normal)
+        let dateText = searchingDate.toString()
         if mode == .daily {
             self.homeCollectionView.switchMode(.daily)
-            homeViewModel.requestDailyData(with: searchingDate.toString())
+            try await homeViewModel.requestDailyData(with: dateText)
         } else {
             self.homeCollectionView.switchMode(.weekly)
-            homeViewModel.requestAllWeekData(with: searchingDate.toString())
-            homeViewModel.requestWeekEndData(with: searchingDate.toString())
+            Task {
+                try await homeViewModel.requestAllWeekData(with: dateText)
+            }
+            Task {
+                try await homeViewModel.requestWeekEndData(with: dateText)
+            }
         }
     }
 }
 
 extension HomeViewController: CalendarViewControllerDelegate {
-    func searchButtonTapped(date: Date) {
+    func searchButtonTapped(date: Date) async throws {
         searchingDate = date
         let dateText = date.toString()
         homeCollectionView.currentDate = dateText
         if viewModeChangeButton.title(for: .normal) == "▼ 일별 박스오피스" {
-            homeViewModel.requestDailyData(with: dateText)
+            self.homeCollectionView.switchMode(.daily)
+            try await homeViewModel.requestDailyData(with: dateText)
         } else {
-            homeViewModel.requestAllWeekData(with: dateText)
-            homeViewModel.requestWeekEndData(with: dateText)
+            self.homeCollectionView.switchMode(.weekly)
+            Task {
+                try await homeViewModel.requestAllWeekData(with: dateText)
+            }
+            Task {
+                try await homeViewModel.requestWeekEndData(with: dateText)
+            }
         }
     }
 }
