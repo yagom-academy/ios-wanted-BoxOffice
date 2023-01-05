@@ -23,4 +23,3 @@ final class Observable<T> {
         self.listener = closure
     }
 }
-    

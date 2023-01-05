@@ -12,12 +12,21 @@ struct SearchMoviePosterAPI: API {
     
     var configuration: APIConfiguration
     
-    init(movieTitle: String) {
-        self.configuration = APIConfiguration(
-            baseUrl: .omdb,
-            param: ["apikey": Bundle.main.omdbApiKey,
-                    "s": movieTitle]
-        )
+    init(movieTitle: String, year: String? = nil) {
+        if let year = year {
+            self.configuration = APIConfiguration(
+                baseUrl: .omdb,
+                param: ["apikey": Bundle.main.omdbApiKey,
+                        "s": movieTitle,
+                        "y": year]
+            )
+        } else {
+            self.configuration = APIConfiguration(
+                baseUrl: .omdb,
+                param: ["apikey": Bundle.main.omdbApiKey,
+                        "s": movieTitle]
+            )
+        }
     }
 }
 
@@ -33,7 +42,12 @@ struct MoviePosterResponseDTO: Decodable {
     }
     
     func posterURLString() -> String {
-        return search[0].poster
+        if search.count == 1 {
+            return search[0].poster
+        } else {
+            search.filter { $0.poster.count > 10 }
+            return search[0].poster
+        }
     }
 }
 

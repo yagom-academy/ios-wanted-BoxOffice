@@ -7,8 +7,11 @@
 
 import Foundation
 
-struct MovieCellData {
-    let posterURL: URL
+struct MovieCellData: Hashable {
+    let uuid: UUID
+    let posterURL: URL?
+    let currentRank: String
+    let totalAudience: String
     let title: String
     let openDate: String
     let isNewEntry: Bool
