@@ -10,7 +10,7 @@ enum BoxOfficeHostAPI: String {
 }
 
 enum BoxOfficeAPIKey: String {
-    case boxOfficeKey = "1f86fdbac6c7e10dc35af4b3cad1c6af"
+    case boxOfficeKey = "24884fe5638ef7db07caeb6a26b75ab8"
 }
 
 enum HTTPMethod: String {

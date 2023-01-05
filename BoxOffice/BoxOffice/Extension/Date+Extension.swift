@@ -19,4 +19,12 @@ extension Date {
         
         return dateFormatter.string(from: self)
     }
+    
+    func translateToString2() -> String {
+        
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "yyyy. MM. dd"
+        
+        return dateFormatter2.string(from: self)
+    }
 }
