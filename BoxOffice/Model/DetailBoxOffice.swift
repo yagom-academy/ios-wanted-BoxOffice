@@ -30,7 +30,7 @@ struct DetailBoxOffice: Decodable {
     let showTime: String
     let genre: [BoxOfficeGenre]
     let directors: [BoxOfficeDirectors]
-    let actors: [BoxOfficeActors]?
+    let actors: [BoxOfficeActors]
     let audits: [BoxOfficeAudits]
     let movieName: String
     let movieEnglishName: String

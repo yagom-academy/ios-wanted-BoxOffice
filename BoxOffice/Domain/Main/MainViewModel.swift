@@ -36,7 +36,6 @@ final class MainViewModel: MainViewModelInterface, MainViewModelOutputInterface 
     private var cancelable = Set<AnyCancellable>()
     private let networkHandler: Networkerable?
     private let itemPerPage = "10"
-    private let currentDate = "20230101"
     private var dailyBoxOffice: [DailyBoxOffice] = []
     private var englishMovieName: [String] = []
     private var customBoxOffice: [CustomBoxOffice] = []
@@ -47,9 +46,13 @@ final class MainViewModel: MainViewModelInterface, MainViewModelOutputInterface 
     
     private func requestBoxOffice() {
         guard let networkHandler = networkHandler else { return }
+        let dateFormmatter = DateFormatter()
+        dateFormmatter.dateFormat = "YYYYMMDD"
+        guard let date = Calendar.current.date(byAdding: .day, value: -1, to: Date()) else { return }
+        let yesterDay = dateFormmatter.string(from: date)
         
         networkHandler.request(BoxOfficeAPI.dailyBoxOffice(
-            targetDate: currentDate,
+            targetDate: yesterDay,
             itemPerPage: itemPerPage,
             isMultiMovie: "N")
         )
@@ -113,7 +116,12 @@ final class MainViewModel: MainViewModelInterface, MainViewModelOutputInterface 
                 }
             } receiveValue: { [weak self] (poster: MoviePoster)  in
                 guard let self = self else { return }
-                self.customBoxOffice.append(.init(boxOffice: self.dailyBoxOffice[indexpath], posterURL: poster.poster ?? ""))
+                self.customBoxOffice.append(
+                    .init(
+                        boxOffice: self.dailyBoxOffice[indexpath],
+                        posterURL: poster.poster ?? "https://i.imgur.com/PQQuSIL.png"
+                    )
+                )
                 indexpath += 1
             }
             .store(in: &cancelable)
