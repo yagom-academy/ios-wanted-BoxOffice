@@ -147,7 +147,7 @@ final class MovieReviewViewController: UIViewController {
         return stackView
     }()
     
-    private let cancelButton: UIButton = {
+    private lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("취소", for: .normal)
         button.setTitleColor(.secondaryLabel, for: .normal)
@@ -155,6 +155,10 @@ final class MovieReviewViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.layer.borderColor = UIColor.systemGray3.cgColor
         button.layer.borderWidth = 1
+        
+        button.addAction(UIAction(handler: { action in
+            self.presentingViewController?.dismiss(animated: true)
+        }), for: .touchUpInside)
         return button
     }()
     
