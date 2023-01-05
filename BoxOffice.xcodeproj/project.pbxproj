@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2005979629669097002AB7EC /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005979529669097002AB7EC /* MovieDetailViewModel.swift */; };
+		200597982966B690002AB7EC /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200597972966B690002AB7EC /* ReviewTableViewCell.swift */; };
 		201825AA29664B8F00ADB79A /* MovieSubInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201825A929664B8F00ADB79A /* MovieSubInfoView.swift */; };
 		201825AC29664D8D00ADB79A /* MovieReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201825AB29664D8D00ADB79A /* MovieReviewView.swift */; };
 		203201FF29630CB000097F31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 203201FE29630CB000097F31 /* GoogleService-Info.plist */; };
@@ -64,6 +65,7 @@
 
 /* Begin PBXFileReference section */
 		2005979529669097002AB7EC /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
+		200597972966B690002AB7EC /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		201825A929664B8F00ADB79A /* MovieSubInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSubInfoView.swift; sourceTree = "<group>"; };
 		201825AB29664D8D00ADB79A /* MovieReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewView.swift; sourceTree = "<group>"; };
 		203201FE29630CB000097F31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				201825AB29664D8D00ADB79A /* MovieReviewView.swift */,
 				201825A929664B8F00ADB79A /* MovieSubInfoView.swift */,
 				2005979529669097002AB7EC /* MovieDetailViewModel.swift */,
+				200597972966B690002AB7EC /* ReviewTableViewCell.swift */,
 			);
 			path = MovieDetailScene;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				20F38B0D2965CCAE00415749 /* MovieMainInfoView.swift in Sources */,
 				AF6C3A5C2962F4FF0074574D /* MovieDetail.swift in Sources */,
 				AF6C3A422962D5C80074574D /* APIConfiguration.swift in Sources */,
+				200597982966B690002AB7EC /* ReviewTableViewCell.swift in Sources */,
 				AF6C3A4F2962D79D0074574D /* SearchMovieInfoAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
