@@ -204,6 +204,26 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
+		32AD695C2966A511005E2B3F /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				32BEE07F2966015D0095FB30 /* MovieOverviewDTO.swift */,
+				32BEE081296601640095FB30 /* MovieDetailDTO.swift */,
+				32645AA42965A7AD00E021B1 /* MoviewReviewDTO.swift */,
+				32A929F12965EC4600133562 /* PosterDTO.swift */,
+			);
+			path = DTOs;
+			sourceTree = "<group>";
+		};
+		32AD695D2966A520005E2B3F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FD733FC22963D16900AFC901 /* NetworkService.swift */,
+				3250DD0A2965700100D597C2 /* FirebaseService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		32BEE0852966017B0095FB30 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,8 +266,8 @@
 				635A19E728F9603900197BCC /* AppDelegate.swift */,
 				32BEE0852966017B0095FB30 /* Common */,
 				32645AAC2965BF8000E021B1 /* Presentation */,
-				FD733FBE2963C04D00AFC901 /* Data */,
 				32A6114F2962A43B009A3BC1 /* Domain */,
+				FD733FBE2963C04D00AFC901 /* Data */,
 				635A19F028F9603A00197BCC /* Assets.xcassets */,
 				635A19F228F9603A00197BCC /* LaunchScreen.storyboard */,
 				635A19F528F9603A00197BCC /* Info.plist */,
@@ -261,12 +281,8 @@
 			isa = PBXGroup;
 			children = (
 				FD733FBF2963C06000AFC901 /* Repositories */,
-				FD733FC22963D16900AFC901 /* NetworkService.swift */,
-				32BEE07F2966015D0095FB30 /* MovieOverviewDTO.swift */,
-				3250DD0A2965700100D597C2 /* FirebaseService.swift */,
-				32BEE081296601640095FB30 /* MovieDetailDTO.swift */,
-				32645AA42965A7AD00E021B1 /* MoviewReviewDTO.swift */,
-				32A929F12965EC4600133562 /* PosterDTO.swift */,
+				32AD695D2966A520005E2B3F /* Services */,
+				32AD695C2966A511005E2B3F /* DTOs */,
 			);
 			path = Data;
 			sourceTree = "<group>";
