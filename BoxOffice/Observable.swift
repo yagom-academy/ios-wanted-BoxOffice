@@ -2,7 +2,7 @@
 //  Observable.swift
 //  BoxOffice
 //
-//  Created by 이원빈 on 2023/01/04.
+//  Created by Judy on 2023/01/03.
 //
 
 final class Observable<T> {
