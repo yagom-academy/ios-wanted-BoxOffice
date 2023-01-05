@@ -133,3 +133,14 @@ final class MovieReviewViewController: UIViewController {
         ])
     }
 }
+
+fileprivate extension UITextField {
+    func setUnderLine(width: CGFloat, color: UIColor) {
+        let border = CALayer()
+        border.borderColor = color.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width - 10, height: self.frame.size.height)
+        border.borderWidth = width
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
+    }
+}
