@@ -147,17 +147,21 @@ private extension MovieCell {
     }
     
     func setUpArrowView() {
-        guard let rankInten = viewModel?.movie.boxOfficeInfo?.rankInten, rankInten != 0 else {
+        guard let boxOfficeInfo = viewModel?.movie.boxOfficeInfo,
+              (boxOfficeInfo.rankInten != 0 || boxOfficeInfo.rankOldAndNew != .old) else {
             rankIntenLabel.text = "-"
             arrowImageView.isHidden = true
             return
         }
         arrowImageView.isHidden = false
-        rankIntenLabel.text = rankInten.description
+        rankIntenLabel.text = boxOfficeInfo.rankInten.description
         let config = UIImage.SymbolConfiguration(textStyle: .body, scale: .medium)
         let upArrow = UIImage(systemName: "arrowtriangle.up.fill")?.withConfiguration(config)
         let downArrow = UIImage(systemName: "arrowtriangle.down.fill")?.withConfiguration(config)
-        if rankInten > 0 {
+        if boxOfficeInfo.rankOldAndNew == .new {
+            arrowImageView.isHidden = true
+            rankIntenLabel.text = boxOfficeInfo.rankOldAndNew.rawValue.capitalized
+        } else if boxOfficeInfo.rankInten > 0 {
             arrowImageView.image = upArrow
             arrowImageView.tintColor = .systemRed
         } else {
