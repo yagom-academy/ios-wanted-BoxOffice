@@ -15,6 +15,7 @@ class MovieReviewView: UIView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "pencil"), for: .normal)
         button.setTitle("리뷰 작성하기", for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -22,6 +23,7 @@ class MovieReviewView: UIView {
     private let moreReviewButton: UIButton = {
         let button = UIButton()
         button.setTitle("더보기", for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.borderColor = UIColor.systemGray5.cgColor
         button.layer.borderWidth = 2

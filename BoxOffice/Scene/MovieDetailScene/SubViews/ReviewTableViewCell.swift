@@ -10,6 +10,7 @@ import UIKit
 class ReviewTableViewCell: UITableViewCell {
     private let photoImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "person.crop.circle")
         imageView.backgroundColor = .systemGray6
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
