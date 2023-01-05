@@ -63,8 +63,7 @@ extension DetailInfoViewModel: DetailInfoViewModelInputInterface {
     func touchUpShareButton() {
         guard let detailBoxOffice = detailBoxOffice else { return }
         let directorName: String = detailBoxOffice.directors[0].peopleName ?? ""
-        let peopleName: String = detailBoxOffice.actors?[0].peopleName ?? ""
-        
+        let peopleName: String = detailBoxOffice.actors[0].peopleName ?? ""
         shareMovieInfoPublisher.send([
 """
 🎥 BOX OFFICE 🎬

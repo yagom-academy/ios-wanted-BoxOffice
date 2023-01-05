@@ -210,10 +210,20 @@ final class DetailInfoViewController: UIViewController {
     }
     
     private func configureDetailBoxOffice(_ model: DetailBoxOffice) {
+        if model.actors.isEmpty {
+            actorLabel.text = "배우:"
+        } else {
+            actorLabel.text = "배우: \(model.actors[0].peopleName ?? "")"
+        }
+        
+        if model.directors.isEmpty {
+            directorLabel.text = "감독:"
+        } else {
+            directorLabel.text = "감독: \(model.directors[0].peopleName ?? "")"
+        }
+        
         titleLabel.text = model.movieName
         infoLabel.text = " \(model.genre[0].genreName) | \(model.audits[0].watchGrade) | \(model.showTime)분"
-        directorLabel.text = "감독: \(model.directors[0].peopleName ?? "")"
-        actorLabel.text = "배우: \(model.actors?[0].peopleName ?? "")"
         dateLabel.text = "제작년도: \(model.productionYear)  개봉일: \(model.openDate)"
     }
     
