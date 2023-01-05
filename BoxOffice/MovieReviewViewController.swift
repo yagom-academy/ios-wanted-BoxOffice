@@ -46,6 +46,10 @@ final class MovieReviewViewController: UIViewController {
     
     private let reviewTextView: UITextView = {
         let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = .preferredFont(forTextStyle: .body)
+        textView.backgroundColor = .secondarySystemBackground
+        textView.layer.cornerRadius = 10
         return textView
     }()
     
@@ -81,7 +85,8 @@ final class MovieReviewViewController: UIViewController {
     private func addViews() {
         [
             questionLabel,
-            reviewRequestLabel
+            reviewRequestLabel,
+            reviewTextView,
         ].forEach( { view.addSubview($0) })
     }
     
@@ -92,6 +97,11 @@ final class MovieReviewViewController: UIViewController {
             
             reviewRequestLabel.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 50),
             reviewRequestLabel.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
+            
+            reviewTextView.topAnchor.constraint(equalTo: reviewRequestLabel.bottomAnchor, constant: 8),
+            reviewTextView.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
+            reviewTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            reviewTextView.heightAnchor.constraint(equalToConstant: 100),
         ])
     }
 }
