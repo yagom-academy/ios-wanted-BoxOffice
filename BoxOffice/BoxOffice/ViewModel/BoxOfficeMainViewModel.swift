@@ -30,12 +30,11 @@ protocol BoxOfficeListProtocol {
 final class BoxOfficeMainViewModel: ObservableObject, BoxOfficeListProtocol {
     
     @Published var movieList = [DailyBoxOfficeList]()
-    
+    @Published var url = [UIImage]()
+
     let boxOfficeDirector = MovieRequestDirector()
     let posterImageDirector = OMDbRequestDirector()
     let networkManager = NetworkManager()
-    
-    var url: [String] = []
     
     func getYesterdayDate() -> String {
         let calendar = Calendar.current
@@ -47,7 +46,7 @@ final class BoxOfficeMainViewModel: ObservableObject, BoxOfficeListProtocol {
         return beforeDay?.translateToString() ?? ""
     }
     
-    func fetchDailyBoxOfficeList(dateType: GetDateType, targetDate: String) { //  완료시에 뭐 할거면 컴플리션 달아도됨
+    func fetchDailyBoxOfficeList(dateType: GetDateType, targetDate: String) {
         let queryItems: [String: String] = [
             "targetDt": targetDate,
             "itemPerPage": BoxOfficeListViewModelConstants.itemsPerPage.rawValue
@@ -66,12 +65,13 @@ final class BoxOfficeMainViewModel: ObservableObject, BoxOfficeListProtocol {
                 guard let decodedDailyBoxOffice = JSONDecoder().decode(from: data, to: DailyMovieRank.self) else {
                     return
                 }
-                self?.movieList = decodedDailyBoxOffice.boxOfficeResult.dailyBoxOfficeList
-                
-                guard let movieListCount = self?.movieList.count else {
-                    return
+                DispatchQueue.main.async { [weak self] in
+                    self?.movieList = decodedDailyBoxOffice.boxOfficeResult.dailyBoxOfficeList
                 }
-                self?.url = Array<String>(repeating: "", count: movieListCount) // 맞는 인덱스에 넣어주기 위해 길이 미리 초기화
+                
+                DispatchQueue.main.sync {
+                    self?.url = Array<UIImage>(repeating: UIImage(), count: Int(BoxOfficeListViewModelConstants.itemsPerPage.rawValue) ?? 0)
+                }
                 
                 self?.movieList.forEach { dailyBoxOfficeMovie in
                     self?.fetchMovieDetail(movieCD: dailyBoxOfficeMovie.movieCD)
@@ -108,7 +108,12 @@ final class BoxOfficeMainViewModel: ObservableObject, BoxOfficeListProtocol {
                     case .success(let success):
                         for (index, dailyBoxOffice) in self.movieList.enumerated() {
                             if dailyBoxOffice.movieCD == movieCD {
-                                self.url[index] = success
+                                DispatchQueue.global().async { [weak self] in
+                                    let data = try? Data(contentsOf: URL(string: success)!)
+                                    DispatchQueue.main.async {
+                                        self?.url[index] = UIImage(data: data!) ?? UIImage()
+                                    }
+                                }
                             }
                         }
                     case .failure(let failure):
@@ -143,13 +148,13 @@ final class BoxOfficeMainViewModel: ObservableObject, BoxOfficeListProtocol {
                         debugPrint("BoxOfficeListViewModel - fetchMoviePoster : PosterImageDecodingError")
                         return
                     }
-                    completion(.failure(PosterImageError.posterNotFound)) // 해당 영문명 포스터가 없을 경우
+                    completion(.failure(PosterImageError.posterNotFound))
                     return
                 }
                 if decodedImageData.totalResults == "1" {
-                    completion(.success(posterURL)) // 영문명 포스터가 한장일 경우
+                    completion(.success(posterURL))
                 } else {
-                    completion(.failure(PosterImageError.multiplePhotos)) // 해당 영문명 포스터가 여러장일 경우
+                    completion(.failure(PosterImageError.multiplePhotos))
                 }
             case .failure(let failure):
                 debugPrint("BoxOfficeListViewModel - fetchMoviePoster : NetworkError - \(failure.localizedDescription)")
