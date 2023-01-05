@@ -28,6 +28,8 @@ class MovieCell: UITableViewCell {
         label.text = "1"
         label.font = .preferredFont(for: .title2, weight: .bold)
         label.textColor = .label
+        label.textAlignment = .center
+        label.widthAnchor.constraint(equalToConstant: 30).isActive = true
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return label
     }()
@@ -159,11 +161,11 @@ private extension MovieCell {
             .compactMap { $0.boxOfficeInfo }
             .map { movieInfo -> String in
                 if movieInfo.rankOldAndNew == .new {
-                    return movieInfo.rankOldAndNew.rawValue
+                    return movieInfo.rankOldAndNew.rawValue.capitalized
                 } else if movieInfo.rankInten == 0 {
                     return "-"
                 } else {
-                    return movieInfo.rankInten.description.capitalized
+                    return movieInfo.rankInten.description
                 }
             }.sinkOnMainThread(receiveValue: { [weak self] rankInten in
                 self?.rankIntenLabel.text = rankInten
@@ -190,14 +192,16 @@ private extension MovieCell {
     }
     
     func setUpInfo(_ movie: Movie) {
+        posterView.setImage(with: movie.detailInfo?.poster ?? "")
         titleLabel.text = movie.name
         openDateLabel.text = "개봉 \(movie.openDate.toString(.yyyyMMddDot))"
         audienceAccumulationLabel.text = "\(movie.boxOfficeInfo?.audienceAccumulation.numberFormatter() ?? "")명"
-        posterView.setImage(with: movie.detailInfo?.poster ?? "")
     }
     
     func reset() {
         ImageCacheManager.shared.cancelDownloadTask()
+        cancellables = .init()
+        viewModel = nil
         rankLabel.text = nil
         rankIntenLabel.text = nil
         arrowImageView.image = nil
