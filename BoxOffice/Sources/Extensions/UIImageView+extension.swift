@@ -27,21 +27,15 @@ extension UIImageView {
         
         if let cachedImage = ImageCacheManager.shared.loadCachedData(for: url) {
             self.image = cachedImage
-            indicator.stopAnimating()
         } else {
-            DispatchQueue.global().async {
-                guard let imageURL = URL(string: url),
-                      let imageData = try? Data(contentsOf: imageURL),
-                      let loadedImage = UIImage(data: imageData) else {
-                    os_log(.error, log: .default, "⛔️ 이미지를 가져오는데 실패하였습니다.")
+            ImageCacheManager.shared.setImage(url: url) { [weak self] image in
+                guard let image else {
                     return
                 }
-                DispatchQueue.main.async {
-                    ImageCacheManager.shared.setCacheData(of: loadedImage, for: url)
-                    self.image = loadedImage
-                    indicator.stopAnimating()
-                }
+                ImageCacheManager.shared.setCacheData(of: image, for: url)
+                self?.image = image
             }
         }
+        indicator.stopAnimating()
     }
 }
