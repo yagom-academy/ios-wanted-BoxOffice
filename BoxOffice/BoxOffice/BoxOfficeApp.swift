@@ -12,6 +12,7 @@ struct BoxOfficeApp: App {
     var body: some Scene {
         WindowGroup {
             BoxOfficeMainView()
+                .environmentObject(BoxOfficeMainViewModel())
         }
     }
 }

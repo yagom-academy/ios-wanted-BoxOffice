@@ -36,6 +36,10 @@ final class BoxOfficeMainViewModel: ObservableObject, BoxOfficeListProtocol {
     let posterImageDirector = OMDbRequestDirector()
     let networkManager = NetworkManager()
     
+    init() {
+        fetchDailyBoxOfficeList(dateType: .daily, targetDate: getYesterdayDate())
+    }
+    
     func getYesterdayDate() -> String {
         let calendar = Calendar.current
         let dateFormatter = DateFormatter()
@@ -49,7 +53,8 @@ final class BoxOfficeMainViewModel: ObservableObject, BoxOfficeListProtocol {
     func fetchDailyBoxOfficeList(dateType: GetDateType, targetDate: String) {
         let queryItems: [String: String] = [
             "targetDt": targetDate,
-            "itemPerPage": BoxOfficeListViewModelConstants.itemsPerPage.rawValue
+            "itemPerPage": BoxOfficeListViewModelConstants.itemsPerPage.rawValue,
+            "wideAreaCd": "0105001"
         ]
         
         guard let dailyBoxOfficeRequest = boxOfficeDirector.createGetRequest(
@@ -70,7 +75,7 @@ final class BoxOfficeMainViewModel: ObservableObject, BoxOfficeListProtocol {
                 }
                 
                 DispatchQueue.main.sync {
-                    self?.url = Array<UIImage>(repeating: UIImage(), count: Int(BoxOfficeListViewModelConstants.itemsPerPage.rawValue) ?? 0)
+                    self?.url = Array<UIImage>(repeating: UIImage(named: "NoImageNotFound")!, count: Int(BoxOfficeListViewModelConstants.itemsPerPage.rawValue) ?? 0)
                 }
                 
                 self?.movieList.forEach { dailyBoxOfficeMovie in
@@ -111,7 +116,7 @@ final class BoxOfficeMainViewModel: ObservableObject, BoxOfficeListProtocol {
                                 DispatchQueue.global().async { [weak self] in
                                     let data = try? Data(contentsOf: URL(string: success)!)
                                     DispatchQueue.main.async {
-                                        self?.url[index] = UIImage(data: data!) ?? UIImage()
+                                        self?.url[index] = UIImage(data: data ?? Data()) ?? UIImage()
                                     }
                                 }
                             }
