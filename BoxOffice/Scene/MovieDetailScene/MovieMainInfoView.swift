@@ -59,7 +59,6 @@ class MovieMainInfoView: UIView {
     
     private let ratingLabel = MovieLabel(font: .headline)
     private let titleLabel = MovieLabel(font: .largeTitle)
-    private let rankinglabel = MovieLabel(font: .caption1)
     private let currentRanklabel = MovieLabel(font: .caption1)
     private let rankChangeLabel = MovieLabel(font: .caption1)
     private let isNewEntryLabel = MovieLabel(font: .caption1)
@@ -76,13 +75,24 @@ class MovieMainInfoView: UIView {
         setupView()
     }
     
+    func configure(with movie: MovieDetail) {
+        //TODO: 별점 평균내기
+        ratingLabel.text = "4.5"
+        titleLabel.text = movie.title
+        currentRanklabel.text = movie.currentRank
+        rankChangeLabel.text = movie.rankChange
+        isNewEntryLabel.text = "\(movie.isNewEntry)"
+        openYearLabel.text = movie.openYear
+        genreLabel.text = movie.genreName
+    }
+    
     private func setupView() {
         addSubView()
         setupConstraint()
     }
     
     private func addSubView() {
-        rankStackView.addArrangedSubview(rankinglabel)
+        rankStackView.addArrangedSubview(currentRanklabel)
         rankStackView.addArrangedSubview(rankChangeLabel)
         rankStackView.addArrangedSubview(isNewEntryLabel)
         
@@ -90,7 +100,7 @@ class MovieMainInfoView: UIView {
         openYearStackView.addArrangedSubview(genreLabel)
         
         ratingStackView.addArrangedSubview(starView)
-        ratingStackView.addArrangedSubview(rankinglabel)
+        ratingStackView.addArrangedSubview(currentRanklabel)
         
         infoStackView.addArrangedSubview(titleLabel)
         infoStackView.addArrangedSubview(rankStackView)
