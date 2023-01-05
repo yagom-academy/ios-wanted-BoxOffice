@@ -16,15 +16,25 @@ class MovieDetailViewController: UIViewController {
         return stackView
     }()
     
+    private let reviewTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(ReviewTableViewCell.self,
+                           forCellReuseIdentifier: "ReviewTableViewCell")
+        return tableView
+    }()
+    
+    private let reviewViewModel = MovieReviewViewModel()
     private let movieMainInfoView = MovieMainInfoView()
     private let movieSubInfoView = MovieSubInfoView()
-    private let movieReviewView = MovieReviewView()
-    private let reviewViewModel = MovieReviewViewModel()
+    private lazy var movieReviewView = MovieReviewView(tableView: reviewTableView)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupNavigationItem()
+        bind()
+        loadReview()
     }
     
     let testMovie = MovieDetail(

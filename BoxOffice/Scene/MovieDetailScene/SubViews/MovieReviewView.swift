@@ -9,18 +9,14 @@ import UIKit
 
 class MovieReviewView: UIView {
     private let reviewTitleLabel = MovieLabel(font: .headline)
+    private let reviewTableView: UITableView
+    
     private let writeReviewButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "pencil"), for: .normal)
         button.setTitle("리뷰 작성하기", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-    }()
-    
-    private let reviewTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
     }()
     
     private let moreReviewButton: UIButton = {
@@ -46,24 +42,20 @@ class MovieReviewView: UIView {
         return stackView
     }()
     
-    override init(frame: CGRect) {
+    init(tableView: UITableView, frame: CGRect = .zero) {
+        reviewTableView = tableView
         super.init(frame: frame)
         setupView()
     }
-    
+
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupView()
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setupView() {
         addSubView()
         setupConstraint()
-    }
-    
-    //TODO: Review로 뷰 세팅하기
-    func configure(with review: Review) {
-
+        reviewTitleLabel.text = "리뷰"
     }
     
     private func addSubView() {
