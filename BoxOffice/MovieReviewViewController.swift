@@ -124,8 +124,12 @@ final class MovieReviewViewController: UIViewController {
         return button
     }()
     
-    private let actionButtonStackView: UIStackView = {
+    private let actionButtonsStackView: UIStackView = {
         let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
         return stackView
     }()
     
