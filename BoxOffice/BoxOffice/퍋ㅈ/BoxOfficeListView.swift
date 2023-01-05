@@ -14,26 +14,30 @@ struct BoxOfficeListView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(dailyBoxOfficeList.rank + ". " + dailyBoxOfficeList.movieNm)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                if dailyBoxOfficeList.rankOldAndNew == RankOldAndNew.old {
-                    Text(dailyBoxOfficeList.rankOldAndNew.rawValue)
-                        .foregroundColor(.secondary)
-                } else {
-                    Text(dailyBoxOfficeList.rankOldAndNew.rawValue)
+                if dailyBoxOfficeList.rankInten.convertInt == 0 {
+                    Image(systemName: "minus")
+                        .foregroundColor(.orange)
+                } else if dailyBoxOfficeList.rankInten.convertInt > 0 {
+                    Image(systemName: "arrow.up")
                         .foregroundColor(.red)
+                } else if dailyBoxOfficeList.rankInten.convertInt < 0 {
+                    Image(systemName: "arrow.down")
+                        .foregroundColor(.blue)
+                }
+                VStack {
+                    Text(dailyBoxOfficeList.rank + ". " + dailyBoxOfficeList.movieNm)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.body)
+                        .lineLimit(1)
+                    HStack {
+                        Text("개봉일 " + dailyBoxOfficeList.openDt.dateYearFormatter.translateToString2())
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Text("누적 관객수 " + dailyBoxOfficeList.audiAcc.insertComma)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    }
+                    .padding(.top, 5)
                 }
             }
-            .font(.body)
-            .lineLimit(1)
-            
-            HStack {
-                Text("전일 증감분 " + dailyBoxOfficeList.rankInten)
-                Text("|")
-                Text("누적 관객수 " + dailyBoxOfficeList.audiCnt.insertComma)
-            }
-            .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .foregroundColor(.primary)
         .font(.caption)

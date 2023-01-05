@@ -9,16 +9,17 @@ import SwiftUI
 
 struct BoxOfficeMainView: View {
     
-    @StateObject var boxOfficeMainViewModel = BoxOfficeMainViewModel()
+    @EnvironmentObject var boxOfficeMainViewModel: BoxOfficeMainViewModel
     @StateObject private var imageLoader = URLImageLoader()
-
+    var random = Int.random(in: 0..<7)
+    
     var body: some View {
         NavigationView {
             if boxOfficeMainViewModel.url.count != 0 {
                 List {
                     Section {
                         VStack(alignment: .leading) {
-                            Text("Top3")
+                            Text("추천 영화")
                                 .font(.headline)
                                 .padding(.leading, 15)
                                 .padding(.top, 5)
@@ -27,17 +28,15 @@ struct BoxOfficeMainView: View {
                                     NavigationLink {
                                         BoxOfficeDetailView(
                                             viewModel: boxOfficeMainViewModel,
-                                            myIndex: index
+                                            myIndex: random + index
                                         )
                                     } label: {
                                         ZStack(alignment: .bottomLeading) {
-                                            Image(uiImage: boxOfficeMainViewModel.url[index])
-                                                .resizable()
-                                                .renderingMode(.original)
-                                            Text("\(index + 1)")
-                                                .padding(10)
-                                                .font(.largeTitle)
-                                                .foregroundColor(.black)
+                                            GeometryReader { reader in
+                                                Image(uiImage: boxOfficeMainViewModel.url[random + index])
+                                                    .resizable()
+                                                    .frame(maxWidth: reader.size.width)
+                                            }
                                         }
                                     }
                                 }
@@ -65,17 +64,23 @@ struct BoxOfficeMainView: View {
                                         } label: {
                                             ZStack(alignment: .bottomLeading) {
                                                 Image(uiImage: boxOfficeMainViewModel.url[index])
-                                                    .renderingMode(.original)
-                                                    .resizable()
                                                     .frame(width: 200, height: 200)
                                                     .cornerRadius(10)
                                                 Text(data.rank + ". " + data.movieNm)
                                                     .padding(10)
                                                     .lineLimit(1)
                                                     .foregroundColor(.white)
+                                                    .frame(width: 200, alignment: .leading)
                                                     .font(.system(size: 15, weight: .bold))
+                                                    .background(
+                                                        Rectangle()
+                                                        .foregroundColor(Color.black)
+                                                        .opacity(0.5)
+                                                        .blur(radius: 2, opaque: true)
+                                                    )
                                             }
                                             .frame(width: 200)
+                                            .cornerRadius(10)
                                         }
                                     }
                                 }
@@ -110,17 +115,12 @@ struct BoxOfficeMainView: View {
                 ProgressView()
             }
         }
-        .onAppear {
-            boxOfficeMainViewModel.fetchDailyBoxOfficeList(
-                dateType: .daily,
-                targetDate: boxOfficeMainViewModel.getYesterdayDate()
-            )
-        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         BoxOfficeMainView()
+            .environmentObject(BoxOfficeMainViewModel())
     }
 }
