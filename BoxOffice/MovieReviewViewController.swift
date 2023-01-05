@@ -113,7 +113,7 @@ final class MovieReviewViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "camera"), for: .normal)
-        button.tintColor = .black
+        button.tintColor = .label
         button.setTitle("  사진 추가하기", for: .normal)
         button.setTitleColor(.label, for: .normal)
         
