@@ -27,8 +27,7 @@ extension MovieReviewDTO {
               let id = UUID(uuidString: idString),
               let userName = reviewData[Keys.userName.rawValue] as? String,
               let movieCode = reviewData[Keys.movieCode.rawValue] as? String,
-              let ratingString = reviewData[Keys.rating.rawValue] as? String,
-              let rating = Double(ratingString),
+              let rating = reviewData[Keys.rating.rawValue] as? Double,
               let imageURL = reviewData[Keys.imageURL.rawValue] as? String,
               let password = reviewData[Keys.password.rawValue] as? String,
               let description = reviewData[Keys.description.rawValue] as? String else {
@@ -38,7 +37,7 @@ extension MovieReviewDTO {
         return MovieReview(id: id, movieCode: movieCode, user: User(nickname: userName), password: password, rating: rating, image: imageURL, description: description)
     }
 }
-
+ 
 extension MovieReview {
     func toDTO() -> MovieReviewDTO {
         var reviewDictionary = [String: Any]()
