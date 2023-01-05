@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ModeSelectViewControllerDelegate: AnyObject {
-    func didSelectedRowAt(indexPath: Int)
+    func didSelectedRowAt(indexPath: Int) async throws
 }
 
 final class ModeSelectViewController: UIViewController {
@@ -113,7 +113,9 @@ extension ModeSelectViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectedRowAt(indexPath: indexPath.row)
+        Task {
+            try await delegate?.didSelectedRowAt(indexPath: indexPath.row)
+        }
         dismiss(animated: true)
     }
 }
