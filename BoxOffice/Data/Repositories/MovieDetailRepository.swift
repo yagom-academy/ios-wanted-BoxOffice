@@ -84,6 +84,13 @@ final class MovieDetailRepository: MovieDetailRepositoryInterface {
             task.resume()
         }
     }
+
+    func fetchReviewImage(imageURL: String, completion: @escaping (Result<UIImage?, Error>) -> Void) -> Cancellable? {
+        let task = firebaseService.fetchReviewImage(imageURL: imageURL) { result in
+            completion(result)
+        }
+        return task
+    }
 }
 
 // MARK: - Private Functions

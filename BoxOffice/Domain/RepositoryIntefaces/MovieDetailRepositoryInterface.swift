@@ -15,4 +15,6 @@ protocol MovieDetailRepositoryInterface {
     func deleteMovieReview(review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void)
 
     func fetchMoviePoster(englishMovieName: String, completion: @escaping (Result<UIImage?, Error>) -> Void)
+
+    func fetchReviewImage(imageURL: String, completion: @escaping (Result<UIImage?, Error>) -> Void) -> Cancellable?
 }
