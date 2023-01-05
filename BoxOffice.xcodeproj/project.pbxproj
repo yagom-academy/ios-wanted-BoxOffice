@@ -12,6 +12,7 @@
 		053AF1F429671A5600B65515 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053AF1F329671A5600B65515 /* ReviewTableViewCell.swift */; };
 		0584CDB729674D0C00B4DD1D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0584CDB629674D0C00B4DD1D /* LoginViewController.swift */; };
 		0584CDBA29674D5600B4DD1D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0584CDB929674D5600B4DD1D /* LoginView.swift */; };
+		0584CDBC2967710E00B4DD1D /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0584CDBB2967710E00B4DD1D /* ImageCacheManager.swift */; };
 		05A8C34C2962B72D009E422C /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A8C34B2962B72D009E422C /* MovieDetailViewController.swift */; };
 		05A8C34E2962B75E009E422C /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A8C34D2962B75E009E422C /* MovieDetailView.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 		053AF1F329671A5600B65515 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		0584CDB629674D0C00B4DD1D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0584CDB929674D5600B4DD1D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		0584CDBB2967710E00B4DD1D /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		05A8C34B2962B72D009E422C /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		05A8C34D2962B75E009E422C /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,6 +196,7 @@
 				72F4D4A52963EBA500116530 /* DateFormatterManager.swift */,
 				72F4D4A72963EBC600116530 /* JSONManager.swift */,
 				053AF1EF29669EF400B65515 /* SendDataDelegate.swift */,
+				0584CDBB2967710E00B4DD1D /* ImageCacheManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				72F4D4A82963EBC600116530 /* JSONManager.swift in Sources */,
 				053AF1F429671A5600B65515 /* ReviewTableViewCell.swift in Sources */,
 				72E59D9D2962DAB3000BBCE5 /* DailyBoxOffice.swift in Sources */,
+				0584CDBC2967710E00B4DD1D /* ImageCacheManager.swift in Sources */,
 				72F4D4AC2963EC2500116530 /* MoviePoster.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

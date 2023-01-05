@@ -46,11 +46,17 @@ class MovieDetailViewController: UIViewController {
     }
     
     private func setPostLabel() {
-        guard let content = detailViewContent else {
+        guard let content = detailViewContent,
+              let grade = content.movieInfo.audits.first?.watchGradeNm else {
             return
         }
         
-        let age = content.movieInfo.audits.first?.watchGradeNm.filter({ $0.isNumber }) ?? ""
+        var age = grade.filter({ $0.isNumber })
+        
+        if age == "" {
+            age = "ALL"
+        }
+        
         var color = UIColor.green
 
         switch age {
@@ -69,11 +75,29 @@ class MovieDetailViewController: UIViewController {
             return
         }
 
+        if let cachedImage = ImageCacheManager.shared.getCachedImage(
+            url: NSString(string: posterURL)
+        ) {
+            DispatchQueue.main.async { [weak self] in
+                self?.movieDetailView.setPoster(
+                    image: cachedImage,
+                    age: age,
+                    color: color
+                )
+            }
+            return
+        }
+        
+        
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: url) {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
-                        self?.movieDetailView.setPoster(image: image, age: age, color: color)
+                        self?.movieDetailView.setPoster(
+                            image: image,
+                            age: age,
+                            color: color
+                        )
                     }
                 }
             }

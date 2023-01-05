@@ -232,9 +232,18 @@ extension UIImageView {
               let url = URL(string: urlString) else {
             return
         }
-    
+        
+        // TODO: 여기에만 추가시키면 되려나?
+        if let cachedImage = ImageCacheManager.shared.getCachedImage(url: NSString(string: urlString)) {
+            completion(.success(cachedImage))
+            return
+        }
+
         let request = URLRequest(url: url)
         
+        // TODO: 변경 여부 확인
+        // let urlSession = URLSession(configuration: .ephemeral)
+        // usrlSession.dataTask(with: request) ...
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else {
                 completion(.failure(error!))
@@ -253,6 +262,7 @@ extension UIImageView {
                 return
             }
             
+            ImageCacheManager.shared.saveCache(image: image, url: urlString)
             completion(.success(image))
         }.resume()
     }
