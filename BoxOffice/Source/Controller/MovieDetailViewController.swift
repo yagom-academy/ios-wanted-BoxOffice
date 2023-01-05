@@ -14,6 +14,8 @@ class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(movieDetailView)
+        view.backgroundColor = .white
+        self.title = detailViewContent?.boxOfficeInfo.movieNm
         
         NSLayoutConstraint.activate([
             movieDetailView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
@@ -116,8 +118,12 @@ class MovieDetailViewController: UIViewController {
         self.present(activityViewController, animated: true, completion: nil)
     }
     
-    @objc private func didReviewButton() {
-        
+    @objc private func didTapReviewButton() {
+        let loginViewController = LoginViewController()
+        navigationController?.pushViewController(
+            loginViewController,
+            animated: true
+        )
     }
 }
 
