@@ -74,7 +74,7 @@ class WriteReviewViewController: UIViewController {
         return stackView
     }()
     
-    private let reviewViewModel = WriteReviewViewModel()
+    private let reviewViewModel = MovieReviewViewModel()
     private let ratingStarView = StarRatingView()
     private let imagePicker = UIImagePickerController()
     private var password = String()
