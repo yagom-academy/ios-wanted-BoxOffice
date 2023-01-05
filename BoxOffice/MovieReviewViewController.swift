@@ -40,9 +40,19 @@ final class MovieReviewViewController: UIViewController {
         label.font = .preferredFont(forTextStyle: .footnote)
         return label
     }()
+        
+    private let nicknameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "닉네임"
+        return label
+    }()
+    
     private let nicknameTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "별명"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "닉네임을 입력해주세요."
+        textField.textAlignment = .left
         return textField
     }()
     
@@ -100,6 +110,13 @@ final class MovieReviewViewController: UIViewController {
         setupLayout()
     }
 
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        nicknameTextField.setUnderLine(width: 1, color: .tertiaryLabel)
+    }
+    
     private func addViews() {
         [
             questionLabel,
@@ -107,6 +124,8 @@ final class MovieReviewViewController: UIViewController {
             reviewTextView,
             photoAddingButton,
             userInformationRequestLabel,
+            nicknameLabel,
+            nicknameTextField,
         ].forEach( { view.addSubview($0) })
     }
     
@@ -130,6 +149,13 @@ final class MovieReviewViewController: UIViewController {
             
             userInformationRequestLabel.topAnchor.constraint(equalTo: photoAddingButton.bottomAnchor, constant: 60),
             userInformationRequestLabel.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
+            
+            nicknameLabel.topAnchor.constraint(equalTo: userInformationRequestLabel.bottomAnchor, constant: 16),
+            nicknameLabel.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
+            
+            nicknameTextField.topAnchor.constraint(equalTo: nicknameLabel.topAnchor),
+            nicknameTextField.leadingAnchor.constraint(equalTo: nicknameLabel.trailingAnchor, constant: 32),
+            nicknameTextField.widthAnchor.constraint(equalToConstant: 200),
         ])
     }
 }
