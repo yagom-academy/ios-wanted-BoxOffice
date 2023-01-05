@@ -135,11 +135,24 @@ final class MovieReviewViewController: UIViewController {
     
     private let cancelButton: UIButton = {
         let button = UIButton()
+        button.setTitle("취소", for: .normal)
+        button.setTitleColor(.secondaryLabel, for: .normal)
+        
+        button.layer.cornerRadius = 10
+        button.layer.borderColor = UIColor.systemGray3.cgColor
+        button.layer.borderWidth = 1
         return button
     }()
     
     private let registrationButton: UIButton = {
         let button = UIButton()
+        button.setTitle("등록", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemPurple
+        
+        button.layer.cornerRadius = 10
+        button.layer.borderColor = UIColor.systemGray3.cgColor
+        button.layer.borderWidth = 1
         return button
     }()
     
