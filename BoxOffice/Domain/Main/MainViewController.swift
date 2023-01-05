@@ -18,7 +18,7 @@ final class MainViewController: UIViewController {
     }
     
     enum Row: Hashable {
-        case forDailyBoxOffice(entity: DailyBoxOffice)
+        case forDailyBoxOffice(entity: CustomBoxOffice)
     }
     
     private let mainView = MainView(frame: .zero)
@@ -70,7 +70,7 @@ extension MainViewController {
     }
     
     
-    func applySnapshot(models: [DailyBoxOffice]) {
+    func applySnapshot(models: [CustomBoxOffice]) {
         var snapshot = Snapshot()
         
         if models.isEmpty == false {
