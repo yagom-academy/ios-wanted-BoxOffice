@@ -55,6 +55,16 @@ final class MovieReviewViewController: UIViewController {
     
     private let photoAddingButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "camera"), for: .normal)
+        button.tintColor = .black
+        button.setTitle("  사진 추가하기", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        
+        button.layer.cornerRadius = 10
+        button.layer.borderColor = UIColor.systemGray3.cgColor
+        button.layer.borderWidth = 1
+        button.clipsToBounds = true
         return button
     }()
     
@@ -87,6 +97,7 @@ final class MovieReviewViewController: UIViewController {
             questionLabel,
             reviewRequestLabel,
             reviewTextView,
+            photoAddingButton
         ].forEach( { view.addSubview($0) })
     }
     
@@ -102,6 +113,11 @@ final class MovieReviewViewController: UIViewController {
             reviewTextView.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
             reviewTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             reviewTextView.heightAnchor.constraint(equalToConstant: 100),
+
+            photoAddingButton.topAnchor.constraint(equalTo: reviewTextView.bottomAnchor, constant: 8),
+            photoAddingButton.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
+            photoAddingButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            photoAddingButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
 }
