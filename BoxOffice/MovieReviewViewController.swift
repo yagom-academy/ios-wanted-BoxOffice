@@ -32,6 +32,14 @@ final class MovieReviewViewController: UIViewController {
         return stackView
     }()
     
+    private let userInformationRequestLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "어떤 닉네임으로 리뷰를 등록해드릴까요?"
+        label.textColor = .secondaryLabel
+        label.font = .preferredFont(forTextStyle: .footnote)
+        return label
+    }()
     private let nicknameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "별명"
@@ -97,7 +105,8 @@ final class MovieReviewViewController: UIViewController {
             questionLabel,
             reviewRequestLabel,
             reviewTextView,
-            photoAddingButton
+            photoAddingButton,
+            userInformationRequestLabel,
         ].forEach( { view.addSubview($0) })
     }
     
@@ -118,6 +127,9 @@ final class MovieReviewViewController: UIViewController {
             photoAddingButton.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
             photoAddingButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             photoAddingButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            userInformationRequestLabel.topAnchor.constraint(equalTo: photoAddingButton.bottomAnchor, constant: 60),
+            userInformationRequestLabel.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
         ])
     }
 }
