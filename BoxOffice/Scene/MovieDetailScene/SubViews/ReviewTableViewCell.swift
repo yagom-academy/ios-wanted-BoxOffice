@@ -8,6 +8,8 @@
 import UIKit
 
 class ReviewTableViewCell: UITableViewCell {
+    static let identifier = "ReviewTableViewCell"
+    
     private let photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "person.crop.circle")
@@ -76,8 +78,9 @@ class ReviewTableViewCell: UITableViewCell {
     }
     
     //TODO: MovieDetail로 뷰 세팅하기
-    func configure(with movie: MovieDetail) {
-
+    func configure(with review: Review) {
+        nickNameLabel.text = review.nickName
+        contentLabel.text = review.content
     }
     
     private func setupView() {
@@ -108,9 +111,9 @@ class ReviewTableViewCell: UITableViewCell {
             entireStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
                                                  constant: -8),
             entireStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,
-                                                 constant: 16),
+                                                 constant: 8),
             entireStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,
-                                                 constant: -16)
+                                                 constant: -8)
         ])
     }
 }
