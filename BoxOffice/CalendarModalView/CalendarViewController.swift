@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CalendarViewControllerDelegate: AnyObject {
-    func doneButtonDidTapped(date: String)
+    func searchButtonTapped(date: Date)
 }
 
 final class CalendarViewController: UIViewController {
@@ -63,23 +63,23 @@ final class CalendarViewController: UIViewController {
         naviItem.leftBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .close,
             target: self,
-            action: #selector(closeButtonDidTapped)
+            action: #selector(closeButtonTapped)
         )
         naviItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .search,
             target: self,
-            action: #selector(searchButtonDidTapped)
+            action: #selector(searchButtonTapped)
         )
         navigationBar.items = [naviItem]
     }
     
-    @objc private func closeButtonDidTapped() {
+    @objc private func closeButtonTapped() {
         self.dismiss(animated: true)
     }
     
-    @objc private func searchButtonDidTapped() {
-        let date = datePicker.date.toString()
-        delegate?.doneButtonDidTapped(date: date)
+    @objc private func searchButtonTapped() {
+        let date = datePicker.date
+        delegate?.searchButtonTapped(date: date)
         self.dismiss(animated: true)
     }
 }

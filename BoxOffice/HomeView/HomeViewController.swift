@@ -43,7 +43,7 @@ final class HomeViewController: UIViewController {
             image: UIImage(systemName: "calendar"),
             style: .done,
             target: self,
-            action: #selector(calendarButtonDidTapped)
+            action: #selector(calendarButtonTapped)
         )
         navigationItem.rightBarButtonItem = calendarButton
     }
@@ -61,7 +61,7 @@ final class HomeViewController: UIViewController {
     private func setupButton() {
         viewModeChangeButton.addTarget(
             self,
-            action: #selector(viewModeChangeButtonDidTapped),
+            action: #selector(viewModeChangeButtonTapped),
             for: .touchUpInside
         )
     }
@@ -82,7 +82,7 @@ final class HomeViewController: UIViewController {
         homeViewModel.requestData()
     }
     
-    @objc private func viewModeChangeButtonDidTapped() {
+    @objc private func viewModeChangeButtonTapped() {
         var modeText = viewModeChangeButton.currentTitle
         modeText?.removeFirst()
         modeText?.removeFirst()
@@ -93,7 +93,7 @@ final class HomeViewController: UIViewController {
         present(modeSelectViewController, animated: true)
     }
     
-    @objc private func calendarButtonDidTapped() {
+    @objc private func calendarButtonTapped() {
         let calendarViewController = CalendarViewController()
         calendarViewController.delegate = self
         
