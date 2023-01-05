@@ -51,10 +51,8 @@ final class MockMovieDetailRepository: MovieDetailRepositoryInterface {
 }
 
 final class MockReviewWritingRepository: ReviewWritingRepositoryInterface {
-    func uploadReview(review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            completion(.success(()))
-        }
+    func uploadReview(image: UIImage, review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void) {
+
     }
 }
 
