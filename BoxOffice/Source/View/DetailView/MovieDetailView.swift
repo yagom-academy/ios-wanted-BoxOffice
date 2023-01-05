@@ -24,34 +24,58 @@ class MovieDetailView: UIView {
 
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title1, compatibleWith: .none)
+        label.font = .boldSystemFont(ofSize: 20)
+        label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let genreLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 2
+        label.font = .preferredFont(forTextStyle: .callout, compatibleWith: .none)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let runtimeLabel: UILabel = {
         let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .callout, compatibleWith: .none)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let ratingNameLabel: UILabel = {
         let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .callout, compatibleWith: .none)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    let releaseDateLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .callout, compatibleWith: .none)
+        label.setContentHuggingPriority(.defaultLow, for: .vertical)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let labelStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 10
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     let topStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .leading
-        stackView.distribution = .equalSpacing
+        stackView.distribution = .fill
         stackView.axis = .horizontal
+        stackView.spacing = 20
         stackView.setContentCompressionResistancePriority(
             .required,
             for: .vertical
@@ -64,37 +88,76 @@ class MovieDetailView: UIView {
         return stackView
     }()
     
-    let labelStackView: UIStackView = {
+    let starAverageTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .caption2)
+        label.text = "관람객 평점"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let starAverageLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .body)
+        label.text = "⭐️ 9.5"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let starAverageStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.distribution = .fill
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
-    let genreAndRuntimeStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        stackView.axis = .horizontal
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-
-    let releaseDateLabel: UILabel = {
+    let movieRankIntenLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title2)
-        label.setContentHuggingPriority(.defaultLow, for: .vertical)
+        label.font = .preferredFont(forTextStyle: .caption2)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let numberOfSpectatorsLabel: UILabel = {
+    let movieRankLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title2)
+        label.font = .preferredFont(forTextStyle: .body)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    let rankStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    let movieAudienceTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .caption2)
+        label.text = "누적 관객수"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let movieAudienceCountLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title3)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let audienceStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     let blackStackView: UIStackView = {
@@ -116,24 +179,39 @@ class MovieDetailView: UIView {
 
     let productionYearLabel: UILabel = {
         let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .callout)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    let directorAndActorNameTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "감독 및 출연"
+        label.font = .boldSystemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let nameCollectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        let collectionView = UICollectionView(
-            frame: .zero,
-            collectionViewLayout: flowLayout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
-    }()
-    
-    let bottomStackView: UIStackView = {
+    let directorAndActorNameStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .fill
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    let directorAndActorNameScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+
+    let MiddleStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 15
         stackView.axis = .vertical
         stackView.setContentCompressionResistancePriority(
             .defaultLow,
@@ -146,22 +224,58 @@ class MovieDetailView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    let shareButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
+        button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let reviewButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("리뷰 작성하기", for: .normal)
+        button.backgroundColor = .systemBlue
+        button.tintColor = .white
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let shareAndReviewStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.axis = .horizontal
+        stackView.spacing = 20
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(
+            top: 20,
+            leading: 30,
+            bottom: 20,
+            trailing: 30
+        )
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    let reviewTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .red
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
 
     // MARK: init
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
-        
-        configureView()
-        configureUI()
-        setPoster(
-            name: "testPost",
-            age: "15",
-            color: .orange
-        )
-        setupData()
         self.backgroundColor = .white
 
+        configureView()
+        configureUI()
     }
 
     required init?(coder: NSCoder) {
@@ -169,24 +283,99 @@ class MovieDetailView: UIView {
     }
     
     // MARK: func
-    // TODO: 매개변수로 Movie 타입 받아와서 할당하기
-    func setupData() {
-        titleLabel.text = "광해, 왕이 된 남자"
-        genreLabel.text = "사극"
-        runtimeLabel.text = "131분"
-        ratingNameLabel.text = "15세이상관람가"
+    func setLabelText(_ data: MovieModel) {
+        titleLabel.text = data.boxOfficeInfo.movieNm
+        genreLabel.text = getGenres(data.movieInfo.genres)
+        runtimeLabel.text = (data.movieInfo.showTm + " 분")
+        ratingNameLabel.text = data.movieInfo.audits.first?.watchGradeNm
+        releaseDateLabel.text = data.boxOfficeInfo.openDt
+        movieAudienceCountLabel.text = data.boxOfficeInfo.audiAcc
+        releaseDateLabel.text = (data.boxOfficeInfo.openDt + " 개봉")
+
+        movieRankIntenLabel.text = (
+            "전일 대비 " +
+            data.boxOfficeInfo.rankInten +
+            " (\(data.boxOfficeInfo.rankOldAndNew))"
+        )
         
-        releaseDateLabel.text = "2012.09.13 개봉"
-        numberOfSpectatorsLabel.text = "353274명"
+        movieRankLabel.text = (
+            "예매율 \(data.boxOfficeInfo.rank)위"
+        )
         
-        productionYearLabel.text = "제작연도: 2012년"
+        movieAudienceCountLabel.text = (
+            "\(data.boxOfficeInfo.audiAcc)명"
+        )
+        
+        productionYearLabel.text = (
+            "🎞️ \(data.movieInfo.prdtYear)년 제작"
+        )
+    }
+
+    func addDirectorAndActorLabel(name: String, role: String) {
+        let nameLabel: UILabel = {
+            let label = UILabel()
+            label.text = name
+            label.font = .preferredFont(forTextStyle: .callout)
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
+        
+        let roleLabel: UILabel = {
+            let label = UILabel()
+            label.text = role
+            label.font = .preferredFont(forTextStyle: .caption2)
+            label.textColor = .systemGray
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
+        
+        if role == "감독" {
+            nameLabel.textColor = .brown
+        }
+        
+        let stackView: UIStackView = {
+           let stackView = UIStackView()
+            stackView.alignment = .top
+            stackView.distribution = .fillEqually
+            stackView.axis = .vertical
+            stackView.translatesAutoresizingMaskIntoConstraints = false
+            return stackView
+        }()
+        
+        
+        stackView.addArrangedSubview(nameLabel)
+        stackView.addArrangedSubview(roleLabel)
+
+        directorAndActorNameStackView.addArrangedSubview(stackView)
     }
     
+    func setPoster(image: UIImage, age: String, color: UIColor) {
+        var image = image
+        image = image.resize(
+            newWidth: UIScreen.main.bounds.width/UIScreen.main.scale
+        )
+        posterView.backgroundColor = UIColor(patternImage: image)
+        ageLabel.text = age
+        ageLabel.backgroundColor = color
+    
+        NSLayoutConstraint.activate([
+            posterView.heightAnchor.constraint(
+                equalToConstant: image.size.height
+            )
+        ])
+    }
+
     // MARK: private func
+    private func getGenres(_ data: [Genre]) -> String {
+        return data.map { $0.genreNm }.joined(separator: ",")
+    }
+
     private func configureView() {
         self.addSubview(topStackView)
         self.addSubview(blackStackView)
-        self.addSubview(bottomStackView)
+        self.addSubview(MiddleStackView)
+        self.addSubview(shareAndReviewStackView)
+        self.addSubview(reviewTableView)
         
         topStackView.addArrangedSubview(posterView)
         topStackView.addArrangedSubview(labelStackView)
@@ -194,17 +383,32 @@ class MovieDetailView: UIView {
         posterView.addSubview(ageLabel)
         
         labelStackView.addArrangedSubview(titleLabel)
-        labelStackView.addArrangedSubview(genreAndRuntimeStackView)
+        labelStackView.addArrangedSubview(genreLabel)
+        labelStackView.addArrangedSubview(runtimeLabel)
         labelStackView.addArrangedSubview(ratingNameLabel)
+        labelStackView.addArrangedSubview(releaseDateLabel)
         
-        genreAndRuntimeStackView.addArrangedSubview(genreLabel)
-        genreAndRuntimeStackView.addArrangedSubview(runtimeLabel)
+        blackStackView.addArrangedSubview(starAverageStackView)
+        blackStackView.addArrangedSubview(rankStackView)
+        blackStackView.addArrangedSubview(audienceStackView)
         
-        blackStackView.addArrangedSubview(releaseDateLabel)
-        blackStackView.addArrangedSubview(numberOfSpectatorsLabel)
+        starAverageStackView.addArrangedSubview(starAverageTitleLabel)
+        starAverageStackView.addArrangedSubview(starAverageLabel)
         
-        bottomStackView.addArrangedSubview(productionYearLabel)
-        bottomStackView.addArrangedSubview(nameCollectionView)
+        rankStackView.addArrangedSubview(movieRankIntenLabel)
+        rankStackView.addArrangedSubview(movieRankLabel)
+        
+        audienceStackView.addArrangedSubview(movieAudienceTitleLabel)
+        audienceStackView.addArrangedSubview(movieAudienceCountLabel)
+
+        MiddleStackView.addArrangedSubview(productionYearLabel)
+        MiddleStackView.addArrangedSubview(directorAndActorNameTitleLabel)
+        MiddleStackView.addArrangedSubview(directorAndActorNameScrollView)
+        
+        directorAndActorNameScrollView.addSubview(directorAndActorNameStackView)
+        
+        shareAndReviewStackView.addArrangedSubview(shareButton)
+        shareAndReviewStackView.addArrangedSubview(reviewButton)
     }
     
     private func configureUI() {
@@ -247,38 +451,66 @@ class MovieDetailView: UIView {
                 equalTo: self.leadingAnchor
             ),
 
-            bottomStackView.topAnchor.constraint(
+            MiddleStackView.topAnchor.constraint(
                 equalTo: blackStackView.bottomAnchor,
                 constant: 10
             ),
-            bottomStackView.trailingAnchor.constraint(
+            MiddleStackView.trailingAnchor.constraint(
                 equalTo: self.trailingAnchor,
                 constant: -20
             ),
-            bottomStackView.leadingAnchor.constraint(
+            MiddleStackView.leadingAnchor.constraint(
                 equalTo: self.leadingAnchor,
                 constant: 20
             ),
             
-            nameCollectionView.heightAnchor.constraint(
+            directorAndActorNameScrollView.heightAnchor.constraint(
                 equalToConstant: 50
-            )
-        ])
-    }
-
-    private func setPoster(name: String, age: String, color: UIColor) {
-        var image = UIImage(named: name)
-        image = image?.resize(
-            newWidth: UIScreen.main.bounds.width/UIScreen.main.scale
-        )
-        posterView.backgroundColor = UIColor(patternImage: image!)
-        ageLabel.text = age
-        ageLabel.backgroundColor = color
-    
-        NSLayoutConstraint.activate([
-            posterView.heightAnchor.constraint(
-                equalToConstant: image?.size.height ?? 100
-            )
+            ),
+            
+            directorAndActorNameStackView.leadingAnchor.constraint(
+                equalTo: directorAndActorNameScrollView.contentLayoutGuide.leadingAnchor
+            ),
+            directorAndActorNameStackView.trailingAnchor.constraint(
+                equalTo: directorAndActorNameScrollView.contentLayoutGuide.trailingAnchor
+            ),
+            directorAndActorNameStackView.topAnchor.constraint(
+                equalTo: directorAndActorNameScrollView.contentLayoutGuide.topAnchor
+            ),
+            directorAndActorNameStackView.bottomAnchor.constraint(
+                equalTo: directorAndActorNameScrollView.contentLayoutGuide.bottomAnchor
+            ),
+            
+            shareAndReviewStackView.topAnchor.constraint(
+                equalTo: MiddleStackView.bottomAnchor,
+                constant: 10
+            ),
+            shareAndReviewStackView.trailingAnchor.constraint(
+                equalTo: self.trailingAnchor,
+                constant: -20
+            ),
+            shareAndReviewStackView.leadingAnchor.constraint(
+                equalTo: self.leadingAnchor,
+                constant: 20
+            ),
+            
+            reviewTableView.topAnchor.constraint(
+                equalTo: shareAndReviewStackView.bottomAnchor,
+                constant: 10
+            ),
+            reviewTableView.trailingAnchor.constraint(
+                equalTo: self.trailingAnchor,
+                constant: -20
+            ),
+            reviewTableView.leadingAnchor.constraint(
+                equalTo: self.leadingAnchor,
+                constant: 20
+            ),
+            
+            reviewTableView.bottomAnchor.constraint(
+                equalTo: self.bottomAnchor,
+                constant: -20
+            ),
         ])
     }
 }

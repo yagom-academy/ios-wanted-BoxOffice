@@ -24,6 +24,7 @@ struct DetailInfo: Decodable {
     let directors: [Director] // 감독
     let actors: [Actor] // 배우
     let audits: [Audit] // 관람등급
+    let showTm: String // 상영시간
 }
 
 struct Nation: Decodable {

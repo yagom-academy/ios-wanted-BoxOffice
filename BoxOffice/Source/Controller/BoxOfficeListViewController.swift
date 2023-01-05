@@ -209,14 +209,23 @@ extension BoxOfficeListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return CGFloat(10)
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movieDetailViewController = MovieDetailViewController()
+        weak var sendDataDelegate: (SendDataDelegate)? = movieDetailViewController
+        
+        guard let key = BoxOfficeRank(rawValue: String(indexPath.row+1)) else {
+            return
+        }
+        sendDataDelegate?.sendData(movieModels[key])
+
+        navigationController?.pushViewController(
+            movieDetailViewController,
+            animated: true
+        )
+    }
 }
 //TODO: 폴더 분리 필요
-struct MovieModel {
-    var boxOfficeInfo: BoxOfficeInfo
-    var movieInfo: DetailInfo
-    var posterURL: String?
-}
-
 extension UIImageView {
     func fetch(url: String?, completion: @escaping (Result<UIImage, Error>) -> Void) {
         guard let urlString = url,
