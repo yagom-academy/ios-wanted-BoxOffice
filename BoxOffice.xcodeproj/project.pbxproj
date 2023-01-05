@@ -23,8 +23,11 @@
 		9B335C292963F75200C8F339 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B335C282963F75200C8F339 /* UIColor+Extension.swift */; };
 		9B335C2B296423DC00C8F339 /* MainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B335C2A296423DC00C8F339 /* MainViewCell.swift */; };
 		9B452033296688C900BE7142 /* DetailInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B452032296688C900BE7142 /* DetailInfoViewModel.swift */; };
+		9B45203529668ACC00BE7142 /* ReviewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B45203429668ACC00BE7142 /* ReviewListViewModel.swift */; };
 		9B8B04E0296538540095636B /* DetailSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B04DF296538540095636B /* DetailSegmentControl.swift */; };
 		9B8B04E2296565100095636B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B04E1296565100095636B /* DetailViewController.swift */; };
+		9B8B04E429656F470095636B /* DetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B04E329656F470095636B /* DetailInfoViewController.swift */; };
+		9B8B04E629656F6B0095636B /* ReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B04E529656F6B0095636B /* ReviewListViewController.swift */; };
 		9BEA28022962D00700FB7E73 /* BoxOfficeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA28012962D00700FB7E73 /* BoxOfficeAPI.swift */; };
 		9BEA28042962D04F00FB7E73 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA28032962D04F00FB7E73 /* HTTPMethod.swift */; };
 		9BEA28062962E41400FB7E73 /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA28052962E41400FB7E73 /* NetworkHandler.swift */; };
@@ -49,8 +52,11 @@
 		9B335C282963F75200C8F339 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		9B335C2A296423DC00C8F339 /* MainViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCell.swift; sourceTree = "<group>"; };
 		9B452032296688C900BE7142 /* DetailInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoViewModel.swift; sourceTree = "<group>"; };
+		9B45203429668ACC00BE7142 /* ReviewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewModel.swift; sourceTree = "<group>"; };
 		9B8B04DF296538540095636B /* DetailSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSegmentControl.swift; sourceTree = "<group>"; };
 		9B8B04E1296565100095636B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		9B8B04E329656F470095636B /* DetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoViewController.swift; sourceTree = "<group>"; };
+		9B8B04E529656F6B0095636B /* ReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewController.swift; sourceTree = "<group>"; };
 		9BEA28012962D00700FB7E73 /* BoxOfficeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeAPI.swift; sourceTree = "<group>"; };
 		9BEA28032962D04F00FB7E73 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		9BEA28052962E41400FB7E73 /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
@@ -133,6 +139,9 @@
 				9B8B04DF296538540095636B /* DetailSegmentControl.swift */,
 				9B8B04E1296565100095636B /* DetailViewController.swift */,
 				9B8B04E329656F470095636B /* DetailInfoViewController.swift */,
+				9B452032296688C900BE7142 /* DetailInfoViewModel.swift */,
+				9B8B04E529656F6B0095636B /* ReviewListViewController.swift */,
+				9B45203429668ACC00BE7142 /* ReviewListViewModel.swift */,
 			);
 			name = Detail;
 			sourceTree = "<group>";
@@ -252,6 +261,8 @@
 				9B335C242963E68B00C8F339 /* MainView.swift in Sources */,
 				9BEA28022962D00700FB7E73 /* BoxOfficeAPI.swift in Sources */,
 				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
+				9B45203529668ACC00BE7142 /* ReviewListViewModel.swift in Sources */,
+				9B8B04E629656F6B0095636B /* ReviewListViewController.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				9BEA28042962D04F00FB7E73 /* HTTPMethod.swift in Sources */,
 				9B28F08129664FAD00F87F48 /* UIImageView+Extension.swift in Sources */,
