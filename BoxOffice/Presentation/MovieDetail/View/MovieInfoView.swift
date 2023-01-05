@@ -22,6 +22,7 @@ final class MovieInfoView: UIView {
         label.text = "내용"
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = .white
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -43,14 +44,16 @@ final class MovieInfoView: UIView {
 
     private func layout() {
         [nameLabel, descriptionLabel].forEach { addSubview($0) }
+        nameLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             nameLabel.topAnchor.constraint(equalTo: topAnchor),
             nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
 
             descriptionLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 10),
-            descriptionLabel.topAnchor.constraint(equalTo: topAnchor),
-            descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            descriptionLabel.topAnchor.constraint(equalTo: nameLabel.topAnchor),
+            descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
 }

@@ -5,17 +5,17 @@
 //  Created by 천수현 on 2023/01/02.
 //
 
-import Foundation
+import UIKit
 
 final class UploadReviewUseCase {
     private let repository: ReviewWritingRepositoryInterface
 
-    init(repository: ReviewWritingRepositoryInterface = MockReviewWritingRepository()) {
+    init(repository: ReviewWritingRepositoryInterface = ReviewWritingRepository()) {
         self.repository = repository
     }
 
-    func execute(review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void) {
-        repository.uploadReview(review: review) { result in
+    func execute(image: UIImage, review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void) {
+        repository.uploadReview(image: image, review: review) { result in
             switch result {
             case .success:
                 completion(.success(()))

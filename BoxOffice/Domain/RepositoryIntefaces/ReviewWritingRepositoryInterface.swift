@@ -5,8 +5,8 @@
 //  Created by 천수현 on 2023/01/02.
 //
 
-import Foundation
+import UIKit
 
 protocol ReviewWritingRepositoryInterface {
-    func uploadReview(review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void)
+    func uploadReview(image: UIImage, review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void)
 }

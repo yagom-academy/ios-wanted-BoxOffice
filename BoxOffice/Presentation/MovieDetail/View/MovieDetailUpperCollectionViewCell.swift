@@ -30,6 +30,8 @@ final class MovieDetailUpperCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.numberOfLines = 0
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -75,14 +77,15 @@ final class MovieDetailUpperCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
     }
 
-    func setUpContents(movieDetail: MovieDetail) {
+    func setUpContents(movieDetail: MovieDetail, movieOverview: MovieOverview, posterImage: UIImage?) {
         titleLabel.text = movieDetail.title
-        gradeLabel.text = "\(movieDetail.watchGrade)세 이상 관람가"
-        rankingLabel.text = "\(movieDetail.rank)위"
-        rankUpDownLabel.textColor = movieDetail.rankFluctuation > 0 ? .systemRed : .systemBlue
-        rankUpDownLabel.text = movieDetail.rankFluctuation > 0 ?  "▲ \(movieDetail.rankFluctuation)" : "▼ \(-movieDetail.rankFluctuation)"
-        newlyRankedLabel.text = movieDetail.isNewlyRanked ? "New" : ""
-        posterImageView.image = movieDetail.posterImage
+        gradeLabel.text = movieDetail.watchGrade
+        rankingLabel.text = "\(movieOverview.rank)위"
+        rankUpDownLabel.textColor = movieOverview.rankFluctuation > 0 ? .systemRed : .systemBlue
+        rankUpDownLabel.isHidden =  movieOverview.rankFluctuation == 0
+        rankUpDownLabel.text = movieOverview.rankFluctuation > 0 ?  "▲ \(movieOverview.rankFluctuation)" : "▼ \(-movieOverview.rankFluctuation)"
+        newlyRankedLabel.text = movieOverview.isNewlyRanked ? "New" : ""
+        posterImageView.image = posterImage
     }
 
     private func layout() {
@@ -106,12 +109,16 @@ final class MovieDetailUpperCollectionViewCell: UICollectionViewCell {
 
             titleLabel.bottomAnchor.constraint(equalTo: gradeLabel.topAnchor, constant: -5),
             titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 40),
+            titleLabel.trailingAnchor.constraint(greaterThanOrEqualTo: contentView.trailingAnchor, constant: -40),
+
 
             rankUpDownLabel.leadingAnchor.constraint(equalTo: rankingLabel.trailingAnchor, constant: 10),
             rankUpDownLabel.centerYAnchor.constraint(equalTo: rankingLabel.centerYAnchor),
 
-            newlyRankedLabel.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -2),
-            newlyRankedLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -5)
+            newlyRankedLabel.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: 10),
+            newlyRankedLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -5),
+            newlyRankedLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 10)
         ])
     }
 }

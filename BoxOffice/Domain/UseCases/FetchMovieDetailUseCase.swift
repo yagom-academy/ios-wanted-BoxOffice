@@ -10,7 +10,7 @@ import Foundation
 final class FetchMovieDetailUseCase {
     private let repository: MovieDetailRepositoryInterface
     
-    init(repository: MovieDetailRepositoryInterface = MockMovieDetailRepository()) {
+    init(repository: MovieDetailRepositoryInterface = MovieDetailRepository()) {
         self.repository = repository
     }
     
