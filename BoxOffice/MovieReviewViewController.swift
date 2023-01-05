@@ -43,12 +43,7 @@ final class MovieReviewViewController: UIViewController {
         label.font = .preferredFont(forTextStyle: .footnote)
         return label
     }()
-    
-    private let userInformationStackView: UIStackView = {
-        let stackView = UIStackView()
-        return stackView
-    }()
-    
+        
     private let userInformationRequestLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -166,7 +161,6 @@ final class MovieReviewViewController: UIViewController {
         addViews()
         setupLayout()
     }
-
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
