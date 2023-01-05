@@ -22,6 +22,7 @@
 		9B335C272963F47900C8F339 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B335C262963F47900C8F339 /* UIView+Extension.swift */; };
 		9B335C292963F75200C8F339 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B335C282963F75200C8F339 /* UIColor+Extension.swift */; };
 		9B335C2B296423DC00C8F339 /* MainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B335C2A296423DC00C8F339 /* MainViewCell.swift */; };
+		9B452033296688C900BE7142 /* DetailInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B452032296688C900BE7142 /* DetailInfoViewModel.swift */; };
 		9B8B04E0296538540095636B /* DetailSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B04DF296538540095636B /* DetailSegmentControl.swift */; };
 		9B8B04E2296565100095636B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B04E1296565100095636B /* DetailViewController.swift */; };
 		9BEA28022962D00700FB7E73 /* BoxOfficeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA28012962D00700FB7E73 /* BoxOfficeAPI.swift */; };
@@ -47,6 +48,7 @@
 		9B335C262963F47900C8F339 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		9B335C282963F75200C8F339 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		9B335C2A296423DC00C8F339 /* MainViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCell.swift; sourceTree = "<group>"; };
+		9B452032296688C900BE7142 /* DetailInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoViewModel.swift; sourceTree = "<group>"; };
 		9B8B04DF296538540095636B /* DetailSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSegmentControl.swift; sourceTree = "<group>"; };
 		9B8B04E1296565100095636B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		9BEA28012962D00700FB7E73 /* BoxOfficeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeAPI.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			children = (
 				9B8B04DF296538540095636B /* DetailSegmentControl.swift */,
 				9B8B04E1296565100095636B /* DetailViewController.swift */,
+				9B8B04E329656F470095636B /* DetailInfoViewController.swift */,
 			);
 			name = Detail;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			files = (
 				9B335C2B296423DC00C8F339 /* MainViewCell.swift in Sources */,
 				9B335C1B2963D87900C8F339 /* DetailBoxOffice.swift in Sources */,
+				9B8B04E429656F470095636B /* DetailInfoViewController.swift in Sources */,
 				9B335C242963E68B00C8F339 /* MainView.swift in Sources */,
 				9BEA28022962D00700FB7E73 /* BoxOfficeAPI.swift in Sources */,
 				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
@@ -259,6 +263,7 @@
 				9BEA28062962E41400FB7E73 /* NetworkHandler.swift in Sources */,
 				9B335C1D2963DD3E00C8F339 /* MoviePoster.swift in Sources */,
 				9B335C272963F47900C8F339 /* UIView+Extension.swift in Sources */,
+				9B452033296688C900BE7142 /* DetailInfoViewModel.swift in Sources */,
 				9B335C1F2963E22400C8F339 /* MainViewController.swift in Sources */,
 				9B335C212963E24C00C8F339 /* MainViewModel.swift in Sources */,
 			);
