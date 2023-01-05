@@ -331,6 +331,25 @@ extension MovieReviewViewController: UIImagePickerControllerDelegate, UINavigati
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
     }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        guard let image = info[.originalImage] as? UIImage else {
+            return
+        }
+        
+        viewModel.imageSelected(image: image)
+        
+        let imageView = UIImageView(image: image)
+        imageView.layer.cornerRadius = 16
+        imageView.heightAnchor.constraint(equalToConstant: 220).isActive = true
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+
+        photoImageStackView.addArrangedSubview(imageView)
+        
+        dismiss(animated: true)
+    }
 }
 
 fileprivate extension UITextField {
