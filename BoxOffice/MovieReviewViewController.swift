@@ -9,7 +9,9 @@ import UIKit
 
 final class MovieReviewViewController: UIViewController {
     
-    private let viewModel = MovieReviewViewModel()
+    private let viewModel: MovieReviewViewModel
+    
+    private let movieCode: String
     private var rating: Double = 0
     
     private let imagePicker: UIImagePickerController = {
@@ -185,6 +187,15 @@ final class MovieReviewViewController: UIViewController {
         setupLayout()
         configureImagePicker()
         bind()
+    init(movieCode: String, viewModel: MovieReviewViewModel) {
+        self.movieCode = movieCode
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLayoutSubviews() {
