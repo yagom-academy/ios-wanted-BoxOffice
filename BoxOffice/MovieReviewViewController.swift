@@ -243,7 +243,11 @@ final class MovieReviewViewController: UIViewController {
             passwordLabel,
             passwordTextField,
             passwordRuleLabel,
+            actionButtonsStackView,
         ].forEach( { view.addSubview($0) })
+        
+        actionButtonsStackView.addArrangedSubview(cancelButton)
+        actionButtonsStackView.addArrangedSubview(registrationButton)
     }
     
     private func setupLayout() {
@@ -287,6 +291,11 @@ final class MovieReviewViewController: UIViewController {
             passwordRuleLabel.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 16),
             passwordRuleLabel.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
             passwordRuleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+
+            actionButtonsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
+            actionButtonsStackView.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
+            actionButtonsStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            actionButtonsStackView.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
 }
