@@ -113,7 +113,12 @@ final class MainViewModel: MainViewModelInterface, MainViewModelOutputInterface 
                 }
             } receiveValue: { [weak self] (poster: MoviePoster)  in
                 guard let self = self else { return }
-                self.customBoxOffice.append(.init(boxOffice: self.dailyBoxOffice[indexpath], posterURL: poster.poster ?? ""))
+                self.customBoxOffice.append(
+                    .init(
+                        boxOffice: self.dailyBoxOffice[indexpath],
+                        posterURL: poster.poster ?? "https://i.imgur.com/PQQuSIL.png"
+                    )
+                )
                 indexpath += 1
             }
             .store(in: &cancelable)

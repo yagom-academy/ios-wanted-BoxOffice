@@ -173,7 +173,12 @@ final class MainViewCell: UICollectionViewCell {
         rankRateLabel.text = "순위증감분: \(model.boxOffice.rankInTen)"
         audienceLabel.text = "관객수: \(model.boxOffice.audienceCount)"
         dateLabel.text = "개봉일: \(model.boxOffice.openDate)"
-        posterImageView.loadImage(from: model.posterURL)
+        
+        if model.posterURL == "N/A" {
+            posterImageView.loadImage(from: "https://i.imgur.com/PQQuSIL.png")
+        } else {
+            posterImageView.loadImage(from: model.posterURL)
+        }
         
         if model.boxOffice.isNewRank == "NEW" {
             newLabel.isHidden = false
