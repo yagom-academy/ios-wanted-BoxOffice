@@ -72,4 +72,14 @@ final class FirebaseService {
 
         return task
     }
+
+    func deleteReview(id: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        movieReviewReference.document(id).delete() { error in
+            guard error == nil else {
+                completion(.failure(FirebaseError.internalError))
+                return
+            }
+            completion(.success(()))
+        }
+    }
 }

@@ -131,13 +131,14 @@ extension MovieDetailViewModel {
     private func deleteMovieReview(review: MovieReview) {
         startLoadingIndicator?()
         deleteMovieReviewUseCase.execute(review: review) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success:
-                self?.applyDataSource?()
+                self.fetchMovieReview(movieCode: self.movieOverview.movieCode)
             case .failure(let error):
                 print(error)
             }
-            self?.stopLoadingIndicator?()
+            self.stopLoadingIndicator?()
         }
     }
 

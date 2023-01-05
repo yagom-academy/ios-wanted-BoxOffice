@@ -53,6 +53,9 @@ final class MovieDetailRepository: MovieDetailRepositoryInterface {
     }
 
     func deleteMovieReview(review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void) {
+        firebaseService.deleteReview(id: review.id.uuidString) { result in
+            completion(result)
+        }
     }
 
     func fetchMoviePoster(englishMovieName: String, completion: @escaping (Result<UIImage?, Error>) -> Void) {
