@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		32406B912962F34900E94D7C /* UploadReviewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32406B902962F34900E94D7C /* UploadReviewUseCase.swift */; };
 		3250DD0629656F3600D597C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3250DD0529656F3600D597C2 /* GoogleService-Info.plist */; };
-		3250DD0929656FC500D597C2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3250DD0829656FC500D597C2 /* FirebaseFirestore */; };
 		3250DD0B2965700100D597C2 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3250DD0A2965700100D597C2 /* FirebaseService.swift */; };
 		32645AA52965A7AD00E021B1 /* MoviewReviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32645AA42965A7AD00E021B1 /* MoviewReviewDTO.swift */; };
 		32645AA72965AB3300E021B1 /* MovieDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32645AA62965AB3300E021B1 /* MovieDetailRepository.swift */; };
@@ -20,6 +19,9 @@
 		32A929F02965DDDE00133562 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32A929EF2965DDDE00133562 /* APIKeys.plist */; };
 		32A929F22965EC4600133562 /* PosterDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A929F12965EC4600133562 /* PosterDTO.swift */; };
 		32A929F42965F0BC00133562 /* FetchPosterImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A929F32965F0BC00133562 /* FetchPosterImageUseCase.swift */; };
+		32AD695729668F2B005E2B3F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 32AD695629668F2B005E2B3F /* FirebaseFirestore */; };
+		32AD695929668F2B005E2B3F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 32AD695829668F2B005E2B3F /* FirebaseStorage */; };
+		32AD695B2966924A005E2B3F /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AD695A2966924A005E2B3F /* Cancellable.swift */; };
 		32BEE0802966015D0095FB30 /* MovieOverviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BEE07F2966015D0095FB30 /* MovieOverviewDTO.swift */; };
 		32BEE082296601640095FB30 /* MovieDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BEE081296601640095FB30 /* MovieDetailDTO.swift */; };
 		32BEE084296601750095FB30 /* ColorAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BEE083296601750095FB30 /* ColorAsset.swift */; };
@@ -62,6 +64,7 @@
 		32A929EF2965DDDE00133562 /* APIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		32A929F12965EC4600133562 /* PosterDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterDTO.swift; sourceTree = "<group>"; };
 		32A929F32965F0BC00133562 /* FetchPosterImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPosterImageUseCase.swift; sourceTree = "<group>"; };
+		32AD695A2966924A005E2B3F /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
 		32BEE07F2966015D0095FB30 /* MovieOverviewDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieOverviewDTO.swift; sourceTree = "<group>"; };
 		32BEE081296601640095FB30 /* MovieDetailDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailDTO.swift; sourceTree = "<group>"; };
 		32BEE083296601750095FB30 /* ColorAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAsset.swift; sourceTree = "<group>"; };
@@ -98,7 +101,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3250DD0929656FC500D597C2 /* FirebaseFirestore in Frameworks */,
+				32AD695729668F2B005E2B3F /* FirebaseFirestore in Frameworks */,
+				32AD695929668F2B005E2B3F /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				32BEE083296601750095FB30 /* ColorAsset.swift */,
+				32AD695A2966924A005E2B3F /* Cancellable.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -289,7 +294,8 @@
 			);
 			name = BoxOffice;
 			packageProductDependencies = (
-				3250DD0829656FC500D597C2 /* FirebaseFirestore */,
+				32AD695629668F2B005E2B3F /* FirebaseFirestore */,
+				32AD695829668F2B005E2B3F /* FirebaseStorage */,
 			);
 			productName = BoxOffice;
 			productReference = 635A19E428F9603900197BCC /* BoxOffice.app */;
@@ -320,7 +326,7 @@
 			);
 			mainGroup = 635A19DB28F9603900197BCC;
 			packageReferences = (
-				3250DD0729656FC500D597C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				32AD695529668F2B005E2B3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 635A19E528F9603900197BCC /* Products */;
 			projectDirPath = "";
@@ -373,6 +379,7 @@
 				FDE33C782962ACD500620E1F /* MovieDetailRepositoryInterface.swift in Sources */,
 				32406B912962F34900E94D7C /* UploadReviewUseCase.swift in Sources */,
 				32BEE084296601750095FB30 /* ColorAsset.swift in Sources */,
+				32AD695B2966924A005E2B3F /* Cancellable.swift in Sources */,
 				32C5D8752962EE8B00FD7260 /* FetchMovieReviewUseCase.swift in Sources */,
 				32BEE082296601640095FB30 /* MovieDetailDTO.swift in Sources */,
 				32BEE0802966015D0095FB30 /* MovieOverviewDTO.swift in Sources */,
@@ -596,21 +603,26 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3250DD0729656FC500D597C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		32AD695529668F2B005E2B3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3250DD0829656FC500D597C2 /* FirebaseFirestore */ = {
+		32AD695629668F2B005E2B3F /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3250DD0729656FC500D597C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 32AD695529668F2B005E2B3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		32AD695829668F2B005E2B3F /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 32AD695529668F2B005E2B3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
