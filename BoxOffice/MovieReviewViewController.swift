@@ -9,6 +9,7 @@ import UIKit
 
 final class MovieReviewViewController: UIViewController {
 
+    private let viewModel = MovieReviewViewModel()
     private let questionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
