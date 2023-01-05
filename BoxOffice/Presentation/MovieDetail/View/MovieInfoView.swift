@@ -13,7 +13,6 @@ final class MovieInfoView: UIView {
         label.text = "이름"
         label.font = UIFont.preferredFont(forTextStyle: .body)
         label.textColor = .lightGray
-        
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -45,6 +44,7 @@ final class MovieInfoView: UIView {
 
     private func layout() {
         [nameLabel, descriptionLabel].forEach { addSubview($0) }
+        nameLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             nameLabel.topAnchor.constraint(equalTo: topAnchor),
