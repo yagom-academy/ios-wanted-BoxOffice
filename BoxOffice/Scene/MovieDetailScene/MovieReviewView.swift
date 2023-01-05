@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieReviewCollectionViewCell: UICollectionViewCell {
+class MovieReviewView: UIView {
     private let reviewTitleLabel = MovieLabel(font: .headline)
     private let writeReviewButton: UIButton = {
         let button = UIButton()

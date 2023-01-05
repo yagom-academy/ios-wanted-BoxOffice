@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieMainInfoCollectionViewCell: UICollectionViewCell {
+class MovieMainInfoView: UIView {
     private let rankStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
