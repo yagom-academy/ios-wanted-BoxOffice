@@ -164,7 +164,7 @@ final class MovieReviewViewController: UIViewController {
         return button
     }()
     
-    private let registrationButton: UIButton = {
+    private lazy var registrationButton: UIButton = {
         let button = UIButton()
         button.setTitle("등록", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -173,6 +173,19 @@ final class MovieReviewViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.layer.borderColor = UIColor.systemGray3.cgColor
         button.layer.borderWidth = 1
+        
+        button.addAction(UIAction(handler: { action in
+            let movieReview = MovieReview(
+                id: UUID(),
+                movieCode: self.movieCode,
+                user: User(nickname: self.nicknameTextField.text!),
+                password: self.passwordTextField.text!,
+                rating: self.rating,
+                image: "",
+                description: self.reviewTextView.text
+            )
+            self.viewModel.registrationButtonTapped(movieReview: movieReview)
+        }), for: .touchUpInside)
         return button
     }()
     
