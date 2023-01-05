@@ -120,8 +120,6 @@
 		635A19E628F9603900197BCC /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
-				E19B5DB529645148001B2DB4 /* Extension */,
-				E19B5DB02963D94F001B2DB4 /* Model */,
 				E19B5DAD2963D82A001B2DB4 /* Network */,
 				9BEA27FD29629F8C00FB7E73 /* Entry */,
 				9B335C172963BFA600C8F339 /* Model */,
@@ -136,6 +134,7 @@
 		9B335C172963BFA600C8F339 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E19B5DB12963D960001B2DB4 /* Comment.swift */,
 				9B335C182963C7E300C8F339 /* DailyBoxOffice.swift */,
 				9B335C1A2963D87900C8F339 /* DetailBoxOffice.swift */,
 				9B335C1C2963DD3E00C8F339 /* MoviePoster.swift */,
@@ -157,6 +156,9 @@
 		9B335C252963F45900C8F339 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				E19B5DB629645160001B2DB4 /* UIImage+Extension.swift */,
+				E19B5DB829645189001B2DB4 /* String+Extension.swift */,
+				E19B5DC929647B10001B2DB4 /* Date+Extension.swift */,
 				9B335C262963F47900C8F339 /* UIView+Extension.swift */,
 				9B335C282963F75200C8F339 /* UIColor+Extension.swift */,
 				9B28F08029664FAD00F87F48 /* UIImageView+Extension.swift */,
@@ -166,17 +168,41 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		9B8B04DC296537800095636B /* Detail */ = {
+		9B429A48296766B0004BF9B0 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
 				9B8B04DF296538540095636B /* DetailSegmentControl.swift */,
 				9B8B04E1296565100095636B /* DetailViewController.swift */,
 				9B45203029667B3400BE7142 /* DetailViewModel.swift */,
+			);
+			name = Detail;
+			sourceTree = "<group>";
+		};
+		9B429A49296766BE004BF9B0 /* DetailInfo */ = {
+			isa = PBXGroup;
+			children = (
 				9B8B04E329656F470095636B /* DetailInfoViewController.swift */,
 				9B452032296688C900BE7142 /* DetailInfoViewModel.swift */,
+			);
+			name = DetailInfo;
+			sourceTree = "<group>";
+		};
+		9B429A4A296766C6004BF9B0 /* ReviewList */ = {
+			isa = PBXGroup;
+			children = (
 				9BD58BD72966D529000A2EA7 /* ReviewListViewController.swift */,
 				9BD58BD92966D542000A2EA7 /* ReviewListViewModel.swift */,
 				E177830829673990009FB219 /* ReviewListCell.swift */,
+			);
+			name = ReviewList;
+			sourceTree = "<group>";
+		};
+		9B8B04DC296537800095636B /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				9B429A48296766B0004BF9B0 /* Detail */,
+				9B429A49296766BE004BF9B0 /* DetailInfo */,
+				9B429A4A296766C6004BF9B0 /* ReviewList */,
 			);
 			name = Detail;
 			sourceTree = "<group>";
@@ -228,24 +254,6 @@
 				E19B5DB329643A14001B2DB4 /* CommentManager.swift */,
 			);
 			path = Network;
-			sourceTree = "<group>";
-		};
-		E19B5DB02963D94F001B2DB4 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				E19B5DB12963D960001B2DB4 /* Comment.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		E19B5DB529645148001B2DB4 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				E19B5DB629645160001B2DB4 /* UIImage+Extension.swift */,
-				E19B5DB829645189001B2DB4 /* String+Extension.swift */,
-				E19B5DC929647B10001B2DB4 /* Date+Extension.swift */,
-			);
-			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
