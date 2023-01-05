@@ -24,7 +24,7 @@ final class FirebaseService {
 
     private init() { }
 
-    func fetchMovieReviews(of movieCode: String, completion: @escaping (Result<[MovieReviewDTO], FirebaseError>) -> Void) {
+    func fetchMovieReviews(of movieCode: String, completion: @escaping (Result<[MovieReviewDTO], Error>) -> Void) {
         movieReviewReference.whereField("movieCode", isEqualTo: movieCode)
             .getDocuments { snapShot, error in
                 guard error == nil else {
@@ -43,15 +43,23 @@ final class FirebaseService {
             }
     }
 
-    func uploadReview(review: MovieReview, completion: @escaping (Result<Void, FirebaseError>) -> Void) {
-        let data = review.toDTO().reviewData
+    func uploadReview(image: UIImage, review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void) {
+        var data = review.toDTO().reviewData
         guard let id = data["id"] as? String else { return }
-        movieReviewReference.document(id).setData(data) { error in
-            guard error == nil else {
-                completion(.failure(FirebaseError.internalError))
-                return
+        uploadImage(id: review.id, image: image) { [weak self] result in
+            switch result {
+            case .success(let url):
+                data.updateValue(url, forKey: "imageURL")
+                self?.movieReviewReference.document(id).setData(data) { error in
+                    guard error == nil else {
+                        completion(.failure(FirebaseError.internalError))
+                        return
+                    }
+                    completion(.success(()))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
-            completion(.success(()))
         }
     }
 
