@@ -11,9 +11,9 @@ import Combine
 
 
 protocol FirebaseManagerable {
-    func upload(data: FireStoreDatable, errorHandler: @escaping (Error) -> Void)
+    func upload(data: FireStoreDatable, errorHandler: @escaping (Error?) -> Void)
     func read(collection: String, completion: @escaping (QuerySnapshot?, Error?) -> Void)
-    func delete(data: FireStoreDatable, errorHandler: @escaping (Error) -> Void)
+    func delete(data: FireStoreDatable, errorHandler: @escaping (Error?) -> Void)
 }
 
 enum FireStoreError: Error {
@@ -29,10 +29,12 @@ final class FirebaseManager: FirebaseManagerable {
         db = Firestore.firestore()
     }
     
-    func upload(data: FireStoreDatable, errorHandler: @escaping (Error) -> Void) {
+    func upload(data: FireStoreDatable, errorHandler: @escaping (Error?) -> Void) {
         db.collection(data.collection).document(data.document).setData(data.toTupleData) { error in
             if let error = error {
                 errorHandler(error)
+            } else {
+                errorHandler(nil)
             }
         }
     }
@@ -47,10 +49,12 @@ final class FirebaseManager: FirebaseManagerable {
         }
     }
     
-    func delete(data: FireStoreDatable, errorHandler: @escaping (Error) -> Void) {
+    func delete(data: FireStoreDatable, errorHandler: @escaping (Error?) -> Void) {
         db.collection(data.collection).document(data.document).delete() { error in
             if error != nil {
                 errorHandler(FireStoreError.deleteError)
+            } else {
+                errorHandler(nil)
             }
         }
     }

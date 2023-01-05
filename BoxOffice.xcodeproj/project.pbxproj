@@ -24,6 +24,8 @@
 		9BEA28022962D00700FB7E73 /* BoxOfficeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA28012962D00700FB7E73 /* BoxOfficeAPI.swift */; };
 		9BEA28042962D04F00FB7E73 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA28032962D04F00FB7E73 /* HTTPMethod.swift */; };
 		9BEA28062962E41400FB7E73 /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA28052962E41400FB7E73 /* NetworkHandler.swift */; };
+		E1166DC72965D58200C42427 /* CommentAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1166DC62965D58200C42427 /* CommentAddViewModel.swift */; };
+		E1166DC92965DA7D00C42427 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1166DC82965DA7D00C42427 /* CommentViewController.swift */; };
 		E11E3DA329634C1F00C736A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E11E3DA229634C1F00C736A2 /* GoogleService-Info.plist */; };
 		E11E3DA62963527C00C736A2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E11E3DA52963527C00C736A2 /* FirebaseFirestore */; };
 		E11E3DA82963527C00C736A2 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E11E3DA72963527C00C736A2 /* FirebaseFirestoreCombine-Community */; };
@@ -34,6 +36,7 @@
 		E19B5DB729645160001B2DB4 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DB629645160001B2DB4 /* UIImage+Extension.swift */; };
 		E19B5DB929645189001B2DB4 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DB829645189001B2DB4 /* String+Extension.swift */; };
 		E19B5DCA29647B10001B2DB4 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DC929647B10001B2DB4 /* Date+Extension.swift */; };
+		E1A140542966B76C009C01ED /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A140532966B76C009C01ED /* UIStackView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +59,8 @@
 		9BEA28012962D00700FB7E73 /* BoxOfficeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeAPI.swift; sourceTree = "<group>"; };
 		9BEA28032962D04F00FB7E73 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		9BEA28052962E41400FB7E73 /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
+		E1166DC62965D58200C42427 /* CommentAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAddViewModel.swift; sourceTree = "<group>"; };
+		E1166DC82965DA7D00C42427 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		E11E3DA229634C1F00C736A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E19B5DAE2963D8CD001B2DB4 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		E19B5DB12963D960001B2DB4 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -63,6 +68,7 @@
 		E19B5DB629645160001B2DB4 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		E19B5DB829645189001B2DB4 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		E19B5DC929647B10001B2DB4 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		E1A140532966B76C009C01ED /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +143,7 @@
 			children = (
 				9B335C262963F47900C8F339 /* UIView+Extension.swift */,
 				9B335C282963F75200C8F339 /* UIColor+Extension.swift */,
+				E1A140532966B76C009C01ED /* UIStackView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -164,6 +171,7 @@
 		9BEA27FF29629FB900FB7E73 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				E1166DC22965707500C42427 /* Comment */,
 				635A19EB28F9603900197BCC /* ViewController.swift */,
 				9B335C222963E25200C8F339 /* Main */,
 			);
@@ -178,6 +186,15 @@
 				9BEA28052962E41400FB7E73 /* NetworkHandler.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		E1166DC22965707500C42427 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				E1166DC62965D58200C42427 /* CommentAddViewModel.swift */,
+				E1166DC82965DA7D00C42427 /* CommentViewController.swift */,
+			);
+			path = Comment;
 			sourceTree = "<group>";
 		};
 		E19B5DAD2963D82A001B2DB4 /* Network */ = {
@@ -217,6 +234,7 @@
 				635A19E028F9603900197BCC /* Sources */,
 				635A19E128F9603900197BCC /* Frameworks */,
 				635A19E228F9603900197BCC /* Resources */,
+				E1166DC5296584A700C42427 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -281,6 +299,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E1166DC5296584A700C42427 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "
+";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		635A19E028F9603900197BCC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -289,10 +328,13 @@
 				9B335C2B296423DC00C8F339 /* MainViewCell.swift in Sources */,
 				9B335C1B2963D87900C8F339 /* DetailBoxOffice.swift in Sources */,
 				9B335C242963E68B00C8F339 /* MainView.swift in Sources */,
+				E1166DC72965D58200C42427 /* CommentAddViewModel.swift in Sources */,
 				9BEA28022962D00700FB7E73 /* BoxOfficeAPI.swift in Sources */,
+				E1A140542966B76C009C01ED /* UIStackView+Extension.swift in Sources */,
 				E19B5DB929645189001B2DB4 /* String+Extension.swift in Sources */,
 				E19B5DB22963D960001B2DB4 /* Comment.swift in Sources */,
 				E19B5DB729645160001B2DB4 /* UIImage+Extension.swift in Sources */,
+				E1166DC92965DA7D00C42427 /* CommentViewController.swift in Sources */,
 				E19B5DAF2963D8CD001B2DB4 /* FirebaseManager.swift in Sources */,
 				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
 				E19B5DB429643A14001B2DB4 /* CommentManager.swift in Sources */,
