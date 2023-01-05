@@ -18,6 +18,7 @@ protocol BoxOfficeListViewModelInput {
 protocol BoxOfficeListViewModelOutput {
     
     var movies: AnyPublisher<[MovieCellViewModel], Never> { get }
+    var isLoading: AnyPublisher<Bool, Never> { get }
     var cellModels: [MovieCellViewModel] { get }
 }
 
@@ -50,6 +51,7 @@ final class DefaultBoxOfficeListViewModel: BoxOfficeListViewModel {
     }
     
     private var _movies = PassthroughSubject<[MovieCellViewModel], Never>()
+    private var _isLoading = PassthroughSubject<Bool, Never>()
     private var _cellViewMovels: [MovieCellViewModel] = .init() {
         didSet {
             if _cellViewMovels.isEmpty {
@@ -87,6 +89,7 @@ extension DefaultBoxOfficeListViewModel: BoxOfficeListViewModelOutput {
     var output: BoxOfficeListViewModelOutput { self }
     
     var movies: AnyPublisher<[MovieCellViewModel], Never> { _movies.eraseToAnyPublisher() }
+    var isLoading: AnyPublisher<Bool, Never> { _isLoading.eraseToAnyPublisher() }
     var cellModels: [MovieCellViewModel] { return _cellViewMovels }
     
 }
@@ -95,6 +98,7 @@ extension DefaultBoxOfficeListViewModel: BoxOfficeListViewModelOutput {
 private extension DefaultBoxOfficeListViewModel {
     
     func bind() {
+        _isLoading.send(true)
         $filter
             .removeDuplicates()
             .handleEvents(receiveOutput: { [weak self] _ in
@@ -103,6 +107,7 @@ private extension DefaultBoxOfficeListViewModel {
                 guard let self else {
                     return Empty().eraseToAnyPublisher()
                 }
+                self._isLoading.send(true)
                 switch filter {
                 case .daily: return self.repository.dailyBoxOffice(date: Date.yesterday)
                 case .weekly: return self.repository.weeklyBoxOffice(date: Date.lastWeek, weekGb: .weekly)
@@ -116,6 +121,7 @@ private extension DefaultBoxOfficeListViewModel {
                 }
             }, receiveValue: { [weak self] movies in
                 self?._cellViewMovels = movies
+                self?._isLoading.send(false)
             }).store(in: &cancellables)
     }
 }

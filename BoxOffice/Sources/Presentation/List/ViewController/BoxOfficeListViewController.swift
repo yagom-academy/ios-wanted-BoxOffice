@@ -31,6 +31,14 @@ class BoxOfficeListViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var activityIndicator: LoadingView = {
+            let activityIndicator = LoadingView(backgroundColor: .clear, alpha: 1)
+            view.addSubviews(activityIndicator)
+            activityIndicator.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+            activityIndicator.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+            return activityIndicator
+        }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
@@ -61,6 +69,15 @@ private extension BoxOfficeListViewController {
         viewModel.output.movies
             .sinkOnMainThread { [weak self] _ in
                 self?.tableView.reloadData()
+            }.store(in: &cancellables)
+        
+        viewModel.output.isLoading
+            .sinkOnMainThread { [weak self] isLoading in
+                if isLoading {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
             }.store(in: &cancellables)
     }
     

@@ -21,6 +21,7 @@
 		02B4805D2966679900F3E31C /* Int+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B4805C2966679900F3E31C /* Int+extension.swift */; };
 		02B4805F296668A100F3E31C /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02B4805E296668A100F3E31C /* Secrets.plist */; };
 		02B4806129666EF000F3E31C /* Publisher+MainThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B4806029666EF000F3E31C /* Publisher+MainThread.swift */; };
+		02B480632966923800F3E31C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B480622966923800F3E31C /* LoadingView.swift */; };
 		02F8552E2963B7E1004B76DD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 02F8552D2963B7E1004B76DD /* FirebaseFirestore */; };
 		02F855302963B7E1004B76DD /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 02F8552F2963B7E1004B76DD /* FirebaseFirestoreCombine-Community */; };
 		02F855322963B7E1004B76DD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 02F855312963B7E1004B76DD /* FirebaseFirestoreSwift */; };
@@ -82,6 +83,7 @@
 		02B4805C2966679900F3E31C /* Int+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+extension.swift"; sourceTree = "<group>"; };
 		02B4805E296668A100F3E31C /* Secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		02B4806029666EF000F3E31C /* Publisher+MainThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+MainThread.swift"; sourceTree = "<group>"; };
+		02B480622966923800F3E31C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		02F855332963BDB3004B76DD /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		02F855372963C290004B76DD /* DefaultAPIProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPIProvider.swift; sourceTree = "<group>"; };
 		02F855392963C90C004B76DD /* KobisAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisAPI.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				02F8558429656550004B76DD /* MovieCell.swift */,
+				02B480622966923800F3E31C /* LoadingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				02F8555D2963FEF4004B76DD /* Bundle+extension.swift in Sources */,
 				028741662965C9EC00B2D021 /* BoxOfficeInputView.swift in Sources */,
 				02F8555F296401DA004B76DD /* BoxOfficeRepository.swift in Sources */,
+				02B480632966923800F3E31C /* LoadingView.swift in Sources */,
 				425D26D5296433DE00967454 /* DetailViewController.swift in Sources */,
 				02F855382963C290004B76DD /* DefaultAPIProvider.swift in Sources */,
 				02F8558529656550004B76DD /* MovieCell.swift in Sources */,
