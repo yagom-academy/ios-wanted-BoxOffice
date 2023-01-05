@@ -83,3 +83,29 @@ final class FirebaseService {
         }
     }
 }
+
+extension FirebaseService {
+    private func uploadImage(id: UUID, image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
+        let imageRef = storage.reference().child(id.uuidString)
+        guard let imageData = image.jpegData(compressionQuality: 1) else { return }
+        let uploadTask = imageRef.putData(imageData, metadata: nil) { metadata, error in
+            guard error == nil else {
+                completion(.failure(FirebaseError.internalError))
+                return
+            }
+
+            imageRef.downloadURL { url, error in
+                guard error == nil else {
+                    completion(.failure(FirebaseError.internalError))
+                    return
+                }
+                guard let url = url else {
+                    completion(.failure(FirebaseError.noData))
+                    return
+                }
+                completion(.success(url.absoluteString))
+            }
+        }
+        uploadTask.resume()
+    }
+}
