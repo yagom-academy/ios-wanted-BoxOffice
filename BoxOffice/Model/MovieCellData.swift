@@ -8,6 +8,7 @@
 import Foundation
 
 struct MovieCellData: Hashable {
+    let uuid: UUID
     let posterURL: URL?
     let currentRank: String
     let totalAudience: String
