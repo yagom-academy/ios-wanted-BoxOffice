@@ -5,9 +5,10 @@
 //  Created by 천수현 on 2023/01/04.
 //
 
-import Foundation
+import UIKit
 import FirebaseCore
 import FirebaseFirestore
+import FirebaseStorage
 
 enum FirebaseError: Error {
     case noData
@@ -18,6 +19,7 @@ final class FirebaseService {
 
     static let shared = FirebaseService()
     private let database = Firestore.firestore()
+    private let storage = Storage.storage()
     private lazy var movieReviewReference = database.collection("movieReview")
 
     private init() { }
@@ -51,5 +53,23 @@ final class FirebaseService {
             }
             completion(.success(()))
         }
+    }
+
+    func fetchReviewImage(imageURL: String, completion: @escaping (Result<UIImage?, Error>) -> Void) -> Cancellable? {
+        let gsReference = storage.reference(forURL: imageURL)
+        let task = gsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            guard error == nil else {
+                completion(.failure(FirebaseError.internalError))
+                return
+            }
+            guard let data = data else {
+                completion(.failure(FirebaseError.noData))
+                return
+            }
+
+            completion(.success(UIImage(data: data)))
+        }
+
+        return task
     }
 }
