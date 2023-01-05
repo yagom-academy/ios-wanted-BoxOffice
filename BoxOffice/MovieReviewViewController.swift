@@ -42,6 +42,13 @@ final class MovieReviewViewController: UIViewController {
         return stackView
     }()
     
+    private let photoImageStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
     private let reviewRequestLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -248,6 +255,7 @@ final class MovieReviewViewController: UIViewController {
             questionLabel,
             starButtonsStackView,
             reviewRequestLabel,
+            photoImageStackView,
             reviewTextView,
             photoAddingButton,
             userInformationRequestLabel,
@@ -274,11 +282,15 @@ final class MovieReviewViewController: UIViewController {
             reviewRequestLabel.topAnchor.constraint(equalTo: starButtonsStackView.bottomAnchor, constant: 50),
             reviewRequestLabel.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
             
-            reviewTextView.topAnchor.constraint(equalTo: reviewRequestLabel.bottomAnchor, constant: 8),
+            photoImageStackView.topAnchor.constraint(equalTo: reviewRequestLabel.bottomAnchor, constant: 8),
+            photoImageStackView.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
+            photoImageStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+
+            reviewTextView.topAnchor.constraint(equalTo: photoImageStackView.bottomAnchor, constant: 8),
             reviewTextView.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
             reviewTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             reviewTextView.heightAnchor.constraint(equalToConstant: 100),
-
+            
             photoAddingButton.topAnchor.constraint(equalTo: reviewTextView.bottomAnchor, constant: 8),
             photoAddingButton.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
             photoAddingButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
