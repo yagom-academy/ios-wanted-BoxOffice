@@ -69,6 +69,11 @@ class ReviewTableViewCell: UITableViewCell {
         setupView()
     }
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+    
     private func setupView() {
         addSubView()
         setupConstraint()
