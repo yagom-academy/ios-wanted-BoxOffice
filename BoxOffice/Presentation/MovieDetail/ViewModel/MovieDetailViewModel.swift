@@ -12,18 +12,22 @@ final class MovieDetailViewModel {
     // MARK: - Outputs
     var tabBarMode: TabBarMode = .movieInfo
     var movieDetail = dummyMovieDetail
+    var movieOverview = dummyMovieOverview
     var movieReviews = [MovieReview]()
     var averageRating: Double {
+        if movieReviews.isEmpty { return 0 }
         let average: Double = movieReviews.reduce(into: 0) { previous, review in
             previous += review.rating
         } / Double(movieReviews.count)
         return average
     }
+    var posterImage: UIImage?
 
     // MARK: - UseCases
     private let fetchMovieDetailUseCase = FetchMovieDetailUseCase()
     private let fetchMovieReviewUseCase = FetchMovieReviewsUseCase()
     private let deleteMovieReviewUseCase = DeleteMovieReviewUseCase()
+    private let fetchPosterImageUseCase = FetchPosterImageUseCase()
 
     // MARK: - Actions
     var applyDataSource: (() -> Void)?
@@ -35,8 +39,9 @@ final class MovieDetailViewModel {
     // MARK: - Private properties
     private let movieCode: String
 
-    init(movieCode: String) {
-        self.movieCode = movieCode
+    init(movieOverview: MovieOverview) {
+        self.movieCode = movieOverview.movieCode
+        self.movieOverview = movieOverview
     }
 }
 
@@ -81,15 +86,7 @@ extension MovieDetailViewModel {
 
     func shareButtonTapped(screenImage: UIImage?) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "포스터 이미지 공유하기", style: .default) { [weak self] _ in
-            guard let urlString = self?.movieDetail.posterImageURL,
-                  let url = URL(string: urlString) else { return }
-            let activityViewController = UIActivityViewController(
-                activityItems: [url],
-                applicationActivities: nil)
-            self?.presentViewController?(activityViewController)
-        })
-        alert.addAction(UIAlertAction(title: "현재 화면 저장하기", style: .default) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: "현재 화면 공유하기", style: .default) { [weak self] _ in
             guard let screenImage = screenImage else { return }
             let activityViewController = UIActivityViewController(
                 activityItems: [screenImage],
@@ -109,7 +106,7 @@ extension MovieDetailViewModel {
             switch result {
             case .success(let movieDetail):
                 self?.movieDetail = movieDetail
-                self?.applyDataSource?()
+                self?.fetchPosterImage()
             case .failure(let error):
                 print(error)
             }
@@ -134,13 +131,26 @@ extension MovieDetailViewModel {
     private func deleteMovieReview(review: MovieReview) {
         startLoadingIndicator?()
         deleteMovieReviewUseCase.execute(review: review) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success:
+                self.fetchMovieReview(movieCode: self.movieOverview.movieCode)
+            case .failure(let error):
+                print(error)
+            }
+            self.stopLoadingIndicator?()
+        }
+    }
+
+    private func fetchPosterImage() {
+        fetchPosterImageUseCase.execute(englishMovieTitle: movieDetail.englishTitle) { [weak self] result in
+            switch result {
+            case .success(let image):
+                self?.posterImage = image
                 self?.applyDataSource?()
             case .failure(let error):
                 print(error)
             }
-            self?.stopLoadingIndicator?()
         }
     }
 }

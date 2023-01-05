@@ -8,19 +8,13 @@
 import UIKit
 
 struct MovieDetail: Hashable {
-    let movieCode: String
-    let rank: UInt
-    let title: String
-    let openingDay: Date
-    let audienceNumber: UInt
-    let rankFluctuation: Int
-    let isNewlyRanked: Bool
-    let productionYear: UInt
-    let playTime: Double
-    let genre: String
-    let directorsName: String
-    let actorsName: String
-    let watchGrade: UInt
-    let posterImage: UIImage?
-    let posterImageURL: String
+    var movieCode: String
+    var title: String
+    var englishTitle: String
+    var productionYear: UInt
+    var playTime: Double
+    var genre: String
+    var directorsName: String
+    var actorsName: String
+    var watchGrade: String
 }

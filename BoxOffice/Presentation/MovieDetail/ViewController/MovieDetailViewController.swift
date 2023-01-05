@@ -30,37 +30,53 @@ final class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = ColorAsset.detailBackgroundColor
-        setUpNavigationBar()
         bind()
         setUpMovieDetailCollectionView()
         layout()
         viewModel.viewDidLoad()
     }
 
-    init(movieCode: String) {
-        self.viewModel = MovieDetailViewModel(movieCode: movieCode)
+    override func viewWillAppear(_ animated: Bool) {
+        setUpNavigationBar()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundColor = .clear
+        navigationController?.navigationBar.standardAppearance = appearance
+    }
+
+    init(movieOverview: MovieOverview) {
+        self.viewModel = MovieDetailViewModel(movieOverview: movieOverview)
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
-        self.viewModel = MovieDetailViewModel(movieCode: "")
+        self.viewModel = MovieDetailViewModel(movieOverview: dummyMovieOverview)
         super.init(coder: coder)
     }
 
     private func setUpNavigationBar() {
         let button = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"),
                                      style: .plain, target: self, action: #selector(shareButtonTapped(_:)))
-        button.tintColor = .white
+//        button.tintColor = .white
         navigationItem.setRightBarButton(button, animated: false)
 
         let appearance = UINavigationBarAppearance()
         appearance.configureWithDefaultBackground()
         appearance.backgroundColor = ColorAsset.detailBackgroundColor
         navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
     }
 
     private func bind() {
-        viewModel.applyDataSource = { [weak self] in self?.applyDataSource() }
+        viewModel.applyDataSource = { [weak self] in
+            DispatchQueue.main.async {
+                self?.applyDataSource()
+            }
+        }
         viewModel.scrollToUpper = { [weak self] in
             let upperMovieInfoIndexPath = IndexPath(row: 0, section: 0)
             if self?.movieDetailCollectionView.cellForItem(at: upperMovieInfoIndexPath) != nil {
@@ -70,8 +86,16 @@ final class MovieDetailViewController: UIViewController {
         viewModel.presentViewController = { [weak self] viewController in
             self?.present(viewController, animated: true)
         }
-        viewModel.startLoadingIndicator = { [weak self] in self?.loadingIndicator.startAnimating() }
-        viewModel.stopLoadingIndicator = { [weak self] in self?.loadingIndicator.stopAnimating() }
+        viewModel.startLoadingIndicator = { [weak self] in
+            DispatchQueue.main.async {
+                self?.loadingIndicator.startAnimating()
+            }
+        }
+        viewModel.stopLoadingIndicator = { [weak self] in
+            DispatchQueue.main.async {
+                self?.loadingIndicator.stopAnimating()
+            }
+        }
     }
 
     private func setUpMovieDetailCollectionView() {
@@ -119,7 +143,7 @@ final class MovieDetailViewController: UIViewController {
                     withReuseIdentifier: MovieDetailUpperCollectionViewCell.reuseIdentifier,
                     for: indexPath
                    ) as? MovieDetailUpperCollectionViewCell {
-                    cell.setUpContents(movieDetail: movieDetail)
+                    cell.setUpContents(movieDetail: movieDetail, movieOverview: self.viewModel.movieOverview, posterImage: self.viewModel.posterImage)
                     return cell
                 }
             }
@@ -131,7 +155,7 @@ final class MovieDetailViewController: UIViewController {
                     withReuseIdentifier: MovieDetailInfoCollectionViewCell.reuseIdentifier,
                     for: indexPath
                    ) as? MovieDetailInfoCollectionViewCell {
-                    cell.setUpContents(movieDetail: movieDetail)
+                    cell.setUpContents(movieDetail: movieDetail, movieOverview: self.viewModel.movieOverview)
                     return cell
                 }
             case .review:

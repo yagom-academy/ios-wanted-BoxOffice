@@ -11,6 +11,24 @@ final class MovieDetailReviewCollectionViewCell: UICollectionViewCell {
 
     static let reuseIdentifier = "movieDetailReviewCollectionViewCell"
 
+    private var review: MovieReview?
+
+    private let fetchReviewUseCase = FetchReviewImageUseCase()
+    private lazy var task: Cancellable? =  {
+        guard let review = review else { return nil }
+        let task: Cancellable? = fetchReviewUseCase.execute(imageURL: review.image) { result in
+            switch result {
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self.photoReviewImageView.image = image
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+        return nil
+    }()
+
     private let photoReviewImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemGray4
@@ -61,10 +79,16 @@ final class MovieDetailReviewCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
     }
 
+    override func prepareForReuse() {
+        task?.cancel()
+    }
+
     func setUpContents(review: MovieReview) {
+        self.review = review
         userNameLabel.text = review.user.nickname
         starReviewView.setUpContents(grade: Double(review.rating), maxGrade: 5, color: .systemYellow)
         descriptionLabel.text = review.description
+        task?.resume()
     }
 
     private func layout() {

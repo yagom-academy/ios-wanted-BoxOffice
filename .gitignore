@@ -1,3 +1,5 @@
+GoogleService-Info.plist
+APIKeys.plist
 .DS_Store
 /*.xcodeproj
 **/xcuserdata
