@@ -39,6 +39,8 @@ final class MainViewModel: MainViewModelInterface, MainViewModelOutputInterface 
     private var dailyBoxOffice: [DailyBoxOffice] = []
     private var englishMovieName: [String] = []
     private var customBoxOffice: [CustomBoxOffice] = []
+    private var rankDictionary: [String: String] = [:]
+    private var boxOffice: [String: String] = [:]
     
     init(networkHandler: Networkerable) {
         self.networkHandler = networkHandler
@@ -92,13 +94,16 @@ final class MainViewModel: MainViewModelInterface, MainViewModelOutputInterface 
             } receiveValue: { [weak self] (model: DetailBoxOfficeConnection) in
                 guard let self = self else { return }
                 self.englishMovieName.append(model.result.movieInfo.movieEnglishName)
+                self.rankDictionary.updateValue(
+                    model.result.movieInfo.movieEnglishName,
+                    forKey: model.result.movieInfo.movieName
+                )
             }
             .store(in: &cancelable)
     }
     
     private func requestPosterURL() {
         guard let networkHandler = networkHandler else { return }
-        var indexpath = 0
         Publishers.Sequence(sequence: self.englishMovieName)
             .flatMap { movieName in
                 return networkHandler.request(
@@ -110,21 +115,32 @@ final class MainViewModel: MainViewModelInterface, MainViewModelOutputInterface 
                 switch completion {
                 case .finished:
                     print("requestPosterURL Complete")
+                    self.configureCustomBoxOffice()
                     self.output.boxOfficePublisher.send(self.customBoxOffice)
                 case .failure(let error):
                     print("requestPosterURL Error: \(error)")
                 }
-            } receiveValue: { [weak self] (poster: MoviePoster)  in
+            } receiveValue: { [weak self] (poster: MoviePoster) in
                 guard let self = self else { return }
-                self.customBoxOffice.append(
-                    .init(
-                        boxOffice: self.dailyBoxOffice[indexpath],
-                        posterURL: poster.poster ?? "https://i.imgur.com/PQQuSIL.png"
-                    )
+                self.boxOffice.updateValue(
+                    poster.poster ?? "https://i.imgur.com/PQQuSIL.png",
+                    forKey: poster.title ?? ""
                 )
-                indexpath += 1
             }
             .store(in: &cancelable)
+    }
+
+    private func configureCustomBoxOffice() {
+        dailyBoxOffice.enumerated().forEach { sequence, element in
+            guard let englishName = rankDictionary[element.title] else { return }
+            let poster = boxOffice[englishName]
+            
+            customBoxOffice.append(
+                .init(boxOffice: dailyBoxOffice[sequence],
+                      posterURL: poster ?? "https://i.imgur.com/PQQuSIL.png")
+            )
+        }
+
     }
 }
 
