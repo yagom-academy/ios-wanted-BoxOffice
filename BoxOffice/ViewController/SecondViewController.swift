@@ -10,12 +10,13 @@ import UIKit
 
 class SecondViewController: UIViewController {
     static var boxofficeData: DailyBoxOfficeList?
+    var filmEnglishName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setUiLayout()
         addViews()
+        setUiLayout()
     }
     
     func getFilmDetailData(completion: @escaping (Result<FilmDetails, Error>) -> Void) {
@@ -25,12 +26,29 @@ class SecondViewController: UIViewController {
         }
     }
     
+    func getPosterData(completion: @escaping (Result<FilmPoster, Error>) -> Void) {
+        if let movieName = filmEnglishName?.replacingOccurrences(of: " ", with: "+") {
+            let url = "https://omdbapi.com/?apikey=54346b2b&t=\(movieName)"
+            NetworkManager().getData(url: url, completion: completion)
+        }
+    }
+    
     func setUiLayout() {
         self.getFilmDetailData { result in
             switch result {
             case .success(let success):
-                DispatchQueue.main.sync {
+                DispatchQueue.main.async {
                     self.configSecondView(data: success.movieInfoResult.movieInfo)
+                    self.getPosterData { result in
+                        switch result {
+                        case .success(let success):
+                            ImageManager.loadImage(from: success.poster) { image in
+                                self.posterImageView.image = image
+                            }
+                        case .failure(let failure):
+                            print(failure)
+                        }
+                    }
                 }
             case .failure(let failure):
                 print(failure.localizedDescription)
@@ -39,7 +57,9 @@ class SecondViewController: UIViewController {
     }
     
     func configSecondView(data: MovieInfo) {
-        if let boxofficeData = SecondViewController.boxofficeData, let rankInten = Int(boxofficeData.rankInten) {
+        filmEnglishName = data.movieNmEn
+        if let boxofficeData = SecondViewController.boxofficeData,
+            let rankInten = Int(boxofficeData.rankInten) {
             let releaseYear = boxofficeData.openDt.split(separator: "-")[0]
             self.navigationItem.title = boxofficeData.movieNm
             rankLabel.text = "순위 \(boxofficeData.rank)위"
@@ -76,12 +96,6 @@ class SecondViewController: UIViewController {
                 rankFluctuationsButton.tintColor = .blue
                 rankFluctuationsButton.setTitleColor(.blue, for: .normal)
             }
-        }
-    }
-    
-    func configImage(data: Search) {
-        ImageManager.loadImage(from: data.poster) { image in
-            self.posterImageView.image = image
         }
     }
     
@@ -124,7 +138,6 @@ class SecondViewController: UIViewController {
             actorNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: labelConstant),
             viewingGradeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: labelConstant),
             
-//            filmNameLabel.topAnchor.constraint(equalTo: posterImageView.bottomAnchor),
             rankLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             releaseDateLabel.topAnchor.constraint(equalTo: rankLabel.bottomAnchor),
             spectatorsLabel.topAnchor.constraint(equalTo: releaseDateLabel.bottomAnchor),
@@ -144,8 +157,7 @@ class SecondViewController: UIViewController {
 
     let posterImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .blue
-        
+
         return imageView
     }()
 
@@ -257,7 +269,7 @@ class SecondViewController: UIViewController {
         button.setTitle("리뷰 작성", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .lightGray
-        button.addTarget(self, action: #selector(createReview), for: .touchUpInside)
+        button.addTarget(SecondViewController.self, action: #selector(createReview), for: .touchUpInside)
         
         return button
     }()

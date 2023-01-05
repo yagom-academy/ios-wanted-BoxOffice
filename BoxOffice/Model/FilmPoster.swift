@@ -8,9 +8,9 @@
 import Foundation
 
 struct FilmPoster: Decodable {
-    let search: [Search]
-}
-
-struct Search: Decodable {
     let poster: String
+
+    enum CodingKeys: String, CodingKey {
+        case poster = "Poster"
+    }
 }

@@ -17,12 +17,6 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let rankFluctuationsLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
-
     let filmNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
@@ -49,6 +43,30 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    let rankFluctuationsButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .white
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.cornerRadius = 5
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        
+        return button
+    }()
+    
+    let newRankButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .white
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.cornerRadius = 5
+        button.setTitleColor(.red, for: .normal)
+        button.alpha = 0
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         createBoxOfficeCell()
@@ -59,7 +77,7 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     }
 
     func createBoxOfficeCell() {
-        [rankLabel, rankFluctuationsLabel, filmNameLabel, releaseDateLabel, spectatorsLabel, posterImageView].forEach {
+        [rankLabel, filmNameLabel, releaseDateLabel, spectatorsLabel, posterImageView, rankFluctuationsButton, newRankButton].forEach {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -73,8 +91,15 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
             rankLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             rankLabel.trailingAnchor.constraint(equalTo: posterImageView.leadingAnchor, constant: -5),
             
-            rankFluctuationsLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            rankFluctuationsLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 4),
+            rankFluctuationsButton.widthAnchor.constraint(equalToConstant: 35),
+            rankFluctuationsButton.heightAnchor.constraint(equalToConstant: 20),
+            rankFluctuationsButton.topAnchor.constraint(equalTo: posterImageView.topAnchor, constant: 10),
+            rankFluctuationsButton.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: -20),
+            
+            newRankButton.widthAnchor.constraint(equalToConstant: 35),
+            newRankButton.heightAnchor.constraint(equalToConstant: 20),
+            newRankButton.topAnchor.constraint(equalTo: rankFluctuationsButton.bottomAnchor, constant: 10),
+            newRankButton.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: -20),
             
             filmNameLabel.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 5),
             filmNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
@@ -88,24 +113,35 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     
     func configBoxOfficeCell(data: DailyBoxOfficeList) {
         boxofficeData = data
+        guard let rankInten = Int(data.rankInten) else {
+            return
+        }
+        
         rankLabel.text = data.rank
         if data.rankOldAndNew == "NEW" {
-            rankFluctuationsLabel.text = data.rankOldAndNew
+            newRankButton.alpha = 1
+            newRankButton.setTitle(data.rankOldAndNew, for: .normal)
+        }
+    
+        if rankInten == 0 {
+            print(data.movieNm)
+            rankFluctuationsButton.setTitle("-", for: .normal)
+            rankFluctuationsButton.setTitleColor(.gray, for: .normal)
+        } else if rankInten > 0 {
+            print(data.movieNm)
+            rankFluctuationsButton.setTitle("\(rankInten)", for: .normal)
+            rankFluctuationsButton.setImage(UIImage(systemName: "chevron.up"), for: .normal)
+            rankFluctuationsButton.tintColor = .red
+            rankFluctuationsButton.setTitleColor(.red, for: .normal)
         } else {
-            if data.rankInten == "0" {
-                rankFluctuationsLabel.text = ""
-            } else {
-                rankFluctuationsLabel.text = data.rankInten
-            }
+            print(data.movieNm)
+            rankFluctuationsButton.setTitle("\(abs(rankInten))", for: .normal)
+            rankFluctuationsButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+            rankFluctuationsButton.tintColor = .blue
+            rankFluctuationsButton.setTitleColor(.blue, for: .normal)
         }
         filmNameLabel.text = data.movieNm
         releaseDateLabel.text = data.openDt
         spectatorsLabel.text = data.audiAcc
-    }
-    
-    func configImage(data: Search) {
-        ImageManager.loadImage(from: data.poster) { image in
-            self.posterImageView.image = image
-        }
     }
 }
