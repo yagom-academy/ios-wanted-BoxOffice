@@ -36,6 +36,9 @@
 		E11E3DA62963527C00C736A2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E11E3DA52963527C00C736A2 /* FirebaseFirestore */; };
 		E11E3DA82963527C00C736A2 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E11E3DA72963527C00C736A2 /* FirebaseFirestoreCombine-Community */; };
 		E11E3DAA2963527C00C736A2 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E11E3DA92963527C00C736A2 /* FirebaseFirestoreSwift */; };
+		E177830929673990009FB219 /* ReviewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E177830829673990009FB219 /* ReviewListCell.swift */; };
+		E177830B29674A8D009FB219 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E177830A29674A8D009FB219 /* UIStackView+Extension.swift */; };
+		E177830D29674E8C009FB219 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E177830C29674E8C009FB219 /* UILabel+Extension.swift */; };
 		E19B5DAF2963D8CD001B2DB4 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DAE2963D8CD001B2DB4 /* FirebaseManager.swift */; };
 		E19B5DB22963D960001B2DB4 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DB12963D960001B2DB4 /* Comment.swift */; };
 		E19B5DB429643A14001B2DB4 /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DB329643A14001B2DB4 /* CommentManager.swift */; };
@@ -73,6 +76,9 @@
 		9BEA28032962D04F00FB7E73 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		9BEA28052962E41400FB7E73 /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		E11E3DA229634C1F00C736A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E177830829673990009FB219 /* ReviewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListCell.swift; sourceTree = "<group>"; };
+		E177830A29674A8D009FB219 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
+		E177830C29674E8C009FB219 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		E19B5DAE2963D8CD001B2DB4 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		E19B5DB12963D960001B2DB4 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		E19B5DB329643A14001B2DB4 /* CommentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentManager.swift; sourceTree = "<group>"; };
@@ -154,6 +160,8 @@
 				9B335C262963F47900C8F339 /* UIView+Extension.swift */,
 				9B335C282963F75200C8F339 /* UIColor+Extension.swift */,
 				9B28F08029664FAD00F87F48 /* UIImageView+Extension.swift */,
+				E177830A29674A8D009FB219 /* UIStackView+Extension.swift */,
+				E177830C29674E8C009FB219 /* UILabel+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -168,6 +176,7 @@
 				9B452032296688C900BE7142 /* DetailInfoViewModel.swift */,
 				9BD58BD72966D529000A2EA7 /* ReviewListViewController.swift */,
 				9BD58BD92966D542000A2EA7 /* ReviewListViewModel.swift */,
+				E177830829673990009FB219 /* ReviewListCell.swift */,
 			);
 			name = Detail;
 			sourceTree = "<group>";
@@ -329,6 +338,7 @@
 				E19B5DAF2963D8CD001B2DB4 /* FirebaseManager.swift in Sources */,
 				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
 				9BD58BDA2966D542000A2EA7 /* ReviewListViewModel.swift in Sources */,
+				E177830929673990009FB219 /* ReviewListCell.swift in Sources */,
 				E19B5DB429643A14001B2DB4 /* CommentManager.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				9BEA28042962D04F00FB7E73 /* HTTPMethod.swift in Sources */,
@@ -337,9 +347,11 @@
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 				9B335C292963F75200C8F339 /* UIColor+Extension.swift in Sources */,
 				9BD58BD82966D529000A2EA7 /* ReviewListViewController.swift in Sources */,
+				E177830B29674A8D009FB219 /* UIStackView+Extension.swift in Sources */,
 				9B8B04E2296565100095636B /* DetailViewController.swift in Sources */,
 				9B8B04E0296538540095636B /* DetailSegmentControl.swift in Sources */,
 				9B335C192963C7E300C8F339 /* DailyBoxOffice.swift in Sources */,
+				E177830D29674E8C009FB219 /* UILabel+Extension.swift in Sources */,
 				9BEA28062962E41400FB7E73 /* NetworkHandler.swift in Sources */,
 				9B335C1D2963DD3E00C8F339 /* MoviePoster.swift in Sources */,
 				9B335C272963F47900C8F339 /* UIView+Extension.swift in Sources */,

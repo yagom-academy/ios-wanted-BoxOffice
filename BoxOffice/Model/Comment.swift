@@ -13,9 +13,7 @@ protocol FireStoreDatable: Codable {
     var toTupleData: [String: Any] { get }
 }
 
-
-
-struct Comment: FireStoreDatable {
+struct Comment: FireStoreDatable, Hashable {
     
     let id: String
     let date: String
