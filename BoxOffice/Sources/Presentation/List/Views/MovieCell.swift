@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class MovieCell: UITableViewCell {
     
     private var viewModel: MovieCellViewModel?
+    private var cancellables: Set<AnyCancellable> = .init()
     
     // MARK: - Views
     private lazy var backgroundStackView: UIStackView = {
@@ -121,7 +123,7 @@ class MovieCell: UITableViewCell {
     // MARK: - Set up
     func setUp(viewModel: MovieCellViewModel) {
         self.viewModel = viewModel
-        setUpViews()
+        bind()
     }
     
 }
@@ -140,40 +142,54 @@ private extension MovieCell {
         ])
     }
     
-    func setUpViews() {
-        rankLabel.text = viewModel?.movie.boxOfficeInfo?.rank.description
-        setUpArrowView()
-        setUpInfo()
+    func bind() {
+        viewModel?.output.movie
+            .compactMap { $0.boxOfficeInfo?.rank.description }
+            .sinkOnMainThread(receiveValue: { [weak self] rank in
+                self?.rankLabel.text = rank
+            }).store(in: &cancellables)
+        
+        viewModel?.output.movie
+            .compactMap { ($0.boxOfficeInfo?.rankInten == 0 || $0.boxOfficeInfo?.rankOldAndNew == .new) }
+            .sinkOnMainThread(receiveValue: { [weak self] isHidden in
+                self?.arrowImageView.isHidden = isHidden
+            }).store(in: &cancellables)
+        
+        viewModel?.output.movie
+            .compactMap { $0.boxOfficeInfo }
+            .map { movieInfo -> String in
+                if movieInfo.rankOldAndNew == .new {
+                    return movieInfo.rankOldAndNew.rawValue
+                } else if movieInfo.rankInten == 0 {
+                    return "-"
+                } else {
+                    return movieInfo.rankInten.description.capitalized
+                }
+            }.sinkOnMainThread(receiveValue: { [weak self] rankInten in
+                self?.rankIntenLabel.text = rankInten
+            }).store(in: &cancellables)
+
+        viewModel?.output.movie
+            .compactMap { $0.boxOfficeInfo?.rankInten }
+            .sinkOnMainThread(receiveValue: { [weak self] rankInten in
+                self?.setUpRankInten(rankInten)
+            }).store(in: &cancellables)
+        
+        viewModel?.output.movie
+            .sinkOnMainThread(receiveValue: { [weak self] movie in
+                self?.setUpInfo(movie)
+            }).store(in: &cancellables)
     }
     
-    func setUpArrowView() {
-        guard let boxOfficeInfo = viewModel?.movie.boxOfficeInfo,
-              (boxOfficeInfo.rankInten != 0 || boxOfficeInfo.rankOldAndNew != .old) else {
-            rankIntenLabel.text = "-"
-            arrowImageView.isHidden = true
-            return
-        }
-        arrowImageView.isHidden = false
-        rankIntenLabel.text = boxOfficeInfo.rankInten.description
+    func setUpRankInten(_ rankInten: Int) {
         let config = UIImage.SymbolConfiguration(textStyle: .body, scale: .medium)
         let upArrow = UIImage(systemName: "arrowtriangle.up.fill")?.withConfiguration(config)
         let downArrow = UIImage(systemName: "arrowtriangle.down.fill")?.withConfiguration(config)
-        if boxOfficeInfo.rankOldAndNew == .new {
-            arrowImageView.isHidden = true
-            rankIntenLabel.text = boxOfficeInfo.rankOldAndNew.rawValue.capitalized
-        } else if boxOfficeInfo.rankInten > 0 {
-            arrowImageView.image = upArrow
-            arrowImageView.tintColor = .systemRed
-        } else {
-            arrowImageView.image = downArrow
-            arrowImageView.tintColor = .systemBlue
-        }
+        arrowImageView.image = rankInten > 0 ? upArrow : downArrow
+        arrowImageView.tintColor = rankInten > 0 ? .systemRed : .systemBlue
     }
     
-    func setUpInfo() {
-        guard let movie = viewModel?.movie else {
-            return
-        }
+    func setUpInfo(_ movie: Movie) {
         titleLabel.text = movie.name
         openDateLabel.text = "개봉 \(movie.openDate.toString(.yyyyMMddDot))"
         audienceAccumulationLabel.text = "\(movie.boxOfficeInfo?.audienceAccumulation.numberFormatter() ?? "")명"

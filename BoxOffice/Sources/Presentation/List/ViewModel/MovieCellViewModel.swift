@@ -12,7 +12,9 @@ protocol MovieCellViewModelInput {}
 
 protocol MovieCellViewModelOutput {
     
-    var movie: Movie { get }
+    var currentMovie: Movie { get }
+    
+    var movie: AnyPublisher<Movie, Never> { get }
     
 }
 
@@ -51,34 +53,30 @@ extension DefaultMovieCellViewModel: MovieCellViewModelOutput {
     
     var output: MovieCellViewModelOutput { self }
     
-    var movie: Movie { return _currentMovie }
+    var currentMovie: Movie { return _currentMovie }
+    var movie: AnyPublisher<Movie, Never> { return Just(_currentMovie).eraseToAnyPublisher() }
     
 }
 
 private extension DefaultMovieCellViewModel {
     
     func bind() {
-        $_currentMovie
-            .filter { $0.detailInfo == nil }
-            .prefix(1)
-            .map { $0.code }
-            .flatMap { [weak self] movieCode -> AnyPublisher<MovieDetailInfo, Error> in
-                guard let self else {
-                    return Empty().eraseToAnyPublisher()
-                }
-                return self.repository.movieInfo(code: movieCode)
-            }.sink(receiveCompletion: { completion in
+        repository.movieInfo(code: _currentMovie.code)
+            .sink(receiveCompletion: { completion in
                 if case .failure(let error) = completion {
                     debugPrint(error)
                 }
             }, receiveValue: { [weak self] info in
-                self?._currentMovie.detailInfo = info
+                guard let self else {
+                    return
+                }
+                self._currentMovie.detailInfo = info
+                self._movie.send(self._currentMovie)
             }).store(in: &cancellables)
         
-        $_currentMovie
+        _movie
             .filter { $0.detailInfo?.poster == nil }
             .compactMap { $0.detailInfo?.movieNameEnglish }
-            .prefix(1)
             .flatMap { [weak self] movieName -> AnyPublisher<String, Error> in
                 guard let self else {
                     return Empty().eraseToAnyPublisher()
@@ -88,12 +86,8 @@ private extension DefaultMovieCellViewModel {
                 if case .failure(let error) = completion {
                     debugPrint(error)
                 }
-            }, receiveValue: { [weak self] posterURL in
-                guard let self else {
-                    return
-                }
+            }, receiveValue: { posterURL in
                 self._currentMovie.detailInfo?.poster = posterURL
-                self._movie.send(self._currentMovie)
             }).store(in: &cancellables)
     }
     
