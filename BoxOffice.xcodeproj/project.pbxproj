@@ -143,6 +143,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		028433F2296696C8002E56FB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				425D26C0296413F000967454 /* UIColor+Extension.swift */,
+				028741482965693C00B2D021 /* UIFont+extension.swift */,
+				02F8556429640F16004B76DD /* UIImageView+extension.swift */,
+				02F855862965658B004B76DD /* UIStackView+extension.swift */,
+				02F85588296565CE004B76DD /* UITableView+extension.swift */,
+				425D26BE2963FCC100967454 /* UIView+Extension.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		0287414C29659FFC00B2D021 /* CreateReview */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,19 +253,14 @@
 		02F855422963E6E4004B76DD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				425D26BE2963FCC100967454 /* UIView+Extension.swift */,
-				02F855862965658B004B76DD /* UIStackView+extension.swift */,
-				028741482965693C00B2D021 /* UIFont+extension.swift */,
-				425D26C0296413F000967454 /* UIColor+Extension.swift */,
-				02F8553B2963C9E8004B76DD /* Encodable+extension.swift */,
-				02F855502963F938004B76DD /* String+extension.swift */,
-				02F855542963F99B004B76DD /* Date+extension.swift */,
+				028433F2296696C8002E56FB /* UI */,
 				02F8555C2963FEF4004B76DD /* Bundle+extension.swift */,
-				02F8556429640F16004B76DD /* UIImageView+extension.swift */,
-				02F85588296565CE004B76DD /* UITableView+extension.swift */,
-				02F8558A296565E4004B76DD /* NSObject+extension.swift */,
+				02F855542963F99B004B76DD /* Date+extension.swift */,
+				02F8553B2963C9E8004B76DD /* Encodable+extension.swift */,
 				02B4805C2966679900F3E31C /* Int+extension.swift */,
+				02F8558A296565E4004B76DD /* NSObject+extension.swift */,
 				02B4806029666EF000F3E31C /* Publisher+MainThread.swift */,
+				02F855502963F938004B76DD /* String+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
