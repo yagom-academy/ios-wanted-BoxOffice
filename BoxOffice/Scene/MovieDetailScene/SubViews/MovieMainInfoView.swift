@@ -77,6 +77,16 @@ class MovieMainInfoView: UIView {
         setupView()
     }
     
+    override func draw(_ rect: CGRect) {
+        let separator = UIBezierPath()
+        separator.move(to: CGPoint(x: 0, y: bounds.maxY))
+        separator.addLine(to: CGPoint(x: bounds.maxX, y: bounds.maxY))
+        separator.lineWidth = 16
+        UIColor.systemGray5.setStroke()
+        separator.stroke()
+        separator.close()
+    }
+    
     func configure(with movie: MovieDetail) {
         //TODO: 별점 평균내기
         ratingLabel.text = "4.5"

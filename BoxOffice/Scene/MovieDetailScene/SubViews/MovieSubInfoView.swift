@@ -39,6 +39,16 @@ class MovieSubInfoView: UIView {
         setupView()
     }
     
+    override func draw(_ rect: CGRect) {
+        let separator = UIBezierPath()
+        separator.move(to: CGPoint(x: 0, y: bounds.maxY))
+        separator.addLine(to: CGPoint(x: bounds.maxX, y: bounds.maxY))
+        separator.lineWidth = 16
+        UIColor.systemGray5.setStroke()
+        separator.stroke()
+        separator.close()
+    }
+    
     //TODO: MovieDetail로 뷰 세팅하기
     func configure(with movie: MovieDetail) {
         totalAudienceLabel.text = movie.totalAudience
