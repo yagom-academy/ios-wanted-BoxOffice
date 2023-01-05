@@ -13,15 +13,10 @@ final class CommentViewController: UIViewController {
     
     private enum StarRate: Double {
         case zero = 0
-        case half = 0.5
         case one = 1
-        case oneHalf = 1.5
         case two = 2
-        case twoHalf = 2.5
         case three = 3
-        case threeHalf = 3.5
         case four = 4
-        case fourHalf = 4.5
         case five = 5
     }
     
@@ -176,13 +171,36 @@ final class CommentViewController: UIViewController {
         imagePicker.delegate = self
         present(imagePicker, animated: true)
     }
+    
+    @objc func changeStarRate(_ sender: UITapGestureRecognizer) {
+        let location = sender.location(in: starStackView)
+        let current = location.x
+        let min = starStackView.frame.minX
+        let max = starStackView.frame.maxX
+        let rate = calculateStarRate(current: current, minX: min, maxX: max)
+        changeRate(starRate: rate)
+    }
 }
 
 private extension CommentViewController {
     
+    private func calculateStarRate(current: CGFloat, minX: CGFloat, maxX: CGFloat) -> StarRate {
+        let newCurrent = current
+        let oneStarLenth = (maxX - minX) / 5
+        let rate = newCurrent / oneStarLenth
+        if rate > 4 { return StarRate.five}
+        if rate > 3 { return StarRate.four}
+        if rate > 2 { return StarRate.three}
+        if rate > 1 { return StarRate.two}
+        if rate >= 0.5 { return StarRate.one}
+        return StarRate.zero
+    }
+    
     func addGesture() {
         pictureImageView.isUserInteractionEnabled = true
         pictureImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addImage)))
+        starStackView.isUserInteractionEnabled = true
+        starStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeStarRate)))
     }
     
     func setup() {
@@ -252,15 +270,10 @@ private extension CommentViewController {
     }
     
     private func changeRate(starRate: StarRate) {
+        self.starRate = starRate
         switch starRate {
         case .zero:
             star1Image.image = Constant.emptyStar
-            star2Image.image = Constant.emptyStar
-            star3Image.image = Constant.emptyStar
-            star4Image.image = Constant.emptyStar
-            star5Image.image = Constant.emptyStar
-        case .half:
-            star1Image.image = Constant.halfStar
             star2Image.image = Constant.emptyStar
             star3Image.image = Constant.emptyStar
             star4Image.image = Constant.emptyStar
@@ -271,22 +284,10 @@ private extension CommentViewController {
             star3Image.image = Constant.emptyStar
             star4Image.image = Constant.emptyStar
             star5Image.image = Constant.emptyStar
-        case .oneHalf:
-            star1Image.image = Constant.fullStar
-            star2Image.image = Constant.halfStar
-            star3Image.image = Constant.emptyStar
-            star4Image.image = Constant.emptyStar
-            star5Image.image = Constant.emptyStar
         case .two:
             star1Image.image = Constant.fullStar
             star2Image.image = Constant.fullStar
             star3Image.image = Constant.emptyStar
-            star4Image.image = Constant.emptyStar
-            star5Image.image = Constant.emptyStar
-        case .twoHalf:
-            star1Image.image = Constant.fullStar
-            star2Image.image = Constant.fullStar
-            star3Image.image = Constant.halfStar
             star4Image.image = Constant.emptyStar
             star5Image.image = Constant.emptyStar
         case .three:
@@ -295,24 +296,12 @@ private extension CommentViewController {
             star3Image.image = Constant.fullStar
             star4Image.image = Constant.emptyStar
             star5Image.image = Constant.emptyStar
-        case .threeHalf:
-            star1Image.image = Constant.fullStar
-            star2Image.image = Constant.fullStar
-            star3Image.image = Constant.fullStar
-            star4Image.image = Constant.halfStar
-            star5Image.image = Constant.emptyStar
         case .four:
             star1Image.image = Constant.fullStar
             star2Image.image = Constant.fullStar
             star3Image.image = Constant.fullStar
             star4Image.image = Constant.fullStar
             star5Image.image = Constant.emptyStar
-        case .fourHalf:
-            star1Image.image = Constant.fullStar
-            star2Image.image = Constant.fullStar
-            star3Image.image = Constant.fullStar
-            star4Image.image = Constant.fullStar
-            star5Image.image = Constant.halfStar
         case .five:
             star1Image.image = Constant.fullStar
             star2Image.image = Constant.fullStar
