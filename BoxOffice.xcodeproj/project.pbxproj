@@ -131,6 +131,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		201C827A2966F4A10060054B /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				20F38B0C2965CCAE00415749 /* MovieMainInfoView.swift */,
+				201825A929664B8F00ADB79A /* MovieSubInfoView.swift */,
+				201825AB29664D8D00ADB79A /* MovieReviewView.swift */,
+				200597972966B690002AB7EC /* ReviewTableViewCell.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
 		203201FA2962CE0700097F31 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,11 +235,8 @@
 			isa = PBXGroup;
 			children = (
 				20F38B0A2965C31400415749 /* MovieDetailViewController.swift */,
-				20F38B0C2965CCAE00415749 /* MovieMainInfoView.swift */,
-				201825AB29664D8D00ADB79A /* MovieReviewView.swift */,
-				201825A929664B8F00ADB79A /* MovieSubInfoView.swift */,
 				2005979529669097002AB7EC /* MovieDetailViewModel.swift */,
-				200597972966B690002AB7EC /* ReviewTableViewCell.swift */,
+				201C827A2966F4A10060054B /* SubViews */,
 			);
 			path = MovieDetailScene;
 			sourceTree = "<group>";
