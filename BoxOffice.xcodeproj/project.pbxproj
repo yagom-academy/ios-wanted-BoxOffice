@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		201825AA29664B8F00ADB79A /* MovieSubInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201825A929664B8F00ADB79A /* MovieSubInfoCollectionViewCell.swift */; };
 		203201FF29630CB000097F31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 203201FE29630CB000097F31 /* GoogleService-Info.plist */; };
 		2032020229630EED00097F31 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2032020129630EED00097F31 /* FirebaseAuth */; };
 		2032020429630EED00097F31 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2032020329630EED00097F31 /* FirebaseFirestore */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		201825A929664B8F00ADB79A /* MovieSubInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSubInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		203201FE29630CB000097F31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2073EB16296311F100216565 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		2073EB1B29631F8C00216565 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			children = (
 				20F38B0A2965C31400415749 /* MovieDetailViewController.swift */,
 				20F38B0C2965CCAE00415749 /* MovieMainInfoCollectionViewCell.swift */,
+				201825A929664B8F00ADB79A /* MovieSubInfoCollectionViewCell.swift */,
 			);
 			path = MovieDetailScene;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				201825AA29664B8F00ADB79A /* MovieSubInfoCollectionViewCell.swift in Sources */,
 				20C7D43729641D8200D87350 /* Observable.swift in Sources */,
 				20F38AFC2965115000415749 /* StarRatingUISlider.swift in Sources */,
 				2073EB17296311F100216565 /* FirestoreManager.swift in Sources */,
