@@ -61,6 +61,11 @@ class MovieReviewView: UIView {
         setupConstraint()
     }
     
+    //TODO: Review로 뷰 세팅하기
+    func configure(with review: Review) {
+
+    }
+    
     private func addSubView() {
         reviewTitleStackView.addArrangedSubview(reviewTitleLabel)
         reviewTitleStackView.addArrangedSubview(writeReviewButton)

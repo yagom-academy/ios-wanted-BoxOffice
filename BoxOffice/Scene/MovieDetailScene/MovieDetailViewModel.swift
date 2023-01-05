@@ -34,4 +34,6 @@ final class MovieDetailViewModel: MovieDetailViewModelType {
             }
         }
     }
+    
+    //TODO: MovieDetail 생성하기??
 }

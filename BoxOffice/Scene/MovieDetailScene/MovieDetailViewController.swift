@@ -41,12 +41,12 @@ class MovieDetailViewController: UIViewController {
         ageLimit: "15세 이상 관람가"
     )
     
-    //TODO: 이전 페이지에서 데이터 받아오기
+    //TODO: 이전 페이지에서 데이터 받아오기 (뷰모델에서 가저오면 될듯합니다)
+    //TODO: 출연 더보기 모달 뷰
     
     private func setupView() {
         addSubView()
         setupConstraint()
-        
     }
     
     private func addSubView() {
@@ -57,6 +57,7 @@ class MovieDetailViewController: UIViewController {
         view.addSubview(entireStackView)
     }
     
+    //TODO: 뷰 constraint 조정하기 (뷰컨 외에도 대부분 뷰의 StackView를 다시 봐야합니다
     private func setupConstraint() {
         NSLayoutConstraint.activate([
             entireStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,

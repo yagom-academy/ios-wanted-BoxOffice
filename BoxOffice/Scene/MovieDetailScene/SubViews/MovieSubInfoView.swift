@@ -39,6 +39,11 @@ class MovieSubInfoView: UIView {
         setupView()
     }
     
+    //TODO: MovieDetail로 뷰 세팅하기
+    func configure(with movie: MovieDetail) {
+
+    }
+    
     private func setupView() {
         addSubView()
         setupConstraint()
