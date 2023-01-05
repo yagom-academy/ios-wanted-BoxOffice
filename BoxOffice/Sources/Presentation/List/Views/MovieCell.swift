@@ -9,6 +9,8 @@ import UIKit
 
 class MovieCell: UITableViewCell {
     
+    private var viewModel: MovieCellViewModel?
+    
     // MARK: - Views
     private lazy var backgroundStackView: UIStackView = {
         let stackView = UIStackView(axis: .horizontal, alignment: .center, distribution: .fill, spacing: 20)
@@ -31,6 +33,7 @@ class MovieCell: UITableViewCell {
     private lazy var rankIntenView: UIStackView = {
         let stackView = UIStackView(axis: .horizontal, alignment: .center, distribution: .fill, spacing: 2)
         stackView.addArrangedSubviews(arrowImageView, rankIntenLabel)
+        stackView.widthAnchor.constraint(equalToConstant: 36).isActive = true
         stackView.setContentHuggingPriority(.required, for: .horizontal)
         return stackView
     }()
@@ -49,7 +52,8 @@ class MovieCell: UITableViewCell {
         label.text = "2"
         label.font = .preferredFont(for: .body, weight: .regular)
         label.textColor = .label
-        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.textAlignment = .center
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return label
     }()
     
@@ -93,9 +97,9 @@ class MovieCell: UITableViewCell {
     
     private lazy var posterView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "ironman")
         imageView.widthAnchor.constraint(equalToConstant: 90).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 110).isActive = true
+        imageView.backgroundColor = .darkGray
         return imageView
     }()
     
@@ -115,8 +119,9 @@ class MovieCell: UITableViewCell {
     }
     
     // MARK: - Set up
-    func setUp() {
-        
+    func setUp(viewModel: MovieCellViewModel) {
+        self.viewModel = viewModel
+        setUpViews()
     }
     
 }
@@ -135,8 +140,51 @@ private extension MovieCell {
         ])
     }
     
+    func setUpViews() {
+        rankLabel.text = viewModel?.movie.boxOfficeInfo?.rank.description
+        setUpArrowView()
+        setUpInfo()
+    }
+    
+    func setUpArrowView() {
+        guard let rankInten = viewModel?.movie.boxOfficeInfo?.rankInten, rankInten != 0 else {
+            rankIntenLabel.text = "-"
+            arrowImageView.isHidden = true
+            return
+        }
+        arrowImageView.isHidden = false
+        rankIntenLabel.text = rankInten.description
+        let config = UIImage.SymbolConfiguration(textStyle: .body, scale: .medium)
+        let upArrow = UIImage(systemName: "arrowtriangle.up.fill")?.withConfiguration(config)
+        let downArrow = UIImage(systemName: "arrowtriangle.down.fill")?.withConfiguration(config)
+        if rankInten > 0 {
+            arrowImageView.image = upArrow
+            arrowImageView.tintColor = .systemRed
+        } else {
+            arrowImageView.image = downArrow
+            arrowImageView.tintColor = .systemBlue
+        }
+    }
+    
+    func setUpInfo() {
+        guard let movie = viewModel?.movie else {
+            return
+        }
+        titleLabel.text = movie.name
+        openDateLabel.text = "개봉 \(movie.openDate.toString(.yyyyMMddDot))"
+        audienceAccumulationLabel.text = "\(movie.boxOfficeInfo?.audienceAccumulation.numberFormatter() ?? "")명"
+        posterView.setImage(with: movie.detailInfo?.poster ?? "")
+    }
+    
     func reset() {
-        
+        ImageCacheManager.shared.cancelDownloadTask()
+        rankLabel.text = nil
+        rankIntenLabel.text = nil
+        arrowImageView.image = nil
+        titleLabel.text = nil
+        openDateLabel.text = nil
+        audienceAccumulationLabel.text = nil
+        posterView.image = nil
     }
     
 }
