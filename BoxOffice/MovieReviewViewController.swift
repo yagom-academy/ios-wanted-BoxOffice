@@ -43,6 +43,34 @@ final class MovieReviewViewController: UIViewController {
         label.font = .preferredFont(forTextStyle: .footnote)
         return label
     }()
+    
+    private let reviewTextView: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = .preferredFont(forTextStyle: .body)
+        textView.backgroundColor = .secondarySystemBackground
+        textView.layer.cornerRadius = 10
+        return textView
+    }()
+    
+    private lazy var photoAddingButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "camera"), for: .normal)
+        button.tintColor = .label
+        button.setTitle("  사진 추가하기", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+                
+        button.layer.cornerRadius = 10
+        button.layer.borderColor = UIColor.systemGray3.cgColor
+        button.layer.borderWidth = 1
+        button.clipsToBounds = true
+        
+        button.addAction(UIAction(handler: { action in
+            self.viewModel.photoAddingButtonTapped()
+        }), for: .touchUpInside)
+        return button
+    }()
         
     private let userInformationRequestLabel: UILabel = {
         let label = UILabel()
@@ -93,30 +121,6 @@ final class MovieReviewViewController: UIViewController {
         label.textColor = .secondaryLabel
         label.font = .preferredFont(forTextStyle: .caption2)
         return label
-    }()
-    
-    private let reviewTextView: UITextView = {
-        let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.font = .preferredFont(forTextStyle: .body)
-        textView.backgroundColor = .secondarySystemBackground
-        textView.layer.cornerRadius = 10
-        return textView
-    }()
-    
-    private let photoAddingButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "camera"), for: .normal)
-        button.tintColor = .label
-        button.setTitle("  사진 추가하기", for: .normal)
-        button.setTitleColor(.label, for: .normal)
-        
-        button.layer.cornerRadius = 10
-        button.layer.borderColor = UIColor.systemGray3.cgColor
-        button.layer.borderWidth = 1
-        button.clipsToBounds = true
-        return button
     }()
     
     private let actionButtonsStackView: UIStackView = {
