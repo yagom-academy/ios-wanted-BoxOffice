@@ -21,13 +21,14 @@ protocol MovieCellViewModel: MovieCellViewModelInput, MovieCellViewModelOutput {
     var input: MovieCellViewModelInput { get }
     var output: MovieCellViewModelOutput { get }
     
+    var cancellables: Set<AnyCancellable> { get }
 }
 
 final class DefaultMovieCellViewModel: MovieCellViewModel {
     
     
     private let repository: BoxOfficeRepository
-    private var subscriptions = [AnyCancellable]()
+    private(set) var cancellables: Set<AnyCancellable> = .init()
     private var _movie = PassthroughSubject<Movie, Never>()
     
     @Published private var _currentMovie: Movie
@@ -72,7 +73,7 @@ private extension DefaultMovieCellViewModel {
                 }
             }, receiveValue: { [weak self] info in
                 self?._currentMovie.detailInfo = info
-            }).store(in: &subscriptions)
+            }).store(in: &cancellables)
         
         $_currentMovie
             .filter { $0.detailInfo?.poster == nil }
@@ -93,7 +94,7 @@ private extension DefaultMovieCellViewModel {
                 }
                 self._currentMovie.detailInfo?.poster = posterURL
                 self._movie.send(self._currentMovie)
-            }).store(in: &subscriptions)
+            }).store(in: &cancellables)
     }
     
 }
