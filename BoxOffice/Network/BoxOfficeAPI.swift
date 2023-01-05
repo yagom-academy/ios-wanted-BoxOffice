@@ -15,10 +15,12 @@ protocol ServerAPI {
 
 enum BoxOfficeAPI {
     case dailyBoxOffice(
-        key: String,
         targetDate: String,
         itemPerPage: String,
         isMultiMovie: String
+    )
+    case detailBoxOffice(
+        movieCode: String
     )
 }
 
@@ -27,6 +29,8 @@ extension BoxOfficeAPI: ServerAPI {
         switch self {
         case .dailyBoxOffice:
             return .get
+        case .detailBoxOffice:
+            return .get
         }
     }
     
@@ -34,22 +38,30 @@ extension BoxOfficeAPI: ServerAPI {
         switch self {
         case .dailyBoxOffice:
             return "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
+        case .detailBoxOffice:
+            return "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
         }
     }
     
     var params: [String : String]? {
         switch self {
         case .dailyBoxOffice(
-            let key,
             let targetDate,
             let itemPerPage,
             let isMultiMovie
         ):
             return [
-                "key": key,
+                "key": "d9346d4d74e3d01826d92e2a0ebfaf6e",
                 "targetDt": targetDate,
                 "itemPerPage": itemPerPage,
                 "multiMovieYn": isMultiMovie
+            ]
+        case .detailBoxOffice(
+            let movieCode
+        ):
+            return [
+                "key": "55b408ed2fa0cf90fe16095fc05ab3b3",
+                "movieCd": movieCode
             ]
         }
     }
