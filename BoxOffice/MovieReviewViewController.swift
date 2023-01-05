@@ -144,6 +144,8 @@ final class MovieReviewViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
+        setupStarButtons()
+        
         addViews()
         setupLayout()
     }
@@ -154,6 +156,16 @@ final class MovieReviewViewController: UIViewController {
         
         nicknameTextField.setUnderLine(width: 1, color: .tertiaryLabel)
         passwordTextField.setUnderLine(width: 1, color: .tertiaryLabel)
+    }
+    
+    private func setupStarButtons() {
+        let sizeConfiguration = UIImage.SymbolConfiguration(pointSize: 35)
+        
+        starButtons.forEach { star in
+            star.setImage(UIImage(systemName: "star", withConfiguration: sizeConfiguration), for: .normal)
+            star.setImage(UIImage(systemName: "star.fill", withConfiguration: sizeConfiguration), for: .selected)
+            star.tintColor = .systemYellow
+        }
     }
     
     private func addViews() {
