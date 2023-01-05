@@ -29,12 +29,16 @@ class MovieDetailViewController: UIViewController {
     private let movieSubInfoView = MovieSubInfoView()
     private lazy var movieReviewView = MovieReviewView(tableView: reviewTableView)
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadReview()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupNavigationItem()
         bind()
-        loadReview()
     }
     
     let testMovie = MovieDetail(
@@ -56,6 +60,10 @@ class MovieDetailViewController: UIViewController {
     //TODO: 이전 페이지에서 데이터 받아오기 (뷰모델에서 가저오면 될듯합니다)
     //TODO: 출연 더보기 모달 뷰
     
+    private func loadReview() {
+        reviewViewModel.fetch()
+    }
+    
     private func setupView() {
         //TODO: ReviewTable
         movieMainInfoView.configure(with: testMovie)
@@ -63,6 +71,7 @@ class MovieDetailViewController: UIViewController {
         
         addSubView()
         setupConstraint()
+        setupTableView()
         view.backgroundColor = .systemBackground
     }
     
@@ -87,5 +96,32 @@ class MovieDetailViewController: UIViewController {
     private func setupNavigationItem() {
         //TODO: 넘겨받은 영화 제목으로 설정
         navigationItem.title = testMovie.title
+    }
+    
+    private func bind() {
+        reviewViewModel.reviews.bind { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.reviewTableView.reloadData()
+            }
+        }
+    }
+}
+
+extension MovieDetailViewController: UITableViewDataSource {
+    private func setupTableView() {
+        reviewTableView.dataSource = self
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return reviewViewModel.reviews.value.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewTableViewCell.identifier,
+                                                       for: indexPath) as? ReviewTableViewCell else { return UITableViewCell() }
+        let review = reviewViewModel.reviews.value[indexPath.row]
+        cell.configure(with: review)
+        
+        return cell
     }
 }
