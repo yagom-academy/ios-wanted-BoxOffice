@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 class DetailViewController: UIViewController {
     
     weak var coordinator: BoxOfficeListCoordinatorInterface?
     private let viewModel: MovieDetailViewModel
-    
+    var model: Movie?
+    private var cancelable = Set<AnyCancellable>()
     private let tableView: UITableView = {
         let tableView = UITableView()
         
@@ -25,6 +27,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bind()
         self.view.backgroundColor = .boBackground
         self.view.addSubview(tableView)
         tableView.delegate = self
@@ -44,6 +47,12 @@ class DetailViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        viewModel.input.viewWillAppear()
+    }
+
     init(viewModel: MovieDetailViewModel, coordinator: BoxOfficeListCoordinatorInterface) {
         self.viewModel = viewModel
         self.coordinator = coordinator
@@ -57,9 +66,15 @@ class DetailViewController: UIViewController {
 }
 
 private extension DetailViewController {
-    
-    func setUp() {
-        
+    func bind() {
+        viewModel.$movie
+            .sink { [weak self] movieData in
+                guard let self = self else {
+                    return
+                }
+                self.model = movieData
+                print(self.model!)
+            }.store(in: &cancelable)
     }
     
     func setUpReviewButton(_ cell: ThirdCell) {
@@ -71,6 +86,12 @@ private extension DetailViewController {
         coordinator?.showCreateReviewView(movie: dummy)
     }
     
+    func setUpDeleteButton(_ cell: ReviewCell) {
+        cell.deleteButton.addTarget(self, action: #selector(didTapDeleteButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc func didTapDeleteButton(_ sender: UIButton) {
+    }
 }
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -82,6 +103,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FirstCell", for: indexPath) as! FirstCell
+            
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SecondCell", for: indexPath) as! SecondCell
@@ -92,7 +114,15 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! ReviewCell
-            return cell
+            
+            if let reviews = viewModel.reviews {
+                cell.setData(reviews, indexPath.row)
+                return cell
+            }
+            
+            setUpDeleteButton(cell)
+            
+            return UITableViewCell()
         }
     }
 
