@@ -20,7 +20,10 @@ final class MovieReviewViewController: UIViewController {
     
     private let reviewRequestLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "관람평을 남겨주세요."
+        label.textColor = .secondaryLabel
+        label.font = .preferredFont(forTextStyle: .footnote)
         return label
     }()
     
@@ -77,14 +80,18 @@ final class MovieReviewViewController: UIViewController {
 
     private func addViews() {
         [
-            questionLabel
+            questionLabel,
+            reviewRequestLabel
         ].forEach( { view.addSubview($0) })
     }
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
             questionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
-            questionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
+            questionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            
+            reviewRequestLabel.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 50),
+            reviewRequestLabel.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
         ])
     }
 }
