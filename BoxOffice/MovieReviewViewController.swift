@@ -8,8 +8,14 @@
 import UIKit
 
 final class MovieReviewViewController: UIViewController {
-
+    
     private let viewModel = MovieReviewViewModel()
+    
+    private let imagePicker: UIImagePickerController = {
+        let imagePicker = UIImagePickerController()
+        return imagePicker
+    }()
+    
     private let questionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -165,6 +171,7 @@ final class MovieReviewViewController: UIViewController {
         
         addViews()
         setupLayout()
+        configureImagePicker()
     }
     
     override func viewDidLayoutSubviews() {
@@ -296,6 +303,14 @@ final class MovieReviewViewController: UIViewController {
             actionButtonsStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             actionButtonsStackView.heightAnchor.constraint(equalToConstant: 50),
         ])
+    }
+}
+
+extension MovieReviewViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    private func configureImagePicker() {
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
     }
 }
 
