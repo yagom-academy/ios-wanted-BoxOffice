@@ -107,8 +107,10 @@ class MovieMainInfoView: UIView {
         infoStackView.addArrangedSubview(openYearStackView)
         infoStackView.addArrangedSubview(ratingStackView)
         
-        self.addSubview(posterView)
-        self.addSubview(infoStackView)
+        entireStackView.addArrangedSubview(posterView)
+        entireStackView.addArrangedSubview(infoStackView)
+        
+        self.addSubview(entireStackView)
     }
     
     private func setupConstraint() {
