@@ -9,7 +9,7 @@ import UIKit
 
 class BoxOfficeCollectionViewCell: UICollectionViewCell {
     static let identify = "cell"
-    var movieCode: String?
+    var boxofficeData: DailyBoxOfficeList?
     
     let rankLabel: UILabel = {
         let label = UILabel()
@@ -64,8 +64,6 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        contentView.backgroundColor = .gray
-        
         NSLayoutConstraint.activate([
             posterImageView.widthAnchor.constraint(equalToConstant: 90),
             posterImageView.heightAnchor.constraint(equalToConstant: 130),
@@ -89,7 +87,7 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     }
     
     func configBoxOfficeCell(data: DailyBoxOfficeList) {
-        movieCode = data.movieCd
+        boxofficeData = data
         rankLabel.text = data.rank
         if data.rankOldAndNew == "NEW" {
             rankFluctuationsLabel.text = data.rankOldAndNew
