@@ -47,6 +47,7 @@ class MovieSubInfoView: UIView {
     private func setupView() {
         addSubView()
         setupConstraint()
+        self.backgroundColor = .systemBackground
     }
     
     private func addSubView() {

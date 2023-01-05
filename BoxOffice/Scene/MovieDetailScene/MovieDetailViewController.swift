@@ -47,6 +47,7 @@ class MovieDetailViewController: UIViewController {
     private func setupView() {
         addSubView()
         setupConstraint()
+        view.backgroundColor = .systemBackground
     }
     
     private func addSubView() {

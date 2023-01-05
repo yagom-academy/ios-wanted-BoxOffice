@@ -39,12 +39,14 @@ class MovieMainInfoView: UIView {
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
     private let posterView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "camera")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -89,6 +91,7 @@ class MovieMainInfoView: UIView {
     private func setupView() {
         addSubView()
         setupConstraint()
+        self.backgroundColor = .systemBackground
     }
     
     private func addSubView() {
