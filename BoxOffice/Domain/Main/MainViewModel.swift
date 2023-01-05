@@ -39,8 +39,8 @@ final class MainViewModel: MainViewModelInterface, MainViewModelOutputInterface 
     private var dailyBoxOffice: [DailyBoxOffice] = []
     private var englishMovieName: [String] = []
     private var customBoxOffice: [CustomBoxOffice] = []
-    private var rankDictionary: [String: String] = [:]
-    private var boxOffice: [String: String] = [:]
+    private var titlesDictionary: [String: String] = [:]
+    private var posterDictionary: [String: String] = [:]
     
     init(networkHandler: Networkerable) {
         self.networkHandler = networkHandler
@@ -94,7 +94,7 @@ final class MainViewModel: MainViewModelInterface, MainViewModelOutputInterface 
             } receiveValue: { [weak self] (model: DetailBoxOfficeConnection) in
                 guard let self = self else { return }
                 self.englishMovieName.append(model.result.movieInfo.movieEnglishName)
-                self.rankDictionary.updateValue(
+                self.titlesDictionary.updateValue(
                     model.result.movieInfo.movieEnglishName,
                     forKey: model.result.movieInfo.movieName
                 )
@@ -122,7 +122,7 @@ final class MainViewModel: MainViewModelInterface, MainViewModelOutputInterface 
                 }
             } receiveValue: { [weak self] (poster: MoviePoster) in
                 guard let self = self else { return }
-                self.boxOffice.updateValue(
+                self.posterDictionary.updateValue(
                     poster.poster ?? "https://i.imgur.com/PQQuSIL.png",
                     forKey: poster.title ?? ""
                 )
@@ -132,8 +132,8 @@ final class MainViewModel: MainViewModelInterface, MainViewModelOutputInterface 
 
     private func configureCustomBoxOffice() {
         dailyBoxOffice.enumerated().forEach { sequence, element in
-            guard let englishName = rankDictionary[element.title] else { return }
-            let poster = boxOffice[englishName]
+            guard let englishName = titlesDictionary[element.title] else { return }
+            let poster = posterDictionary[englishName]
             
             customBoxOffice.append(
                 .init(boxOffice: dailyBoxOffice[sequence],
