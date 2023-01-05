@@ -22,6 +22,7 @@
 		9B335C272963F47900C8F339 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B335C262963F47900C8F339 /* UIView+Extension.swift */; };
 		9B335C292963F75200C8F339 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B335C282963F75200C8F339 /* UIColor+Extension.swift */; };
 		9B335C2B296423DC00C8F339 /* MainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B335C2A296423DC00C8F339 /* MainViewCell.swift */; };
+		9B45203129667B3500BE7142 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B45203029667B3400BE7142 /* DetailViewModel.swift */; };
 		9B452033296688C900BE7142 /* DetailInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B452032296688C900BE7142 /* DetailInfoViewModel.swift */; };
 		9B45203529668ACC00BE7142 /* ReviewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B45203429668ACC00BE7142 /* ReviewListViewModel.swift */; };
 		9B8B04E0296538540095636B /* DetailSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B04DF296538540095636B /* DetailSegmentControl.swift */; };
@@ -51,6 +52,7 @@
 		9B335C262963F47900C8F339 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		9B335C282963F75200C8F339 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		9B335C2A296423DC00C8F339 /* MainViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCell.swift; sourceTree = "<group>"; };
+		9B45203029667B3400BE7142 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		9B452032296688C900BE7142 /* DetailInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoViewModel.swift; sourceTree = "<group>"; };
 		9B45203429668ACC00BE7142 /* ReviewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewModel.swift; sourceTree = "<group>"; };
 		9B8B04DF296538540095636B /* DetailSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSegmentControl.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			children = (
 				9B8B04DF296538540095636B /* DetailSegmentControl.swift */,
 				9B8B04E1296565100095636B /* DetailViewController.swift */,
+				9B45203029667B3400BE7142 /* DetailViewModel.swift */,
 				9B8B04E329656F470095636B /* DetailInfoViewController.swift */,
 				9B452032296688C900BE7142 /* DetailInfoViewModel.swift */,
 				9B8B04E529656F6B0095636B /* ReviewListViewController.swift */,
@@ -265,6 +268,7 @@
 				9B8B04E629656F6B0095636B /* ReviewListViewController.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				9BEA28042962D04F00FB7E73 /* HTTPMethod.swift in Sources */,
+				9B45203129667B3500BE7142 /* DetailViewModel.swift in Sources */,
 				9B28F08129664FAD00F87F48 /* UIImageView+Extension.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 				9B335C292963F75200C8F339 /* UIColor+Extension.swift in Sources */,
