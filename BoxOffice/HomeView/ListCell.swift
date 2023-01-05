@@ -14,7 +14,6 @@ final class ListCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .systemGray3
-        
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -26,7 +25,6 @@ final class ListCell: UICollectionViewCell {
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         stackView.alignment = .top
-
         stackView.spacing = 10
         return stackView
     }()
@@ -131,10 +129,10 @@ final class ListCell: UICollectionViewCell {
     }
     
     private func setRankChangeLabel(with rankChange: String) {
-        if Int(rankChange)! > 0 {
+        if Int(rankChange) ?? 0 > 0 {
             rankChangeBadgeLabel.text = "  " + rankChange + "▲" + "  "
             rankChangeBadgeLabel.layer.backgroundColor = UIColor.systemGreen.cgColor
-        } else if Int(rankChange)! < 0 {
+        } else if Int(rankChange) ?? 0 < 0 {
             rankChangeBadgeLabel.text = "  " + rankChange + "▼" + "  "
             rankChangeBadgeLabel.layer.backgroundColor = UIColor.systemRed.cgColor
         } else {
@@ -156,16 +154,16 @@ final class ListCell: UICollectionViewCell {
     
     private func setPosterImageView(with url: URL?) {
         let imageManager = URLCacheManager()
-        if url == nil {
-            let image = UIImage(systemName: "nosign")
-            posterImageView.backgroundColor = .systemGray6
-            posterImageView.image = image
-        } else {
-            imageManager.getImage(with: url!) { image in
+        if let url = url {
+            imageManager.getImage(with: url) { image in
                 DispatchQueue.main.async {
                     self.posterImageView.image = image
                 }
             }
+        } else {
+            let image = UIImage(systemName: "nosign")
+            posterImageView.backgroundColor = .systemGray6
+            posterImageView.image = image
         }
     }
     

@@ -8,14 +8,15 @@
 import UIKit
 
 protocol ImageCacheManager {
-    func getImage(with imageURL: URL, _ completion: @escaping (UIImage) -> Void)
+    func getImage(with imageURL: URL?, _ completion: @escaping (UIImage) -> Void)
 }
 
 final class URLCacheManager: ImageCacheManager {
     private let cache = URLCache.shared
     private var dataTask: URLSessionDataTask?
     
-    func getImage(with imageURL: URL, _ completion: @escaping (UIImage) -> Void) {
+    func getImage(with imageURL: URL?, _ completion: @escaping (UIImage) -> Void) {
+        guard let imageURL = imageURL else { return }
         let request = URLRequest(url: imageURL)
         if self.cache.cachedResponse(for: request) != nil {
             self.loadImageFromCache(with: imageURL) { image in
@@ -41,10 +42,11 @@ final class URLCacheManager: ImageCacheManager {
         let request = URLRequest(url: imageURL)
 
         self.dataTask = URLSession.shared.dataTask(with: imageURL) { data, response, _ in
+            guard let response = response else { return }
             if let data = data {
-                let cachedData = CachedURLResponse(response: response!, data: data)
+                let cachedData = CachedURLResponse(response: response, data: data)
                 self.cache.storeCachedResponse(cachedData, for: request)
-                completion(UIImage(data: data)!)
+                completion(UIImage(data: data) ?? UIImage())
             }
         }
         self.dataTask?.resume()

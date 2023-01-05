@@ -70,7 +70,7 @@ final class HomeViewController: UIViewController {
         homeViewModel.movieCellDatas.bind { cellDatas in
             guard cellDatas.count == 10 else { return }
             let rankSortedCellDatas = cellDatas.sorted { a, b in
-                Int(a.currentRank)! < Int(b.currentRank)!
+                Int(a.currentRank) ?? 0 < Int(b.currentRank) ?? 0
             }
             DispatchQueue.main.async {
                 self.homeCollectionView.appendSnapshot(with: rankSortedCellDatas)

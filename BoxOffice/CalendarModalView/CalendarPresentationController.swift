@@ -43,7 +43,7 @@ final class CalendarPresentationController: UIPresentationController {
     override func presentationTransitionWillBegin() {
         super.presentationTransitionWillBegin()
         
-        let superview = presentingViewController.view!
+        guard let superview = presentingViewController.view else { return }
         superview.addSubview(dimmingView)
         setupDimmingViewLayout(in: superview)
         adoptTapGestureRecognizer()
@@ -66,7 +66,7 @@ final class CalendarPresentationController: UIPresentationController {
     }
 
     private func adoptTapGestureRecognizer() {
-        let adoptedView = containerView!
+        guard let adoptedView = containerView else { return }
         let tapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(dismissView(_:))

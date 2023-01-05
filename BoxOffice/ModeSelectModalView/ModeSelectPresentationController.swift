@@ -8,7 +8,7 @@
 import UIKit
 
 final class ModeSelectPresentationController: UIPresentationController {
-    private var originalPosition: CGPoint?
+    private var originalPosition: CGPoint = CGPoint(x: 0, y: 0)
     private var currentPositionTouched: CGPoint?
     private let dimmingView: UIView = {
         let dimmingView = UIVisualEffectView(
@@ -43,7 +43,7 @@ final class ModeSelectPresentationController: UIPresentationController {
     override func presentationTransitionWillBegin() {
         super.presentationTransitionWillBegin()
         
-        let superview = presentingViewController.view!
+        guard let superview = presentingViewController.view else { return }
         superview.addSubview(dimmingView)
         setupDimmingViewLayout(in: superview)
         adoptPanGestureRecognizer()
@@ -67,7 +67,7 @@ final class ModeSelectPresentationController: UIPresentationController {
     }
 
     private func adoptPanGestureRecognizer() {
-        let adoptedView = containerView!
+        guard let adoptedView = containerView else { return }
         let panGestureRecognizer = UIPanGestureRecognizer(
             target: self,
             action: #selector(dismissView(_:))
@@ -85,17 +85,18 @@ final class ModeSelectPresentationController: UIPresentationController {
     }
     
     @objc private func dismissView(_ sender: UIPanGestureRecognizer) {
+        guard let presentedView = presentedView else { return }
         let translation = sender.translation(in: presentedView)
         
         if sender.state == .began {
-            originalPosition = presentedView!.center
+            originalPosition = presentedView.center
             currentPositionTouched = sender.location(in: presentedView)
         } else if sender.state == .changed {
             
-            if (presentedView?.frame.origin.y)! < 680 {
+            if presentedView.frame.origin.y < 680 {
                 return
             }
-            presentedView!.center.y = originalPosition!.y + translation.y*0.1
+            presentedView.center.y = originalPosition.y + translation.y*0.1
         } else if sender.state == .ended {
             let velocity = sender.velocity(in: presentedView)
             
@@ -103,7 +104,7 @@ final class ModeSelectPresentationController: UIPresentationController {
                 presentedViewController.dismiss(animated: true)
             } else {
                 UIView.animate(withDuration: 0.2) { [self] in
-                    presentedView?.center = originalPosition!
+                    presentedView.center = originalPosition
                 }
             }
         }
