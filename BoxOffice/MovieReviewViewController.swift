@@ -172,6 +172,7 @@ final class MovieReviewViewController: UIViewController {
         addViews()
         setupLayout()
         configureImagePicker()
+        bind()
     }
     
     override func viewDidLayoutSubviews() {
@@ -179,6 +180,12 @@ final class MovieReviewViewController: UIViewController {
         
         nicknameTextField.setUnderLine(width: 1, color: .tertiaryLabel)
         passwordTextField.setUnderLine(width: 1, color: .tertiaryLabel)
+    }
+    
+    private func bind() {
+        viewModel.presentImagePicker = { [weak self] in
+            self?.present(self!.imagePicker, animated: true)
+        }
     }
     
     private func setupStarButtons() {
