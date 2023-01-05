@@ -78,6 +78,7 @@ final class DetailInfoViewController: UIViewController {
     
     private lazy var shareButton: UIButton = {
         let button = UIButton(frame: .zero)
+        button.addTarget(self, action: #selector(touchUpShareButton), for: .touchUpInside)
         button.setImage(UIImage(systemName: "paperplane"), for: .normal)
         button.tintColor = UIColor(r: 76, g: 52, b: 145)
         return button
@@ -234,5 +235,21 @@ final class DetailInfoViewController: UIViewController {
                 self.configureCustomBoxOffice(model)
             }
             .store(in: &cancelable)
+        
+        detailInfoViewModel.output.shareMovieInfoPublisher
+            .sink { [weak self] model in
+                guard let self = self else { return }
+                let activityController = UIActivityViewController(
+                    activityItems: model,
+                    applicationActivities: nil
+                )
+                self.present(activityController, animated: true)
+            }
+            .store(in: &cancelable)
+    }
+    
+    @objc
+    private func touchUpShareButton() {
+        detailInfoViewModel?.input.touchUpShareButton()
     }
 }
