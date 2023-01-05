@@ -11,6 +11,7 @@ class MovieDetailViewController: UIViewController {
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 16
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -22,7 +23,8 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupView()
+        setupNavigationItem()
     }
     
     let testMovie = MovieDetail(
@@ -45,6 +47,10 @@ class MovieDetailViewController: UIViewController {
     //TODO: 출연 더보기 모달 뷰
     
     private func setupView() {
+        //TODO: ReviewTable
+        movieMainInfoView.configure(with: testMovie)
+        movieSubInfoView.configure(with: testMovie)
+        
         addSubView()
         setupConstraint()
         view.backgroundColor = .systemBackground
@@ -61,14 +67,15 @@ class MovieDetailViewController: UIViewController {
     //TODO: 뷰 constraint 조정하기 (뷰컨 외에도 대부분 뷰의 StackView를 다시 봐야합니다
     private func setupConstraint() {
         NSLayoutConstraint.activate([
-            entireStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-                                                 constant: 8),
-            entireStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                                                    constant: -8),
-            entireStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-                                                     constant: 16),
-            entireStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                                                      constant: -16)
+            entireStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            entireStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            entireStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            entireStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
+    }
+    
+    private func setupNavigationItem() {
+        //TODO: 넘겨받은 영화 제목으로 설정
+        navigationItem.title = testMovie.title
     }
 }
