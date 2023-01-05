@@ -25,7 +25,6 @@
 		20F38B0129654EB800415749 /* WriteReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F38B0029654EB800415749 /* WriteReviewViewModel.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
-		635A19EC28F9603900197BCC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* HomeViewController.swift */; };
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
 		635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F228F9603A00197BCC /* LaunchScreen.storyboard */; };
 		AF12A473296595CB008C484B /* CalendarPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF12A472296595CB008C484B /* CalendarPresentationController.swift */; };
@@ -33,6 +32,7 @@
 		AF12A47829659722008C484B /* ModeSelectTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF12A47729659722008C484B /* ModeSelectTransitioningDelegate.swift */; };
 		AF3AEB2D29669A6300B82DCB /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3AEB2C29669A6300B82DCB /* GridCell.swift */; };
 		AF3AEB2F2966CB4B00B82DCB /* MovieAPIUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3AEB2E2966CB4B00B82DCB /* MovieAPIUseCase.swift */; };
+		AF3AEB322966D21800B82DCB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3AEB312966D21800B82DCB /* HomeViewController.swift */; };
 		AF6C3A422962D5C80074574D /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C3A412962D5C80074574D /* APIConfiguration.swift */; };
 		AF6C3A442962D5E00074574D /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C3A432962D5E00074574D /* APIError.swift */; };
 		AF6C3A462962D5E70074574D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C3A452962D5E70074574D /* API.swift */; };
@@ -89,7 +89,6 @@
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		635A19EB28F9603900197BCC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		635A19F028F9603A00197BCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		635A19F328F9603A00197BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		635A19F528F9603A00197BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,6 +97,7 @@
 		AF12A47729659722008C484B /* ModeSelectTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectTransitioningDelegate.swift; sourceTree = "<group>"; };
 		AF3AEB2C29669A6300B82DCB /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		AF3AEB2E2966CB4B00B82DCB /* MovieAPIUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPIUseCase.swift; sourceTree = "<group>"; };
+		AF3AEB312966D21800B82DCB /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		AF6C3A412962D5C80074574D /* APIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
 		AF6C3A432962D5E00074574D /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		AF6C3A452962D5E70074574D /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -245,6 +245,7 @@
 				635A19E628F9603900197BCC /* BoxOffice */,
 				AF6C3A622963045F0074574D /* APITests */,
 				635A19E528F9603900197BCC /* Products */,
+				AF3AEB302966D10600B82DCB /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -275,7 +276,6 @@
 				AF12A4762965965C008C484B /* CalendarModalView */,
 				20BB8C162963B37D00801668 /* Domain */,
 				2073EB18296317BF00216565 /* FirebaseManager */,
-				635A19EB28F9603900197BCC /* ViewController.swift */,
 				20C7D43629641D8200D87350 /* Observable.swift */,
 				20F38AF92965112200415749 /* StarRating */,
 				20F38B032965BB1000415749 /* Scene */,
@@ -307,15 +307,23 @@
 		AF12A47A29659773008C484B /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				635A19EB28F9603900197BCC /* HomeViewController.swift */,
 				AF85E0AC29653D7400A22732 /* HomeViewModel.swift */,
 				AF3AEB2E2966CB4B00B82DCB /* MovieAPIUseCase.swift */,
 				AFB6BB72296413B300386D14 /* HomeCollectionView.swift */,
+				AF3AEB312966D21800B82DCB /* HomeViewController.swift */,
 				AFB6BB702963C4AA00386D14 /* ListCell.swift */,
 				AF3AEB2C29669A6300B82DCB /* GridCell.swift */,
 				AFB6BB742964553D00386D14 /* HeaderView.swift */,
 			);
 			path = HomeView;
+			sourceTree = "<group>";
+		};
+		AF3AEB302966D10600B82DCB /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				AF85E0AE296541FA00A22732 /* Observable.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		AF6C3A402962D5B50074574D /* Network */ = {
@@ -477,7 +485,7 @@
 				20F38AFC2965115000415749 /* StarRatingUISlider.swift in Sources */,
 				2073EB17296311F100216565 /* FirestoreManager.swift in Sources */,
 				20BB8C202963C2DA00801668 /* FirebaseError.swift in Sources */,
-				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
+				AF3AEB322966D21800B82DCB /* HomeViewController.swift in Sources */,
 				20BB8C1C2963B54400801668 /* Review.swift in Sources */,
 				2073EB1C29631F8C00216565 /* StorageManager.swift in Sources */,
 				AF6C3A5A2962F1BC0074574D /* MovieCellData.swift in Sources */,
@@ -487,8 +495,6 @@
 				AF12A47829659722008C484B /* ModeSelectTransitioningDelegate.swift in Sources */,
 				AF6C3A4D2962D74E0074574D /* SearchWeeklyBoxOfficeListAPI.swift in Sources */,
 				AF85E0B329656BBA00A22732 /* CalendarViewController.swift in Sources */,
-				635A19EC28F9603900197BCC /* HomeViewController.swift in Sources */,
-				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
 				20C7D43C29642F0400D87350 /* StarRatingView.swift in Sources */,
 				AF6C3A482962D6090074574D /* APIClient.swift in Sources */,
 				AF12A4752965963A008C484B /* CalendarTransitioningDelegate.swift in Sources */,
