@@ -171,6 +171,7 @@ final class MovieReviewViewController: UIViewController {
     private func addViews() {
         [
             questionLabel,
+            starButtonsStackView,
             reviewRequestLabel,
             reviewTextView,
             photoAddingButton,
@@ -188,7 +189,10 @@ final class MovieReviewViewController: UIViewController {
             questionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
             questionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             
-            reviewRequestLabel.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 50),
+            starButtonsStackView.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 16),
+            starButtonsStackView.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
+            
+            reviewRequestLabel.topAnchor.constraint(equalTo: starButtonsStackView.bottomAnchor, constant: 50),
             reviewRequestLabel.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
             
             reviewTextView.topAnchor.constraint(equalTo: reviewRequestLabel.bottomAnchor, constant: 8),
