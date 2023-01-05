@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2005979629669097002AB7EC /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005979529669097002AB7EC /* MovieDetailViewModel.swift */; };
 		201825AA29664B8F00ADB79A /* MovieSubInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201825A929664B8F00ADB79A /* MovieSubInfoCollectionViewCell.swift */; };
 		201825AC29664D8D00ADB79A /* MovieReviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201825AB29664D8D00ADB79A /* MovieReviewCollectionViewCell.swift */; };
 		203201FF29630CB000097F31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 203201FE29630CB000097F31 /* GoogleService-Info.plist */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2005979529669097002AB7EC /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 		201825A929664B8F00ADB79A /* MovieSubInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSubInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		201825AB29664D8D00ADB79A /* MovieReviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewCollectionViewCell.swift; sourceTree = "<group>"; };
 		203201FE29630CB000097F31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				20F38B0C2965CCAE00415749 /* MovieMainInfoCollectionViewCell.swift */,
 				201825AB29664D8D00ADB79A /* MovieReviewCollectionViewCell.swift */,
 				201825A929664B8F00ADB79A /* MovieSubInfoCollectionViewCell.swift */,
+				2005979529669097002AB7EC /* MovieDetailViewModel.swift */,
 			);
 			path = MovieDetailScene;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				20F38AFF296511A700415749 /* StarImageView.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				AF6C3A512962D7E20074574D /* SearchMoviePosterAPI.swift in Sources */,
+				2005979629669097002AB7EC /* MovieDetailViewModel.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 				20F38B0129654EB800415749 /* WriteReviewViewModel.swift in Sources */,
 				20BB8C192963B40300801668 /* ReviewFirebaseUseCase.swift in Sources */,
