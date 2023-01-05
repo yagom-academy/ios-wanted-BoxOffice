@@ -10,6 +10,16 @@ import UIKit
 final class MainViewCell: UICollectionViewCell {
     static let identifier = "\(MainViewCell.self)"
     
+    private lazy var newLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "NEW"
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 15, weight: .heavy)
+        label.isHidden = true
+        label.textAlignment = .center
+        return label
+    }()
+    
     private lazy var posterImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.backgroundColor = .lightGray
@@ -73,6 +83,7 @@ final class MainViewCell: UICollectionViewCell {
         
         addSubviews(
             posterImageView,
+            newLabel,
             numberBoxView,
             rankNumberLabel,
             titleLabel,
@@ -83,6 +94,14 @@ final class MainViewCell: UICollectionViewCell {
     }
     
     private func setupUI() {
+        // MARK: - newLabel
+        newLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            newLabel.topAnchor.constraint(equalTo: posterImageView.topAnchor, constant: 15),
+            newLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
+        ])
+        
         // MARK: - posterImageView
         posterImageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -155,5 +174,9 @@ final class MainViewCell: UICollectionViewCell {
         audienceLabel.text = "관객수: \(model.boxOffice.audienceCount)"
         dateLabel.text = "개봉일: \(model.boxOffice.openDate)"
         posterImageView.loadImage(from: model.posterURL)
+        
+        if model.boxOffice.isNewRank == "NEW" {
+            newLabel.isHidden = false
+        }
     }
 }

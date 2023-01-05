@@ -55,8 +55,8 @@ final class MainView: UIView {
     
     private lazy var dailyWeeklyToggle: UIButton = {
         let button = UIButton(frame: .zero)
-        button.setTitle("DAILY", for: .normal)
-        button.titleLabel?.font = .preferredFont(forTextStyle: .headline)
+        button.setTitle("예매하기", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         button.backgroundColor = UIColor(r: 76, g: 52, b: 145)
         return button
     }()
@@ -133,7 +133,7 @@ final class MainView: UIView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: boxOfficeLabel.bottomAnchor, constant: 30),
+            collectionView.topAnchor.constraint(equalTo: boxOfficeLabel.bottomAnchor, constant: 20),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: dailyWeeklyToggle.topAnchor, constant: -30)
@@ -143,10 +143,10 @@ final class MainView: UIView {
         dailyWeeklyToggle.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            dailyWeeklyToggle.topAnchor.constraint(equalTo: bottomAnchor, constant: -100),
             dailyWeeklyToggle.leadingAnchor.constraint(equalTo: leadingAnchor),
             dailyWeeklyToggle.trailingAnchor.constraint(equalTo: trailingAnchor),
-            dailyWeeklyToggle.bottomAnchor.constraint(equalTo: bottomAnchor)
+            dailyWeeklyToggle.bottomAnchor.constraint(equalTo: bottomAnchor),
+            dailyWeeklyToggle.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
 }

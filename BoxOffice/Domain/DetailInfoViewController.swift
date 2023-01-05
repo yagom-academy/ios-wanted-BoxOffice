@@ -14,7 +14,7 @@ final class DetailInfoViewController: UIViewController {
         let label = UILabel(frame: .zero)
         label.text = "NEW"
         label.textColor = UIColor(r: 76, g: 52, b: 145)
-        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.font = .systemFont(ofSize: 15, weight: .heavy)
         label.isHidden = true
         return label
     }()
