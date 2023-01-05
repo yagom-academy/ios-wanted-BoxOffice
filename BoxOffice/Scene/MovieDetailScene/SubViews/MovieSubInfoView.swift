@@ -41,7 +41,12 @@ class MovieSubInfoView: UIView {
     
     //TODO: MovieDetail로 뷰 세팅하기
     func configure(with movie: MovieDetail) {
-
+        totalAudienceLabel.text = movie.totalAudience
+        productionYearLabel.text = movie.productionYear
+        showTimeLabel.text = movie.showTime
+        directorNameLabel.text = movie.directorName
+        actorsLabel.text = movie.actors
+        ageLimitLabel.text = movie.ageLimit
     }
     
     private func setupView() {
