@@ -16,24 +16,22 @@ struct BoxOfficeDetailView: View {
 
     var body: some View {
         ZStack {
-            if let image = imageLoader.image {
-                Image(uiImage: image)
+            Image(uiImage: viewModel.url[myIndex])
+                .renderingMode(.original)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(maxHeight: .infinity, alignment: .top)
+                .padding(EdgeInsets(top: 0, leading: 0, bottom: 500, trailing: 0))
+                .blur(radius: 2, opaque: true)
+            
+            HStack(alignment: .top) {
+                Image(uiImage: viewModel.url[myIndex])
                     .renderingMode(.original)
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(maxHeight: .infinity, alignment: .top)
-                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 500, trailing: 0))
-                    .blur(radius: 2, opaque: true)
-            }
-            HStack(alignment: .top) {
-                if let image = imageLoader.image {
-                    Image(uiImage: image)
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .padding(.top, 200)
-                        .frame(width: 150, height: 500)
-                }
+                    .aspectRatio(contentMode: .fit)
+                    .padding(.top, 200)
+                    .frame(width: 150, height: 500)
+                
                 VStack(alignment: .leading) {
                     Text("제목")
                         .font(.title3)
@@ -47,11 +45,7 @@ struct BoxOfficeDetailView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(30)
         }
-        
         .ignoresSafeArea()
-        .onAppear {
-            imageLoader.fetch(urlString: viewModel.url[myIndex])
-        }
     }
 }
 

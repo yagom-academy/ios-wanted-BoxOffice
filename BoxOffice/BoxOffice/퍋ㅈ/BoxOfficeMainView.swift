@@ -9,11 +9,12 @@ import SwiftUI
 
 struct BoxOfficeMainView: View {
     
-    @ObservedObject var boxOfficeMainViewModel = BoxOfficeMainViewModel()
-    
+    @StateObject var boxOfficeMainViewModel = BoxOfficeMainViewModel()
+    @StateObject private var imageLoader = URLImageLoader()
+
     var body: some View {
         NavigationView {
-            if boxOfficeMainViewModel.movieList.count != 0 {
+            if boxOfficeMainViewModel.url.count != 0 {
                 List {
                     Section {
                         VStack(alignment: .leading) {
@@ -22,16 +23,22 @@ struct BoxOfficeMainView: View {
                                 .padding(.leading, 15)
                                 .padding(.top, 5)
                             TabView {
-                                ForEach(Array(boxOfficeMainViewModel.movieList.enumerated()), id: \.0) { index, data in
+                                ForEach(0..<3, id: \.self) { index in
                                     NavigationLink {
                                         BoxOfficeDetailView(
                                             viewModel: boxOfficeMainViewModel,
                                             myIndex: index
                                         )
                                     } label: {
-                                        BoxOfficeTabView(
-                                            viewModel: boxOfficeMainViewModel,
-                                            myIndex: index)
+                                        ZStack(alignment: .bottomLeading) {
+                                            Image(uiImage: boxOfficeMainViewModel.url[index])
+                                                .resizable()
+                                                .renderingMode(.original)
+                                            Text("\(index + 1)")
+                                                .padding(10)
+                                                .font(.largeTitle)
+                                                .foregroundColor(.black)
+                                        }
                                     }
                                 }
                             }
@@ -56,11 +63,19 @@ struct BoxOfficeMainView: View {
                                                 myIndex: index
                                             )
                                         } label: {
-                                            BoxOfficeStackView(
-                                                dailyModel: boxOfficeMainViewModel,
-                                                dailyBoxOfficeList: data,
-                                                myIndex: index
-                                            )
+                                            ZStack(alignment: .bottomLeading) {
+                                                Image(uiImage: boxOfficeMainViewModel.url[index])
+                                                    .renderingMode(.original)
+                                                    .resizable()
+                                                    .frame(width: 200, height: 200)
+                                                    .cornerRadius(10)
+                                                Text(data.rank + ". " + data.movieNm)
+                                                    .padding(10)
+                                                    .lineLimit(1)
+                                                    .foregroundColor(.white)
+                                                    .font(.system(size: 15, weight: .bold))
+                                            }
+                                            .frame(width: 200)
                                         }
                                     }
                                 }
