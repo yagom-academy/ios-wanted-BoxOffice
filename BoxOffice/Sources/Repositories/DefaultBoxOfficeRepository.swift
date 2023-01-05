@@ -40,7 +40,7 @@ final class DefaultBoxOfficeRepository: BoxOfficeRepository {
         return apiProvider.excute(KobisAPI.weeklyBoxOfficeList(param), useCaching: true)
             .subscribe(on: DispatchQueue.global())
             .map(\.data)
-            .decode(type: DailyBoxOfficeListResponse.self, decoder: decoder)
+            .decode(type: WeeklyBoxOfficeListResponse.self, decoder: decoder)
             .map { $0.toMovies() }
             .eraseToAnyPublisher()
     }

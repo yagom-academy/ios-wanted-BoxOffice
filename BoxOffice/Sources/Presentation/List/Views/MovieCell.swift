@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class MovieCell: UITableViewCell {
+    
+    private var viewModel: MovieCellViewModel?
+    private var cancellables: Set<AnyCancellable> = .init()
     
     // MARK: - Views
     private lazy var backgroundStackView: UIStackView = {
@@ -31,6 +35,7 @@ class MovieCell: UITableViewCell {
     private lazy var rankIntenView: UIStackView = {
         let stackView = UIStackView(axis: .horizontal, alignment: .center, distribution: .fill, spacing: 2)
         stackView.addArrangedSubviews(arrowImageView, rankIntenLabel)
+        stackView.widthAnchor.constraint(equalToConstant: 36).isActive = true
         stackView.setContentHuggingPriority(.required, for: .horizontal)
         return stackView
     }()
@@ -49,7 +54,8 @@ class MovieCell: UITableViewCell {
         label.text = "2"
         label.font = .preferredFont(for: .body, weight: .regular)
         label.textColor = .label
-        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.textAlignment = .center
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return label
     }()
     
@@ -93,9 +99,9 @@ class MovieCell: UITableViewCell {
     
     private lazy var posterView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "ironman")
         imageView.widthAnchor.constraint(equalToConstant: 90).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 110).isActive = true
+        imageView.backgroundColor = .darkGray
         return imageView
     }()
     
@@ -115,8 +121,9 @@ class MovieCell: UITableViewCell {
     }
     
     // MARK: - Set up
-    func setUp() {
-        
+    func setUp(viewModel: MovieCellViewModel) {
+        self.viewModel = viewModel
+        bind()
     }
     
 }
@@ -135,8 +142,69 @@ private extension MovieCell {
         ])
     }
     
-    func reset() {
+    func bind() {
+        viewModel?.output.movie
+            .compactMap { $0.boxOfficeInfo?.rank.description }
+            .sinkOnMainThread(receiveValue: { [weak self] rank in
+                self?.rankLabel.text = rank
+            }).store(in: &cancellables)
         
+        viewModel?.output.movie
+            .compactMap { ($0.boxOfficeInfo?.rankInten == 0 || $0.boxOfficeInfo?.rankOldAndNew == .new) }
+            .sinkOnMainThread(receiveValue: { [weak self] isHidden in
+                self?.arrowImageView.isHidden = isHidden
+            }).store(in: &cancellables)
+        
+        viewModel?.output.movie
+            .compactMap { $0.boxOfficeInfo }
+            .map { movieInfo -> String in
+                if movieInfo.rankOldAndNew == .new {
+                    return movieInfo.rankOldAndNew.rawValue
+                } else if movieInfo.rankInten == 0 {
+                    return "-"
+                } else {
+                    return movieInfo.rankInten.description.capitalized
+                }
+            }.sinkOnMainThread(receiveValue: { [weak self] rankInten in
+                self?.rankIntenLabel.text = rankInten
+            }).store(in: &cancellables)
+
+        viewModel?.output.movie
+            .compactMap { $0.boxOfficeInfo?.rankInten }
+            .sinkOnMainThread(receiveValue: { [weak self] rankInten in
+                self?.setUpRankInten(rankInten)
+            }).store(in: &cancellables)
+        
+        viewModel?.output.movie
+            .sinkOnMainThread(receiveValue: { [weak self] movie in
+                self?.setUpInfo(movie)
+            }).store(in: &cancellables)
+    }
+    
+    func setUpRankInten(_ rankInten: Int) {
+        let config = UIImage.SymbolConfiguration(textStyle: .body, scale: .medium)
+        let upArrow = UIImage(systemName: "arrowtriangle.up.fill")?.withConfiguration(config)
+        let downArrow = UIImage(systemName: "arrowtriangle.down.fill")?.withConfiguration(config)
+        arrowImageView.image = rankInten > 0 ? upArrow : downArrow
+        arrowImageView.tintColor = rankInten > 0 ? .systemRed : .systemBlue
+    }
+    
+    func setUpInfo(_ movie: Movie) {
+        titleLabel.text = movie.name
+        openDateLabel.text = "개봉 \(movie.openDate.toString(.yyyyMMddDot))"
+        audienceAccumulationLabel.text = "\(movie.boxOfficeInfo?.audienceAccumulation.numberFormatter() ?? "")명"
+        posterView.setImage(with: movie.detailInfo?.poster ?? "")
+    }
+    
+    func reset() {
+        ImageCacheManager.shared.cancelDownloadTask()
+        rankLabel.text = nil
+        rankIntenLabel.text = nil
+        arrowImageView.image = nil
+        titleLabel.text = nil
+        openDateLabel.text = nil
+        audienceAccumulationLabel.text = nil
+        posterView.image = nil
     }
     
 }
