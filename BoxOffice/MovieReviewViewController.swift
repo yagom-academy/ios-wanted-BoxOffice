@@ -18,6 +18,23 @@ final class MovieReviewViewController: UIViewController {
         return label
     }()
     
+    private let starButton1 = UIButton()
+    private let starButton2 = UIButton()
+    private let starButton3 = UIButton()
+    private let starButton4 = UIButton()
+    private let starButton5 = UIButton()
+
+    private lazy var starButtons = [starButton1, starButton2, starButton3, starButton4, starButton5]
+    
+    private lazy var starsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        starButtons.forEach { stackView.addArrangedSubview($0) }
+        stackView.axis = .horizontal
+        stackView.backgroundColor = .clear
+        return stackView
+    }()
+    
     private let reviewRequestLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
