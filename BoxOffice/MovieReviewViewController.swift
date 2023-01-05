@@ -10,6 +10,7 @@ import UIKit
 final class MovieReviewViewController: UIViewController {
     
     private let viewModel = MovieReviewViewModel()
+    private var rating: Double = 0
     
     private let imagePicker: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
@@ -215,6 +216,7 @@ final class MovieReviewViewController: UIViewController {
             self.starButton3.isSelected = false
             self.starButton4.isSelected = false
             self.starButton5.isSelected = false
+            self.rating = 1
         }), for: .touchUpInside)
         
         starButton2.addAction(UIAction(handler: { action in
@@ -223,6 +225,7 @@ final class MovieReviewViewController: UIViewController {
             self.starButton3.isSelected = false
             self.starButton4.isSelected = false
             self.starButton5.isSelected = false
+            self.rating = 2
         }), for: .touchUpInside)
         
         starButton3.addAction(UIAction(handler: { action in
@@ -231,6 +234,7 @@ final class MovieReviewViewController: UIViewController {
             self.starButton3.isSelected = true
             self.starButton4.isSelected = false
             self.starButton5.isSelected = false
+            self.rating = 3
         }), for: .touchUpInside)
         
         starButton4.addAction(UIAction(handler: { action in
@@ -239,6 +243,7 @@ final class MovieReviewViewController: UIViewController {
             self.starButton3.isSelected = true
             self.starButton4.isSelected = true
             self.starButton5.isSelected = false
+            self.rating = 4
         }), for: .touchUpInside)
         
         starButton5.addAction(UIAction(handler: { action in
@@ -247,6 +252,7 @@ final class MovieReviewViewController: UIViewController {
             self.starButton3.isSelected = true
             self.starButton4.isSelected = true
             self.starButton5.isSelected = true
+            self.rating = 5
         }), for: .touchUpInside)
     }
 
