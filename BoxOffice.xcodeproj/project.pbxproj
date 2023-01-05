@@ -31,9 +31,14 @@
 		20F38B0D2965CCAE00415749 /* MovieMainInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F38B0C2965CCAE00415749 /* MovieMainInfoView.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
-		635A19EC28F9603900197BCC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* ViewController.swift */; };
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
 		635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F228F9603A00197BCC /* LaunchScreen.storyboard */; };
+		AF12A473296595CB008C484B /* CalendarPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF12A472296595CB008C484B /* CalendarPresentationController.swift */; };
+		AF12A4752965963A008C484B /* CalendarTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF12A4742965963A008C484B /* CalendarTransitioningDelegate.swift */; };
+		AF12A47829659722008C484B /* ModeSelectTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF12A47729659722008C484B /* ModeSelectTransitioningDelegate.swift */; };
+		AF3AEB2D29669A6300B82DCB /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3AEB2C29669A6300B82DCB /* GridCell.swift */; };
+		AF3AEB2F2966CB4B00B82DCB /* MovieAPIUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3AEB2E2966CB4B00B82DCB /* MovieAPIUseCase.swift */; };
+		AF3AEB322966D21800B82DCB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3AEB312966D21800B82DCB /* HomeViewController.swift */; };
 		AF6C3A422962D5C80074574D /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C3A412962D5C80074574D /* APIConfiguration.swift */; };
 		AF6C3A442962D5E00074574D /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C3A432962D5E00074574D /* APIError.swift */; };
 		AF6C3A462962D5E70074574D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C3A452962D5E70074574D /* API.swift */; };
@@ -51,6 +56,17 @@
 		AF6C3A6B296306B80074574D /* SearchWeeklyBoxOfficeListAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C3A6A296306B80074574D /* SearchWeeklyBoxOfficeListAPITests.swift */; };
 		AF6C3A6D296306CE0074574D /* SearchMovieInfoAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C3A6C296306CE0074574D /* SearchMovieInfoAPITests.swift */; };
 		AF6C3A6F2963070C0074574D /* SearchMoviePosterAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C3A6E2963070C0074574D /* SearchMoviePosterAPITests.swift */; };
+		AF85E0A92965156A00A22732 /* ModeSelectPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF85E0A82965156A00A22732 /* ModeSelectPresentationController.swift */; };
+		AF85E0AB29651C0000A22732 /* ModeSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF85E0AA29651C0000A22732 /* ModeSelectCell.swift */; };
+		AF85E0AD29653D7400A22732 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF85E0AC29653D7400A22732 /* HomeViewModel.swift */; };
+		AF85E0AF296541FA00A22732 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF85E0AE296541FA00A22732 /* Observable.swift */; };
+		AF85E0B12965509D00A22732 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF85E0B02965509D00A22732 /* ImageCacheManager.swift */; };
+		AF85E0B329656BBA00A22732 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF85E0B229656BBA00A22732 /* CalendarViewController.swift */; };
+		AF85E0B5296571A300A22732 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF85E0B4296571A300A22732 /* Date+Extension.swift */; };
+		AFB6BB712963C4AA00386D14 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB6BB702963C4AA00386D14 /* ListCell.swift */; };
+		AFB6BB73296413B300386D14 /* HomeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB6BB72296413B300386D14 /* HomeCollectionView.swift */; };
+		AFB6BB752964553D00386D14 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB6BB742964553D00386D14 /* HeaderView.swift */; };
+		AFB6BB7729646B6400386D14 /* ModeSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB6BB7629646B6400386D14 /* ModeSelectViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,10 +101,15 @@
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		635A19EB28F9603900197BCC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		635A19F028F9603A00197BCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		635A19F328F9603A00197BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		635A19F528F9603A00197BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF12A472296595CB008C484B /* CalendarPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPresentationController.swift; sourceTree = "<group>"; };
+		AF12A4742965963A008C484B /* CalendarTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTransitioningDelegate.swift; sourceTree = "<group>"; };
+		AF12A47729659722008C484B /* ModeSelectTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectTransitioningDelegate.swift; sourceTree = "<group>"; };
+		AF3AEB2C29669A6300B82DCB /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
+		AF3AEB2E2966CB4B00B82DCB /* MovieAPIUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPIUseCase.swift; sourceTree = "<group>"; };
+		AF3AEB312966D21800B82DCB /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		AF6C3A412962D5C80074574D /* APIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
 		AF6C3A432962D5E00074574D /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		AF6C3A452962D5E70074574D /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -107,6 +128,17 @@
 		AF6C3A6A296306B80074574D /* SearchWeeklyBoxOfficeListAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWeeklyBoxOfficeListAPITests.swift; sourceTree = "<group>"; };
 		AF6C3A6C296306CE0074574D /* SearchMovieInfoAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieInfoAPITests.swift; sourceTree = "<group>"; };
 		AF6C3A6E2963070C0074574D /* SearchMoviePosterAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMoviePosterAPITests.swift; sourceTree = "<group>"; };
+		AF85E0A82965156A00A22732 /* ModeSelectPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectPresentationController.swift; sourceTree = "<group>"; };
+		AF85E0AA29651C0000A22732 /* ModeSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectCell.swift; sourceTree = "<group>"; };
+		AF85E0AC29653D7400A22732 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		AF85E0AE296541FA00A22732 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		AF85E0B02965509D00A22732 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		AF85E0B229656BBA00A22732 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		AF85E0B4296571A300A22732 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		AFB6BB702963C4AA00386D14 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
+		AFB6BB72296413B300386D14 /* HomeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionView.swift; sourceTree = "<group>"; };
+		AFB6BB742964553D00386D14 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		AFB6BB7629646B6400386D14 /* ModeSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +279,7 @@
 				635A19E628F9603900197BCC /* BoxOffice */,
 				AF6C3A622963045F0074574D /* APITests */,
 				635A19E528F9603900197BCC /* Products */,
+				AF3AEB302966D10600B82DCB /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -270,14 +303,61 @@
 				AF6C3A402962D5B50074574D /* Network */,
 				203201FB2962CE1900097F31 /* Resource */,
 				203201FA2962CE0700097F31 /* Application */,
+				AF85E0B02965509D00A22732 /* ImageCacheManager.swift */,
+				AF85E0B4296571A300A22732 /* Date+Extension.swift */,
+				AF12A47A29659773008C484B /* HomeView */,
+				AF12A47929659744008C484B /* ModeSelectModalView */,
+				AF12A4762965965C008C484B /* CalendarModalView */,
 				20BB8C162963B37D00801668 /* Domain */,
 				2073EB18296317BF00216565 /* FirebaseManager */,
-				635A19EB28F9603900197BCC /* ViewController.swift */,
 				20C7D43629641D8200D87350 /* Observable.swift */,
 				20F38AF92965112200415749 /* StarRating */,
 				20F38B032965BB1000415749 /* Scene */,
 			);
 			path = BoxOffice;
+			sourceTree = "<group>";
+		};
+		AF12A4762965965C008C484B /* CalendarModalView */ = {
+			isa = PBXGroup;
+			children = (
+				AF85E0B229656BBA00A22732 /* CalendarViewController.swift */,
+				AF12A472296595CB008C484B /* CalendarPresentationController.swift */,
+				AF12A4742965963A008C484B /* CalendarTransitioningDelegate.swift */,
+			);
+			path = CalendarModalView;
+			sourceTree = "<group>";
+		};
+		AF12A47929659744008C484B /* ModeSelectModalView */ = {
+			isa = PBXGroup;
+			children = (
+				AFB6BB7629646B6400386D14 /* ModeSelectViewController.swift */,
+				AF85E0AA29651C0000A22732 /* ModeSelectCell.swift */,
+				AF85E0A82965156A00A22732 /* ModeSelectPresentationController.swift */,
+				AF12A47729659722008C484B /* ModeSelectTransitioningDelegate.swift */,
+			);
+			path = ModeSelectModalView;
+			sourceTree = "<group>";
+		};
+		AF12A47A29659773008C484B /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				AF85E0AC29653D7400A22732 /* HomeViewModel.swift */,
+				AF3AEB2E2966CB4B00B82DCB /* MovieAPIUseCase.swift */,
+				AFB6BB72296413B300386D14 /* HomeCollectionView.swift */,
+				AF3AEB312966D21800B82DCB /* HomeViewController.swift */,
+				AFB6BB702963C4AA00386D14 /* ListCell.swift */,
+				AF3AEB2C29669A6300B82DCB /* GridCell.swift */,
+				AFB6BB742964553D00386D14 /* HeaderView.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		AF3AEB302966D10600B82DCB /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				AF85E0AE296541FA00A22732 /* Observable.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		AF6C3A402962D5B50074574D /* Network */ = {
@@ -443,14 +523,21 @@
 				20BB8C202963C2DA00801668 /* FirebaseError.swift in Sources */,
 				20F38B0B2965C31400415749 /* MovieDetailViewController.swift in Sources */,
 				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
+				AF3AEB322966D21800B82DCB /* HomeViewController.swift in Sources */,
 				20BB8C1C2963B54400801668 /* Review.swift in Sources */,
 				2073EB1C29631F8C00216565 /* StorageManager.swift in Sources */,
 				AF6C3A5A2962F1BC0074574D /* MovieCellData.swift in Sources */,
+				AF85E0AD29653D7400A22732 /* HomeViewModel.swift in Sources */,
+				AFB6BB752964553D00386D14 /* HeaderView.swift in Sources */,
 				AF6C3A4B2962D7210074574D /* SearchDailyBoxOfficeListAPI.swift in Sources */,
+				AF12A47829659722008C484B /* ModeSelectTransitioningDelegate.swift in Sources */,
 				AF6C3A4D2962D74E0074574D /* SearchWeeklyBoxOfficeListAPI.swift in Sources */,
-				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
+				AF85E0B329656BBA00A22732 /* CalendarViewController.swift in Sources */,
 				20C7D43C29642F0400D87350 /* StarRatingView.swift in Sources */,
 				AF6C3A482962D6090074574D /* APIClient.swift in Sources */,
+				AF12A4752965963A008C484B /* CalendarTransitioningDelegate.swift in Sources */,
+				AFB6BB73296413B300386D14 /* HomeCollectionView.swift in Sources */,
+				AFB6BB7729646B6400386D14 /* ModeSelectViewController.swift in Sources */,
 				AF6C3A572962EBDE0074574D /* Dictionary+Extension.swift in Sources */,
 				20F38AFF296511A700415749 /* StarImageView.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
@@ -460,14 +547,25 @@
 				20F38B0129654EB800415749 /* MovieReviewViewModel.swift in Sources */,
 				20BB8C192963B40300801668 /* ReviewFirebaseUseCase.swift in Sources */,
 				AF6C3A552962EA0B0074574D /* Bundle+Extension.swift in Sources */,
+				AF85E0B5296571A300A22732 /* Date+Extension.swift in Sources */,
 				AF6C3A442962D5E00074574D /* APIError.swift in Sources */,
+				AFB6BB712963C4AA00386D14 /* ListCell.swift in Sources */,
 				20C7D43929641DDA00D87350 /* WriteReviewViewController.swift in Sources */,
 				AF6C3A462962D5E70074574D /* API.swift in Sources */,
 				20F38B0D2965CCAE00415749 /* MovieMainInfoView.swift in Sources */,
 				AF6C3A5C2962F4FF0074574D /* MovieDetail.swift in Sources */,
 				AF6C3A422962D5C80074574D /* APIConfiguration.swift in Sources */,
 				200597982966B690002AB7EC /* ReviewTableViewCell.swift in Sources */,
+				AF85E0AB29651C0000A22732 /* ModeSelectCell.swift in Sources */,
+				AF3AEB2F2966CB4B00B82DCB /* MovieAPIUseCase.swift in Sources */,
+				AF6C3A5C2962F4FF0074574D /* MovieDetail.swift in Sources */,
+				AF6C3A422962D5C80074574D /* APIConfiguration.swift in Sources */,
+				AF85E0B12965509D00A22732 /* ImageCacheManager.swift in Sources */,
 				AF6C3A4F2962D79D0074574D /* SearchMovieInfoAPI.swift in Sources */,
+				AF85E0A92965156A00A22732 /* ModeSelectPresentationController.swift in Sources */,
+				AF12A473296595CB008C484B /* CalendarPresentationController.swift in Sources */,
+				AF85E0AF296541FA00A22732 /* Observable.swift in Sources */,
+				AF3AEB2D29669A6300B82DCB /* GridCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,6 +729,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -657,6 +756,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
