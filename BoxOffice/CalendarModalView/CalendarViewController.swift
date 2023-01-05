@@ -15,7 +15,7 @@ final class CalendarViewController: UIViewController {
     weak var delegate: CalendarViewControllerDelegate?
     private var customTransitioningDelegate = CalendarTransitioningDelegate()
     private let navigationBar = UINavigationBar(frame: .zero)
-    private let datePicker: UIDatePicker = {
+    let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.preferredDatePickerStyle = .wheels

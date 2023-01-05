@@ -7,10 +7,15 @@
 
 import UIKit
 
+enum BoxOfficeMode: String, CaseIterable {
+    case daily = "일별 박스오피스"
+    case weekly = "주간/주말 박스오피스"
+}
+
 final class HomeViewController: UIViewController {
-    private let selectList = ["일별 박스오피스", "주간/주말 박스오피스"]
     private let homeCollectionView = HomeCollectionView()
     private let homeViewModel = DefaultHomeViewModel()
+    private var searchingDate: Date = Date()
     private let viewModeChangeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -67,19 +72,39 @@ final class HomeViewController: UIViewController {
     }
     
     private func setupViewModel() {
-        homeViewModel.movieCellDatas.bind { cellDatas in
+        homeViewModel.dailyMovieCellDatas.bind { cellDatas in
             guard cellDatas.count == 10 else { return }
             let rankSortedCellDatas = cellDatas.sorted { a, b in
                 Int(a.currentRank) ?? 0 < Int(b.currentRank) ?? 0
             }
             DispatchQueue.main.async {
-                self.homeCollectionView.appendSnapshot(with: rankSortedCellDatas)
+                self.homeCollectionView.appendDailySnapshot(with: rankSortedCellDatas)
                 self.homeCollectionView.reloadData()
             }
         }
-        homeViewModel.setupProperty(date: "20221004")
-        homeCollectionView.currentDate = "20221004"
-        homeViewModel.requestData()
+        homeViewModel.allWeekMovieCellDatas.bind { cellDatas in
+            guard cellDatas.count == 10 else { return }
+            let rankSortedCellDatas = cellDatas.sorted { a, b in
+                Int(a.currentRank) ?? 0 < Int(b.currentRank) ?? 0
+            }
+            DispatchQueue.main.async {
+                self.homeCollectionView.appendAllWeekSnapshot(data: rankSortedCellDatas)
+                self.homeCollectionView.reloadData()
+            }
+        }
+        homeViewModel.weekEndMovieCellDatas.bind { cellDatas in
+            guard cellDatas.count == 10 else { return }
+            let rankSortedCellDatas = cellDatas.sorted { a, b in
+                Int(a.currentRank) ?? 0 < Int(b.currentRank) ?? 0
+            }
+            DispatchQueue.main.async {
+                self.homeCollectionView.appendWeekEndSnapshot(data: rankSortedCellDatas)
+                self.homeCollectionView.reloadData()
+            }
+        }
+        
+        homeCollectionView.currentDate = searchingDate.toString()
+        homeViewModel.requestDailyData(with: searchingDate.toString())
     }
     
     @objc private func viewModeChangeButtonTapped() {
@@ -96,6 +121,7 @@ final class HomeViewController: UIViewController {
     @objc private func calendarButtonTapped() {
         let calendarViewController = CalendarViewController()
         calendarViewController.delegate = self
+        calendarViewController.datePicker.date = searchingDate
         
         present(calendarViewController, animated: true)
     }
@@ -104,8 +130,8 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: 영화 상세로 넘어가기
         print(indexPath.row)
+        // TODO: 영화 상세로 넘어가기
     }
 }
 
@@ -123,17 +149,30 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 // MARK: ModalView Delegate
 extension HomeViewController: ModeSelectViewControllerDelegate {
     func didSelectedRowAt(indexPath: Int) {
-        let mode = selectList[indexPath]
-        viewModeChangeButton.setTitle("▼ \(mode)", for: .normal)
-        // TODO: 해당 보기모드의 dataSource와 layout 으로 변경하기
+        let mode = BoxOfficeMode.allCases[indexPath]
+        viewModeChangeButton.setTitle("▼ \(mode.rawValue)", for: .normal)
+        if mode == .daily {
+            self.homeCollectionView.switchMode(.daily)
+            homeViewModel.requestDailyData(with: searchingDate.toString())
+        } else {
+            self.homeCollectionView.switchMode(.weekly)
+            homeViewModel.requestAllWeekData(with: searchingDate.toString())
+            homeViewModel.requestWeekEndData(with: searchingDate.toString())
+        }
     }
 }
 
 extension HomeViewController: CalendarViewControllerDelegate {
-    func doneButtonDidTapped(date: String) {
-        homeCollectionView.currentDate = date
-        homeViewModel.setupProperty(date: date)
-        homeViewModel.requestData()
+    func searchButtonTapped(date: Date) {
+        searchingDate = date
+        let dateText = date.toString()
+        homeCollectionView.currentDate = dateText
+        if viewModeChangeButton.title(for: .normal) == "▼ 일별 박스오피스" {
+            homeViewModel.requestDailyData(with: dateText)
+        } else {
+            homeViewModel.requestAllWeekData(with: dateText)
+            homeViewModel.requestWeekEndData(with: dateText)
+        }
     }
 }
 

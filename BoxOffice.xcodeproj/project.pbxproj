@@ -15,6 +15,8 @@
 		AF12A473296595CB008C484B /* CalendarPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF12A472296595CB008C484B /* CalendarPresentationController.swift */; };
 		AF12A4752965963A008C484B /* CalendarTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF12A4742965963A008C484B /* CalendarTransitioningDelegate.swift */; };
 		AF12A47829659722008C484B /* ModeSelectTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF12A47729659722008C484B /* ModeSelectTransitioningDelegate.swift */; };
+		AF3AEB2D29669A6300B82DCB /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3AEB2C29669A6300B82DCB /* GridCell.swift */; };
+		AF3AEB2F2966CB4B00B82DCB /* MovieAPIUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3AEB2E2966CB4B00B82DCB /* MovieAPIUseCase.swift */; };
 		AF6C3A422962D5C80074574D /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C3A412962D5C80074574D /* APIConfiguration.swift */; };
 		AF6C3A442962D5E00074574D /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C3A432962D5E00074574D /* APIError.swift */; };
 		AF6C3A462962D5E70074574D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C3A452962D5E70074574D /* API.swift */; };
@@ -66,6 +68,8 @@
 		AF12A472296595CB008C484B /* CalendarPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPresentationController.swift; sourceTree = "<group>"; };
 		AF12A4742965963A008C484B /* CalendarTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTransitioningDelegate.swift; sourceTree = "<group>"; };
 		AF12A47729659722008C484B /* ModeSelectTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectTransitioningDelegate.swift; sourceTree = "<group>"; };
+		AF3AEB2C29669A6300B82DCB /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
+		AF3AEB2E2966CB4B00B82DCB /* MovieAPIUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPIUseCase.swift; sourceTree = "<group>"; };
 		AF6C3A412962D5C80074574D /* APIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
 		AF6C3A432962D5E00074574D /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		AF6C3A452962D5E70074574D /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -197,8 +201,10 @@
 			children = (
 				635A19EB28F9603900197BCC /* HomeViewController.swift */,
 				AF85E0AC29653D7400A22732 /* HomeViewModel.swift */,
+				AF3AEB2E2966CB4B00B82DCB /* MovieAPIUseCase.swift */,
 				AFB6BB72296413B300386D14 /* HomeCollectionView.swift */,
 				AFB6BB702963C4AA00386D14 /* ListCell.swift */,
+				AF3AEB2C29669A6300B82DCB /* GridCell.swift */,
 				AFB6BB742964553D00386D14 /* HeaderView.swift */,
 			);
 			path = HomeView;
@@ -371,6 +377,7 @@
 				AFB6BB712963C4AA00386D14 /* ListCell.swift in Sources */,
 				AF6C3A462962D5E70074574D /* API.swift in Sources */,
 				AF85E0AB29651C0000A22732 /* ModeSelectCell.swift in Sources */,
+				AF3AEB2F2966CB4B00B82DCB /* MovieAPIUseCase.swift in Sources */,
 				AF6C3A5C2962F4FF0074574D /* MovieDetail.swift in Sources */,
 				AF6C3A422962D5C80074574D /* APIConfiguration.swift in Sources */,
 				AF85E0B12965509D00A22732 /* ImageCacheManager.swift in Sources */,
@@ -378,6 +385,7 @@
 				AF85E0A92965156A00A22732 /* ModeSelectPresentationController.swift in Sources */,
 				AF12A473296595CB008C484B /* CalendarPresentationController.swift in Sources */,
 				AF85E0AF296541FA00A22732 /* Observable.swift in Sources */,
+				AF3AEB2D29669A6300B82DCB /* GridCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
