@@ -56,9 +56,18 @@ final class MovieReviewViewController: UIViewController {
         return textField
     }()
     
+    private let passwordLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "비밀번호"
+        return label
+    }()
+    
     private let passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "암호"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "비밀번호를 입력해주세요."
+        textField.textAlignment = .left
         return textField
     }()
     
@@ -115,6 +124,7 @@ final class MovieReviewViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         nicknameTextField.setUnderLine(width: 1, color: .tertiaryLabel)
+        passwordTextField.setUnderLine(width: 1, color: .tertiaryLabel)
     }
     
     private func addViews() {
@@ -126,6 +136,8 @@ final class MovieReviewViewController: UIViewController {
             userInformationRequestLabel,
             nicknameLabel,
             nicknameTextField,
+            passwordLabel,
+            passwordTextField,
         ].forEach( { view.addSubview($0) })
     }
     
@@ -156,6 +168,14 @@ final class MovieReviewViewController: UIViewController {
             nicknameTextField.topAnchor.constraint(equalTo: nicknameLabel.topAnchor),
             nicknameTextField.leadingAnchor.constraint(equalTo: nicknameLabel.trailingAnchor, constant: 32),
             nicknameTextField.widthAnchor.constraint(equalToConstant: 200),
+            
+            passwordLabel.topAnchor.constraint(equalTo: nicknameTextField.bottomAnchor, constant: 16),
+            passwordLabel.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
+
+            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.topAnchor),
+            passwordTextField.leadingAnchor.constraint(equalTo: passwordLabel.trailingAnchor, constant: 16),
+            passwordTextField.widthAnchor.constraint(equalToConstant: 200)
+            
         ])
     }
 }
