@@ -26,4 +26,8 @@ final class MovieReviewViewModel {
     func photoAddingButtonTapped() {
         presentImagePicker?()
     }
+    
+    func imageSelected(image: UIImage) {
+        selectedPhoto = image
+    }
 }
