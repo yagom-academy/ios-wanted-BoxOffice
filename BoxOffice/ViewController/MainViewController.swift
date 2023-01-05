@@ -14,9 +14,8 @@ enum Section {
 class MainViewController: UIViewController {
     var boxOfficeCollectionView: UICollectionView!
     var boxOfficeDatasource: UICollectionViewDiffableDataSource<Section, DailyBoxOfficeList>!
-    var boxOfficeData: [DailyBoxOffice] = []
-    static var movieCodeData: [String] = []
-    static var posterData: [String] = []
+    var boxOfficeData: DailyBoxOffice?
+    var movieCodeData: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,29 +30,23 @@ extension MainViewController {
             switch result {
             case .success(let boxOfficeData):
                 DispatchQueue.main.sync {
-                    self.getMovieCodeData(data: boxOfficeData.boxOfficeResult.dailyBoxOfficeList)
+                    self.navigationItem.title = boxOfficeData.boxOfficeResult.boxofficeType
+                    self.getMovieCode(data: boxOfficeData.boxOfficeResult.dailyBoxOfficeList)
                     self.createBoxOfficeCollectionView()
                     self.configBoxOfficeDataSource(data: boxOfficeData.boxOfficeResult.dailyBoxOfficeList)
                     self.boxOfficeCollectionView.reloadData()
-                    
-                    NetworkManager().getFilmDetailData { result in
-                        switch result {
-                        case .success(let success):
-                            print(success)
-                        case .failure(let failure):
-                            print(failure.localizedDescription)
-                        }
-                    }
                 }
             case .failure(let failure):
                 print(failure.localizedDescription)
             }
         }
+        
     }
     
     func createBoxOfficeLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
         let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(135), heightDimension: .absolute(230))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 3)
         group.interItemSpacing = .fixed(5)
@@ -64,7 +57,6 @@ extension MainViewController {
         
         let layout = UICollectionViewCompositionalLayout(section: section)
         
-        
         return layout
     }
     
@@ -73,8 +65,10 @@ extension MainViewController {
         self.view.addSubview(boxOfficeCollectionView)
 
         boxOfficeCollectionView.translatesAutoresizingMaskIntoConstraints = false
-
+        boxOfficeCollectionView.delegate = self
+        boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: BoxOfficeCollectionViewCell.identify)
         
+
         NSLayoutConstraint.activate([
             boxOfficeCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
             boxOfficeCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -97,15 +91,21 @@ extension MainViewController {
         snapShot.appendItems(data)
         boxOfficeDatasource.apply(snapShot)
     }
-    
-    func getMovieCodeData(data: [DailyBoxOfficeList]) {
+
+    func getMovieCode(data: [DailyBoxOfficeList]) {
         for i in 0...9 {
-            MainViewController.movieCodeData.append(data[i].movieCd)
+            movieCodeData.append(data[i].movieCd)
         }
-        print(MainViewController.movieCodeData)
+        print(movieCodeData)
     }
-    
-    func getPosterData(data: []) {
-        
+}
+
+extension MainViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! BoxOfficeCollectionViewCell
+        SecondViewController.movieCode = cell.movieCode
+        let secondVC = SecondViewController()
+        secondVC.modalTransitionStyle = .coverVertical
+        self.present(secondVC, animated: true)
     }
 }

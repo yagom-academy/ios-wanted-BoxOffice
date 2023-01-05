@@ -15,17 +15,6 @@ class NetworkManager: NetworkProtocol {
         let url = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(appKey)&targetDt=\(currentDate)"
         self.getData(url: url, completion: completion)
     }
-    
-    func getFilmDetailData(completion: @escaping (Result<FilmDetails, Error>) -> Void) {
-        for i in 0...9 {
-            let url = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=\(appKey)&movieCd=\(MainViewController.movieCodeData[i])"
-            self.getData(url: url, completion: completion)
-        }
-    }
-    
-    func getPosterData(completion: @escaping (Result<FilmPoster, Error>) -> Void) {
-        
-    }
 }
 
 extension NetworkManager {
@@ -49,7 +38,7 @@ extension NetworkManager {
             guard (200...299).contains(response.statusCode) else {
                 return
             }
-            
+     
             if let data = data {
                 do {
                     let data = try JSONDecoder().decode(T.self, from: data)

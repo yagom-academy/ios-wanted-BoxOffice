@@ -16,6 +16,7 @@ struct MovieInfoResult: Decodable {
 }
 
 struct MovieInfo: Decodable {
+    let movieNmEn: String
     let prdtYear: String
     let openDt: String
     let showTm: String
