@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class MainViewController: UIViewController {
+final class MainViewController: UIViewController, UICollectionViewDelegate {
     
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Row>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Row>
@@ -18,7 +18,7 @@ final class MainViewController: UIViewController {
     }
     
     enum Row: Hashable {
-        case forDailyBoxOffice(entity: DailyBoxOffice)
+        case forDailyBoxOffice(entity: CustomBoxOffice)
     }
     
     private let mainView = MainView(frame: .zero)
@@ -30,6 +30,7 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         view = mainView
         mainViewModel?.input.onViewDidLoad()
+        mainView.collectionView.delegate = self
         bind()
     }
     
@@ -49,12 +50,28 @@ final class MainViewController: UIViewController {
                 self.applySnapshot(models: model)
             }
             .store(in: &cancelable)
+        
+        mainViewModel.output.detailBoxOfficePublisher
+            .sink { [weak self] model in
+                guard let self = self else { return }
+                self.navigationController?.pushViewController(
+                    DetailViewController.instance(
+                        DetailViewModel(detailBoxOffice: model),
+                                                  model: model),
+                    animated: true
+                )
+            }
+            .store(in: &cancelable)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        mainViewModel?.input.didSelectRowAt(indexPath[1])
     }
 }
 
 extension MainViewController {
     
-    func createDataSource() -> DataSource {
+    private func createDataSource() -> DataSource {
         let datasource = DataSource(collectionView: mainView.collectionView) { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
             case .forDailyBoxOffice(let entity):
@@ -70,7 +87,7 @@ extension MainViewController {
     }
     
     
-    func applySnapshot(models: [DailyBoxOffice]) {
+    private func applySnapshot(models: [CustomBoxOffice]) {
         var snapshot = Snapshot()
         
         if models.isEmpty == false {

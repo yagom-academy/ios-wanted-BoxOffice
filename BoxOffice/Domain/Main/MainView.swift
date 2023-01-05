@@ -39,7 +39,7 @@ final class MainView: UIView {
     private lazy var boxOfficeLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.text = "BOX OFFICE"
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .systemFont(ofSize: 25, weight: .bold)
         return label
     }()
     
@@ -55,7 +55,7 @@ final class MainView: UIView {
     
     private lazy var dailyWeeklyToggle: UIButton = {
         let button = UIButton(frame: .zero)
-        button.setTitle("Daily", for: .normal)
+        button.setTitle("DAILY", for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .headline)
         button.backgroundColor = UIColor(r: 76, g: 52, b: 145)
         return button

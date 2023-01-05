@@ -44,9 +44,7 @@ protocol Networkerable {
 }
 
 final class Networker {
-    
-    private var baseURL: String = ""
-    
+        
     private lazy var header: [String: String] = {
         return [:]
     }()
@@ -66,7 +64,7 @@ extension Networker: Networkerable {
         switch api.method {
             // MARK: - Get
         case .get:
-            var urlComponents = URLComponents(string: baseURL + api.path)
+            var urlComponents = URLComponents(string: api.path)
             
             var parameters: [URLQueryItem] = []
             api.params?.forEach({ key, value in
@@ -90,7 +88,7 @@ extension Networker: Networkerable {
             return request(urlRequest: urlRequest)
             // MARK: - Post, Put, Delete
         case .post, .put, .delete:
-            let urlComponents = URLComponents(string: baseURL + api.path)
+            let urlComponents = URLComponents(string: api.path)
             
             guard let url: URL = urlComponents?.url else {
                 return Fail(error: NSError(domain: "", code: -44)).eraseToAnyPublisher()

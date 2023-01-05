@@ -11,7 +11,8 @@ final class MainViewCell: UICollectionViewCell {
     static let identifier = "\(MainViewCell.self)"
     
     private lazy var posterImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "dummyPoster"))
+        let imageView = UIImageView(frame: .zero)
+        imageView.backgroundColor = .lightGray
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -147,17 +148,12 @@ final class MainViewCell: UICollectionViewCell {
         ])
     }
     
-    func configureCell(_ model: DailyBoxOffice) {
-        rankNumberLabel.text = model.rank
-        titleLabel.text = model.title
-        rankRateLabel.text = "순위증감분: \(model.rankInTen)"
-        audienceLabel.text = "관객수: \(model.audienceCount)"
-        dateLabel.text = "개봉일: \(model.openDate)"
-        
-        if model.isNewRank == "N" {
-            
-        } else if model.isNewRank == "Y" {
-            
-        }
+    func configureCell(_ model: CustomBoxOffice) {
+        rankNumberLabel.text = model.boxOffice.rank
+        titleLabel.text = model.boxOffice.title
+        rankRateLabel.text = "순위증감분: \(model.boxOffice.rankInTen)"
+        audienceLabel.text = "관객수: \(model.boxOffice.audienceCount)"
+        dateLabel.text = "개봉일: \(model.boxOffice.openDate)"
+        posterImageView.loadImage(from: model.posterURL)
     }
 }

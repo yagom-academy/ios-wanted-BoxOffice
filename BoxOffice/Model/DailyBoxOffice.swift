@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct CustomBoxOffice: Hashable {
+    let boxOffice: DailyBoxOffice
+    let posterURL: String
+}
+
 struct DailyBoxOfficeConnection: Decodable {
     let boxOfficeResult: BoxOfficeResult
     
