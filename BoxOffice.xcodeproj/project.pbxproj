@@ -11,6 +11,7 @@
 		200597982966B690002AB7EC /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200597972966B690002AB7EC /* ReviewTableViewCell.swift */; };
 		201825AA29664B8F00ADB79A /* MovieSubInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201825A929664B8F00ADB79A /* MovieSubInfoView.swift */; };
 		201825AC29664D8D00ADB79A /* MovieReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201825AB29664D8D00ADB79A /* MovieReviewView.swift */; };
+		201C827E2966F7F70060054B /* MovieLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C827D2966F7F70060054B /* MovieLabel.swift */; };
 		203201FF29630CB000097F31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 203201FE29630CB000097F31 /* GoogleService-Info.plist */; };
 		2032020229630EED00097F31 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2032020129630EED00097F31 /* FirebaseAuth */; };
 		2032020429630EED00097F31 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2032020329630EED00097F31 /* FirebaseFirestore */; };
@@ -84,6 +85,7 @@
 		200597972966B690002AB7EC /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		201825A929664B8F00ADB79A /* MovieSubInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSubInfoView.swift; sourceTree = "<group>"; };
 		201825AB29664D8D00ADB79A /* MovieReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewView.swift; sourceTree = "<group>"; };
+		201C827D2966F7F70060054B /* MovieLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieLabel.swift; sourceTree = "<group>"; };
 		203201FE29630CB000097F31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2073EB16296311F100216565 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		2073EB1B29631F8C00216565 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				201825A929664B8F00ADB79A /* MovieSubInfoView.swift */,
 				201825AB29664D8D00ADB79A /* MovieReviewView.swift */,
 				200597972966B690002AB7EC /* ReviewTableViewCell.swift */,
+				201C827D2966F7F70060054B /* MovieLabel.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -522,7 +525,6 @@
 				2073EB17296311F100216565 /* FirestoreManager.swift in Sources */,
 				20BB8C202963C2DA00801668 /* FirebaseError.swift in Sources */,
 				20F38B0B2965C31400415749 /* MovieDetailViewController.swift in Sources */,
-				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
 				AF3AEB322966D21800B82DCB /* HomeViewController.swift in Sources */,
 				20BB8C1C2963B54400801668 /* Review.swift in Sources */,
 				2073EB1C29631F8C00216565 /* StorageManager.swift in Sources */,
@@ -547,6 +549,7 @@
 				20F38B0129654EB800415749 /* MovieReviewViewModel.swift in Sources */,
 				20BB8C192963B40300801668 /* ReviewFirebaseUseCase.swift in Sources */,
 				AF6C3A552962EA0B0074574D /* Bundle+Extension.swift in Sources */,
+				201C827E2966F7F70060054B /* MovieLabel.swift in Sources */,
 				AF85E0B5296571A300A22732 /* Date+Extension.swift in Sources */,
 				AF6C3A442962D5E00074574D /* APIError.swift in Sources */,
 				AFB6BB712963C4AA00386D14 /* ListCell.swift in Sources */,

@@ -125,20 +125,3 @@ class MovieMainInfoView: UIView {
     }
     
 }
-
-
-final class MovieLabel: UILabel {
-    init(font: UIFont.TextStyle, frame: CGRect = .zero) {
-        super.init(frame: frame)
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.font = .preferredFont(forTextStyle: font)
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-}
