@@ -26,7 +26,7 @@ final class MovieReviewViewController: UIViewController {
 
     private lazy var starButtons = [starButton1, starButton2, starButton3, starButton4, starButton5]
     
-    private lazy var starsStackView: UIStackView = {
+    private lazy var starButtonsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         starButtons.forEach { stackView.addArrangedSubview($0) }
