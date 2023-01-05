@@ -9,7 +9,7 @@ import UIKit
 
 final class HeaderView: UICollectionReusableView {
     
-    let label: UILabel = {
+    let sectionHeaderlabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
@@ -19,14 +19,13 @@ final class HeaderView: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(label)
+        addSubview(sectionHeaderlabel)
         NSLayoutConstraint.activate([
-            label.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 10),
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15)
+            sectionHeaderlabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 10),
+            sectionHeaderlabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15)
         ])
     }
     
-    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
