@@ -9,112 +9,63 @@ import Foundation
 
 struct MovieAPIUseCase {
     
-    func requestDailyData(with date: String, in dataList: Observable<[MovieCellData]>) {
+    func requestDailyData(with date: String, in dataList: Observable<[MovieCellData]>) async throws {
         dataList.value = []
-        fetchDailyBoxOfficeData(with: date) { boxOfficeList in
-            boxOfficeList.forEach { boxOffice in
-                self.fetchMovieDetailInfo(with: boxOffice.movieCd) { movieName, openDate, productYear in
-                    let openYear = String(openDate.prefix(4))
-                    DispatchQueue.main.async {
-                        self.fetchMoviePoster(with: movieName, year: openYear) { result in
-                            switch result {
-                            case .success(let url):
-                                self.appendCellData(to: dataList,
-                                                    boxOffice: boxOffice,
-                                                    openDate: openDate,
-                                                    posterURL: url)
-                            case .failure(_):
-                                self.fetchMoviePoster(with: movieName, year: productYear) { result in
-                                    switch result {
-                                    case .success(let url):
-                                        self.appendCellData(to: dataList,
-                                                            boxOffice: boxOffice,
-                                                            openDate: openDate,
-                                                            posterURL: url)
-                                    case .failure(_):
-                                        self.appendCellData(to: dataList,
-                                                            boxOffice: boxOffice,
-                                                            openDate: openDate,
-                                                            posterURL: nil)
-                                    }
-                                }
-                            }
-                        }
-                    }
+        let boxOfficeList = try await fetchDailyBoxOfficeData(with: date)
+        for boxOffice in boxOfficeList {
+            Task {
+                guard let result = try await fetchMovieDetailInfo(with: boxOffice.movieCd) else { return }
+                let movieEnglishName = result.movieNmEn
+                let movieOpenYear = String(result.openDt.prefix(4))
+                do {
+                    let posterURL1 = try await fetchMoviePosterURL(with: movieEnglishName, year: movieOpenYear)
+                    appendCellData(to: dataList, boxOffice: boxOffice, openDate: result.openDt,
+                                       posterURL: URL(string: posterURL1 ?? ""))
+                } catch {
+                    appendCellData(to: dataList, boxOffice: boxOffice, openDate: result.openDt,
+                                       posterURL: nil)
                 }
             }
         }
     }
     
-    func requestAllWeekData(with date: String, in dataList: Observable<[MovieCellData]>) {
+    func requestAllWeekData(with date: String, in dataList: Observable<[MovieCellData]>) async throws {
         dataList.value = []
-        fetchAllWeekBoxOfficeData(with: date) { boxOfficeList in
-            boxOfficeList.forEach { boxOffice in
-                self.fetchMovieDetailInfo(with: boxOffice.movieCd) { movieName, openDate, productYear in
-                    let openYear = String(openDate.prefix(4))
-                    DispatchQueue.main.async {
-                        self.fetchMoviePoster(with: movieName, year: openYear) { result in
-                            switch result {
-                            case .success(let url):
-                                self.appendCellData(to: dataList,
-                                                    boxOffice: boxOffice,
-                                                    openDate: openDate,
-                                                    posterURL: url)
-                            case .failure(_):
-                                self.fetchMoviePoster(with: movieName, year: productYear) { result in
-                                    switch result {
-                                    case .success(let url):
-                                        self.appendCellData(to: dataList,
-                                                            boxOffice: boxOffice,
-                                                            openDate: openDate,
-                                                            posterURL: url)
-                                    case .failure(_):
-                                        self.appendCellData(to: dataList,
-                                                            boxOffice: boxOffice,
-                                                            openDate: openDate,
-                                                            posterURL: nil)
-                                    }
-                                }
-                            }
-                        }
-                    }
+        let boxOfficeList = try await fetchAllWeekBoxOfficeData(with: date)
+        for boxOffice in boxOfficeList {
+            Task {
+                guard let result = try await fetchMovieDetailInfo(with: boxOffice.movieCd) else { return }
+                let movieEnglishName = result.movieNmEn
+                let movieOpenYear = String(result.openDt.prefix(4))
+                
+                do {
+                    let posterURL1 = try await fetchMoviePosterURL(with: movieEnglishName, year: movieOpenYear)
+                    appendCellData(to: dataList, boxOffice: boxOffice, openDate: result.openDt,
+                                   posterURL: URL(string: posterURL1 ?? ""))
+                } catch {
+                    appendCellData(to: dataList, boxOffice: boxOffice, openDate: result.openDt,
+                                   posterURL: nil)
                 }
             }
         }
     }
     
-    func requestWeekEndData(with date: String, in dataList: Observable<[MovieCellData]>) {
+    func requestWeekEndData(with date: String, in dataList: Observable<[MovieCellData]>) async throws {
         dataList.value = []
-        fetchWeekEndBoxOfficeData(with: date) { boxOfficeList in
-            boxOfficeList.forEach { boxOffice in
-                self.fetchMovieDetailInfo(with: boxOffice.movieCd) { movieName, openDate, productYear in
-                    let openYear = String(openDate.prefix(4))
-                    DispatchQueue.main.async {
-                        self.fetchMoviePoster(with: movieName, year: openYear) { result in
-                            switch result {
-                            case .success(let url):
-                                self.appendCellData(to: dataList,
-                                                    boxOffice: boxOffice,
-                                                    openDate: openDate,
-                                                    posterURL: url)
-                            case .failure(_):
-                                self.fetchMoviePoster(with: movieName, year: productYear) { result in
-                                    switch result {
-                                    case .success(let url):
-                                        self.appendCellData(to: dataList,
-                                                            boxOffice: boxOffice,
-                                                            openDate: openDate,
-                                                            posterURL: url)
-                                    case .failure(_):
-                                        self.appendCellData(to: dataList,
-                                                            boxOffice: boxOffice,
-                                                            openDate: openDate,
-                                                            posterURL: nil)
-                                    }
-                                }
-                            }
-                        }
-                    }
+        let boxOfficeList = try await fetchWeekEndBoxOfficeData(with: date)
+        for boxOffice in boxOfficeList {
+            Task {
+                guard let result = try await fetchMovieDetailInfo(with: boxOffice.movieCd) else { return }
+                let movieEnglishName = result.movieNmEn
+                let movieOpenYear = String(result.openDt.prefix(4))
+                
+                do {
+                    let posterURL1 = try await fetchMoviePosterURL(with: movieEnglishName, year: movieOpenYear)
+                    appendCellData(to: dataList, boxOffice: boxOffice, openDate: result.openDt,
+                                   posterURL: URL(string: posterURL1 ?? ""))
+                } catch {
+                    appendCellData(to: dataList, boxOffice: boxOffice, openDate: result.openDt,
+                                   posterURL: nil)
                 }
             }
         }
@@ -122,102 +73,52 @@ struct MovieAPIUseCase {
 }
 
 private extension MovieAPIUseCase {
-    func fetchAllWeekBoxOfficeData(with date: String,
-                                          _ completion: @escaping ([BoxOffice]) -> Void) {
+    
+    func fetchAllWeekBoxOfficeData(with date: String) async throws -> [BoxOffice] {
         let searchWeeklyBoxOfficeListAPI = SearchWeeklyBoxOfficeListAPI(
             date: date,
             weekOption: .allWeek
         )
-        searchWeeklyBoxOfficeListAPI.execute { result in
-            switch result {
-            case .success(let boxOfficeList):
-                guard let weeklyBoxOfficeList = boxOfficeList.boxOfficeResult.weeklyBoxOfficeList else {
-                    return
-                }
-                completion(weeklyBoxOfficeList)
-            case .failure(let error):
-                print(String(describing: error))
-            }
-        }
+        let result = try await searchWeeklyBoxOfficeListAPI.execute()
+        guard let weeklyBoxOfficeList = result?.boxOfficeResult.weeklyBoxOfficeList else { return [] }
+        return weeklyBoxOfficeList
     }
     
-    func fetchWeekEndBoxOfficeData(with date: String,
-                                          _ completion: @escaping ([BoxOffice]) -> Void) {
+    func fetchWeekEndBoxOfficeData(with date: String) async throws -> [BoxOffice] {
         let searchWeeklyBoxOfficeListAPI = SearchWeeklyBoxOfficeListAPI(
             date: date,
             weekOption: .weekEnd
         )
-        searchWeeklyBoxOfficeListAPI.execute { result in
-            switch result {
-            case .success(let boxOfficeList):
-                guard let weeklyBoxOfficeList = boxOfficeList.boxOfficeResult.weeklyBoxOfficeList else {
-                    return
-                }
-                completion(weeklyBoxOfficeList)
-            case .failure(let error):
-                print(String(describing: error))
-            }
-        }
+        let result = try await searchWeeklyBoxOfficeListAPI.execute()
+        guard let weeklyBoxOfficeList = result?.boxOfficeResult.weeklyBoxOfficeList else { return [] }
+        return weeklyBoxOfficeList
     }
     
-    func fetchDailyBoxOfficeData(with date: String,
-                                         _ completion: @escaping ([BoxOffice]) -> Void) {
+    func fetchDailyBoxOfficeData(with date: String) async throws -> [BoxOffice] {
         let searchDailyBoxOfficeListAPI = SearchDailyBoxOfficeListAPI(
             date: date
         )
-        searchDailyBoxOfficeListAPI.execute { result in
-            switch result {
-            case .success(let boxOfficeList):
-                guard let dailyBoxOfficeList = boxOfficeList.boxOfficeResult.dailyBoxOfficeList else {
-                    return
-                }
-                completion(dailyBoxOfficeList)
-            case .failure(let error):
-                print(String(describing: error))
-            }
-        }
+        let result = try await searchDailyBoxOfficeListAPI.execute()
+        guard let dailyBoxOfficeList = result?.boxOfficeResult.dailyBoxOfficeList else { return [] }
+        return dailyBoxOfficeList
     }
     
-    func fetchMovieDetailInfo(
-        with movieCode: String,
-        _ completion: @escaping (_ movieName: String, _ openDate: String, _ productYear: String) -> Void
-    ) {
+    func fetchMovieDetailInfo(with movieCode: String) async throws -> MovieInfo? {
         let searchMovieInfoAPI = SearchMovieInfoAPI(movieCode: movieCode)
-        searchMovieInfoAPI.execute { result in
-            switch result {
-            case .success(let movieDetail):
-                let movieName = movieDetail.movieInfoResult.movieInfo.movieNmEn
-                let openDate = movieDetail.movieInfoResult.movieInfo.openDt
-                let productYear = movieDetail.movieInfoResult.movieInfo.prdtYear
-                completion(movieName, openDate, productYear)
-            case .failure(let error):
-                print(String(describing: error))
-            }
-        }
+        let result = try await searchMovieInfoAPI.execute()
+        guard let movieInfo = result?.movieInfoResult.movieInfo else { return nil }
+        return movieInfo
     }
     
-    func fetchMoviePoster(with movieName: String,
-                                  year: String?,
-                                  _ completion: @escaping (Result<URL?, Error>) -> Void) {
+    func fetchMoviePosterURL(with movieName: String, year: String?) async throws -> String? {
         let searchMoviePosterAPI = SearchMoviePosterAPI(movieTitle: movieName, year: year)
-        searchMoviePosterAPI.execute { result in
-            switch result {
-            case .success(let posterInfo):
-                let url = URL(string: posterInfo.posterURLString())
-                completion(.success(url))
-            case .failure(let error):
-                print(String(describing: error))
-                completion(.failure(error))
-            }
-        }
+        guard let result = try await searchMoviePosterAPI.execute() else { return nil }
+        guard let url = result.posterURLString() else { return nil }
+        return url
     }
     
-    func appendCellData(
-        to list: Observable<[MovieCellData]>,
-        boxOffice: BoxOffice,
-        openDate: String,
-        posterURL: URL?
-    ) {
+    func appendCellData(to list: Observable<[MovieCellData]>, boxOffice: BoxOffice,
+                        openDate: String,posterURL: URL?) {
         list.value.append(
             MovieCellData(
                 uuid: UUID(),
