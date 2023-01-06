@@ -269,13 +269,13 @@ class SecondViewController: UIViewController {
         button.setTitle("리뷰 작성", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .lightGray
-        button.addTarget(SecondViewController.self, action: #selector(createReview), for: .touchUpInside)
+        button.addTarget(self, action: #selector(createReview), for: .touchUpInside)
         
         return button
     }()
     
     @objc func createReview(sender: UIButton!) {
-        print("버튼 클릭")
+        navigationController?.pushViewController(ReviewViewController(), animated: true)
     }
     
     @objc func tabDismissButton(sender: UINavigationItem) {
