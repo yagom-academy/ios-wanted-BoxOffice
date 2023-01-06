@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		458A93172967782F00380F59 /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458A93162967782F00380F59 /* MovieDetailViewModel.swift */; };
 		45FB1A582963C71400A9D43B /* DailyMovieBoxOfficeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB1A572963C71400A9D43B /* DailyMovieBoxOfficeModel.swift */; };
 		45FB1A5B2963C72E00A9D43B /* BoxOfficeMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB1A5A2963C72E00A9D43B /* BoxOfficeMainViewModel.swift */; };
 		45FB1A5E2963CC2700A9D43B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB1A5D2963CC2700A9D43B /* NetworkManager.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		1482EFD7E63DAF1779BA8F19 /* Pods_BoxOffice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BoxOffice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		458A93162967782F00380F59 /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 		45FB1A572963C71400A9D43B /* DailyMovieBoxOfficeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyMovieBoxOfficeModel.swift; sourceTree = "<group>"; };
 		45FB1A5A2963C72E00A9D43B /* BoxOfficeMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeMainViewModel.swift; sourceTree = "<group>"; };
 		45FB1A5D2963CC2700A9D43B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				45FB1A5A2963C72E00A9D43B /* BoxOfficeMainViewModel.swift */,
+				458A93162967782F00380F59 /* MovieDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				A38E78222965711A005F636B /* NetworkService.swift in Sources */,
 				A36F38EB2963C294009D15E6 /* BoxOfficeApp.swift in Sources */,
 				45FB1A6C29641F4600A9D43B /* BoxOfficeURL.swift in Sources */,
+				458A93172967782F00380F59 /* MovieDetailViewModel.swift in Sources */,
 				A38E782929657336005F636B /* BoxOfficeListView.swift in Sources */,
 				45FB1A6929641A8F00A9D43B /* APIRequest.swift in Sources */,
 				45FB1A6529640E8F00A9D43B /* MoviePosterModel.swift in Sources */,
