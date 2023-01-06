@@ -65,6 +65,7 @@ extension BoxOfficeListCoordinator: BoxOfficeListCoordinatorInterface {
     func showCreateReviewView(movie: Movie) {
         let viewController = makeCreateReviewViewController(movie: movie)
         viewController.isModalInPresentation = true
+        viewController.modalPresentationStyle = .fullScreen
         navigationController.visibleViewController?.present(viewController, animated: true)
     }
     

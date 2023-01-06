@@ -9,9 +9,9 @@ import UIKit
 
 class FirstCell: UITableViewCell {
     private lazy var posterImageView: UIImageView = {
-        let view = UIImageView(image: UIImage(named: "ironman.jpg"))
+        let view = UIImageView()
+        view.backgroundColor = .darkGray
         view.heightAnchor.constraint(equalToConstant: 325).isActive = true
-        view.backgroundColor = .purple
         return view
     }()
     
@@ -143,26 +143,26 @@ class FirstCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             shareButton.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 34),
-            shareButton.leadingAnchor.constraint(equalTo: titledatetimeageStackView.trailingAnchor, constant: 110),
+            shareButton.leadingAnchor.constraint(equalTo: titledatetimeageStackView.trailingAnchor, constant: 20),
             shareButton.heightAnchor.constraint(equalToConstant: 20),
-            shareButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
+            shareButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
         ])
     }
     
     func transferData(_ name: String, _ detailInfo: MovieDetailInfo, _ boxOfficeInfo: BoxOfficeInfo) {
-        guard let poster = detailInfo.poster,
-              let image = ImageCacheManager.shared.loadCachedData(for: poster)
-        else { return }
-        posterImageView.image = image
+        posterImageView.setImage(with: detailInfo.poster ?? "")
         if boxOfficeInfo.rankOldAndNew == .new {
             updownNumberLabel.text = boxOfficeInfo.rankOldAndNew.rawValue
+            updownImageView.isHidden = true
         } else {
             if boxOfficeInfo.rankInten < 0 {
                 updownImageView.image = UIImage(systemName: "arrowtriangle.down.fill")
                 updownImageView.tintColor = .blue
+                updownNumberLabel.text = "\(boxOfficeInfo.rankInten)"
+            } else if boxOfficeInfo.rankInten == 0 {
+                updownImageView.isHidden = true
+                updownNumberLabel.text = "-"
             }
-            
-            updownNumberLabel.text = "\(abs(boxOfficeInfo.rankInten))"
         }
         titleLabel.text = name
         releaseDatelabel.text = detailInfo.productionYear

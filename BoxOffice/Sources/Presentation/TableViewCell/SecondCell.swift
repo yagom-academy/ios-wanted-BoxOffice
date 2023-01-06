@@ -116,15 +116,25 @@ class SecondCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             rankingattendancestarsStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            rankingattendancestarsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25),
-            rankingattendancestarsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25),
+            rankingattendancestarsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 35),
+            rankingattendancestarsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -35),
             rankingattendancestarsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }
     
-    func transferData(_ boxOfficeInfo: BoxOfficeInfo) {
+    func transferData(_ boxOfficeInfo: BoxOfficeInfo, _ reviews: [Review]) {
         rankingLabel.text = "\(boxOfficeInfo.rank)위"
         attendanceLabel.text = boxOfficeInfo.audienceAccumulation.numberFormatter()
-        starsLabel.text = "구현"
+
+        guard reviews.count != 0 else {
+            starsLabel.text = "0"
+            return
+        }
+        
+        var rating: Double = 0
+        reviews.forEach { rating += $0.stars }
+        
+        starsLabel.text = "\(rating / Double(reviews.count))"
+        
     }
 }

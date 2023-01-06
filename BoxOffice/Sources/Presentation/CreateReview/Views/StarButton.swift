@@ -10,11 +10,12 @@ import UIKit
 final class StarButton: UIButton {
     
     private var starState: StarState = .noon
-    private var config = UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .largeTitle), scale: .large)
+    private lazy var config = UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .largeTitle), scale: .large)
     
     convenience init(config: UIImage.SymbolConfiguration, state: StarState = .noon) {
         self.init(frame: .zero)
         self.starState = state
+        self.config = config
         configure()
     }
     

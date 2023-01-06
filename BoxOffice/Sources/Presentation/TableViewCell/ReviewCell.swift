@@ -9,14 +9,16 @@ import UIKit
 
 class ReviewCell: UITableViewCell {
     private lazy var userImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(systemName: "circle.fill"))
-        imageView.tintColor = .white
+        let imageView = UIImageView(image: UIImage(systemName: "person.fill"))
+        imageView.tintColor = .systemGray
+        imageView.backgroundColor = .darkGray
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = imageView.frame.height/2
+        imageView.layer.cornerRadius = 30
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.clear.cgColor
         imageView.clipsToBounds = true
         imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        imageView.backgroundColor = .gray
         imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
         return imageView
     }()
@@ -30,6 +32,7 @@ class ReviewCell: UITableViewCell {
         stackview.translatesAutoresizingMaskIntoConstraints = false
         return stackview
     }()
+    
     private lazy var starsStackView: UIStackView = {
         let stackview = UIStackView()
         stackview.axis = .horizontal
@@ -98,6 +101,7 @@ class ReviewCell: UITableViewCell {
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.textColor = .white
+        label.numberOfLines = 3
         return label
     }()
     
@@ -113,7 +117,7 @@ class ReviewCell: UITableViewCell {
     private lazy var nicknameLabel: UILabel = {
         let label = UILabel()
         label.text = "leea**"
-        label.font = .preferredFont(forTextStyle: .caption2)
+        label.font = .preferredFont(for: .caption2, weight: .bold)
         label.textColor = .white
         return label
     }()
@@ -122,8 +126,15 @@ class ReviewCell: UITableViewCell {
         let label = UILabel()
         label.text = "2023 01.02 17:14"
         label.font = .preferredFont(forTextStyle: .caption2)
-        label.textColor = .white
+        label.textColor = .white.withAlphaComponent(0.8)
         return label
+    }()
+    
+    private lazy var ratingView: RatingView = {
+        let view = RatingView(
+            config: UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .subheadline), scale: .medium)
+        )
+        return view
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -140,13 +151,13 @@ class ReviewCell: UITableViewCell {
     func setAutolayout() {
         contentView.addSubviews(userImageView, reviewStackView, deleteButton)
         
-        reviewStackView.addArrangedSubviews(starsStackView, writingLabel, userInfoStackView)
+        reviewStackView.addArrangedSubviews(ratingView, writingLabel, userInfoStackView)
         userInfoStackView.addArrangedSubviews(nicknameLabel, dateLabel)
-        starsStackView.addArrangedSubviews(firstStarImageView, secondStarImageView, thirdStarImageView, fourthStarImageView, fifthStarImageView)
+//        starsStackView.addArrangedSubviews(firstStarImageView, secondStarImageView, thirdStarImageView, fourthStarImageView, fifthStarImageView)
         
         NSLayoutConstraint.activate([
             userImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            userImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
+            userImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
         ])
         
         NSLayoutConstraint.activate([
@@ -158,20 +169,24 @@ class ReviewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             deleteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             deleteButton.leadingAnchor.constraint(equalTo: reviewStackView.trailingAnchor, constant: 8),
-            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             deleteButton.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
     
-    func transferData(_ reviews: [Review], _ index: Int) {
-
+    func transferData(_ reviews: [Review]?, _ index: Int, _ tableView: UITableView) {
+        guard let reviews = reviews else {
+            return
+        }
+        
         guard reviews.indices.contains(index) else {
             return
         }
-        userImageView.image = reviews[index].userImage.toUIImage()
-        // star..
+        
+        userImageView.image = reviews[index].userImage.toUIImage() ?? UIImage(systemName: "person.circle")
         writingLabel.text = reviews[index].review
         nicknameLabel.text = reviews[index].nickname
-        dateLabel.text = reviews[index].date?.toString(DateFormat(rawValue: "yyyy.mm.dd")!)
+        dateLabel.text = reviews[index].date?.toString(.yyyyMMddDot)
+        ratingView.setUp(rating: reviews[index].stars)
     }
 }

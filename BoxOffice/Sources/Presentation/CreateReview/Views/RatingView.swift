@@ -53,7 +53,7 @@ private extension RatingView {
         axis = .horizontal
         alignment = .center
         distribution = .fill
-        spacing = 9
+        spacing = 4
         addArrangedSubviews(starButtons)
     }
     
