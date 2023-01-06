@@ -90,7 +90,8 @@ DTO에서 Entity로의 변환, Entity에서 DTO로의 변환 또한 Data Layer�
 ## 화면 설명
 
 ### Movie List
-![image](https://user-images.githubusercontent.com/96630194/211033663-e1a48ba0-c10e-4060-aea9-b090a46b9237.png)
+![image](https://user-images.githubusercontent.com/96630194/211037502-9ef75503-314c-4356-8f44-bc87402952d9.png)
+
 
 
 
