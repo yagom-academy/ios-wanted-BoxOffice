@@ -14,9 +14,11 @@ final class FetchPosterImageUseCase {
         self.repository = repository
     }
 
-    func execute(englishMovieTitle: String, completion: @escaping (Result<UIImage?, Error>) -> Void) {
-        repository.fetchMoviePoster(englishMovieName: englishMovieTitle) { result in
+    func execute(englishMovieTitle: String, completion: @escaping (Result<UIImage?, Error>) -> Void) -> Cancellable? {
+        let task = repository.fetchMoviePoster(englishMovieName: englishMovieTitle) { result in
             completion(result)
         }
+
+        return task
     }
 }
