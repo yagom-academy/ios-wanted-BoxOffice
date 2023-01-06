@@ -17,6 +17,8 @@ protocol MovieDetailViewModelInput {
 
 protocol MovieDetailViewModelOutput {
     var movieModelPublisher: PassthroughSubject<Movie, Never> { get }
+    var movie: Movie { get }
+    var movieModel: AnyPublisher<Movie, Never> { get }
 }
 
 protocol MovieDetailViewModelInterface {
@@ -25,21 +27,26 @@ protocol MovieDetailViewModelInterface {
 }
 
 final class MovieDetailViewModel: MovieDetailViewModelInterface  {
-    let firebaseManager = FirebaseManager(collectionType: Review.self as! FirebaseModel)
+    let firebaseManager = FirebaseManager()
     var input: MovieDetailViewModelInput { self }
     var output: MovieDetailViewModelOutput { self }
     var movieModelPublisher = PassthroughSubject<Movie, Never>()
-    @Published var movie: Movie
+    @Published var _movie: Movie
     var reviews: [Review]?
     
     init(movie: Movie) {
-        self.movie = movie
+        self._movie = movie
     }
     
     private var cancelable = Set<AnyCancellable>()
 }
 
 extension MovieDetailViewModel: MovieDetailViewModelInput, MovieDetailViewModelOutput {
+    
+    var movie: Movie { return _movie }
+    
+    var movieModel: AnyPublisher<Movie, Never> { return Just(_movie).eraseToAnyPublisher() }
+    
     func viewWillAppear() {
         firebaseManager.fetchAll { [weak self] in
             if let self = self {

@@ -9,12 +9,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 final class FirebaseManager {
-    private let collectionType: FirebaseModel
     private let database = Firestore.firestore()
-    
-    init(collectionType: FirebaseModel) {
-        self.collectionType = collectionType
-    }
     
     func save(review: Review) {
         do {
