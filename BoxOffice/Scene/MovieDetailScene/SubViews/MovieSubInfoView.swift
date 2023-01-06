@@ -126,23 +126,23 @@ class MovieSubInfoView: UIView {
 
 enum AgeLimit: String {
     case all = "전체관람가"
-    case twelveOver = "12세 이상 관람가"
-    case fifteenOver = "15세 이상 관람가"
-    case teenagersNotAllowed = "청소년 관람불가"
+    case twelveOver = "12세이상관람가"
+    case fifteenOver = "15세이상관람가"
+    case teenagersNotAllowed = "청소년관람불가"
     case fullLimit = "제한상영가"
     
     var age: String {
         switch self {
         case .all:
-            return "All"
+            return " ALL "
         case .twelveOver:
-            return "12"
+            return " 12 "
         case .fifteenOver:
-            return "15"
+            return " 15 "
         case .teenagersNotAllowed:
-            return "18"
+            return " 18 "
         case .fullLimit:
-            return "X"
+            return " X "
         }
     }
     
