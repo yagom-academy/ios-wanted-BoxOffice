@@ -8,41 +8,6 @@
 import UIKit
 
 class MovieDetailViewController: UIViewController {
-    private let reviewTitleLabel = MovieLabel(font: .title3, isBold: true)
-    private let writeReviewButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "pencil"), for: .normal)
-        button.setTitle("리뷰 작성하기", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    private let moreReviewButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("더보기", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.borderColor = UIColor.systemGray5.cgColor
-        button.layer.borderWidth = 2
-        return button
-    }()
-    
-    private let reviewStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 8
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    private let reviewTitleStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -59,6 +24,7 @@ class MovieDetailViewController: UIViewController {
         return tableView
     }()
 
+    private lazy var movieReviewView = MovieReviewView(tableView: reviewTableView)
     private let movieMainInfoView = MovieMainInfoView()
     private let movieSubInfoView = MovieSubInfoView()
     private let reviewViewModel = MovieReviewViewModel()
@@ -136,10 +102,8 @@ extension MovieDetailViewController: UITableViewDataSource {
 //MARK: Setup View
 extension MovieDetailViewController {
     private func setupView() {
-        //TODO: ReviewTable
         movieMainInfoView.configure(with: testMovie)
         movieSubInfoView.configure(with: testMovie)
-        reviewTitleLabel.text = "리뷰"
         
         movieSubInfoView.setupMoreButton(with: self,
                                          selector: #selector(moreActorButtonTapped))
@@ -151,16 +115,9 @@ extension MovieDetailViewController {
     }
     
     private func addSubView() {
-        reviewTitleStackView.addArrangedSubview(reviewTitleLabel)
-        reviewTitleStackView.addArrangedSubview(writeReviewButton)
-        
-        reviewStackView.addArrangedSubview(reviewTitleStackView)
-        reviewStackView.addArrangedSubview(reviewTableView)
-        reviewStackView.addArrangedSubview(moreReviewButton)
-        
         entireStackView.addArrangedSubview(movieMainInfoView)
         entireStackView.addArrangedSubview(movieSubInfoView)
-        entireStackView.addArrangedSubview(reviewStackView)
+        entireStackView.addArrangedSubview(movieReviewView)
         
         view.addSubview(entireStackView)
     }
@@ -174,15 +131,8 @@ extension MovieDetailViewController {
             
             movieMainInfoView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor,
                                                       multiplier: 1/3),
-            reviewStackView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor,
-                                                    multiplier: 5/10),
-            
-            reviewStackView.bottomAnchor.constraint(equalTo: entireStackView.bottomAnchor,
-                                                    constant: -8),
-            reviewStackView.leadingAnchor.constraint(equalTo: entireStackView.leadingAnchor,
-                                                     constant: 16),
-            reviewStackView.trailingAnchor.constraint(equalTo: entireStackView.trailingAnchor,
-                                                      constant: -16),
+            movieReviewView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor,
+                                                    multiplier: 5/10)
         ])
     }
 }
