@@ -86,7 +86,6 @@ final class MovieSubInfoView: UIView {
         
         productionYearLabel.text = movie.productionYear + "년 제작"
         showTimeLabel.text = "•" + movie.showTime + "분"
-        //TODO: numberFormatter로 , 추가
         totalAudienceLabel.text = "•" + movie.totalAudience.toDecimal() + "명 관람"
         directorNameLabel.text = "감독: " + movie.directorName
         actorsLabel.text =  "출연: " + movie.actors.joined(separator: ", ")
@@ -121,7 +120,6 @@ final class MovieSubInfoView: UIView {
         self.addSubview(entireStackView)
     }
     
-    //TODO: constraint 및 StackView 조정
     private func setupConstraint() {
         NSLayoutConstraint.activate([
             entireStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,

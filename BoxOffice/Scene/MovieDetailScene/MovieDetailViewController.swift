@@ -169,7 +169,6 @@ extension MovieDetailViewController {
     }
     
     @objc private func moreActorButtonTapped() {
-        //TODO: 배우 더보기 modal
         let actorList = movieDetail.actors
         let actorListViewController = ActorListViewController(actorList: actorList)
         present(actorListViewController, animated: true)

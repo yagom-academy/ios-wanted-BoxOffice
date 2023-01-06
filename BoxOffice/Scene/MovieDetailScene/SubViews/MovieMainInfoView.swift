@@ -124,11 +124,9 @@ final class MovieMainInfoView: UIView {
         separator.close()
     }
     
-    //TODO: 정보 표시 형식 맞추기
     func configure(with movie: MovieData) {
         //TODO: 포스터 이미지로 변경
         posterView.image = movie.poster
-        //TODO: 별점 평균내기
         ratingLabel.text = "4.5"
         titleLabel.text = movie.title
         currentRanklabel.text = movie.currentRank
