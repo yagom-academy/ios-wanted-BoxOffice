@@ -11,7 +11,9 @@ final class MovieSubInfoView: UIView {
     private let infoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 10
+        stackView.spacing = 8
+        stackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        stackView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -23,9 +25,17 @@ final class MovieSubInfoView: UIView {
         return stackView
     }()
     
+    private let subInfoStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -34,7 +44,8 @@ final class MovieSubInfoView: UIView {
         let button = UIButton()
         button.setTitle("더보기", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .horizontal)
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -84,9 +95,9 @@ final class MovieSubInfoView: UIView {
             ageLimitLabel.backgroundColor = AgeLimit.fullLimit.color
         }
         
-        productionYearLabel.text = movie.productionYear + "년 제작"
-        showTimeLabel.text = "•" + movie.showTime + "분"
-        totalAudienceLabel.text = "•" + movie.totalAudience.toDecimal() + "명 관람"
+        productionYearLabel.text = movie.productionYear
+        showTimeLabel.text = " " + movie.showTime + "분"
+        totalAudienceLabel.text = " " + movie.totalAudience.toDecimal() + "명 관람"
         directorNameLabel.text = "감독: " + movie.directorName
         actorsLabel.text =  "출연: " + movie.actors.joined(separator: ", ")
     }
@@ -100,6 +111,8 @@ final class MovieSubInfoView: UIView {
     private func setupView() {
         addSubView()
         setupConstraint()
+        totalAudienceLabel.setContentHuggingPriority(UILayoutPriority(200), for: .horizontal)
+        totalAudienceLabel.adjustsFontSizeToFitWidth = true
         self.backgroundColor = .systemBackground
     }
     
@@ -113,9 +126,11 @@ final class MovieSubInfoView: UIView {
         actorStackView.addArrangedSubview(actorsLabel)
         actorStackView.addArrangedSubview(moreActorsButton)
         
+        subInfoStackView.addArrangedSubview(directorNameLabel)
+        subInfoStackView.addArrangedSubview(actorStackView)
+        
         entireStackView.addArrangedSubview(infoStackView)
-        entireStackView.addArrangedSubview(directorNameLabel)
-        entireStackView.addArrangedSubview(actorStackView)
+        entireStackView.addArrangedSubview(subInfoStackView)
         
         self.addSubview(entireStackView)
     }

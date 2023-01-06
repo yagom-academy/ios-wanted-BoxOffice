@@ -18,7 +18,9 @@ final class MovieMainInfoView: UIView {
     private let openYearStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 20
+        stackView.spacing = 0
+        stackView.alignment = .top
+        stackView.setContentHuggingPriority(UILayoutPriority(200), for: .vertical)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -26,6 +28,7 @@ final class MovieMainInfoView: UIView {
     private let ratingStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.setContentCompressionResistancePriority(UILayoutPriority(900), for: .vertical)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -34,7 +37,7 @@ final class MovieMainInfoView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
-        stackView.spacing = 20
+        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -45,15 +48,6 @@ final class MovieMainInfoView: UIView {
         stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
-    }()
-    
-    private let fakeView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.widthAnchor.constraint(equalToConstant: 10).isActive = true
-        view.heightAnchor.constraint(greaterThanOrEqualToConstant: 10).isActive = true
-        view.setContentHuggingPriority(.init(100), for: .vertical)
-        return view
     }()
     
     private let posterView: UIImageView = {
@@ -68,6 +62,7 @@ final class MovieMainInfoView: UIView {
         imageView.image = UIImage(systemName: "star.fill")
         imageView.tintColor = .systemYellow
         imageView.contentMode = .scaleAspectFit
+        imageView.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -131,7 +126,7 @@ final class MovieMainInfoView: UIView {
         currentRanklabel.text = movie.currentRank
         setRankChangeLabel(with: movie.rankChange)
         setIsNewEntryLabel(with: movie.isNewEntry)
-        openYearLabel.text = movie.openYear
+        openYearLabel.text = movie.openYear + " • "
         genreLabel.text = movie.genreName
     }
     
@@ -160,6 +155,7 @@ final class MovieMainInfoView: UIView {
         setupConstraint()
         titleLabel.numberOfLines = 0
         titleLabel.setContentHuggingPriority(UILayoutPriority(900), for: .vertical)
+        titleLabel.adjustsFontSizeToFitWidth = true
         currentRanklabel.textColor = .white
         self.backgroundColor = .systemBackground
     }
@@ -178,7 +174,6 @@ final class MovieMainInfoView: UIView {
         infoStackView.addArrangedSubview(rankStackView)
         infoStackView.addArrangedSubview(openYearStackView)
         infoStackView.addArrangedSubview(ratingStackView)
-        infoStackView.addArrangedSubview(fakeView)
         
         entireStackView.addArrangedSubview(posterView)
         entireStackView.addArrangedSubview(infoStackView)
@@ -187,8 +182,7 @@ final class MovieMainInfoView: UIView {
         addSubview(rankBackgroundView)
         rankBackgroundView.addSubview(currentRanklabel)
     }
-    
-    //TODO: constraint 및 StackView 조정
+
     private func setupConstraint() {
         NSLayoutConstraint.activate([
             currentRanklabel.centerXAnchor.constraint(equalTo: rankBackgroundView.centerXAnchor),
@@ -209,7 +203,8 @@ final class MovieMainInfoView: UIView {
                                                       constant: -16),
             
             posterView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor,
-                                              multiplier: 4/10)
+                                              multiplier: 4/10),
+            starView.widthAnchor.constraint(equalTo: starView.heightAnchor)
         ])
     }
     
