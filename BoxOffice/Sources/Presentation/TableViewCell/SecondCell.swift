@@ -116,8 +116,8 @@ class SecondCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             rankingattendancestarsStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            rankingattendancestarsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25),
-            rankingattendancestarsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25),
+            rankingattendancestarsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 35),
+            rankingattendancestarsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -35),
             rankingattendancestarsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }

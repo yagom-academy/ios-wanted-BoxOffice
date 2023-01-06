@@ -8,12 +8,22 @@
 import UIKit
 
 class ThirdCell: UITableViewCell {
+    
+    private lazy var backgroundStackView: UIStackView = {
+        let stackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually, spacing: 4)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+        stackView.addArrangedSubviews(genreStackView, directorStackView, actorStackView, productionyearStackView)
+        return stackView
+    }()
+    
     private lazy var genreStackView: UIStackView = {
         let stackview = UIStackView()
         stackview.axis = .horizontal
-        stackview.alignment = .bottom
-        stackview.distribution = .equalSpacing
+        stackview.alignment = .leading
+        stackview.distribution = .fill
         stackview.spacing = 6
+        stackview.addArrangedSubviews(genreLabel, genresLabel)
         return stackview
     }()
     
@@ -21,6 +31,8 @@ class ThirdCell: UITableViewCell {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 15)
         label.textColor = .white
+        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.text = "장르"
         return label
     }()
@@ -29,7 +41,6 @@ class ThirdCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13)
         label.textColor = .white
-        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.text = "액션, 어드벤쳐"
         return label
     }()
@@ -37,9 +48,10 @@ class ThirdCell: UITableViewCell {
     private lazy var directorStackView: UIStackView = {
         let stackview = UIStackView()
         stackview.axis = .horizontal
-        stackview.alignment = .bottom
-        stackview.distribution = .equalSpacing
+        stackview.alignment = .leading
+        stackview.distribution = .fill
         stackview.spacing = 6
+        stackview.addArrangedSubviews(directorLabel, directorsLabel)
         return stackview
     }()
     
@@ -47,6 +59,8 @@ class ThirdCell: UITableViewCell {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 15)
         label.textColor = .white
+        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.text = "감독"
         return label
     }()
@@ -63,9 +77,10 @@ class ThirdCell: UITableViewCell {
     private lazy var actorStackView: UIStackView = {
         let stackview = UIStackView()
         stackview.axis = .horizontal
-        stackview.alignment = .bottom
-        stackview.distribution = .equalSpacing
+        stackview.alignment = .leading
+        stackview.distribution = .fill
         stackview.spacing = 6
+        stackview.addArrangedSubviews(actorLabel, actorsLabel)
         return stackview
     }()
     
@@ -74,6 +89,8 @@ class ThirdCell: UITableViewCell {
         label.font = .boldSystemFont(ofSize: 15)
         label.textColor = .white
         label.text = "주연"
+        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         return label
     }()
     
@@ -81,18 +98,20 @@ class ThirdCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13)
         label.textColor = .white
-        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.text = "asdasd, asdasdasd, asdasd"
         label.numberOfLines = 2
+        label.numberOfLines = 1
+        label.textAlignment = .left
         return label
     }()
     
     private lazy var productionyearStackView: UIStackView = {
         let stackview = UIStackView()
         stackview.axis = .horizontal
-        stackview.alignment = .bottom
-        stackview.distribution = .equalSpacing
+        stackview.alignment = .leading
+        stackview.distribution = .fill
         stackview.spacing = 6
+        stackview.addArrangedSubviews(productionyearLabel, productionyearsLabel)
         return stackview
     }()
     
@@ -100,6 +119,8 @@ class ThirdCell: UITableViewCell {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 15)
         label.textColor = .white
+        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.text = "제작연도"
         return label
     }()
@@ -116,14 +137,10 @@ class ThirdCell: UITableViewCell {
     private(set) lazy var reviewButton: UIButton = {
         let button = UIButton()
         button.tintColor = .white
-        button.backgroundColor = UIColor(r: 50, g: 50, b: 50)
+        button.backgroundColor = .systemIndigo
         button.setTitle("리뷰하기", for: .normal)
         button.titleLabel?.textColor = .white
         button.layer.cornerRadius = 10
-        button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.gray.cgColor
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.borderColor = UIColor(r: 50, g: 50, b: 50).cgColor
         return button
     }()
 
@@ -139,45 +156,17 @@ class ThirdCell: UITableViewCell {
     }
     
     func setAutolayout() {
-        contentView.addSubviews(genreStackView, directorStackView, actorStackView, productionyearStackView, reviewButton)
-        
-        genreStackView.addArrangedSubviews(genreLabel, genresLabel)
-        
-        directorStackView.addArrangedSubviews(directorLabel, directorsLabel)
-        
-        actorStackView.addArrangedSubviews(actorLabel, actorsLabel)
-        
-        productionyearStackView.addArrangedSubviews(productionyearLabel, productionyearsLabel)
-        
+        contentView.addSubviews(backgroundStackView, reviewButton)
         NSLayoutConstraint.activate([
-            genreStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            genreStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            genreStackView.heightAnchor.constraint(equalToConstant: 20)
-        ])
-        
-        NSLayoutConstraint.activate([
-            directorStackView.topAnchor.constraint(equalTo: genreStackView.bottomAnchor, constant: 4),
-            directorStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            directorStackView.heightAnchor.constraint(equalToConstant: 20)
-        ])
-        
-        NSLayoutConstraint.activate([
-            actorStackView.topAnchor.constraint(equalTo: directorStackView.bottomAnchor, constant: 4),
-            actorStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            actorStackView.heightAnchor.constraint(equalToConstant: 20)
-        ])
-        
-        NSLayoutConstraint.activate([
-            productionyearStackView.topAnchor.constraint(equalTo: actorStackView.bottomAnchor, constant: 4),
-            productionyearStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            productionyearStackView.heightAnchor.constraint(equalToConstant: 20)
-        ])
-        
-        NSLayoutConstraint.activate([
-            reviewButton.topAnchor.constraint(equalTo: productionyearStackView.bottomAnchor, constant: 15),
+            backgroundStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            backgroundStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            backgroundStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            backgroundStackView.bottomAnchor.constraint(equalTo: reviewButton.topAnchor),
+            reviewButton.topAnchor.constraint(equalTo: backgroundStackView.bottomAnchor),
             reviewButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             reviewButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            reviewButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+            reviewButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            reviewButton.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
@@ -186,21 +175,21 @@ class ThirdCell: UITableViewCell {
         var directors = String()
         var actors = String()
         detailInfo.genres.forEach {
-            genres += ("\($0),")
+            genres += ("\($0), ")
         }
         detailInfo.directors.forEach {
-            directors += ("\($0),")
+            directors += ("\($0), ")
         }
         if  detailInfo.actors.count != 0 {
             detailInfo.actors.forEach {
-                actors += ("\($0),")
+                actors += ("\($0), ")
             }
-            actors.removeLast()
+            actors.removeLast(2)
         } else {
             actors = ""
         }
-        genres.removeLast()
-        directors.removeLast()
+        genres.removeLast(2)
+        directors.removeLast(2)
         
         genresLabel.text = genres
         directorsLabel.text = directors
@@ -208,3 +197,4 @@ class ThirdCell: UITableViewCell {
         productionyearsLabel.text = detailInfo.productionYear
     }
 }
+

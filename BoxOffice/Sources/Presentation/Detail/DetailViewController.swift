@@ -18,7 +18,6 @@ class DetailViewController: UIViewController {
         
         tableView.backgroundColor = .boBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.separatorColor = .gray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         return tableView
     }()
@@ -37,10 +36,10 @@ class DetailViewController: UIViewController {
         tableView.register(ReviewCell.self, forCellReuseIdentifier: "ReviewCell")
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+            tableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
         ])
 
         navigationItem.largeTitleDisplayMode = .never
