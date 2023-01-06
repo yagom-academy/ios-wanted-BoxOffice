@@ -8,6 +8,41 @@
 import UIKit
 
 class MovieDetailViewController: UIViewController {
+    private let reviewTitleLabel = MovieLabel(font: .title3, isBold: true)
+    private let writeReviewButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "pencil"), for: .normal)
+        button.setTitle("리뷰 작성하기", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let moreReviewButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("더보기", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.borderColor = UIColor.systemGray5.cgColor
+        button.layer.borderWidth = 2
+        return button
+    }()
+    
+    private let reviewStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let reviewTitleStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -23,11 +58,10 @@ class MovieDetailViewController: UIViewController {
                            forCellReuseIdentifier: "ReviewTableViewCell")
         return tableView
     }()
-    
-    private let reviewViewModel = MovieReviewViewModel()
+
     private let movieMainInfoView = MovieMainInfoView()
     private let movieSubInfoView = MovieSubInfoView()
-    private lazy var movieReviewView = MovieReviewView(tableView: reviewTableView)
+    private let reviewViewModel = MovieReviewViewModel()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -64,40 +98,6 @@ class MovieDetailViewController: UIViewController {
         reviewViewModel.fetch()
     }
     
-    private func setupView() {
-        //TODO: ReviewTable
-        movieMainInfoView.configure(with: testMovie)
-        movieSubInfoView.configure(with: testMovie)
-        
-        addSubView()
-        setupConstraint()
-        setupTableView()
-        view.backgroundColor = .systemBackground
-    }
-    
-    private func addSubView() {
-        entireStackView.addArrangedSubview(movieMainInfoView)
-        entireStackView.addArrangedSubview(movieSubInfoView)
-        entireStackView.addArrangedSubview(movieReviewView)
-        
-        view.addSubview(entireStackView)
-    }
-    
-    //TODO: 뷰 constraint 조정하기 (뷰컨 외에도 대부분 뷰의 StackView를 다시 봐야합니다
-    private func setupConstraint() {
-        NSLayoutConstraint.activate([
-            entireStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            entireStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            entireStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            entireStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            
-            movieMainInfoView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor,
-                                                      multiplier: 1/3),
-            reviewStackView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor,
-                                                    multiplier: 5/10)
-        ])
-    }
-    
     private func setupNavigationItem() {
         //TODO: 넘겨받은 영화 제목으로 설정
         navigationItem.title = testMovie.title
@@ -131,5 +131,56 @@ extension MovieDetailViewController: UITableViewDataSource {
         cell.configure(with: review)
         
         return cell
+    }
+}
+
+//MARK: Setup View
+extension MovieDetailViewController {
+    private func setupView() {
+        //TODO: ReviewTable
+        movieMainInfoView.configure(with: testMovie)
+        movieSubInfoView.configure(with: testMovie)
+        reviewTitleLabel.text = "리뷰"
+        
+        addSubView()
+        setupConstraint()
+        setupTableView()
+        view.backgroundColor = .systemBackground
+    }
+    
+    private func addSubView() {
+        reviewTitleStackView.addArrangedSubview(reviewTitleLabel)
+        reviewTitleStackView.addArrangedSubview(writeReviewButton)
+        
+        reviewStackView.addArrangedSubview(reviewTitleStackView)
+        reviewStackView.addArrangedSubview(reviewTableView)
+        reviewStackView.addArrangedSubview(moreReviewButton)
+        
+        entireStackView.addArrangedSubview(movieMainInfoView)
+        entireStackView.addArrangedSubview(movieSubInfoView)
+        entireStackView.addArrangedSubview(reviewStackView)
+        
+        view.addSubview(entireStackView)
+    }
+    
+    private func setupConstraint() {
+        NSLayoutConstraint.activate([
+            entireStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            entireStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            entireStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            entireStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            
+            movieMainInfoView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor,
+                                                      multiplier: 1/3),
+            reviewStackView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor,
+                                                    multiplier: 5/10),
+            
+            reviewStackView.bottomAnchor.constraint(equalTo: entireStackView.bottomAnchor,
+                                                    constant: -8),
+            reviewStackView.leadingAnchor.constraint(equalTo: entireStackView.leadingAnchor,
+                                                     constant: 16),
+            reviewStackView.trailingAnchor.constraint(equalTo: entireStackView.trailingAnchor,
+                                                      constant: -16),
+        ])
     }
 }
