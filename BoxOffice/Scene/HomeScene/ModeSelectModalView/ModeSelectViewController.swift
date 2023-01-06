@@ -13,10 +13,8 @@ protocol ModeSelectViewControllerDelegate: AnyObject {
 
 final class ModeSelectViewController: UIViewController {
     weak var delegate: ModeSelectViewControllerDelegate?
-    private let passedMode: String
+    private let passedMode: BoxOfficeMode
     private let customTransitioningDelegate = ModeSelectTransitioningDelegate()
-    private var selectList = ["일별 박스오피스", "주간/주말 박스오피스"]
-    
     private let navigationBar = UINavigationBar(frame: .zero)
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -24,7 +22,7 @@ final class ModeSelectViewController: UIViewController {
         return tableView
     }()
     
-    init(passMode: String) {
+    init(passMode: BoxOfficeMode) {
         self.passedMode = passMode
         super.init(nibName: nil, bundle: nil)
         setupModalStyle()
@@ -47,7 +45,6 @@ final class ModeSelectViewController: UIViewController {
         modalPresentationStyle = .custom
         modalTransitionStyle = .coverVertical
         transitioningDelegate = customTransitioningDelegate
-     
     }
     
     private func setupInitialView() {
@@ -89,7 +86,7 @@ extension ModeSelectViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return selectList.count
+        return 2
     }
     
     func tableView(_ tableView: UITableView,
@@ -100,9 +97,9 @@ extension ModeSelectViewController: UITableViewDelegate, UITableViewDataSource {
         ) as? ModeSelectCell else {
             return UITableViewCell(style: .default, reuseIdentifier: .none)
         }
-        let modeName = selectList[indexPath.row]
+        let modeName = BoxOfficeMode.allCases[indexPath.row]
         
-        cell.setup(label: modeName, isChecked: passedMode == modeName)
+        cell.setup(label: modeName.rawValue, isChecked: passedMode == modeName)
         return cell
     }
     

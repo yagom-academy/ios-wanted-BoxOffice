@@ -61,7 +61,7 @@ final class HomeCollectionView: UICollectionView {
         
         let headerFooterSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44)
+            heightDimension: .estimated(60)
         )
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerFooterSize,
@@ -82,14 +82,14 @@ final class HomeCollectionView: UICollectionView {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(
             top: 0,
-            leading: 5,
+            leading: 10,
             bottom: 0,
-            trailing: 5
+            trailing: 10
         )
         
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.5),
-            heightDimension: .fractionalHeight(0.5)
+            widthDimension: .fractionalWidth(0.45),
+            heightDimension: .fractionalHeight(0.45)
         )
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize,
@@ -100,7 +100,7 @@ final class HomeCollectionView: UICollectionView {
         section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         let headerFooterSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44)
+            heightDimension: .estimated(50)
         )
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerFooterSize,
