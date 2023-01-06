@@ -162,8 +162,9 @@ extension WriteReviewViewController {
     
     @objc private func saveBarButtonTapped() {
         guard let newReview = createReview() else { return }
+        let movieKey = movie.title + movie.openYear
         
-        reviewViewModel.save(newReview)
+        reviewViewModel.save(newReview, at: movieKey)
         navigationController?.popViewController(animated: true)
     }
     

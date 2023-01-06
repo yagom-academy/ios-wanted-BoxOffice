@@ -52,7 +52,8 @@ class MovieDetailViewController: UIViewController {
     }
     
     private func loadReview() {
-        reviewViewModel.fetch()
+        let movieKey = movieDetail.title + movieDetail.openYear
+        reviewViewModel.fetch(at: movieKey)
     }
     
     private func bind() {

@@ -11,20 +11,14 @@ import FirebaseFirestore
 final class FirestoreManager {
     static let shared = FirestoreManager()
     private let database = Firestore.firestore()
-    private let deviceID: String
     
-    private init() {
-        guard let deviceIdentifier = UIDevice.current.identifierForVendor?.uuidString else {
-            deviceID = ""
-            return
-        }
-        deviceID = deviceIdentifier
-    }
+    private init() { }
     
     func save(_ data: [String: Any],
+              at collection: String,
               with id: String,
               completion: @escaping (Result<Void, FirebaseError>) -> Void) {
-        database.collection(deviceID).document(id).setData(data) { error in
+        database.collection(collection).document(id).setData(data) { error in
             if error != nil {
                 completion(.failure(.save))
             }
@@ -34,8 +28,9 @@ final class FirestoreManager {
     }
     
     func delete(with id: String,
+                at collection: String,
                 completion: @escaping (Result<Void, FirebaseError>) -> Void) {
-        database.collection(deviceID).document(id).delete { error in
+        database.collection(collection).document(id).delete { error in
             if error != nil {
                 completion(.failure(.delete))
             }
@@ -44,8 +39,9 @@ final class FirestoreManager {
         }
     }
     
-    func fetch(completion: @escaping (Result<[QueryDocumentSnapshot], FirebaseError>) -> Void) {
-        database.collection(deviceID).getDocuments { querySnapshot, error in
+    func fetch(at collection: String,
+                completion: @escaping (Result<[QueryDocumentSnapshot], FirebaseError>) -> Void) {
+        database.collection(collection).getDocuments { querySnapshot, error in
             if error != nil {
                 completion(.failure(.fetch))
             }

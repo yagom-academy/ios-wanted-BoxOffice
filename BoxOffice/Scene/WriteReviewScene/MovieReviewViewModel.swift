@@ -6,8 +6,8 @@
 //
 
 protocol MovieReviewViewModelInput {
-    func save(_ review: Review)
-    func fetch()
+    func save(_ review: Review, at movieKey: String)
+    func fetch(at movieKey: String)
 }
 
 protocol MovieReviewViewModelOutput {
@@ -25,8 +25,8 @@ final class MovieReviewViewModel: MovieReviewViewModelType {
     var error: Observable<String?> = Observable(nil)
     
     /// Input
-    func save(_ review: Review) {
-        reviewFirebaseUseCase.save(review) { result in
+    func save(_ review: Review, at movieKey: String) {
+        reviewFirebaseUseCase.save(review, at: movieKey) { result in
             switch result {
             case .success(_):
                 break
@@ -36,8 +36,8 @@ final class MovieReviewViewModel: MovieReviewViewModelType {
         }
     }
     
-    func fetch() {
-        reviewFirebaseUseCase.fetch { [weak self] result in
+    func fetch(at movieKey: String) {
+        reviewFirebaseUseCase.fetch(at: movieKey) { [weak self] result in
             switch result {
             case .success(let reviews):
                 self?.reviews.value = reviews
