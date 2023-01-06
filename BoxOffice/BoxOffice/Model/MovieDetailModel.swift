@@ -89,7 +89,7 @@ struct Staffs: Codable {
 
 //class JSONNull: Codable, Hashable {
 //
-//    public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
+//    public stㅈㄷ atic func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
 //        return true
 //    }
 //
