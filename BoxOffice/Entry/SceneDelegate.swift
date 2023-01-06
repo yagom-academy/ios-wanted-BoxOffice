@@ -19,10 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
-        let box = DetailBoxOffice(movieCode: "1111", productionYear: "2222", openDate: "3333", showTime: "4444", genreName: "5555", dirctors: "6666", actors: "7777", watchGradeName: "8888", movieEnglishName: "9999")
-        let viewModel = CommentAddViewModel(detailBoxOffice: box)
         window?.rootViewController = UINavigationController(
-            rootViewController: CommentViewController(viewModel: viewModel)
+            rootViewController: MainViewController.instance(MainViewModel(networkHandler: Networker()))
         )
         window?.backgroundColor = .white
         window?.overrideUserInterfaceStyle = .light
