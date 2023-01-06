@@ -13,7 +13,7 @@ struct BoxOfficeReviewView: View {
     @State private var newUsername: String = ""
     @State private var newPassword: String = ""
     
-    @StateObject var boxOfficeReviewModel = BoxOfficeReviewModel()
+    @StateObject var boxOfficeReviewModel = BoxOfficeReviewModel(movieNm: "Avatar: The Way of Water")
     
     var movieTitle: String
     
