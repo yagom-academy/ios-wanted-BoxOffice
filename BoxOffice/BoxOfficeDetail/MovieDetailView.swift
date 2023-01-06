@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class SecondView: UIView {
+final class MovieDetailView: UIView {
     
     // MARK: Properties
     

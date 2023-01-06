@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class MovieDetailViewController: UIViewController {
 
     private let boxOfficeData: BoxOffice
     private let boxofficeDetailAPI = BoxOfficeDetailAPI()
@@ -16,8 +16,8 @@ class SecondViewController: UIViewController {
     private var moviePosterData: MoviePosterInfo?
     private let URLSemaphore = DispatchSemaphore(value: 0)
     
-    let movieDetailView: SecondView = {
-        let view = SecondView()
+    let movieDetailView: MovieDetailView = {
+        let view = MovieDetailView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -78,7 +78,7 @@ class SecondViewController: UIViewController {
     
 }
 
-extension SecondViewController {
+extension MovieDetailViewController {
     private func configureUI() {
         self.view.addSubview(self.movieDetailView)
         setUpBaseUIConstraints()
