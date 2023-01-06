@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		028433FB2967E3BC002E56FB /* StarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028433FA2967E3BC002E56FB /* StarButton.swift */; };
 		028741492965693C00B2D021 /* UIFont+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028741482965693C00B2D021 /* UIFont+extension.swift */; };
 		0287414B29659F7A00B2D021 /* CreateReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0287414A29659F7A00B2D021 /* CreateReviewViewController.swift */; };
 		0287414E2965A00D00B2D021 /* CreateReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0287414D2965A00D00B2D021 /* CreateReviewViewModel.swift */; };
@@ -69,6 +70,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		028433FA2967E3BC002E56FB /* StarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarButton.swift; sourceTree = "<group>"; };
 		028741482965693C00B2D021 /* UIFont+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+extension.swift"; sourceTree = "<group>"; };
 		0287414A29659F7A00B2D021 /* CreateReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewViewController.swift; sourceTree = "<group>"; };
 		0287414D2965A00D00B2D021 /* CreateReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewViewModel.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			children = (
 				0287415F2965BA9000B2D021 /* ProfileImageButton.swift */,
 				028741612965BECE00B2D021 /* RatingView.swift */,
+				028433FA2967E3BC002E56FB /* StarButton.swift */,
 				028741652965C9EC00B2D021 /* BoxOfficeInputView.swift */,
 			);
 			path = Views;
@@ -508,6 +511,7 @@
 				425D26C1296413F000967454 /* UIColor+Extension.swift in Sources */,
 				02F8556929641B68004B76DD /* AppCoordinator.swift in Sources */,
 				02F855342963BDB3004B76DD /* TargetType.swift in Sources */,
+				028433FB2967E3BC002E56FB /* StarButton.swift in Sources */,
 				02F855402963E31B004B76DD /* BoxOfficeListResponse.swift in Sources */,
 				425D26D22964329500967454 /* ThirdCell.swift in Sources */,
 				0287414B29659F7A00B2D021 /* CreateReviewViewController.swift in Sources */,
