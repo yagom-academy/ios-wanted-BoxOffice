@@ -9,7 +9,7 @@ import UIKit
 
 final class MovieReviewViewController: UIViewController {
     
-    private let viewModel: MovieReviewViewModel
+    private let viewModel = MovieReviewViewModel()
     
     private let movieCode: String
     private var rating: Double = 0
@@ -195,6 +195,15 @@ final class MovieReviewViewController: UIViewController {
         }), for: .touchUpInside)
         return button
     }()
+
+    init(movieCode: String) {
+        self.movieCode = movieCode
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -212,6 +221,13 @@ final class MovieReviewViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        nicknameTextField.setUnderLine(width: 1, color: .tertiaryLabel)
+        passwordTextField.setUnderLine(width: 1, color: .tertiaryLabel)
+    }
     
     @objc private func keyboardWillShow(_ notification: NSNotification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
@@ -222,24 +238,6 @@ final class MovieReviewViewController: UIViewController {
     
     @objc private func keyboardWillHide(_ notification: NSNotification) {
         outerScrollView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
-    }
-
-    init(movieCode: String, viewModel: MovieReviewViewModel) {
-        self.movieCode = movieCode
-        self.viewModel = viewModel
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        nicknameTextField.setUnderLine(width: 1, color: .tertiaryLabel)
-        passwordTextField.setUnderLine(width: 1, color: .tertiaryLabel)
     }
     
     private func bind() {
