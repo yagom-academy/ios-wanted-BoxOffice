@@ -72,6 +72,7 @@ class CreateReviewViewController: UIViewController {
         let inputView = BoxOfficeInputView(title: "암호", placeholder: "소문자, 숫자, 특수문자(!@#$) 필수")
         inputView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 60).isActive = true
         inputView.addTarget(target: self, action: #selector(didChangePasswordTextField(_:)), for: [.allEditingEvents, .valueChanged])
+        inputView.setUpSecureTextEntry(true)
         return inputView
     }()
     
@@ -144,6 +145,7 @@ private extension CreateReviewViewController {
     func setUp() {
         setUpNavigationBar()
         setUpView()
+        hideKeyboard()
     }
     
     func setUpNavigationBar() {
