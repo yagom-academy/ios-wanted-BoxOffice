@@ -197,6 +197,7 @@ final class MovieReviewViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
         
         addViews()
         setupLayout()

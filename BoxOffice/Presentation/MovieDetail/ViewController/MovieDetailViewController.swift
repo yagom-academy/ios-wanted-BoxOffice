@@ -38,6 +38,7 @@ final class MovieDetailViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         setUpNavigationBar()
+        viewModel.viewWillAppear()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,6 +46,7 @@ final class MovieDetailViewController: UIViewController {
         appearance.configureWithDefaultBackground()
         appearance.backgroundColor = .clear
         navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.tintColor = .black
     }
 
     init(movieOverview: MovieOverview) {
@@ -60,7 +62,6 @@ final class MovieDetailViewController: UIViewController {
     private func setUpNavigationBar() {
         let button = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"),
                                      style: .plain, target: self, action: #selector(shareButtonTapped(_:)))
-//        button.tintColor = .white
         navigationItem.setRightBarButton(button, animated: false)
 
         let appearance = UINavigationBarAppearance()
