@@ -99,7 +99,13 @@ extension MovieDetailViewController: UITableViewDataSource {
             return 0
         }
         
-        return reviewCount > 3 ? 3 : reviewCount
+        if reviewCount > 3 {
+            movieReviewView.moreButtonState(isEnabled: true)
+            return 3
+        } else{
+            movieReviewView.moreButtonState(isEnabled: false)
+            return reviewCount
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

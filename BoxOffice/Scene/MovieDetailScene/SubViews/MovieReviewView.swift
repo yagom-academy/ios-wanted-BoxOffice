@@ -62,6 +62,10 @@ final class MovieReviewView: UIView {
                                    for: .touchUpInside)
     }
     
+    func moreButtonState(isEnabled: Bool) {
+        moreReviewButton.isEnabled = isEnabled
+    }
+    
     private func setupView() {
         addSubView()
         setupConstraint()
