@@ -173,6 +173,13 @@ extension WriteReviewViewController {
               let rating = ratingStarView.rating,
               let content = contentTextView.text else { return nil }
         
+        guard nickName.isEmpty == false,
+              content.isEmpty == false,
+              password.isEmpty == false else {
+            //TODO: 모든 항목 입력 확인 얼럿 띄우기
+            return nil
+        }
+        
         if validatePassword() == false {
             //TODO: 암호 유효성 실패 얼럿 띄우기
             return nil
