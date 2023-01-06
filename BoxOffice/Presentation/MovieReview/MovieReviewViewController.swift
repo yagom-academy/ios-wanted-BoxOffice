@@ -22,7 +22,7 @@ final class MovieReviewViewController: UIViewController {
     private let outerScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.keyboardDismissMode = .onDrag
+        scrollView.keyboardDismissMode = .interactive
         return scrollView
     }()
     
@@ -209,25 +209,19 @@ final class MovieReviewViewController: UIViewController {
         configureTextField()
         bind()
         
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc private func hideKeyboard() {
-        self.view.endEditing(true)
-    }
-    
-    @objc private func keyboardWillShow(notification: NSNotification) {
+    @objc private func keyboardWillShow(_ notification: NSNotification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
-
+            outerScrollView.contentInset = .init(top: 0, left: 0, bottom: keyboardHeight, right: 0)
         }
     }
     
-    @objc private func keyboardWillHide() {
-
+    @objc private func keyboardWillHide(_ notification: NSNotification) {
+        outerScrollView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
     }
 
     init(movieCode: String, viewModel: MovieReviewViewModel) {
