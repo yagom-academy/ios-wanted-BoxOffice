@@ -4,6 +4,10 @@
 
 **팀원: Neph, Minsson**
 
+| <img src="https://avatars.githubusercontent.com/u/67148595?v=4" alt="img" style="zoom:50%;" /> | <img src="https://avatars.githubusercontent.com/u/96630194?v=4" alt="img" style="zoom:50%;" /> |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+|                             Neph                             |                           Minsson                            |
+
 **채택한 아키텍쳐: Clean Architecture**
 
 **서로 담당한 파트**
@@ -120,8 +124,8 @@ DTO에서 Entity로의 변환, Entity에서 DTO로의 변환 또한 Data Layer�
 
 ## 동작화면들
 
-| ![LoadingIndicator](https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20230104112342.gif) | ![ReviewDelete](https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20230104112430.gif) |
+| <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20230104112342.gif" alt="LoadingIndicator" style="zoom:50%;" /> | <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20230104112430.gif" alt="ReviewDelete" style="zoom:50%;" /> |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
 |                           Loading                            |                        Delete Review                         |
-| ![Share action](https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20230104112506.gif) | ![Tab전환 및 스크롤](https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20230104112524.gif) |
+| <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20230106193523.gif" alt="Simulator Screen Recording - iPhone 13 Pro - 2023-01-06 at 19.34.46" style="zoom:50%;" /> | <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20230104112524.gif" alt="Tab전환 및 스크롤" style="zoom:50%;" /> |
 |                         Share action                         |                          Tab Change                          |
