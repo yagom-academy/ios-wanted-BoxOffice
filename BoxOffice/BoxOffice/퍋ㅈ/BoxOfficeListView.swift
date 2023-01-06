@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct BoxOfficeListView: View {
-
     var dailyBoxOfficeList: DailyBoxOfficeList
     
     var body: some View {
@@ -24,6 +23,7 @@ struct BoxOfficeListView: View {
                     Image(systemName: "arrow.down")
                         .foregroundColor(.blue)
                 }
+                
                 VStack {
                     Text(dailyBoxOfficeList.rank + ". " + dailyBoxOfficeList.movieNm)
                         .frame(maxWidth: .infinity, alignment: .leading)

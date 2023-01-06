@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BoxOfficeDetailView: View {
+    @StateObject var detailViewModel = MovieDetailViewModel()
     
     var viewModel: BoxOfficeMainViewModel
     var myIndex: Int
@@ -33,15 +34,25 @@ struct BoxOfficeDetailView: View {
                     
                     VStack(alignment: .leading) {
                         Text(viewModel.movieList[myIndex].movieNm)
-                            .font(.body)
+                            .font(.subheadline)
                             .fontWeight(.bold)
-                            .padding(.top, 300)
+                            .padding(.top, 350)
+                        Text("")
                         HStack {
-                            Text(viewModel.movieList[myIndex].openDt)
-                            Text("상영시간")
+                            Text(detailViewModel.currentPageMovieDetail?.nations[0].nationNm ?? "")
+                            Text("/")
+                            Text(detailViewModel.currentPageMovieDetail?.genreNm ?? "")
                         }
+                        .foregroundColor(.primary)
+                        .font(.caption)
+                        HStack {
+                            Text((detailViewModel.currentPageMovieDetail?.openDatDt ?? "").dateYearFormatter.translateToString2() + " 개봉")
+                            Image(systemName: "clock.arrow.circlepath")
+                            Text((detailViewModel.currentPageMovieDetail?.showTm ?? "") + " 분")
+                        }
+                        .foregroundColor(.primary)
+                        .font(.caption)
                     }
-                    .padding(.top, 30)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 30)
@@ -57,12 +68,12 @@ struct BoxOfficeDetailView: View {
                     VStack {
                         Text("랭킹 진입 여부")
                             .font(.system(size: 10))
-                        Text(viewModel.movieList[myIndex].audiAcc)
+                        Text(viewModel.movieList[myIndex].rankOldAndNew.rawValue)
                     }
                     VStack {
                         Text("누적 관객수")
                             .font(.system(size: 10))
-                        Text(viewModel.movieList[myIndex].audiAcc)
+                        Text(viewModel.movieList[myIndex].audiAcc.insertComma + " 명")
                     }
                 }
                 .font(.system(size: 15, weight: .bold))
@@ -77,5 +88,8 @@ struct BoxOfficeDetailView: View {
             }
         }
         .ignoresSafeArea()
+        .onAppear {
+            detailViewModel.fetchCurrentMovieDetail(movieBoxOfficeInfo: viewModel.movieList[myIndex])
+        }
     }
 }

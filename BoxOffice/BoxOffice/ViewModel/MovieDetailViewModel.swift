@@ -12,21 +12,12 @@ protocol MovieDetailViewModelProtocol {
     func createMoviePageInfo(movieBoxOfficeInfo: DailyBoxOfficeList, movieDetail: MovieDetail) -> MovieInfoPageModel
 }
 
-final class MovieDetailViewModel: MovieDetailViewModelProtocol {
-    
-    // Network
+final class MovieDetailViewModel: MovieDetailViewModelProtocol, ObservableObject {
+    @Published var currentPageMovieDetail: MovieInfoPageModel?
+
     let boxOfficeDirector = MovieRequestDirector()
     let networkManager = NetworkManager()
 
-    // ViewModel Properties
-    var currentPageMovieDetail: MovieInfoPageModel?
-    
-    //initializer
-    init(selectedDailyMovie: DailyBoxOfficeList) {
-        fetchCurrentMovieDetail(movieBoxOfficeInfo: selectedDailyMovie)
-    }
-    
-    // method
     func fetchCurrentMovieDetail(movieBoxOfficeInfo: DailyBoxOfficeList) {
         let queryItems: [String: String] = [
             "movieCd": movieBoxOfficeInfo.movieCD
@@ -49,7 +40,7 @@ final class MovieDetailViewModel: MovieDetailViewModelProtocol {
                     movieBoxOfficeInfo: movieBoxOfficeInfo,
                     movieDetail: movieDetailInfo
                 )
-                
+
                 DispatchQueue.main.async { [weak self] in
                     self?.currentPageMovieDetail = movieDetailPageInfo
                 }
@@ -74,7 +65,8 @@ final class MovieDetailViewModel: MovieDetailViewModelProtocol {
             genreNm: movieDetail.movieInfoResult.movieInfo.genres[0].genreNm,
             directors: movieDetail.movieInfoResult.movieInfo.directors,
             actors: movieDetail.movieInfoResult.movieInfo.actors,
-            watchGradeNm: movieDetail.movieInfoResult.movieInfo.audits[0].watchGradeNm
+            watchGradeNm: movieDetail.movieInfoResult.movieInfo.audits[0].watchGradeNm,
+            nations: movieDetail.movieInfoResult.movieInfo.nations
         )
     }
 }

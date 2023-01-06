@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct BoxOfficeMainView: View {
-    
     @EnvironmentObject var boxOfficeMainViewModel: BoxOfficeMainViewModel
     @StateObject private var imageLoader = URLImageLoader()
+    @State private var dateType: GetDateType = .daily
+    
     var random = Int.random(in: 0..<7)
     
     var body: some View {
@@ -114,6 +115,11 @@ struct BoxOfficeMainView: View {
             } else {
                 ProgressView()
             }
+        }
+        .onAppear {
+            boxOfficeMainViewModel.fetchDailyBoxOfficeList(
+                dateType: dateType, targetDate: boxOfficeMainViewModel.getYesterdayDate()
+            )
         }
     }
 }

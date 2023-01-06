@@ -28,17 +28,12 @@ protocol BoxOfficeListProtocol {
 }
 
 final class BoxOfficeMainViewModel: ObservableObject, BoxOfficeListProtocol {
-    
     @Published var movieList = [DailyBoxOfficeList]()
     @Published var url = [UIImage]()
 
     let boxOfficeDirector = MovieRequestDirector()
     let posterImageDirector = OMDbRequestDirector()
     let networkManager = NetworkManager()
-    
-    init() {
-        fetchDailyBoxOfficeList(dateType: .daily, targetDate: getYesterdayDate())
-    }
     
     func getYesterdayDate() -> String {
         let calendar = Calendar.current
