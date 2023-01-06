@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StarImageView: UIImageView {
+final class StarImageView: UIImageView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()

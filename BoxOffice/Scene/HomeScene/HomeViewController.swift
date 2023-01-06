@@ -26,6 +26,7 @@ final class HomeViewController: UIViewController {
         button.contentHorizontalAlignment = .left
         return button
     }()
+    
     private var viewMode: BoxOfficeMode {
         if viewModeChangeButton.currentTitle == "▼ 일별 박스오피스" {
             return BoxOfficeMode.daily
@@ -33,6 +34,7 @@ final class HomeViewController: UIViewController {
             return BoxOfficeMode.weekly
         }
     }
+    
     private let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(frame: .zero)
         indicator.tintColor = .systemBlue
@@ -148,7 +150,6 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: 영화 상세로 넘어가기
         if viewMode == .daily {
             pushMovieDetail(
                 in: homeViewModel.dailyMovieCellDatas.value,

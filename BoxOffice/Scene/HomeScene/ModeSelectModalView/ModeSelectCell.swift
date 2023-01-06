@@ -8,7 +8,6 @@
 import UIKit
 
 final class ModeSelectCell: UITableViewCell {
-    
     private let boxOfficeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false

@@ -96,7 +96,7 @@ final class ModeSelectPresentationController: UIPresentationController {
             if presentedView.frame.origin.y < 680 {
                 return
             }
-            presentedView.center.y = originalPosition.y + translation.y*0.1
+            presentedView.center.y = originalPosition.y + translation.y * 0.1
         } else if sender.state == .ended {
             let velocity = sender.velocity(in: presentedView)
             

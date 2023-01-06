@@ -10,8 +10,9 @@ import UIKit
 final class ActorListPresentationController: UIPresentationController {
     private var originalPosition: CGPoint = CGPoint(x: 0, y: 0)
     private var currentPositionTouched: CGPoint?
-    private let viewWidth = UIScreen.main.bounds.width/2
-    private let viewHeight = UIScreen.main.bounds.height/3
+    private let viewWidth = UIScreen.main.bounds.width / 2
+    private let viewHeight = UIScreen.main.bounds.height / 3
+    
     private let dimmingView: UIView = {
         let dimmingView = UIVisualEffectView(
             effect: UIBlurEffect(style: .systemMaterialDark)
@@ -24,8 +25,8 @@ final class ActorListPresentationController: UIPresentationController {
         let size = CGSize(width: viewWidth,
                           height: viewHeight)
         let origin = CGPoint(
-            x: UIScreen.main.bounds.midX-viewWidth/2,
-            y: UIScreen.main.bounds.midY-viewHeight/2
+            x: UIScreen.main.bounds.midX-viewWidth / 2,
+            y: UIScreen.main.bounds.midY-viewHeight / 2
         )
         return CGRect(origin: origin, size: size)
     }

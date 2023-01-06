@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StarRatingUISlider: UISlider {
+final class StarRatingUISlider: UISlider {
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let width = self.frame.size.width
         let tapPoint = touch.location(in: self)

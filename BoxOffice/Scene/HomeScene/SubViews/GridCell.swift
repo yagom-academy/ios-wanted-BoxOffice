@@ -8,7 +8,6 @@
 import UIKit
 
 final class GridCell: UICollectionViewCell {
-    
     private let posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -130,7 +129,12 @@ final class GridCell: UICollectionViewCell {
     
     private func setOpenDateLabel(with openDate: String) {
         let characterArray = Array(openDate).map { String($0) }
-        let date = characterArray[0...3].joined() + "-" + characterArray[4...5].joined() + "-" + characterArray[6...7].joined() + " 개봉"
+        let date = characterArray[0...3].joined()
+        + "-"
+        + characterArray[4...5].joined()
+        + "-" + characterArray[6...7].joined()
+        + " 개봉"
+        
         openDateLabel.text = date
     }
     

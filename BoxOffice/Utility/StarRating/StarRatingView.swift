@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StarRatingView: UIView {
+final class StarRatingView: UIView {
     private let starImages = (1...5).map { _ in StarImageView(frame: .zero) }
     
     private let ratingLabel: UILabel = {
@@ -63,22 +63,6 @@ class StarRatingView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
-    }
-    
-    func setupStars(to rating: Float) {
-        let ratingValue = Int(rating)
-        let halfValue = rating - Float(ratingValue)
-
-        if rating == Float.zero {
-            clearStar(upto: 0)
-            return
-        }
-
-        fillStar(upto: ratingValue)
-
-        if halfValue != Float.zero {
-            starImages[ratingValue].image = UIImage(systemName: "star.leadinghalf.fill")
-        }
     }
 
     @objc private func sliderStar() {

@@ -25,10 +25,11 @@ struct SearchMovieInfoAPI: API {
 struct MovieInfoResponseDTO: Decodable {
     let movieInfoResult: MovieInfoResult
 }
+
 struct MovieInfoResult: Decodable {
     let movieInfo: MovieInfo
-    // let source: String
 }
+
 struct MovieInfo: Decodable {
     let movieCd: String
     let movieNm: String
@@ -52,33 +53,40 @@ struct MovieInfo: Decodable {
 struct Nation: Decodable {
     let nationNm: String
 }
+
 struct Genre: Decodable {
     let genreNm: String
 }
+
 struct Director: Decodable {
     let peopleNm: String
     let peopleNmEn: String
 }
+
 struct Actor: Decodable {
     let peopleNm: String
     let peopleNmEn: String
     let cast: String
     let castEn: String
 }
+
 struct ShowType: Decodable {
     let showTypeGroupNm: String
     let showTypeNm: String
 }
+
 struct Company: Decodable {
     let companyCd: String
     let companyNm: String
     let companyNmEn: String
     let companyPartNm: String
 }
+
 struct Audit: Decodable {
     let auditNo: String
     let watchGradeNm: String
 }
+
 struct Staff: Decodable {
     let peopleNm: String
     let peopleNmEn: String

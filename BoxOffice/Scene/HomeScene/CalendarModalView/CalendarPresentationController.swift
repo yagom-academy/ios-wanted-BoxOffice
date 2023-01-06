@@ -19,8 +19,8 @@ final class CalendarPresentationController: UIPresentationController {
     }()
     
     override var frameOfPresentedViewInContainerView: CGRect {
-        let size = CGSize(width: UIScreen.main.bounds.width-100,
-                          height: UIScreen.main.bounds.height/4)
+        let size = CGSize(width: UIScreen.main.bounds.width - 100,
+                          height: UIScreen.main.bounds.height / 4)
         let origin = CGPoint(x: 100, y: 50)
         return CGRect(origin: origin, size: size)
     }
@@ -85,7 +85,7 @@ final class CalendarPresentationController: UIPresentationController {
     
     @objc private func dismissView(_ sender: UITouch) {
         let point = sender.location(in: presentedView)
-        if point.y > 235 || point.x < 0{
+        if point.y > 235 || point.x < 0 {
             presentedViewController.dismiss(animated: true)
         }
     }

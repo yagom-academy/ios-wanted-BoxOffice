@@ -8,7 +8,6 @@
 import UIKit
 
 final class ActorListViewController: UIViewController {
-    
     private let mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -22,6 +21,7 @@ final class ActorListViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
     private let customTransitioningDelegate = ActorListTransitioningDelegate()
     private let navigationBar = UINavigationBar(frame: .zero)
     private let actorList: [String]

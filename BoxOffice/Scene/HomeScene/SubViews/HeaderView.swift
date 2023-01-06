@@ -8,7 +8,6 @@
 import UIKit
 
 final class HeaderView: UICollectionReusableView {
-    
     let sectionHeaderlabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false

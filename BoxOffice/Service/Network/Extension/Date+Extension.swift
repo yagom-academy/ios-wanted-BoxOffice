@@ -13,6 +13,7 @@ extension Date {
         dateFormatter.dateFormat = "yyyyMMdd"
         return dateFormatter
     }
+    
     var calendar: Calendar {
         return Calendar.current
     }

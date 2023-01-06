@@ -8,12 +8,12 @@
 import UIKit
 
 final class HomeCollectionView: UICollectionView {
-    
     private enum Section: String, CaseIterable {
         case allWeek = "주간 박스오피스"
         case weekEnd = "주말 박스오피스"
         case main
     }
+    
     var currentDate = ""
     private var currentViewMode: BoxOfficeMode = .daily
     private var homeDataSource: UICollectionViewDiffableDataSource<Section, MovieData>?
