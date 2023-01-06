@@ -79,7 +79,7 @@ final class FirebaseService {
 
     func fetchReviewImage(imageURL: String, completion: @escaping (Result<UIImage?, Error>) -> Void) -> Cancellable? {
         let gsReference = storage.reference(forURL: imageURL)
-        let task = gsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+        let task = gsReference.getData(maxSize: .max) { data, error in
             guard error == nil else {
                 completion(.failure(FirebaseError.internalError))
                 return
