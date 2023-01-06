@@ -165,10 +165,13 @@ class ReviewCell: UITableViewCell {
     }
     
     func setData(_ reviews: [Review], _ index: Int) {
+        guard reviews.indices.contains(index) else {
+            return
+        }
         userImageView.image = reviews[index].userImage.toUIImage()
         // star..
         writingLabel.text = reviews[index].review
         nicknameLabel.text = reviews[index].nickname
-        dateLabel.text = reviews[index].date.toString(DateFormat(rawValue: "yyyy.mm.dd")!)
+        dateLabel.text = reviews[index].date?.toString(DateFormat(rawValue: "yyyy.mm.dd")!)
     }
 }

@@ -43,7 +43,7 @@ final class ImageCacheManager {
     }
     
     func setImage(url urlString: String, completion: @escaping (UIImage?) -> Void) {
-        guard let url = URL(string: urlString) else {
+        guard urlString.contains("https"), let url = URL(string: urlString) else {
             return
         }
         latestTask = session.dataTask(with: url, completionHandler: { data, response, error in
