@@ -77,3 +77,20 @@ extension DefaultCreateReviewViewModel: CreateReviewViewModelOutput {
     var output: CreateReviewViewModelOutput { self }
     
 }
+
+private extension DefaultCreateReviewViewModel {
+    
+    func isValidPassword(_ password: String) -> Bool {
+        guard password.count >= 6,
+              password.count <= 20,
+              password.isContainsUppercase == false else {
+            return false
+        }
+        guard password.isContainsNumber,
+              password.isContainsLowercase,
+              password.isContainsSpecialCharacters else {
+            return false
+        }
+        return true
+    }
+}
