@@ -30,6 +30,7 @@
 		20F38B0129654EB800415749 /* MovieReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F38B0029654EB800415749 /* MovieReviewViewModel.swift */; };
 		20F38B0B2965C31400415749 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F38B0A2965C31400415749 /* MovieDetailViewController.swift */; };
 		20F38B0D2965CCAE00415749 /* MovieMainInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F38B0C2965CCAE00415749 /* MovieMainInfoView.swift */; };
+		20F8D473296816DF00FA77BA /* ReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F8D472296816DF00FA77BA /* ReviewListViewController.swift */; };
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
@@ -98,6 +99,7 @@
 		20F38B0029654EB800415749 /* MovieReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewViewModel.swift; sourceTree = "<group>"; };
 		20F38B0A2965C31400415749 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		20F38B0C2965CCAE00415749 /* MovieMainInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieMainInfoView.swift; sourceTree = "<group>"; };
+		20F8D472296816DF00FA77BA /* ReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewController.swift; sourceTree = "<group>"; };
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -307,18 +309,19 @@
 			children = (
 				AF12A47A29659773008C484B /* HomeScene */,
 				20F38B092965C2BA00415749 /* MovieDetailScene */,
-				20F38B042965BB2D00415749 /* WriteReviewScene */,
+				20F38B042965BB2D00415749 /* ReviewScene */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
 		};
-		20F38B042965BB2D00415749 /* WriteReviewScene */ = {
+		20F38B042965BB2D00415749 /* ReviewScene */ = {
 			isa = PBXGroup;
 			children = (
+				20F8D472296816DF00FA77BA /* ReviewListViewController.swift */,
 				20C7D43829641DDA00D87350 /* WriteReviewViewController.swift */,
 				20F38B0029654EB800415749 /* MovieReviewViewModel.swift */,
 			);
-			path = WriteReviewScene;
+			path = ReviewScene;
 			sourceTree = "<group>";
 		};
 		20F38B092965C2BA00415749 /* MovieDetailScene */ = {
@@ -590,6 +593,7 @@
 				AF6C3A422962D5C80074574D /* APIConfiguration.swift in Sources */,
 				AF85E0B12965509D00A22732 /* ImageCacheManager.swift in Sources */,
 				AF6C3A4F2962D79D0074574D /* SearchMovieInfoAPI.swift in Sources */,
+				20F8D473296816DF00FA77BA /* ReviewListViewController.swift in Sources */,
 				AF85E0A92965156A00A22732 /* ModeSelectPresentationController.swift in Sources */,
 				AF12A473296595CB008C484B /* CalendarPresentationController.swift in Sources */,
 				AF3AEB2D29669A6300B82DCB /* GridCell.swift in Sources */,

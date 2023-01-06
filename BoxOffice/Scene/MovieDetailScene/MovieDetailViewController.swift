@@ -42,6 +42,7 @@ class MovieDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadReview()
+        setupTableView()
     }
     
     override func viewDidLoad() {
@@ -112,7 +113,6 @@ extension MovieDetailViewController {
 
         addSubView()
         setupConstraint()
-        setupTableView()
         addTagetButton()
         view.backgroundColor = .systemBackground
     }
@@ -162,7 +162,10 @@ extension MovieDetailViewController {
     }
     
     @objc private func moreReviewButtonTapped() {
-        //TODO: 리뷰 테이블 페이지 이동
+        let reviewListViewController = ReviewListViewController(movieTitle: movieDetail.title,
+                                                                 viewModel: reviewViewModel)
+        navigationController?.pushViewController(reviewListViewController,
+                                                 animated: true)
     }
 }
 
