@@ -10,12 +10,24 @@ import UIKit
 class MovieDetailViewController: UIViewController {
     private var detailViewContent: MovieModel?
     private let movieDetailView = MovieDetailView()
+    private var cellCount = 0 {
+        didSet {
+            self.movieDetailView.reviewTableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(movieDetailView)
         view.backgroundColor = .white
         self.title = detailViewContent?.boxOfficeInfo.movieNm
+        
+        movieDetailView.reviewTableView.delegate = self
+        movieDetailView.reviewTableView.dataSource = self
+        movieDetailView.reviewTableView.register(
+            ReviewTableViewCell.self,
+            forCellReuseIdentifier: "ReviewTableViewCell"
+        )
         
         NSLayoutConstraint.activate([
             movieDetailView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
@@ -26,6 +38,11 @@ class MovieDetailViewController: UIViewController {
 
         guard let data = detailViewContent else {
             return
+        }
+        
+        FirebaseManager.shared.fetch(movieName: data.boxOfficeInfo.movieNm) { _ in
+            print(FirebaseManager.shared.reviews)
+            self.cellCount = FirebaseManager.shared.reviews.count
         }
 
         movieDetailView.setLabelText(data)
@@ -158,5 +175,22 @@ extension MovieDetailViewController: SendDataDelegate {
         }
         
         detailViewContent = content
+    }
+}
+
+extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cellCount
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: "ReviewTableViewCell",
+            for: indexPath
+        ) as? ReviewTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        return cell
     }
 }

@@ -16,9 +16,11 @@ class ReviewTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    let userNickNameLabel: UILabel = {
+    let userNicknameLabel: UILabel = {
         let label = UILabel()
         label.text = "별명"
+        label.font = .preferredFont(forTextStyle: .callout, compatibleWith: .none)
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -69,13 +71,17 @@ class ReviewTableViewCell: UITableViewCell {
         configureUI()
     }
     
-    func configureUI() {
+    func setupReivewLabelText(model: LoginModel) {
+        
+    }
+    
+    private func configureUI() {
         addSubview(reviewTotalStackView)
         reviewTotalStackView.addArrangedSubview(userInfoStackView)
         reviewTotalStackView.addArrangedSubview(contentTextView)
         userInfoStackView.addArrangedSubview(userImageView)
         userInfoStackView.addArrangedSubview(nameAndStarStackView)
-        nameAndStarStackView.addArrangedSubview(userNickNameLabel)
+        nameAndStarStackView.addArrangedSubview(userNicknameLabel)
         nameAndStarStackView.addArrangedSubview(starScoreLabel)
 
         NSLayoutConstraint.activate([
