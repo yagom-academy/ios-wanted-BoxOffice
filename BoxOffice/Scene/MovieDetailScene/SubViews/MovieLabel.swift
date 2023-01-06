@@ -8,10 +8,14 @@
 import UIKit
 
 final class MovieLabel: UILabel {
-    init(font: UIFont.TextStyle, frame: CGRect = .zero) {
+    init(font: UIFont.TextStyle, isBold: Bool = false, frame: CGRect = .zero) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.font = .preferredFont(forTextStyle: font)
+        
+        if isBold {
+            self.font = .boldSystemFont(ofSize: self.font.pointSize)
+        }
     }
     
     override init(frame: CGRect) {

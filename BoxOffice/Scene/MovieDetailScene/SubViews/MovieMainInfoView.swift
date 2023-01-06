@@ -59,13 +59,13 @@ class MovieMainInfoView: UIView {
         return imageView
     }()
     
+    private let titleLabel = MovieLabel(font: .title1, isBold: true)
+    private let currentRanklabel = MovieLabel(font: .callout)
+    private let rankChangeLabel = MovieLabel(font: .callout)
+    private let isNewEntryLabel = MovieLabel(font: .callout)
+    private let openYearLabel = MovieLabel(font: .body)
+    private let genreLabel = MovieLabel(font: .body)
     private let ratingLabel = MovieLabel(font: .headline)
-    private let titleLabel = MovieLabel(font: .largeTitle)
-    private let currentRanklabel = MovieLabel(font: .caption1)
-    private let rankChangeLabel = MovieLabel(font: .caption1)
-    private let isNewEntryLabel = MovieLabel(font: .caption1)
-    private let openYearLabel = MovieLabel(font: .callout)
-    private let genreLabel = MovieLabel(font: .callout)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

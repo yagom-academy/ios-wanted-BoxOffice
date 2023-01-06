@@ -22,12 +22,12 @@ class MovieSubInfoView: UIView {
         return stackView
     }()
     
-    private let totalAudienceLabel = MovieLabel(font: .title3)
-    private let productionYearLabel = MovieLabel(font: .headline)
-    private let showTimeLabel = MovieLabel(font: .headline)
+    private let productionYearLabel = MovieLabel(font: .title3, isBold: true)
+    private var ageLimitLabel = MovieLabel(font: .title3, isBold: true)
+    private let showTimeLabel = MovieLabel(font: .title3, isBold: true)
+    private let totalAudienceLabel = MovieLabel(font: .title3, isBold: true)
     private let directorNameLabel = MovieLabel(font: .body)
     private let actorsLabel = MovieLabel(font: .body)
-    private let ageLimitLabel = MovieLabel(font: .title3)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
