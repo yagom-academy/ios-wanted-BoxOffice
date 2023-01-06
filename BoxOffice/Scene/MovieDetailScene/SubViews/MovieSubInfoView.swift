@@ -24,14 +24,7 @@ final class MovieSubInfoView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
-    private let subInfoStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
+
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -45,7 +38,7 @@ final class MovieSubInfoView: UIView {
         button.setTitle("더보기", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        button.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .horizontal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -125,12 +118,10 @@ final class MovieSubInfoView: UIView {
         
         actorStackView.addArrangedSubview(actorsLabel)
         actorStackView.addArrangedSubview(moreActorsButton)
-        
-        subInfoStackView.addArrangedSubview(directorNameLabel)
-        subInfoStackView.addArrangedSubview(actorStackView)
-        
+
         entireStackView.addArrangedSubview(infoStackView)
-        entireStackView.addArrangedSubview(subInfoStackView)
+        entireStackView.addArrangedSubview(directorNameLabel)
+        entireStackView.addArrangedSubview(actorStackView)
         
         self.addSubview(entireStackView)
     }
