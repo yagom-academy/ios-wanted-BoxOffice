@@ -9,13 +9,16 @@ import UIKit
 
 final class CreateReviewCoordinator: Coordinator {
     
+    private let movie: Movie
+    
     var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var type: CoordinatorType { .review }
     weak var finishDelegate: CoordinatorFinishDelegate?
     
-    init(navigationConrtoller: UINavigationController) {
+    init(movie: Movie, navigationConrtoller: UINavigationController) {
+        self.movie = movie
         self.navigationController = navigationConrtoller
     }
     
@@ -30,7 +33,7 @@ private extension CreateReviewCoordinator {
     
     func makeCreateReviewController() -> UIViewController {
         let viewController = CreateReviewViewController(
-            viewModel: DefaultCreateReviewViewModel(),
+            viewModel: DefaultCreateReviewViewModel(movie: movie),
             coordinator: self
         )
         return viewController

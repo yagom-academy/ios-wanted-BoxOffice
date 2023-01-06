@@ -16,6 +16,7 @@ protocol CreateReviewViewModelInput {
     func reviewText(_ text: String)
     func didTapRatingView(_ rating: Int)
     func didTapCreateButton()
+    
 }
 
 protocol CreateReviewViewModelOutput {
@@ -35,8 +36,10 @@ protocol CreateReviewViewModel {
 
 final class DefaultCreateReviewViewModel: CreateReviewViewModel {
     
+    private let movie: Movie
     private let firestoreManager: FirebaseManager
     private(set) var cancellables: Set<AnyCancellable> = .init()
+    
     private var _isCurrentValid = CurrentValueSubject<Bool, Never>(false)
     private var _currentRating = CurrentValueSubject<Double, Never>(0)
     
@@ -50,7 +53,8 @@ final class DefaultCreateReviewViewModel: CreateReviewViewModel {
         }
     }
     
-    init(firestoreManager: FirebaseManager = .init()) {
+    init(movie: Movie, firestoreManager: FirebaseManager = .init()) {
+        self.movie = movie
         self.firestoreManager = firestoreManager
     }
     
@@ -93,7 +97,16 @@ extension DefaultCreateReviewViewModel: CreateReviewViewModelInput {
     }
     
     func didTapCreateButton() {
-        print(#function)
+        let newReview = Review(
+            movieName: movie.name,
+            userImage: _imageData,
+            stars: _rating,
+            nickname: _name,
+            password: _password,
+            review: _review,
+            date: Date()
+        )
+        firestoreManager.save(review: newReview)
     }
 }
 
