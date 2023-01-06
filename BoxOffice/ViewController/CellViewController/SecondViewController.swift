@@ -185,21 +185,23 @@ class SecondViewController: UIViewController {
     func setUiLayout() {
         self.getFilmDetailData { result in
             switch result {
-            case .success(let success):
-                DispatchQueue.main.sync {
-                    self.configSecondView(data: success.movieInfoResult.movieInfo)
+            case .success(let detailData):
+                DispatchQueue.main.async {
                     self.setConstraints()
+                    self.configSecondView(data: detailData.movieInfoResult.movieInfo)
                     self.readFirestore()
                     self.getPosterData { result in
                         switch result {
-                        case .success(let success):
-                            DispatchQueue.main.sync {
-                                ImageManager.loadImage(from: success.poster) { image in
+                        case .success(let posterData):
+                            DispatchQueue.main.async {
+                                ImageManager.loadImage(from: posterData.poster) { image in
                                     self.posterImageView.image = image
                                 }
                             }
-                        case .failure(let failure):
-                            print(failure)
+                        case .failure(_):
+                            ImageManager.loadImage(from: "https://xn--lu5bi2w.com/img/error_image.jpg") { image in
+                                self.posterImageView.image = image
+                            }
                         }
                     }
                 }
@@ -256,7 +258,6 @@ class SecondViewController: UIViewController {
     func setConstraints() {
         let labelConstant = view.frame.width / 3 + 30
         NSLayoutConstraint.activate([
-
             posterImageView.widthAnchor.constraint(equalToConstant: view.frame.width / 3),
             posterImageView.heightAnchor.constraint(equalToConstant: 220),
             posterImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),

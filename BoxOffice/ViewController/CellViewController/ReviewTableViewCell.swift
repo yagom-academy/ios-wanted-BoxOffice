@@ -9,7 +9,7 @@ import UIKit
 
 class ReviewTableViewCell: UITableViewCell {
     static let identify = "Cell"
-    static var end = 0
+    static var end: Int?
     
     let nicknameLabel: UILabel = {
         let label = UILabel()
@@ -31,16 +31,19 @@ class ReviewTableViewCell: UITableViewCell {
     
     let rateStackView: UIStackView = {
         var buttons: [UIButton] = []
-        let stackView = UIStackView()
-        let end = ReviewTableViewCell.end
+        lazy var stackView = UIStackView()
+        guard let end = ReviewTableViewCell.end else {
+            return UIStackView()
+        }
+        
         for i in 0..<end {
-            let button = UIButton()
+            lazy var button = UIButton()
             button.setImage(UIImage(systemName: "star.fill"), for: .normal)
             buttons += [button]
             stackView.addArrangedSubview(button)
         }
         for i in end..<5 {
-            let button = UIButton()
+            lazy var button = UIButton()
             button.setImage(UIImage(systemName: "star"), for: .normal)
             buttons += [button]
             stackView.addArrangedSubview(button)
@@ -74,12 +77,16 @@ class ReviewTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             rateStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5),
             rateStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 5),
+            
             rateLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5),
             rateLabel.leadingAnchor.constraint(equalTo: rateStackView.trailingAnchor, constant: 5),
+            
             contentLabel.topAnchor.constraint(equalTo: rateStackView.bottomAnchor, constant: 5),
             contentLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 5),
+            
             nicknameLabel.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: 5),
             nicknameLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 5),
+            
             reviewImageView.heightAnchor.constraint(equalToConstant: 80),
             reviewImageView.widthAnchor.constraint(equalToConstant: 100),
             reviewImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),

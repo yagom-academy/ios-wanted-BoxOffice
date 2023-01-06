@@ -106,14 +106,15 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
             filmNameLabel.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 5),
             filmNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             filmNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
             releaseDateLabel.topAnchor.constraint(equalTo: filmNameLabel.bottomAnchor, constant: 5),
             releaseDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             releaseDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
             spectatorsLabel.topAnchor.constraint(equalTo: releaseDateLabel.bottomAnchor, constant: 5),
             spectatorsLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
         ])
     }
-    
     
     func getFilmDetailData(movieCode: String, completion: @escaping (Result<FilmDetails, Error>) -> Void) {
         let url = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=635cb0b1404820f91c8a45fcdf831615&movieCd=\(movieCode)"
@@ -125,7 +126,6 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
         let url = "https://omdbapi.com/?apikey=54346b2b&t=\(movieName.replacingOccurrences(of: " ", with: "+"))"
         NetworkManager().getData(url: url, completion: completion)
     }
-    
     
     func configBoxOfficeCell(data: DailyBoxOfficeList) {
         boxofficeData = data
@@ -142,8 +142,10 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
                         ImageManager.loadImage(from: success.poster) { image in
                             self.posterImageView.image = image
                         }
-                    case .failure(let failure):
-                        print(failure)
+                    case .failure(_):
+                        ImageManager.loadImage(from: "https://xn--lu5bi2w.com/img/error_image.jpg") { image in
+                            self.posterImageView.image = image
+                        }
                     }
                 }
             case .failure(let failure):

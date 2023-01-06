@@ -29,7 +29,7 @@ extension MainViewController {
         NetworkManager().getBoxOfficeData { result in
             switch result {
             case .success(let boxOfficeData):
-                DispatchQueue.main.sync {
+                DispatchQueue.main.async {
                     self.navigationItem.title = boxOfficeData.boxOfficeResult.boxofficeType
                     self.getMovieCode(data: boxOfficeData.boxOfficeResult.dailyBoxOfficeList)
                     self.createBoxOfficeCollectionView()
@@ -39,7 +39,6 @@ extension MainViewController {
                 print(failure.localizedDescription)
             }
         }
-        
     }
     
     func createBoxOfficeLayout() -> UICollectionViewCompositionalLayout {

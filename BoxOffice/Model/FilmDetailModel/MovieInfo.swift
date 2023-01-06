@@ -1,19 +1,11 @@
 //
-//  FilmDetails.swift
+//  File.swift
 //  BoxOffice
 //
-//  Created by 천승희 on 2023/01/03.
+//  Created by 박도원 on 2023/01/06.
 //
 
 import Foundation
-
-struct FilmDetails: Decodable {
-    let movieInfoResult: MovieInfoResult
-}
-
-struct MovieInfoResult: Decodable {
-    let movieInfo: MovieInfo
-}
 
 struct MovieInfo: Decodable {
     let movieNmEn: String

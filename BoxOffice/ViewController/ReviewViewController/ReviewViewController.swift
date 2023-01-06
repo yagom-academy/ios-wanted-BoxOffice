@@ -11,6 +11,8 @@ import Firebase
 
 class ReviewViewController: UIViewController {
     static var movieName: String = ""
+    var db = Firestore.firestore()
+    var count: [Count] = []
 
     private lazy var nickNameLabel: UILabel = {
         let label = UILabel()
@@ -114,9 +116,6 @@ class ReviewViewController: UIViewController {
         return stackView
     }()
     
-    var db = Firestore.firestore()
-    var count: [Count] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -139,7 +138,6 @@ extension ReviewViewController {
             self.vStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 40),
             self.vStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
         ]
-        
         NSLayoutConstraint.activate(layout)
     }
 }

@@ -1,15 +1,11 @@
 //
-//  DayBoxOffice.swift
+//  File.swift
 //  BoxOffice
 //
-//  Created by 박도원 on 2023/01/03.
+//  Created by 박도원 on 2023/01/06.
 //
 
 import Foundation
-
-struct DailyBoxOffice: Decodable, Hashable {
-    let boxOfficeResult: BoxOfficeResult
-}
 
 struct BoxOfficeResult: Decodable, Hashable {
     let boxofficeType: String

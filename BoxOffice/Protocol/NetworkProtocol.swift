@@ -9,5 +9,4 @@ import Foundation
 
 protocol NetworkProtocol {
     func getBoxOfficeData(completion: @escaping (Result<DailyBoxOffice, Error>) -> Void)
-//    func getFilmDetailData(completion: @escaping (Result<FilmDetails, Error>) -> Void)
 }
