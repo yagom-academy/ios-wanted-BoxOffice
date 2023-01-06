@@ -12,10 +12,9 @@ struct BoxOfficeListCellViewModel {
     var movieName: String
     var rank: Int
     var openDate: Date
-    var audienceCount: Int
     var rankingChange: Int
     var isNewEntryToRank: Bool
-    var movieCode: String
+    var boxOffice: BoxOffice
 }
 
 extension BoxOfficeListCellViewModel: Hashable {
@@ -31,12 +30,11 @@ extension BoxOfficeListCellViewModel: Hashable {
 
 extension BoxOfficeListCellViewModel {
     init(boxOffice: BoxOffice) {
+        self.boxOffice = boxOffice
         self.movieName = boxOffice.movieNm
         self.rank = boxOffice.rank
         self.openDate = boxOffice.openDate
-        self.audienceCount = boxOffice.audiAcc
         self.rankingChange = boxOffice.rankInten
         self.isNewEntryToRank = boxOffice.isNewRanked
-        self.movieCode = boxOffice.movieCD
     }
 }
