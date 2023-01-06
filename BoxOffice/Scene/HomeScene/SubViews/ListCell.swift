@@ -117,7 +117,7 @@ final class ListCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(with data: MovieCellData) {
+    func setup(with data: MovieData) {
         titleLabel.text = data.title
         rankLabel.text = data.currentRank
         openDateLabel.text = data.openDate + " 개봉"
@@ -125,7 +125,7 @@ final class ListCell: UICollectionViewCell {
         setRankChangeLabel(with: data.rankChange)
         setTotalAudiencesCountLabel(with: data.totalAudience)
         setNewEntryBadgeLabel(with: data.isNewEntry)
-        setPosterImageView(with: data.posterURL)
+        setPosterImageView(with: data.poster)
     }
     
     private func setRankChangeLabel(with rankChange: String) {
@@ -152,14 +152,9 @@ final class ListCell: UICollectionViewCell {
         totalAudiencesCountLabel.text = "관객수 " + totalAudience + "명"
     }
     
-    private func setPosterImageView(with url: URL?) {
-        let imageManager = URLCacheManager()
-        if let url = url {
-            imageManager.getImage(with: url) { image in
-                DispatchQueue.main.async {
-                    self.posterImageView.image = image
-                }
-            }
+    private func setPosterImageView(with image: UIImage?) {
+        if let image = image {
+            posterImageView.image = image
         } else {
             let image = UIImage(systemName: "nosign")
             posterImageView.backgroundColor = .systemGray6

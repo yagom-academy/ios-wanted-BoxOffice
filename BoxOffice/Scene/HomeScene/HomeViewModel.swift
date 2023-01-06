@@ -14,18 +14,18 @@ protocol HomeViewModelInput {
 }
 
 protocol HomeViewModelOutput{
-    var dailyMovieCellDatas: Observable<[MovieCellData]> { get }
-    var allWeekMovieCellDatas: Observable<[MovieCellData]> { get }
-    var weekEndMovieCellDatas: Observable<[MovieCellData]> { get }
+    var dailyMovieCellDatas: Observable<[MovieData]> { get }
+    var allWeekMovieCellDatas: Observable<[MovieData]> { get }
+    var weekEndMovieCellDatas: Observable<[MovieData]> { get }
 }
 
 protocol HomeViewModel: HomeViewModelInput, HomeViewModelOutput {}
 
 final class DefaultHomeViewModel: HomeViewModel {
     private let movieAPIUseCase = MovieAPIUseCase()
-    var dailyMovieCellDatas = Observable<[MovieCellData]>([])
-    var allWeekMovieCellDatas = Observable<[MovieCellData]>([])
-    var weekEndMovieCellDatas = Observable<[MovieCellData]>([])
+    var dailyMovieCellDatas = Observable<[MovieData]>([])
+    var allWeekMovieCellDatas = Observable<[MovieData]>([])
+    var weekEndMovieCellDatas = Observable<[MovieData]>([])
     
     func requestDailyData(with date: String) async throws {
         try await movieAPIUseCase.requestDailyData(with: date, in: dailyMovieCellDatas)
