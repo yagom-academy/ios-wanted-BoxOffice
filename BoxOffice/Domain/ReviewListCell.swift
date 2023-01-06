@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ReviewListDelegate: AnyObject {
-    func deleteComment(row: Int)
+    func deleteComment(comment: Comment)
 }
 
 final class ReviewListCell: UITableViewCell {
@@ -17,9 +17,9 @@ final class ReviewListCell: UITableViewCell {
     private enum Constant {
         static var pupleColor = UIColor(r: 76, g: 52, b: 145)
         static var pictureSize: CGFloat = 100
-        static var buttonSize: CGFloat = 40
+        static var buttonSize: CGFloat = 60
     }
-    private var row = 0
+    private var comment: Comment?
     var delegate: ReviewListDelegate?
     
     private lazy var pictureImageView: UIImageView = {
@@ -73,11 +73,13 @@ final class ReviewListCell: UITableViewCell {
         button.tintColor = Constant.pupleColor
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         button.layer.cornerRadius = 20
+        button.becomeFirstResponder()
         return button
     }()
     
      @objc func buttonTapped() {
-         delegate?.deleteComment(row: row)
+         guard let comment = comment else { return }
+         delegate?.deleteComment(comment: comment)
      }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -100,7 +102,7 @@ final class ReviewListCell: UITableViewCell {
             rateLabel,
             infoLabel
         )
-        addSubviews(
+        contentView.addSubviews(
             pictureImageView,
             labelStackView,
             deleteButton
@@ -137,7 +139,7 @@ final class ReviewListCell: UITableViewCell {
     }
     
     func configureCell(_ model: Comment, row: Int) {
-        self.row = row
+        self.comment = model
         pictureImageView.image = model.picture.toUIImage
         nickNameLabel.text = "아이디: " + model.nickName
         rateLabel.setStarLabel(String(model.rate))

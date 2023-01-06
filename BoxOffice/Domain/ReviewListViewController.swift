@@ -45,11 +45,6 @@ final class ReviewListViewController: UIViewController,  UICollectionViewDelegat
                 self.applySnapshot(models: comments)
             }
             .store(in: &cancelable)
-        
-        reviewListViewModel.output.commentDeletePublisher.sink { comment in
-            //self?.showDeleteAlert(comment: comment)
-        }
-        .store(in: &cancelable)
     }
     
     private lazy var averageLabel: UILabel = {
@@ -83,7 +78,6 @@ final class ReviewListViewController: UIViewController,  UICollectionViewDelegat
     }
     
     private func setupConstraints() {
-        // MARK: - newLabel
         
         NSLayoutConstraint.activate([
             averageLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor),
@@ -125,18 +119,31 @@ extension ReviewListViewController {
     private func applySnapshot(models: [Comment]) {
         var snapshot = ReviewSnapshot()
         
-        if models.isEmpty == false {
-   //         snapshot.appendSections([.CommentSection])
-        }
         snapshot.appendSections([.CommentSection])
     
         snapshot.appendItems(models)
         dataSource.apply(snapshot)
     }
+    
+    private func showDeleteAlert(comment: Comment) {
+        let controller = UIAlertController(title: "삭제", message: "비밀번호를 입력해주십시오.", preferredStyle: .alert)
+        controller.addTextField()
+        let okAction = UIAlertAction(title: "확인", style: .default) { [weak self] action in
+            if let textField = controller.textFields {
+                if comment.password == textField.first?.text {
+                    self?.reviewListViewModel?.input.deleteComment(comment: comment)
+                }
+            }
+        }
+        let cancleAction = UIAlertAction(title: "취소", style: .cancel)
+        controller.addAction(cancleAction)
+        controller.addAction(okAction)
+        self.present(controller, animated: true)
+    }
 }
 
 extension ReviewListViewController: ReviewListDelegate {
-    func deleteComment(row: Int) {
-        
+    func deleteComment(comment: Comment) {
+        showDeleteAlert(comment: comment)
     }
 }

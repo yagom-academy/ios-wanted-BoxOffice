@@ -10,12 +10,11 @@ import Combine
 
 protocol ReviewListViewModelInputInterface: AnyObject {
     func onViewDidLoad()
-    //func didDeleteRowAt(_ row: Int)
+    func deleteComment(comment: Comment)
 }
 
 protocol ReviewListViewModelOutPutInterface: AnyObject {
     var commentPublisher: PassthroughSubject<[Comment], Never> { get }
-    var commentDeletePublisher: PassthroughSubject<Comment, Never> { get }
     var errorPublisher: PassthroughSubject<Error?, Never> { get }
 }
 
@@ -36,7 +35,6 @@ final class ReviewListViewModel: ReviewListViewModelInterface, ReviewListViewMod
     // MARK: ReviewListViewModelOutPutInterface
     
     var commentPublisher = PassthroughSubject<[Comment], Never>()
-    var commentDeletePublisher = PassthroughSubject<Comment, Never>()
     var errorPublisher = PassthroughSubject<Error?, Never>()
     
     private var commentArray: [Comment] = []
@@ -50,7 +48,8 @@ final class ReviewListViewModel: ReviewListViewModelInterface, ReviewListViewMod
         let movieCd = detailBoxOffice.boxOffice.movieCode
         commentManager.getComments(movieCd: movieCd) { [weak self] comments, error in
             if let comments = comments, error == nil {
-                self?.commentPublisher.send(comments)
+                self?.commentArray = comments
+                self?.commentPublisher.send(self?.commentArray ?? [])
             } else {
                 self?.errorPublisher.send(error)
             }
@@ -62,10 +61,17 @@ extension ReviewListViewModel: ReviewListViewModelOutPutInterface {
     func onViewDidLoad() {
         requestComments()
     }
-    
-    /*
-    func didDeleteRowAt(_ row: Int) {
-        <#code#>
+    func deleteComment(comment: Comment) {
+        commentManager.deleteComment(comment: comment) { [weak self] error in
+            if error == nil {
+                guard let index = self?.commentArray.firstIndex(of: comment) else {
+                    return
+                }
+                self?.commentArray.remove(at: index)
+                self?.commentPublisher.send(self?.commentArray ?? [])
+            } else {
+                self?.errorPublisher.send(error)
+            }
+        }
     }
-    */
 }
