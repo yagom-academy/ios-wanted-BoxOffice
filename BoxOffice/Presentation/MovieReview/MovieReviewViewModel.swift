@@ -58,6 +58,10 @@ final class MovieReviewViewModel {
         }
     }
 
+    func cancelButtonTapped() {
+        popViewController?()
+    }
+
     func isValid(password: String) -> Bool {
       if password.count < 6 || password.count > 20 {
         return false

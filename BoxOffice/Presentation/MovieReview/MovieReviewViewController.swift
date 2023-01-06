@@ -154,7 +154,7 @@ final class MovieReviewViewController: UIViewController {
         button.layer.borderWidth = 1
         
         button.addAction(UIAction(handler: { action in
-            self.presentingViewController?.dismiss(animated: true)
+            self.viewModel.cancelButtonTapped()
         }), for: .touchUpInside)
         return button
     }()
