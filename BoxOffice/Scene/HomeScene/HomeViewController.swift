@@ -75,7 +75,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func setupViewModel() {
-        homeViewModel.dailyMovieCellDatas.bind { cellDatas in // MARK: 기다렸다가 한번에 순위별로 띄우는 방법
+        homeViewModel.dailyMovieCellDatas.bind { cellDatas in
             guard cellDatas.count == 10 else { return }
             let rankSortedCellDatas = cellDatas.sorted { a, b in
                 Int(a.currentRank) ?? 0 < Int(b.currentRank) ?? 0
@@ -84,14 +84,22 @@ final class HomeViewController: UIViewController {
                 self.homeCollectionView.appendDailySnapshot(with: rankSortedCellDatas)
             }
         }
-        homeViewModel.allWeekMovieCellDatas.bind { cellDatas in // MARK: 받아오는 즉시 무작위로 띄우는 방법
+        homeViewModel.allWeekMovieCellDatas.bind { cellDatas in
+            guard cellDatas.count == 10 else { return }
+            let rankSortedCellDatas = cellDatas.sorted { a, b in
+                Int(a.currentRank) ?? 0 < Int(b.currentRank) ?? 0
+            }
             DispatchQueue.main.async {
-                self.homeCollectionView.appendAllWeekSnapshot(data: cellDatas)
+                self.homeCollectionView.appendAllWeekSnapshot(data: rankSortedCellDatas)
             }
         }
         homeViewModel.weekEndMovieCellDatas.bind { cellDatas in
+            guard cellDatas.count == 10 else { return }
+            let rankSortedCellDatas = cellDatas.sorted { a, b in
+                Int(a.currentRank) ?? 0 < Int(b.currentRank) ?? 0
+            }
             DispatchQueue.main.async {
-                self.homeCollectionView.appendWeekEndSnapshot(data: cellDatas)
+                self.homeCollectionView.appendWeekEndSnapshot(data: rankSortedCellDatas)
             }
         }
         
