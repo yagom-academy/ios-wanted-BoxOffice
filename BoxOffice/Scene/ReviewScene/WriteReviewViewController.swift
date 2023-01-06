@@ -142,7 +142,7 @@ final class WriteReviewViewController: UIViewController {
     
     private func bind() {
         reviewViewModel.error
-            .bind { error in
+            .bind { [weak self] error in
                 DispatchQueue.main.async {
                     if let description = error {
                         self?.showAlert(message: description)
