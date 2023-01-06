@@ -252,6 +252,12 @@ final class MovieReviewViewController: UIViewController {
         viewModel.presentImagePicker = { [weak self] in
             self?.present(self!.imagePicker, animated: true)
         }
+        viewModel.showAlert = { [weak self] alert in
+            self?.present(alert, animated: true)
+        }
+        viewModel.popViewController = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
     
     private func setupStarButtons() {
