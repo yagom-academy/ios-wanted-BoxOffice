@@ -47,7 +47,7 @@
 		E19B5DB729645160001B2DB4 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DB629645160001B2DB4 /* UIImage+Extension.swift */; };
 		E19B5DB929645189001B2DB4 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DB829645189001B2DB4 /* String+Extension.swift */; };
 		E19B5DCA29647B10001B2DB4 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DC929647B10001B2DB4 /* Date+Extension.swift */; };
-		E1A140542966B76C009C01ED /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A140532966B76C009C01ED /* UIStackView+Extension.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,7 +90,6 @@
 		E19B5DB629645160001B2DB4 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		E19B5DB829645189001B2DB4 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		E19B5DC929647B10001B2DB4 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
-		E1A140532966B76C009C01ED /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,12 +248,39 @@
 				9BEA28012962D00700FB7E73 /* BoxOfficeAPI.swift */,
 				9BEA28032962D04F00FB7E73 /* HTTPMethod.swift */,
 				9BEA28052962E41400FB7E73 /* NetworkHandler.swift */,
-				E19B5DAE2963D8CD001B2DB4 /* FirebaseManager.swift */,
-				E19B5DB329643A14001B2DB4 /* CommentManager.swift */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
+                E19B5DAE2963D8CD001B2DB4 /* FirebaseManager.swift */,
+                E19B5DB329643A14001B2DB4 /* CommentManager.swift */,
+				);
+            path = Network;
+            sourceTree = "<group>";
+        };
+        E1166DC22965707500C42427 /* Comment */ = {
+            isa = PBXGroup;
+            children = (
+                E1166DC62965D58200C42427 /* CommentAddViewModel.swift */,
+                E1166DC82965DA7D00C42427 /* CommentViewController.swift */,
+            );
+            path = Comment;
+            sourceTree = "<group>";
+        };
+        E19B5DB02963D94F001B2DB4 /* Model */ = {
+            isa = PBXGroup;
+            children = (
+                E19B5DB12963D960001B2DB4 /* Comment.swift */,
+            );
+            path = Model;
+            sourceTree = "<group>";
+        };
+        E19B5DB529645148001B2DB4 /* Extension */ = {
+            isa = PBXGroup;
+            children = (
+                E19B5DB629645160001B2DB4 /* UIImage+Extension.swift */,
+                E19B5DB829645189001B2DB4 /* String+Extension.swift */,
+                E19B5DC929647B10001B2DB4 /* Date+Extension.swift */,
+            );
+            path = Extension;
+            sourceTree = "<group>";
+        };
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -362,7 +388,6 @@
 				9B335C242963E68B00C8F339 /* MainView.swift in Sources */,
 				E1166DC72965D58200C42427 /* CommentAddViewModel.swift in Sources */,
 				9BEA28022962D00700FB7E73 /* BoxOfficeAPI.swift in Sources */,
-				E1A140542966B76C009C01ED /* UIStackView+Extension.swift in Sources */,
 				E19B5DB929645189001B2DB4 /* String+Extension.swift in Sources */,
 				E19B5DB22963D960001B2DB4 /* Comment.swift in Sources */,
 				E19B5DB729645160001B2DB4 /* UIImage+Extension.swift in Sources */,
