@@ -413,6 +413,29 @@ extension MovieReviewViewController: UITextFieldDelegate {
         passwordTextField.isSecureTextEntry = true
         passwordTextField.textContentType = .password
     }
+    
+    private func isValid(password: String) -> Bool {
+      if password.count < 6 || password.count > 20 {
+        return false
+      }
+
+      let lowercaseCharacterSet = CharacterSet.lowercaseLetters
+      if password.rangeOfCharacter(from: lowercaseCharacterSet) == nil {
+        return false
+      }
+
+      let decimalDigitCharacterSet = CharacterSet.decimalDigits
+      if password.rangeOfCharacter(from: decimalDigitCharacterSet) == nil {
+        return false
+      }
+
+      let specialSymbolCharacterSet = CharacterSet(charactersIn: "!@#$")
+      if password.rangeOfCharacter(from: specialSymbolCharacterSet) == nil {
+        return false
+      }
+
+      return true
+    }
 }
 
 fileprivate extension UITextField {
