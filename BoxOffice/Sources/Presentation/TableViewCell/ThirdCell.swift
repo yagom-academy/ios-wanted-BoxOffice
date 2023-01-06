@@ -83,6 +83,7 @@ class ThirdCell: UITableViewCell {
         label.textColor = .white
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.text = "asdasd, asdasdasd, asdasd"
+        label.numberOfLines = 2
         return label
     }()
     
@@ -178,5 +179,32 @@ class ThirdCell: UITableViewCell {
             reviewButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             reviewButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
+    }
+    
+    func transferData(_ detailInfo: MovieDetailInfo) {
+        var genres = String()
+        var directors = String()
+        var actors = String()
+        detailInfo.genres.forEach {
+            genres += ("\($0),")
+        }
+        detailInfo.directors.forEach {
+            directors += ("\($0),")
+        }
+        if  detailInfo.actors.count != 0 {
+            detailInfo.actors.forEach {
+                actors += ("\($0),")
+            }
+            actors.removeLast()
+        } else {
+            actors = ""
+        }
+        genres.removeLast()
+        directors.removeLast()
+        
+        genresLabel.text = genres
+        directorsLabel.text = directors
+        actorsLabel.text = actors
+        productionyearsLabel.text = detailInfo.productionYear
     }
 }

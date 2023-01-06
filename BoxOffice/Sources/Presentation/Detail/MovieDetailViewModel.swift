@@ -16,7 +16,6 @@ protocol MovieDetailViewModelInput {
 }
 
 protocol MovieDetailViewModelOutput {
-    var movieModelPublisher: PassthroughSubject<Movie, Never> { get }
     var movie: Movie { get }
     var movieModel: AnyPublisher<Movie, Never> { get }
 }
@@ -30,8 +29,7 @@ final class MovieDetailViewModel: MovieDetailViewModelInterface  {
     let firebaseManager = FirebaseManager()
     var input: MovieDetailViewModelInput { self }
     var output: MovieDetailViewModelOutput { self }
-    var movieModelPublisher = PassthroughSubject<Movie, Never>()
-    @Published var _movie: Movie
+    var _movie: Movie
     var reviews: [Review]?
     
     init(movie: Movie) {

@@ -164,7 +164,7 @@ class ReviewCell: UITableViewCell {
         ])
     }
     
-    func setData(_ reviews: [Review], _ index: Int) {
+    func transferData(_ reviews: [Review], _ index: Int) {
         guard reviews.indices.contains(index) else {
             return
         }

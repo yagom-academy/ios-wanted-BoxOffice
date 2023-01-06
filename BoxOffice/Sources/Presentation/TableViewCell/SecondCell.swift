@@ -121,4 +121,10 @@ class SecondCell: UITableViewCell {
             rankingattendancestarsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }
+    
+    func transferData(_ boxOfficeInfo: BoxOfficeInfo) {
+        rankingLabel.text = "\(boxOfficeInfo.rank)위"
+        attendanceLabel.text = boxOfficeInfo.audienceAccumulation.numberFormatter()
+        starsLabel.text = "구현"
+    }
 }

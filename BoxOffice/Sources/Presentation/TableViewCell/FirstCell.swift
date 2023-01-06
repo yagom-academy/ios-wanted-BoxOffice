@@ -62,6 +62,7 @@ class FirstCell: UITableViewCell {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 20)
         label.textColor = .white
+        label.numberOfLines = 2
         label.text = "가디언즈 오브 갤럭시"
         return label
     }()
@@ -143,8 +144,27 @@ class FirstCell: UITableViewCell {
         NSLayoutConstraint.activate([
             shareImageView.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 34),
             shareImageView.leadingAnchor.constraint(equalTo: titledatetimeageStackView.trailingAnchor, constant: 110),
-            shareImageView.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            shareImageView.heightAnchor.constraint(equalToConstant: 20),
             shareImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
         ])
+    }
+    
+    func transferData(_ name: String, _ detailInfo: MovieDetailInfo, _ boxOfficeInfo: BoxOfficeInfo) {
+        posterImageView.image = detailInfo.poster?.toUIImage()
+        if boxOfficeInfo.rankOldAndNew == .new {
+            updownNumberLabel.text = boxOfficeInfo.rankOldAndNew.rawValue
+        } else {
+            if boxOfficeInfo.rankInten < 0 {
+                updownImageView.image = UIImage(systemName: "arrowtriangle.down.fill")
+                updownImageView.tintColor = .blue
+            }
+            
+            updownNumberLabel.text = "\( abs(boxOfficeInfo.rankInten))"
+        }
+        titleLabel.text = name
+        releaseDatelabel.text = detailInfo.productionYear
+        runningTimeLabel.text =
+        "\(detailInfo.showTime)분"
+        ageLabel.text = detailInfo.audit
     }
 }

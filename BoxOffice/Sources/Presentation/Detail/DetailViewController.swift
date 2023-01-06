@@ -12,7 +12,6 @@ class DetailViewController: UIViewController {
     
     weak var coordinator: BoxOfficeListCoordinatorInterface?
     private let viewModel: MovieDetailViewModel
-    var model: Movie?
     private var cancelable = Set<AnyCancellable>()
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -72,8 +71,8 @@ private extension DetailViewController {
                 guard let self = self else {
                     return
                 }
-                self.model = movieData
-                print(self.model!)
+                
+                print(self.viewModel._movie)
             }.store(in: &cancelable)
     }
     
@@ -102,20 +101,22 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FirstCell", for: indexPath) as! FirstCell
-            
+            cell.transferData(viewModel._movie.name, viewModel._movie.detailInfo!, viewModel._movie.boxOfficeInfo!)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SecondCell", for: indexPath) as! SecondCell
+            cell.transferData(viewModel._movie.boxOfficeInfo!)
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdCell", for: indexPath) as! ThirdCell
             setUpReviewButton(cell)
+            cell.transferData(viewModel._movie.detailInfo!)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! ReviewCell
             
             if let reviews = viewModel.reviews {
-                cell.setData(reviews, indexPath.row)
+                cell.transferData(reviews, indexPath.row)
                 return cell
             }
             
