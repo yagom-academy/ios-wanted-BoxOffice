@@ -11,7 +11,7 @@ class MovieDetailViewController: UIViewController {
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 16
+        stackView.spacing = 0
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -89,7 +89,12 @@ class MovieDetailViewController: UIViewController {
             entireStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             entireStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             entireStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            entireStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            entireStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            
+            movieMainInfoView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor,
+                                                      multiplier: 1/3),
+            reviewStackView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor,
+                                                    multiplier: 5/10)
         ])
     }
     

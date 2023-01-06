@@ -39,14 +39,14 @@ class MovieMainInfoView: UIView {
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
     private let posterView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "camera")
+        imageView.backgroundColor = .systemGray6
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -81,13 +81,15 @@ class MovieMainInfoView: UIView {
         let separator = UIBezierPath()
         separator.move(to: CGPoint(x: 0, y: bounds.maxY))
         separator.addLine(to: CGPoint(x: bounds.maxX, y: bounds.maxY))
-        separator.lineWidth = 16
+        separator.lineWidth = 8
         UIColor.systemGray5.setStroke()
         separator.stroke()
         separator.close()
     }
     
     func configure(with movie: MovieDetail) {
+        //TODO: 포스터 이미지로 변경
+        posterView.image = UIImage(systemName: "camera")
         //TODO: 별점 평균내기
         ratingLabel.text = "4.5"
         titleLabel.text = movie.title
@@ -101,6 +103,7 @@ class MovieMainInfoView: UIView {
     private func setupView() {
         addSubView()
         setupConstraint()
+        titleLabel.numberOfLines = 0
         self.backgroundColor = .systemBackground
     }
     
@@ -113,7 +116,7 @@ class MovieMainInfoView: UIView {
         openYearStackView.addArrangedSubview(genreLabel)
         
         ratingStackView.addArrangedSubview(starView)
-        ratingStackView.addArrangedSubview(currentRanklabel)
+        ratingStackView.addArrangedSubview(ratingLabel)
         
         infoStackView.addArrangedSubview(titleLabel)
         infoStackView.addArrangedSubview(rankStackView)
@@ -135,7 +138,10 @@ class MovieMainInfoView: UIView {
             entireStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,
                                                  constant: 16),
             entireStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,
-                                                 constant: -16)
+                                                 constant: -16),
+            
+            posterView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor,
+                                              multiplier: 4/10)
         ])
     }
     

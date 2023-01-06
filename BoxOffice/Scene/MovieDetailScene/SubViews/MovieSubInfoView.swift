@@ -43,7 +43,7 @@ class MovieSubInfoView: UIView {
         let separator = UIBezierPath()
         separator.move(to: CGPoint(x: 0, y: bounds.maxY))
         separator.addLine(to: CGPoint(x: bounds.maxX, y: bounds.maxY))
-        separator.lineWidth = 16
+        separator.lineWidth = 8
         UIColor.systemGray5.setStroke()
         separator.stroke()
         separator.close()
@@ -60,10 +60,11 @@ class MovieSubInfoView: UIView {
         }
         
         productionYearLabel.text = movie.productionYear
-        showTimeLabel.text = movie.showTime
-        directorNameLabel.text = movie.directorName
-        actorsLabel.text = movie.actors
-        ageLimitLabel.text = movie.ageLimit
+        showTimeLabel.text = " " + movie.showTime + "분"
+        //TODO: numberFormatter로 , 추가
+        totalAudienceLabel.text = " " + movie.totalAudience + "명 관람"
+        directorNameLabel.text = "감독: " + movie.directorName
+        actorsLabel.text =  "출연: " + movie.actors
     }
     
     private func setupView() {
