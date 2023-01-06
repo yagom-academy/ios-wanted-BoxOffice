@@ -162,6 +162,9 @@ class FirstCell: UITableViewCell {
             } else if boxOfficeInfo.rankInten == 0 {
                 updownImageView.isHidden = true
                 updownNumberLabel.text = "-"
+            } else {
+                updownNumberLabel.text = "\(boxOfficeInfo.rankInten)"
+                updownImageView.image = UIImage(systemName: "arrowtriangle.up.fill")
             }
         }
         titleLabel.text = name
