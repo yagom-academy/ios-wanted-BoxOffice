@@ -79,6 +79,8 @@
 		3A3DBCA72967EA7500F455B6 /* Download */ = {
 			isa = PBXGroup;
 			children = (
+				3A406FE5296598BA00D536FB /* BoxOfficeListRequester.swift */,
+				3A406FEA2965BEA100D536FB /* DecodeError.swift */,
 				3A3DBCA82967EAA100F455B6 /* KobisResult.swift */,
 				3A3DBCAA2967EAC300F455B6 /* BoxOffice.swift */,
 				3A3DBCAC2967EAEA00F455B6 /* BoxOfficeList.swift */,
@@ -91,8 +93,6 @@
 			isa = PBXGroup;
 			children = (
 				3A3DBCA72967EA7500F455B6 /* Download */,
-				3A406FE5296598BA00D536FB /* BoxOfficeListRequester.swift */,
-				3A406FEA2965BEA100D536FB /* DecodeError.swift */,
 			);
 			path = KobisRequest;
 			sourceTree = "<group>";
