@@ -68,6 +68,25 @@ class MovieDetailViewController: UIViewController {
         
         FirebaseManager.shared.fetch(movieName: data.boxOfficeInfo.movieNm) { _ in
             self.cellCount = FirebaseManager.shared.reviews.count
+            self.setStarScoreAverage()
+        }
+    }
+
+    private func setStarScoreAverage() {
+        var sumStar = 0.0
+        var count = 0.0
+        
+        for data in FirebaseManager.shared.reviews {
+            if let score = data["star"] as? Double {
+                sumStar += score
+                count += 1
+            }
+        }
+        
+        if sumStar == 0.0 {
+            movieDetailView.starAverageLabel.text = "없음"
+        } else {
+            movieDetailView.starAverageLabel.text = String(sumStar / count)
         }
     }
     

@@ -16,15 +16,15 @@ struct MovieInfo: Decodable {
 }
 
 struct DetailInfo: Decodable {
-    let movieNmEn: String // 영화 이름(영어)
-    let prdtYear: String // 제작 년도
-    let openDt: String // 개봉 년도
+    let movieNmEn: String
+    let prdtYear: String
+    let openDt: String
     let nations: [Nation]
-    let genres: [Genre] // 장르
-    let directors: [Director] // 감독
-    let actors: [Actor] // 배우
-    let audits: [Audit] // 관람등급
-    let showTm: String // 상영시간
+    let genres: [Genre]
+    let directors: [Director]
+    let actors: [Actor]
+    let audits: [Audit]
+    let showTm: String
 }
 
 struct Nation: Decodable {

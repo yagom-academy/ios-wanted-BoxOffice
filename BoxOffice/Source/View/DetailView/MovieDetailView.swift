@@ -306,7 +306,7 @@ class MovieDetailView: UIView {
         )
         
         movieAudienceCountLabel.text = (
-            "\(data.boxOfficeInfo.audiAcc)명"
+            "\(String(describing: NumberFormatterManager.shared.getAudience(from: data.boxOfficeInfo.audiAcc)!)) 명"
         )
         
         productionYearLabel.text = (
@@ -515,21 +515,5 @@ class MovieDetailView: UIView {
                 constant: -20
             )
         ])
-    }
-}
-
-// TODO: 파일분리
-extension UIImage {
-    func resize(newWidth: CGFloat) -> UIImage {
-        let scale = newWidth / self.size.width
-        let newHeight = self.size.height * scale
-
-        let size = CGSize(width: newWidth, height: newHeight)
-        let render = UIGraphicsImageRenderer(size: size)
-        let renderImage = render.image { context in
-            self.draw(in: CGRect(origin: .zero, size: size))
-        }
-
-        return renderImage
     }
 }

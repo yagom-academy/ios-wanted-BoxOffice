@@ -15,7 +15,6 @@ protocol APIRequest {
 }
 
 extension APIRequest {
-    //TODO: nil 대신 에러를 던질 건지 고민
     func configureRequest() -> URLRequest? {
         guard let url = self.configureURL() else {
             return nil

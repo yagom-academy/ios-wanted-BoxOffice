@@ -184,8 +184,7 @@ extension BoxOfficeListViewController: UICollectionViewDataSource, UICollectionV
         
         return cell
     }
-    
-    //TODO: View에 들어갈 데이터 처리하는 메서드 구현
+
     private func checkRankInTen(from rankInTen: String) -> String? {
         guard let number = Int(rankInTen) else {
             return nil
@@ -194,9 +193,9 @@ extension BoxOfficeListViewController: UICollectionViewDataSource, UICollectionV
         if number == 0 {
             return "minus"
         } else if number > 0 {
-            return "arrow.up"
+            return "chevron.up"
         } else {
-            return "arrow.down"
+            return "chevron.down"
         }
     }
 }
@@ -223,99 +222,5 @@ extension BoxOfficeListViewController: UICollectionViewDelegateFlowLayout {
             movieDetailViewController,
             animated: true
         )
-    }
-}
-//TODO: 폴더 분리 필요
-extension UIImageView {
-    func fetch(url: String?, completion: @escaping (Result<UIImage, Error>) -> Void) {
-        guard let urlString = url,
-              let url = URL(string: urlString) else {
-            return
-        }
-        
-        // TODO: 여기에만 추가시키면 되려나?
-        if let cachedImage = ImageCacheManager.shared.getCachedImage(url: NSString(string: urlString)) {
-            completion(.success(cachedImage))
-            return
-        }
-
-        let request = URLRequest(url: url)
-        
-        // TODO: 변경 여부 확인
-        let urlSession = URLSession(configuration: .ephemeral)
-        urlSession.dataTask(with: request) { data, response, error in
-            guard error == nil else {
-                completion(.failure(error!))
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                completion(.failure(error!))
-                return
-            }
-            
-            guard let data = data,
-                  let image = UIImage(data: data) else {
-                completion(.failure(error!))
-                return
-            }
-            
-            ImageCacheManager.shared.saveCache(image: image, url: urlString)
-            completion(.success(image))
-        }.resume()
-    }
-}
-
-extension CALayer {
-    func addBorder(_ arr_edge: [UIRectEdge], color: UIColor, width: CGFloat) {
-        for edge in arr_edge {
-            let border = CALayer()
-            switch edge {
-            case UIRectEdge.top:
-                border.frame = CGRect.init(x: 0, y: 0, width: frame.width, height: width)
-                break
-            case UIRectEdge.bottom:
-                border.frame = CGRect.init(x: 0, y: frame.height - width, width: frame.width, height: width)
-                break
-            case UIRectEdge.left:
-                border.frame = CGRect.init(x: 0, y: 0, width: width, height: frame.height)
-                break
-            case UIRectEdge.right:
-                border.frame = CGRect.init(x: frame.width - width, y: 0, width: width, height: frame.height)
-                break
-            default:
-                break
-            }
-            border.backgroundColor = color.cgColor;
-            self.addSublayer(border)
-        }
-    }
-}
-
-class NumberFormatterManager {
-    static let shared = NumberFormatterManager()
-    private let formatter = NumberFormatter()
-    
-    var audienceNumberFormatter: NumberFormatter {
-        self.formatter.numberStyle = .decimal
-        self.formatter.roundingMode = .ceiling
-        self.formatter.maximumFractionDigits = 0
-        return formatter
-    }
-    
-    private init() { }
-    
-    func getAudience(from number: String) -> String? {
-        guard let number = Int(number) else {
-            return nil
-        }
-        
-        if number / 10000 == 0 {
-            return audienceNumberFormatter.string(for: number)
-        } else {
-            let newNumber = Double(number) / Double(10000)
-            return audienceNumberFormatter.string(for: newNumber)! + "만"
-        }
     }
 }

@@ -23,7 +23,7 @@ class EndPoint: APIRequest {
         self.query = query
     }
 }
-//TODO: 파일 분리
+
 struct EndPoints {
     static func makeBoxOfficeApi(key: String, date: String) -> APIRequest {
         return EndPoint(baseURL: .boxOfficeURL, key: .boxOffice(key: key), query: .boxOffice(targetDt: date))

@@ -79,7 +79,7 @@ class ListCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let statusLabel: UILabel = { //TODO: 랭킹 진입여부 -> 네이밍 변경 필요
+    let statusLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 10)
         label.textColor = .systemYellow
@@ -210,10 +210,10 @@ class ListCollectionViewCell: UICollectionViewCell {
         self.rankInTenLabel.text = rankInTen
         self.rankInTenImageView.image = UIImage(systemName: name)
         
-        if name == "arrow.down" {
+        if name == "chevron.down" {
             rankInTenLabel.textColor = .systemBlue
             rankInTenImageView.tintColor = .systemBlue
-        } else if name == "arrow.up" {
+        } else if name == "chevron.up" {
             rankInTenLabel.textColor = .systemRed
             rankInTenImageView.tintColor = .systemRed
         } else {

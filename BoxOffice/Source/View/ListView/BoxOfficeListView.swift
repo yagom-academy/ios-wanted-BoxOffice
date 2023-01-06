@@ -8,8 +8,6 @@
 import UIKit
 
 class BoxOfficeListView: UIView {
-    //TODO: type Label을 header로 구현할지 고민
-    //TODO: Compositional Layout 사용하면 일일 주간 박스오피스 순위 View 구현이 편함
     let typeLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 14)

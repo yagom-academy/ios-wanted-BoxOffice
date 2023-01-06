@@ -164,11 +164,6 @@ class LoginViewController: UIViewController {
         saveFireStore()
         showSuccessAlert()
     }
-
-    @objc private func didTapImageButton() {
-        
-    }
-
     
     @objc private func didTapTwoStarButton() {
         guard let currentImage = loginView.twoStarButton.currentImage else {
