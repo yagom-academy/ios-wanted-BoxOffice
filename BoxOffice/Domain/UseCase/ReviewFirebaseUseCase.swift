@@ -47,7 +47,7 @@ final class ReviewFirebaseUseCase {
     func delete(_ review: Review,
                 at movie: String,
                 completion: @escaping (Result<Void, FirebaseError>) -> Void) {
-        firestoreManager.delete(with: review.password,
+        firestoreManager.delete(with: review.nickName + review.password,
                                 at: movie,
                                 completion: completion)
     }
