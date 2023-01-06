@@ -13,11 +13,13 @@ import Firebase
 protocol MovieDetailViewModelInput {
     func viewWillAppear()
     func deleteReview()
+    func didTapShareButton()
 }
 
 protocol MovieDetailViewModelOutput {
     var movie: Movie { get }
     var movieModel: AnyPublisher<Movie, Never> { get }
+    var shareMovieInfoPublisher: PassthroughSubject<[String], Never> { get }
 }
 
 protocol MovieDetailViewModelInterface {
@@ -26,23 +28,23 @@ protocol MovieDetailViewModelInterface {
 }
 
 final class MovieDetailViewModel: MovieDetailViewModelInterface  {
-    let firebaseManager = FirebaseManager()
     var input: MovieDetailViewModelInput { self }
     var output: MovieDetailViewModelOutput { self }
+
+    let firebaseManager = FirebaseManager()
     var _movie: Movie
     var reviews: [Review]?
+    var shareMovieInfoPublisher = PassthroughSubject<[String], Never>()
     
     init(movie: Movie) {
-        self._movie = movie
+        self._movie = movie // 1
     }
     
     private var cancelable = Set<AnyCancellable>()
 }
 
 extension MovieDetailViewModel: MovieDetailViewModelInput, MovieDetailViewModelOutput {
-    
     var movie: Movie { return _movie }
-    
     var movieModel: AnyPublisher<Movie, Never> { return Just(_movie).eraseToAnyPublisher() }
     
     func viewWillAppear() {
@@ -55,7 +57,31 @@ extension MovieDetailViewModel: MovieDetailViewModelInput, MovieDetailViewModelO
         }
     }
     
+    func didTapShareButton() {
+        guard let boxOfficeInfo = movie.boxOfficeInfo,
+              let detailInfo = movie.detailInfo else { return }
+        
+        shareMovieInfoPublisher.send([
+        """
+        🍿 BoxOffice Information 🍿
+        영화명: \(movie.name)
+        순위증감분: \(String(describing: boxOfficeInfo.rankInten))
+        개봉일: \(String(describing: movie.openDate))
+        제작연도: \(String(describing: movie.detailInfo?.productionYear))
+        상영시간: \(String(describing: detailInfo.showTime))
+        관람등급: \(String(describing: detailInfo.audit))
+        박스오피스 순위: \(String(describing: boxOfficeInfo.rank))
+        누적 관객수: \(String(describing: boxOfficeInfo.audienceAccumulation))명
+        랭킹 신규 진입: \(String(describing: boxOfficeInfo.rankOldAndNew.rawValue))
+        장르: \(String(describing: detailInfo.genres.first ?? ""))
+        감독: \(detailInfo.directors.first ?? "")
+        주연: \(detailInfo.actors.first ?? "")
+        """
+        ])
+    }
+    
     func deleteReview() {
         
     }
 }
+

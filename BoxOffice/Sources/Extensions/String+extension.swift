@@ -21,8 +21,6 @@ extension String {
         }
         return UIImage(data: data)
     }
-
-
 }
 
 enum DateFormat: String {

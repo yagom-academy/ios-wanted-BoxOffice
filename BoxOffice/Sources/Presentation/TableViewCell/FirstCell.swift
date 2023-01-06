@@ -100,11 +100,11 @@ class FirstCell: UITableViewCell {
         return label
     }()
     
-    private lazy var shareImageView: UIImageView = {
-        let view = UIImageView(image: UIImage(systemName: "square.and.arrow.up"))
-        view.backgroundColor = .boBackground
-        view.tintColor = .white
-        return view
+    lazy var shareButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
+        button.tintColor = .white
+        return button
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -119,7 +119,7 @@ class FirstCell: UITableViewCell {
     }
     
     func setAutolayout() {
-        contentView.addSubviews(posterImageView, titledatetimeageStackView, shareImageView)
+        contentView.addSubviews(posterImageView, titledatetimeageStackView, shareButton)
         
         updownRankingStackView.addArrangedSubviews(updownImageView, updownNumberLabel)
         
@@ -142,15 +142,18 @@ class FirstCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            shareImageView.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 34),
-            shareImageView.leadingAnchor.constraint(equalTo: titledatetimeageStackView.trailingAnchor, constant: 110),
-            shareImageView.heightAnchor.constraint(equalToConstant: 20),
-            shareImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
+            shareButton.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 34),
+            shareButton.leadingAnchor.constraint(equalTo: titledatetimeageStackView.trailingAnchor, constant: 110),
+            shareButton.heightAnchor.constraint(equalToConstant: 20),
+            shareButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
         ])
     }
     
     func transferData(_ name: String, _ detailInfo: MovieDetailInfo, _ boxOfficeInfo: BoxOfficeInfo) {
-        posterImageView.image = ImageCacheManager.shared.loadCachedData(for: detailInfo.poster!)!
+        guard let poster = detailInfo.poster,
+              let image = ImageCacheManager.shared.loadCachedData(for: poster)
+        else { return }
+        posterImageView.image = image
         if boxOfficeInfo.rankOldAndNew == .new {
             updownNumberLabel.text = boxOfficeInfo.rankOldAndNew.rawValue
         } else {
@@ -159,7 +162,7 @@ class FirstCell: UITableViewCell {
                 updownImageView.tintColor = .blue
             }
             
-            updownNumberLabel.text = "\( abs(boxOfficeInfo.rankInten))"
+            updownNumberLabel.text = "\(abs(boxOfficeInfo.rankInten))"
         }
         titleLabel.text = name
         releaseDatelabel.text = detailInfo.productionYear

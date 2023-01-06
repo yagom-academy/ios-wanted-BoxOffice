@@ -74,6 +74,17 @@ private extension DetailViewController {
                 
                 print(self.viewModel._movie)
             }.store(in: &cancelable)
+        
+        viewModel.output.shareMovieInfoPublisher
+            .sink { [weak self] sharedInformation in
+                guard let self = self else { return }
+                let activityController = UIActivityViewController(
+                    activityItems: sharedInformation,
+                    applicationActivities: nil
+                )
+                self.present(activityController, animated: true)
+            }
+            .store(in: &cancelable)
     }
     
     func setUpReviewButton(_ cell: ThirdCell) {
@@ -90,6 +101,14 @@ private extension DetailViewController {
     
     @objc func didTapDeleteButton(_ sender: UIButton) {
     }
+    
+    func setUpShareButton(_ cell: FirstCell) {
+        cell.shareButton.addTarget(self, action: #selector(didTapShareButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc func didTapShareButton(_ sender: UIButton) {
+        viewModel.input.didTapShareButton()
+    }
 }
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -102,6 +121,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FirstCell", for: indexPath) as! FirstCell
             cell.transferData(viewModel._movie.name, viewModel._movie.detailInfo!, viewModel._movie.boxOfficeInfo!)
+            setUpShareButton(cell)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SecondCell", for: indexPath) as! SecondCell

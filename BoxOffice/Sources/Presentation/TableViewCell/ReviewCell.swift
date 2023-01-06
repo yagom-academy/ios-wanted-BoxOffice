@@ -87,9 +87,8 @@ class ReviewCell: UITableViewCell {
     
     lazy var deleteButton: UIButton = {
        let button = UIButton()
-        button.imageView?.image = UIImage(systemName: "trash")
-        imageView?.tintColor = .white
-        imageView?.tintColor = UIColor(r: 100, g: 100, b: 100)
+        button.setImage(UIImage(systemName: "trash"), for: .normal)
+        button.tintColor = UIColor(r: 100, g: 100, b: 100)
         return button
     }()
     
