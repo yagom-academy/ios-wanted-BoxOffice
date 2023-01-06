@@ -20,7 +20,7 @@ final class MovieDetailViewController: UIViewController {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(ReviewTableViewCell.self,
-                           forCellReuseIdentifier: "ReviewTableViewCell")
+                           forCellReuseIdentifier: ReviewTableViewCell.identifier)
         return tableView
     }()
 
