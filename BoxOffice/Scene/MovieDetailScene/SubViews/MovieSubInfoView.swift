@@ -11,6 +11,7 @@ class MovieSubInfoView: UIView {
     private let infoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -33,8 +34,18 @@ class MovieSubInfoView: UIView {
         let button = UIButton()
         button.setTitle("더보기", for: .normal)
         button.setTitleColor(.black, for: .normal)
+        button.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .horizontal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    private let fakeView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.widthAnchor.constraint(greaterThanOrEqualToConstant: 10).isActive = true
+        view.heightAnchor.constraint(greaterThanOrEqualToConstant: 10).isActive = true
+        view.setContentHuggingPriority(.init(100), for: .horizontal)
+        return view
     }()
     
     private let productionYearLabel = MovieLabel(font: .title3, isBold: true)
@@ -73,12 +84,12 @@ class MovieSubInfoView: UIView {
             ageLimitLabel.backgroundColor = AgeLimit.fullLimit.color
         }
         
-        productionYearLabel.text = movie.productionYear
-        showTimeLabel.text = " " + movie.showTime + "분"
+        productionYearLabel.text = movie.productionYear + "년 제작"
+        showTimeLabel.text = "•" + movie.showTime + "분"
         //TODO: numberFormatter로 , 추가
-        totalAudienceLabel.text = " " + movie.totalAudience + "명 관람"
+        totalAudienceLabel.text = "•" + movie.totalAudience.toDecimal() + "명 관람"
         directorNameLabel.text = "감독: " + movie.directorName
-        actorsLabel.text =  "출연: " + movie.actors.joined()
+        actorsLabel.text =  "출연: " + movie.actors.joined(separator: ", ")
     }
     
     func addTargetMoreButton(with target: UIViewController, selector: Selector) {
@@ -98,6 +109,7 @@ class MovieSubInfoView: UIView {
         infoStackView.addArrangedSubview(ageLimitLabel)
         infoStackView.addArrangedSubview(showTimeLabel)
         infoStackView.addArrangedSubview(totalAudienceLabel)
+        infoStackView.addArrangedSubview(fakeView)
         
         actorStackView.addArrangedSubview(actorsLabel)
         actorStackView.addArrangedSubview(moreActorsButton)
