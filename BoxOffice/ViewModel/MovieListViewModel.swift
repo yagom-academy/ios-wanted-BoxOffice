@@ -38,10 +38,6 @@ final class MovieListViewModel {
         moviePosterList.subscribe { [weak self] entity in
             self?.configureMovieEssentialInfo()
         }
-        
-        movieEssentialInfoList.subscribe { movie in
-//            print(movie)
-        }
     }
     
     private func configureMovieEssentialInfo() {
@@ -52,7 +48,6 @@ final class MovieListViewModel {
             let boxOffice = $0.0
             let info = $0.1.movieInfoResult.movieInfo
             let poster = $0.2
-            let genres = info.genres
             return MovieEssentialInfo(posterUrl: poster.poster,
                                rank: boxOffice.rank,
                                movieNm: boxOffice.movieNm,
@@ -63,10 +58,10 @@ final class MovieListViewModel {
                                prdtYear: info.prdtYear,
                                openYear: info.openDt,
                                showTm: info.showTm,
-                                      genres: [""],
-                               directors: [""],
-                                      actors: [""],
-                                      watchGradeNm: "")
+                                      genres: info.genres[0].genreNm,
+                                      directors: info.directors,
+                                      actors: info.actors,
+                                      watchGradeNm: info.audits[0].watchGradeNm)
         }
         movieEssentialInfoList.value = models
     }

@@ -22,11 +22,10 @@ struct MovieInfoEntity: Decodable {
             let directors: [Directors]
             let actors: [Actors]
             let audits: [Audits]
-
-            struct Genres: Decodable { let genreNm: String }
-            struct Directors: Decodable { let peopleNm: String }
-            struct Actors: Decodable { let peopleNm: String }
-            struct Audits: Decodable { let watchGradeNm: String }
         }
     }
 }
+struct Genres: Decodable { let genreNm: String }
+struct Directors: Decodable { let peopleNm: String }
+struct Actors: Decodable { let peopleNm: String }
+struct Audits: Decodable { let watchGradeNm: String }

@@ -18,8 +18,8 @@ struct MovieEssentialInfo {
     let prdtYear: String
     let openYear: String
     let showTm: String
-    let genres: [String]
-    let directors: [String]
-    let actors: [String]
+    let genres: String
+    let directors: [Directors]
+    let actors: [Actors]
     let watchGradeNm: String
 }
