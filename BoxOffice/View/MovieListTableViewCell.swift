@@ -147,7 +147,7 @@ class MovieListTableViewCell: UITableViewCell {
     
     private func appendNewLabel(_ value: RankOldOrNew?) {
         guard let value = value else { return }
-        print(value)
+        
         switch value {
         case .old:
             movieOldOrNew.isHidden = true

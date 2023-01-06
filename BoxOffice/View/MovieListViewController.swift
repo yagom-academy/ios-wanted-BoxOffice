@@ -29,20 +29,42 @@ final class MovieListViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var segmentedControl: UISegmentedControl = {
+        let control = UISegmentedControl(items: [FetchType.today.value, FetchType.week.value])
+        control.translatesAutoresizingMaskIntoConstraints = false
+        control.selectedSegmentIndex = 0
+        
+        return control
+    }()
+    
+    private var lastWeek: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        let timeInterval = Date().timeIntervalSince1970 - (86400 * 7)
+        let date = Date(timeIntervalSince1970: timeInterval)
+        return formatter.string(from: date)
+    }
+    
+    private var today: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        let timeInterval = Date().timeIntervalSince1970 - 86400
+        let date = Date(timeIntervalSince1970: timeInterval)
+        return formatter.string(from: date)
+    }
+    
     private let viewModel = MovieListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupDataSource()
         setupDefault()
         setupSubviews()
         setupLayout()
-        appendData()
         setupNavigation()
     }
     
-    private func setupDefault() {
-        view.backgroundColor = .white
-        
+    private func setupDataSource() {
         movieListTableView.register(MovieListTableViewCell.self, forCellReuseIdentifier: "MovieListViewCell")
         movieListTableView.delegate = self
 
@@ -59,8 +81,12 @@ final class MovieListViewController: UIViewController {
                 cell.configure(movie: itemIdentifier)
                 return cell
             })
-        
-        snapshot.appendSections([.main])
+    }
+    
+    private func setupDefault() {
+        view.backgroundColor = .white
+        segmentedControl.addTarget(self, action: #selector(fetchData), for: .valueChanged)
+        appendDailyData()
     }
     
     private func setupSubviews() {
@@ -77,13 +103,38 @@ final class MovieListViewController: UIViewController {
     }
     
     private func setupNavigation() {
-        navigationItem.title = "박스오피스 순위"
+        navigationItem.titleView?.largeContentTitle = "박스오피스 순위"
+        navigationItem.titleView = segmentedControl
     }
     
-    private func appendData() {
-        viewModel.fetch(date: "20221214") { [weak self] (movies) in
+    @objc private func fetchData() {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            appendDailyData()
+        case 1:
+            appendWeekData()
+        default:
+            return
+        }
+    }
+    
+    private func appendDailyData() {
+        snapshot.deleteAllItems()
+        snapshot.appendSections([.main])
+        viewModel.fetch(date: today) { [weak self] (movies) in
             guard let self = self else { return }
-            print(movies)
+            
+            self.snapshot.appendItems(movies)
+            self.dataSource?.apply(self.snapshot)
+        }
+    }
+    
+    private func appendWeekData() {
+        snapshot.deleteAllItems()
+        snapshot.appendSections([.main])
+        viewModel.fetch(date: lastWeek) { [weak self] (movies) in
+            guard let self = self else { return }
+
             self.snapshot.appendItems(movies)
             self.dataSource?.apply(self.snapshot)
         }
@@ -92,5 +143,28 @@ final class MovieListViewController: UIViewController {
 
 extension MovieListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
+}
+
+enum FetchType {
+    case today
+    case week
+    
+    var number: Int {
+        switch self {
+        case .today:
+            return 0
+        case .week:
+            return 1
+        }
+    }
+    
+    var value: String {
+        switch self {
+        case .today:
+            return "Today"
+        case .week:
+            return "Week"
+        }
     }
 }
