@@ -57,11 +57,34 @@ final class MovieReviewViewModel {
             showAlert?(alert)
         }
     }
+
+    func isValid(password: String) -> Bool {
+      if password.count < 6 || password.count > 20 {
+        return false
+      }
+
+      let lowercaseCharacterSet = CharacterSet.lowercaseLetters
+      if password.rangeOfCharacter(from: lowercaseCharacterSet) == nil {
+        return false
+      }
+
+      let decimalDigitCharacterSet = CharacterSet.decimalDigits
+      if password.rangeOfCharacter(from: decimalDigitCharacterSet) == nil {
+        return false
+      }
+
+      let specialSymbolCharacterSet = CharacterSet(charactersIn: "!@#$")
+      if password.rangeOfCharacter(from: specialSymbolCharacterSet) == nil {
+        return false
+      }
+
+      return true
+    }
     
     private func isValid(movieReview: MovieReview) -> Bool {
         if movieReview.rating != 0,
            movieReview.user.nickname != "",
-           movieReview.password != "",
+           isValid(password: movieReview.password),
            movieReview.description != "" {
             return true
         }
