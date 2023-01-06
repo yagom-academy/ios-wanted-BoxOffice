@@ -139,7 +139,6 @@ final class SecondView: UIView {
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "1위"
         return label
     }()
     
@@ -149,19 +148,6 @@ final class SecondView: UIView {
         label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .left
-        label.numberOfLines = 0
-        label.lineBreakStrategy = .hangulWordPriority
-        label.lineBreakMode = .byCharWrapping
-        label.adjustsFontForContentSizeCategory = true
-        label.text = "작중 배경은 전작의 2154년에서 15년이 지난 2169년이며, 족장이 된 제이크 설리와 네이티리는 가정을 꾸리고 네 자녀를 갖는다. 개중에는 그레이스 박사의 아바타가 낳은 입양아인 키리도 있다. 나이가 어려 냉동 수면을 할 수 없었던 인간 아이 스파이더도 남아 완전히 부족에 동화된 모습이고, 제이크와 함께 남은 과학자 일행도 나비족과 어울리며 잘 정착한 모습이다. 그렇게 평화로운 나날을 보내던 어느날 밤, RDA가 ISV 매니페스트 데스티니를 선두로 한 10척에 이르는 함대를 이끌고 다시 판도라를 침략한다. 이번에는 언옵타늄을 비롯한 자원 채굴이 아니라 죽어가는 지구를 버리고 판도라로의 완전 이주가 목적이었다. 그 일환으로 이들은 판도라에 도시형 기지 브리지헤드를 1년 만에 건설한다."
         return label
     }()
     
@@ -225,6 +211,16 @@ final class SecondView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    private let openAtLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let stackAudienceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -241,7 +237,6 @@ final class SecondView: UIView {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "809.4 만"
         return label
     }()
     
@@ -261,7 +256,6 @@ final class SecondView: UIView {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "91,102"
         return label
     }()
     
@@ -271,7 +265,7 @@ final class SecondView: UIView {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "순위: "
+        label.text = "순위"
         return label
     }()
     
@@ -281,7 +275,6 @@ final class SecondView: UIView {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "1위"
         return label
     }()
     
@@ -291,7 +284,7 @@ final class SecondView: UIView {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "증감률: "
+        label.text = "증감분"
         return label
     }()
     
@@ -301,7 +294,6 @@ final class SecondView: UIView {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "-0.6%"
         return label
     }()
     
@@ -311,7 +303,7 @@ final class SecondView: UIView {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "신규여부: "
+        label.text = "신규여부"
         return label
     }()
     
@@ -321,7 +313,6 @@ final class SecondView: UIView {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "New"
         return label
     }()
     
@@ -344,12 +335,13 @@ final class SecondView: UIView {
         dateFormatter.dateFormat = "yyyyMMdd"
         let convertDate = dateFormatter.date(from: date)
         
-        dateFormatter.dateFormat = "yyyy.MM.dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         let result = dateFormatter.string(from: convertDate!)
         return result
     }
     
-    func fetchMovieDetailData(posterData: MoviePosterInfo?, movieData: MovieDetailInfo? ) {
+    func fetchMovieDetailData(posterData: MoviePosterInfo?, movieData: MovieDetailInfo?,
+                              boxOfficeData: BoxOffice) {
         guard let posterData = posterData else { return }
         guard let movieData = movieData else { return }
         
@@ -365,23 +357,40 @@ final class SecondView: UIView {
             moviegenres += "," + moviegenresArray[genresCount].genreNm
         }
         
-        var movieActors = movieData.movieInfoResult.movieInfo.actors[0].peopleNm
-        let movieActorsArray = movieData.movieInfoResult.movieInfo.actors
-        for actorsCount in 1..<movieData.movieInfoResult.movieInfo.actors.count {
-            movieActors += "," + movieActorsArray[actorsCount].peopleNm
+        var movieActors = "없음"
+        
+        if !movieData.movieInfoResult.movieInfo.actors.isEmpty {
+            movieActors = ""
+            movieActors = movieData.movieInfoResult.movieInfo.actors[0].peopleNm
+            let movieActorsArray = movieData.movieInfoResult.movieInfo.actors
+            for actorsCount in 1..<movieData.movieInfoResult.movieInfo.actors.count {
+                movieActors += "," + movieActorsArray[actorsCount].peopleNm
+            }
         }
+        
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = .withFullDate
+        dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+        let dateString = dateFormatter.string(from: boxOfficeData.openDate)
+       
         
         let url = URL(string: posterData.search[0].poster)
         moviewPosterImage.load(url: url!)
         
         krTitileLabel.text = "제목: " + movieData.movieInfoResult.movieInfo.movieNm
-        releaseLabel.text = "개봉일: " + refineDate(date:movieData.movieInfoResult.movieInfo.openDt)
+        releaseLabel.text = "개봉일: " + dateString
+        createdAtLabel.text = "제작년도: " + movieData.movieInfoResult.movieInfo.prdtYear
+        openAtLabel.text = "개봉년도: " + refineDate(date:movieData.movieInfoResult.movieInfo.openDt)
         typeLabel.text = "타입: " + movieType
         genreLabel.text = "장르: " + moviegenres + " /" + movieData.movieInfoResult.movieInfo.showTm + " 분"
         ageLimitLabel.text = "등급: " + movieData.movieInfoResult.movieInfo.audits[0].watchGradeNm
         directorLabel.text = "감독: " + movieData.movieInfoResult.movieInfo.directors[0].peopleNm
         castLabel.text = "출연: " + movieActors
-        
+        stackAudienceCountLabel.text = String(boxOfficeData.audiAcc) + "명"
+        dailyAudienceCountLabel.text = String(boxOfficeData.audiCnt) + "명"
+        boxOfficeRankNumberLabel.text = String(boxOfficeData.rank) + "위"
+        rankIncreaseNumberLabel.text = String(boxOfficeData.audiInten)
+        newRankJudgeLabel.text = boxOfficeData.isNewRanked == true ? "New" : "Old"
     }
     
     private func commonInit() {
@@ -396,12 +405,13 @@ final class SecondView: UIView {
         
         movieInfomationStackView.addArrangedSubview(krTitileLabel)
         movieInfomationStackView.addArrangedSubview(releaseLabel)
+        movieInfomationStackView.addArrangedSubview(createdAtLabel)
+        movieInfomationStackView.addArrangedSubview(openAtLabel)
         movieInfomationStackView.addArrangedSubview(typeLabel)
         movieInfomationStackView.addArrangedSubview(genreLabel)
         movieInfomationStackView.addArrangedSubview(ageLimitLabel)
         movieInfomationStackView.addArrangedSubview(directorLabel)
         movieInfomationStackView.addArrangedSubview(castLabel)
-        movieInfomationStackView.addArrangedSubview(createdAtLabel)
         
         verticalStackView.addArrangedSubview(movieInfomationStackView)
         
@@ -425,9 +435,6 @@ final class SecondView: UIView {
         boxOfficeNewRankStackView.addArrangedSubview(newRankLabel)
         boxOfficeNewRankStackView.addArrangedSubview(newRankJudgeLabel)
         verticalStackView.addArrangedSubview(boxOfficeNewRankStackView)
-        
-        
-        
         
         contentScrollView.insetsLayoutMarginsFromSafeArea = false
         verticalStackView.insetsLayoutMarginsFromSafeArea = false
@@ -459,9 +466,6 @@ final class SecondView: UIView {
             self.movieInfomationStackView.trailingAnchor.constraint(equalTo: self.verticalStackView.trailingAnchor),
             self.movieInfomationStackView.heightAnchor.constraint(equalTo: self.moviewPosterImage.heightAnchor),
 
-//            self.audienceInfomationStackView.topAnchor.constraint(equalTo: self.movieInfomationStackView.bottomAnchor),
-//            self.audienceInfomationStackView.leadingAnchor.constraint(equalTo: self.movieInfomationStackView.leadingAnchor),
-//            self.audienceInfomationStackView.trailingAnchor.constraint(equalTo:self.movieInfomationStackView.trailingAnchor),
             self.audienceInfomationStackView.widthAnchor.constraint(equalTo: self.verticalStackView.widthAnchor),
             self.boxOfficeRankStackView.widthAnchor.constraint(equalTo: self.verticalStackView.widthAnchor),
             self.boxOfficeIncreaseRankStackView.widthAnchor.constraint(equalTo: self.verticalStackView.widthAnchor),

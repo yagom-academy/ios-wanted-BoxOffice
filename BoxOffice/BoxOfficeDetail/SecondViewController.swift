@@ -9,7 +9,7 @@ import UIKit
 
 class SecondViewController: UIViewController {
 
-    var movieCode: String
+    private let boxOfficeData: BoxOffice
     private let boxofficeDetailAPI = BoxOfficeDetailAPI()
     private let moviePosterAPI = MoviePosterAPI()
     private var movieData: MovieDetailInfo?
@@ -34,26 +34,25 @@ class SecondViewController: UIViewController {
         view.backgroundColor = .systemBackground
         self.fetchData()
         self.fetchPosterData()
-        movieDetailView.fetchMovieDetailData(posterData: moviePosterData, movieData: movieData)
+        movieDetailView.fetchMovieDetailData(posterData: moviePosterData, movieData: movieData
+                                             , boxOfficeData: boxOfficeData)
         configureUI()
     }
     
-    init(movieCode: String) {
-        self.movieCode = movieCode
+    init(boxOffice: BoxOffice) {
+        self.boxOfficeData = boxOffice
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
-        self.movieCode = ""
         fatalError("init(coder:) has not been implemented")
     }
     
     private func fetchData() {
-        boxofficeDetailAPI.dataTask(by: movieCode, completion: { (response) in
+        boxofficeDetailAPI.dataTask(by: self.boxOfficeData.movieCD, completion: { (response) in
             switch response {
             case .success(let data):
                 self.movieData = data
-                print(self.movieData)
                 self.URLSemaphore.signal()
             case .failure(let data):
                 print(data)
@@ -69,7 +68,6 @@ class SecondViewController: UIViewController {
             switch response {
             case .success(let data):
                 self.moviePosterData = data
-                print(self.moviePosterData)
                 self.URLSemaphore.signal()
             case .failure(let data):
                 print(data)
