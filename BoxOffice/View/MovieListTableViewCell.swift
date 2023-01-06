@@ -130,7 +130,7 @@ class MovieListTableViewCell: UITableViewCell {
         movieOpenDate.text = "개봉일 : \(movie.openDate ?? "")"
         movieShowCount.text = "관객 수 : \(movie.showCnt ?? "")"
         changeBackgourndOfUpdateRank(movie.rankInten)
-        movieUpdatedRank.text = movie.rankInten
+        movieUpdatedRank.text = "(\(movie.rankInten ?? ""))"
         appendNewLabel(movie.rankOldAndNew)
     }
     

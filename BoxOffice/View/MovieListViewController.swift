@@ -143,6 +143,10 @@ final class MovieListViewController: UIViewController {
 
 extension MovieListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailView = MovieDetailViewController()
+        let movie = snapshot.itemIdentifiers[indexPath.row]
+        detailView.configure(movie)
+        navigationController?.pushViewController(detailView, animated: true)
     }
 }
 
