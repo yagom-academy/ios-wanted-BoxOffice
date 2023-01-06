@@ -7,8 +7,11 @@
 
 import UIKit
 import FirebaseFirestore
+import Firebase
 
 class ReviewViewController: UIViewController {
+    static var movieName: String = ""
+
     private lazy var nickNameLabel: UILabel = {
         let label = UILabel()
         label.text = "별명"
@@ -110,11 +113,12 @@ class ReviewViewController: UIViewController {
     }()
     
     var db = Firestore.firestore()
-    var ReviewList: [Review] = []
+    var count: [Count] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        getCount()
         constraints()
     }
 }
@@ -149,17 +153,21 @@ extension ReviewViewController {
         let starRating = rateView.currentStar
         guard let content = contentTextField.text else { return }
         let imageURL = ""
+        let count = self.count[0].count
+        let reviewCount = "review\(count)"
         
         let pattern = "^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$]).{6,20}"
         let isValidPassword = password.range(of: pattern, options: .regularExpression) != nil
         
         if isValidPassword {
-            db.collection("ReviewList").document().setData(["nickname": nickname, "password": password, "starRating": starRating, "content": content, "imageURL": imageURL])
+            db.collection(ReviewViewController.movieName).document(reviewCount).setData(["nickname": nickname, "password": password, "starRating": starRating, "content": content, "imageURL": imageURL, "id": reviewCount])
             
             let alert = UIAlertController(title: "저장 성공", message: "저장이 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default, handler : nil)
             alert.addAction(defaultAction)
             present(alert, animated: false, completion: nil)
+            
+            db.collection("Count").document("count").setData(["count":count+1])
         } else {
             let alert = UIAlertController(title: "저장 실패", message: "암호 입력이 잘못되었습니다", preferredStyle: UIAlertController.Style.alert)
             let defaultAction = UIAlertAction(title: "OK", style: .destructive, handler : nil)
@@ -168,31 +176,24 @@ extension ReviewViewController {
         }
     }
     
-    private func readFirestore() {
-        db.collection("ReviewList").addSnapshotListener { snapshot, error in
+    private func getCount() {
+        db.collection("Count").addSnapshotListener { snapshot, error in
             guard let documents = snapshot?.documents else {
                 print("\(String(describing: error))")
                 return
             }
             
-            self.ReviewList = documents.compactMap { doc -> Review? in
+            self.count = documents.compactMap { doc -> Count? in
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: doc.data(), options: [])
-                    let review = try JSONDecoder().decode(Review.self, from: jsonData)
-                    return review
+                    let count = try JSONDecoder().decode(Count.self, from: jsonData)
+                    print(count)
+                    return count
                 } catch let error {
                     print("\(error)")
                     return nil
                 }
             }
-            
-            DispatchQueue.main.async {
-                print(self.ReviewList)
-            }
         }
-    }
-    
-    private func deleteFirestore() {
-        db.collection("ReviewList").document().delete()
     }
 }

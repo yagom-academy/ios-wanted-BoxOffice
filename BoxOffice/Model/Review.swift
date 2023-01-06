@@ -13,4 +13,5 @@ struct Review: Decodable {
     let starRating: Double
     let content: String
     let imageURL: String
+    let id: String
 }

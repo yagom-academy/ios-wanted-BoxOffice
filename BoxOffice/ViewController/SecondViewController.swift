@@ -7,10 +7,13 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class SecondViewController: UIViewController {
     static var boxofficeData: DailyBoxOfficeList?
     var filmEnglishName: String?
+    var ReviewList: [Review] = []
+    var db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +42,7 @@ class SecondViewController: UIViewController {
             case .success(let success):
                 DispatchQueue.main.async {
                     self.configSecondView(data: success.movieInfoResult.movieInfo)
+                    self.readFirestore()
                     self.getPosterData { result in
                         switch result {
                         case .success(let success):
@@ -57,6 +61,7 @@ class SecondViewController: UIViewController {
     }
     
     func configSecondView(data: MovieInfo) {
+        ReviewViewController.movieName = data.movieNmEn
         filmEnglishName = data.movieNmEn
         if let boxofficeData = SecondViewController.boxofficeData,
             let rankInten = Int(boxofficeData.rankInten) {
@@ -100,11 +105,13 @@ class SecondViewController: UIViewController {
     }
     
     func addViews() {
-        let views = [posterImageView, rankLabel, rankFluctuationsButton, releaseDateLabel, spectatorsLabel, productionYearLabel, releaseYearLabel, screeningTimeLabel, genreLabel, directorNameLabel, actorNameLabel, viewingGradeLabel, createReviewButton, newRankButton]
+        let views = [posterImageView, rankLabel, rankFluctuationsButton, releaseDateLabel, spectatorsLabel, productionYearLabel, releaseYearLabel, screeningTimeLabel, genreLabel, directorNameLabel, actorNameLabel, viewingGradeLabel, createReviewButton, newRankButton, tableView]
         views.forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
+        tableView.dataSource = self
+        tableView.delegate = self
         setConstraints()
     }
 
@@ -152,6 +159,11 @@ class SecondViewController: UIViewController {
             createReviewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             createReviewButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             createReviewButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            
+            tableView.topAnchor.constraint(equalTo: createReviewButton.bottomAnchor, constant: 40),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            tableView.heightAnchor.constraint(equalToConstant: 300)
         ])
     }
 
@@ -274,11 +286,80 @@ class SecondViewController: UIViewController {
         return button
     }()
     
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: ReviewTableViewCell.identify)
+        tableView.rowHeight = 100
+        
+        return tableView
+    }()
+    
     @objc func createReview(sender: UIButton!) {
         navigationController?.pushViewController(ReviewViewController(), animated: true)
     }
     
     @objc func tabDismissButton(sender: UINavigationItem) {
         self.present(MainViewController(), animated: true)
+    }
+}
+
+extension SecondViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ReviewList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewTableViewCell.identify, for: indexPath) as? ReviewTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        cell.nicknameLabel.text = ReviewList[indexPath.row].nickname
+        cell.rateLabel.text = "\(Int(ReviewList[indexPath.row].starRating))점"
+        cell.contentLabel.text = ReviewList[indexPath.row].content
+        ReviewTableViewCell.end = Int(ReviewList[indexPath.row].starRating)
+        return cell
+    }
+}
+
+extension SecondViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
+            self.db.collection(self.filmEnglishName ?? "ReviewList").document(self.ReviewList[indexPath.row].id).delete()
+            self.ReviewList.remove(at: indexPath.row)
+            
+            self.tableView.reloadData()
+            success(true)
+        }
+        delete.backgroundColor = .red
+        
+        return UISwipeActionsConfiguration(actions:[delete])
+    }
+}
+
+extension SecondViewController {
+    private func readFirestore() {
+        db.collection(filmEnglishName ?? "ReviewList").addSnapshotListener { snapshot, error in
+            guard let documents = snapshot?.documents else {
+                print("\(String(describing: error))")
+                return
+            }
+            
+            self.ReviewList = documents.compactMap { doc -> Review? in
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: doc.data(), options: [])
+                    let review = try JSONDecoder().decode(Review.self, from: jsonData)
+                    return review
+                } catch let error {
+                    print("\(error)")
+                    return nil
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                print(self.ReviewList)
+                print(self.filmEnglishName)
+            }
+        }
     }
 }
