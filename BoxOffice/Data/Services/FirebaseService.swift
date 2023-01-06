@@ -26,6 +26,7 @@ final class FirebaseService {
 
     func fetchMovieReviews(of movieCode: String, completion: @escaping (Result<[MovieReviewDTO], Error>) -> Void) {
         movieReviewReference.whereField("movieCode", isEqualTo: movieCode)
+            .order(by: "timeStamp", descending: true)
             .getDocuments { snapShot, error in
                 guard error == nil else {
                     completion(.failure(FirebaseError.internalError))
@@ -43,22 +44,35 @@ final class FirebaseService {
             }
     }
 
-    func uploadReview(image: UIImage, review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void) {
+    func uploadReview(image: UIImage?, review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void) {
         var data = review.toDTO().reviewData
+        data.updateValue(Date(), forKey: "timeStamp")
+
         guard let id = data["id"] as? String else { return }
-        uploadImage(id: review.id, image: image) { [weak self] result in
-            switch result {
-            case .success(let url):
-                data.updateValue(url, forKey: "imageURL")
-                self?.movieReviewReference.document(id).setData(data) { error in
-                    guard error == nil else {
-                        completion(.failure(FirebaseError.internalError))
-                        return
+        if let image = image {
+            uploadImage(id: review.id, image: image) { [weak self] result in
+                switch result {
+                case .success(let url):
+                    data.updateValue(url, forKey: "imageURL")
+                    self?.movieReviewReference.document(id).setData(data) { error in
+                        guard error == nil else {
+                            completion(.failure(FirebaseError.internalError))
+                            return
+                        }
+                        completion(.success(()))
                     }
-                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
                 }
-            case .failure(let error):
-                completion(.failure(error))
+            }
+        } else {
+            data.updateValue("", forKey: "imageURL")
+            movieReviewReference.document(id).setData(data) { error in
+                guard error == nil else {
+                    completion(.failure(FirebaseError.internalError))
+                    return
+                }
+                completion(.success(()))
             }
         }
     }

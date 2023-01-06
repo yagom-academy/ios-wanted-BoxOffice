@@ -49,7 +49,7 @@ final class MockMovieDetailRepository: MovieDetailRepositoryInterface {
 }
 
 final class MockReviewWritingRepository: ReviewWritingRepositoryInterface {
-    func uploadReview(image: UIImage, review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void) {
+    func uploadReview(image: UIImage?, review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void) {
 
     }
 }

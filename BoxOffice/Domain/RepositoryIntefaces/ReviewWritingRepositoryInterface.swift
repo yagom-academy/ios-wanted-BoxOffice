@@ -8,5 +8,5 @@
 import UIKit
 
 protocol ReviewWritingRepositoryInterface {
-    func uploadReview(image: UIImage, review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void)
+    func uploadReview(image: UIImage?, review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void)
 }

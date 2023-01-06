@@ -14,7 +14,7 @@ final class UploadReviewUseCase {
         self.repository = repository
     }
 
-    func execute(image: UIImage, review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void) {
+    func execute(image: UIImage?, review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void) {
         repository.uploadReview(image: image, review: review) { result in
             switch result {
             case .success:

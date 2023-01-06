@@ -27,7 +27,7 @@ final class AverageReviewCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-    private let reviewWriteButton: UIButton = {
+    private lazy var reviewWriteButton: UIButton = {
         let button = UIButton()
         button.setTitleColor(.white, for: .normal)
         button.setTitle("관람평 쓰기", for: .normal)
@@ -35,8 +35,13 @@ final class AverageReviewCollectionViewCell: UICollectionViewCell {
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.borderWidth = 1
         button.titleEdgeInsets = .init(top: 0, left: 8, bottom: 0, right: 8)
+        button.addAction(UIAction { [weak self] _ in
+            self?.reviewWriteButtonTapped?()
+        }, for: .touchUpInside)
         return button
     }()
+
+    var reviewWriteButtonTapped: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)

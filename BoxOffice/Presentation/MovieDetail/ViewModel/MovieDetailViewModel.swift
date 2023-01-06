@@ -54,6 +54,10 @@ extension MovieDetailViewModel {
         fetchMovieReview(movieCode: movieCode)
     }
 
+    func viewWillAppear() {
+        fetchMovieReview(movieCode: movieCode)
+    }
+
     func tabBarModeChanged(mode: TabBarMode) {
         tabBarMode = mode
         applyDataSource?()
