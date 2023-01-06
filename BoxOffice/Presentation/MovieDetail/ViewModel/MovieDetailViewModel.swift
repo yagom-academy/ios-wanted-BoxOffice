@@ -113,6 +113,7 @@ extension MovieDetailViewModel {
             case .success(let movieDetail):
                 self?.movieDetail = movieDetail
                 self?.fetchPosterImage()
+                self?.applyDataSource?()
             case .failure(let error):
                 print(error)
             }
@@ -128,10 +129,10 @@ extension MovieDetailViewModel {
             switch result {
             case .success(let reviews):
                 self?.movieReviews = reviews
-                self?.applyDataSource?()
             case .failure(let error):
                 print(error)
             }
+            self?.applyDataSource?()
             self?.stopLoadingIndicator?()
         }
     }
@@ -151,7 +152,8 @@ extension MovieDetailViewModel {
     }
 
     private func fetchPosterImage() {
-        fetchPosterImageTask = fetchPosterImageUseCase.execute(englishMovieTitle: movieDetail.englishTitle) { [weak self] result in
+        fetchPosterImageTask = fetchPosterImageUseCase
+            .execute(englishMovieTitle: movieDetail.englishTitle, year: movieOverview.openingDay.toYearString()) { [weak self] result in
             switch result {
             case .success(let image):
                 self?.posterImage = image
@@ -170,5 +172,13 @@ extension MovieDetailViewModel {
     enum TabBarMode {
         case movieInfo
         case review
+    }
+}
+
+fileprivate extension Date {
+    func toYearString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        return dateFormatter.string(from: self)
     }
 }

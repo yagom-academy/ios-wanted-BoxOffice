@@ -135,16 +135,17 @@ extension MovieListCollectionViewCell {
             rankFluctuationValueLabel.text = ""
         }
 
-        fetchPosterImage()
+        fetchPosterImage(openingDay: movieOverview.openingDay)
     }
 
-    private func fetchPosterImage() {
+    private func fetchPosterImage(openingDay: Date) {
         guard let movieCode = movieCode else { return }
         fetchMoviePosterTask = fetchMovieDetailUseCase.execute(movieCode: movieCode) { [weak self] result in
             switch result {
             case .success(let movieDetail):
                 let englishTitle = movieDetail.englishTitle
-                let task = self?.fetchPosterImageUseCase.execute(englishMovieTitle: englishTitle) { result in
+                let task = self?.fetchPosterImageUseCase
+                    .execute(englishMovieTitle: englishTitle, year: openingDay.toYearString()) { result in
                     switch result {
                     case .success(let image):
                         DispatchQueue.main.async {
@@ -237,6 +238,12 @@ fileprivate extension Date {
         formatter.dateFormat = "yyyy-MM-dd"
         
         return formatter.string(from: self)
+    }
+
+    func toYearString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        return dateFormatter.string(from: self)
     }
 }
 

@@ -21,7 +21,7 @@ final class MockMovieDetailRepository: MovieDetailRepositoryInterface {
         return nil
     }
 
-    func fetchMoviePoster(englishMovieName: String, completion: @escaping (Result<UIImage?, Error>) -> Void) -> Cancellable? {
+    func fetchMoviePoster(englishMovieName: String, year: String, completion: @escaping (Result<UIImage?, Error>) -> Void) -> Cancellable? {
         return nil
     }
 

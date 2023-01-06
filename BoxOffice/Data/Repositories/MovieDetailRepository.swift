@@ -58,9 +58,9 @@ final class MovieDetailRepository: MovieDetailRepositoryInterface {
         }
     }
 
-    func fetchMoviePoster(englishMovieName: String, completion: @escaping (Result<UIImage?, Error>) -> Void) -> Cancellable? {
+    func fetchMoviePoster(englishMovieName: String, year: String, completion: @escaping (Result<UIImage?, Error>) -> Void) -> Cancellable? {
         var urlString = ""
-        let task = fetchMoviePosterURL(englishMovieName: englishMovieName) { result in
+        let task = fetchMoviePosterURL(englishMovieName: englishMovieName, year: year) { result in
             switch result {
             case .success(let result):
                 urlString = result
@@ -93,11 +93,12 @@ final class MovieDetailRepository: MovieDetailRepositoryInterface {
 
 // MARK: - Private Functions
 extension MovieDetailRepository {
-    private func fetchMoviePosterURL(englishMovieName: String, completion: @escaping (Result<String, Error>) -> Void) -> Cancellable? {
+    private func fetchMoviePosterURL(englishMovieName: String, year: String, completion: @escaping (Result<String, Error>) -> Void) -> Cancellable? {
         var urlComponents = URLComponents(string: "http://www.omdbapi.com/")
         urlComponents?.queryItems = [
             .init(name: "apikey", value: neworkService.omdbAPIKey),
-            .init(name: "t", value: englishMovieName)
+            .init(name: "t", value: englishMovieName),
+            .init(name: "y", value: String(year))
         ]
         guard let url = urlComponents?.url else { return nil }
         let urlRequest = URLRequest(url: url)
