@@ -59,11 +59,9 @@ struct BoxOfficeDetailView: View {
                 
                 HStack(spacing: 40) {
                     VStack {
-                        Button {
-                            print("Review Button!!")
-                        } label: {
-                            Text("리뷰 작성")
-                        }
+                        Text("예매 순위")
+                            .font(.system(size: 10))
+                        Text(viewModel.movieList[myIndex].rank + " 위")
                     }
                     VStack {
                         Text("랭킹 진입 여부")
@@ -85,11 +83,37 @@ struct BoxOfficeDetailView: View {
                     .opacity(0.5)
                     .blur(radius: 2, opaque: true)
                 )
+                HStack(spacing: 40) {
+                    Button {
+                        actionSheet()
+                    } label: {
+                        Image(systemName: "square.and.arrow.up.on.square")
+                    }
+                    Spacer()
+                    NavigationLink {
+                        BoxOfficeReviewView(movieTitle: detailViewModel.currentPageMovieDetail?.movieNm ?? "")
+                    } label: {
+                        Text("리뷰 작성")
+                            .frame(width: 200)
+                            .foregroundColor(.white)
+                            .font(.caption)
+                            .padding()
+                            .background(Color.red)
+                            .cornerRadius(16)
+                    }
+                }
+                .padding(.leading, 30)
+                .padding()
             }
         }
         .ignoresSafeArea()
         .onAppear {
             detailViewModel.fetchCurrentMovieDetail(movieBoxOfficeInfo: viewModel.movieList[myIndex])
         }
+    }
+    func actionSheet() {
+        guard let urlShare = URL(string: "https://developer.apple.com/xcode/swiftui/") else { return }
+        let activityVC = UIActivityViewController(activityItems: [urlShare], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
     }
 }
