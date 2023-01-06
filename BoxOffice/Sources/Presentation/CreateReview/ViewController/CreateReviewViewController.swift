@@ -157,7 +157,7 @@ private extension CreateReviewViewController {
     }
     
     @objc func didTapProfileButton(_ sender: ProfileImageButton) {
-        print(#function)
+        coordinator?.showImagePicker(self)
     }
     
     @objc func didTapCreateButton(_ sender: UIButton) {
@@ -180,6 +180,23 @@ extension CreateReviewViewController: UITextViewDelegate {
             textView.text = reviewPlaceHolder
             textView.textColor = .darkGray
         }
+    }
+    
+}
+
+extension CreateReviewViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
+    ) {
+        let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+        guard let selectedImage = editedImage ?? originalImage else {
+            return
+        }
+        createImageButton.setImage(selectedImage.withConfiguration(createImageButton.config), for: .normal)
+        picker.dismiss(animated: true)
     }
     
 }

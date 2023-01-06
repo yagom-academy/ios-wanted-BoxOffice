@@ -35,6 +35,14 @@ private extension CreateReviewCoordinator {
         )
         return viewController
     }
+    
+    func makeImagePickerController(_ viewController: UIViewController) -> UIImagePickerController {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = viewController as? any UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        imagePicker.allowsEditing = true
+        return imagePicker
+    }
 }
 
 extension CreateReviewCoordinator: CreateReviewCoordinatorInterface {
@@ -42,6 +50,11 @@ extension CreateReviewCoordinator: CreateReviewCoordinatorInterface {
     func finish() {
         parentCoordinator = nil
         finishDelegate?.coordinatorDidFinish(childCoordinator: self)
+    }
+    
+    func showImagePicker(_ viewController: UIViewController) {
+        let viewController = makeImagePickerController(viewController)
+        navigationController.visibleViewController?.present(viewController, animated: true)
     }
     
 }
