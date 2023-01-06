@@ -28,7 +28,7 @@ final class BoxOfficeTests: XCTestCase {
             switch result {
             case .success(let success):
                 expectedResult = success
-            case .failure(let failure):
+            case .failure(_):
                 return
             }
             expectation.fulfill()
@@ -80,27 +80,7 @@ final class BoxOfficeTests: XCTestCase {
         
         wait(for: [expectation], timeout: 300)
     }
-    
-//    func test_KobisMovieDetailAPIRequest_withNetworking() {
-//        let request = KobisWeeklyBoxOfficeAPIRequest()
-//        let session = MyURLSession()
-//        
-//        let expectation = expectation(description: "비동기 요청을 기다림.")
-//        
-//        session.execute(request) { (result: Result<WeeklyBoxOfficeResponse, APIError>) in
-//            switch result {
-//            case .success(let success):
-//                print(success)
-//                success.boxOfficeResult.weeklyBoxOfficeList.forEach { print($0.movieCode) }
-//            case .failure(let failure):
-//                print(failure.localizedDescription)
-//            }
-//            expectation.fulfill()
-//        }
-//        
-//        wait(for: [expectation], timeout: 300)
-//    }
-    
+
     func test_KobisMovieDetailAPIRequest_withNetworking() {
         let request = KobisMovieDetailAPIRequest(movieCode: "20210028")
         let session = MyURLSession()

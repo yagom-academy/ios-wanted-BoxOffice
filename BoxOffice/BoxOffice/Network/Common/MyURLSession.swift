@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit.UIImage
 
 struct MyURLSession: APIService {
 
@@ -80,5 +81,28 @@ struct MyURLSession: APIService {
         } else {
             return .failure(.failedToParse)
         }
+    }
+
+    func networkPerform(for request: URLRequest, completion: @escaping (Result<Data, APIError>) -> Void) {
+        let dataTask: URLSessionDataTask = session.dataTask(with: request) { data, response, error in
+            if error != nil {
+                completion(.failure(.invalidRequest))
+                return
+            }
+            guard let response = response as? HTTPURLResponse else {
+                completion(.failure(.invalidResponse))
+                return
+            }
+            guard 200 ..< 300 ~= response.statusCode else {
+                completion(.failure(.abnormalStatusCode(response.statusCode)))
+                return
+            }
+            guard let data = data else {
+                completion(.failure(.emptyData))
+                return
+            }
+            completion(.success(data))
+        }
+        dataTask.resume()
     }
 }

@@ -12,14 +12,13 @@ struct DailyBoxOfficeResponse: Decodable {
 }
 
 struct DailyBoxOfficeResult: Decodable {
-//    let boxOfficeType: String
-//    let showRange: String
-//    데이터가 필요없는 것들은 모델에서 지워줄까?
+    let boxOfficeType: String
+    let showRange: String
     let dailyBoxOfficeList: [BoxOfficeMovie]
     
     private enum CodingKeys: String, CodingKey {
-//        case boxOfficeType = "boxofficeType"
-//        case showRange
+        case boxOfficeType = "boxofficeType"
+        case showRange
         case dailyBoxOfficeList
     }
 }

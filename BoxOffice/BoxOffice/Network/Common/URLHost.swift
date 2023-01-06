@@ -14,7 +14,7 @@ enum URLHost {
         case .kobis:
             return "https://www.kobis.or.kr"
         case .OMDB:
-            return "https://www.omdbapi.com"
+            return "https://www.omdbapi.com/"
         }
     }
 }

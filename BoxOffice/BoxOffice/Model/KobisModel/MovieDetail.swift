@@ -24,36 +24,30 @@ struct MovieDetailResult: Decodable {
 }
 
 struct MovieDetail: Decodable {
-//    let rank: String
-//    let movieName: String
-//    let openDate: String
-//    let audienceAttendance: String
-//    let rankIncrease: String
-//    let isNewRanked: String
-    // --- for detail ---
+
+    let openDate: String
     let productionYear: String
     let showTime: String
-    let typeNumber: String
+    let typeName: String
     let directors: [Director]
     let actors: [Actor]
     let genres: [Genre]
     let audits: [Audit]
+    let movieEnglishName: String
+    let movieKoreaName: String
     
     private enum CodingKeys: String, CodingKey {
-//        case rank
-//        case movieName = "movieNm"
-//        case openDate = "openDt"
-//        case audienceAttendance = "audiAcc"
-//        case rankIncrease = "rankInten"
-//        case isNewRanked = "rankOldAndNew"
-        
+
+        case openDate = "openDt"
         case productionYear = "prdtYear"
         case showTime = "showTm"
-        case typeNumber = "typeNm"
+        case typeName = "typeNm"
         case directors
         case actors
         case genres
         case audits
+        case movieEnglishName = "movieNmEn"
+        case movieKoreaName = "movieNm"
     }
 }
 

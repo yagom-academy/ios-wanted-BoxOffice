@@ -168,8 +168,6 @@ struct PhotoPicker: UIViewControllerRepresentable {
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
             picker.dismiss(animated: true)
             parent.isPresented = false
-
-
         }
     }
 }

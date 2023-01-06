@@ -10,7 +10,9 @@ import SwiftUI
 struct MovieDetailView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var isPresented = false
-    var movie: Movie
+    @ObservedObject var viewModel = MovieDetailViewModel()
+    @Binding var poster: UIImage
+    var boxOfficeMovie: BoxOfficeMovie
 
     var body: some View {
         List {
@@ -32,21 +34,21 @@ struct MovieDetailView: View {
                 }
 
                 Button(action: {
-                    let sharePoster = UIImage(named: "Avatar")
+                    let sharePoster = poster
                     let shareInformation = """
-                                            영화명: \(movie.movieName)
-                                            박스오피스 순위: \(movie.rank)
-                                            개봉일: \(movie.openDtDay)
-                                            관객수: \(movie.spectators)
-                                            전일대비 순위: \(movie.rankInten)
-                                            랭킹에 신규진입 여부: \(movie.rankOldAndNew)
-                                            제작연도: \(movie.prdtYear)
-                                            개봉연도: \(movie.openDtYear)
-                                            상영시간: \(movie.showTm)
-                                            장르: \(movie.genreNm)
-                                            감독명: \(movie.directorNm)
-                                            배우명: \(movie.actorNm)
-                                            관람등급: \(movie.watchGradeNm)
+                                            영화명: \(boxOfficeMovie.movieName)
+                                            박스오피스 순위: \(boxOfficeMovie.rank)
+                                            개봉일: \(boxOfficeMovie.openDate)
+                                            관객수: \(boxOfficeMovie.audienceAttendance)
+                                            전일대비 순위: \(boxOfficeMovie.rankIncrease)
+                                            랭킹에 신규진입 여부: \(boxOfficeMovie.isNewRanked)
+                                            제작연도: \(viewModel.detailInformation.productionYear)
+                                            개봉연도: \(viewModel.detailInformation.openDate)
+                                            상영시간: \(viewModel.detailInformation.showTime)
+                                            장르: \(viewModel.detailInformation.genres)
+                                            감독명: \(viewModel.detailInformation.directors)
+                                            배우명: \(viewModel.detailInformation.actors)
+                                            관람등급: \(viewModel.detailInformation.audits)
                                             리뷰 별점 평균: 4.4
                                             리뷰리스트:?
                                             """
@@ -63,11 +65,12 @@ struct MovieDetailView: View {
                     }
                 })
             }) {
-                HStack(alignment: .top) {
-                    Image(uiImage: UIImage(named: "Avatar")!)
+                VStack(alignment: .leading) {
+                    Image(uiImage: poster)
                         .resizable()
-                        .aspectRatio(450/650, contentMode: .fit)
-                    MovieInformationView(movie: movie)
+                        .aspectRatio(1.4, contentMode: .fit)
+                        .padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 0))
+                    MovieInformationView(movieDetail: viewModel.detailInformation, boxOfficeMovie: boxOfficeMovie)
                 }
                 VStack(alignment: .leading) {
                     HStack {
@@ -82,37 +85,37 @@ struct MovieDetailView: View {
                         Text("현재 순위:")
                             .foregroundColor(.gray)
                             .shadow(radius: 0.2)
-                        Text("\(movie.rank) 위")
+                        Text(boxOfficeMovie.rank + "위")
                             .bold()
                     }
                     HStack {
                         Text("전일 대비:")
                             .foregroundColor(.gray)
                             .shadow(radius: 0.2)
-                        if Int(movie.rankInten) == 0 {
+                        if Int(boxOfficeMovie.rankIncrease) == 0 {
                             Rectangle()
                                 .frame(width: 13, height: 2)
-                        } else if Int(movie.rankInten) ?? 0 > 0 {
+                        } else if Int(boxOfficeMovie.rankIncrease) ?? 0 > 0 {
                             HStack(spacing: 2) {
                                 Text("↑")
                                     .foregroundColor(.red)
                                     .bold()
-                                Text(movie.rankInten)
+                                Text(boxOfficeMovie.rankIncrease)
                             }
                         } else {
                             HStack(spacing: 2) {
                                 Text("↓")
                                     .foregroundColor(.blue)
                                     .bold()
-                                Text(movie.rankInten)
+                                Text(boxOfficeMovie.rankIncrease)
                             }
                         }
                     }
                     HStack {
-                        Text("현재 순위:")
+                        Text("순위 진입 여부")
                             .foregroundColor(.gray)
                             .shadow(radius: 0.2)
-                        Text("\(movie.rank) 위")
+                        Text(boxOfficeMovie.isNewRanked)
                             .bold()
                     }
                 }
@@ -129,38 +132,41 @@ struct MovieDetailView: View {
                         Text("제작 연도:")
                             .foregroundColor(.gray)
                             .shadow(radius: 0.2)
-                        Text(movie.prdtYear)
+                        Text(viewModel.detailInformation.productionYear)
                             .bold()
                     }
                     HStack {
                         Text("개봉 연도:")
                             .foregroundColor(.gray)
                             .shadow(radius: 0.2)
-                        Text(movie.openDtYear)
+                        Text(viewModel.detailInformation.productionYear)
                             .bold()
                     }
                 }
             }
         }
-        .navigationTitle(movie.movieName)
         .frame(alignment: .center)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: Button("❮" + " \(movie.movieName)", action: {
+        .navigationBarItems(leading: Button("❮" + " \(boxOfficeMovie.movieName)", action: {
             presentationMode.wrappedValue.dismiss()
         }))
+        .onAppear {
+            viewModel.fetchMovieDetail(movieCode: boxOfficeMovie.movieCode)
+        }
     }
 }
 
 struct MovieInformationView: View {
-    var movie: Movie
+    var movieDetail: MovieDetail
+    var boxOfficeMovie: BoxOfficeMovie
 
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Text("영화명:")
                     .bold()
-                Text("\(movie.movieName)")
+                Text(boxOfficeMovie.movieName)
                     .bold()
             }
             .font(.title3)
@@ -168,41 +174,47 @@ struct MovieInformationView: View {
             HStack {
                 Text("개봉일:")
                     .bold()
-                Text("\(movie.openDtDay)")
+                Text(boxOfficeMovie.openDate)
             }
             HStack {
                 Text("관객수:")
                     .bold()
-                Text("\(movie.spectators)")
+                Text(boxOfficeMovie.audienceAttendance.numberOfPeople + "명")
             }
             .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
             HStack {
                 Text("장르:")
                     .bold()
-                Text("\(movie.genreNm)")
+                HStack {
+                    ForEach(movieDetail.genres, id: \.self) { genre in
+                        Text(genre.genreName)
+                    }
+                }
             }
             HStack {
                 Text("관람등급:")
                     .bold()
-                Text("\(movie.watchGradeNm)")
+                if movieDetail.audits.isEmpty {
+                    Text("")
+                } else {
+                    Text(movieDetail.audits[0].watchGradeName)
+                }
             }
             .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
             HStack {
                 Text("상영시간:")
                     .bold()
-                Text("\(movie.showTm)")
+                Text(movieDetail.showTime + "분")
             }
             HStack {
                 Text("감독:")
                     .bold()
-                Text("\(movie.directorNm)")
+                ForEach(movieDetail.directors, id: \.self) { director in
+                    Text(director.peopleName)
+                }
             }
         }
-    }
-}
-
-struct MovieDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        MovieDetailView(movie: Movie(rank: "1", movieName: "아바타", openDtDay: "2022/12/15", spectators: "10000000", rankInten: "0", rankOldAndNew: "Old", prdtYear: "2021", openDtYear: "2022", showTm: "3시간", genreNm: "판타지", directorNm: "제임스카메룬", actorNm: "나비족", watchGradeNm: "15세"))
+        .lineLimit(1)
+        .minimumScaleFactor(0.5)
     }
 }

@@ -21,7 +21,7 @@ extension KobisAPIRequest {
     var queryItems: [String : String]? {
         [
             "key": "019dfeab346ca4bdaa25268affad110a",
-            "targetDt": "20220101",
+            "targetDt": Calendar.current.date(byAdding: .day, value: -1, to: Date())?.now ?? "",
             "wideAreaCd": "0105001"
         ]
     }
