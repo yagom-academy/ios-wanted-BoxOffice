@@ -143,7 +143,11 @@ final class WriteReviewViewController: UIViewController {
     private func bind() {
         reviewViewModel.error
             .bind { error in
-                //TODO: 저장 실패 얼럿
+                DispatchQueue.main.async {
+                    if let description = error {
+                        self?.showAlert(message: description)
+                    }
+                }
             }
     }
 }
