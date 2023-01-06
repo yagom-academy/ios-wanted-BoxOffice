@@ -12,7 +12,7 @@ final class GridCell: UICollectionViewCell {
     private let posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.tintColor = .systemGray3
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.systemGray3.cgColor
