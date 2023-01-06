@@ -21,7 +21,7 @@ struct DailyBoxoffice: Decodable {
     let rnum: String
     let rank: String
     let rankInten: String
-    let rankOldAndNew: RankOldAndNew
+    let rankOldAndNew: RankOldOrNew
     let movieCd: String
     let movieNm: String
     let openDt: String
@@ -38,7 +38,16 @@ struct DailyBoxoffice: Decodable {
     let showCnt: String
 }
 
-enum RankOldAndNew: String, Decodable {
+enum RankOldOrNew: String, Decodable {
     case old = "OLD"
     case new = "NEW"
+    
+    var value: String {
+        switch self {
+        case .old:
+            return "OLD"
+        case .new:
+            return "NEW"
+        }
+    }
 }

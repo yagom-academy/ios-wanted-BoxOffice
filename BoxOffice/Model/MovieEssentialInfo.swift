@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieEssentialInfo {
+struct MovieEssentialInfo: Hashable {
     var poster: String?  // omdb
     var boxOfficeRank: String?
     var movieNm: String?
@@ -16,7 +16,8 @@ struct MovieEssentialInfo {
     var openDate: String?// 상세
     var showCnt: String?
     var salesChange: String?
-    var rankOldAndNew: RankOldAndNew?
+    var rankOldAndNew: RankOldOrNew?
+    var rankInten: String?
     var prdtYear: String? // 상세
     var openYear: String? // 상세
     var runtime: String? // 상세

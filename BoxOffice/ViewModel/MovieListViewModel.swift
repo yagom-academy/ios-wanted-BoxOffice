@@ -21,6 +21,8 @@ final class MovieListViewModel {
                 boxOfficeInfo.salesChange = movie.salesChange
                 boxOfficeInfo.openDate = movie.openDt
                 boxOfficeInfo.movieCd = movie.movieCd
+                boxOfficeInfo.rankInten = movie.rankInten
+                boxOfficeInfo.rankOldAndNew = movie.rankOldAndNew
                 movies.append(boxOfficeInfo)
                 if movies.count == 10 {
                     completion(movies)
