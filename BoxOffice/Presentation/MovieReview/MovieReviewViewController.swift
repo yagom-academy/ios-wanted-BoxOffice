@@ -410,6 +410,8 @@ extension MovieReviewViewController: UITextFieldDelegate {
     private func configureTextField() {
         passwordTextField.delegate = self
         
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.textContentType = .password
     }
 }
 
