@@ -79,6 +79,12 @@ private extension BoxOfficeListViewController {
                     self?.activityIndicator.stopAnimating()
                 }
             }.store(in: &cancellables)
+        
+        viewModel.output.errorMessage
+            .compactMap { $0 }
+            .sinkOnMainThread(receiveValue: { [weak self] message in
+                self?.showAlert(message: message)
+            }).store(in: &cancellables)
     }
     
     func setUpNavigationBar() {

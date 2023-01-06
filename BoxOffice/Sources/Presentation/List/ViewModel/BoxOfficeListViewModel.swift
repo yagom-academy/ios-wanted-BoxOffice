@@ -20,6 +20,7 @@ protocol BoxOfficeListViewModelOutput {
     var movies: AnyPublisher<[MovieCellViewModel], Never> { get }
     var isLoading: AnyPublisher<Bool, Never> { get }
     var cellModels: [MovieCellViewModel] { get }
+    var errorMessage: AnyPublisher<String?, Never> { get }
 }
 
 protocol BoxOfficeListViewModel {
@@ -51,6 +52,7 @@ final class DefaultBoxOfficeListViewModel: BoxOfficeListViewModel {
     }
     
     private var _movies = PassthroughSubject<[MovieCellViewModel], Never>()
+    private var _errorMessage = CurrentValueSubject<String?, Never>(nil)
     private var _isLoading = PassthroughSubject<Bool, Never>()
     private var _cellViewMovels: [MovieCellViewModel] = .init() {
         didSet {
@@ -90,7 +92,8 @@ extension DefaultBoxOfficeListViewModel: BoxOfficeListViewModelOutput {
     
     var movies: AnyPublisher<[MovieCellViewModel], Never> { _movies.eraseToAnyPublisher() }
     var isLoading: AnyPublisher<Bool, Never> { _isLoading.eraseToAnyPublisher() }
-    var cellModels: [MovieCellViewModel] { return _cellViewMovels }
+    var cellModels: [MovieCellViewModel] { _cellViewMovels }
+    var errorMessage: AnyPublisher<String?, Never> { _errorMessage.eraseToAnyPublisher() }
     
 }
 
@@ -115,9 +118,10 @@ private extension DefaultBoxOfficeListViewModel {
                 }
             }.map { $0.map { movie in
                 return DefaultMovieCellViewModel(movie: movie)
-            }}.sink(receiveCompletion: { completion in
+            }}.sink(receiveCompletion: { [weak self] completion in
                 if case .failure(let error) = completion {
                     debugPrint(error)
+                    self?._errorMessage.send("알 수 없는 에러가 발생했습니다.")
                 }
             }, receiveValue: { [weak self] movies in
                 self?._cellViewMovels = movies
