@@ -5,10 +5,11 @@
 //  Created by Ari on 2023/01/04.
 //
 
-import Foundation
+import UIKit
 
 protocol CreateReviewCoordinatorInterface: AnyObject {
     
     func finish()
+    func showImagePicker(_ viewController: UIViewController)
     
 }

@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class CreateReviewViewController: UIViewController {
 
     weak var coordinator: CreateReviewCoordinatorInterface?
     private let viewModel: CreateReviewViewModel
+    private var cancellables: Set<AnyCancellable> = .init()
     
     private let reviewPlaceHolder = "감상평을 자유롭게 작성해주세요."
     
@@ -49,6 +51,7 @@ class CreateReviewViewController: UIViewController {
         let view = RatingView(
             config: UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .largeTitle), scale: .large)
         )
+        view.addTarget(target: self, action: #selector(didTapStarButton(_:)), for: .touchUpInside)
         return view
     }()
     
@@ -59,14 +62,17 @@ class CreateReviewViewController: UIViewController {
     }()
     
     private lazy var nickNameInputView: BoxOfficeInputView = {
-        let inputView = BoxOfficeInputView(title: "별명", placeholder: "별명을 입력해주세요.")
+        let inputView = BoxOfficeInputView(title: "별명", placeholder: "별명 입력 필수")
         inputView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 60).isActive = true
+        inputView.addTarget(target: self, action: #selector(didChangeNameTextField(_:)), for: [.allEditingEvents, .valueChanged])
         return inputView
     }()
     
     private lazy var passwordInputView: BoxOfficeInputView = {
-        let inputView = BoxOfficeInputView(title: "암호", placeholder: "비밀번호를 입력해주세요.")
+        let inputView = BoxOfficeInputView(title: "암호", placeholder: "소문자, 숫자, 특수문자(!@#$) 필수")
         inputView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 60).isActive = true
+        inputView.addTarget(target: self, action: #selector(didChangePasswordTextField(_:)), for: [.allEditingEvents, .valueChanged])
+        inputView.setUpSecureTextEntry(true)
         return inputView
     }()
     
@@ -105,6 +111,7 @@ class CreateReviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
+        bind()
     }
 
     init(viewModel: CreateReviewViewModel, coordinator: CreateReviewCoordinatorInterface) {
@@ -121,9 +128,39 @@ class CreateReviewViewController: UIViewController {
 
 private extension CreateReviewViewController {
     
+    func bind() {
+        viewModel.output.isValid
+            .removeDuplicates()
+            .sinkOnMainThread(receiveValue: { [weak self] isValid in
+                self?.crateButton.isEnabled = isValid
+                self?.crateButton.backgroundColor = isValid ? .systemIndigo : .darkGray
+            }).store(in: &cancellables)
+        
+        viewModel.output.rating
+            .sinkOnMainThread(receiveValue: { [weak self] rating in
+                self?.ratingView.setUp(rating: rating)
+            }).store(in: &cancellables)
+        
+        viewModel.output.errorMessage
+            .compactMap { $0 }
+            .sinkOnMainThread(receiveValue: { [weak self] message in
+                self?.showAlert(message: message)
+            }).store(in: &cancellables)
+        
+        viewModel.output.isCompleted
+            .compactMap { $0 }
+            .filter { $0 == true }
+            .sinkOnMainThread(receiveValue: { [weak self] _ in
+                self?.dismiss(animated: true) {
+                    self?.coordinator?.finish()
+                }
+            }).store(in: &cancellables)
+    }
+    
     func setUp() {
         setUpNavigationBar()
         setUpView()
+        hideKeyboard()
     }
     
     func setUpNavigationBar() {
@@ -157,11 +194,23 @@ private extension CreateReviewViewController {
     }
     
     @objc func didTapProfileButton(_ sender: ProfileImageButton) {
-        print(#function)
+        coordinator?.showImagePicker(self)
     }
     
     @objc func didTapCreateButton(_ sender: UIButton) {
-        print(#function)
+        viewModel.input.didTapCreateButton()
+    }
+    
+    @objc func didChangeNameTextField(_ sender: UITextField) {
+        viewModel.input.nameText(sender.text ?? "")
+    }
+    
+    @objc func didChangePasswordTextField(_ sender: UITextField) {
+        viewModel.input.passwordText(sender.text ?? "")
+    }
+    
+    @objc func didTapStarButton(_ sender: StarButton) {
+        viewModel.input.didTapRatingView(sender.tag + 1)
     }
     
 }
@@ -175,11 +224,33 @@ extension CreateReviewViewController: UITextViewDelegate {
         }
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        viewModel.input.reviewText(textView.text)
+    }
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = reviewPlaceHolder
             textView.textColor = .darkGray
         }
+    }
+    
+}
+
+extension CreateReviewViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
+    ) {
+        let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+        guard let selectedImage = editedImage ?? originalImage else {
+            return
+        }
+        createImageButton.setImage(selectedImage.withConfiguration(createImageButton.config), for: .normal)
+        viewModel.input.imageData(selectedImage.toString ?? "")
+        picker.dismiss(animated: true)
     }
     
 }

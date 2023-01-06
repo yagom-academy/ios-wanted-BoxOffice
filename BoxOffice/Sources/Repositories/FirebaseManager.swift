@@ -19,7 +19,6 @@ final class FirebaseManager {
         } catch {
             print(error)
         }
-    }
     
     func update(review: Review) {
         do {

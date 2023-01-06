@@ -44,9 +44,9 @@ private extension BoxOfficeListCoordinator {
         return viewController
     }
     
-    func makeCreateReviewViewController() -> UIViewController {
+    func makeCreateReviewViewController(movie: Movie) -> UIViewController {
         let navigationController = UINavigationController()
-        let coordinator = CreateReviewCoordinator(navigationConrtoller: navigationController)
+        let coordinator = CreateReviewCoordinator(movie: movie, navigationConrtoller: navigationController)
         coordinator.finishDelegate = self
         coordinator.parentCoordinator = self
         coordinator.start()
@@ -63,7 +63,7 @@ extension BoxOfficeListCoordinator: BoxOfficeListCoordinatorInterface {
     }
     
     func showCreateReviewView(movie: Movie) {
-        let viewController = makeCreateReviewViewController()
+        let viewController = makeCreateReviewViewController(movie: movie)
         viewController.isModalInPresentation = true
         navigationController.visibleViewController?.present(viewController, animated: true)
     }

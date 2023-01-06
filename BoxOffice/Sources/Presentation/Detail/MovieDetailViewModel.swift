@@ -20,6 +20,7 @@ protocol MovieDetailViewModelOutput {
     var movie: Movie { get }
     var movieModel: AnyPublisher<Movie, Never> { get }
     var shareMovieInfoPublisher: PassthroughSubject<[String], Never> { get }
+
 }
 
 protocol MovieDetailViewModelInterface {
@@ -33,11 +34,12 @@ final class MovieDetailViewModel: MovieDetailViewModelInterface  {
 
     let firebaseManager = FirebaseManager()
     var _movie: Movie
+
     var reviews: [Review]?
     var shareMovieInfoPublisher = PassthroughSubject<[String], Never>()
     
     init(movie: Movie) {
-        self._movie = movie // 1
+        self._movie = movie
     }
     
     private var cancelable = Set<AnyCancellable>()

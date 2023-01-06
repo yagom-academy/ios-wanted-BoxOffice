@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		028433FB2967E3BC002E56FB /* StarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028433FA2967E3BC002E56FB /* StarButton.swift */; };
+		028433FD2968073B002E56FB /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028433FC2968073B002E56FB /* UIViewController+extension.swift */; };
 		028741492965693C00B2D021 /* UIFont+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028741482965693C00B2D021 /* UIFont+extension.swift */; };
 		0287414B29659F7A00B2D021 /* CreateReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0287414A29659F7A00B2D021 /* CreateReviewViewController.swift */; };
 		0287414E2965A00D00B2D021 /* CreateReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0287414D2965A00D00B2D021 /* CreateReviewViewModel.swift */; };
@@ -69,6 +71,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		028433FA2967E3BC002E56FB /* StarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarButton.swift; sourceTree = "<group>"; };
+		028433FC2968073B002E56FB /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
 		028741482965693C00B2D021 /* UIFont+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+extension.swift"; sourceTree = "<group>"; };
 		0287414A29659F7A00B2D021 /* CreateReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewViewController.swift; sourceTree = "<group>"; };
 		0287414D2965A00D00B2D021 /* CreateReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewViewModel.swift; sourceTree = "<group>"; };
@@ -153,6 +157,7 @@
 				02F85588296565CE004B76DD /* UITableView+extension.swift */,
 				425D26BE2963FCC100967454 /* UIView+Extension.swift */,
 				425D270A2966F29200967454 /* UIImage+extension.swift */,
+				028433FC2968073B002E56FB /* UIViewController+extension.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 			children = (
 				0287415F2965BA9000B2D021 /* ProfileImageButton.swift */,
 				028741612965BECE00B2D021 /* RatingView.swift */,
+				028433FA2967E3BC002E56FB /* StarButton.swift */,
 				028741652965C9EC00B2D021 /* BoxOfficeInputView.swift */,
 			);
 			path = Views;
@@ -508,6 +514,7 @@
 				425D26C1296413F000967454 /* UIColor+Extension.swift in Sources */,
 				02F8556929641B68004B76DD /* AppCoordinator.swift in Sources */,
 				02F855342963BDB3004B76DD /* TargetType.swift in Sources */,
+				028433FB2967E3BC002E56FB /* StarButton.swift in Sources */,
 				02F855402963E31B004B76DD /* BoxOfficeListResponse.swift in Sources */,
 				425D26D22964329500967454 /* ThirdCell.swift in Sources */,
 				0287414B29659F7A00B2D021 /* CreateReviewViewController.swift in Sources */,
@@ -538,6 +545,7 @@
 				028741502965A06500B2D021 /* MovieDetailViewModel.swift in Sources */,
 				02F855512963F938004B76DD /* String+extension.swift in Sources */,
 				02F8555D2963FEF4004B76DD /* Bundle+extension.swift in Sources */,
+				028433FD2968073B002E56FB /* UIViewController+extension.swift in Sources */,
 				028741662965C9EC00B2D021 /* BoxOfficeInputView.swift in Sources */,
 				02F8555F296401DA004B76DD /* BoxOfficeRepository.swift in Sources */,
 				02B480632966923800F3E31C /* LoadingView.swift in Sources */,
