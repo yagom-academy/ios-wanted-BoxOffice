@@ -35,4 +35,5 @@ struct MovieInfoPageModel {
     let directors: [Director]
     let actors: [Actor]
     let watchGradeNm: String // Audit의 프로퍼티
+    let nations: [Nation]
 }
