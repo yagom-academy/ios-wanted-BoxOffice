@@ -8,64 +8,89 @@
 import Foundation
 
 struct MovieAPIUseCase {
+    private let imageCacheManager = URLCacheManager()
     
-    func requestDailyData(with date: String, in dataList: Observable<[MovieCellData]>) async throws {
+    func requestDailyData(with date: String, in dataList: Observable<[MovieData]>) async throws {
         dataList.value = []
         let boxOfficeList = try await fetchDailyBoxOfficeData(with: date)
         for boxOffice in boxOfficeList {
             Task {
-                guard let result = try await fetchMovieDetailInfo(with: boxOffice.movieCd) else { return }
-                let movieEnglishName = result.movieNmEn
-                let movieOpenYear = String(result.openDt.prefix(4))
+                guard let movieInfo = try await fetchMovieDetailInfo(with: boxOffice.movieCd) else { return }
+                let movieEnglishName = movieInfo.movieNmEn
+                let movieOpenYear = String(movieInfo.openDt.prefix(4))
                 do {
                     let posterURL1 = try await fetchMoviePosterURL(with: movieEnglishName, year: movieOpenYear)
-                    appendCellData(to: dataList, boxOffice: boxOffice, openDate: result.openDt,
-                                       posterURL: URL(string: posterURL1 ?? ""))
+                    try await appendCellData(
+                        to: dataList,
+                        boxOffice: boxOffice,
+                        movieInfo: movieInfo,
+                        posterURL: URL(string: posterURL1 ?? "")
+                    )
                 } catch {
-                    appendCellData(to: dataList, boxOffice: boxOffice, openDate: result.openDt,
-                                       posterURL: nil)
+                    try await appendCellData(
+                        to: dataList,
+                        boxOffice: boxOffice,
+                        movieInfo: movieInfo,
+                        posterURL: nil
+                    )
                 }
             }
         }
     }
     
-    func requestAllWeekData(with date: String, in dataList: Observable<[MovieCellData]>) async throws {
+    func requestAllWeekData(with date: String, in dataList: Observable<[MovieData]>) async throws {
         dataList.value = []
         let boxOfficeList = try await fetchAllWeekBoxOfficeData(with: date)
         for boxOffice in boxOfficeList {
             Task {
-                guard let result = try await fetchMovieDetailInfo(with: boxOffice.movieCd) else { return }
-                let movieEnglishName = result.movieNmEn
-                let movieOpenYear = String(result.openDt.prefix(4))
+                guard let movieInfo = try await fetchMovieDetailInfo(with: boxOffice.movieCd) else { return }
+                let movieEnglishName = movieInfo.movieNmEn
+                let movieOpenYear = String(movieInfo.openDt.prefix(4))
                 
                 do {
                     let posterURL1 = try await fetchMoviePosterURL(with: movieEnglishName, year: movieOpenYear)
-                    appendCellData(to: dataList, boxOffice: boxOffice, openDate: result.openDt,
-                                   posterURL: URL(string: posterURL1 ?? ""))
+                    try await appendCellData(
+                        to: dataList,
+                        boxOffice: boxOffice,
+                        movieInfo: movieInfo,
+                        posterURL: URL(string: posterURL1 ?? "")
+                    )
                 } catch {
-                    appendCellData(to: dataList, boxOffice: boxOffice, openDate: result.openDt,
-                                   posterURL: nil)
+                    try await appendCellData(
+                        to: dataList,
+                        boxOffice: boxOffice,
+                        movieInfo: movieInfo,
+                        posterURL: nil
+                    )
                 }
             }
         }
     }
     
-    func requestWeekEndData(with date: String, in dataList: Observable<[MovieCellData]>) async throws {
+    func requestWeekEndData(with date: String, in dataList: Observable<[MovieData]>) async throws {
         dataList.value = []
         let boxOfficeList = try await fetchWeekEndBoxOfficeData(with: date)
         for boxOffice in boxOfficeList {
             Task {
-                guard let result = try await fetchMovieDetailInfo(with: boxOffice.movieCd) else { return }
-                let movieEnglishName = result.movieNmEn
-                let movieOpenYear = String(result.openDt.prefix(4))
+                guard let movieInfo = try await fetchMovieDetailInfo(with: boxOffice.movieCd) else { return }
+                let movieEnglishName = movieInfo.movieNmEn
+                let movieOpenYear = String(movieInfo.openDt.prefix(4))
                 
                 do {
                     let posterURL1 = try await fetchMoviePosterURL(with: movieEnglishName, year: movieOpenYear)
-                    appendCellData(to: dataList, boxOffice: boxOffice, openDate: result.openDt,
-                                   posterURL: URL(string: posterURL1 ?? ""))
+                    try await appendCellData(
+                        to: dataList,
+                        boxOffice: boxOffice,
+                        movieInfo: movieInfo,
+                        posterURL: URL(string: posterURL1 ?? "")
+                    )
                 } catch {
-                    appendCellData(to: dataList, boxOffice: boxOffice, openDate: result.openDt,
-                                   posterURL: nil)
+                    try await appendCellData(
+                        to: dataList,
+                        boxOffice: boxOffice,
+                        movieInfo: movieInfo,
+                        posterURL: nil
+                    )
                 }
             }
         }
@@ -117,18 +142,26 @@ private extension MovieAPIUseCase {
         return url
     }
     
-    func appendCellData(to list: Observable<[MovieCellData]>, boxOffice: BoxOffice,
-                        openDate: String,posterURL: URL?) {
+    func appendCellData(to list: Observable<[MovieData]>, boxOffice: BoxOffice,
+                        movieInfo: MovieInfo, posterURL: URL?) async throws {
+        let image = try await imageCacheManager.getImage(with: posterURL)
         list.value.append(
-            MovieCellData(
+            MovieData(
                 uuid: UUID(),
-                posterURL: posterURL ?? nil,
+                poster: image,
                 currentRank: boxOffice.rank,
-                totalAudience: boxOffice.audiAcc,
                 title: boxOffice.movieNm,
-                openDate: openDate,
-                isNewEntry: boxOffice.rankOldAndNew == "NEW",
-                rankChange: boxOffice.rankInten
+                openDate: movieInfo.openDt,
+                totalAudience: boxOffice.audiAcc,
+                rankChange: boxOffice.rankInten,
+                isNewEntry: boxOffice.rankOldAndNew == "New",
+                productionYear: movieInfo.prdtYear,
+                openYear: String(movieInfo.openDt.prefix(4)),
+                showTime: movieInfo.showTm,
+                genreName: movieInfo.genres.count > 0 ? movieInfo.genres[0].genreNm : "",
+                directorName: movieInfo.directors.count > 0 ? movieInfo.directors[0].peopleNm : "",
+                actors: movieInfo.actors.count > 0 ? movieInfo.actors.map { $0.peopleNm } : [] ,
+                ageLimit: movieInfo.audits.count > 0 ? movieInfo.audits[0].watchGradeNm : ""
             )
         )
     }
