@@ -23,6 +23,8 @@ protocol CreateReviewViewModelOutput {
     
     var isValid: AnyPublisher<Bool, Never> { get }
     var rating: AnyPublisher<Double, Never> { get }
+    var errorMessage: AnyPublisher<String?, Never> { get }
+    var isCompleted: AnyPublisher<Bool?, Never> { get }
     
 }
 
@@ -42,6 +44,8 @@ final class DefaultCreateReviewViewModel: CreateReviewViewModel {
     
     private var _isCurrentValid = CurrentValueSubject<Bool, Never>(false)
     private var _currentRating = CurrentValueSubject<Double, Never>(0)
+    private var _errorMessage = CurrentValueSubject<String?, Never>(nil)
+    private var _isCompleted = CurrentValueSubject<Bool?, Never>(nil)
     
     private var _imageData: String = ""
     private var _name: String = ""
@@ -106,7 +110,13 @@ extension DefaultCreateReviewViewModel: CreateReviewViewModelInput {
             review: _review,
             date: Date()
         )
-        firestoreManager.save(review: newReview)
+        do {
+            try firestoreManager.save(review: newReview)
+            _isCompleted.send(true)
+        } catch {
+            debugPrint(error)
+            _errorMessage.send("리뷰를 등록하는 도중 알 수 없는 에러가 발생했습니다.")
+        }
     }
 }
 
@@ -116,6 +126,8 @@ extension DefaultCreateReviewViewModel: CreateReviewViewModelOutput {
     
     var isValid: AnyPublisher<Bool, Never> { return _isCurrentValid.eraseToAnyPublisher() }
     var rating: AnyPublisher<Double, Never> { return _currentRating.eraseToAnyPublisher() }
+    var errorMessage: AnyPublisher<String?, Never> { return _errorMessage.eraseToAnyPublisher() }
+    var isCompleted: AnyPublisher<Bool?, Never> { return _isCompleted.eraseToAnyPublisher() }
     
 }
 

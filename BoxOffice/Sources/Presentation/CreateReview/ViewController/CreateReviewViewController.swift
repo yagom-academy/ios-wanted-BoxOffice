@@ -140,6 +140,21 @@ private extension CreateReviewViewController {
             .sinkOnMainThread(receiveValue: { [weak self] rating in
                 self?.ratingView.setUp(rating: rating)
             }).store(in: &cancellables)
+        
+        viewModel.output.errorMessage
+            .compactMap { $0 }
+            .sinkOnMainThread(receiveValue: { [weak self] message in
+                self?.showAlert(message: message)
+            }).store(in: &cancellables)
+        
+        viewModel.output.isCompleted
+            .compactMap { $0 }
+            .filter { $0 == true }
+            .sinkOnMainThread(receiveValue: { [weak self] _ in
+                self?.dismiss(animated: true) {
+                    self?.coordinator?.finish()
+                }
+            }).store(in: &cancellables)
     }
     
     func setUp() {
