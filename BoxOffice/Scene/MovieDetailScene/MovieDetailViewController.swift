@@ -72,8 +72,22 @@ extension MovieDetailViewController: UITableViewDataSource {
         reviewTableView.rowHeight = view.bounds.height * 0.1
     }
     
+    private func setupInitialTableView() {
+        let emptyLabel = UILabel()
+        emptyLabel.frame = CGRect(x: .zero, y: .zero, width: view.bounds.width, height: view.bounds.height)
+        emptyLabel.text = "작성된 리뷰가 없습니다."
+        emptyLabel.textAlignment = .center
+        reviewTableView.backgroundView = emptyLabel
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let reviewCount = reviewViewModel.reviews.value.count
+        reviewTableView.backgroundView = .none
+        
+        guard reviewCount != 0 else {
+            setupInitialTableView()
+            return 0
+        }
         
         return reviewCount > 3 ? 3 : reviewCount
     }
