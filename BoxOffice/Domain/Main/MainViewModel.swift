@@ -36,10 +36,11 @@ final class MainViewModel: MainViewModelInterface, MainViewModelOutputInterface 
     private var cancelable = Set<AnyCancellable>()
     private let networkHandler: Networkerable?
     private let itemPerPage = "10"
-    private let currentDate = "20230101"
     private var dailyBoxOffice: [DailyBoxOffice] = []
     private var englishMovieName: [String] = []
     private var customBoxOffice: [CustomBoxOffice] = []
+    private var titlesDictionary: [String: String] = [:]
+    private var posterDictionary: [String: String] = [:]
     
     init(networkHandler: Networkerable) {
         self.networkHandler = networkHandler
@@ -47,9 +48,13 @@ final class MainViewModel: MainViewModelInterface, MainViewModelOutputInterface 
     
     private func requestBoxOffice() {
         guard let networkHandler = networkHandler else { return }
+        let dateFormmatter = DateFormatter()
+        dateFormmatter.dateFormat = "YYYYMMDD"
+        guard let date = Calendar.current.date(byAdding: .day, value: -1, to: Date()) else { return }
+        let yesterDay = dateFormmatter.string(from: date)
         
         networkHandler.request(BoxOfficeAPI.dailyBoxOffice(
-            targetDate: currentDate,
+            targetDate: yesterDay,
             itemPerPage: itemPerPage,
             isMultiMovie: "N")
         )
@@ -89,13 +94,16 @@ final class MainViewModel: MainViewModelInterface, MainViewModelOutputInterface 
             } receiveValue: { [weak self] (model: DetailBoxOfficeConnection) in
                 guard let self = self else { return }
                 self.englishMovieName.append(model.result.movieInfo.movieEnglishName)
+                self.titlesDictionary.updateValue(
+                    model.result.movieInfo.movieEnglishName,
+                    forKey: model.result.movieInfo.movieName
+                )
             }
             .store(in: &cancelable)
     }
     
     private func requestPosterURL() {
         guard let networkHandler = networkHandler else { return }
-        var indexpath = 0
         Publishers.Sequence(sequence: self.englishMovieName)
             .flatMap { movieName in
                 return networkHandler.request(
@@ -107,16 +115,32 @@ final class MainViewModel: MainViewModelInterface, MainViewModelOutputInterface 
                 switch completion {
                 case .finished:
                     print("requestPosterURL Complete")
+                    self.configureCustomBoxOffice()
                     self.output.boxOfficePublisher.send(self.customBoxOffice)
                 case .failure(let error):
                     print("requestPosterURL Error: \(error)")
                 }
-            } receiveValue: { [weak self] (poster: MoviePoster)  in
+            } receiveValue: { [weak self] (poster: MoviePoster) in
                 guard let self = self else { return }
-                self.customBoxOffice.append(.init(boxOffice: self.dailyBoxOffice[indexpath], posterURL: poster.poster ?? ""))
-                indexpath += 1
+                self.posterDictionary.updateValue(
+                    poster.poster ?? "https://i.imgur.com/PQQuSIL.png",
+                    forKey: poster.title ?? ""
+                )
             }
             .store(in: &cancelable)
+    }
+
+    private func configureCustomBoxOffice() {
+        dailyBoxOffice.enumerated().forEach { sequence, element in
+            guard let englishName = titlesDictionary[element.title] else { return }
+            let poster = posterDictionary[englishName]
+            
+            customBoxOffice.append(
+                .init(boxOffice: dailyBoxOffice[sequence],
+                      posterURL: poster ?? "https://i.imgur.com/PQQuSIL.png")
+            )
+        }
+
     }
 }
 

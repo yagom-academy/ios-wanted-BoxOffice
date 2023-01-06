@@ -10,7 +10,7 @@ import Combine
 
 final class DetailViewController: UIViewController {
     
-    private let posterImageView: UIImageView = {
+    private lazy var posterImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.backgroundColor = UIColor(r: 76, g: 52, b: 145)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -18,10 +18,19 @@ final class DetailViewController: UIViewController {
         return imageView
     }()
     
-    private let segmentedControl: UISegmentedControl = {
+    private lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl = DetailSegmentControl(items: ["상세 정보", "리뷰"])
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         return segmentedControl
+    }()
+    
+    private lazy var postReViewButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor(r: 76, g: 52, b: 145)
+        button.addTarget(self, action: #selector(touchUpPostReviewButton), for: .touchUpInside)
+        return button
     }()
     
     private lazy var pageViewController: UIPageViewController = {
@@ -80,9 +89,12 @@ final class DetailViewController: UIViewController {
     static func instance(_ viewModel: DetailViewModelInterface, model: CustomBoxOffice) -> DetailViewController {
         let viewController = DetailViewController(nibName: nil, bundle: nil)
         viewController.detailViewModel = viewModel
-        viewController.detailInfoViewController = DetailInfoViewController.instance( DetailInfoViewModel(customBoxOffice: model))
+        viewController.detailInfoViewController = DetailInfoViewController.instance(
+            DetailInfoViewModel(customBoxOffice: model)
+        )
         viewController.reviewListViewController = ReviewListViewController.instance(
-            ReviewListViewModel(detailBoxOffice: model))
+            ReviewListViewModel(detailBoxOffice: model)
+        )
         return viewController
     }
     
@@ -90,7 +102,8 @@ final class DetailViewController: UIViewController {
         view.addSubviews(
             posterImageView,
             segmentedControl,
-            pageViewController.view
+            pageViewController.view,
+            postReViewButton
         )
         
         segmentedControl.setTitleTextAttributes([
@@ -130,7 +143,7 @@ final class DetailViewController: UIViewController {
             segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 5),
             segmentedControl.heightAnchor.constraint(equalToConstant: 50)
         ])
-        
+                
         // MARK: - pageViewController.view
         NSLayoutConstraint.activate([
             pageViewController.view.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor),
@@ -138,6 +151,18 @@ final class DetailViewController: UIViewController {
             pageViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             pageViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        // MARK: - postButton
+        postReViewButton.translatesAutoresizingMaskIntoConstraints = false
+        postReViewButton.layer.cornerRadius = 50 / 2
+        
+        NSLayoutConstraint.activate([
+            postReViewButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            postReViewButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+            postReViewButton.widthAnchor.constraint(equalToConstant: 50),
+            postReViewButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        
     }
     
     private func bind() {
@@ -152,8 +177,15 @@ final class DetailViewController: UIViewController {
             .store(in: &cancelable)
     }
     
-    @objc private func changeValue(control: UISegmentedControl) {
+    @objc
+    private func changeValue(control: UISegmentedControl) {
         currentPage = control.selectedSegmentIndex
+    }
+    
+    @objc
+    private func touchUpPostReviewButton() {
+        // TODO: 리뷰 작성 페이지 띄워주기
+        navigationController?.present(ViewController(), animated: true)
     }
 }
 

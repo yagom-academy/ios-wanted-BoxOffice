@@ -9,8 +9,10 @@ import Foundation
 
 struct MoviePoster: Decodable {
     let poster: String?
+    let title: String?
     
     enum CodingKeys: String, CodingKey {
         case poster = "Poster"
+        case title = "Title"
     }
 }
