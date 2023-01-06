@@ -12,5 +12,6 @@ final class MovieListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.fetchBoxOffice(date: "20220101")
     }
 }

@@ -13,7 +13,7 @@ struct MovieEssentialInfo {
     var movieNm: String?
     var movieNmEn: String?
     var movieCd: String?
-    var openDate: String?// 상세
+    var openDate: String? // 상세
     var showCnt: String?
     var salesChange: String?
     var rankOldAndNew: RankOldAndNew?

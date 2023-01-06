@@ -10,58 +10,81 @@ import Foundation
 final class MovieListViewModel {
     private let apiService = APIService()
     
-    func fetch(date: String, completion: @escaping (([MovieEssentialInfo]) -> Void)) {
-        var movies: [MovieEssentialInfo] = []
-        fetchBoxOffice(date: date) { (boxOffice) in
-            boxOffice.boxOfficeResult.dailyBoxOfficeList.forEach { movie in
-                var boxOfficeInfo = MovieEssentialInfo()
-                boxOfficeInfo.movieNm = movie.movieNm
-                boxOfficeInfo.boxOfficeRank = movie.rank
-                boxOfficeInfo.showCnt = movie.showCnt
-                boxOfficeInfo.salesChange = movie.salesChange
-                boxOfficeInfo.openDate = movie.openDt
-                boxOfficeInfo.movieCd = movie.movieCd
-                movies.append(boxOfficeInfo)
-                if movies.count == 10 {
-                    completion(movies)
+    private var boxOfficeList = Observable([BoxOfficeEntity.BoxOffice.DailyBoxoffice]())
+    private var movieInfoList = Observable([MovieInfoEntity]())
+    private var moviePosterList = Observable([MovieEntity]())
+    
+    var movieEssentialInfoList = Observable([MovieEssentialInfo]())
+    var errorMessage = Observable("")
+    
+    init() {
+        boxOfficeList.subscribe { [weak self] entity in
+            var models = [MovieInfoEntity]()
+            entity.forEach {
+                self?.fetchMovieDetail(movieCd: $0.movieCd) { model in
+                    models.append(model)
+                    guard models.count == entity.count else { return }
+                    self?.movieInfoList.value = models
                 }
             }
         }
-    }
-    
-    private func configureMovieInfo(completion: @escaping (() -> Void)) {
         
+        movieInfoList.subscribe { [weak self] entity in
+            entity.forEach {
+                self?.fetchPoster(title: $0.movieInfoResult.movieInfo.movieNmEn)
+            }
+        }
+        
+        moviePosterList.subscribe { [weak self] entity in
+            self?.configureMovieEssentialInfo()
+        }
+        
+        movieEssentialInfoList.subscribe { movie in
+            print(movie)
+        }
     }
     
-    private func fetchBoxOffice(date: String, completion: @escaping ((BoxOfficeEntity) -> Void)) {
-        self.apiService.fetchBoxOffice(date: date) { result in
+    private func configureMovieEssentialInfo() {
+        let sequenceZip = zip3(boxOfficeList.value,
+                               movieInfoList.value,
+                               moviePosterList.value)
+        let models = sequenceZip.map {
+            MovieEssentialInfo(poster: $0.2.poster,
+                               boxOfficeRank: $0.0.rank,
+                               movieNmEn: $0.1.movieInfoResult.movieInfo.movieNmEn)
+        }
+        movieEssentialInfoList.value = models
+    }
+    
+    func fetchBoxOffice(date: String) {
+        apiService.fetchBoxOffice(date: date) { [weak self] result in
             switch result {
             case .success(let data):
-                completion(data)
+                self?.boxOfficeList.value = data.boxOfficeResult.dailyBoxOfficeList
             case .failure(let error):
-                print(error)
+                self?.errorMessage.value = error.localizedDescription
             }
         }
     }
     
-    private func fetchPoster(title: String, completion: @escaping ((MovieEntity)) -> Void) {
-        self.apiService.fetchPoster(title: title) { result in
+    private func fetchMovieDetail(movieCd: String, completion: @escaping (MovieInfoEntity) -> Void) {
+        apiService.fetchMovieDetail(movieCd: movieCd) { [weak self] result in
             switch result {
             case .success(let data):
                 completion(data)
             case .failure(let error):
-                print(error)
+                self?.errorMessage.value = error.localizedDescription
             }
         }
     }
     
-    private func fetchMovieDetail(movieCd: String, completion: @escaping ((MovieInfoEntity)) -> Void) {
-        self.apiService.fetchMovieDetail(movieCd: movieCd) { result in
+    private func fetchPoster(title: String) {
+        apiService.fetchPoster(title: title) { [weak self] result in
             switch result {
             case .success(let data):
-                completion(data)
+                self?.moviePosterList.value.append(data)
             case .failure(let error):
-                print(error)
+                self?.errorMessage.value = error.localizedDescription
             }
         }
     }

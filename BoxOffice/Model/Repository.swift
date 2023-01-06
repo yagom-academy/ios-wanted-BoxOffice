@@ -46,7 +46,7 @@ final class Repository {
         urlComponent?.queryItems = [
             URLQueryItem(name: "key", value: boxOfficeApiKey),
             URLQueryItem(name: "targetDt", value: date),
-            URLQueryItem(name: "comCode", value: "0105000000")
+            URLQueryItem(name: "wideAreaCd", value: "0105001")
         ]
         
         guard let url = urlComponent?.url else { return }
@@ -66,7 +66,6 @@ final class Repository {
         urlComponent?.queryItems = [
             URLQueryItem(name: "key", value: boxOfficeApiKey),
             URLQueryItem(name: "movieCd", value: movieCd),
-            URLQueryItem(name: "wideAreaCd", value: "0105001")
         ]
         
         guard let url = urlComponent?.url else { return }

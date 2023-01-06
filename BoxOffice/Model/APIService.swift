@@ -9,7 +9,7 @@ import Foundation
 
 final class APIService {
     
-    let repository = Repository()
+    private let repository = Repository()
     
     typealias PosterResult = Result<MovieEntity, Error>
     typealias BoxOfficeResult = Result<BoxOfficeEntity, Error>
