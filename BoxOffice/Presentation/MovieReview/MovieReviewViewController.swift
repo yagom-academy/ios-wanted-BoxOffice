@@ -421,15 +421,20 @@ extension MovieReviewViewController: UIImagePickerControllerDelegate, UINavigati
 extension MovieReviewViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let stringBeforeCurrentInput = textField.text else {
+        guard var stringBeforeCurrentInput = textField.text else {
             return false
         }
-        
+
+        if string.isEmpty {
+            _ = stringBeforeCurrentInput.popLast()
+        }
+
         let passwordInput = stringBeforeCurrentInput + string
         
         if isValid(password: passwordInput) {
             passwordRuleLabel.isHidden = true
         } else {
+            passwordRuleLabel.isHidden = false
             passwordRuleLabel.textColor = .red
         }
         
