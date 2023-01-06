@@ -12,8 +12,8 @@ class SecondCell: UITableViewCell {
         let stackview = UIStackView()
         stackview.axis = .horizontal
         stackview.alignment = .center
-        stackview.distribution = .equalSpacing
-        stackview.spacing = 5
+        stackview.distribution = .fill
+        stackview.spacing = 60
         return stackview
     }()
     
@@ -116,8 +116,9 @@ class SecondCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             rankingattendancestarsStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            rankingattendancestarsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 35),
-            rankingattendancestarsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -35),
+            rankingattendancestarsStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+//            rankingattendancestarsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 35),
+//            rankingattendancestarsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -35),
             rankingattendancestarsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }
