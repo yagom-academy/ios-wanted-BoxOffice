@@ -45,6 +45,12 @@ final class ReviewListViewController: UIViewController,  UICollectionViewDelegat
                 self.applySnapshot(models: comments)
             }
             .store(in: &cancelable)
+        reviewListViewModel.output.averagePublisher.receive(on: DispatchQueue.main)
+            .sink { [weak self] average in
+                let formatedString = String(format: "%.1f", average)
+                self?.averageRateLabel.setStarLabel(formatedString)
+            }
+            .store(in: &cancelable)
     }
     
     private lazy var averageLabel: UILabel = {
