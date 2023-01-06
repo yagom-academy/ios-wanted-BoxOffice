@@ -9,6 +9,22 @@ import UIKit
 
 extension String {
     
+    var isContainsNumber: Bool {
+        return contains { $0.isNumber }
+    }
+    
+    var isContainsLowercase: Bool {
+        return contains { $0.isLowercase }
+    }
+    
+    var isContainsUppercase: Bool {
+        return contains { $0.isUppercase }
+    }
+    
+    var isContainsSpecialCharacters: Bool {
+        return contains { $0 == "!" || $0 == "@" || $0 == "#" || $0 == "$" }
+    }
+    
     func asDate(format: DateFormat = .yyyyMMddHypen) -> Date? {
         let formatter = DateFormatter()
         formatter.dateFormat = format.rawValue

@@ -67,7 +67,7 @@ class DetailViewController: UIViewController {
 
 private extension DetailViewController {
     func bind() {
-        viewModel.$movie
+        viewModel.movieModel
             .sink { [weak self] movieData in
                 guard let self = self else {
                     return
@@ -82,8 +82,7 @@ private extension DetailViewController {
     }
     
     @objc func didTapReviewButton(_ sender: UIButton) {
-        let dummy = Movie(code: "", name: "", openDate: Date())
-        coordinator?.showCreateReviewView(movie: dummy)
+        coordinator?.showCreateReviewView(movie: viewModel.output.movie)
     }
     
     func setUpDeleteButton(_ cell: ReviewCell) {
@@ -122,7 +121,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             
             setUpDeleteButton(cell)
             
-            return UITableViewCell()
+            return cell
         }
     }
 

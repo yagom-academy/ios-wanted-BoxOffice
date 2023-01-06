@@ -15,7 +15,7 @@ final class ProfileImageButton: UIButton {
         return .init(width: size, height: size)
     }
     
-    private lazy var config = UIImage.SymbolConfiguration(pointSize: size)
+    private(set) lazy var config = UIImage.SymbolConfiguration(pointSize: size)
     
     private lazy var editBackgroundView: UIView = {
         let view = UIView()
