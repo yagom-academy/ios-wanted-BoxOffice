@@ -28,12 +28,12 @@ final class CommentAddViewModel: CommentAddViewModelInterface, CommentAddViewMod
     private var commentManger: CommentManagerable
     var errorPublisher = PassthroughSubject<String, Never>()
     var isloadingPublisher = PassthroughSubject<Bool, Never>()
-    private var detailBoxOffice: DetailBoxOffice
+    private var detailBoxOffice: DailyBoxOffice
     private let validateNumber:[Character] = ["0","1","2","3","4","5","6","7","8","9"]
     private let validateEnglish:[Character] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
     private let validateSpecial:[Character] = ["!","@","#","$"]
     
-    init(commentManger: CommentManagerable = CommentManager(), detailBoxOffice: DetailBoxOffice) {
+    init(commentManger: CommentManagerable = CommentManager(), detailBoxOffice: DailyBoxOffice) {
         self.commentManger = commentManger
         self.detailBoxOffice = detailBoxOffice
     }

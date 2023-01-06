@@ -10,10 +10,12 @@ import Combine
 
 protocol DetailViewModelInputInterface: AnyObject {
     func onViewDidLoad()
+    func touchUpPostReviewButton()
 }
 
 protocol DetailViewModelOutputInterface: AnyObject {
     var detailBoxOfficePublisher: PassthroughSubject<CustomBoxOffice, Never> { get }
+    var commentViewPublisher: PassthroughSubject<DailyBoxOffice, Never> { get }
 }
 
 protocol DetailViewModelInterface: AnyObject {
@@ -27,6 +29,7 @@ final class DetailViewModel: DetailViewModelInterface, DetailViewModelOutputInte
     var output: DetailViewModelOutputInterface { self }
     
     var detailBoxOfficePublisher = PassthroughSubject<CustomBoxOffice, Never>()
+    var commentViewPublisher = PassthroughSubject<DailyBoxOffice, Never>()
     private let detailBoxOffice: CustomBoxOffice
     
     init(detailBoxOffice: CustomBoxOffice) {
@@ -37,5 +40,9 @@ final class DetailViewModel: DetailViewModelInterface, DetailViewModelOutputInte
 extension DetailViewModel: DetailViewModelInputInterface {
     func onViewDidLoad() {
         output.detailBoxOfficePublisher.send(detailBoxOffice)
+    }
+    
+    func touchUpPostReviewButton() {
+        output.commentViewPublisher.send(detailBoxOffice.boxOffice)
     }
 }

@@ -175,6 +175,13 @@ final class DetailViewController: UIViewController {
                 self.posterImageView.loadImage(from: model.posterURL)
             }
             .store(in: &cancelable)
+        
+        detailViewModel.output.commentViewPublisher
+            .sink { [weak self] model in
+                guard let self = self else { return }
+                self.navigationController?.present(CommentViewController(viewModel: CommentAddViewModel(detailBoxOffice: model)), animated: true)
+            }
+            .store(in: &cancelable)
     }
     
     @objc
@@ -184,8 +191,7 @@ final class DetailViewController: UIViewController {
     
     @objc
     private func touchUpPostReviewButton() {
-        // TODO: 리뷰 작성 페이지 띄워주기
-        navigationController?.present(ViewController(), animated: true)
+        detailViewModel?.input.touchUpPostReviewButton()
     }
 }
 
