@@ -12,14 +12,14 @@ final class MovieDetailRepository: MovieDetailRepositoryInterface {
     private let firebaseService = FirebaseService.shared
     private let neworkService = NetworkService.shared
 
-    func fetchMovieDetail(movieCode: String, completion: @escaping (Result<MovieDetail, Error>) -> Void) {
+    func fetchMovieDetail(movieCode: String, completion: @escaping (Result<MovieDetail, Error>) -> Void) -> Cancellable? {
         var urlComponents = URLComponents(string: "https://www.kobis.or.kr")
         urlComponents?.path = "/kobisopenapi/webservice/rest/movie/searchMovieInfo"
         urlComponents?.queryItems = [
             .init(name: "key", value: neworkService.koficAPIKey),
             .init(name: "movieCd", value: movieCode)
         ]
-        guard let url = urlComponents?.url else { return }
+        guard let url = urlComponents?.url else { return nil }
         let urlRequest = URLRequest(url: url)
         let task = neworkService.dataTask(request: urlRequest) { result in
             switch result {
@@ -35,7 +35,7 @@ final class MovieDetailRepository: MovieDetailRepositoryInterface {
             }
         }
 
-        task.resume()
+        return task
     }
 
     func fetchMovieReview(movieCode: String, completion: @escaping (Result<[MovieReview], Error>) -> Void) {
@@ -58,34 +58,29 @@ final class MovieDetailRepository: MovieDetailRepositoryInterface {
         }
     }
 
-    func fetchMoviePoster(englishMovieName: String, completion: @escaping (Result<UIImage?, Error>) -> Void) {
-        let dispatchGroup = DispatchGroup()
-        dispatchGroup.enter()
+    func fetchMoviePoster(englishMovieName: String, completion: @escaping (Result<UIImage?, Error>) -> Void) -> Cancellable? {
         var urlString = ""
-        fetchMoviePosterURL(englishMovieName: englishMovieName) { result in
+        let task = fetchMoviePosterURL(englishMovieName: englishMovieName) { result in
             switch result {
             case .success(let result):
                 urlString = result
-            case .failure:
-                break
-            }
-            dispatchGroup.leave()
-        }
+                guard let url = URL(string: urlString) else { return }
 
-        dispatchGroup.notify(queue: DispatchQueue.global()) {
-            guard let url = URL(string: urlString) else { return }
-
-            let task = self.neworkService.dataTask(request: URLRequest(url: url)) { result in
-                switch result {
-                case .success(let data):
-                    completion(.success(UIImage(data: data)))
-                case .failure(let error):
-                    completion(.failure(error))
+                let task = self.neworkService.dataTask(request: URLRequest(url: url)) { result in
+                    switch result {
+                    case .success(let data):
+                        completion(.success(UIImage(data: data)))
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
                 }
+                task?.resume()
+            case .failure:
+                return
             }
-
-            task.resume()
         }
+
+        return task
     }
 
     func fetchReviewImage(imageURL: String, completion: @escaping (Result<UIImage?, Error>) -> Void) -> Cancellable? {
@@ -98,13 +93,13 @@ final class MovieDetailRepository: MovieDetailRepositoryInterface {
 
 // MARK: - Private Functions
 extension MovieDetailRepository {
-    private func fetchMoviePosterURL(englishMovieName: String, completion: @escaping (Result<String, Error>) -> Void) {
+    private func fetchMoviePosterURL(englishMovieName: String, completion: @escaping (Result<String, Error>) -> Void) -> Cancellable? {
         var urlComponents = URLComponents(string: "http://www.omdbapi.com/")
         urlComponents?.queryItems = [
             .init(name: "apikey", value: neworkService.omdbAPIKey),
             .init(name: "t", value: englishMovieName)
         ]
-        guard let url = urlComponents?.url else { return }
+        guard let url = urlComponents?.url else { return nil }
         let urlRequest = URLRequest(url: url)
         let task = neworkService.dataTask(request: urlRequest) { result in
             switch result {
@@ -119,6 +114,6 @@ extension MovieDetailRepository {
                 completion(.failure(error))
             }
         }
-        task.resume()
+        return task
     }
 }
