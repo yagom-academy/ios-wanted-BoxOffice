@@ -18,6 +18,12 @@ final class MovieReviewViewController: UIViewController {
         let imagePicker = UIImagePickerController()
         return imagePicker
     }()
+
+    private let outerScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
     
     private let questionLabel: UILabel = {
         let label = UILabel()
@@ -200,6 +206,8 @@ final class MovieReviewViewController: UIViewController {
         setupLayout()
         configureImagePicker()
         bind()
+    }
+
     init(movieCode: String, viewModel: MovieReviewViewModel) {
         self.movieCode = movieCode
         self.viewModel = viewModel
@@ -285,6 +293,7 @@ final class MovieReviewViewController: UIViewController {
     }
 
     private func addViews() {
+        view.addSubview(outerScrollView)
         [
             questionLabel,
             starButtonsStackView,
@@ -299,7 +308,7 @@ final class MovieReviewViewController: UIViewController {
             passwordTextField,
             passwordRuleLabel,
             actionButtonsStackView,
-        ].forEach( { view.addSubview($0) })
+        ].forEach( { outerScrollView.addSubview($0) })
         
         actionButtonsStackView.addArrangedSubview(cancelButton)
         actionButtonsStackView.addArrangedSubview(registrationButton)
@@ -307,7 +316,12 @@ final class MovieReviewViewController: UIViewController {
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            questionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
+            outerScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            outerScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            outerScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            outerScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+
+            questionLabel.topAnchor.constraint(equalTo: outerScrollView.topAnchor, constant: 80),
             questionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             
             starButtonsStackView.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 16),
@@ -351,7 +365,8 @@ final class MovieReviewViewController: UIViewController {
             passwordRuleLabel.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
             passwordRuleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
 
-            actionButtonsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
+            actionButtonsStackView.topAnchor.constraint(equalTo: passwordRuleLabel.bottomAnchor, constant: 20),
+            actionButtonsStackView.bottomAnchor.constraint(equalTo: outerScrollView.bottomAnchor),
             actionButtonsStackView.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
             actionButtonsStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             actionButtonsStackView.heightAnchor.constraint(equalToConstant: 50),
@@ -376,10 +391,13 @@ extension MovieReviewViewController: UIImagePickerControllerDelegate, UINavigati
         
         let imageView = UIImageView(image: image)
         imageView.layer.cornerRadius = 16
-        imageView.heightAnchor.constraint(equalToConstant: 220).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 180).isActive = true
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 10
+        imageView.backgroundColor = .systemGray6
 
+        photoImageStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
         photoImageStackView.addArrangedSubview(imageView)
         
         dismiss(animated: true)

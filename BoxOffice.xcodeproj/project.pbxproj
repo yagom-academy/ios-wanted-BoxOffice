@@ -270,7 +270,6 @@
 		635A19E628F9603900197BCC /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
-				FDDE307C2967118100B51E07 /* MovieReviewViewController.swift */,
 				635A19E728F9603900197BCC /* AppDelegate.swift */,
 				32BEE0852966017B0095FB30 /* Common */,
 				32645AAC2965BF8000E021B1 /* Presentation */,
@@ -308,6 +307,7 @@
 		FDDE307E296711EF00B51E07 /* MovieReview */ = {
 			isa = PBXGroup;
 			children = (
+				FDDE307C2967118100B51E07 /* MovieReviewViewController.swift */,
 				FDDE307F296722F800B51E07 /* MovieReviewViewModel.swift */,
 			);
 			path = MovieReview;
