@@ -222,6 +222,29 @@ extension MovieDetailViewController {
     }
     
     @objc private func shareButtonTapped() {
-        //TODO: 영화정보 공유하기
+        let shareObject: [String] = convertMovieInfo()
+        let activityViewController = UIActivityViewController(activityItems: shareObject,
+                                                              applicationActivities: nil)
+        
+        present(activityViewController, animated: true)
+    }
+    
+    private func convertMovieInfo() -> [String] {
+        let movieInfo = [movieDetail.title,
+                         movieDetail.openYear + " 개봉",
+                         movieDetail.ageLimit,
+                         movieDetail.currentRank + "위",
+                         movieDetail.directorName,
+                         movieDetail.actors.joined(separator: ","),
+                         movieDetail.genreName,
+                         movieDetail.isNewEntry ? "순위 진입" : "",
+                         movieDetail.openDate,
+                         movieDetail.rankChange + "단계 변동",
+                         movieDetail.showTime + "분"
+        ]
+        
+        return movieInfo
     }
 }
+
+
