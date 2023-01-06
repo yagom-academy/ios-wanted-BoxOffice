@@ -41,12 +41,12 @@ struct MoviePosterResponseDTO: Decodable {
         case response = "Response"
     }
     
-    func posterURLString() -> String {
-        if search.count == 1 {
-            return search[0].poster
+    func posterURLString() -> String? {
+        let posterURL = search[0].poster
+        if posterURL.count < 10 {
+            return nil
         } else {
-            search.filter { $0.poster.count > 10 }
-            return search[0].poster
+            return posterURL
         }
     }
 }

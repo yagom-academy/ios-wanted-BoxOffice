@@ -16,8 +16,8 @@ final class HomeCollectionView: UICollectionView {
     }
     var currentDate = ""
     private var currentViewMode: BoxOfficeMode = .daily
-    private var homeDataSource: UICollectionViewDiffableDataSource<Section, MovieCellData>?
-    private var snapshot = NSDiffableDataSourceSnapshot<Section, MovieCellData>()
+    private var homeDataSource: UICollectionViewDiffableDataSource<Section, MovieData>?
+    private var snapshot = NSDiffableDataSourceSnapshot<Section, MovieData>()
     
     init() {
         super.init(frame: .zero, collectionViewLayout: UICollectionViewLayout())
@@ -114,7 +114,7 @@ final class HomeCollectionView: UICollectionView {
     }
   
     private func configureDataSource<T: UICollectionViewCell>(
-        with cellRegistration: UICollectionView.CellRegistration<T, MovieCellData>
+        with cellRegistration: UICollectionView.CellRegistration<T, MovieData>
     ) {
         let headerRegistration = createHeaderRegistration()
         homeDataSource = createDataSource(with: cellRegistration)
@@ -147,25 +147,25 @@ final class HomeCollectionView: UICollectionView {
         return headerRegistration
     }
     
-    private func createDailyCellRegistration() -> UICollectionView.CellRegistration<ListCell, MovieCellData> {
-        let cellRegistration = UICollectionView.CellRegistration<ListCell, MovieCellData> { (cell, _, item) in
+    private func createDailyCellRegistration() -> UICollectionView.CellRegistration<ListCell, MovieData> {
+        let cellRegistration = UICollectionView.CellRegistration<ListCell, MovieData> { (cell, _, item) in
             cell.setup(with: item)
         }
         return cellRegistration
     }
     
-    private func createWeeklyCellRegistration() -> UICollectionView.CellRegistration<GridCell, MovieCellData> {
-        let cellRegistration = UICollectionView.CellRegistration<GridCell, MovieCellData> { (cell, _, item) in
+    private func createWeeklyCellRegistration() -> UICollectionView.CellRegistration<GridCell, MovieData> {
+        let cellRegistration = UICollectionView.CellRegistration<GridCell, MovieData> { (cell, _, item) in
             cell.setup(with: item)
         }
         return cellRegistration
     }
     
     private func createDataSource<T: UICollectionViewCell>(
-        with cellRegistration: UICollectionView.CellRegistration<T, MovieCellData>
-    ) -> UICollectionViewDiffableDataSource<Section, MovieCellData>? {
-        let dataSource = UICollectionViewDiffableDataSource<Section, MovieCellData>(collectionView: self) {
-            (collectionView: UICollectionView, indexPath: IndexPath, itemIdentifier: MovieCellData) -> UICollectionViewCell? in
+        with cellRegistration: UICollectionView.CellRegistration<T, MovieData>
+    ) -> UICollectionViewDiffableDataSource<Section, MovieData>? {
+        let dataSource = UICollectionViewDiffableDataSource<Section, MovieData>(collectionView: self) {
+            (collectionView: UICollectionView, indexPath: IndexPath, itemIdentifier: MovieData) -> UICollectionViewCell? in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
         }
         return dataSource
@@ -179,25 +179,22 @@ final class HomeCollectionView: UICollectionView {
         }
     }
     
-    func appendDailySnapshot(with cellDatas: [MovieCellData]) {
-        snapshot.deleteAllItems() 
-        snapshot.appendSections([.main])
+    func appendDailySnapshot(with cellDatas: [MovieData]) {
+        guard cellDatas.count > 0 else { return }
         snapshot.appendItems(cellDatas)
-        homeDataSource?.apply(snapshot, animatingDifferences: false)
+        homeDataSource?.apply(snapshot, animatingDifferences: true)
     }
     
-    func appendAllWeekSnapshot(data: [MovieCellData]) {
-        snapshot.deleteSections([.allWeek])
-        snapshot.appendSections([.allWeek])
+    func appendAllWeekSnapshot(data: [MovieData]) {
+        guard data.count > 0 else { return }
         snapshot.appendItems(data, toSection: .allWeek)
-        homeDataSource?.apply(snapshot, animatingDifferences: false)
+        homeDataSource?.apply(snapshot, animatingDifferences: true)
     }
     
-    func appendWeekEndSnapshot(data: [MovieCellData]) {
-        snapshot.deleteSections([.weekEnd])
-        snapshot.appendSections([.weekEnd])
+    func appendWeekEndSnapshot(data: [MovieData]) {
+        guard data.count > 0 else { return }
         snapshot.appendItems(data, toSection: .weekEnd)
-        homeDataSource?.apply(snapshot, animatingDifferences: false)
+        homeDataSource?.apply(snapshot, animatingDifferences: true)
     }
     
     func switchMode(_ mode: BoxOfficeMode){

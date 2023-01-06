@@ -34,6 +34,9 @@ final class HomeViewController: UIViewController {
         setupCollectionView()
         setupButton()
         setupViewModel()
+        Task {
+            try await requestInitialData()
+        }
     }
     
     private func setupInitialView() {
@@ -79,7 +82,6 @@ final class HomeViewController: UIViewController {
             }
             DispatchQueue.main.async {
                 self.homeCollectionView.appendDailySnapshot(with: rankSortedCellDatas)
-                self.homeCollectionView.reloadData()
             }
         }
         homeViewModel.allWeekMovieCellDatas.bind { cellDatas in
@@ -89,7 +91,6 @@ final class HomeViewController: UIViewController {
             }
             DispatchQueue.main.async {
                 self.homeCollectionView.appendAllWeekSnapshot(data: rankSortedCellDatas)
-                self.homeCollectionView.reloadData()
             }
         }
         homeViewModel.weekEndMovieCellDatas.bind { cellDatas in
@@ -99,12 +100,14 @@ final class HomeViewController: UIViewController {
             }
             DispatchQueue.main.async {
                 self.homeCollectionView.appendWeekEndSnapshot(data: rankSortedCellDatas)
-                self.homeCollectionView.reloadData()
             }
         }
         
         homeCollectionView.currentDate = searchingDate.toString()
-        homeViewModel.requestDailyData(with: searchingDate.toString())
+    }
+    
+    private func requestInitialData() async throws {
+        try await homeViewModel.requestDailyData(with: searchingDate.toString())
     }
     
     @objc private func viewModeChangeButtonTapped() {
@@ -148,30 +151,41 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: ModalView Delegate
 extension HomeViewController: ModeSelectViewControllerDelegate {
-    func didSelectedRowAt(indexPath: Int) {
+    func didSelectedRowAt(indexPath: Int) async throws {
         let mode = BoxOfficeMode.allCases[indexPath]
         viewModeChangeButton.setTitle("▼ \(mode.rawValue)", for: .normal)
+        let dateText = searchingDate.toString()
         if mode == .daily {
             self.homeCollectionView.switchMode(.daily)
-            homeViewModel.requestDailyData(with: searchingDate.toString())
+            try await homeViewModel.requestDailyData(with: dateText)
         } else {
             self.homeCollectionView.switchMode(.weekly)
-            homeViewModel.requestAllWeekData(with: searchingDate.toString())
-            homeViewModel.requestWeekEndData(with: searchingDate.toString())
+            Task {
+                try await homeViewModel.requestAllWeekData(with: dateText)
+            }
+            Task {
+                try await homeViewModel.requestWeekEndData(with: dateText)
+            }
         }
     }
 }
 
 extension HomeViewController: CalendarViewControllerDelegate {
-    func searchButtonTapped(date: Date) {
+    func searchButtonTapped(date: Date) async throws {
         searchingDate = date
         let dateText = date.toString()
         homeCollectionView.currentDate = dateText
         if viewModeChangeButton.title(for: .normal) == "▼ 일별 박스오피스" {
-            homeViewModel.requestDailyData(with: dateText)
+            self.homeCollectionView.switchMode(.daily)
+            try await homeViewModel.requestDailyData(with: dateText)
         } else {
-            homeViewModel.requestAllWeekData(with: dateText)
-            homeViewModel.requestWeekEndData(with: dateText)
+            self.homeCollectionView.switchMode(.weekly)
+            Task {
+                try await homeViewModel.requestAllWeekData(with: dateText)
+            }
+            Task {
+                try await homeViewModel.requestWeekEndData(with: dateText)
+            }
         }
     }
 }
