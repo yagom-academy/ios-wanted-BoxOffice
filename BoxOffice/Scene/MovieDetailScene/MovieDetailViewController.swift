@@ -98,11 +98,6 @@ class MovieDetailViewController: UIViewController {
         reviewViewModel.fetch()
     }
     
-    private func setupNavigationItem() {
-        //TODO: 넘겨받은 영화 제목으로 설정
-        navigationItem.title = testMovie.title
-    }
-    
     private func bind() {
         reviewViewModel.reviews.bind { [weak self] _ in
             DispatchQueue.main.async {
@@ -182,5 +177,23 @@ extension MovieDetailViewController {
             reviewStackView.trailingAnchor.constraint(equalTo: entireStackView.trailingAnchor,
                                                       constant: -16),
         ])
+    }
+}
+
+//MARK: Setup NavigationItem
+extension MovieDetailViewController {
+    private func setupNavigationItem() {
+        let shareBarButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"),
+                                             style: .plain,
+                                             target: self,
+                                             action: #selector(shareButtonTapped))
+        
+        navigationItem.rightBarButtonItem = shareBarButton
+        //TODO: 넘겨받은 영화 제목으로 설정
+        navigationItem.title = testMovie.title
+    }
+    
+    @objc private func shareButtonTapped() {
+        //TODO: 영화정보 공유하기
     }
 }
