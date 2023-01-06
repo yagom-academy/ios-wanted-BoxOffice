@@ -42,7 +42,6 @@ class MovieDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadReview()
-        setupTableView()
     }
     
     override func viewDidLoad() {
@@ -100,7 +99,9 @@ extension MovieDetailViewController: UITableViewDataSource {
                                                        for: indexPath) as? ReviewTableViewCell else { return UITableViewCell() }
         let review = reviewViewModel.reviews.value[indexPath.row]
         cell.configure(with: review)
-        
+        cell.addTargetDeleteButton(with: self,
+                                   selector: #selector(reviewDeleteButtonTapped),
+                                   tag: indexPath.row)
         return cell
     }
 }
@@ -112,6 +113,7 @@ extension MovieDetailViewController {
         movieSubInfoView.configure(with: movieDetail)
 
         addSubView()
+        setupTableView()
         setupConstraint()
         addTagetButton()
         view.backgroundColor = .systemBackground
@@ -162,10 +164,32 @@ extension MovieDetailViewController {
     }
     
     @objc private func moreReviewButtonTapped() {
-        let reviewListViewController = ReviewListViewController(movieTitle: movieDetail.title,
+        let reviewListViewController = ReviewListViewController(movie: movieDetail,
                                                                  viewModel: reviewViewModel)
         navigationController?.pushViewController(reviewListViewController,
                                                  animated: true)
+    }
+    
+    @objc func reviewDeleteButtonTapped(button: UIButton) {
+        let review = reviewViewModel.reviews.value[button.tag]
+        
+        let checkPasswordAlert = UIAlertController(title: "리뷰 삭제",
+                                                   message: "암호를 입력해주세요.",
+                                                   preferredStyle: .alert)
+        checkPasswordAlert.addTextField()
+        
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { [self] _ in
+            let inputPassword = checkPasswordAlert.textFields?.first?.text
+            if inputPassword == review.password {
+                reviewViewModel.delete(review,
+                                       at: movieDetail.title + movieDetail.openYear)
+            }
+        }
+        
+        checkPasswordAlert.addAction(confirmAction)
+        checkPasswordAlert.addAction(UIAlertAction(title: "취소",
+                                                   style: .cancel))
+        present(checkPasswordAlert, animated: true)
     }
 }
 

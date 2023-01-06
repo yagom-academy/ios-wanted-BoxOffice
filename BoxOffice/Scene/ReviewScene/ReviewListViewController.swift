@@ -9,7 +9,7 @@ import UIKit
 
 class ReviewListViewController: UIViewController {
     private let reviewViewModel: MovieReviewViewModel
-    private let movieTitle: String
+    private let movie: MovieData
     private let reviewTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -18,9 +18,9 @@ class ReviewListViewController: UIViewController {
         return tableView
     }()
     
-    init(movieTitle: String, viewModel: MovieReviewViewModel) {
+    init(movie: MovieData, viewModel: MovieReviewViewModel) {
         self.reviewViewModel = viewModel
-        self.movieTitle = movieTitle
+        self.movie = movie
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -32,10 +32,11 @@ class ReviewListViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupView()
+        bind()
     }
     
     private func setupView() {
-        navigationItem.title = movieTitle
+        navigationItem.title = movie.title
         view.backgroundColor = .systemBackground
         view.addSubview(reviewTableView)
         
@@ -45,6 +46,14 @@ class ReviewListViewController: UIViewController {
             reviewTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             reviewTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
+    }
+    
+    private func bind() {
+        reviewViewModel.reviews.bind { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.reviewTableView.reloadData()
+            }
+        }
     }
 }
 
@@ -65,7 +74,32 @@ extension ReviewListViewController: UITableViewDataSource {
                                                        for: indexPath) as? ReviewTableViewCell else { return UITableViewCell() }
         let review = reviewViewModel.reviews.value[indexPath.row]
         cell.configure(with: review)
+        cell.addTargetDeleteButton(with: self,
+                                   selector: #selector(reviewDeleteButtonTapped),
+                                   tag: indexPath.row)
         
         return cell
+    }
+    
+    @objc private func reviewDeleteButtonTapped(button: UIButton) {
+        let review = reviewViewModel.reviews.value[button.tag]
+        
+        let checkPasswordAlert = UIAlertController(title: "리뷰 삭제",
+                                                   message: "암호를 입력해주세요.",
+                                                   preferredStyle: .alert)
+        checkPasswordAlert.addTextField()
+        
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { [self] _ in
+            let inputPassword = checkPasswordAlert.textFields?.first?.text
+            if inputPassword == review.password {
+                reviewViewModel.delete(review,
+                                       at: movie.title + movie.openYear)
+            }
+        }
+        
+        checkPasswordAlert.addAction(confirmAction)
+        checkPasswordAlert.addAction(UIAlertAction(title: "취소",
+                                                   style: .cancel))
+        present(checkPasswordAlert, animated: true)
     }
 }

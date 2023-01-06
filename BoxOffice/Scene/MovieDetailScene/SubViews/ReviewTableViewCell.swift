@@ -88,10 +88,11 @@ class ReviewTableViewCell: UITableViewCell {
         ratingLabel.text = review.rating
     }
     
-    func addTargetDeleteButton(with target: UIViewController, selector: Selector) {
+    func addTargetDeleteButton(with target: UIViewController, selector: Selector, tag: Int) {
         deleteButton.addTarget(target,
                                action: selector,
                                for: .touchUpInside)
+        deleteButton.tag = tag
     }
     
     private func setupView() {
