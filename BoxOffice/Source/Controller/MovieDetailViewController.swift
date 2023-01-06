@@ -16,7 +16,7 @@ class MovieDetailViewController: UIViewController {
             self.movieDetailView.reviewTableView.reloadData()
         }
     }
-    
+
     // MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,7 +89,7 @@ class MovieDetailViewController: UIViewController {
             self.setStarScoreAverage()
         }
     }
-
+    
     private func setStarScoreAverage() {
         var sumStar = 0.0
         var count = 0.0
@@ -104,7 +104,8 @@ class MovieDetailViewController: UIViewController {
         if sumStar == 0.0 {
             movieDetailView.starAverageLabel.text = "없음"
         } else {
-            movieDetailView.starAverageLabel.text = String(sumStar / count)
+            let averageScore = sumStar / count
+            movieDetailView.starAverageLabel.text = String(format: "%.1f", averageScore)
         }
     }
     
@@ -121,7 +122,7 @@ class MovieDetailViewController: UIViewController {
         }
         
         var color = UIColor.green
-
+        
         switch age {
         case "12":
             color = UIColor.yellow
@@ -142,7 +143,7 @@ class MovieDetailViewController: UIViewController {
             )
             return
         }
-
+        
         if let cachedImage = ImageCacheManager.shared.getCachedImage(
             url: NSString(string: posterURL)
         ) {
@@ -193,6 +194,42 @@ class MovieDetailViewController: UIViewController {
             }
         }
     }
+
+    private func getLoginModel(index: Int) -> LoginModel {
+        let data = FirebaseManager.shared.reviews[index]
+        let model = LoginModel(
+            image: data["image"] as? String ?? "",
+            nickname: data["nickname"] as? String ?? "",
+            password: data["password"] as? String ?? "",
+            star: data["star"] as? Int ?? 1,
+            content: data["content"] as? String ?? ""
+        )
+        return model
+    }
+    
+    private func deleteReview(movieName: String, inputPassword: String, model: LoginModel) {
+        if inputPassword == model.password {
+            FirebaseManager.shared.delete(
+                movieName: movieName,
+                nickname: model.nickname
+            )
+
+            FirebaseManager.shared.fetch(movieName: movieName) { [weak self] _ in
+                self?.cellCount = FirebaseManager.shared.reviews.count
+                
+                let alert = UIAlertController(title: "성공", message: "리뷰가 삭제되었습니다.", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(ok)
+                self?.present(alert, animated: true, completion: nil)
+            }
+        } else {
+            let alert = UIAlertController(title: "실패", message: "비밀번호가 다릅니다.", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "확인", style: .default)
+            alert.addAction(ok)
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
     
     // MARK: objc function
     @objc private func didTapShareButton() {
@@ -219,7 +256,7 @@ class MovieDetailViewController: UIViewController {
             return
         }
         sendDataDelegate?.sendData(movieName)
-
+        
         navigationController?.pushViewController(
             loginViewController,
             animated: true
@@ -251,19 +288,46 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate 
         ) as? ReviewTableViewCell else {
             return UITableViewCell()
         }
-        
-        let data = FirebaseManager.shared.reviews[indexPath.row]
-        let model = LoginModel(
-            image: data["image"] as? String ?? "",
-            nickname: data["nickname"] as? String ?? "",
-            password: data["password"] as? String ?? "",
-            star: data["star"] as? Int ?? 1,
-            content: data["content"] as? String ?? ""
-        )
 
+        let model = getLoginModel(index: indexPath.row)
         cell.setupReviewLabelText(model: model)
         cell.selectionStyle = .none
+        cell.deleteButton.addAction(UIAction(handler: { [weak self] _ in
+            var password = ""
+            let alert = UIAlertController(
+                title: "비밀번호를 입력해주세요.",
+                message: "리뷰를 삭제하려면 비밀번호가 필요합니다.",
+                preferredStyle: .alert
+            )
 
+            let cancel = UIAlertAction(title: "cancel", style: .cancel) { _ in
+                
+                return
+            }
+
+            let ok = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+                
+                self?.dismiss(animated: true)
+
+                guard let movieName = self?.detailViewContent?.boxOfficeInfo.movieNm else {
+                    return
+                }
+                
+                password = alert.textFields?.first?.text ?? ""
+                self?.deleteReview(
+                    movieName: movieName,
+                    inputPassword: password,
+                    model: model
+                )
+            }
+            
+            alert.addTextField()
+            alert.addAction(cancel)
+            alert.addAction(ok)
+            
+            self?.present(alert, animated: true, completion: nil)
+        }), for: .touchUpInside)
+        
         return cell
     }
 }

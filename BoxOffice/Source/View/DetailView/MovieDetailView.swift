@@ -266,7 +266,7 @@ class MovieDetailView: UIView {
     
     let reviewTableView: UITableView = {
         let tableView = UITableView()
-        tableView.rowHeight = 100
+        tableView.rowHeight = 150
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()

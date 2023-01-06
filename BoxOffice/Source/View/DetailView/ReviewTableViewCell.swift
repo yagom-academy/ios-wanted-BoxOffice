@@ -48,6 +48,14 @@ class ReviewTableViewCell: UITableViewCell {
         return stackView
     }()
     
+    let deleteButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("삭제", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     let userInfoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .fill
@@ -64,6 +72,16 @@ class ReviewTableViewCell: UITableViewCell {
         stackView.distribution = .fill
         stackView.axis = .vertical
         stackView.spacing = 10
+        stackView.layer.borderWidth = 1
+        stackView.layer.borderColor = UIColor.lightGray.cgColor
+        stackView.layer.cornerRadius = 10
+        stackView.directionalLayoutMargins =  NSDirectionalEdgeInsets(
+            top: 20,
+            leading: 20,
+            bottom: 10,
+            trailing: 0
+        )
+        stackView.isLayoutMarginsRelativeArrangement = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -80,35 +98,41 @@ class ReviewTableViewCell: UITableViewCell {
 
     // MARK: private function
     private func configureUI() {
-        addSubview(reviewTotalStackView)
+        self.contentView.addSubview(reviewTotalStackView)
         reviewTotalStackView.addArrangedSubview(userInfoStackView)
         reviewTotalStackView.addArrangedSubview(contentLabel)
-        
+
         userInfoStackView.addArrangedSubview(userImageView)
         userInfoStackView.addArrangedSubview(nameAndStarStackView)
-        
+        userInfoStackView.addArrangedSubview(deleteButton)
+
         nameAndStarStackView.addArrangedSubview(userNicknameLabel)
         nameAndStarStackView.addArrangedSubview(starScoreLabel)
 
         NSLayoutConstraint.activate([
             reviewTotalStackView.topAnchor.constraint(
                 equalTo: contentView.safeAreaLayoutGuide.topAnchor,
-                constant: 10
+                constant: 5
             ),
             reviewTotalStackView.trailingAnchor.constraint(
                 equalTo: contentView.safeAreaLayoutGuide.trailingAnchor,
-                constant: -10
+                constant: -5
             ),
             reviewTotalStackView.bottomAnchor.constraint(
                 equalTo: contentView.safeAreaLayoutGuide.bottomAnchor,
-                constant: -10
+                constant: -5
             ),
             reviewTotalStackView.leadingAnchor.constraint(
                 equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,
-                constant: 10
+                constant: 5
             ),
             
-            userImageView.widthAnchor.constraint(equalToConstant: 50)
+            userImageView.widthAnchor.constraint(equalToConstant: 50),
+
+            nameAndStarStackView.widthAnchor.constraint(
+                equalTo: userInfoStackView.widthAnchor,
+                multiplier: 0.67
+            )
         ])
     }
     
