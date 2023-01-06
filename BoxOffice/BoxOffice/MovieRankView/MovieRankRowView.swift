@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct MovieRankRowView: View {
-    var movie: BoxOfficeMovie
-    @Binding var poster: UIImage
+    @ObservedObject var viewModel: MovieRankViewModel
+    let movie: BoxOfficeMovie
 
     var body: some View {
         ZStack(alignment: .bottom) {
             GeometryReader { geometry in
-                Image(uiImage: poster)
+                Image(uiImage:  viewModel.posters[(Int(movie.rank) ?? 0) - 1])
                     .resizable(resizingMode: .stretch)
                     .aspectRatio(contentMode: .fill)
                     .clipped()
@@ -61,11 +61,11 @@ struct MovieRankRowView: View {
                 .foregroundColor(Color.black)
                 .opacity(0.6)
                 .blur(radius: 2.5))
-
         }
         .frame(height: 300)
         .cornerRadius(10)
         .shadow(radius: 20)
         .padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
+
     }
 }

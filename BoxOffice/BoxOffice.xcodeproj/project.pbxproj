@@ -18,7 +18,6 @@
 		8F3FA0D82965C90C0015B7E3 /* OMDbPosterAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3FA0D72965C90C0015B7E3 /* OMDbPosterAPIRequest.swift */; };
 		8F3FA0DD2965C9EF0015B7E3 /*  PosterResultResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3FA0DC2965C9EF0015B7E3 /*  PosterResultResponse.swift */; };
 		8F3FA0E12966A4450015B7E3 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3FA0E02966A4450015B7E3 /* ImageCacheManager.swift */; };
-		8F3FA0E82967B3C10015B7E3 /* UIImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3FA0E72967B3C10015B7E3 /* UIImageView + Extension.swift */; };
 		8FC531B4296269C100DBDAA1 /* BoxOfficeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC531B3296269C100DBDAA1 /* BoxOfficeApp.swift */; };
 		8FC531B6296269C100DBDAA1 /* MovieRankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC531B5296269C100DBDAA1 /* MovieRankView.swift */; };
 		8FC531B8296269C200DBDAA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FC531B7296269C200DBDAA1 /* Assets.xcassets */; };
@@ -37,7 +36,6 @@
 		C46A926F2962CF1C00B412C5 /* KobisAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46A926E2962CF1C00B412C5 /* KobisAPIRequest.swift */; };
 		C46A92712962D07000B412C5 /* KobisDailyBoxOfficeAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46A92702962D07000B412C5 /* KobisDailyBoxOfficeAPIRequest.swift */; };
 		C46A92732962D12100B412C5 /* KobisWeeklyBoxOfficeAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46A92722962D12100B412C5 /* KobisWeeklyBoxOfficeAPIRequest.swift */; };
-		C46A92762962D2A300B412C5 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46A92752962D2A300B412C5 /* Data+Extension.swift */; };
 		C46A92782962D4AC00B412C5 /* DailyBoxOfficeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46A92772962D4AC00B412C5 /* DailyBoxOfficeResult.swift */; };
 		C46A927B29630F1E00B412C5 /* DailyBoxOfficeResultMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = C46A92792962FE5A00B412C5 /* DailyBoxOfficeResultMockData.json */; };
 		C46A927D2963142900B412C5 /* MockSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46A927C2963142800B412C5 /* MockSession.swift */; };
@@ -68,7 +66,6 @@
 		8F3FA0D72965C90C0015B7E3 /* OMDbPosterAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMDbPosterAPIRequest.swift; sourceTree = "<group>"; };
 		8F3FA0DC2965C9EF0015B7E3 /*  PosterResultResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " PosterResultResponse.swift"; sourceTree = "<group>"; };
 		8F3FA0E02966A4450015B7E3 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
-		8F3FA0E72967B3C10015B7E3 /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
 		8FC531B0296269C100DBDAA1 /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FC531B3296269C100DBDAA1 /* BoxOfficeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeApp.swift; sourceTree = "<group>"; };
 		8FC531B5296269C100DBDAA1 /* MovieRankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRankView.swift; sourceTree = "<group>"; };
@@ -89,7 +86,6 @@
 		C46A926E2962CF1C00B412C5 /* KobisAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisAPIRequest.swift; sourceTree = "<group>"; };
 		C46A92702962D07000B412C5 /* KobisDailyBoxOfficeAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisDailyBoxOfficeAPIRequest.swift; sourceTree = "<group>"; };
 		C46A92722962D12100B412C5 /* KobisWeeklyBoxOfficeAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisWeeklyBoxOfficeAPIRequest.swift; sourceTree = "<group>"; };
-		C46A92752962D2A300B412C5 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		C46A92772962D4AC00B412C5 /* DailyBoxOfficeResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeResult.swift; sourceTree = "<group>"; };
 		C46A92792962FE5A00B412C5 /* DailyBoxOfficeResultMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DailyBoxOfficeResultMockData.json; sourceTree = "<group>"; };
 		C46A927C2963142800B412C5 /* MockSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSession.swift; sourceTree = "<group>"; };
@@ -289,10 +285,8 @@
 		C46A92742962D29400B412C5 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				C46A92752962D2A300B412C5 /* Data+Extension.swift */,
 				C46A927E29634D9200B412C5 /* Date+Extension.swift */,
 				8F3FA0D029654F730015B7E3 /* String + Extension.swift */,
-				8F3FA0E72967B3C10015B7E3 /* UIImageView + Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -409,14 +403,12 @@
 				C46A92662962C35200B412C5 /* URLSessionProtocol.swift in Sources */,
 				8F3FA0DD2965C9EF0015B7E3 /*  PosterResultResponse.swift in Sources */,
 				C46A92782962D4AC00B412C5 /* DailyBoxOfficeResult.swift in Sources */,
-				C46A92762962D2A300B412C5 /* Data+Extension.swift in Sources */,
 				C46A92712962D07000B412C5 /* KobisDailyBoxOfficeAPIRequest.swift in Sources */,
 				8F3FA0D129654F730015B7E3 /* String + Extension.swift in Sources */,
 				C46A92602962BE3E00B412C5 /* HTTPMehtod.swift in Sources */,
 				C46A92732962D12100B412C5 /* KobisWeeklyBoxOfficeAPIRequest.swift in Sources */,
 				8FC531B6296269C100DBDAA1 /* MovieRankView.swift in Sources */,
 				C46A925A2962BD8E00B412C5 /* URLHost.swift in Sources */,
-				8F3FA0E82967B3C10015B7E3 /* UIImageView + Extension.swift in Sources */,
 				C46A92832963533700B412C5 /* KobisMovieDetailAPIRequest.swift in Sources */,
 				C46A926F2962CF1C00B412C5 /* KobisAPIRequest.swift in Sources */,
 				8F3FA0E12966A4450015B7E3 /* ImageCacheManager.swift in Sources */,

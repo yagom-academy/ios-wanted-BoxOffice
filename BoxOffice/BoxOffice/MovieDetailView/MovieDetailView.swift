@@ -9,10 +9,10 @@ import SwiftUI
 
 struct MovieDetailView: View {
     @Environment(\.presentationMode) var presentationMode
+    var boxOfficeMovie: BoxOfficeMovie
     @State var isPresented = false
     @ObservedObject var viewModel = MovieDetailViewModel()
-    @Binding var poster: UIImage
-    var boxOfficeMovie: BoxOfficeMovie
+    @ObservedObject var rankViewModel: MovieRankViewModel
 
     var body: some View {
         List {
@@ -34,7 +34,7 @@ struct MovieDetailView: View {
                 }
 
                 Button(action: {
-                    let sharePoster = poster
+                    let sharePoster =  rankViewModel.posters[(Int(boxOfficeMovie.rank) ?? 0) - 1]
                     let shareInformation = """
                                             영화명: \(boxOfficeMovie.movieName)
                                             박스오피스 순위: \(boxOfficeMovie.rank)
@@ -66,7 +66,7 @@ struct MovieDetailView: View {
                 })
             }) {
                 VStack(alignment: .leading) {
-                    Image(uiImage: poster)
+                    Image(uiImage: rankViewModel.posters[(Int(boxOfficeMovie.rank) ?? 0) - 1])
                         .resizable()
                         .aspectRatio(1.4, contentMode: .fit)
                         .padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 0))

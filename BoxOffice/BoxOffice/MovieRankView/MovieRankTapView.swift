@@ -22,17 +22,26 @@ struct MovieRankTapView: View {
             TabView(selection: $selection) {
                 MovieRankView()
                     .tabItem {
-                        Text("일간")
+                        VStack {
+                            Image(uiImage: UIImage(systemName: "sun.min") ?? UIImage())
+                            Text("일간")
+                        }
                     }
                     .tag(Tab.daily)
                 MovieRankView()
                     .tabItem {
-                        Text("주간")
+                        VStack {
+                            Image(uiImage: UIImage(systemName: "desktopcomputer") ?? UIImage())
+                            Text("주간")
+                        }
                     }
                     .tag(Tab.weekly)
                 MovieRankView()
                     .tabItem {
-                        Text("주말")
+                        VStack {
+                            Image(uiImage: UIImage(systemName: "person.3") ?? UIImage())
+                            Text("주말")
+                        }
                     }
                     .tag(Tab.weekend)
             }

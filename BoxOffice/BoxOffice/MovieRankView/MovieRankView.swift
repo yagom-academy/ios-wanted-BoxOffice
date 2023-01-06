@@ -8,33 +8,21 @@
 import SwiftUI
 
 struct MovieRankView: View {
-
-    enum Rank {
-
-    }
-    @ObservedObject var viewModel = MovieRankViewModel()
-    @State var posters: [UIImage] = []
-    @State var noImage: UIImage = (UIImage(systemName: "x.circle") ?? UIImage())
+    @StateObject var viewModel = MovieRankViewModel()
 
     var body: some View {
         Group {
             List(viewModel.boxOfficeList, id: \.rank) { movie in
-                NavigationLink(destination:
-                                MovieDetailView(poster: posters.count <= Int(movie.rank) ?? 0 - 1 ? $noImage : $posters[Int(movie.rank) ?? 0 - 1], boxOfficeMovie: movie)) {
-                    MovieRankRowView(movie: movie, poster: posters.count <= Int(movie.rank) ?? 0 - 1 ? $noImage : $posters[Int(movie.rank) ?? 0 - 1])
+                NavigationLink(destination: MovieDetailView(boxOfficeMovie: movie, rankViewModel: viewModel)) {
+                    MovieRankRowView(viewModel: viewModel, movie: movie)
                 }
             }
             .listStyle(.plain)
         }
         .onAppear {
-                viewModel.fetchPoster() { result in
-                    switch result {
-                    case .success(let data):
-                        posters.append(UIImage(data: data) ?? UIImage())
-                    case .failure(let failure):
-                        print(failure.localizedDescription)
-                    }
-                }
+            DispatchQueue.main.async {
+                viewModel.fetchMovie()
+            }
         }
     }
 }

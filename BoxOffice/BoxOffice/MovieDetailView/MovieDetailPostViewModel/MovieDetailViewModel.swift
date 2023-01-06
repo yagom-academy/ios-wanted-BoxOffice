@@ -17,8 +17,7 @@ final class MovieDetailViewModel: ObservableObject {
                                                                 genres: [],
                                                                 audits: [], movieEnglishName: "",
                                                                 movieKoreaName: "")
-
-private let session = MyURLSession()
+    private let session = MyURLSession()
 
     func fetchMovieDetail(movieCode: String) {
         let request = KobisMovieDetailAPIRequest(movieCode: movieCode)
@@ -34,5 +33,4 @@ private let session = MyURLSession()
             }
         }
     }
-
 }

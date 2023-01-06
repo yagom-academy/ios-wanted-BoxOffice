@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum BoxOfficeItemPerPage: String {
+    case constant = "10"
+}
+
 protocol KobisAPIRequest: APIRequest { }
 
 extension KobisAPIRequest {
@@ -22,7 +26,8 @@ extension KobisAPIRequest {
         [
             "key": "019dfeab346ca4bdaa25268affad110a",
             "targetDt": Calendar.current.date(byAdding: .day, value: -1, to: Date())?.now ?? "",
-            "wideAreaCd": "0105001"
+            "wideAreaCd": "0105001",
+            "itemPerPage": BoxOfficeItemPerPage.constant.rawValue
         ]
     }
 }

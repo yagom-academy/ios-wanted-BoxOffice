@@ -8,14 +8,6 @@
 import SwiftUI
 import PhotosUI
 
-struct Review {
-    let nickName: String
-    let passWord: String
-    let starRate: Int
-    let review: String
-    let picture: UIImage
-}
-
 struct MovieReviewPostView: View {
     @Binding var isPresented: Bool
     @State var selected = -1
@@ -25,7 +17,6 @@ struct MovieReviewPostView: View {
     @State var showImagePicker: Bool = false
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     var profileImage = UIImage(systemName: "person.crop.circle")
-    //    @Binding var reviews: [Review]
 
     var body: some View {
         VStack(alignment: .leading) {
