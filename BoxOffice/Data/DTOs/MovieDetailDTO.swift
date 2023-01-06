@@ -83,14 +83,3 @@ extension MovieDetailDTO {
             watchGrade: audits.first?.watchGrade ?? "")
     }
 }
-
-fileprivate extension String {
-    func toDate() -> Date {
-        let formatter = DateFormatter()
-        guard let date = formatter.date(from: self) else {
-            return Date()
-        }
-
-        return date
-    }
-}
