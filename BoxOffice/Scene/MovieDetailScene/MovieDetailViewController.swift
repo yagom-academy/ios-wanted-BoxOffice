@@ -28,9 +28,9 @@ class MovieDetailViewController: UIViewController {
     private let movieMainInfoView = MovieMainInfoView()
     private let movieSubInfoView = MovieSubInfoView()
     private let reviewViewModel = MovieReviewViewModel()
-    private let movieDetail: MovieDetail
+    private let movieDetail: MovieData
     
-    init(movieDetail: MovieDetail) {
+    init(movieDetail: MovieData) {
         self.movieDetail = movieDetail
         super.init(nibName: nil, bundle: nil)
     }

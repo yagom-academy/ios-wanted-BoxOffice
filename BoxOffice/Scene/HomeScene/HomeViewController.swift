@@ -136,7 +136,9 @@ extension HomeViewController: UICollectionViewDelegate {
         print(indexPath.row)
         // TODO: 영화 상세로 넘어가기
 
-        let testMovie = MovieDetail(
+        let testMovie = MovieData(
+            uuid: UUID(),
+            poster: nil,
             currentRank: "1",
             title: "오펀: 천사의 탄생",
             openDate: "20221012",
@@ -148,7 +150,7 @@ extension HomeViewController: UICollectionViewDelegate {
             showTime: "146",
             genreName: "공포(호러)",
             directorName: "윌리엄 브렌트 벨",
-            actors: "이사벨 퍼만, 줄리아 스타일즈, 로지프 서덜랜드",
+            actors: ["이사벨 퍼만", "줄리아 스타일즈", "로지프 서덜랜드"],
             ageLimit: "15세 이상 관람가"
         )
         let movieDetailViewController = MovieDetailViewController(movieDetail: testMovie)

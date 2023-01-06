@@ -1,8 +1,8 @@
 //
-//  MovieData.swift
+//  MovieDetail.swift
 //  BoxOffice
 //
-//  Created by 이원빈 on 2023/01/06.
+//  Created by 이원빈 on 2023/01/02.
 //
 
 import UIKit

@@ -88,7 +88,7 @@ class MovieMainInfoView: UIView {
     }
     
     //TODO: 정보 표시 형식 맞추기
-    func configure(with movie: MovieDetail) {
+    func configure(with movie: MovieData) {
         //TODO: 포스터 이미지로 변경
         posterView.image = UIImage(systemName: "camera")
         //TODO: 별점 평균내기

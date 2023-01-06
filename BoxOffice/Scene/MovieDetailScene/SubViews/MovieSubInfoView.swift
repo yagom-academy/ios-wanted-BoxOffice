@@ -64,7 +64,7 @@ class MovieSubInfoView: UIView {
         separator.close()
     }
     
-    func configure(with movie: MovieDetail) {
+    func configure(with movie: MovieData) {
         if let ageLimit = AgeLimit(rawValue: movie.ageLimit) {
             ageLimitLabel.text = ageLimit.age
             ageLimitLabel.backgroundColor = ageLimit.color
@@ -78,7 +78,7 @@ class MovieSubInfoView: UIView {
         //TODO: numberFormatter로 , 추가
         totalAudienceLabel.text = " " + movie.totalAudience + "명 관람"
         directorNameLabel.text = "감독: " + movie.directorName
-        actorsLabel.text =  "출연: " + movie.actors
+        actorsLabel.text =  "출연: " + movie.actors.joined()
     }
     
     func addTargetMoreButton(with target: UIViewController, selector: Selector) {
