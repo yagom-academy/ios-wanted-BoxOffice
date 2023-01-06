@@ -120,12 +120,18 @@ final class ListCell: UICollectionViewCell {
     func setup(with data: MovieData) {
         titleLabel.text = data.title
         rankLabel.text = data.currentRank
-        openDateLabel.text = data.openDate + " 개봉"
-        
+
+        setOpenDateLabel(with: data.openDate)
         setRankChangeLabel(with: data.rankChange)
         setTotalAudiencesCountLabel(with: data.totalAudience)
         setNewEntryBadgeLabel(with: data.isNewEntry)
         setPosterImageView(with: data.poster)
+    }
+    
+    private func setOpenDateLabel(with openDate: String) {
+        let characterArray = Array(openDate).map { String($0) }
+        let date = characterArray[0...3].joined() + "-" + characterArray[4...5].joined() + "-" + characterArray[6...7].joined() + " 개봉"
+        openDateLabel.text = date
     }
     
     private func setRankChangeLabel(with rankChange: String) {
