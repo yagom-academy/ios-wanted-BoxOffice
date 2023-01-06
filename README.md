@@ -1,4 +1,4 @@
-## 루키, 송만이, 도도
+## [루키](https://github.com/chaeyoon1101), [송만이](https://github.com/seunghui5247), [도도](https://github.com/dddowon)
 
 ## 앱 설명
 - `Model-View-Controller 패턴` 
