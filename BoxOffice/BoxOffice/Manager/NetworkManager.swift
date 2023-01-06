@@ -13,6 +13,7 @@ enum NetWorkError: Error {
 
 final class NetworkManager {
     func executeDataTask(request: APIRequest, completion: @escaping (Result<Data, NetWorkError>) -> Void) {
+        
         guard let request = request.urlRequest else {
             completion(.failure(NetWorkError.networkError))
             return

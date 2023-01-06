@@ -57,6 +57,7 @@ final class OMDbRequestBuilder {
     }
     
     func buildRequest() -> OMDbRequest? {
+        
         guard let method = method, let path = path else {
             return nil
         }
@@ -80,6 +81,7 @@ struct OMDbRequestDirector {
     }
     
     func createGetRequest(queryItems: [String: String], type: OMDbRequestPath) -> OMDbRequest? {
+        
         builder.queryInitialization()
         let getRequest = builder
             .setMethod(.get)

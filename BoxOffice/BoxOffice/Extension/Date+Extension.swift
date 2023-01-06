@@ -9,6 +9,7 @@ import Foundation
 
 extension Date {
     var dateFormatter: DateFormatter {
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
         

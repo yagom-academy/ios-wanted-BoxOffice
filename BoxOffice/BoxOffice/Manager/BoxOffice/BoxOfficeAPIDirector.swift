@@ -57,6 +57,7 @@ final class MovieRequestBuilder {
     }
     
     func buildRequest() -> MovieRequest? {
+        
         guard let method = method, let path = path else {
             return nil
         }
@@ -80,6 +81,7 @@ struct MovieRequestDirector {
     }
     
     func createGetRequest(queryItems: [String: String], type: MovieRequestPath) -> MovieRequest? {
+        
         builder.queryInitialization()
         let getRequest = builder
             .setMethod(.get)
@@ -90,14 +92,4 @@ struct MovieRequestDirector {
     
         return getRequest
     }
-    
-    //TODO: 디테일 화면시 구현
-//    func createGetDetailRequest(_ productNumber: Int) -> OpenMarketRequest? {
-//        let getDetailRequest = builder
-//            .setMethod(.get)
-//            .setPath(.productDetail(productNumber))
-//            .buildRequest()
-//
-//        return getDetailRequest
-//    }
 }

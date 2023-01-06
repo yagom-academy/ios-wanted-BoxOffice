@@ -8,7 +8,6 @@
 import SwiftUI
 import Combine
 
-
 enum NetworkMethod: String {
     case get
     case post
@@ -24,21 +23,26 @@ struct RequestBuilder {
     let headers: [String: String]?
 
     func create() -> URLRequest? {
-        guard let url = url else { return nil }
+        
+        guard let url = url else {
+            return nil
+        }
+        
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue.uppercased()
+        
         if let body = body {
             request.httpBody = body
         }
         if let headers = headers {
             request.allHTTPHeaderFields = headers
         }
+        
         return request
     }
 }
 
 final class NetworkService {
-
     enum NetworkError: Error {
         case invalidRequest
         case unknownError(message: String)

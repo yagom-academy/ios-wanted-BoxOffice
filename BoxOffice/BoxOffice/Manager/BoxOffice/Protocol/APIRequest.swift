@@ -18,11 +18,13 @@ extension APIRequest {
     var url: URL? {
         var urlBodyComponents = URLComponents(string: baseURL + path)
         var urlQueryComponents: [URLQueryItem] = []
+        
         for queryItems in query {
             let urlQueryComponent = URLQueryItem(name: queryItems.key, value: queryItems.value)
             urlQueryComponents.append(urlQueryComponent)
         }
         urlBodyComponents?.queryItems = urlQueryComponents
+        
         return urlBodyComponents?.url
     }
     
@@ -32,7 +34,6 @@ extension APIRequest {
         }
         
         var urlRequest = URLRequest(url: url)
-        
         urlRequest.httpMethod = method.rawValue
         
         return urlRequest
