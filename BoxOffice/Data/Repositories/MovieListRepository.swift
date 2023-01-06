@@ -20,8 +20,6 @@ final class MovieListRepository: MovieListRepositoryInterface {
             fetchWeeklyMovieList { result in
                 completion(result)
             }
-        default:
-            break
         }
     }
     
@@ -70,7 +68,6 @@ final class MovieListRepository: MovieListRepositoryInterface {
         urlComponents?.path += "/searchWeeklyBoxOfficeList"
         
         urlComponents?.queryItems = [
-            // TODO: Key 등록
             .init(name: "key", value: networkService.koficAPIKey),
             .init(name: "targetDt", value: lastWeek.toString())
         ]

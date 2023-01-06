@@ -19,13 +19,6 @@ struct MovieOverview: Hashable {
 }
 
 enum DayType {
-    case monday
-    case tuesday
-    case wednesday
-    case thursday
-    case friday
-    case saturday
-    case sunday
     case weekdays
     case weekends
 }

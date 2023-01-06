@@ -64,7 +64,6 @@ extension MovieOverviewWeeklyDTO {
         var movieOverviews = [MovieOverview]()
         
         self.movieOverviewDTOs.forEach { movieOverviewDTO in
-            // TODO: dayType 주말로 바꾸기
             movieOverviews.append(movieOverviewDTO.toDomain(dayType: .weekends))
         }
         
