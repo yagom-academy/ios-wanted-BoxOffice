@@ -8,7 +8,14 @@
 import UIKit
 
 class MovieSubInfoView: UIView {
-    private let horizontalStackView: UIStackView = {
+    private let infoStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let actorStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -20,6 +27,14 @@ class MovieSubInfoView: UIView {
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
+    }()
+    
+    private let moreActorsButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("더보기", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private let productionYearLabel = MovieLabel(font: .title3, isBold: true)
@@ -49,7 +64,6 @@ class MovieSubInfoView: UIView {
         separator.close()
     }
     
-    //TODO: MovieDetail로 뷰 세팅하기
     func configure(with movie: MovieDetail) {
         if let ageLimit = AgeLimit(rawValue: movie.ageLimit) {
             ageLimitLabel.text = ageLimit.age
@@ -67,6 +81,12 @@ class MovieSubInfoView: UIView {
         actorsLabel.text =  "출연: " + movie.actors
     }
     
+    func setupMoreButton(with target: UIViewController, selector: Selector) {
+        moreActorsButton.addTarget(target,
+                                   action: selector,
+                                   for: .touchUpInside)
+    }
+    
     private func setupView() {
         addSubView()
         setupConstraint()
@@ -74,14 +94,17 @@ class MovieSubInfoView: UIView {
     }
     
     private func addSubView() {
-        horizontalStackView.addArrangedSubview(productionYearLabel)
-        horizontalStackView.addArrangedSubview(ageLimitLabel)
-        horizontalStackView.addArrangedSubview(showTimeLabel)
-        horizontalStackView.addArrangedSubview(totalAudienceLabel)
+        infoStackView.addArrangedSubview(productionYearLabel)
+        infoStackView.addArrangedSubview(ageLimitLabel)
+        infoStackView.addArrangedSubview(showTimeLabel)
+        infoStackView.addArrangedSubview(totalAudienceLabel)
         
-        entireStackView.addArrangedSubview(horizontalStackView)
+        actorStackView.addArrangedSubview(actorsLabel)
+        actorStackView.addArrangedSubview(moreActorsButton)
+        
+        entireStackView.addArrangedSubview(infoStackView)
         entireStackView.addArrangedSubview(directorNameLabel)
-        entireStackView.addArrangedSubview(actorsLabel)
+        entireStackView.addArrangedSubview(actorStackView)
         
         self.addSubview(entireStackView)
     }

@@ -105,6 +105,10 @@ class MovieDetailViewController: UIViewController {
             }
         }
     }
+    
+    @objc private func moreActorButtonTapped() {
+        //TODO: 배우 더보기 modal
+    }
 }
 
 //MARK: Review TableView
@@ -136,6 +140,9 @@ extension MovieDetailViewController {
         movieMainInfoView.configure(with: testMovie)
         movieSubInfoView.configure(with: testMovie)
         reviewTitleLabel.text = "리뷰"
+        
+        movieSubInfoView.setupMoreButton(with: self,
+                                         selector: #selector(moreActorButtonTapped))
         
         addSubView()
         setupConstraint()
