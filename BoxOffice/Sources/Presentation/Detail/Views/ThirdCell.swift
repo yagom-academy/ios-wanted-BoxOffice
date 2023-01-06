@@ -140,6 +140,7 @@ class ThirdCell: UITableViewCell {
         button.backgroundColor = .systemIndigo
         button.setTitle("리뷰하기", for: .normal)
         button.titleLabel?.textColor = .white
+        button.titleLabel?.font = .preferredFont(for: .body, weight: .bold)
         button.layer.cornerRadius = 10
         return button
     }()
@@ -175,30 +176,30 @@ class ThirdCell: UITableViewCell {
         var directors = String()
         var actors = String()
         detailInfo.genres.forEach {
-            genres += ("\($0),")
+            genres += ("\($0), ")
         }
         detailInfo.directors.forEach {
-            directors += ("\($0),")
+            directors += ("\($0), ")
         }
         if  detailInfo.actors.count != 0 {
             detailInfo.actors.forEach {
-                actors += ("\($0),")
+                actors += ("\($0), ")
             }
-            actors.removeLast()
+            actors.removeLast(2)
         } else {
             actors = "-"
         }
         
         if  detailInfo.directors.count != 0 {
             detailInfo.directors.forEach {
-                directors += ("\($0),")
+                directors += ("\($0), ")
             }
-            directors.removeLast()
+            directors.removeLast(2)
         } else {
             directors = "-"
         }
         
-        genres.removeLast()
+        genres.removeLast(2)
         
         genresLabel.text = genres
         directorsLabel.text = directors
