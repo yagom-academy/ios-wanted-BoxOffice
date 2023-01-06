@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class CreateReviewViewController: UIViewController {
 
     weak var coordinator: CreateReviewCoordinatorInterface?
     private let viewModel: CreateReviewViewModel
+    private var cancellables: Set<AnyCancellable> = .init()
     
     private let reviewPlaceHolder = "감상평을 자유롭게 작성해주세요."
     
@@ -108,6 +110,7 @@ class CreateReviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
+        bind()
     }
 
     init(viewModel: CreateReviewViewModel, coordinator: CreateReviewCoordinatorInterface) {
@@ -123,6 +126,15 @@ class CreateReviewViewController: UIViewController {
 }
 
 private extension CreateReviewViewController {
+    
+    func bind() {
+        viewModel.output.isValid
+            .removeDuplicates()
+            .sinkOnMainThread(receiveValue: { [weak self] isValid in
+                self?.crateButton.isEnabled = isValid
+                self?.crateButton.backgroundColor = isValid ? .systemIndigo : .darkGray
+            }).store(in: &cancellables)
+    }
     
     func setUp() {
         setUpNavigationBar()

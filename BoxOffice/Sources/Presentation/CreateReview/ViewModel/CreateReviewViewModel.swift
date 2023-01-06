@@ -20,6 +20,8 @@ protocol CreateReviewViewModelInput {
 
 protocol CreateReviewViewModelOutput {
     
+    var isValid: AnyPublisher<Bool, Never> { get }
+    
 }
 
 protocol CreateReviewViewModel {
@@ -34,6 +36,23 @@ final class DefaultCreateReviewViewModel: CreateReviewViewModel {
     
     private let firestoreManager: FirebaseManager
     private(set) var cancellables: Set<AnyCancellable> = .init()
+    private var _isCurrentValid = CurrentValueSubject<Bool, Never>(false)
+    private var _currentRating = CurrentValueSubject<Int, Never>(0)
+    
+    private var _imageData: String = ""
+    private var _name: String = ""
+    private var _password: String = ""
+    private var _review: String = ""
+    private var _rating: Int = 0 {
+        didSet {
+            _currentRating.send(_rating)
+        }
+    }
+    private var _isValid: Bool = false {
+        didSet {
+            _isCurrentValid.send(_isValid)
+        }
+    }
     
     init(firestoreManager: FirebaseManager = .init()) {
         self.firestoreManager = firestoreManager
@@ -46,25 +65,27 @@ extension DefaultCreateReviewViewModel: CreateReviewViewModelInput {
     var input: CreateReviewViewModelInput { self }
     
     func nameText(_ text: String) {
-        print(text)
+        _name = text
+        _isValid = isValidUserInfo(_password)
     }
     
     func passwordText(_ text: String) {
-        print(text)
+        _isValid = isValidUserInfo(text)
     }
     
     func reviewText(_ text: String) {
-        print(text)
+        _review = text
     }
     
     func imageData(_ encodedString: String) {
-        if let data = Data(base64Encoded: encodedString) {
-            print(data)
+        guard Data(base64Encoded: encodedString) != nil else {
+            return
         }
+        _imageData = encodedString
     }
     
     func didTapRatingView(_ rating: Int) {
-        print(rating)
+        _rating = rating
     }
     
     func didTapCreateButton() {
@@ -76,11 +97,17 @@ extension DefaultCreateReviewViewModel: CreateReviewViewModelOutput {
     
     var output: CreateReviewViewModelOutput { self }
     
+    var isValid: AnyPublisher<Bool, Never> { return _isCurrentValid.eraseToAnyPublisher() }
+    
+    
 }
 
 private extension DefaultCreateReviewViewModel {
     
-    func isValidPassword(_ password: String) -> Bool {
+    func isValidUserInfo(_ password: String) -> Bool {
+        guard _name.isEmpty == false, _name.count >= 3 else {
+            return false
+        }
         guard password.count >= 6,
               password.count <= 20,
               password.isContainsUppercase == false else {
@@ -91,6 +118,7 @@ private extension DefaultCreateReviewViewModel {
               password.isContainsSpecialCharacters else {
             return false
         }
+        _password = password
         return true
     }
 }
