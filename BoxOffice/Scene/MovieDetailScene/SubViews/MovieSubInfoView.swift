@@ -51,7 +51,14 @@ class MovieSubInfoView: UIView {
     
     //TODO: MovieDetail로 뷰 세팅하기
     func configure(with movie: MovieDetail) {
-        totalAudienceLabel.text = movie.totalAudience
+        if let ageLimit = AgeLimit(rawValue: movie.ageLimit) {
+            ageLimitLabel.text = ageLimit.age
+            ageLimitLabel.backgroundColor = ageLimit.color
+        } else {
+            ageLimitLabel.text = AgeLimit.fullLimit.age
+            ageLimitLabel.backgroundColor = AgeLimit.fullLimit.color
+        }
+        
         productionYearLabel.text = movie.productionYear
         showTimeLabel.text = movie.showTime
         directorNameLabel.text = movie.directorName
@@ -89,5 +96,43 @@ class MovieSubInfoView: UIView {
             entireStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,
                                                  constant: -16)
         ])
+    }
+}
+
+enum AgeLimit: String {
+    case all = "전체관람가"
+    case twelveOver = "12세 이상 관람가"
+    case fifteenOver = "15세 이상 관람가"
+    case teenagersNotAllowed = "청소년 관람불가"
+    case fullLimit = "제한상영가"
+    
+    var age: String {
+        switch self {
+        case .all:
+            return "All"
+        case .twelveOver:
+            return "12"
+        case .fifteenOver:
+            return "15"
+        case .teenagersNotAllowed:
+            return "18"
+        case .fullLimit:
+            return "X"
+        }
+    }
+    
+    var color: UIColor {
+        switch self {
+        case .all:
+            return .systemGreen
+        case .twelveOver:
+            return .systemYellow
+        case .fifteenOver:
+            return .systemOrange
+        case .teenagersNotAllowed:
+            return .systemRed
+        case .fullLimit:
+            return .black
+        }
     }
 }
