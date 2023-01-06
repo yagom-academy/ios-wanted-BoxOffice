@@ -51,11 +51,15 @@ final class MovieDetailViewModel {
 extension MovieDetailViewModel {
     func viewDidLoad() {
         fetchMovieDetail(movieCode: movieCode)
-        fetchMovieReview(movieCode: movieCode)
     }
 
     func viewWillAppear() {
         fetchMovieReview(movieCode: movieCode)
+    }
+
+    func viewWillDisappear() {
+        fetchMovieDetailTask?.cancel()
+        fetchPosterImageTask?.cancel()
     }
 
     func tabBarModeChanged(mode: TabBarMode) {

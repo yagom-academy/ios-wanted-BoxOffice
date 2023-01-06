@@ -47,6 +47,7 @@ final class MovieDetailViewController: UIViewController {
         appearance.backgroundColor = .clear
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.tintColor = .black
+        viewModel.viewWillDisappear()
     }
 
     init(movieOverview: MovieOverview) {
@@ -144,7 +145,7 @@ final class MovieDetailViewController: UIViewController {
                     withReuseIdentifier: MovieDetailUpperCollectionViewCell.reuseIdentifier,
                     for: indexPath
                    ) as? MovieDetailUpperCollectionViewCell {
-                    cell.setUpContents(movieDetail: movieDetail, movieOverview: self.viewModel.movieOverview, posterImage: self.viewModel.posterImage)
+                    cell.setUpContents(movieDetail: movieDetail.0, movieOverview: self.viewModel.movieOverview, posterImage: self.viewModel.posterImage)
                     return cell
                 }
             }
@@ -213,7 +214,7 @@ final class MovieDetailViewController: UIViewController {
     private func applyDataSource() {
         var snapShot = NSDiffableDataSourceSnapshot<MovieDetailSection, MovieDetailItem>()
         snapShot.appendSections([.upper, .bottom])
-        snapShot.appendItems([.upper(viewModel.movieDetail)], toSection: .upper)
+        snapShot.appendItems([.upper(viewModel.movieDetail, viewModel.posterImage)], toSection: .upper)
         if viewModel.tabBarMode == .movieInfo {
             snapShot.appendItems([.info(viewModel.movieDetail)], toSection: .bottom)
         } else {
@@ -255,7 +256,7 @@ final class MovieDetailViewController: UIViewController {
 extension MovieDetailViewController {
     /// Wrapper Enum to use DiffableDataSource
     enum MovieDetailItem: Hashable {
-        case upper(MovieDetail)
+        case upper(MovieDetail, UIImage?)
         case info(MovieDetail)
         case review(MovieReview)
     }

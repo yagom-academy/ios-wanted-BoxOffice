@@ -100,7 +100,10 @@ extension MovieDetailRepository {
             .init(name: "t", value: englishMovieName),
             .init(name: "y", value: String(year))
         ]
-        guard let url = urlComponents?.url else { return nil }
+        guard let url = urlComponents?.url else {
+            return nil
+
+        }
         let urlRequest = URLRequest(url: url)
         let task = neworkService.dataTask(request: urlRequest) { result in
             switch result {
