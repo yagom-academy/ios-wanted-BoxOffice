@@ -28,6 +28,16 @@ class MovieDetailViewController: UIViewController {
     private let movieMainInfoView = MovieMainInfoView()
     private let movieSubInfoView = MovieSubInfoView()
     private let reviewViewModel = MovieReviewViewModel()
+    private let movieDetail: MovieDetail
+    
+    init(movieDetail: MovieDetail) {
+        self.movieDetail = movieDetail
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,25 +50,6 @@ class MovieDetailViewController: UIViewController {
         setupNavigationItem()
         bind()
     }
-    
-    let testMovie = MovieDetail(
-        currentRank: "1",
-        title: "오펀: 천사의 탄생",
-        openDate: "20221012",
-        totalAudience: "50243",
-        rankChange: "-3",
-        isNewEntry: true,
-        productionYear: "2022",
-        openYear: "2022",
-        showTime: "146",
-        genreName: "공포(호러)",
-        directorName: "윌리엄 브렌트 벨",
-        actors: "이사벨 퍼만, 줄리아 스타일즈, 로지프 서덜랜드",
-        ageLimit: "15세 이상 관람가"
-    )
-    
-    //TODO: 이전 페이지에서 데이터 받아오기 (뷰모델에서 가저오면 될듯합니다)
-    //TODO: 출연 더보기 모달 뷰
     
     private func loadReview() {
         reviewViewModel.fetch()
@@ -98,8 +89,8 @@ extension MovieDetailViewController: UITableViewDataSource {
 //MARK: Setup View
 extension MovieDetailViewController {
     private func setupView() {
-        movieMainInfoView.configure(with: testMovie)
-        movieSubInfoView.configure(with: testMovie)
+        movieMainInfoView.configure(with: movieDetail)
+        movieSubInfoView.configure(with: movieDetail)
 
         addSubView()
         setupConstraint()
@@ -164,8 +155,7 @@ extension MovieDetailViewController {
                                              action: #selector(shareButtonTapped))
         
         navigationItem.rightBarButtonItem = shareBarButton
-        //TODO: 넘겨받은 영화 제목으로 설정
-        navigationItem.title = testMovie.title
+        navigationItem.title = movieDetail.title
     }
     
     @objc private func shareButtonTapped() {

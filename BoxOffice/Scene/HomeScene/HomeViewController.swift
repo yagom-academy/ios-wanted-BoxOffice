@@ -132,6 +132,24 @@ extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
         // TODO: 영화 상세로 넘어가기
+
+        let testMovie = MovieDetail(
+            currentRank: "1",
+            title: "오펀: 천사의 탄생",
+            openDate: "20221012",
+            totalAudience: "50243",
+            rankChange: "-3",
+            isNewEntry: true,
+            productionYear: "2022",
+            openYear: "2022",
+            showTime: "146",
+            genreName: "공포(호러)",
+            directorName: "윌리엄 브렌트 벨",
+            actors: "이사벨 퍼만, 줄리아 스타일즈, 로지프 서덜랜드",
+            ageLimit: "15세 이상 관람가"
+        )
+        let movieDetailViewController = MovieDetailViewController(movieDetail: testMovie)
+        navigationController?.pushViewController(movieDetailViewController, animated: true)
     }
 }
 
