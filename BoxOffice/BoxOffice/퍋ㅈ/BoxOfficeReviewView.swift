@@ -8,89 +8,114 @@
 import SwiftUI
 
 struct BoxOfficeReviewView: View {
+    private enum ActiveAlert {
+        case first, second
+    }
+    
+    @Environment(\.presentationMode) var presentationMode
+    
     @State private var showingImagePicker = false
     @State private var isNewAccountTapped = false
-    @State private var newUsername: String = ""
-    @State private var newPassword: String = ""
-    
-    @StateObject var boxOfficeReviewModel = BoxOfficeReviewModel()
+    @State private var isCheckPasswordEmpty = false
+    @State private var showAlert = false
+    @State private var activeAlert: ActiveAlert = .first
+
+    @ObservedObject var boxOfficeReviewModel = BoxOfficeReviewModel()
     
     var movieTitle: String
     
     var body: some View {
-        VStack {
-            ZStack {
-                starsView.overlay(overlayView.mask(starsView))
-            }
-            .frame(height: 200)
-            TextField("별명", text: $boxOfficeReviewModel.nickname)
-                .padding(10)
-                .foregroundColor(.secondary)
-                .background(
-                    RoundedRectangle(cornerRadius: 4, style: .continuous)
-                        .stroke(Color.secondary)
-                )
-            SecureField("암호", text: $boxOfficeReviewModel.password)
-                .padding(10)
-                .foregroundColor(.secondary)
-                .background(
-                    RoundedRectangle(cornerRadius: 4, style: .continuous)
-                        .stroke(Color.secondary)
-                )
-            ZStack {
-                TextEditor(text: $boxOfficeReviewModel.description)
-                    .frame(minHeight: 200, maxHeight: .infinity)
-                    .cornerRadius(15)
+        ScrollView {
+            VStack {
+                ZStack {
+                    starsView.overlay(overlayView.mask(starsView))
+                }
+                .frame(height: 200)
+                TextField("별명", text: $boxOfficeReviewModel.nickname)
+                    .padding(10)
+                    .foregroundColor(.secondary)
                     .background(
-                        RoundedRectangle(cornerRadius: 4, style: .circular)
+                        RoundedRectangle(cornerRadius: 4, style: .continuous)
                             .stroke(Color.secondary)
                     )
-                if boxOfficeReviewModel.description.isEmpty {
-                    Text("리뷰를 작성해주세요")
-                        .foregroundColor(Color.secondary)
-                        .padding(.top, 5)
-                        .padding(.leading, 5)
-                        .frame(maxWidth: .infinity,
-                               maxHeight: .infinity,
-                               alignment: .topLeading)
-                }
-            }
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(0..<boxOfficeReviewModel.imageArray.count, id: \.self) { images in
-                        Image(uiImage: boxOfficeReviewModel.imageArray[images])
-                            .resizable()
-                            .frame(width: 150, height: 150)
+                SecureField("암호", text: $boxOfficeReviewModel.password)
+                    .padding(10)
+                    .foregroundColor(.secondary)
+                    .background(
+                        RoundedRectangle(cornerRadius: 4, style: .continuous)
+                            .stroke(Color.secondary)
+                    )
+                    
+                ZStack {
+                    TextEditor(text: $boxOfficeReviewModel.description)
+                        .frame(minHeight: 200, maxHeight: .infinity)
+                        .cornerRadius(15)
+                        .background(
+                            RoundedRectangle(cornerRadius: 4, style: .circular)
+                                .stroke(Color.secondary)
+                        )
+                    if boxOfficeReviewModel.description.isEmpty {
+                        Text("리뷰를 작성해주세요")
+                            .foregroundColor(Color.secondary)
+                            .padding(.top, 5)
+                            .padding(.leading, 5)
+                            .frame(maxWidth: .infinity,
+                                   maxHeight: .infinity,
+                                   alignment: .topLeading)
                     }
-                    if boxOfficeReviewModel.imageArray.count < 5 {
-                        Button {
-                            self.showingImagePicker.toggle()
-                        } label: {
-                            Image(systemName: "camera")
+                }
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(0..<boxOfficeReviewModel.imageArray.count, id: \.self) { images in
+                            Image(uiImage: boxOfficeReviewModel.imageArray[images])
+                                .resizable()
                                 .frame(width: 150, height: 150)
-                                .foregroundColor(Color.white)
-                                .background(Color.secondary)
-                            
-                        }.sheet(isPresented: $showingImagePicker) {
-                            ImagePicker(sourceType: .photoLibrary) { (image) in
-                                boxOfficeReviewModel.imageArray.append(image)
+                        }
+                        if boxOfficeReviewModel.imageArray.count < 5 {
+                            Button {
+                                self.showingImagePicker.toggle()
+                            } label: {
+                                Image(systemName: "camera")
+                                    .frame(width: 150, height: 150)
+                                    .foregroundColor(Color.white)
+                                    .background(Color.secondary)
+                                
+                            }.sheet(isPresented: $showingImagePicker) {
+                                ImagePicker(sourceType: .photoLibrary) { (image) in
+                                    boxOfficeReviewModel.imageArray.append(image)
+                                }
                             }
                         }
                     }
                 }
+               
             }
+            .padding()
         }
-        .padding()
         .navigationTitle(movieTitle)
         .toolbar {
             ToolbarItem {
                 Button {
-                    boxOfficeReviewModel.uploadReviewData(getMoviewName: movieTitle)
+                    if boxOfficeReviewModel.password.validatePassword() {
+                        boxOfficeReviewModel.uploadReviewData(getMoviewName: movieTitle)
+                        activeAlert = .first
+                    } else {
+                        activeAlert = .second
+                    }
+                    showAlert.toggle()
                 } label: {
                     Text("작성 완료")
                 }
             }
         }
+        .alert(isPresented: $showAlert) {
+                    switch activeAlert {
+                    case .first:
+                        return Alert(title: Text("업로드 성공"), dismissButton: .default(Text("확인"), action: { dismiss() }))
+                    case .second:
+                        return Alert(title: Text("비밀번호 형식에 맞지 않습니다"), message: Text("-암호는 6자리 이상, 20자리 이하입니다.\n-암호는 알파벳 소문자와 아라비아 숫자, 특수문자(!, @, #, $의 4가지)만을 입력받습니다.\n-암호는 반드시 알파벳 소문자, 아라비아 숫자, 특수문자가 각 1개 이상 포함되어야 합니다."), dismissButton: .cancel())
+                    }
+                }
     }
     private var overlayView: some View {
         GeometryReader { geo in
@@ -117,6 +142,9 @@ struct BoxOfficeReviewView: View {
                     }
             }
         }
+    }
+    private func dismiss() {
+        presentationMode.wrappedValue.dismiss()
     }
 }
 
