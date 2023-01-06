@@ -438,7 +438,6 @@
 				02F855292963B22D004B76DD /* Resources */,
 				02F855282963B226004B76DD /* Sources */,
 				635A19F528F9603A00197BCC /* Info.plist */,
-				0284340629686400002E56FB /* Secrets.plist */,
 			);
 			path = BoxOffice;
 			sourceTree = "<group>";
