@@ -10,7 +10,7 @@ import UIKit
 extension UIImage {
     var toString: String? {
         get {
-            return self.jpegData(compressionQuality: 1.0)?.base64EncodedString()
+            return self.compress().jpegData(compressionQuality: 1.0)?.base64EncodedString()
         }
     }
     
