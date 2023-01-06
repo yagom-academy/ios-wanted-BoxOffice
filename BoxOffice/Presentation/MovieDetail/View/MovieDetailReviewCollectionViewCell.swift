@@ -14,21 +14,7 @@ final class MovieDetailReviewCollectionViewCell: UICollectionViewCell {
     private var review: MovieReview?
 
     private let fetchReviewUseCase = FetchReviewImageUseCase()
-    private lazy var task: Cancellable? =  {
-        guard let review = review,
-        review.image != "" else { return nil }
-        let task: Cancellable? = fetchReviewUseCase.execute(imageURL: review.image) { result in
-            switch result {
-            case .success(let image):
-                DispatchQueue.main.async {
-                    self.photoReviewImageView.image = image
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-        return nil
-    }()
+    private var task: Cancellable?
 
     private let photoReviewImageView: UIImageView = {
         let imageView = UIImageView()
@@ -81,6 +67,7 @@ final class MovieDetailReviewCollectionViewCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
+        photoReviewImageView.image = nil
         task?.cancel()
     }
 
@@ -89,7 +76,7 @@ final class MovieDetailReviewCollectionViewCell: UICollectionViewCell {
         userNameLabel.text = review.user.nickname
         starReviewView.setUpContents(grade: Double(review.rating), maxGrade: 5, color: .systemYellow)
         descriptionLabel.text = review.description
-        task?.resume()
+        fetchReviewImage()
     }
 
     private func layout() {
@@ -125,6 +112,25 @@ final class MovieDetailReviewCollectionViewCell: UICollectionViewCell {
             divisionLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constraint.inset),
             divisionLine.heightAnchor.constraint(equalToConstant: Constraint.divisionLineHeight)
         ])
+    }
+
+    private func fetchReviewImage() {
+        guard let review = review, review.image != "" else {
+            return
+        }
+
+        task = fetchReviewUseCase.execute(imageURL: review.image) { result in
+            switch result {
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self.photoReviewImageView.image = image
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+
+        task?.resume()
     }
 }
 
