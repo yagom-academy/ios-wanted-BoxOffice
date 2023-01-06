@@ -13,7 +13,7 @@ struct BoxOfficeReviewView: View {
     @State private var newUsername: String = ""
     @State private var newPassword: String = ""
     
-    @StateObject var boxOfficeReviewModel = BoxOfficeReviewModel(movieNm: "Avatar: The Way of Water")
+    @StateObject var boxOfficeReviewModel = BoxOfficeReviewModel()
     
     var movieTitle: String
     
@@ -85,7 +85,7 @@ struct BoxOfficeReviewView: View {
         .toolbar {
             ToolbarItem {
                 Button {
-                    boxOfficeReviewModel.uploadReviewData()
+                    boxOfficeReviewModel.uploadReviewData(getMoviewName: movieTitle)
                 } label: {
                     Text("작성 완료")
                 }

@@ -26,4 +26,10 @@ extension String {
     var convertInt: Int {
         return Int(self) ?? 0
     }
+    
+    func validatePassword() -> Bool {
+        let passwordRegEx =  ("(?=.*[A-Za-z])(?=.*[0-9]).{6,20}")
+        let predicate = NSPredicate(format:"SELF MATCHES %@", passwordRegEx)
+        return predicate.evaluate(with: self)
+    }
 }

@@ -14,8 +14,6 @@ final class BoxOfficeFirebaseStorageManager {
     let db: Firestore
     
     init() {
-        FirebaseApp.configure()
-
         self.db = Firestore.firestore()
     }
     

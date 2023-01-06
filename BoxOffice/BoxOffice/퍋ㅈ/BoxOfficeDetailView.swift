@@ -9,7 +9,8 @@ import SwiftUI
 
 struct BoxOfficeDetailView: View {
     @StateObject var detailViewModel = MovieDetailViewModel()
-    
+    @StateObject var boxOfficeReviewModel = BoxOfficeReviewModel()
+
     var viewModel: BoxOfficeMainViewModel
     var myIndex: Int
     
@@ -112,8 +113,9 @@ struct BoxOfficeDetailView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.leading, 30)
                     List {
-                        ForEach(viewModel.movieList, id: \.rank) { data in
-                            Text(data.movieNm)
+                        ForEach(Array(boxOfficeReviewModel.reviewList.enumerated()), id: \.0) { index, data in
+                            Text(data.nickname)
+                            Text(data.description)
                         }
                     }
                     .listStyle(.plain)

@@ -10,14 +10,13 @@ import SwiftUI
 
 protocol BoxOfficeReviewModelProtocol {
     
-    func fetchReviewData()
-    func uploadReviewData()
+    func fetchReviewData(getMoviewName: String)
+    func uploadReviewData(getMoviewName: String)
 }
 
 final class BoxOfficeReviewModel: ObservableObject, BoxOfficeReviewModelProtocol {
     
     private let fireBaseManager = BoxOfficeFirebaseStorageManager()
-    private let movieNm: String
     
     @Published var reviewList: [Review] = []
     
@@ -28,13 +27,8 @@ final class BoxOfficeReviewModel: ObservableObject, BoxOfficeReviewModelProtocol
     
     @Published var imageArray = [UIImage]()
     
-    init(movieNm: String) {
-        self.movieNm = movieNm
-        fetchReviewData()
-    }
-    
-    func fetchReviewData() {
-        fireBaseManager.fetchReviewList(movieNm: self.movieNm) { (fetchedReviewList: [[String : Any]]) in
+    func fetchReviewData(getMoviewName: String) {
+        fireBaseManager.fetchReviewList(movieNm: getMoviewName) { (fetchedReviewList: [[String : Any]]) in
             fetchedReviewList.forEach { (reviewData: [String : Any]) in
                 guard let nickname = reviewData["nickname"] as? String,
                       let password = reviewData["password"] as? String,
@@ -59,7 +53,7 @@ final class BoxOfficeReviewModel: ObservableObject, BoxOfficeReviewModelProtocol
         }
     }
     
-    func uploadReviewData() {
+    func uploadReviewData(getMoviewName: String) {
         let imageData = imageArray.map({ $0.pngData()! })
         let currentReview = Review(
             nickname: self.nickname,
@@ -67,6 +61,6 @@ final class BoxOfficeReviewModel: ObservableObject, BoxOfficeReviewModelProtocol
             description: self.description,
             starRank: self.rating,
             images: imageData)
-        fireBaseManager.createData(movieNm: self.movieNm, review: currentReview)
+        fireBaseManager.createData(movieNm: getMoviewName, review: currentReview)
     }
 }
