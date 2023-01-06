@@ -62,6 +62,14 @@ final class MovieDetailViewController: UIViewController {
                 self?.reviewTableView.reloadData()
             }
         }
+        
+        reviewViewModel.error.bind { [weak self] error in
+            DispatchQueue.main.async {
+                if let description = error {
+                    self?.showAlert(message: description)
+                }
+            }
+        }
     }
 }
 
