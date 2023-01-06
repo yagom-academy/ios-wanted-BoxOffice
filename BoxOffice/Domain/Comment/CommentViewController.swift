@@ -25,6 +25,8 @@ final class CommentViewController: UIViewController {
         static var halfStar = UIImage(systemName: "star.leadinghalf.filled")
         static var fullStar = UIImage(systemName: "star.fill")
         static var defalutImage = UIImage(systemName: "camera")
+        static var starColor: UIColor = .systemYellow
+        static var purple = UIColor(r: 76, g: 52, b: 145)
     }
     
     struct InputValue {
@@ -80,6 +82,7 @@ final class CommentViewController: UIViewController {
     private lazy var pictureImageView: UIImageView = {
         let image = UIImageView()
         image.image = Constant.defalutImage
+        image.tintColor = Constant.purple
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -89,8 +92,8 @@ final class CommentViewController: UIViewController {
         textField.placeholder = "별명"
         textField.font = .preferredFont(forTextStyle: .title2)
         textField.textAlignment = .center
-        textField.layer.borderColor = UIColor.purple.cgColor
-        textField.layer.borderWidth = 1.0
+        textField.layer.borderColor = Constant.purple.cgColor
+        textField.layer.borderWidth = 2.0
         textField.layer.cornerRadius = 10
         return textField
     }()
@@ -101,8 +104,8 @@ final class CommentViewController: UIViewController {
         textField.textAlignment = .center
         textField.font = .preferredFont(forTextStyle: .title2)
         textField.isSecureTextEntry = true
-        textField.layer.borderColor = UIColor.purple.cgColor
-        textField.layer.borderWidth = 1.0
+        textField.layer.borderColor = Constant.purple.cgColor
+        textField.layer.borderWidth = 2.0
         textField.layer.cornerRadius = 10
         return textField
     }()
@@ -115,33 +118,38 @@ final class CommentViewController: UIViewController {
     
     private lazy var star1Image: UIImageView = {
         let imageView = UIImageView(image: Constant.emptyStar)
+        imageView.tintColor = Constant.starColor
         return imageView
     }()
     
     private lazy var star2Image: UIImageView = {
         let imageView = UIImageView(image: Constant.emptyStar)
+        imageView.tintColor = Constant.starColor
         return imageView
     }()
     
     private lazy var star3Image: UIImageView = {
         let imageView = UIImageView(image: Constant.emptyStar)
+        imageView.tintColor = Constant.starColor
         return imageView
     }()
     
     private lazy var star4Image: UIImageView = {
         let imageView = UIImageView(image: Constant.emptyStar)
+        imageView.tintColor = Constant.starColor
         return imageView
     }()
     
     private lazy var star5Image: UIImageView = {
         let imageView = UIImageView(image: Constant.emptyStar)
+        imageView.tintColor = Constant.starColor
         return imageView
     }()
     
     private lazy var infoTextView: UITextView = {
         let textView = UITextView()
-        textView.layer.borderColor = UIColor.purple.cgColor
-        textView.layer.borderWidth = 1.0
+        textView.layer.borderColor = Constant.purple.cgColor
+        textView.layer.borderWidth = 2.0
         textView.layer.cornerRadius = 10
         return textView
     }()
