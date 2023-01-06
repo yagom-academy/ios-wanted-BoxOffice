@@ -54,11 +54,12 @@ final class MovieListViewController: UIViewController {
 }
 
 extension MovieListViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == viewModel.movieOverviewList.count - 1 {
-            viewModel.scrollEnded()
-        }
-    }
+    // TODO: Pagination 로직 제작
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        if indexPath.row == viewModel.movieOverviewList.count - 1 {
+//            viewModel.scrollEnded()
+//        }
+//    }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         navigationController?.pushViewController(
@@ -72,14 +73,14 @@ private extension MovieListViewController {
     func movieListCollectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(200.0)
+            heightDimension: .absolute(210)
         )
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(200.0)
+            heightDimension: .absolute(210)
         )
         
         let group = NSCollectionLayoutGroup.horizontal(
@@ -111,7 +112,7 @@ private extension MovieListViewController {
                 return MovieListCollectionViewCell()
             }
 
-            cell.layer.addBottomDivisionLine(width: 1)
+//            cell.layer.addBottomDivisionLine(width: 1)
 
             cell.setupContents(movieOverview: itemIdentifier)
             
@@ -169,18 +170,18 @@ private extension MovieListViewController {
     }
 }
 
-fileprivate extension CALayer {
-    func addBottomDivisionLine(width: CGFloat) {
-        let border = CALayer()
-
-        border.frame = CGRect.init(
-            x: 0,
-            y: frame.height-width,
-            width: bounds.width,
-            height: width
-        )
-
-        border.backgroundColor = UIColor.systemGray5.cgColor
-        self.addSublayer(border)
-    }
-}
+//fileprivate extension CALayer {
+//    func addBottomDivisionLine(width: CGFloat) {
+//        let border = CALayer()
+//
+//        border.frame = CGRect.init(
+//            x: 0,
+//            y: frame.height-width,
+//            width: bounds.width,
+//            height: width
+//        )
+//
+//        border.backgroundColor = UIColor.systemGray5.cgColor
+//        self.addSublayer(border)
+//    }
+//}
