@@ -16,7 +16,7 @@ final class ReviewListCell: UITableViewCell {
     
     private enum Constant {
         static var pupleColor = UIColor(r: 76, g: 52, b: 145)
-        static var pictureSize: CGFloat = 200
+        static var pictureSize: CGFloat = 100
         static var buttonSize: CGFloat = 40
     }
     private var row = 0
@@ -25,7 +25,7 @@ final class ReviewListCell: UITableViewCell {
     private lazy var pictureImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.backgroundColor = .lightGray
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.layer.borderWidth = 2
         imageView.layer.borderColor = Constant.pupleColor.cgColor
         return imageView
@@ -35,6 +35,8 @@ final class ReviewListCell: UITableViewCell {
         let stackView = UIStackView(frame: .zero)
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
+        stackView.alignment = .fill
+        stackView.spacing = 5
         return stackView
     }()
     
@@ -42,17 +44,18 @@ final class ReviewListCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.textColor = .black
         label.font = .preferredFont(forTextStyle: .headline)
-        label.textAlignment = .center
+        label.textAlignment = .left
+        label.sizeToFit()
         return label
     }()
     
     private lazy var rateLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.textColor = .yellow
-        
+        label.textColor = .systemYellow
         label.font = .preferredFont(forTextStyle: .headline)
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.setStarLabel("0.0")
+        label.sizeToFit()
         return label
     }()
     
@@ -60,13 +63,14 @@ final class ReviewListCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.font = .preferredFont(forTextStyle: .body)
         label.numberOfLines = 0
-        
+        label.setContentHuggingPriority(.defaultLow, for: .vertical)
         return label
     }()
     
     private lazy var deleteButton: UIButton = {
         let button = UIButton(frame: .zero)
-        button.setTitle("삭제", for: .normal)
+        button.setImage(UIImage(systemName: "trash"), for: .normal)
+        button.tintColor = Constant.pupleColor
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         button.layer.cornerRadius = 20
         return button
@@ -104,19 +108,22 @@ final class ReviewListCell: UITableViewCell {
     }
     
     private func setupUI() {
-        // MARK: - posterImageView
+        
         NSLayoutConstraint.activate([
-            pictureImageView.topAnchor.constraint(equalTo: topAnchor),
-            pictureImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            pictureImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            pictureImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            pictureImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             pictureImageView.widthAnchor.constraint(equalToConstant: Constant.pictureSize),
             pictureImageView.heightAnchor.constraint(equalToConstant: Constant.pictureSize)
         ])
         
         NSLayoutConstraint.activate([
-            deleteButton.topAnchor.constraint(equalTo: topAnchor),
+            nickNameLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2),
+            rateLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2)
+        ])
+        
+        NSLayoutConstraint.activate([
             deleteButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-            deleteButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+            deleteButton.centerYAnchor.constraint(equalTo: centerYAnchor),
             deleteButton.widthAnchor.constraint(equalToConstant: Constant.buttonSize),
             deleteButton.heightAnchor.constraint(equalToConstant: Constant.buttonSize)
         ])
@@ -132,7 +139,7 @@ final class ReviewListCell: UITableViewCell {
     func configureCell(_ model: Comment, row: Int) {
         self.row = row
         pictureImageView.image = model.picture.toUIImage
-        nickNameLabel.text = model.nickName
+        nickNameLabel.text = "아이디: " + model.nickName
         rateLabel.setStarLabel(String(model.rate))
         infoLabel.text = model.info
     }

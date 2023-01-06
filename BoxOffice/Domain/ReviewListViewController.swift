@@ -68,6 +68,7 @@ final class ReviewListViewController: UIViewController,  UICollectionViewDelegat
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
+        tableView.rowHeight = 130        
         return tableView
     }()
     
