@@ -39,11 +39,6 @@ class MovieDetailViewController: UIViewController {
         guard let data = detailViewContent else {
             return
         }
-        
-        FirebaseManager.shared.fetch(movieName: data.boxOfficeInfo.movieNm) { _ in
-            print(FirebaseManager.shared.reviews)
-            self.cellCount = FirebaseManager.shared.reviews.count
-        }
 
         movieDetailView.setLabelText(data)
         movieDetailView.shareButton.addTarget(
@@ -60,6 +55,20 @@ class MovieDetailViewController: UIViewController {
         setPostLabel()
         addStackView()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchReview()
+    }
+    
+    private func fetchReview() {
+        guard let data = detailViewContent else {
+            return
+        }
+        
+        FirebaseManager.shared.fetch(movieName: data.boxOfficeInfo.movieNm) { _ in
+            self.cellCount = FirebaseManager.shared.reviews.count
+        }
     }
     
     private func setPostLabel() {
@@ -161,6 +170,13 @@ class MovieDetailViewController: UIViewController {
     
     @objc private func didTapReviewButton() {
         let loginViewController = LoginViewController()
+        weak var sendDataDelegate: (SendDataDelegate)? = loginViewController
+        
+        guard let movieName = detailViewContent?.boxOfficeInfo.movieNm else {
+            return
+        }
+        sendDataDelegate?.sendData(movieName)
+
         navigationController?.pushViewController(
             loginViewController,
             animated: true
@@ -191,6 +207,17 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate 
             return UITableViewCell()
         }
         
+        let data = FirebaseManager.shared.reviews[indexPath.row]
+        let model = LoginModel(
+            image: data["image"]  as? String ?? "",
+            nickname: data["nickname"] as? String ?? "",
+            password: data["password"] as? String ?? "",
+            star: data["star"] as? Int ?? 1,
+            content: data["content"] as? String ?? ""
+        )
+
+        cell.setupReviewLabelText(model: model)
+
         return cell
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 class LoginViewController: UIViewController {
     private let loginView = LoginView()
     private var starIndex = [0: false]
+    private var movieName = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +91,40 @@ class LoginViewController: UIViewController {
         )
     }
     
+    private func saveFireStore() {
+        let model = LoginModel(
+            image: loginView.userImageButton.imageView?.image?.description ?? "",
+            nickname: loginView.nickNameTextView.text,
+            password: loginView.passwordTextView.text,
+            star: getStar(),
+            content: loginView.contentTextView.text)
+        FirebaseManager.shared.save(
+            model,
+            movieName: movieName
+        )
+    }
+    
+    private func getStar() -> Int {
+        var result = 1
+        if loginView.twoStarButton.currentImage == UIImage(systemName: "star.fill") {
+            result += 1
+        }
+        
+        if loginView.threeStarButton.currentImage == UIImage(systemName: "star.fill") {
+            result += 1
+        }
+        
+        if loginView.fourStarButton.currentImage == UIImage(systemName: "star.fill") {
+            result += 1
+        }
+        
+        if loginView.fiveStarButton.currentImage == UIImage(systemName: "star.fill") {
+            result += 1
+        }
+        
+        return result
+    }
+    
     @objc private func verifyPassword() {
         guard let password = loginView.passwordTextView.text else {
             showFailureAlert()
@@ -126,9 +161,10 @@ class LoginViewController: UIViewController {
             return
         }
         
+        saveFireStore()
         showSuccessAlert()
     }
-    
+
     @objc private func didTapImageButton() {
         
     }
@@ -202,5 +238,15 @@ class LoginViewController: UIViewController {
         loginView.threeStarButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
         loginView.fourStarButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
         loginView.fiveStarButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+    }
+}
+
+extension LoginViewController: SendDataDelegate {
+    func sendData<T>(_ data: T) {
+        guard let name = data as? String else {
+            return
+        }
+        
+        movieName = name
     }
 }

@@ -99,7 +99,6 @@ class MovieDetailView: UIView {
     let starAverageLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
-        label.text = "⭐️ 9.5"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -263,7 +262,6 @@ class MovieDetailView: UIView {
     
     let reviewTableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .red
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -510,7 +508,7 @@ class MovieDetailView: UIView {
             reviewTableView.bottomAnchor.constraint(
                 equalTo: self.bottomAnchor,
                 constant: -20
-            ),
+            )
         ])
     }
 }

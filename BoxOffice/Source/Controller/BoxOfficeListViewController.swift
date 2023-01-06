@@ -38,17 +38,6 @@ class BoxOfficeListViewController: UIViewController {
         super.viewDidLoad()
         configureDefaultSetting()
         configureDailyBoxOffice()
-        
-//        let model = LoginModel(image: "이미지", nickname: "id1", password: "123", star: 1, content: "내용")
-//        FirebaseManager.shared.save(model, movieName: "아바타: 물의 길")
-//        
-//        let model1 = LoginModel(image: "이미지", nickname: "id2", password: "123", star: 2, content: "내용")
-//        FirebaseManager.shared.save(model1, movieName: "아바타: 물의 길")
-//        
-//        FirebaseManager.shared.fetch(movieName: "아바타: 물의 길") { documetn in
-//            print(documetn.count)
-//            print(documetn)
-//        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -253,9 +242,8 @@ extension UIImageView {
         let request = URLRequest(url: url)
         
         // TODO: 변경 여부 확인
-        // let urlSession = URLSession(configuration: .ephemeral)
-        // usrlSession.dataTask(with: request) ...
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        let urlSession = URLSession(configuration: .ephemeral)
+        urlSession.dataTask(with: request) { data, response, error in
             guard error == nil else {
                 completion(.failure(error!))
                 return

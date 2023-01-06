@@ -12,14 +12,14 @@ class ReviewTableViewCell: UITableViewCell {
     let userImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "person.crop.circle")
+        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     let userNicknameLabel: UILabel = {
         let label = UILabel()
-        label.text = "별명"
-        label.font = .preferredFont(forTextStyle: .callout, compatibleWith: .none)
+        label.font = .boldSystemFont(ofSize: 16)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -27,21 +27,21 @@ class ReviewTableViewCell: UITableViewCell {
     
     let starScoreLabel: UILabel = {
         let label = UILabel()
-        label.text = "⭐️ 10"
+        label.font = .preferredFont(forTextStyle: .title3)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let contentTextView: UITextView = {
-        let textView = UITextView()
-        textView.text = "여기는 리뷰 내용이 들어갑니다!! 재미있게 잘 봤습니다!!"
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
+    let contentLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 10
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     let nameAndStarStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.alignment = .leading
+        stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +50,7 @@ class ReviewTableViewCell: UITableViewCell {
     
     let userInfoStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.alignment = .leading
+        stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,38 +65,53 @@ class ReviewTableViewCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
     }
     
-    func setupReivewLabelText(model: LoginModel) {
-        
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupReviewLabelText(model: LoginModel) {
+        userNicknameLabel.text = model.nickname
+        starScoreLabel.text = "⭐️ \(String(model.star))점"
+        contentLabel.text = model.content
     }
     
     private func configureUI() {
         addSubview(reviewTotalStackView)
         reviewTotalStackView.addArrangedSubview(userInfoStackView)
-        reviewTotalStackView.addArrangedSubview(contentTextView)
+        reviewTotalStackView.addArrangedSubview(contentLabel)
+        
         userInfoStackView.addArrangedSubview(userImageView)
         userInfoStackView.addArrangedSubview(nameAndStarStackView)
+        
         nameAndStarStackView.addArrangedSubview(userNicknameLabel)
         nameAndStarStackView.addArrangedSubview(starScoreLabel)
 
         NSLayoutConstraint.activate([
             reviewTotalStackView.topAnchor.constraint(
-                equalTo: contentView.safeAreaLayoutGuide.topAnchor
+                equalTo: contentView.safeAreaLayoutGuide.topAnchor,
+                constant: 10
             ),
             reviewTotalStackView.trailingAnchor.constraint(
-                equalTo: contentView.safeAreaLayoutGuide.trailingAnchor
+                equalTo: contentView.safeAreaLayoutGuide.trailingAnchor,
+                constant: -10
             ),
             reviewTotalStackView.bottomAnchor.constraint(
-                equalTo: contentView.safeAreaLayoutGuide.bottomAnchor
+                equalTo: contentView.safeAreaLayoutGuide.bottomAnchor,
+                constant: -10
             ),
             reviewTotalStackView.leadingAnchor.constraint(
-                equalTo: contentView.safeAreaLayoutGuide.leadingAnchor
-            )
+                equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,
+                constant: 10
+            ),
+            
+            userImageView.widthAnchor.constraint(equalToConstant: 100),
+            contentView.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
 }
