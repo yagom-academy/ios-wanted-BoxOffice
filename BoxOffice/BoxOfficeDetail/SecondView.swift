@@ -23,9 +23,8 @@ final class SecondView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
-        stackView.distribution = .equalSpacing
+        stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = 10
         stackView.backgroundColor = .white
         return stackView
     }()
@@ -36,23 +35,74 @@ final class SecondView: UIView {
         stackView.alignment = .leading
         stackView.distribution = .equalSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.backgroundColor = .blue
+        stackView.backgroundColor = .black
+        stackView.spacing = 5
         return stackView
     }()
     
     private let audienceInfomationStackView: UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.distribution = .equalSpacing
+        stackView.alignment = .top
+        stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.backgroundColor = .white
+        return stackView
+    }()
+    
+    private let stackAudienceStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.backgroundColor = .black
+        stackView.spacing = 5
+        return stackView
+    }()
+    
+    private let dailyAudienceStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.backgroundColor = .black
+        stackView.spacing = 5
+        return stackView
+    }()
+    
+    private let boxOfficeRankStackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .top
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.backgroundColor = .black
+        return stackView
+    }()
+    
+    private let boxOfficeIncreaseRankStackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .top
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.backgroundColor = .black
+        return stackView
+    }()
+    
+    private let boxOfficeNewRankStackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .top
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.backgroundColor = .black
         return stackView
     }()
     
     private let moviewPosterImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "avatarposter")
         imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -61,9 +111,10 @@ final class SecondView: UIView {
     
     private let krTitileLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "아바타: 물의 길"
         return label
     }()
     
@@ -71,20 +122,21 @@ final class SecondView: UIView {
         let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Avatar: The Way of Water"
         return label
     }()
     
     private let ageLimitLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "12세이상관람가"
         return label
     }()
     
     private let rankingLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "1위"
@@ -93,6 +145,8 @@ final class SecondView: UIView {
     
     private let gradeLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -113,56 +167,161 @@ final class SecondView: UIView {
     
     private let releaseLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "2022.12.14"
+        return label
+    }()
+    
+    private let typeLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.lineBreakStrategy = .hangulWordPriority
+        label.lineBreakMode = .byCharWrapping
+        label.numberOfLines = 0
         return label
     }()
     
     private let genreLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "SF,스릴러,액션,어드벤쳐"
         return label
     }()
     
     private let directorLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "제임스 카메론"
         return label
     }()
     
     private let castLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.lineBreakStrategy = .hangulWordPriority
+        label.lineBreakMode = .byCharWrapping
+        label.numberOfLines = 0
         return label
     }()
     
-    private let runningTimeLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "192 분"
-        return label
-    }()
     
     private let createdAtLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "2022-12-14"
+        return label
+    }()
+    private let stackAudienceLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .lightGray
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "누적 관객 수"
         return label
     }()
     
-    private let audienceLabel: UILabel = {
+    private let stackAudienceCountLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
+        label.textColor = .white
+        label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "22만명"
+        label.text = "809.4 만"
+        return label
+    }()
+    
+    private let dailyAudienceLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .lightGray
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "일별 관객 수"
+        return label
+    }()
+    
+    private let dailyAudienceCountLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "91,102"
+        return label
+    }()
+    
+    private let boxOfficeRankLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "순위: "
+        return label
+    }()
+    
+    private let boxOfficeRankNumberLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "1위"
+        return label
+    }()
+    
+    private let rankIncreaseLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "증감률: "
+        return label
+    }()
+    
+    private let rankIncreaseNumberLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "-0.6%"
+        return label
+    }()
+    
+    private let newRankLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "신규여부: "
+        return label
+    }()
+    
+    private let newRankJudgeLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "New"
         return label
     }()
     
@@ -180,6 +339,51 @@ final class SecondView: UIView {
     
     // MARK: - Methods
     
+    private func refineDate(date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        let convertDate = dateFormatter.date(from: date)
+        
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        let result = dateFormatter.string(from: convertDate!)
+        return result
+    }
+    
+    func fetchMovieDetailData(posterData: MoviePosterInfo?, movieData: MovieDetailInfo? ) {
+        guard let posterData = posterData else { return }
+        guard let movieData = movieData else { return }
+        
+        var movieType = movieData.movieInfoResult.movieInfo.showTypes[0].showTypeNm
+        let movieTypeArray = movieData.movieInfoResult.movieInfo.showTypes
+        for TypeCount in 1..<movieData.movieInfoResult.movieInfo.showTypes.count {
+            movieType += "," + movieTypeArray[TypeCount].showTypeNm
+        }
+        
+        var moviegenres = movieData.movieInfoResult.movieInfo.genres[0].genreNm
+        let moviegenresArray = movieData.movieInfoResult.movieInfo.genres
+        for genresCount in 1..<movieData.movieInfoResult.movieInfo.genres.count {
+            moviegenres += "," + moviegenresArray[genresCount].genreNm
+        }
+        
+        var movieActors = movieData.movieInfoResult.movieInfo.actors[0].peopleNm
+        let movieActorsArray = movieData.movieInfoResult.movieInfo.actors
+        for actorsCount in 1..<movieData.movieInfoResult.movieInfo.actors.count {
+            movieActors += "," + movieActorsArray[actorsCount].peopleNm
+        }
+        
+        let url = URL(string: posterData.search[0].poster)
+        moviewPosterImage.load(url: url!)
+        
+        krTitileLabel.text = "제목: " + movieData.movieInfoResult.movieInfo.movieNm
+        releaseLabel.text = "개봉일: " + refineDate(date:movieData.movieInfoResult.movieInfo.openDt)
+        typeLabel.text = "타입: " + movieType
+        genreLabel.text = "장르: " + moviegenres + " /" + movieData.movieInfoResult.movieInfo.showTm + " 분"
+        ageLimitLabel.text = "등급: " + movieData.movieInfoResult.movieInfo.audits[0].watchGradeNm
+        directorLabel.text = "감독: " + movieData.movieInfoResult.movieInfo.directors[0].peopleNm
+        castLabel.text = "출연: " + movieActors
+        
+    }
+    
     private func commonInit() {
         configureUI()
         setUpBaseUIConstraints()
@@ -189,17 +393,41 @@ final class SecondView: UIView {
         self.addSubview(contentScrollView)
         contentScrollView.addSubview(verticalStackView)
         verticalStackView.addArrangedSubview(moviewPosterImage)
-        verticalStackView.addArrangedSubview(descriptionLabel)
+        
+        movieInfomationStackView.addArrangedSubview(krTitileLabel)
         movieInfomationStackView.addArrangedSubview(releaseLabel)
+        movieInfomationStackView.addArrangedSubview(typeLabel)
         movieInfomationStackView.addArrangedSubview(genreLabel)
         movieInfomationStackView.addArrangedSubview(ageLimitLabel)
         movieInfomationStackView.addArrangedSubview(directorLabel)
         movieInfomationStackView.addArrangedSubview(castLabel)
-        movieInfomationStackView.addArrangedSubview(runningTimeLabel)
         movieInfomationStackView.addArrangedSubview(createdAtLabel)
+        
         verticalStackView.addArrangedSubview(movieInfomationStackView)
-        audienceInfomationStackView.addArrangedSubview(audienceLabel)
-        verticalStackView.addArrangedSubview(audienceLabel)
+        
+        audienceInfomationStackView.addArrangedSubview(stackAudienceStackView)
+        stackAudienceStackView.addArrangedSubview(stackAudienceLabel)
+        stackAudienceStackView.addArrangedSubview(stackAudienceCountLabel)
+        
+        audienceInfomationStackView.addArrangedSubview(dailyAudienceStackView)
+        dailyAudienceStackView.addArrangedSubview(dailyAudienceLabel)
+        dailyAudienceStackView.addArrangedSubview(dailyAudienceCountLabel)
+        verticalStackView.addArrangedSubview(audienceInfomationStackView)
+        
+        boxOfficeRankStackView.addArrangedSubview(boxOfficeRankLabel)
+        boxOfficeRankStackView.addArrangedSubview(boxOfficeRankNumberLabel)
+        verticalStackView.addArrangedSubview(boxOfficeRankStackView)
+        
+        boxOfficeIncreaseRankStackView.addArrangedSubview(rankIncreaseLabel)
+        boxOfficeIncreaseRankStackView.addArrangedSubview(rankIncreaseNumberLabel)
+        verticalStackView.addArrangedSubview(boxOfficeIncreaseRankStackView)
+        
+        boxOfficeNewRankStackView.addArrangedSubview(newRankLabel)
+        boxOfficeNewRankStackView.addArrangedSubview(newRankJudgeLabel)
+        verticalStackView.addArrangedSubview(boxOfficeNewRankStackView)
+        
+        
+        
         
         contentScrollView.insetsLayoutMarginsFromSafeArea = false
         verticalStackView.insetsLayoutMarginsFromSafeArea = false
@@ -217,6 +445,7 @@ final class SecondView: UIView {
             self.verticalStackView.leadingAnchor.constraint(equalTo: contentScrollView.leadingAnchor),
             self.verticalStackView.trailingAnchor.constraint(equalTo: contentScrollView.trailingAnchor),
             self.verticalStackView.topAnchor.constraint(equalTo: contentScrollView.topAnchor),
+            self.verticalStackView.bottomAnchor.constraint(equalTo: contentScrollView.bottomAnchor),
             self.verticalStackView.widthAnchor.constraint(equalTo: self.widthAnchor),
             
             self.moviewPosterImage.topAnchor.constraint(equalTo: verticalStackView.topAnchor),
@@ -224,17 +453,20 @@ final class SecondView: UIView {
             self.moviewPosterImage.trailingAnchor.constraint(equalTo: verticalStackView.trailingAnchor),
             self.moviewPosterImage.heightAnchor.constraint(equalTo: moviewPosterImage.widthAnchor),
 
-            self.descriptionLabel.leadingAnchor.constraint(equalTo: verticalStackView.leadingAnchor, constant: 10),
-            self.descriptionLabel.trailingAnchor.constraint(equalTo: verticalStackView.trailingAnchor, constant: -10),
 
+            self.movieInfomationStackView.topAnchor.constraint(equalTo: moviewPosterImage.bottomAnchor),
             self.movieInfomationStackView.leadingAnchor.constraint(equalTo: self.verticalStackView.leadingAnchor),
             self.movieInfomationStackView.trailingAnchor.constraint(equalTo: self.verticalStackView.trailingAnchor),
+            self.movieInfomationStackView.heightAnchor.constraint(equalTo: self.moviewPosterImage.heightAnchor),
 
 //            self.audienceInfomationStackView.topAnchor.constraint(equalTo: self.movieInfomationStackView.bottomAnchor),
 //            self.audienceInfomationStackView.leadingAnchor.constraint(equalTo: self.movieInfomationStackView.leadingAnchor),
-//            self.audienceInfomationStackView.trailingAnchor.constraint(equalTo: self.movieInfomationStackView.trailingAnchor),
-//            self.audienceInfomationStackView.widthAnchor.constraint(equalTo: self.movieInfomationStackView.widthAnchor),
-            
+//            self.audienceInfomationStackView.trailingAnchor.constraint(equalTo:self.movieInfomationStackView.trailingAnchor),
+            self.audienceInfomationStackView.widthAnchor.constraint(equalTo: self.verticalStackView.widthAnchor),
+            self.boxOfficeRankStackView.widthAnchor.constraint(equalTo: self.verticalStackView.widthAnchor),
+            self.boxOfficeIncreaseRankStackView.widthAnchor.constraint(equalTo: self.verticalStackView.widthAnchor),
+            self.boxOfficeNewRankStackView.widthAnchor.constraint(equalTo: self.verticalStackView.widthAnchor),
+
         ])
     }
 }
