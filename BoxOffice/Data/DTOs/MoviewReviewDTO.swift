@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 struct MovieReviewDTO {
     let reviewData: [String: Any]

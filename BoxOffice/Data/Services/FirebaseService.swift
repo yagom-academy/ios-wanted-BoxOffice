@@ -26,6 +26,7 @@ final class FirebaseService {
 
     func fetchMovieReviews(of movieCode: String, completion: @escaping (Result<[MovieReviewDTO], Error>) -> Void) {
         movieReviewReference.whereField("movieCode", isEqualTo: movieCode)
+            .order(by: "timeStamp", descending: true)
             .getDocuments { snapShot, error in
                 guard error == nil else {
                     completion(.failure(FirebaseError.internalError))
@@ -45,6 +46,8 @@ final class FirebaseService {
 
     func uploadReview(image: UIImage, review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void) {
         var data = review.toDTO().reviewData
+        data.updateValue(Date(), forKey: "timeStamp")
+
         guard let id = data["id"] as? String else { return }
         uploadImage(id: review.id, image: image) { [weak self] result in
             switch result {
