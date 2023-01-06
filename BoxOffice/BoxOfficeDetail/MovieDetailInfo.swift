@@ -2,11 +2,11 @@
 //  MoviewDetailInfo.swift
 //  BoxOffice
 //
-//  Created by Baek on 2023/01/03.
+//  Created by 백곰 on 2023/01/03.
 //
 import Foundation
 
-// MARK: - Welcome
+// MARK: - MovieDetailInfo
 struct MovieDetailInfo: Codable {
     let movieInfoResult: MovieInfoResult
 }
@@ -21,7 +21,6 @@ struct MovieInfoResult: Codable {
 struct MovieInfo: Codable {
     let movieCD, movieNm, movieNmEn, movieNmOg: String
     let showTm, prdtYear, openDt, prdtStatNm: String
-    //let typeNm: String
     let nations: [Nation]
     let genres: [Genre]
     let directors: [Director]

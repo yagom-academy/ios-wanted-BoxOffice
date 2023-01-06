@@ -2,7 +2,7 @@
 //  BoxOfficeRequest.swift
 //  BoxOffice
 //
-//  Created by Baek on 2023/01/04.
+//  Created by 백곰 on 2023/01/04.
 //
 
 import Foundation
