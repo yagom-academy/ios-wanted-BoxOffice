@@ -8,7 +8,14 @@
 import UIKit
 
 class MovieSubInfoView: UIView {
-    private let horizontalStackView: UIStackView = {
+    private let infoStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let actorStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -22,12 +29,20 @@ class MovieSubInfoView: UIView {
         return stackView
     }()
     
-    private let totalAudienceLabel = MovieLabel(font: .title3)
-    private let productionYearLabel = MovieLabel(font: .headline)
-    private let showTimeLabel = MovieLabel(font: .headline)
+    private let moreActorsButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("더보기", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let productionYearLabel = MovieLabel(font: .title3, isBold: true)
+    private var ageLimitLabel = MovieLabel(font: .title3, isBold: true)
+    private let showTimeLabel = MovieLabel(font: .title3, isBold: true)
+    private let totalAudienceLabel = MovieLabel(font: .title3, isBold: true)
     private let directorNameLabel = MovieLabel(font: .body)
     private let actorsLabel = MovieLabel(font: .body)
-    private let ageLimitLabel = MovieLabel(font: .title3)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,29 +54,62 @@ class MovieSubInfoView: UIView {
         setupView()
     }
     
-    //TODO: MovieDetail로 뷰 세팅하기
+    override func draw(_ rect: CGRect) {
+        let separator = UIBezierPath()
+        separator.move(to: CGPoint(x: 0, y: bounds.maxY))
+        separator.addLine(to: CGPoint(x: bounds.maxX, y: bounds.maxY))
+        separator.lineWidth = 8
+        UIColor.systemGray5.setStroke()
+        separator.stroke()
+        separator.close()
+    }
+    
     func configure(with movie: MovieDetail) {
-
+        if let ageLimit = AgeLimit(rawValue: movie.ageLimit) {
+            ageLimitLabel.text = ageLimit.age
+            ageLimitLabel.backgroundColor = ageLimit.color
+        } else {
+            ageLimitLabel.text = AgeLimit.fullLimit.age
+            ageLimitLabel.backgroundColor = AgeLimit.fullLimit.color
+        }
+        
+        productionYearLabel.text = movie.productionYear
+        showTimeLabel.text = " " + movie.showTime + "분"
+        //TODO: numberFormatter로 , 추가
+        totalAudienceLabel.text = " " + movie.totalAudience + "명 관람"
+        directorNameLabel.text = "감독: " + movie.directorName
+        actorsLabel.text =  "출연: " + movie.actors
+    }
+    
+    func addTargetMoreButton(with target: UIViewController, selector: Selector) {
+        moreActorsButton.addTarget(target,
+                                   action: selector,
+                                   for: .touchUpInside)
     }
     
     private func setupView() {
         addSubView()
         setupConstraint()
+        self.backgroundColor = .systemBackground
     }
     
     private func addSubView() {
-        horizontalStackView.addArrangedSubview(productionYearLabel)
-        horizontalStackView.addArrangedSubview(ageLimitLabel)
-        horizontalStackView.addArrangedSubview(showTimeLabel)
-        horizontalStackView.addArrangedSubview(totalAudienceLabel)
+        infoStackView.addArrangedSubview(productionYearLabel)
+        infoStackView.addArrangedSubview(ageLimitLabel)
+        infoStackView.addArrangedSubview(showTimeLabel)
+        infoStackView.addArrangedSubview(totalAudienceLabel)
         
-        entireStackView.addArrangedSubview(horizontalStackView)
+        actorStackView.addArrangedSubview(actorsLabel)
+        actorStackView.addArrangedSubview(moreActorsButton)
+        
+        entireStackView.addArrangedSubview(infoStackView)
         entireStackView.addArrangedSubview(directorNameLabel)
-        entireStackView.addArrangedSubview(actorsLabel)
+        entireStackView.addArrangedSubview(actorStackView)
         
         self.addSubview(entireStackView)
     }
     
+    //TODO: constraint 및 StackView 조정
     private func setupConstraint() {
         NSLayoutConstraint.activate([
             entireStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
@@ -73,5 +121,43 @@ class MovieSubInfoView: UIView {
             entireStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,
                                                  constant: -16)
         ])
+    }
+}
+
+enum AgeLimit: String {
+    case all = "전체관람가"
+    case twelveOver = "12세 이상 관람가"
+    case fifteenOver = "15세 이상 관람가"
+    case teenagersNotAllowed = "청소년 관람불가"
+    case fullLimit = "제한상영가"
+    
+    var age: String {
+        switch self {
+        case .all:
+            return "All"
+        case .twelveOver:
+            return "12"
+        case .fifteenOver:
+            return "15"
+        case .teenagersNotAllowed:
+            return "18"
+        case .fullLimit:
+            return "X"
+        }
+    }
+    
+    var color: UIColor {
+        switch self {
+        case .all:
+            return .systemGreen
+        case .twelveOver:
+            return .systemYellow
+        case .fifteenOver:
+            return .systemOrange
+        case .teenagersNotAllowed:
+            return .systemRed
+        case .fullLimit:
+            return .black
+        }
     }
 }
