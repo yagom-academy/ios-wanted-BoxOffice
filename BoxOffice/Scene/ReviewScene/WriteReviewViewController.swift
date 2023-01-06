@@ -176,12 +176,14 @@ extension WriteReviewViewController {
         guard nickName.isEmpty == false,
               content.isEmpty == false,
               password.isEmpty == false else {
-            //TODO: 모든 항목 입력 확인 얼럿 띄우기
+            showAlert(title: "저장 실패",
+                      message: "모든 항목을 작성해주세요.")
             return nil
         }
         
         if validatePassword() == false {
-            //TODO: 암호 유효성 실패 얼럿 띄우기
+            showAlert(title: "암호 확인",
+                      message: "암호는 6~20자리로 숫자, 영문 소문자, 특수문자(!, @, #, $)를 포함해야 합니다.")
             return nil
         }
         

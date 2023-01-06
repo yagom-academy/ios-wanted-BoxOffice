@@ -172,7 +172,6 @@ extension MovieDetailViewController {
     
     @objc func reviewDeleteButtonTapped(button: UIButton) {
         let review = reviewViewModel.reviews.value[button.tag]
-        
         let checkPasswordAlert = UIAlertController(title: "리뷰 삭제",
                                                    message: "암호를 입력해주세요.",
                                                    preferredStyle: .alert)
@@ -183,6 +182,9 @@ extension MovieDetailViewController {
             if inputPassword == review.password {
                 reviewViewModel.delete(review,
                                        at: movieDetail.title + movieDetail.openYear)
+            } else {
+                showAlert(title: "리뷰 삭제 실패",
+                          message: "암호가 일치하지 않습니다.")
             }
         }
         
