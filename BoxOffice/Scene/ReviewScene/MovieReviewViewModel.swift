@@ -36,6 +36,8 @@ final class MovieReviewViewModel: MovieReviewViewModelType {
                 self.error.value = error.localizedDescription
             }
         }
+        
+        fetch(at: movieKey)
     }
     
     func fetch(at movieKey: String) {
@@ -48,6 +50,19 @@ final class MovieReviewViewModel: MovieReviewViewModelType {
                 self?.error.value = error.localizedDescription
             }
         }
+    }
+    
+    func delete(_ review: Review, at movieKey: String) {
+        reviewFirebaseUseCase.delete(review, at: movieKey) { [weak self] result in
+            switch result {
+            case .success(_):
+                break
+            case .failure(let error):
+                self?.error.value = error.localizedDescription
+            }
+        }
+        
+        fetch(at: movieKey)
     }
     
     func calculateRating() {
