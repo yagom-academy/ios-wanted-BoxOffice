@@ -11,7 +11,8 @@ extension Date {
     static let dateFormatter = DateFormatter()
     var now: String {
         get {
-            Date.dateFormatter.string(from: Date())
+            Date.dateFormatter.dateFormat = "yyyy-MM-dd"
+            return Date.dateFormatter.string(from: Date())
         }
     }
 }
