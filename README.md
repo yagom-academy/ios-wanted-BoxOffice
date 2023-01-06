@@ -38,11 +38,11 @@
 - **`비동기처리`**
     - @escaping closer
 
-## 📱 실행화면
-
+## 📱 실행화면!
+    
 |||
 |:---:|:---:|
-|<image src = "https://i.imgur.com/S8zR5qO.gif">|<image src = "https://i.imgur.com/ha17cAx.gif">|
+|<image src = "https://i.imgur.com/10Dv6jS.gif" width="250" height="500">|<image src = "https://i.imgur.com/zzi51eA.gif" width="250" height="500">|
 |`Prview와 상세 화면`|`리뷰 등록 및 리뷰 확인`|
 
 ## 🔭 프로젝트 구조
