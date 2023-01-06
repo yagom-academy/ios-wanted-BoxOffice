@@ -79,6 +79,16 @@ class WriteReviewViewController: UIViewController {
     private let imagePicker = UIImagePickerController()
     private var password = String()
     private var imageURL = String()
+    private let movie: MovieData
+    
+    init(movie: MovieData) {
+        self.movie = movie
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,8 +157,7 @@ extension WriteReviewViewController {
                                             action: #selector(saveBarButtonTapped))
         
         navigationItem.rightBarButtonItem = saveBarButton
-        //TODO: 영화 제목 넘겨받기
-        navigationItem.title = "영화 제목"
+        navigationItem.title = movie.title
     }
     
     @objc private func saveBarButtonTapped() {

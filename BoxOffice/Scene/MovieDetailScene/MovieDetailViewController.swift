@@ -139,7 +139,9 @@ extension MovieDetailViewController {
     }
     
     @objc private func writeReviewButtonTapped() {
-        //TODO: 리뷰 쓰기 화면 이동
+        let writeReviewViewController = WriteReviewViewController(movie: movieDetail)
+        navigationController?.pushViewController(writeReviewViewController,
+                                                 animated: true)
     }
     
     @objc private func moreReviewButtonTapped() {
