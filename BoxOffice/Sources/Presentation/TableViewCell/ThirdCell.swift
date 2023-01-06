@@ -175,21 +175,30 @@ class ThirdCell: UITableViewCell {
         var directors = String()
         var actors = String()
         detailInfo.genres.forEach {
-            genres += ("\($0), ")
+            genres += ("\($0),")
         }
         detailInfo.directors.forEach {
-            directors += ("\($0), ")
+            directors += ("\($0),")
         }
         if  detailInfo.actors.count != 0 {
             detailInfo.actors.forEach {
-                actors += ("\($0), ")
+                actors += ("\($0),")
             }
-            actors.removeLast(2)
+            actors.removeLast()
         } else {
-            actors = ""
+            actors = "-"
         }
-        genres.removeLast(2)
-        directors.removeLast(2)
+        
+        if  detailInfo.directors.count != 0 {
+            detailInfo.directors.forEach {
+                directors += ("\($0),")
+            }
+            directors.removeLast()
+        } else {
+            directors = "-"
+        }
+        
+        genres.removeLast()
         
         genresLabel.text = genres
         directorsLabel.text = directors

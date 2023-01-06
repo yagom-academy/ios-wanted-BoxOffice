@@ -18,6 +18,7 @@ class ReviewCell: UITableViewCell {
         imageView.layer.borderColor = UIColor.clear.cgColor
         imageView.clipsToBounds = true
         imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        imageView.backgroundColor = .gray
         imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
         return imageView
     }()
@@ -183,7 +184,6 @@ class ReviewCell: UITableViewCell {
         }
         
         userImageView.image = reviews[index].userImage.toUIImage() ?? UIImage(systemName: "person.circle")
-        // star..
         writingLabel.text = reviews[index].review
         nicknameLabel.text = reviews[index].nickname
         dateLabel.text = reviews[index].date?.toString(.yyyyMMddDot)

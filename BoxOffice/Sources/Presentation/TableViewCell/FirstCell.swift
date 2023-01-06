@@ -153,13 +153,16 @@ class FirstCell: UITableViewCell {
         posterImageView.setImage(with: detailInfo.poster ?? "")
         if boxOfficeInfo.rankOldAndNew == .new {
             updownNumberLabel.text = boxOfficeInfo.rankOldAndNew.rawValue
+            updownImageView.isHidden = true
         } else {
             if boxOfficeInfo.rankInten < 0 {
                 updownImageView.image = UIImage(systemName: "arrowtriangle.down.fill")
                 updownImageView.tintColor = .blue
+                updownNumberLabel.text = "\(boxOfficeInfo.rankInten)"
+            } else if boxOfficeInfo.rankInten == 0 {
+                updownImageView.isHidden = true
+                updownNumberLabel.text = "-"
             }
-            
-            updownNumberLabel.text = "\(abs(boxOfficeInfo.rankInten))"
         }
         titleLabel.text = name
         releaseDatelabel.text = detailInfo.productionYear
