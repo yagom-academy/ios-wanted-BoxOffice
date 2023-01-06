@@ -21,26 +21,7 @@ final class Repository {
     private let moviewDetail = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
     
     typealias FetchResult = Result<Data, Error>
-    
-    func fetchPoster(title: String, completion: @escaping (FetchResult) -> Void) {
-        var urlComponent = URLComponents(string: omdbAPIUrl)
-        urlComponent?.queryItems = [
-            URLQueryItem(name: "apikey", value: firstApiKey),
-            URLQueryItem(name: "t", value: title)
-        ]
-        
-        guard let url = urlComponent?.url else { return }
-        
-        fetch(url) { result in
-            switch result {
-            case .success(let data):
-                completion(.success(data))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
+
     func fetchBoxOffice(date: String, completion: @escaping (FetchResult) -> Void) {
         var urlComponent = URLComponents(string: boxOfficeUrl)
         urlComponent?.queryItems = [
@@ -66,6 +47,25 @@ final class Repository {
         urlComponent?.queryItems = [
             URLQueryItem(name: "key", value: boxOfficeApiKey),
             URLQueryItem(name: "movieCd", value: movieCd),
+        ]
+        
+        guard let url = urlComponent?.url else { return }
+        
+        fetch(url) { result in
+            switch result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchPoster(title: String, completion: @escaping (FetchResult) -> Void) {
+        var urlComponent = URLComponents(string: omdbAPIUrl)
+        urlComponent?.queryItems = [
+            URLQueryItem(name: "apikey", value: firstApiKey),
+            URLQueryItem(name: "t", value: title)
         ]
         
         guard let url = urlComponent?.url else { return }

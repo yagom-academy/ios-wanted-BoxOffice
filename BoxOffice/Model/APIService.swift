@@ -11,27 +11,15 @@ final class APIService {
     
     private let repository = Repository()
     
-    typealias PosterResult = Result<MovieEntity, Error>
-    typealias BoxOfficeResult = Result<BoxOfficeEntity, Error>
+    typealias PosterResult = Result<MoviePosterEntity, Error>
+    typealias BoxOfficeResult = Result<DailyBoxOfficeEntity, Error>
     typealias MovieInfoResult = Result<MovieInfoEntity, Error>
-    
-    func fetchPoster(title: String, completion: @escaping (PosterResult) -> Void) {
-        repository.fetchPoster(title: title) { result in
-            switch result {
-            case let .success(data):
-                guard let moviePoster = self.parseJson(from: data, to: MovieEntity.self) else { return }
-                completion(.success(moviePoster))
-            case let .failure(error):
-                completion(.failure(error))
-            }
-        }
-    }
     
     func fetchBoxOffice(date: String, completion: @escaping (BoxOfficeResult) -> Void) {
         repository.fetchBoxOffice(date: date) { result in
             switch result {
             case let .success(data):
-                guard let movieList = self.parseJson(from: data, to: BoxOfficeEntity.self) else { return }
+                guard let movieList = self.parseJson(from: data, to: DailyBoxOfficeEntity.self) else { return }
                 completion(.success(movieList))
             case let .failure(error):
                 completion(.failure(error))
@@ -45,6 +33,18 @@ final class APIService {
             case let .success(data):
                 guard let movieDetail = self.parseJson(from: data, to: MovieInfoEntity.self) else { return }
                 completion(.success(movieDetail))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchPoster(title: String, completion: @escaping (PosterResult) -> Void) {
+        repository.fetchPoster(title: title) { result in
+            switch result {
+            case let .success(data):
+                guard let moviePoster = self.parseJson(from: data, to: MoviePosterEntity.self) else { return }
+                completion(.success(moviePoster))
             case let .failure(error):
                 completion(.failure(error))
             }

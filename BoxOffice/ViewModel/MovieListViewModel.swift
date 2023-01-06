@@ -10,9 +10,9 @@ import Foundation
 final class MovieListViewModel {
     private let apiService = APIService()
     
-    private var boxOfficeList = Observable([BoxOfficeEntity.BoxOffice.DailyBoxoffice]())
+    private var boxOfficeList = Observable([DailyBoxOfficeEntity.BoxOfficeResult.DailyBoxOfficeList]())
     private var movieInfoList = Observable([MovieInfoEntity]())
-    private var moviePosterList = Observable([MovieEntity]())
+    private var moviePosterList = Observable([MoviePosterEntity]())
     
     var movieEssentialInfoList = Observable([MovieEssentialInfo]())
     var errorMessage = Observable("")
@@ -40,7 +40,7 @@ final class MovieListViewModel {
         }
         
         movieEssentialInfoList.subscribe { movie in
-            print(movie)
+//            print(movie)
         }
     }
     
@@ -49,9 +49,24 @@ final class MovieListViewModel {
                                movieInfoList.value,
                                moviePosterList.value)
         let models = sequenceZip.map {
-            MovieEssentialInfo(poster: $0.2.poster,
-                               boxOfficeRank: $0.0.rank,
-                               movieNmEn: $0.1.movieInfoResult.movieInfo.movieNmEn)
+            let boxOffice = $0.0
+            let info = $0.1.movieInfoResult.movieInfo
+            let poster = $0.2
+            let genres = info.genres
+            return MovieEssentialInfo(posterUrl: poster.poster,
+                               rank: boxOffice.rank,
+                               movieNm: boxOffice.movieNm,
+                               openDt: boxOffice.openDt,
+                               audiAcc: boxOffice.audiAcc,
+                               rankInten: boxOffice.rankInten,
+                               rankOldAndNew: boxOffice.rankOldAndNew,
+                               prdtYear: info.prdtYear,
+                               openYear: info.openDt,
+                               showTm: info.showTm,
+                                      genres: [""],
+                               directors: [""],
+                                      actors: [""],
+                                      watchGradeNm: "")
         }
         movieEssentialInfoList.value = models
     }
