@@ -9,6 +9,12 @@ import UIKit
 
 class SecondViewController: UIViewController {
     
+    private let boxofficeDetailAPI = BoxOfficeDetailAPI()
+    private let moviePosterAPI = MoviePosterAPI()
+    private var movieData: MovieDetailInfo?
+    private var moviePosterData: MoviePosterInfo?
+    private let URLSemaphore = DispatchSemaphore(value: 0)
+    
     let movieDetailView: SecondView = {
         let view = SecondView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -21,13 +27,16 @@ class SecondViewController: UIViewController {
         scrollView.backgroundColor = .white
         return scrollView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        self.fetchData()
+        self.fetchPosterData()
+        movieDetailView.fetchMovieDetailData(posterData: moviePosterData, movieData: movieData)
         configureUI()
     }
-
+    
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -35,6 +44,37 @@ class SecondViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private func fetchData() {
+        boxofficeDetailAPI.dataTask(by: "20225061", completion: { (response) in
+            switch response {
+            case .success(let data):
+                self.movieData = data
+                print(self.movieData)
+                self.URLSemaphore.signal()
+            case .failure(let data):
+                print(data)
+            }
+        })
+        self.URLSemaphore.wait()
+    }
+    
+    private func fetchPosterData() {
+        guard let movieDataName = self.movieData?.movieInfoResult.movieInfo.movieNmEn else { return }
+        
+        moviePosterAPI.dataTask(by: movieDataName, completion: { (response) in
+            switch response {
+            case .success(let data):
+                self.moviePosterData = data
+                print(self.moviePosterData)
+                self.URLSemaphore.signal()
+            case .failure(let data):
+                print(data)
+            }
+        })
+        self.URLSemaphore.wait()
+    }
+    
 }
 
 extension SecondViewController {
