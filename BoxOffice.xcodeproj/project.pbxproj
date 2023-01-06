@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		635A19E828F9603900197BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E728F9603900197BCC /* AppDelegate.swift */; };
 		635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19E928F9603900197BCC /* SceneDelegate.swift */; };
-		635A19EC28F9603900197BCC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635A19EB28F9603900197BCC /* ViewController.swift */; };
 		635A19F128F9603A00197BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F028F9603A00197BCC /* Assets.xcassets */; };
 		635A19F428F9603A00197BCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635A19F228F9603A00197BCC /* LaunchScreen.storyboard */; };
 		9B28F08129664FAD00F87F48 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B28F08029664FAD00F87F48 /* UIImageView+Extension.swift */; };
@@ -47,14 +46,12 @@
 		E19B5DB729645160001B2DB4 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DB629645160001B2DB4 /* UIImage+Extension.swift */; };
 		E19B5DB929645189001B2DB4 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DB829645189001B2DB4 /* String+Extension.swift */; };
 		E19B5DCA29647B10001B2DB4 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DC929647B10001B2DB4 /* Date+Extension.swift */; };
-
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		635A19E428F9603900197BCC /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635A19E728F9603900197BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		635A19E928F9603900197BCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		635A19EB28F9603900197BCC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		635A19F028F9603A00197BCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		635A19F328F9603A00197BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		635A19F528F9603A00197BCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -234,10 +231,9 @@
 		9BEA27FF29629FB900FB7E73 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				E1166DC22965707500C42427 /* Comment */,
-				635A19EB28F9603900197BCC /* ViewController.swift */,
 				9B335C222963E25200C8F339 /* Main */,
 				9B8B04DC296537800095636B /* Detail */,
+				E1166DC22965707500C42427 /* Comment */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -248,39 +244,21 @@
 				9BEA28012962D00700FB7E73 /* BoxOfficeAPI.swift */,
 				9BEA28032962D04F00FB7E73 /* HTTPMethod.swift */,
 				9BEA28052962E41400FB7E73 /* NetworkHandler.swift */,
-                E19B5DAE2963D8CD001B2DB4 /* FirebaseManager.swift */,
-                E19B5DB329643A14001B2DB4 /* CommentManager.swift */,
-				);
-            path = Network;
-            sourceTree = "<group>";
-        };
-        E1166DC22965707500C42427 /* Comment */ = {
-            isa = PBXGroup;
-            children = (
-                E1166DC62965D58200C42427 /* CommentAddViewModel.swift */,
-                E1166DC82965DA7D00C42427 /* CommentViewController.swift */,
-            );
-            path = Comment;
-            sourceTree = "<group>";
-        };
-        E19B5DB02963D94F001B2DB4 /* Model */ = {
-            isa = PBXGroup;
-            children = (
-                E19B5DB12963D960001B2DB4 /* Comment.swift */,
-            );
-            path = Model;
-            sourceTree = "<group>";
-        };
-        E19B5DB529645148001B2DB4 /* Extension */ = {
-            isa = PBXGroup;
-            children = (
-                E19B5DB629645160001B2DB4 /* UIImage+Extension.swift */,
-                E19B5DB829645189001B2DB4 /* String+Extension.swift */,
-                E19B5DC929647B10001B2DB4 /* Date+Extension.swift */,
-            );
-            path = Extension;
-            sourceTree = "<group>";
-        };
+				E19B5DAE2963D8CD001B2DB4 /* FirebaseManager.swift */,
+				E19B5DB329643A14001B2DB4 /* CommentManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E1166DC22965707500C42427 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				E1166DC62965D58200C42427 /* CommentAddViewModel.swift */,
+				E1166DC82965DA7D00C42427 /* CommentViewController.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -393,7 +371,6 @@
 				E19B5DB729645160001B2DB4 /* UIImage+Extension.swift in Sources */,
 				E1166DC92965DA7D00C42427 /* CommentViewController.swift in Sources */,
 				E19B5DAF2963D8CD001B2DB4 /* FirebaseManager.swift in Sources */,
-				635A19EC28F9603900197BCC /* ViewController.swift in Sources */,
 				9BD58BDA2966D542000A2EA7 /* ReviewListViewModel.swift in Sources */,
 				E177830929673990009FB219 /* ReviewListCell.swift in Sources */,
 				E19B5DB429643A14001B2DB4 /* CommentManager.swift in Sources */,
