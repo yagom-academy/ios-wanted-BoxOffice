@@ -17,7 +17,7 @@ final class ReviewListViewController: UIViewController,  UICollectionViewDelegat
         case CommentSection
     }
     
-    private var reviewListViewModel: ReviewListViewModel?
+    private var reviewListViewModel: ReviewListViewModelInterface?
     private lazy var dataSource = createDataSource()
     private var cancelable = Set<AnyCancellable>()
     
@@ -30,7 +30,7 @@ final class ReviewListViewController: UIViewController,  UICollectionViewDelegat
         bind()
     }
     
-    static func instance(_ viewModel: ReviewListViewModel) -> ReviewListViewController {
+    static func instance(_ viewModel: ReviewListViewModelInterface) -> ReviewListViewController {
         let viewController = ReviewListViewController(nibName: nil, bundle: nil)
         viewController.reviewListViewModel = viewModel
         return viewController

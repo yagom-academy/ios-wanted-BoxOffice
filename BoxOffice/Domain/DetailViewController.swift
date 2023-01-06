@@ -89,9 +89,12 @@ final class DetailViewController: UIViewController {
     static func instance(_ viewModel: DetailViewModelInterface, model: CustomBoxOffice) -> DetailViewController {
         let viewController = DetailViewController(nibName: nil, bundle: nil)
         viewController.detailViewModel = viewModel
-        viewController.detailInfoViewController = DetailInfoViewController.instance( DetailInfoViewModel(customBoxOffice: model))
+        viewController.detailInfoViewController = DetailInfoViewController.instance(
+            DetailInfoViewModel(customBoxOffice: model)
+        )
         viewController.reviewListViewController = ReviewListViewController.instance(
-            ReviewListViewModel(detailBoxOffice: model))
+            ReviewListViewModel(detailBoxOffice: model)
+        )
         return viewController
     }
     

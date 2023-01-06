@@ -85,7 +85,7 @@ final class DetailInfoViewController: UIViewController {
     }()
     
     private var cancelable = Set<AnyCancellable>()
-    private var detailInfoViewModel: DetailInfoViewModel?
+    private var detailInfoViewModel: DetailInfoViewModelInterface?
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,7 +96,7 @@ final class DetailInfoViewController: UIViewController {
         setupConstraints()
     }
     
-    static func instance(_ viewModel: DetailInfoViewModel) -> DetailInfoViewController {
+    static func instance(_ viewModel: DetailInfoViewModelInterface) -> DetailInfoViewController {
         let viewController = DetailInfoViewController(nibName: nil, bundle: nil)
         viewController.detailInfoViewModel = viewModel
         return viewController
