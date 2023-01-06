@@ -12,7 +12,7 @@ final class HeaderView: UICollectionReusableView {
     let sectionHeaderlabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
+        label.textColor = .label
         label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()

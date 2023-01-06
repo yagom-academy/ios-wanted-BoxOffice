@@ -154,7 +154,7 @@ private extension MovieAPIUseCase {
                 openDate: movieInfo.openDt,
                 totalAudience: boxOffice.audiAcc,
                 rankChange: boxOffice.rankInten,
-                isNewEntry: boxOffice.rankOldAndNew == "New",
+                isNewEntry: boxOffice.rankOldAndNew == "NEW",
                 productionYear: movieInfo.prdtYear,
                 openYear: String(movieInfo.openDt.prefix(4)),
                 showTime: movieInfo.showTm,
