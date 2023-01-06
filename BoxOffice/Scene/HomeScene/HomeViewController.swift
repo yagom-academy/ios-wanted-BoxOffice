@@ -26,6 +26,13 @@ final class HomeViewController: UIViewController {
         button.contentHorizontalAlignment = .left
         return button
     }()
+    private var viewMode: BoxOfficeMode {
+        if viewModeChangeButton.currentTitle == "▼ 일별 박스오피스" {
+            return BoxOfficeMode.daily
+        } else {
+            return BoxOfficeMode.weekly
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,19 +110,15 @@ final class HomeViewController: UIViewController {
             }
         }
         
-        homeCollectionView.currentDate = searchingDate.toString()
+        homeCollectionView.currentDate = "20221220"
     }
     
     private func requestInitialData() async throws {
-        try await homeViewModel.requestDailyData(with: searchingDate.toString())
+        try await homeViewModel.requestDailyData(with: "20221220")
     }
     
     @objc private func viewModeChangeButtonTapped() {
-        var modeText = viewModeChangeButton.currentTitle
-        modeText?.removeFirst()
-        modeText?.removeFirst()
-
-        let modeSelectViewController = ModeSelectViewController(passMode: modeText ?? "")
+        let modeSelectViewController = ModeSelectViewController(passMode: viewMode)
         modeSelectViewController.delegate = self
         
         present(modeSelectViewController, animated: true)
@@ -133,27 +136,33 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
         // TODO: 영화 상세로 넘어가기
-
-        let testMovie = MovieData(
-            uuid: UUID(),
-            poster: nil,
-            currentRank: "1",
-            title: "오펀: 천사의 탄생",
-            openDate: "20221012",
-            totalAudience: "50243",
-            rankChange: "-3",
-            isNewEntry: true,
-            productionYear: "2022",
-            openYear: "2022",
-            showTime: "146",
-            genreName: "공포(호러)",
-            directorName: "윌리엄 브렌트 벨",
-            actors: ["이사벨 퍼만", "줄리아 스타일즈", "로지프 서덜랜드"],
-            ageLimit: "15세 이상 관람가"
-        )
-        let movieDetailViewController = MovieDetailViewController(movieDetail: testMovie)
+        if viewMode == .daily {
+            pushMovieDetail(
+                in: homeViewModel.dailyMovieCellDatas.value,
+                at: indexPath.row
+            )
+        } else {
+            if indexPath.section == 0 {
+                pushMovieDetail(
+                    in: homeViewModel.allWeekMovieCellDatas.value,
+                    at: indexPath.row
+                )
+            } else {
+                pushMovieDetail(
+                    in: homeViewModel.weekEndMovieCellDatas.value,
+                    at: indexPath.row
+                )
+            }
+        }
+    }
+    
+    private func pushMovieDetail(in cellDatas: [MovieData], at index: Int) {
+        let rankSortedCellDatas = cellDatas.sorted { a, b in
+            Int(a.currentRank) ?? 0 < Int(b.currentRank) ?? 0
+        }
+        let tappedCellData = rankSortedCellDatas[index]
+        let movieDetailViewController = MovieDetailViewController(movieDetail: tappedCellData)
         navigationController?.pushViewController(movieDetailViewController, animated: true)
     }
 }
