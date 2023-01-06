@@ -9,16 +9,17 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 final class FirebaseManager {
+    static let shared = FirebaseManager()
+    
+    private init() {}
+    
     private let database = Firestore.firestore()
     
-    func save(review: Review) {
-        do {
-            let reviewDictionary = try review.asDictionary()
-            
-            database.collection("review").document(review.password).setData(reviewDictionary)
-        } catch {
-            print(error)
-        }
+    func save(review: Review) throws {
+        let reviewDictionary = try review.asDictionary()
+        
+        database.collection("review").document(review.password).setData(reviewDictionary)
+    }
     
     func update(review: Review) {
         do {
@@ -60,5 +61,3 @@ final class FirebaseManager {
         }
     }
 }
-
-

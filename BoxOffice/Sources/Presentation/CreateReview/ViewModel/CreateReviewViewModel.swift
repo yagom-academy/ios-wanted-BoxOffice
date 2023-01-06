@@ -39,7 +39,6 @@ protocol CreateReviewViewModel {
 final class DefaultCreateReviewViewModel: CreateReviewViewModel {
     
     private let movie: Movie
-    private let firestoreManager: FirebaseManager
     private(set) var cancellables: Set<AnyCancellable> = .init()
     
     private var _isCurrentValid = CurrentValueSubject<Bool, Never>(false)
@@ -57,9 +56,8 @@ final class DefaultCreateReviewViewModel: CreateReviewViewModel {
         }
     }
     
-    init(movie: Movie, firestoreManager: FirebaseManager = .init()) {
+    init(movie: Movie) {
         self.movie = movie
-        self.firestoreManager = firestoreManager
     }
     
 }
@@ -111,7 +109,7 @@ extension DefaultCreateReviewViewModel: CreateReviewViewModelInput {
             date: Date()
         )
         do {
-            try firestoreManager.save(review: newReview)
+            try FirebaseManager.shared.save(review: newReview)
             _isCompleted.send(true)
         } catch {
             debugPrint(error)

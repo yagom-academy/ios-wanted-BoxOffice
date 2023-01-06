@@ -19,6 +19,7 @@ protocol MovieDetailViewModelInput {
 protocol MovieDetailViewModelOutput {
     var movie: Movie { get }
     var movieModel: AnyPublisher<Movie, Never> { get }
+    var reviewModel: AnyPublisher<[Review], Never> { get }
     var shareMovieInfoPublisher: PassthroughSubject<[String], Never> { get }
 
 }
@@ -31,11 +32,9 @@ protocol MovieDetailViewModelInterface {
 final class MovieDetailViewModel: MovieDetailViewModelInterface  {
     var input: MovieDetailViewModelInput { self }
     var output: MovieDetailViewModelOutput { self }
-
-    let firebaseManager = FirebaseManager()
     var _movie: Movie
-
-    var reviews: [Review]?
+    @Published var _reviews: [Review]?
+    private var _reviewModel = CurrentValueSubject<[Review], Never>([])
     var shareMovieInfoPublisher = PassthroughSubject<[String], Never>()
     
     init(movie: Movie) {
@@ -48,13 +47,21 @@ final class MovieDetailViewModel: MovieDetailViewModelInterface  {
 extension MovieDetailViewModel: MovieDetailViewModelInput, MovieDetailViewModelOutput {
     var movie: Movie { return _movie }
     var movieModel: AnyPublisher<Movie, Never> { return Just(_movie).eraseToAnyPublisher() }
+    var reviewModel: AnyPublisher<[Review], Never> { return _reviewModel.eraseToAnyPublisher() }
+    var review: [Review]? {
+        return _reviews
+    }
+    
     
     func viewWillAppear() {
-        firebaseManager.fetchAll { [weak self] in
+        FirebaseManager.shared.fetchAll { [weak self] reviews in
             if let self = self {
-                self.reviews = $0.filter {
+                var movieReview = reviews.filter {
                     $0.movieName == self.movie.name
                 }
+                self._reviews = movieReview
+                
+                self._reviewModel.send(movieReview)
             }
         }
     }

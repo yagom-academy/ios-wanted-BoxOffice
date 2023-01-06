@@ -61,7 +61,6 @@ class DetailViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 private extension DetailViewController {
@@ -71,8 +70,7 @@ private extension DetailViewController {
                 guard let self = self else {
                     return
                 }
-                
-                print(self.viewModel._movie)
+//                print(self.viewModel._movie)
             }.store(in: &cancelable)
         
         viewModel.output.shareMovieInfoPublisher
@@ -83,6 +81,14 @@ private extension DetailViewController {
                     applicationActivities: nil
                 )
                 self.present(activityController, animated: true)
+            }
+            .store(in: &cancelable)
+        
+        viewModel.output.reviewModel
+            .sink { [weak self] reviews in
+                guard let self = self else { return }
+            
+                self.tableView.reloadData()
             }
             .store(in: &cancelable)
     }
@@ -113,7 +119,7 @@ private extension DetailViewController {
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return (viewModel._reviews?.count ?? 0) + 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -135,17 +141,13 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! ReviewCell
             
-            if let reviews = viewModel.reviews {
-                cell.transferData(reviews, indexPath.row)
-                return cell
-            }
-            
             setUpDeleteButton(cell)
+            cell.transferData(viewModel.review, indexPath.row - 3, tableView)
             
             return cell
         }
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
            return UITableView.automaticDimension
        }
