@@ -176,7 +176,7 @@
 
 &nbsp;
 
-## 🔥 Truoble Shooting
+## 🔥 Trouble Shooting
 
 ### PassthroughSubject로 이벤트를 보냈는데, 왜 뷰가 이벤트를 전달받지 못하는 걸까?
 
