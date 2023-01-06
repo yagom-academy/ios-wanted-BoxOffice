@@ -15,7 +15,7 @@ final class MovieDetailView: UIView {
     private let contentScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .white
+        scrollView.backgroundColor = .black
         return scrollView
     }()
     
@@ -25,7 +25,7 @@ final class MovieDetailView: UIView {
         stackView.alignment = .center
         stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.backgroundColor = .white
+        stackView.backgroundColor = .black
         return stackView
     }()
     

@@ -21,17 +21,9 @@ class MovieDetailViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    private let contentScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .white
-        return scrollView
-    }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         self.fetchData()
         self.fetchPosterData()
         movieDetailView.fetchMovieDetailData(posterData: moviePosterData, movieData: movieData
