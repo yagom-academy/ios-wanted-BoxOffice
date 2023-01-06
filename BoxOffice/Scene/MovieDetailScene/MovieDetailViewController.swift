@@ -96,6 +96,7 @@ extension MovieDetailViewController: UITableViewDataSource {
         
         guard reviewCount != 0 else {
             setupInitialTableView()
+            movieReviewView.moreButtonState(isEnabled: false)
             return 0
         }
         
