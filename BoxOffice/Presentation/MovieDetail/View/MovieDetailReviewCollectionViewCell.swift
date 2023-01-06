@@ -15,7 +15,8 @@ final class MovieDetailReviewCollectionViewCell: UICollectionViewCell {
 
     private let fetchReviewUseCase = FetchReviewImageUseCase()
     private lazy var task: Cancellable? =  {
-        guard let review = review else { return nil }
+        guard let review = review,
+        review.image != "" else { return nil }
         let task: Cancellable? = fetchReviewUseCase.execute(imageURL: review.image) { result in
             switch result {
             case .success(let image):

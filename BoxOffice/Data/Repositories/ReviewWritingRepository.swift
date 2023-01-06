@@ -11,7 +11,7 @@ final class ReviewWritingRepository: ReviewWritingRepositoryInterface {
 
     private let firebaseService = FirebaseService.shared
 
-    func uploadReview(image: UIImage, review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void) {
+    func uploadReview(image: UIImage?, review: MovieReview, completion: @escaping (Result<Void, Error>) -> Void) {
         firebaseService.uploadReview(image: image, review: review) { result in
             completion(result)
         }

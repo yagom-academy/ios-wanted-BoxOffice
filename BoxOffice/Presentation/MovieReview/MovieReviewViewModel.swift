@@ -11,7 +11,7 @@ final class MovieReviewViewModel {
 
     // MARK: - Outputs
     private var selectedPhoto: UIImage?
-    
+
     // MARK: - UseCases
     private let uploadReviewUseCase = UploadReviewUseCase()
     
@@ -35,9 +35,6 @@ final class MovieReviewViewModel {
     func registrationButtonTapped(movieReview: MovieReview) {
         if isValid(movieReview: movieReview) {
             // TODO: upload review
-            guard let selectedPhoto = selectedPhoto else {
-                return
-            }
             
             uploadReviewUseCase.execute(image: selectedPhoto, review: movieReview) { [weak self] result in
                 switch result {
