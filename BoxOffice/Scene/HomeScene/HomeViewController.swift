@@ -15,7 +15,7 @@ enum BoxOfficeMode: String, CaseIterable {
 final class HomeViewController: UIViewController {
     private let homeCollectionView = HomeCollectionView()
     private let homeViewModel = DefaultHomeViewModel()
-    private var searchingDate: Date = Date()
+    private var searchingDate: Date = Date().previousDate(to: -7)
     private let viewModeChangeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -33,6 +33,14 @@ final class HomeViewController: UIViewController {
             return BoxOfficeMode.weekly
         }
     }
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(frame: .zero)
+        indicator.tintColor = .systemBlue
+        indicator.style = .large
+        indicator.hidesWhenStopped = true
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +52,7 @@ final class HomeViewController: UIViewController {
         Task {
             try await requestInitialData()
         }
+        activityIndicator.startAnimating()
     }
     
     private func setupInitialView() {
@@ -89,6 +98,7 @@ final class HomeViewController: UIViewController {
             }
             DispatchQueue.main.async {
                 self.homeCollectionView.appendDailySnapshot(with: rankSortedCellDatas)
+                self.activityIndicator.stopAnimating()
             }
         }
         homeViewModel.allWeekMovieCellDatas.bind { cellDatas in
@@ -98,6 +108,7 @@ final class HomeViewController: UIViewController {
             }
             DispatchQueue.main.async {
                 self.homeCollectionView.appendAllWeekSnapshot(data: rankSortedCellDatas)
+                self.activityIndicator.stopAnimating()
             }
         }
         homeViewModel.weekEndMovieCellDatas.bind { cellDatas in
@@ -107,14 +118,15 @@ final class HomeViewController: UIViewController {
             }
             DispatchQueue.main.async {
                 self.homeCollectionView.appendWeekEndSnapshot(data: rankSortedCellDatas)
+                self.activityIndicator.stopAnimating()
             }
         }
         
-        homeCollectionView.currentDate = "20221220"
+        homeCollectionView.currentDate = searchingDate.toString()
     }
     
     private func requestInitialData() async throws {
-        try await homeViewModel.requestDailyData(with: "20221220")
+        try await homeViewModel.requestDailyData(with: searchingDate.toString())
     }
     
     @objc private func viewModeChangeButtonTapped() {
@@ -181,6 +193,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 // MARK: ModalView Delegate
 extension HomeViewController: ModeSelectViewControllerDelegate {
     func didSelectedRowAt(indexPath: Int) async throws {
+        activityIndicator.startAnimating()
         let mode = BoxOfficeMode.allCases[indexPath]
         viewModeChangeButton.setTitle("▼ \(mode.rawValue)", for: .normal)
         let dateText = searchingDate.toString()
@@ -201,6 +214,7 @@ extension HomeViewController: ModeSelectViewControllerDelegate {
 
 extension HomeViewController: CalendarViewControllerDelegate {
     func searchButtonTapped(date: Date) async throws {
+        activityIndicator.startAnimating()
         searchingDate = date
         let dateText = date.toString()
         homeCollectionView.currentDate = dateText
@@ -224,6 +238,7 @@ private extension HomeViewController {
     func addSubviews() {
         view.addSubview(homeCollectionView)
         view.addSubview(viewModeChangeButton)
+        view.addSubview(activityIndicator)
     }
     
     func setupConstraints() {
@@ -237,6 +252,11 @@ private extension HomeViewController {
             homeCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             homeCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             homeCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            
+            activityIndicator.widthAnchor.constraint(equalToConstant: 40),
+            activityIndicator.heightAnchor.constraint(equalToConstant: 40),
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
 }
