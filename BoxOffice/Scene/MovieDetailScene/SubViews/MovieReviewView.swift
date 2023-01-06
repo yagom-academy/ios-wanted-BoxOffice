@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieReviewView: UIView {
+final class MovieReviewView: UIView {
     private let reviewTitleLabel = MovieLabel(font: .title3, isBold: true)
     private let reviewTableView: UITableView
     

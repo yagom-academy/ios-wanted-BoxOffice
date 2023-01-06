@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewListViewController: UIViewController {
+final class ReviewListViewController: UIViewController {
     private let reviewViewModel: MovieReviewViewModel
     private let movie: MovieData
     private let reviewTableView: UITableView = {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WriteReviewViewController: UIViewController {
+final class WriteReviewViewController: UIViewController {
     private let photoButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "photo.on.rectangle.angled"), for: .normal)

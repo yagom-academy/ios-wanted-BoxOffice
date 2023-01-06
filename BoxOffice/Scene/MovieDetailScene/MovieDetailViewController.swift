@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieDetailViewController: UIViewController {
+final class MovieDetailViewController: UIViewController {
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical

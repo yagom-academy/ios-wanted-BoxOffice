@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewTableViewCell: UITableViewCell {
+final class ReviewTableViewCell: UITableViewCell {
     static let identifier = "ReviewTableViewCell"
     private let nickNameLabel = MovieLabel(font: .headline)
     private let contentLabel = MovieLabel(font: .body)
