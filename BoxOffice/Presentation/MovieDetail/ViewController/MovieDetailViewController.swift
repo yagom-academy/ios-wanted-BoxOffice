@@ -180,6 +180,12 @@ final class MovieDetailViewController: UIViewController {
                    ) as? AverageReviewCollectionViewCell {
                     cell.setUpContents(averageRating: self.viewModel.averageRating,
                                        movieTitle: self.viewModel.movieDetail.title)
+                    cell.reviewWriteButtonTapped = { [weak self] in
+                        guard let self = self else { return }
+                        self.navigationController?
+                            .pushViewController(MovieReviewViewController(movieCode: self.viewModel.movieDetail.movieCode),
+                                                animated: true)
+                    }
                     return cell
                 }
             }
