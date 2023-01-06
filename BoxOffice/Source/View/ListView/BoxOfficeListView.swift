@@ -8,6 +8,7 @@
 import UIKit
 
 class BoxOfficeListView: UIView {
+    // MARK: properties
     let typeLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 14)
@@ -27,6 +28,7 @@ class BoxOfficeListView: UIView {
         return collectionView
     }()
     
+    // MARK: init
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -39,6 +41,7 @@ class BoxOfficeListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: private function
     private func configureView() {
         self.addSubview(typeLabel)
         self.addSubview(boxOfficeCollectionView)

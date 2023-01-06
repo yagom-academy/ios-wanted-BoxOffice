@@ -285,90 +285,7 @@ class MovieDetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: func
-    func setLabelText(_ data: MovieModel) {
-        titleLabel.text = data.boxOfficeInfo.movieNm
-        genreLabel.text = getGenres(data.movieInfo.genres)
-        runtimeLabel.text = (data.movieInfo.showTm + " 분")
-        ratingNameLabel.text = data.movieInfo.audits.first?.watchGradeNm
-        releaseDateLabel.text = data.boxOfficeInfo.openDt
-        movieAudienceCountLabel.text = data.boxOfficeInfo.audiAcc
-        releaseDateLabel.text = (data.boxOfficeInfo.openDt + " 개봉")
-
-        movieRankIntenLabel.text = (
-            "전일 대비 " +
-            data.boxOfficeInfo.rankInten +
-            " (\(data.boxOfficeInfo.rankOldAndNew))"
-        )
-        
-        movieRankLabel.text = (
-            "예매율 \(data.boxOfficeInfo.rank)위"
-        )
-        
-        movieAudienceCountLabel.text = (
-            "\(String(describing: NumberFormatterManager.shared.getAudience(from: data.boxOfficeInfo.audiAcc)!)) 명"
-        )
-        
-        productionYearLabel.text = (
-            "🎞️ \(data.movieInfo.prdtYear)년 제작"
-        )
-    }
-
-    func addDirectorAndActorLabel(name: String, role: String) {
-        let nameLabel: UILabel = {
-            let label = UILabel()
-            label.text = name
-            label.font = .preferredFont(forTextStyle: .callout)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        
-        let roleLabel: UILabel = {
-            let label = UILabel()
-            label.text = role
-            label.font = .preferredFont(forTextStyle: .caption2)
-            label.textColor = .systemGray
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        
-        if role == "감독" {
-            nameLabel.textColor = .brown
-        }
-        
-        let stackView: UIStackView = {
-           let stackView = UIStackView()
-            stackView.alignment = .top
-            stackView.distribution = .fillEqually
-            stackView.axis = .vertical
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            return stackView
-        }()
-        
-        
-        stackView.addArrangedSubview(nameLabel)
-        stackView.addArrangedSubview(roleLabel)
-
-        directorAndActorNameStackView.addArrangedSubview(stackView)
-    }
-    
-    func setPoster(image: UIImage, age: String, color: UIColor) {
-        var image = image
-        image = image.resize(
-            newWidth: UIScreen.main.bounds.width/UIScreen.main.scale
-        )
-        posterView.backgroundColor = UIColor(patternImage: image)
-        ageLabel.text = age
-        ageLabel.backgroundColor = color
-    
-        NSLayoutConstraint.activate([
-            posterView.heightAnchor.constraint(
-                equalToConstant: image.size.height
-            )
-        ])
-    }
-
-    // MARK: private func
+    // MARK: private function
     private func getGenres(_ data: [Genre]) -> String {
         return data.map { $0.genreNm }.joined(separator: ",")
     }
@@ -513,6 +430,89 @@ class MovieDetailView: UIView {
             reviewTableView.bottomAnchor.constraint(
                 equalTo: self.bottomAnchor,
                 constant: -20
+            )
+        ])
+    }
+    
+    // MARK: function
+    func setLabelText(_ data: MovieModel) {
+        titleLabel.text = data.boxOfficeInfo.movieNm
+        genreLabel.text = getGenres(data.movieInfo.genres)
+        runtimeLabel.text = (data.movieInfo.showTm + " 분")
+        ratingNameLabel.text = data.movieInfo.audits.first?.watchGradeNm
+        releaseDateLabel.text = data.boxOfficeInfo.openDt
+        movieAudienceCountLabel.text = data.boxOfficeInfo.audiAcc
+        releaseDateLabel.text = (data.boxOfficeInfo.openDt + " 개봉")
+
+        movieRankIntenLabel.text = (
+            "전일 대비 " +
+            data.boxOfficeInfo.rankInten +
+            " (\(data.boxOfficeInfo.rankOldAndNew))"
+        )
+        
+        movieRankLabel.text = (
+            "예매율 \(data.boxOfficeInfo.rank)위"
+        )
+        
+        movieAudienceCountLabel.text = (
+            "\(String(describing: NumberFormatterManager.shared.getAudience(from: data.boxOfficeInfo.audiAcc)!)) 명"
+        )
+        
+        productionYearLabel.text = (
+            "🎞️ \(data.movieInfo.prdtYear)년 제작"
+        )
+    }
+
+    func addDirectorAndActorLabel(name: String, role: String) {
+        let nameLabel: UILabel = {
+            let label = UILabel()
+            label.text = name
+            label.font = .preferredFont(forTextStyle: .callout)
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
+        
+        let roleLabel: UILabel = {
+            let label = UILabel()
+            label.text = role
+            label.font = .preferredFont(forTextStyle: .caption2)
+            label.textColor = .systemGray
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
+        
+        if role == "감독" {
+            nameLabel.textColor = .brown
+        }
+        
+        let stackView: UIStackView = {
+           let stackView = UIStackView()
+            stackView.alignment = .top
+            stackView.distribution = .fillEqually
+            stackView.axis = .vertical
+            stackView.translatesAutoresizingMaskIntoConstraints = false
+            return stackView
+        }()
+        
+        
+        stackView.addArrangedSubview(nameLabel)
+        stackView.addArrangedSubview(roleLabel)
+
+        directorAndActorNameStackView.addArrangedSubview(stackView)
+    }
+    
+    func setPoster(image: UIImage, age: String, color: UIColor) {
+        var image = image
+        image = image.resize(
+            newWidth: UIScreen.main.bounds.width/UIScreen.main.scale
+        )
+        posterView.backgroundColor = UIColor(patternImage: image)
+        ageLabel.text = age
+        ageLabel.backgroundColor = color
+    
+        NSLayoutConstraint.activate([
+            posterView.heightAnchor.constraint(
+                equalToConstant: image.size.height
             )
         ])
     }

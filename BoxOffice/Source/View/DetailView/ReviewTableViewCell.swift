@@ -8,7 +8,7 @@
 import UIKit
 
 class ReviewTableViewCell: UITableViewCell {
-    
+    // MARK: properties
     let userImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "person.crop.circle")
@@ -68,6 +68,7 @@ class ReviewTableViewCell: UITableViewCell {
         return stackView
     }()
     
+    // MARK: init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
@@ -76,13 +77,8 @@ class ReviewTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func setupReviewLabelText(model: LoginModel) {
-        userNicknameLabel.text = model.nickname
-        starScoreLabel.text = "⭐️ \(String(model.star))점"
-        contentLabel.text = model.content
-    }
-    
+
+    // MARK: private function
     private func configureUI() {
         addSubview(reviewTotalStackView)
         reviewTotalStackView.addArrangedSubview(userInfoStackView)
@@ -114,5 +110,16 @@ class ReviewTableViewCell: UITableViewCell {
             
             userImageView.widthAnchor.constraint(equalToConstant: 50)
         ])
+    }
+    
+    // MARK: function
+    func setupReviewLabelText(model: LoginModel) {
+        if let image = model.image.imageFromBase64 {
+            userImageView.image = image
+        }
+
+        userNicknameLabel.text = model.nickname
+        starScoreLabel.text = "⭐️ \(String(model.star))점"
+        contentLabel.text = model.content
     }
 }

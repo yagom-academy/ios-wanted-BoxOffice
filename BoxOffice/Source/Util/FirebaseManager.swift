@@ -7,13 +7,15 @@
 
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import UIKit
 
 class FirebaseManager {
-    public static let shared =  FirebaseManager()
-    private init() {}
+    static let shared =  FirebaseManager()
     
     private(set) var reviews = [[String : Any]]()
     private let db = Firestore.firestore()
+    
+    private init() {}
     
     func save(_ model: LoginModel, movieName: String) {
         db.collection(movieName).document(model.nickname).setData([
@@ -29,19 +31,6 @@ class FirebaseManager {
         }
     }
 
-    func read(movieName: String, nickname: String, handler: (@escaping ([[String : Any]]) -> Void)) {
-        db.collection(movieName).document(nickname).getDocument { (document, error)  in
-            if let document = document,
-               let dataDescription = document.data(),
-                document.exists {
-                self.reviews.append(dataDescription)
-                handler(self.reviews)
-            } else {
-                print(error?.localizedDescription ?? "error")
-            }
-        }
-    }
-    
     func fetch(movieName: String, handler: (@escaping ([[String : Any]]) -> Void)) {
         db.collection(movieName).getDocuments() { (querySnapshot, error) in
             if let error = error {
@@ -62,6 +51,21 @@ class FirebaseManager {
         db.collection(movieName).document(nickname).delete() { error in
             if let error = error {
                 print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func getImage(movieName: String, nickname: String, handler: (@escaping (UIImage) -> Void)) {
+        db.collection(movieName).document(nickname).getDocument { (document, error)  in
+            if let document = document,
+               let dataDescription = document.data(),
+                document.exists {
+                if let test = dataDescription["image"] as? String,
+                   let image = test.imageFromBase64 {
+                    handler(image)
+                }
+            } else {
+                print(error?.localizedDescription ?? "error")
             }
         }
     }

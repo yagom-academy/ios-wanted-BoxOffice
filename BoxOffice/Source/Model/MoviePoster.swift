@@ -6,7 +6,8 @@
 //
 
 import Foundation
-//MARK: poster
+
+// MARK: poster DTO
 struct MoviePoster: Decodable {
     let poster: String?
     

@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: Firestore에 저장될 로그인 DTO
 struct LoginModel: Codable {
     let image: String
     let nickname: String

@@ -8,26 +8,26 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    // MARK: Properties
     private let loginView = LoginView()
-    private var starIndex = [0: false]
     private var movieName = ""
 
+    // MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.addSubview(loginView)
-        view.backgroundColor = .white
-        self.title = "리뷰 작성"
-        
-        NSLayoutConstraint.activate([
-            loginView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            loginView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            loginView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            loginView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-        ])
+        configureView()
+        configureUI()
         
         registerButtonAction()
+    }
+    
+    // MARK: private function
+    private func configureView() {
+        view.addSubview(loginView)
+        view.backgroundColor = .white
         
+        self.title = "리뷰 작성"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "저장",
             style: .done,
@@ -36,6 +36,47 @@ class LoginViewController: UIViewController {
         )
     }
     
+    // MARK: private function
+    private func configureUI() {
+        NSLayoutConstraint.activate([
+            loginView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            loginView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            loginView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            loginView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
+    private func registerButtonAction() {
+        loginView.userImageButton.addTarget(
+            self,
+            action: #selector(selectImage),
+            for: .touchUpInside
+        )
+        
+        loginView.twoStarButton.addTarget(
+            self,
+            action: #selector(didTapTwoStarButton),
+            for: .touchUpInside
+        )
+        
+        loginView.threeStarButton.addTarget(
+            self,
+            action: #selector(didTapThreeStarButton),
+            for: .touchUpInside
+        )
+        
+        loginView.fourStarButton.addTarget(
+            self,
+            action: #selector(didTapFourStarButton),
+            for: .touchUpInside
+        )
+        
+        loginView.fiveStarButton.addTarget(
+            self,
+            action: #selector(didTapFiveStarButton),
+            for: .touchUpInside
+        )
+    }
     
     private func showFailureAlert() {
         let alert = UIAlertController(
@@ -65,35 +106,13 @@ class LoginViewController: UIViewController {
         present(alert, animated: false, completion: nil)
     }
     
-    private func registerButtonAction() {
-        loginView.twoStarButton.addTarget(
-            self,
-            action: #selector(didTapTwoStarButton),
-            for: .touchUpInside
-        )
-        
-        loginView.threeStarButton.addTarget(
-            self,
-            action: #selector(didTapThreeStarButton),
-            for: .touchUpInside
-        )
-        
-        loginView.fourStarButton.addTarget(
-            self,
-            action: #selector(didTapFourStarButton),
-            for: .touchUpInside
-        )
-        
-        loginView.fiveStarButton.addTarget(
-            self,
-            action: #selector(didTapFiveStarButton),
-            for: .touchUpInside
-        )
-    }
-    
     private func saveFireStore() {
+        let image = loginView.userImageButton.imageView?.image?.toBase64 ?? ""
+
+        print("🥳\(image)")
+        
         let model = LoginModel(
-            image: loginView.userImageButton.imageView?.image?.description ?? "",
+            image: image,
             nickname: loginView.nickNameTextView.text,
             password: loginView.passwordTextView.text,
             star: getStar(),
@@ -123,6 +142,29 @@ class LoginViewController: UIViewController {
         }
         
         return result
+    }
+    
+    private func clearAllStarScore() {
+        loginView.twoStarButton.setImage(UIImage(systemName: "star"), for: .normal)
+        loginView.threeStarButton.setImage(UIImage(systemName: "star"), for: .normal)
+        loginView.fourStarButton.setImage(UIImage(systemName: "star"), for: .normal)
+        loginView.fiveStarButton.setImage(UIImage(systemName: "star"), for: .normal)
+    }
+    
+    private func fillAllStarScore() {
+        loginView.twoStarButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        loginView.threeStarButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        loginView.fourStarButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        loginView.fiveStarButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+    }
+    
+    // MARK: objc function
+    @objc private func selectImage() {
+        let imagePickerController = UIImagePickerController()
+        
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .photoLibrary
+        present(imagePickerController, animated: true, completion: nil)
     }
     
     @objc private func verifyPassword() {
@@ -218,24 +260,10 @@ class LoginViewController: UIViewController {
             fillAllStarScore()
             loginView.fiveStarButton.setImage(UIImage(systemName: "star"), for: .normal)
         }
-        
-    }
-    
-    private func clearAllStarScore() {
-        loginView.twoStarButton.setImage(UIImage(systemName: "star"), for: .normal)
-        loginView.threeStarButton.setImage(UIImage(systemName: "star"), for: .normal)
-        loginView.fourStarButton.setImage(UIImage(systemName: "star"), for: .normal)
-        loginView.fiveStarButton.setImage(UIImage(systemName: "star"), for: .normal)
-    }
-    
-    private func fillAllStarScore() {
-        loginView.twoStarButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
-        loginView.threeStarButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
-        loginView.fourStarButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
-        loginView.fiveStarButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
     }
 }
 
+// MARK: Extension - SendDataDelegate
 extension LoginViewController: SendDataDelegate {
     func sendData<T>(_ data: T) {
         guard let name = data as? String else {
@@ -243,5 +271,20 @@ extension LoginViewController: SendDataDelegate {
         }
         
         movieName = name
+    }
+}
+
+// MARK: Extension - UIImagePickerControllerDelegate, UINavigationControllerDelegate
+extension LoginViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
+    ) {
+        if var image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            image = image.resize(newWidth: 100)
+            loginView.userImageButton.setImage(image, for: .normal)
+        }
+
+        picker.dismiss(animated: true, completion: nil)
     }
 }

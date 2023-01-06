@@ -21,7 +21,9 @@ class BoxOfficeListViewController: UIViewController {
         case ten = "10"
     }
     
+    // MARK: Properties
     let networkManager = NetworkManager()
+    let listView = BoxOfficeListView()
     private var movieModels = [BoxOfficeRank: MovieModel]() {
         didSet {
             if self.movieModels.count == 10 {
@@ -31,19 +33,19 @@ class BoxOfficeListViewController: UIViewController {
             }
         }
     }
-    
-    let listView = BoxOfficeListView()
-    
+
+    // MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDefaultSetting()
         configureDailyBoxOffice()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         listView.layer.addBorder([.top], color: .black, width: 1)
     }
     
+    // MARK: private function
     private func configureDefaultSetting() {
         self.view.backgroundColor = .white
         self.view.addSubview(listView)
@@ -146,6 +148,7 @@ class BoxOfficeListViewController: UIViewController {
     }
 }
 
+// MARK: Extension - UICollectionViewDataSource
 extension BoxOfficeListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.movieModels.count
@@ -200,6 +203,7 @@ extension BoxOfficeListViewController: UICollectionViewDataSource, UICollectionV
     }
 }
 
+// MARK: Extension - UICollectionViewDelegateFlowLayout
 extension BoxOfficeListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.listView.boxOfficeCollectionView.frame.width, height: 120)

@@ -8,6 +8,7 @@
 import UIKit
 
 class LoginView: UIView {
+    // MARK: properties
     let userImageButton: UIButton = {
         let button = UIButton()
         let config = UIImage.SymbolConfiguration(pointSize: 100)
@@ -123,6 +124,7 @@ class LoginView: UIView {
         return stackView
     }()
     
+    // MARK: init
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -136,6 +138,7 @@ class LoginView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: private function
     private func configureView() {
         self.addSubview(loginTotalStackView)
         

@@ -8,6 +8,7 @@
 import UIKit
 
 class ListCollectionViewCell: UICollectionViewCell {
+    // MARK: properties
     let simpleMovieInfoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -97,6 +98,7 @@ class ListCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    // MARK: init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -110,6 +112,7 @@ class ListCollectionViewCell: UICollectionViewCell {
         self.posterImageView.image = nil
     }
     
+    // MARK: private function
     private func setup() {
         self.addSubview(posterImageView)
         self.addSubview(simpleMovieInfoStackView)
@@ -166,6 +169,7 @@ class ListCollectionViewCell: UICollectionViewCell {
         ])
     }
     
+    // MARK: function
     func setupPoster(url: String?, rank: String, status: String) {
         if url == nil {
             posterImageView.image = UIImage(systemName: "play")

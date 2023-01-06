@@ -8,6 +8,7 @@
 import UIKit
 
 class MovieDetailViewController: UIViewController {
+    // MARK: Properties
     private var detailViewContent: MovieModel?
     private let movieDetailView = MovieDetailView()
     private var cellCount = 0 {
@@ -16,31 +17,55 @@ class MovieDetailViewController: UIViewController {
         }
     }
     
+    // MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureView()
+        configureTableView()
+        configureUI()
+
+        registerButtonAction()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchReview()
+    }
+    
+    // MARK: private function
+    private func configureView() {
         view.addSubview(movieDetailView)
         view.backgroundColor = .white
-        self.title = detailViewContent?.boxOfficeInfo.movieNm
         
+        guard let content = detailViewContent else {
+            return
+        }
+
+        self.title = content.boxOfficeInfo.movieNm
+        movieDetailView.setLabelText(content)
+        setPostLabel()
+        addStackView()
+    }
+    
+    private func configureTableView() {
         movieDetailView.reviewTableView.delegate = self
         movieDetailView.reviewTableView.dataSource = self
         movieDetailView.reviewTableView.register(
             ReviewTableViewCell.self,
             forCellReuseIdentifier: "ReviewTableViewCell"
         )
-        
+    }
+    
+    private func configureUI() {
         NSLayoutConstraint.activate([
             movieDetailView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             movieDetailView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             movieDetailView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
             movieDetailView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
-
-        guard let data = detailViewContent else {
-            return
-        }
-
-        movieDetailView.setLabelText(data)
+    }
+    
+    private func registerButtonAction() {
         movieDetailView.shareButton.addTarget(
             self,
             action: #selector(didTapShareButton),
@@ -52,13 +77,6 @@ class MovieDetailViewController: UIViewController {
             action: #selector(didTapReviewButton),
             for: .touchUpInside
         )
-        setPostLabel()
-        addStackView()
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        fetchReview()
     }
     
     private func fetchReview() {
@@ -176,6 +194,7 @@ class MovieDetailViewController: UIViewController {
         }
     }
     
+    // MARK: objc function
     @objc private func didTapShareButton() {
         guard let data = detailViewContent else {
             return
@@ -208,6 +227,7 @@ class MovieDetailViewController: UIViewController {
     }
 }
 
+// MARK: Extension - SendDataDelegate
 extension MovieDetailViewController: SendDataDelegate {
     func sendData<T>(_ data: T) {
         guard let content = data as? MovieModel else {
@@ -218,6 +238,7 @@ extension MovieDetailViewController: SendDataDelegate {
     }
 }
 
+// MARK: Extension - UITableViewDataSource, UITableViewDelegate
 extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellCount
@@ -233,7 +254,7 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate 
         
         let data = FirebaseManager.shared.reviews[indexPath.row]
         let model = LoginModel(
-            image: data["image"]  as? String ?? "",
+            image: data["image"] as? String ?? "",
             nickname: data["nickname"] as? String ?? "",
             password: data["password"] as? String ?? "",
             star: data["star"] as? Int ?? 1,
@@ -241,6 +262,7 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate 
         )
 
         cell.setupReviewLabelText(model: model)
+        cell.selectionStyle = .none
 
         return cell
     }

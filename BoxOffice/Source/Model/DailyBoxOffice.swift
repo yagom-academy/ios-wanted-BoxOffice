@@ -7,7 +7,7 @@
 
 import Foundation
 
-//MARK: 일일 박스오피스 DTO
+// MARK: 일일 박스오피스 DTO
 struct BoxOfficeResult: Decodable {
     let boxOfficeResult: DailyBoxOffice
 }

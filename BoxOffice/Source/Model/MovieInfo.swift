@@ -6,7 +6,8 @@
 //
 
 import Foundation
-//MARK: 영화 상세 정보 DTO
+
+// MARK: 영화 상세 정보 DTO
 struct MovieInfoResult: Decodable {
     let movieInfoResult: MovieInfo
 }
