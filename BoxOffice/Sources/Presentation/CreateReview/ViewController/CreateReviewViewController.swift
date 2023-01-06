@@ -62,14 +62,14 @@ class CreateReviewViewController: UIViewController {
     }()
     
     private lazy var nickNameInputView: BoxOfficeInputView = {
-        let inputView = BoxOfficeInputView(title: "별명", placeholder: "별명을 입력해주세요.")
+        let inputView = BoxOfficeInputView(title: "별명", placeholder: "별명 입력 필수")
         inputView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 60).isActive = true
         inputView.addTarget(target: self, action: #selector(didChangeNameTextField(_:)), for: [.allEditingEvents, .valueChanged])
         return inputView
     }()
     
     private lazy var passwordInputView: BoxOfficeInputView = {
-        let inputView = BoxOfficeInputView(title: "암호", placeholder: "비밀번호를 입력해주세요.")
+        let inputView = BoxOfficeInputView(title: "암호", placeholder: "소문자, 숫자, 특수문자(!@#$) 필수")
         inputView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 60).isActive = true
         inputView.addTarget(target: self, action: #selector(didChangePasswordTextField(_:)), for: [.allEditingEvents, .valueChanged])
         return inputView

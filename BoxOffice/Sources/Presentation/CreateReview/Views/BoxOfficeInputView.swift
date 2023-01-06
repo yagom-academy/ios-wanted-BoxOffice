@@ -14,7 +14,7 @@ final class BoxOfficeInputView: UIView {
     }
     
     private lazy var backgroundStackView: UIStackView = {
-        let stackView = UIStackView(axis: .horizontal, alignment: .fill, distribution: .fill, spacing: 70)
+        let stackView = UIStackView(axis: .horizontal, alignment: .fill, distribution: .fill, spacing: 30)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 11, leading: 16, bottom: 11, trailing: 0)
         stackView.addArrangedSubviews(titleLabel, textField)
@@ -35,7 +35,7 @@ final class BoxOfficeInputView: UIView {
         textField.tintColor = .label.withAlphaComponent(0.9)
         textField.clearButtonMode = .always
         textField.borderStyle = .none
-        textField.font = .preferredFont(forTextStyle: .body)
+        textField.font = .preferredFont(forTextStyle: .callout)
         textField.backgroundColor = .boBackground
         return textField
     }()
@@ -73,6 +73,10 @@ extension BoxOfficeInputView {
     
     func addTarget(target: Any?, action: Selector, for controlEvents: UITextField.Event) {
         textField.addTarget(target, action: action, for: controlEvents)
+    }
+    
+    func setUpSecureTextEntry(_ isSecureTextEntry: Bool) {
+        textField.isSecureTextEntry = isSecureTextEntry
     }
     
 }
