@@ -13,8 +13,8 @@ protocol CommentAddViewModelInputInterface: AnyObject {
 }
 
 protocol CommentAddViewModelOutPutInterface: AnyObject {
-    var isloadingPublisher: PassthroughSubject<Bool, Never> { get }
     var errorPublisher: PassthroughSubject<String, Never> { get }
+    var uploadSuccessPublisher: PassthroughSubject<Bool, Never> { get }
 }
 
 protocol CommentAddViewModelInterface: AnyObject {
@@ -27,7 +27,7 @@ final class CommentAddViewModel: CommentAddViewModelInterface, CommentAddViewMod
     var output: CommentAddViewModelOutPutInterface { self }
     private var commentManger: CommentManagerable
     var errorPublisher = PassthroughSubject<String, Never>()
-    var isloadingPublisher = PassthroughSubject<Bool, Never>()
+    var uploadSuccessPublisher = PassthroughSubject<Bool, Never>()
     private var detailBoxOffice: DailyBoxOffice
     private let validateNumber:[Character] = ["0","1","2","3","4","5","6","7","8","9"]
     private let validateEnglish:[Character] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
@@ -57,12 +57,11 @@ extension CommentAddViewModel:  CommentAddViewModelInputInterface{
             picture: input.image?.toString ?? ""
         )
         
-        isloadingPublisher.send(true)
         commentManger.uploadComment(comment: comment) { [weak self] error in
             if let error = error {
                 self?.errorPublisher.send(error.localizedDescription)
             } else {
-                self?.isloadingPublisher.send(false)
+                self?.uploadSuccessPublisher.send(true)
             }
         }
     }
@@ -99,15 +98,13 @@ extension CommentAddViewModel:  CommentAddViewModelInputInterface{
             return validateNumber.contains($0) || validateEnglish.contains($0) || validateSpecial.contains($0)
         })
         
-        guard checkSatisfy && checkNumber && checkEnglish && checkSpecial else {
+        guard checkSatisfy else {
             return ValidationError.passwordValidationError
+        }
+        
+        guard checkNumber && checkEnglish && checkSpecial else {
+            return ValidationError.passwordRequirmentError
         }
         return nil
     }
-}
-
-enum ValidationError: Error {
-    case passwordLengthError
-    case nickNameEmptyError
-    case passwordValidationError
 }

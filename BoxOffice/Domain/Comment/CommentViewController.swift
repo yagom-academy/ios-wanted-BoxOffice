@@ -44,6 +44,7 @@ final class CommentViewController: UIViewController {
         setup()
         setupConstraints()
         addGesture()
+        bind()
     }
     
     init(viewModel: CommentAddViewModelInterface) {
@@ -309,6 +310,29 @@ private extension CommentViewController {
             star4Image.image = Constant.fullStar
             star5Image.image = Constant.fullStar
         }
+    }
+    
+    private func showErrorAlert(message: String) {
+        let controller = UIAlertController(title: "오류", message: message, preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title: "확인", style: .cancel))
+        present(controller, animated: true)
+    }
+    
+    private func bind() {
+        viewModel.output.errorPublisher.receive(on: DispatchQueue.main)
+            .sink { [weak self] errorMessage in
+                guard let self = self else { return }
+                self.showErrorAlert(message: errorMessage)
+            }
+            .store(in: &cancelable)
+        
+        viewModel.output.uploadSuccessPublisher.receive(on: DispatchQueue.main)
+            .sink { [weak self] isSucess in
+                guard let self = self else { return }
+                if isSucess {
+                    self.dismiss(animated: true)
+                }
+            }.store(in: &cancelable)
     }
 }
 

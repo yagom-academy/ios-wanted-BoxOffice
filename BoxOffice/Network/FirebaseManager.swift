@@ -16,10 +16,6 @@ protocol FirebaseManagerable {
     func delete(data: FireStoreDatable, errorHandler: @escaping (Error?) -> Void)
 }
 
-enum FireStoreError: Error {
-    case uploadError, readError, deleteError
-}
-
 final class FirebaseManager: FirebaseManagerable {
     
     private let db: Firestore

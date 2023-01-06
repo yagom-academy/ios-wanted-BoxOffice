@@ -46,6 +46,8 @@
 		E19B5DB729645160001B2DB4 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DB629645160001B2DB4 /* UIImage+Extension.swift */; };
 		E19B5DB929645189001B2DB4 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DB829645189001B2DB4 /* String+Extension.swift */; };
 		E19B5DCA29647B10001B2DB4 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B5DC929647B10001B2DB4 /* Date+Extension.swift */; };
+		E1F2D08E29683DE200F6096F /* FireStoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F2D08D29683DE200F6096F /* FireStoreError.swift */; };
+		E1F2D09029683E1B00F6096F /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F2D08F29683E1B00F6096F /* ValidationError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +89,8 @@
 		E19B5DB629645160001B2DB4 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		E19B5DB829645189001B2DB4 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		E19B5DC929647B10001B2DB4 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		E1F2D08D29683DE200F6096F /* FireStoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FireStoreError.swift; path = BoxOffice/Extension/FireStoreError.swift; sourceTree = SOURCE_ROOT; };
+		E1F2D08F29683E1B00F6096F /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,7 @@
 		635A19E628F9603900197BCC /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
+				E1F2D08C29683DCE00F6096F /* Error */,
 				9BEA27FD29629F8C00FB7E73 /* Entry */,
 				9B335C172963BFA600C8F339 /* Model */,
 				9BEA28002962BA0100FB7E73 /* Network */,
@@ -259,6 +264,15 @@
 			path = Comment;
 			sourceTree = "<group>";
 		};
+		E1F2D08C29683DCE00F6096F /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				E1F2D08D29683DE200F6096F /* FireStoreError.swift */,
+				E1F2D08F29683E1B00F6096F /* ValidationError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -376,6 +390,7 @@
 				E19B5DB429643A14001B2DB4 /* CommentManager.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				9BEA28042962D04F00FB7E73 /* HTTPMethod.swift in Sources */,
+				E1F2D09029683E1B00F6096F /* ValidationError.swift in Sources */,
 				9B45203129667B3500BE7142 /* DetailViewModel.swift in Sources */,
 				9B28F08129664FAD00F87F48 /* UIImageView+Extension.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
@@ -386,6 +401,7 @@
 				9B8B04E0296538540095636B /* DetailSegmentControl.swift in Sources */,
 				9B335C192963C7E300C8F339 /* DailyBoxOffice.swift in Sources */,
 				E177830D29674E8C009FB219 /* UILabel+Extension.swift in Sources */,
+				E1F2D08E29683DE200F6096F /* FireStoreError.swift in Sources */,
 				9BEA28062962E41400FB7E73 /* NetworkHandler.swift in Sources */,
 				9B335C1D2963DD3E00C8F339 /* MoviePoster.swift in Sources */,
 				9B335C272963F47900C8F339 /* UIView+Extension.swift in Sources */,
@@ -531,6 +547,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4645UMZ6U4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BoxOffice/SupportFile/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
