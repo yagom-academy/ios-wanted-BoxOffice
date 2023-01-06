@@ -63,6 +63,11 @@ final class MovieDetailViewController: UIViewController {
             }
         }
         
+        reviewViewModel.rating.bind { [self] rating in
+            movieMainInfoView.configure(with: movieDetail,
+                                              rating: rating)
+        }
+        
         reviewViewModel.error.bind { [weak self] error in
             DispatchQueue.main.async {
                 if let description = error {
@@ -124,9 +129,8 @@ extension MovieDetailViewController: UITableViewDataSource {
 //MARK: Setup View
 extension MovieDetailViewController {
     private func setupView() {
-        movieMainInfoView.configure(with: movieDetail)
         movieSubInfoView.configure(with: movieDetail)
-
+        
         addSubView()
         setupTableView()
         setupConstraint()

@@ -124,10 +124,9 @@ final class MovieMainInfoView: UIView {
         separator.close()
     }
     
-    func configure(with movie: MovieData) {
-        //TODO: 포스터 이미지로 변경
+    func configure(with movie: MovieData, rating: String) {
         posterView.image = movie.poster
-        ratingLabel.text = "4.5"
+        ratingLabel.text = rating == "nan" ? "정보 없음" : rating
         titleLabel.text = movie.title
         currentRanklabel.text = movie.currentRank
         setRankChangeLabel(with: movie.rankChange)
