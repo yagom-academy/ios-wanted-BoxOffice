@@ -150,7 +150,7 @@ class FirstCell: UITableViewCell {
     }
     
     func transferData(_ name: String, _ detailInfo: MovieDetailInfo, _ boxOfficeInfo: BoxOfficeInfo) {
-        posterImageView.image = detailInfo.poster?.toUIImage()
+        posterImageView.image = ImageCacheManager.shared.loadCachedData(for: detailInfo.poster!)!
         if boxOfficeInfo.rankOldAndNew == .new {
             updownNumberLabel.text = boxOfficeInfo.rankOldAndNew.rawValue
         } else {
