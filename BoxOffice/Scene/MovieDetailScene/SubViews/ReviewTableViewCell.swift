@@ -29,12 +29,11 @@ class ReviewTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private let deleteButton: UIButton = {
-        let button = UIButton()
+    private let deleteButton: MoviewButton = {
+        let button = MoviewButton()
         button.setImage(UIImage(systemName: "trash"), for: .normal)
         button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
