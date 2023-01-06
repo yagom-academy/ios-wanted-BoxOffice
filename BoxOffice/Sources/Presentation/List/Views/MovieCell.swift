@@ -37,7 +37,7 @@ class MovieCell: UITableViewCell {
     private lazy var rankIntenView: UIStackView = {
         let stackView = UIStackView(axis: .horizontal, alignment: .center, distribution: .fill, spacing: 2)
         stackView.addArrangedSubviews(arrowImageView, rankIntenLabel)
-        stackView.widthAnchor.constraint(equalToConstant: 36).isActive = true
+        stackView.widthAnchor.constraint(equalToConstant: 38).isActive = true
         stackView.setContentHuggingPriority(.required, for: .horizontal)
         return stackView
     }()

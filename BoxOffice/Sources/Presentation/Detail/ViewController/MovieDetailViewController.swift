@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  MovieDetailViewController.swift
 //  BoxOffice
 //
 //  Created by 이예은 on 2023/01/03.
@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class DetailViewController: UIViewController {
+class MovieDetailViewController: UIViewController {
     
     weak var coordinator: BoxOfficeListCoordinatorInterface?
     private let viewModel: MovieDetailViewModel
@@ -62,7 +62,7 @@ class DetailViewController: UIViewController {
     }
 }
 
-private extension DetailViewController {
+private extension MovieDetailViewController {
     func bind() {
         viewModel.output.shareMovieInfoPublisher
             .sink { [weak self] sharedInformation in
@@ -135,7 +135,7 @@ private extension DetailViewController {
     }
 }
 
-extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
+extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel._reviews.count + 3
     }

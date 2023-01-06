@@ -152,7 +152,7 @@ class FirstCell: UITableViewCell {
     func transferData(_ name: String, _ detailInfo: MovieDetailInfo, _ boxOfficeInfo: BoxOfficeInfo) {
         posterImageView.setImage(with: detailInfo.poster ?? "")
         if boxOfficeInfo.rankOldAndNew == .new {
-            updownNumberLabel.text = boxOfficeInfo.rankOldAndNew.rawValue
+            updownNumberLabel.text = boxOfficeInfo.rankOldAndNew.rawValue.capitalized
             updownImageView.isHidden = true
         } else {
             if boxOfficeInfo.rankInten < 0 {
@@ -162,6 +162,9 @@ class FirstCell: UITableViewCell {
             } else if boxOfficeInfo.rankInten == 0 {
                 updownImageView.isHidden = true
                 updownNumberLabel.text = "-"
+            } else {
+                updownNumberLabel.text = "\(boxOfficeInfo.rankInten)"
+                updownImageView.image = UIImage(systemName: "arrowtriangle.up.fill")
             }
         }
         titleLabel.text = name
