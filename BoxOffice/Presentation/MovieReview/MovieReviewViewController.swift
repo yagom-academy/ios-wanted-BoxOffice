@@ -205,6 +205,7 @@ final class MovieReviewViewController: UIViewController {
         addViews()
         setupLayout()
         configureImagePicker()
+        configureTextField()
         bind()
     }
 
@@ -401,6 +402,14 @@ extension MovieReviewViewController: UIImagePickerControllerDelegate, UINavigati
         photoImageStackView.addArrangedSubview(imageView)
         
         dismiss(animated: true)
+    }
+}
+
+extension MovieReviewViewController: UITextFieldDelegate {
+    
+    private func configureTextField() {
+        passwordTextField.delegate = self
+        
     }
 }
 
