@@ -24,6 +24,12 @@ final class MovieReviewViewController: UIViewController {
         scrollView.keyboardDismissMode = .interactive
         return scrollView
     }()
+
+    private let loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
     
     private let questionLabel: UILabel = {
         let label = UILabel()
@@ -237,10 +243,29 @@ final class MovieReviewViewController: UIViewController {
         viewModel.popViewController = { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
+        viewModel.startLoadingIndicator = { [weak self] in
+            DispatchQueue.main.async {
+                self?.loadingIndicator.startAnimating()
+            }
+        }
+        viewModel.stopLoadingIndicator = { [weak self] in
+            DispatchQueue.main.async {
+                self?.loadingIndicator.stopAnimating()
+            }
+        }
+        viewModel.enableRegisterButton = { [weak self] in
+            self?.registrationButton.isEnabled = true
+            self?.registrationButton.backgroundColor = .systemPurple
+        }
+        viewModel.disableRegisterButton = { [weak self] in
+            self?.registrationButton.isEnabled = false
+            self?.registrationButton.backgroundColor = .lightGray
+        }
     }
 
     private func addViews() {
         view.addSubview(outerScrollView)
+        view.addSubview(loadingIndicator)
         [
             questionLabel,
             starReviewWriteView,
@@ -263,6 +288,8 @@ final class MovieReviewViewController: UIViewController {
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
+            loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             outerScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             outerScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             outerScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

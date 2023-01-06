@@ -19,7 +19,11 @@ final class MovieReviewViewModel {
     var presentImagePicker: (() -> Void)?
     var showAlert: ((UIAlertController) -> Void)?
     var popViewController: (() -> Void)?
-    
+    var startLoadingIndicator: (() -> Void)?
+    var stopLoadingIndicator: (() -> Void)?
+    var enableRegisterButton: (() -> Void)?
+    var disableRegisterButton: (() -> Void)?
+
     func viewDidLoad() {
         
     }
@@ -33,9 +37,9 @@ final class MovieReviewViewModel {
     }
     
     func registrationButtonTapped(movieReview: MovieReview) {
+        startLoadingIndicator?()
+        disableRegisterButton?()
         if isValid(movieReview: movieReview) {
-            // TODO: upload review
-            
             uploadReviewUseCase.execute(image: selectedPhoto, review: movieReview) { [weak self] result in
                 switch result {
                 case .success:
@@ -47,6 +51,8 @@ final class MovieReviewViewModel {
                     self?.showAlert?(alert)
                     print(error)
                 }
+                self?.stopLoadingIndicator?()
+                self?.enableRegisterButton?()
             }
         } else {
             let alert = UIAlertController(title: "빠진 정보가 있는 것 같아요.", message: "별점, 관람평, 닉네임, 패스워드를 모두 채워주셨나요?", preferredStyle: .alert)
