@@ -12,7 +12,6 @@ final class MovieReviewViewController: UIViewController {
     private let viewModel = MovieReviewViewModel()
     
     private let movieCode: String
-    private var rating: Double = 0
     
     private let imagePicker: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
@@ -34,22 +33,11 @@ final class MovieReviewViewController: UIViewController {
         label.font = .preferredFont(forTextStyle: .title3)
         return label
     }()
-    
-    private let starButton1 = UIButton()
-    private let starButton2 = UIButton()
-    private let starButton3 = UIButton()
-    private let starButton4 = UIButton()
-    private let starButton5 = UIButton()
 
-    private lazy var starButtons = [starButton1, starButton2, starButton3, starButton4, starButton5]
-    
-    private lazy var starButtonsStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        starButtons.forEach { stackView.addArrangedSubview($0) }
-        stackView.axis = .horizontal
-        stackView.backgroundColor = .clear
-        return stackView
+    private let starReviewWriteView: StarReviewWriteView = {
+        let starReviewWriteView = StarReviewWriteView()
+        starReviewWriteView.translatesAutoresizingMaskIntoConstraints = false
+        return starReviewWriteView
     }()
     
     private let photoImageStackView: UIStackView = {
@@ -187,7 +175,7 @@ final class MovieReviewViewController: UIViewController {
                 movieCode: self.movieCode,
                 user: User(nickname: self.nicknameTextField.text!),
                 password: self.passwordTextField.text!,
-                rating: self.rating,
+                rating: self.starReviewWriteView.rating,
                 image: "",
                 description: self.reviewTextView.text
             )
@@ -209,8 +197,6 @@ final class MovieReviewViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        
-        setupStarButtons()
         
         addViews()
         setupLayout()
@@ -251,72 +237,12 @@ final class MovieReviewViewController: UIViewController {
             self?.navigationController?.popViewController(animated: true)
         }
     }
-    
-    private func setupStarButtons() {
-        let sizeConfiguration = UIImage.SymbolConfiguration(pointSize: 35)
-        
-        starButtons.forEach { star in
-            star.setImage(UIImage(systemName: "star", withConfiguration: sizeConfiguration), for: .normal)
-            star.setImage(UIImage(systemName: "star.fill", withConfiguration: sizeConfiguration), for: .selected)
-            star.tintColor = .systemYellow
-        }
-        
-        configureStarButtonsAction()
-    }
-    
-
-    private func configureStarButtonsAction() {
-        starButton1.addAction(UIAction(handler: { action in
-            self.starButton1.isSelected = true
-            self.starButton2.isSelected = false
-            self.starButton3.isSelected = false
-            self.starButton4.isSelected = false
-            self.starButton5.isSelected = false
-            self.rating = 1
-        }), for: .touchUpInside)
-        
-        starButton2.addAction(UIAction(handler: { action in
-            self.starButton1.isSelected = true
-            self.starButton2.isSelected = true
-            self.starButton3.isSelected = false
-            self.starButton4.isSelected = false
-            self.starButton5.isSelected = false
-            self.rating = 2
-        }), for: .touchUpInside)
-        
-        starButton3.addAction(UIAction(handler: { action in
-            self.starButton1.isSelected = true
-            self.starButton2.isSelected = true
-            self.starButton3.isSelected = true
-            self.starButton4.isSelected = false
-            self.starButton5.isSelected = false
-            self.rating = 3
-        }), for: .touchUpInside)
-        
-        starButton4.addAction(UIAction(handler: { action in
-            self.starButton1.isSelected = true
-            self.starButton2.isSelected = true
-            self.starButton3.isSelected = true
-            self.starButton4.isSelected = true
-            self.starButton5.isSelected = false
-            self.rating = 4
-        }), for: .touchUpInside)
-        
-        starButton5.addAction(UIAction(handler: { action in
-            self.starButton1.isSelected = true
-            self.starButton2.isSelected = true
-            self.starButton3.isSelected = true
-            self.starButton4.isSelected = true
-            self.starButton5.isSelected = true
-            self.rating = 5
-        }), for: .touchUpInside)
-    }
 
     private func addViews() {
         view.addSubview(outerScrollView)
         [
             questionLabel,
-            starButtonsStackView,
+            starReviewWriteView,
             reviewRequestLabel,
             photoImageStackView,
             reviewTextView,
@@ -344,10 +270,10 @@ final class MovieReviewViewController: UIViewController {
             questionLabel.topAnchor.constraint(equalTo: outerScrollView.topAnchor, constant: 80),
             questionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             
-            starButtonsStackView.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 16),
-            starButtonsStackView.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
+            starReviewWriteView.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 16),
+            starReviewWriteView.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
             
-            reviewRequestLabel.topAnchor.constraint(equalTo: starButtonsStackView.bottomAnchor, constant: 50),
+            reviewRequestLabel.topAnchor.constraint(equalTo: starReviewWriteView.bottomAnchor, constant: 50),
             reviewRequestLabel.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
             
             photoImageStackView.topAnchor.constraint(equalTo: reviewRequestLabel.bottomAnchor, constant: 8),
