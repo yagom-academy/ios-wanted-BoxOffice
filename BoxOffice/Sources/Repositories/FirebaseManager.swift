@@ -11,10 +11,14 @@ import FirebaseFirestoreSwift
 final class FirebaseManager {
     private let database = Firestore.firestore()
     
-    func save(review: Review) throws {
-        let reviewDictionary = try review.asDictionary()
-        database.collection("review").document(review.password).setData(reviewDictionary)
-    }
+    func save(review: Review) {
+        do {
+            let reviewDictionary = try review.asDictionary()
+            
+            database.collection("review").document(review.password).setData(reviewDictionary)
+        } catch {
+            print(error)
+        }
     
     func update(review: Review) {
         do {

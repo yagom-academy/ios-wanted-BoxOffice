@@ -87,9 +87,8 @@ class ReviewCell: UITableViewCell {
     
     lazy var deleteButton: UIButton = {
        let button = UIButton()
-        button.imageView?.image = UIImage(systemName: "trash")
-        imageView?.tintColor = .white
-        imageView?.tintColor = UIColor(r: 100, g: 100, b: 100)
+        button.setImage(UIImage(systemName: "trash"), for: .normal)
+        button.tintColor = UIColor(r: 100, g: 100, b: 100)
         return button
     }()
     
@@ -164,7 +163,8 @@ class ReviewCell: UITableViewCell {
         ])
     }
     
-    func setData(_ reviews: [Review], _ index: Int) {
+    func transferData(_ reviews: [Review], _ index: Int) {
+
         guard reviews.indices.contains(index) else {
             return
         }
