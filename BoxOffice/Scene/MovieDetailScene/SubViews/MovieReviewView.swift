@@ -16,6 +16,7 @@ class MovieReviewView: UIView {
         button.setImage(UIImage(systemName: "pencil"), for: .normal)
         button.setTitle("리뷰 작성하기", for: .normal)
         button.setTitleColor(.black, for: .normal)
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

@@ -68,6 +68,7 @@ class MovieDetailViewController: UIViewController {
 extension MovieDetailViewController: UITableViewDataSource {
     private func setupTableView() {
         reviewTableView.dataSource = self
+        reviewTableView.rowHeight = view.bounds.height * 0.1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
