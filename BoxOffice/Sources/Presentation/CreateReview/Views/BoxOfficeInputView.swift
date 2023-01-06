@@ -71,4 +71,8 @@ extension BoxOfficeInputView {
         textField.placeholder = placeholder
     }
     
+    func addTarget(target: Any?, action: Selector, for controlEvents: UITextField.Event) {
+        textField.addTarget(target, action: action, for: controlEvents)
+    }
+    
 }

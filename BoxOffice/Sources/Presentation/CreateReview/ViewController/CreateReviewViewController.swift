@@ -49,6 +49,7 @@ class CreateReviewViewController: UIViewController {
         let view = RatingView(
             config: UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .largeTitle), scale: .large)
         )
+        view.addTarget(target: self, action: #selector(didTapStarButton(_:)), for: .touchUpInside)
         return view
     }()
     
@@ -61,12 +62,14 @@ class CreateReviewViewController: UIViewController {
     private lazy var nickNameInputView: BoxOfficeInputView = {
         let inputView = BoxOfficeInputView(title: "별명", placeholder: "별명을 입력해주세요.")
         inputView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 60).isActive = true
+        inputView.addTarget(target: self, action: #selector(didChangeNameTextField(_:)), for: [.allEditingEvents, .valueChanged])
         return inputView
     }()
     
     private lazy var passwordInputView: BoxOfficeInputView = {
         let inputView = BoxOfficeInputView(title: "암호", placeholder: "비밀번호를 입력해주세요.")
         inputView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 60).isActive = true
+        inputView.addTarget(target: self, action: #selector(didChangePasswordTextField(_:)), for: [.allEditingEvents, .valueChanged])
         return inputView
     }()
     
@@ -161,7 +164,27 @@ private extension CreateReviewViewController {
     }
     
     @objc func didTapCreateButton(_ sender: UIButton) {
-        print(#function)
+        viewModel.input.didTapCreateButton()
+    }
+    
+    @objc func didChangeNameTextField(_ sender: UITextField) {
+        viewModel.input.nameText(sender.text ?? "")
+    }
+    
+    @objc func didChangePasswordTextField(_ sender: UITextField) {
+        viewModel.input.passwordText(sender.text ?? "")
+    }
+    
+    @objc func didTapStarButton(_ sender: StarButton) {
+        let state = sender.currentState
+        if state == .noon {
+            sender.changeState(.filled)
+        } else if state == .leadinghalf {
+            sender.changeState(.noon)
+        } else {
+            sender.changeState(.leadinghalf)
+        }
+        viewModel.input.didTapRatingView(sender.tag + 1)
     }
     
 }
@@ -173,6 +196,10 @@ extension CreateReviewViewController: UITextViewDelegate {
             textView.text = nil
             textView.textColor = .black
         }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        viewModel.input.reviewText(textView.text)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -196,6 +223,7 @@ extension CreateReviewViewController: UIImagePickerControllerDelegate & UINaviga
             return
         }
         createImageButton.setImage(selectedImage.withConfiguration(createImageButton.config), for: .normal)
+        viewModel.input.imageData(selectedImage.toString ?? "")
         picker.dismiss(animated: true)
     }
     

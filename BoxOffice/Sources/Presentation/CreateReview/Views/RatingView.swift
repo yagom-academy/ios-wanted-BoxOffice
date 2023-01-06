@@ -16,15 +16,15 @@ final class RatingView: UIStackView {
     private var config = UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .largeTitle), scale: .large)
     
     private lazy var starButtons: [UIButton] = {
-        var stars = [UIButton(), UIButton(), UIButton(), UIButton(), UIButton()]
-        let config = UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .largeTitle), scale: .large)
-        stars.forEach {
-            $0.setImage(
-                UIImage(systemName: "star")?
-                    .withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
-                    .withConfiguration(config),
-                for: .normal
-            )
+        var stars = [
+            StarButton(config: config),
+            StarButton(config: config),
+            StarButton(config: config),
+            StarButton(config: config),
+            StarButton(config: config)
+        ]
+        stars.enumerated().forEach { (index, button) in
+            button.tag = index
         }
         return stars
     }()
@@ -33,6 +33,12 @@ final class RatingView: UIStackView {
         self.init(frame: .zero)
         self.config = config
         configure()
+    }
+    
+    func addTarget(target: Any?, action: Selector, for controlEvents: UIControl.Event) {
+        starButtons.forEach { button in
+            button.addTarget(target, action: action, for: controlEvents)
+        }
     }
     
 }
