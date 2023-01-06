@@ -186,9 +186,8 @@ extension BoxOfficeListViewController: UICollectionViewDelegate {
         let cell = collectionView.cellForItem(at: indexPath)
         guard let cell = cell as? BoxOfficeListCell else { return }
         
-        let movieCode = cell.viewModel?.movieCode ?? ""
-        let secondViewController = SecondViewController(movieCode: movieCode)
-//        viewController.view.backgroundColor = .systemBackground
+        guard let boxOffice = cell.viewModel?.boxOffice else { return }
+        let secondViewController = SecondViewController(boxOffice: boxOffice)
         navigationController?.pushViewController(secondViewController, animated: true)
     }
 }
