@@ -146,6 +146,7 @@ class BoxOfficeListContentView: UIView, UIContentView {
     private func apply(_ configuration: BoxOfficeListContentConfiguration) {
         if let date = configuration.openDate {
             let dateFormatter = ISO8601DateFormatter()
+            dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
             dateFormatter.formatOptions = .withFullDate
             let dateString = dateFormatter.string(from: date)
             openDateLabel.text = dateString
