@@ -114,7 +114,7 @@ class ReviewTableViewCell: UITableViewCell {
         entireStackView.addArrangedSubview(photoImageView)
         entireStackView.addArrangedSubview(infoStackView)
         
-        self.addSubview(entireStackView)
+        self.contentView.addSubview(entireStackView)
     }
     
     private func setupConstraint() {
@@ -135,7 +135,6 @@ class ReviewTableViewCell: UITableViewCell {
             
             photoImageView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor,
                                                   multiplier: 1/6)
-//            deleteButton.widthAnchor.constraint(equalTo: ratingLabel.widthAnchor)
         ])
        
     }
