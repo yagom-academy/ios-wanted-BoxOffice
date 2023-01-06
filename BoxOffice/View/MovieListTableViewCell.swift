@@ -124,13 +124,19 @@ class MovieListTableViewCell: UITableViewCell {
     }
     
     func configure(movie: MovieEssentialInfo) {
-        poster.image = UIImage(systemName: "circle")
-        movieRank.text = "\(movie.boxOfficeRank ?? "")위"
+        DispatchQueue.global().async {
+            guard let url = URL(string: movie.posterUrl),
+                  let data = try? Data(contentsOf: url) else { return }
+            DispatchQueue.main.async {
+                self.poster.image = UIImage(data: data)
+            }
+        }
+        movieRank.text = "\(movie.rank )위"
         movieName.text = movie.movieNm
-        movieOpenDate.text = "개봉일 : \(movie.openDate ?? "")"
-        movieShowCount.text = "관객 수 : \(movie.showCnt ?? "")"
+        movieOpenDate.text = "개봉일 : \(movie.openDt)"
+        movieShowCount.text = "관객 수 : \(movie.audiAcc)"
         changeBackgourndOfUpdateRank(movie.rankInten)
-        movieUpdatedRank.text = "(\(movie.rankInten ?? ""))"
+        movieUpdatedRank.text = "(\(movie.rankInten))"
         appendNewLabel(movie.rankOldAndNew)
     }
     
@@ -145,16 +151,18 @@ class MovieListTableViewCell: UITableViewCell {
         }
     }
     
-    private func appendNewLabel(_ value: RankOldOrNew?) {
+    private func appendNewLabel(_ value: String?) {
         guard let value = value else { return }
         
         switch value {
-        case .old:
+        case "OLD":
             movieOldOrNew.isHidden = true
-        case .new:
-            movieOldOrNew.text = value.value
+        case "NEW":
+            movieOldOrNew.text = value
             movieOldOrNew.backgroundColor = .green
             movieOldOrNew.textColor = .white
+        default:
+            return
         }
     }
 }

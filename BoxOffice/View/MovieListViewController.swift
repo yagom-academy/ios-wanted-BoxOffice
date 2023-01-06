@@ -62,6 +62,11 @@ final class MovieListViewController: UIViewController {
         setupSubviews()
         setupLayout()
         setupNavigation()
+        bind()
+    }
+    
+    private func bind() {
+        viewModel.fetchBoxOffice(date: today)
     }
     
     private func setupDataSource() {
@@ -81,6 +86,7 @@ final class MovieListViewController: UIViewController {
                 cell.configure(movie: itemIdentifier)
                 return cell
             })
+        snapshot.appendSections([.main])
     }
     
     private func setupDefault() {
@@ -121,20 +127,18 @@ final class MovieListViewController: UIViewController {
     private func appendDailyData() {
         snapshot.deleteAllItems()
         snapshot.appendSections([.main])
-        viewModel.fetch(date: today) { [weak self] (movies) in
-            guard let self = self else { return }
-            
-            self.snapshot.appendItems(movies)
-            self.dataSource?.apply(self.snapshot)
+        viewModel.movieEssentialInfoList.subscribe { (movies: [MovieEssentialInfo]) in
+            DispatchQueue.main.async {
+                self.snapshot.appendItems(movies)
+                self.dataSource?.apply(self.snapshot)
+            }
         }
     }
     
     private func appendWeekData() {
         snapshot.deleteAllItems()
         snapshot.appendSections([.main])
-        viewModel.fetch(date: lastWeek) { [weak self] (movies) in
-            guard let self = self else { return }
-
+        viewModel.movieEssentialInfoList.subscribe { (movies: [MovieEssentialInfo]) in
             self.snapshot.appendItems(movies)
             self.dataSource?.apply(self.snapshot)
         }

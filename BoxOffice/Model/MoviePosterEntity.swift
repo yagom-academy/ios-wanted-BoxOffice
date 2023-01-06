@@ -1,8 +1,8 @@
 //
-//  MovieEntity.swift
+//  MoviePosterEntity.swift
 //  BoxOffice
 //
-//  Created by 이은찬 on 2023/01/03.
+//  Created by 이은찬 on 2023/01/06.
 //
 
 import Foundation

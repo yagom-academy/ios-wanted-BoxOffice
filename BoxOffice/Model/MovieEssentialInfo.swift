@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieEssentialInfo {
+struct MovieEssentialInfo: Hashable {
     let posterUrl: String
     let rank: String
     let movieNm: String

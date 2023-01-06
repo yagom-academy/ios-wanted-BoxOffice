@@ -153,7 +153,7 @@ final class MovieDetailViewController: UIViewController {
         return label
     }()
     
-    private let actors: UILabel = {
+    private let movieActors: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .title3)
@@ -204,7 +204,7 @@ final class MovieDetailViewController: UIViewController {
         movieInfoStackView.addArrangedSubview(runTime)
         movieInfoStackView.addArrangedSubview(genre)
         movieInfoStackView.addArrangedSubview(directors)
-        movieInfoStackView.addArrangedSubview(actors)
+        movieInfoStackView.addArrangedSubview(movieActors)
         movieInfoStackView.addArrangedSubview(showGrade)
     }
     
@@ -239,22 +239,32 @@ final class MovieDetailViewController: UIViewController {
     }
     
     func configure(_ movie: MovieEssentialInfo) {
-        poster.image = UIImage(systemName: "circle") // 이미지
-        movieRank.text = "\(movie.boxOfficeRank ?? "")위"
-        movieName.text = movie.movieNm
-        movieOpenDate.text = "개봉일 : \(movie.openDate ?? "")"
-        movieShowCount.text = "상영시간 : \(movie.showCnt ?? "")"
-        changeBackgourndOfUpdateRank(movie.rankInten)
-        if movie.rankOldAndNew?.value == "NEW" {
-            movieOldOrNew.text = movie.rankOldAndNew?.value
+        DispatchQueue.global().async {
+            guard let url = URL(string: movie.posterUrl),
+                  let data = try? Data(contentsOf: url) else { return }
+            DispatchQueue.main.async {
+                self.poster.image = UIImage(data: data)
+            }
         }
-        makeYear.text = "제작년도 : \(movie.prdtYear ?? "")"
-        openYear.text = "개봉년도 : \(movie.openYear ?? "")"
-        runTime.text = "상영시간 : \(movie.runtime ?? "")"
-        genre.text = "장르 : \(movie.genre ?? "")"
-        directors.text = "감독 : \(movie.director ?? "")"
-        actors.text = "배우 : \(movie.actors ?? "")"
-        showGrade.text = "관람등급 : \(movie.watchGrade ?? "")"
+        movieRank.text = "\(movie.rank)위"
+        movieName.text = movie.movieNm
+        movieOpenDate.text = "개봉일 : \(movie.openDt)"
+        movieShowCount.text = "상영시간 : \(movie.audiAcc)"
+        changeBackgourndOfUpdateRank(movie.rankInten)
+        if movie.rankOldAndNew == "NEW" {
+            movieOldOrNew.text = movie.rankOldAndNew
+        }
+        makeYear.text = "제작년도 : \(movie.prdtYear)"
+        openYear.text = "개봉년도 : \(movie.openYear)"
+        runTime.text = "상영시간 : \(movie.showTm)분"
+        genre.text = "장르 : \(movie.genres)"
+        var actors: String = ""
+        movie.actors.forEach { `actor` in
+            actors += "\(`actor`.peopleNm)  "
+        }
+        directors.text = "감독 : \(movie.directors.first!.peopleNm)"
+        movieActors.text = "배우 : \(actors)"
+        showGrade.text = "관람등급 : \(movie.watchGradeNm)"
     }
     
     private func changeBackgourndOfUpdateRank(_ number: String?) {
@@ -271,7 +281,5 @@ final class MovieDetailViewController: UIViewController {
     }
     
     @objc func writeReviewButtonDidTapped() {
-        let reviewView = ReviewViewController()
-        // reviewView.configure
     }
 }

@@ -26,6 +26,6 @@ struct MovieInfoEntity: Decodable {
     }
 }
 struct Genres: Decodable { let genreNm: String }
-struct Directors: Decodable { let peopleNm: String }
-struct Actors: Decodable { let peopleNm: String }
+struct Directors: Decodable, Hashable { let peopleNm: String }
+struct Actors: Decodable, Hashable { let peopleNm: String }
 struct Audits: Decodable { let watchGradeNm: String }
