@@ -87,6 +87,7 @@ class MovieMainInfoView: UIView {
         separator.close()
     }
     
+    //TODO: 정보 표시 형식 맞추기
     func configure(with movie: MovieDetail) {
         //TODO: 포스터 이미지로 변경
         posterView.image = UIImage(systemName: "camera")
@@ -129,6 +130,7 @@ class MovieMainInfoView: UIView {
         self.addSubview(entireStackView)
     }
     
+    //TODO: constraint 및 StackView 조정
     private func setupConstraint() {
         NSLayoutConstraint.activate([
             entireStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,

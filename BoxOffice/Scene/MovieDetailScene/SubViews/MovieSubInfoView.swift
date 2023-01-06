@@ -109,6 +109,7 @@ class MovieSubInfoView: UIView {
         self.addSubview(entireStackView)
     }
     
+    //TODO: constraint 및 StackView 조정
     private func setupConstraint() {
         NSLayoutConstraint.activate([
             entireStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
