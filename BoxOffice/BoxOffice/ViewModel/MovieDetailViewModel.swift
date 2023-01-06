@@ -12,7 +12,7 @@ protocol MovieDetailViewModelProtocol {
     func createMoviePageInfo(movieBoxOfficeInfo: DailyBoxOfficeList, movieDetail: MovieDetail) -> MovieInfoPageModel
 }
 
-final class MovieDetailViewModel: MovieDetailViewModelProtocol, ObservableObject {
+final class MovieDetailViewModel: ObservableObject, MovieDetailViewModelProtocol {
     @Published var currentPageMovieDetail: MovieInfoPageModel?
 
     let boxOfficeDirector = MovieRequestDirector()
