@@ -70,6 +70,8 @@ extension MovieDetailViewController: UITableViewDataSource {
     private func setupTableView() {
         reviewTableView.dataSource = self
         reviewTableView.rowHeight = view.bounds.height * 0.1
+        reviewTableView.isScrollEnabled = false
+        reviewTableView.allowsSelection = false
     }
     
     private func setupInitialTableView() {
