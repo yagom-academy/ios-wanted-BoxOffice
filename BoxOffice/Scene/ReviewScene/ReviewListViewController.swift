@@ -41,10 +41,14 @@ final class ReviewListViewController: UIViewController {
         view.addSubview(reviewTableView)
         
         NSLayoutConstraint.activate([
-            reviewTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            reviewTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            reviewTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            reviewTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            reviewTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                                                     constant: 8),
+            reviewTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                                                     constant: -8),
+            reviewTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                                     constant: 16),
+            reviewTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                                     constant: -16)
         ])
     }
     

@@ -128,13 +128,11 @@ final class ReviewTableViewCell: UITableViewCell {
                                                  constant: 8),
             entireStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
                                                  constant: -8),
-            entireStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,
-                                                 constant: 8),
+            entireStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             entireStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,
                                                  constant: -8),
             
-            photoImageView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor,
-                                                  multiplier: 1/6)
+            photoImageView.widthAnchor.constraint(equalTo: photoImageView.heightAnchor)
         ])
        
     }
