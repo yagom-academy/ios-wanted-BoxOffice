@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2005979629669097002AB7EC /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005979529669097002AB7EC /* MovieDetailViewModel.swift */; };
 		200597982966B690002AB7EC /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200597972966B690002AB7EC /* ReviewTableViewCell.swift */; };
 		201825AA29664B8F00ADB79A /* MovieSubInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201825A929664B8F00ADB79A /* MovieSubInfoView.swift */; };
 		201825AC29664D8D00ADB79A /* MovieReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201825AB29664D8D00ADB79A /* MovieReviewView.swift */; };
@@ -85,7 +84,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2005979529669097002AB7EC /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 		200597972966B690002AB7EC /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		201825A929664B8F00ADB79A /* MovieSubInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSubInfoView.swift; sourceTree = "<group>"; };
 		201825AB29664D8D00ADB79A /* MovieReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewView.swift; sourceTree = "<group>"; };
@@ -339,7 +337,6 @@
 			isa = PBXGroup;
 			children = (
 				20F38B0A2965C31400415749 /* MovieDetailViewController.swift */,
-				2005979529669097002AB7EC /* MovieDetailViewModel.swift */,
 				20F8D4762968396900FA77BA /* UIViewController+.swift */,
 				AF22D9F1296839EB0059075F /* ActorListModalView */,
 				201C827A2966F4A10060054B /* SubViews */,
@@ -598,7 +595,6 @@
 				20F38AFF296511A700415749 /* StarImageView.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				AF6C3A512962D7E20074574D /* SearchMoviePosterAPI.swift in Sources */,
-				2005979629669097002AB7EC /* MovieDetailViewModel.swift in Sources */,
 				635A19EA28F9603900197BCC /* SceneDelegate.swift in Sources */,
 				20F38B0129654EB800415749 /* MovieReviewViewModel.swift in Sources */,
 				20BB8C192963B40300801668 /* ReviewFirebaseUseCase.swift in Sources */,
