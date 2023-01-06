@@ -13,7 +13,7 @@ class BoxOfficeListCell: UICollectionViewListCell {
     override func updateConfiguration(using state: UICellConfigurationState) {
         let config = BoxOfficeListContentConfiguration(
             movieName: viewModel?.movieName,
-            lank: viewModel?.lank,
+            rank: viewModel?.rank,
             openDate: viewModel?.openDate,
             audienceCount: viewModel?.audienceCount,
             increaseOrDecreaseInRank: viewModel?.rankingChange,

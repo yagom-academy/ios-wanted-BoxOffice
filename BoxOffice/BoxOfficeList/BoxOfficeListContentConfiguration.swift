@@ -9,7 +9,7 @@ import UIKit
 
 struct BoxOfficeListContentConfiguration: UIContentConfiguration {
     var movieName: String?
-    var lank: Int?
+    var rank: Int?
     var openDate: Date?
     var audienceCount: Int?
     var increaseOrDecreaseInRank: Int?

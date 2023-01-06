@@ -55,7 +55,7 @@ class BoxOfficeListContentView: UIView, UIContentView {
         stackView.alignment = .center
 
         let footer = UILabel()
-        footer.text = "당일 관객수"
+        footer.text = "누적관객수"
         footer.textColor = .secondaryLabel
         footer.font = .preferredFont(forTextStyle: .caption1)
 
@@ -151,7 +151,7 @@ class BoxOfficeListContentView: UIView, UIContentView {
             openDateLabel.text = dateString
         }
         movieNameLabel.text = configuration.movieName
-        lankLabel.text = "\(configuration.lank ?? 0)위"
+        lankLabel.text = "\(configuration.rank ?? 0)위"
         audienceCountLabel.text = configuration.audienceCount?.description
         let rankingChange = configuration.increaseOrDecreaseInRank ?? 0
         let isNewEntryToRank = configuration.isNewEntryToRank ?? false

@@ -15,11 +15,32 @@ class BoxOfficeListViewController: UIViewController {
     private let listView: UICollectionView = {
         let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
         let layout = UICollectionViewCompositionalLayout.list(using: configuration)
-        return UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let listView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return listView
+    }()
+    private let dateIntervalStackView: UIStackView = {
+        let descriptionLable = UILabel()
+        descriptionLable.text = "조회 기간:"
+        descriptionLable.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = UIStackView.spacingUseSystem
+        stackView.addArrangedSubview(descriptionLable)
+        return stackView
+    }()
+    private let dateIntervalLabel: UILabel = {
+        let label = UILabel()
+        return label
     }()
 
     private let periodSegmentedControl = UISegmentedControl()
-    private let stackView = UIStackView()
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        return stackView
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,39 +50,91 @@ class BoxOfficeListViewController: UIViewController {
         setupListView()
         layout()
         // initial data
+        setupData(period: .day)
+    }
+
+    private func layout() {
+        dateIntervalStackView.addArrangedSubview(dateIntervalLabel)
+
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(periodSegmentedControl)
+        stackView.addArrangedSubview(dateIntervalStackView)
+        stackView.addArrangedSubview(listView)
+
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+    }
+
+    private func setupData(period: Period) {
+        typealias Request = BoxOfficeListRequester.BoxOfficeListRequest
+
+        let reqester = BoxOfficeListRequester()
+        let calendar = Calendar.current
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: Date())
+        let lastWeek = calendar.date(byAdding: .day, value: -7, to: Date())
+
+        switch period {
+        case .day:
+            reqester.requestDailyList(Request(targetDt: yesterday ?? Date()), completionHandler: completionHandler(result:))
+        case .week:
+            reqester.requestWeeklyList(Request(targetDt: lastWeek ?? Date(), weekGb: .week), completionHandler: completionHandler(result:))
+        case .weekend:
+            reqester.requestWeeklyList(Request(targetDt: lastWeek ?? Date(), weekGb: .weekend), completionHandler: completionHandler(result:))
+        case .weekdays:
+            reqester.requestWeeklyList(Request(targetDt: lastWeek ?? Date(), weekGb: .weekdays), completionHandler: completionHandler(result:))
+        }
+
+        func completionHandler(result: Result<KobisResult, Error>) {
+            switch result {
+            case .success(let kobisResult):
+                self.apply(kobisResult)
+            case .failure(let error):
+                print(error.localizedDescription)
+                return
+            }
+        }
+    }
+
+    private func apply(_ result: KobisResult) {
+        let movies = result.boxOfficeList.movies.map{ BoxOfficeListCellViewModel(boxOffice: $0) }
+
         var snapshot = DataSourceSnapshot()
         snapshot.appendSections([.main])
-        snapshot.appendItems(testDatasForDay)
-        dataSource?.apply(snapshot, animatingDifferences: false)
+        snapshot.appendItems(movies)
+        DispatchQueue.main.async { [weak self] in
+            let dateFormatter = ISO8601DateFormatter()
+            dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+            dateFormatter.formatOptions = .withFullDate
+
+            let dateInterval = result.boxOfficeList.showRange
+            let startDate = dateFormatter.string(from: dateInterval.start)
+            let endDate = dateFormatter.string(from: dateInterval.end)
+
+            self?.dateIntervalLabel.text = "\(startDate)~\(endDate)"
+            self?.dataSource?.apply(snapshot, animatingDifferences: false)
+        }
     }
 
     private func setupSegmentControll() {
-        let segment1 = UIAction(title: Period.day.title) { [weak self] _ in
-            guard let self = self else { return }
-            var snapshot = DataSourceSnapshot()
-            snapshot.appendSections([.main])
-            snapshot.appendItems(self.testDatasForDay)
-            self.dataSource?.apply(snapshot, animatingDifferences: false)
+        let daySegment = UIAction(title: Period.day.title) { [weak self] _ in
+            self?.setupData(period: .day)
         }
-        periodSegmentedControl.insertSegment(action: segment1, at: 0, animated: false)
+        periodSegmentedControl.insertSegment(action: daySegment, at: 0, animated: false)
 
-        let segment2 = UIAction(title: Period.week.title) { [weak self] _ in
-            guard let self = self else { return }
-            var snapshot = DataSourceSnapshot()
-            snapshot.appendSections([.main])
-            snapshot.appendItems(self.testDatasForWeek)
-            self.dataSource?.apply(snapshot, animatingDifferences: false)
+        let weekSegment = UIAction(title: Period.week.title) { [weak self] _ in
+            self?.setupData(period: .week)
         }
-        periodSegmentedControl.insertSegment(action: segment2, at: 1, animated: false)
+        periodSegmentedControl.insertSegment(action: weekSegment, at: 1, animated: false)
 
-        let segment3 = UIAction(title: Period.weekEnd.title) { [weak self] _ in
-            guard let self = self else { return }
-            var snapshot = DataSourceSnapshot()
-            snapshot.appendSections([.main])
-            snapshot.appendItems(self.testDatasForWeekend)
-            self.dataSource?.apply(snapshot, animatingDifferences: false)
+        let weekendSegmant = UIAction(title: Period.weekend.title) { [weak self] _ in
+            self?.setupData(period: .weekdays)
         }
-        periodSegmentedControl.insertSegment(action: segment3, at: 2, animated: false)
+        periodSegmentedControl.insertSegment(action: weekendSegmant, at: 2, animated: false)
 
         periodSegmentedControl.selectedSegmentIndex = 0
     }
@@ -69,6 +142,8 @@ class BoxOfficeListViewController: UIViewController {
     private func setupListView() {
         let cellRegistraion = UICollectionView.CellRegistration<BoxOfficeListCell, BoxOfficeListCellViewModel> { cell, indexPath, item in
             cell.viewModel = item
+            cell.indentationWidth = 10
+            cell.indentationLevel = 1
         }
 
         dataSource = DataSource(collectionView: listView) { collectionView, indexPath, item in
@@ -76,20 +151,7 @@ class BoxOfficeListViewController: UIViewController {
         }
 
         listView.dataSource = dataSource
-    }
-
-    private func layout() {
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stackView)
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10)
-        ])
-        stackView.addArrangedSubview(periodSegmentedControl)
-        stackView.addArrangedSubview(listView)
+        listView.delegate = self
     }
 }
 
@@ -101,7 +163,8 @@ extension BoxOfficeListViewController {
     private enum Period: CaseIterable {
         case day
         case week
-        case weekEnd
+        case weekend
+        case weekdays
 
         var title: String {
             switch self {
@@ -109,60 +172,22 @@ extension BoxOfficeListViewController {
                 return "일"
             case .week:
                 return "주"
-            case .weekEnd:
+            case .weekend:
                 return "주말"
+            case .weekdays:
+                return "주중"
             }
         }
     }
 }
 
-extension BoxOfficeListViewController {
-    private var testDatasForDay: [BoxOfficeListCellViewModel] {
-        return [
-            BoxOfficeListCellViewModel(movieName: "Avatar: The Way of Water",
-                                       lank: 1,
-                                       openDate: "2022-12-14",
-                                       audienceCount: 1,
-                                       rankingChange: 1,
-                                       isNewEntryToRank: true),
-            BoxOfficeListCellViewModel(movieName: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                                       lank: 2,
-                                       openDate: "",
-                                       audienceCount: 12,
-                                       rankingChange: 0,
-                                       isNewEntryToRank: false)
-        ]
-    }
-    private var testDatasForWeek: [BoxOfficeListCellViewModel] {
-        return [
-            BoxOfficeListCellViewModel(movieName: "Avatar: The Way of Water",
-                                       lank: 1,
-                                       openDate: "2022-12-14",
-                                       audienceCount: 2,
-                                       rankingChange: 1,
-                                       isNewEntryToRank: true),
-            BoxOfficeListCellViewModel(movieName: "title2",
-                                       lank: 3,
-                                       openDate: "",
-                                       audienceCount: 12,
-                                       rankingChange: -3,
-                                       isNewEntryToRank: false)
-        ]
-    }
-    private var testDatasForWeekend: [BoxOfficeListCellViewModel] {
-        return [
-            BoxOfficeListCellViewModel(movieName: "Avatar: The Way of Water",
-                                       lank: 1,
-                                       openDate: "2022-12-14",
-                                       audienceCount: 3,
-                                       rankingChange: 1,
-                                       isNewEntryToRank: true),
-            BoxOfficeListCellViewModel(movieName: "title2",
-                                       lank: 2,
-                                       openDate: "",
-                                       audienceCount: 12,
-                                       rankingChange: -2,
-                                       isNewEntryToRank: false)
-        ]
+extension BoxOfficeListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        guard let cell = cell as? BoxOfficeListCell else { return }
+        let movieCode = cell.viewModel?.movieCode
+        let viewController = UIViewController()
+        viewController.view.backgroundColor = .systemBackground
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

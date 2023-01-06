@@ -10,6 +10,13 @@
 		3A0B33622963FE7600D2766D /* BoxOfficeListContentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B33612963FE7600D2766D /* BoxOfficeListContentConfiguration.swift */; };
 		3A0B33642963FE9100D2766D /* BoxOfficeListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B33632963FE9100D2766D /* BoxOfficeListContentView.swift */; };
 		3A0B336B29640C2200D2766D /* RankingChangeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B336A29640C2200D2766D /* RankingChangeLabel.swift */; };
+		3A3DBCA92967EAA100F455B6 /* KobisResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DBCA82967EAA100F455B6 /* KobisResult.swift */; };
+		3A3DBCAB2967EAC300F455B6 /* BoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DBCAA2967EAC300F455B6 /* BoxOffice.swift */; };
+		3A3DBCAD2967EAEA00F455B6 /* BoxOfficeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DBCAC2967EAEA00F455B6 /* BoxOfficeList.swift */; };
+		3A3DBCAF2967EB1200F455B6 /* BoxOfficeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DBCAE2967EB1200F455B6 /* BoxOfficeType.swift */; };
+		3A406FE6296598BA00D536FB /* BoxOfficeListRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A406FE5296598BA00D536FB /* BoxOfficeListRequester.swift */; };
+		3A406FE92965B99D00D536FB /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A406FE82965B99D00D536FB /* Collection+Extension.swift */; };
+		3A406FEB2965BEA100D536FB /* DecodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A406FEA2965BEA100D536FB /* DecodeError.swift */; };
 		3A4A73472962A46000C78334 /* BoxOfficeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A73462962A46000C78334 /* BoxOfficeListViewController.swift */; };
 		3A4A73492962B44A00C78334 /* BoxOfficeListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A73482962B44A00C78334 /* BoxOfficeListCellViewModel.swift */; };
 		3A4A734B2962BDD000C78334 /* BoxOfficeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A734A2962BDD000C78334 /* BoxOfficeListCell.swift */; };
@@ -25,6 +32,13 @@
 		3A0B33612963FE7600D2766D /* BoxOfficeListContentConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListContentConfiguration.swift; sourceTree = "<group>"; };
 		3A0B33632963FE9100D2766D /* BoxOfficeListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListContentView.swift; sourceTree = "<group>"; };
 		3A0B336A29640C2200D2766D /* RankingChangeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingChangeLabel.swift; sourceTree = "<group>"; };
+		3A3DBCA82967EAA100F455B6 /* KobisResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisResult.swift; sourceTree = "<group>"; };
+		3A3DBCAA2967EAC300F455B6 /* BoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOffice.swift; sourceTree = "<group>"; };
+		3A3DBCAC2967EAEA00F455B6 /* BoxOfficeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeList.swift; sourceTree = "<group>"; };
+		3A3DBCAE2967EB1200F455B6 /* BoxOfficeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeType.swift; sourceTree = "<group>"; };
+		3A406FE5296598BA00D536FB /* BoxOfficeListRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListRequester.swift; sourceTree = "<group>"; };
+		3A406FE82965B99D00D536FB /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
+		3A406FEA2965BEA100D536FB /* DecodeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeError.swift; sourceTree = "<group>"; };
 		3A4A73462962A46000C78334 /* BoxOfficeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListViewController.swift; sourceTree = "<group>"; };
 		3A4A73482962B44A00C78334 /* BoxOfficeListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListCellViewModel.swift; sourceTree = "<group>"; };
 		3A4A734A2962BDD000C78334 /* BoxOfficeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListCell.swift; sourceTree = "<group>"; };
@@ -62,9 +76,23 @@
 			path = BoxOfficeList;
 			sourceTree = "<group>";
 		};
+		3A3DBCA72967EA7500F455B6 /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				3A3DBCA82967EAA100F455B6 /* KobisResult.swift */,
+				3A3DBCAA2967EAC300F455B6 /* BoxOffice.swift */,
+				3A3DBCAC2967EAEA00F455B6 /* BoxOfficeList.swift */,
+				3A3DBCAE2967EB1200F455B6 /* BoxOfficeType.swift */,
+			);
+			path = Download;
+			sourceTree = "<group>";
+		};
 		3A406FE32965528200D536FB /* KobisRequest */ = {
 			isa = PBXGroup;
 			children = (
+				3A3DBCA72967EA7500F455B6 /* Download */,
+				3A406FE5296598BA00D536FB /* BoxOfficeListRequester.swift */,
+				3A406FEA2965BEA100D536FB /* DecodeError.swift */,
 			);
 			path = KobisRequest;
 			sourceTree = "<group>";
@@ -77,6 +105,14 @@
 				8ADDFA152962FC5C00085D72 /* SecondView.swift */,
 			);
 			path = BoxOfficeDetail;
+			sourceTree = "<group>";
+		};
+		3A406FE72965B98600D536FB /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3A406FE82965B99D00D536FB /* Collection+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		635A19DB28F9603900197BCC = {
@@ -98,6 +134,7 @@
 		635A19E628F9603900197BCC /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
+				3A406FE72965B98600D536FB /* Extension */,
 				3A406FE4296552E600D536FB /* BoxOfficeDetail */,
 				3A0B33652963FEED00D2766D /* BoxOfficeList */,
 				3A406FE32965528200D536FB /* KobisRequest */,
@@ -180,16 +217,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				635A19EC28F9603900197BCC /* SecondViewController.swift in Sources */,
+				3A3DBCAD2967EAEA00F455B6 /* BoxOfficeList.swift in Sources */,
 				8ADDFA162962FC5C00085D72 /* SecondView.swift in Sources */,
 				3A0B336B29640C2200D2766D /* RankingChangeLabel.swift in Sources */,
+				3A406FE6296598BA00D536FB /* BoxOfficeListRequester.swift in Sources */,
+				3A3DBCAF2967EB1200F455B6 /* BoxOfficeType.swift in Sources */,
+				3A406FEB2965BEA100D536FB /* DecodeError.swift in Sources */,
 				3A0B33642963FE9100D2766D /* BoxOfficeListContentView.swift in Sources */,
 				3A0B33622963FE7600D2766D /* BoxOfficeListContentConfiguration.swift in Sources */,
 				3A4A73492962B44A00C78334 /* BoxOfficeListCellViewModel.swift in Sources */,
 				635A19EC28F9603900197BCC /* SecondViewController.swift in Sources */,
+				3A3DBCA92967EAA100F455B6 /* KobisResult.swift in Sources */,
+				3A406FE92965B99D00D536FB /* Collection+Extension.swift in Sources */,
 				3A4A73472962A46000C78334 /* BoxOfficeListViewController.swift in Sources */,
 				3A4A734B2962BDD000C78334 /* BoxOfficeListCell.swift in Sources */,
 				635A19E828F9603900197BCC /* AppDelegate.swift in Sources */,
 				8ADDFA1A2964018C00085D72 /* MovieDetailInfo.swift in Sources */,
+				3A3DBCAB2967EAC300F455B6 /* BoxOffice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

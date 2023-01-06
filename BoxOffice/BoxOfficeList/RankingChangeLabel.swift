@@ -41,8 +41,10 @@ class RankingChangeLabel: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
         NSLayoutConstraint.activate([
-            label.widthAnchor.constraint(equalTo: widthAnchor),
-            label.heightAnchor.constraint(equalTo: heightAnchor)
+            label.topAnchor.constraint(equalTo: topAnchor),
+            label.bottomAnchor.constraint(equalTo: bottomAnchor),
+            label.leadingAnchor.constraint(equalTo: leadingAnchor),
+            label.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
 

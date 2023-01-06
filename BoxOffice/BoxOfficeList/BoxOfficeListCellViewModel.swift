@@ -10,11 +10,12 @@ import Foundation
 struct BoxOfficeListCellViewModel {
     let id = UUID()
     var movieName: String
-    var lank: Int
+    var rank: Int
     var openDate: Date
     var audienceCount: Int
     var rankingChange: Int
     var isNewEntryToRank: Bool
+    var movieCode: String
 }
 
 extension BoxOfficeListCellViewModel: Hashable {
@@ -29,17 +30,13 @@ extension BoxOfficeListCellViewModel: Hashable {
 }
 
 extension BoxOfficeListCellViewModel {
-    init(movieName: String, lank: Int, openDate: String, audienceCount: Int, rankingChange: Int, isNewEntryToRank: Bool) {
-        let dateFommater = ISO8601DateFormatter()
-        dateFommater.timeZone = TimeZone(identifier: "Asia/Seoul")
-        dateFommater.formatOptions = .withFullDate
-        let dateFromString = dateFommater.date(from: openDate)
-
-        self.movieName = movieName
-        self.lank = lank
-        self.openDate = dateFromString  ?? Date(timeIntervalSince1970: .nan)
-        self.audienceCount = audienceCount
-        self.rankingChange = rankingChange
-        self.isNewEntryToRank = isNewEntryToRank
+    init(boxOffice: BoxOffice) {
+        self.movieName = boxOffice.movieNm
+        self.rank = boxOffice.rank
+        self.openDate = boxOffice.openDate
+        self.audienceCount = boxOffice.audiAcc
+        self.rankingChange = boxOffice.rankInten
+        self.isNewEntryToRank = boxOffice.isNewRanked
+        self.movieCode = boxOffice.movieCD
     }
 }
