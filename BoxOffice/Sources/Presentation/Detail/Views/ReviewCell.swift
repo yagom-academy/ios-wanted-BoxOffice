@@ -10,8 +10,8 @@ import UIKit
 class ReviewCell: UITableViewCell {
     private lazy var userImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "person.fill"))
-        imageView.tintColor = .systemGray
-        imageView.backgroundColor = .darkGray
+        imageView.tintColor = .darkGray
+        imageView.backgroundColor = .systemGray
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 30
         imageView.layer.borderWidth = 1
@@ -183,7 +183,7 @@ class ReviewCell: UITableViewCell {
             return
         }
         
-        userImageView.image = reviews[index].userImage.toUIImage() ?? UIImage(systemName: "person.circle")
+        userImageView.image = reviews[index].userImage.toUIImage() ?? UIImage(systemName: "person.circle.fill")
         writingLabel.text = reviews[index].review
         nicknameLabel.text = reviews[index].nickname
         dateLabel.text = reviews[index].date?.toString(.yyyyMMddDot)

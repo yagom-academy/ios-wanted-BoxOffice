@@ -117,8 +117,6 @@ class SecondCell: UITableViewCell {
         NSLayoutConstraint.activate([
             rankingattendancestarsStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             rankingattendancestarsStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-//            rankingattendancestarsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 35),
-//            rankingattendancestarsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -35),
             rankingattendancestarsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }
@@ -135,7 +133,7 @@ class SecondCell: UITableViewCell {
         var rating: Double = 0
         reviews.forEach { rating += $0.stars }
         
-        starsLabel.text = "\(rating / Double(reviews.count))"
+        starsLabel.text = String(format: "%.1f", rating / Double(reviews.count))
         
     }
 }

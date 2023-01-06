@@ -77,16 +77,16 @@ extension MovieDetailViewModel: MovieDetailViewModelInput, MovieDetailViewModelO
         🍿 BoxOffice Information 🍿
         영화명: \(movie.name)
         순위증감분: \(String(describing: boxOfficeInfo.rankInten))
-        개봉일: \(String(describing: movie.openDate))
-        제작연도: \(String(describing: movie.detailInfo?.productionYear))
+        개봉일: \(movie.openDate.toString(.yyyyMMddDot))
+        제작연도: \(detailInfo.productionYear)
         상영시간: \(String(describing: detailInfo.showTime))
         관람등급: \(String(describing: detailInfo.audit))
         박스오피스 순위: \(String(describing: boxOfficeInfo.rank))
-        누적 관객수: \(String(describing: boxOfficeInfo.audienceAccumulation))명
+        누적 관객수: \(boxOfficeInfo.audienceAccumulation.numberFormatter())명
         랭킹 신규 진입: \(String(describing: boxOfficeInfo.rankOldAndNew.rawValue))
-        장르: \(String(describing: detailInfo.genres.first ?? ""))
-        감독: \(detailInfo.directors.first ?? "")
-        주연: \(detailInfo.actors.first ?? "")
+        장르: \(detailInfo.genres.joined(separator: ", "))
+        감독: \(detailInfo.directors.joined(separator: ", "))
+        주연: \(detailInfo.actors.joined(separator: ", "))
         """
         ])
     }
