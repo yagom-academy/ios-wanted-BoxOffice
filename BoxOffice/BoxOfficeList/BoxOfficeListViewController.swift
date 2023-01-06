@@ -132,9 +132,14 @@ class BoxOfficeListViewController: UIViewController {
         periodSegmentedControl.insertSegment(action: weekSegment, at: 1, animated: false)
 
         let weekendSegmant = UIAction(title: Period.weekend.title) { [weak self] _ in
-            self?.setupData(period: .weekdays)
+            self?.setupData(period: .weekend)
         }
         periodSegmentedControl.insertSegment(action: weekendSegmant, at: 2, animated: false)
+
+        let weekdaySegment = UIAction(title: Period.weekdays.title) { [weak self] _ in
+            self?.setupData(period: .weekdays)
+        }
+        periodSegmentedControl.insertSegment(action: weekdaySegment, at: 3, animated: false)
 
         periodSegmentedControl.selectedSegmentIndex = 0
     }
