@@ -55,6 +55,18 @@ class MovieReviewView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func addTargetWriteButton(with target: UIViewController, selector: Selector) {
+        writeReviewButton.addTarget(target,
+                                    action: selector,
+                                    for: .touchUpInside)
+    }
+    
+    func addTargetMoreButton(with target: UIViewController, selector: Selector) {
+        moreReviewButton.addTarget(target,
+                                   action: selector,
+                                   for: .touchUpInside)
+    }
+    
     private func setupView() {
         addSubView()
         setupConstraint()

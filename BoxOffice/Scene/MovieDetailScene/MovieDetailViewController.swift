@@ -71,10 +71,6 @@ class MovieDetailViewController: UIViewController {
             }
         }
     }
-    
-    @objc private func moreActorButtonTapped() {
-        //TODO: 배우 더보기 modal
-    }
 }
 
 //MARK: Review TableView
@@ -104,13 +100,11 @@ extension MovieDetailViewController {
     private func setupView() {
         movieMainInfoView.configure(with: testMovie)
         movieSubInfoView.configure(with: testMovie)
-        
-        movieSubInfoView.setupMoreButton(with: self,
-                                         selector: #selector(moreActorButtonTapped))
-        
+
         addSubView()
         setupConstraint()
         setupTableView()
+        addTagetButton()
         view.backgroundColor = .systemBackground
     }
     
@@ -134,6 +128,30 @@ extension MovieDetailViewController {
             movieReviewView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor,
                                                     multiplier: 5/10)
         ])
+    }
+}
+
+//MARK: Button Action
+extension MovieDetailViewController {
+    private func addTagetButton() {
+        movieSubInfoView.addTargetMoreButton(with: self,
+                                             selector: #selector(moreActorButtonTapped))
+        movieReviewView.addTargetWriteButton(with: self,
+                                             selector: #selector(writeReviewButtonTapped))
+        movieReviewView.addTargetMoreButton(with: self,
+                                            selector: #selector(moreReviewButtonTapped))
+    }
+    
+    @objc private func moreActorButtonTapped() {
+        //TODO: 배우 더보기 modal
+    }
+    
+    @objc private func writeReviewButtonTapped() {
+        //TODO: 리뷰 쓰기 화면 이동
+    }
+    
+    @objc private func moreReviewButtonTapped() {
+        //TODO: 리뷰 테이블 페이지 이동
     }
 }
 

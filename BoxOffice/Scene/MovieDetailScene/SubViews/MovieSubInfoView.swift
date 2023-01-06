@@ -81,7 +81,7 @@ class MovieSubInfoView: UIView {
         actorsLabel.text =  "출연: " + movie.actors
     }
     
-    func setupMoreButton(with target: UIViewController, selector: Selector) {
+    func addTargetMoreButton(with target: UIViewController, selector: Selector) {
         moreActorsButton.addTarget(target,
                                    action: selector,
                                    for: .touchUpInside)
