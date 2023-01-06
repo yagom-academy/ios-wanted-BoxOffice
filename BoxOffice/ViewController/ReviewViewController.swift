@@ -24,6 +24,7 @@ class ReviewViewController: UIViewController {
         let textField = UITextField()
         textField.layer.borderWidth = 1.0
         textField.layer.borderColor = UIColor.black.cgColor
+        textField.font = UIFont.systemFont(ofSize: 15)
         
         return textField
     }()
@@ -108,6 +109,7 @@ class ReviewViewController: UIViewController {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
+        stackView.spacing = 20
         
         return stackView
     }()
@@ -134,7 +136,7 @@ extension ReviewViewController {
         
         let layout = [
             self.vStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            self.vStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.vStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 40),
             self.vStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
         ]
         
@@ -163,14 +165,18 @@ extension ReviewViewController {
             db.collection(ReviewViewController.movieName).document(reviewCount).setData(["nickname": nickname, "password": password, "starRating": starRating, "content": content, "imageURL": imageURL, "id": reviewCount])
             
             let alert = UIAlertController(title: "저장 성공", message: "저장이 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .default, handler : nil)
+            let defaultAction = UIAlertAction(title: "OK", style: .default) { (_) in
+                self.dismiss(animated: true)
+            }
             alert.addAction(defaultAction)
             present(alert, animated: false, completion: nil)
-            
+    
             db.collection("Count").document("count").setData(["count":count+1])
         } else {
             let alert = UIAlertController(title: "저장 실패", message: "암호 입력이 잘못되었습니다", preferredStyle: UIAlertController.Style.alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .destructive, handler : nil)
+            let defaultAction = UIAlertAction(title: "OK", style: .destructive) { (_) in
+                self.dismiss(animated: true)
+            }
             alert.addAction(defaultAction)
             present(alert, animated: false, completion: nil)
         }
@@ -187,7 +193,6 @@ extension ReviewViewController {
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: doc.data(), options: [])
                     let count = try JSONDecoder().decode(Count.self, from: jsonData)
-                    print(count)
                     return count
                 } catch let error {
                     print("\(error)")

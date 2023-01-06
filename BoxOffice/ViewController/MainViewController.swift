@@ -96,7 +96,6 @@ extension MainViewController {
         for i in 0...9 {
             movieCodeData.append(data[i].movieCd)
         }
-        print(movieCodeData)
     }
 }
 
@@ -107,4 +106,12 @@ extension MainViewController: UICollectionViewDelegate {
         let secondVC = SecondViewController()
         self.navigationController?.pushViewController(secondVC, animated: true)
     }
+}
+
+func numberFormatter(number: String) -> String {
+    let intNumber = Int(number)!
+    let numberFormatter = NumberFormatter()
+    numberFormatter.numberStyle = .decimal
+    
+    return numberFormatter.string(from: NSNumber(value: intNumber))!
 }

@@ -33,7 +33,6 @@ class ReviewTableViewCell: UITableViewCell {
         var buttons: [UIButton] = []
         let stackView = UIStackView()
         let end = ReviewTableViewCell.end
-        print(end)
         for i in 0..<end {
             let button = UIButton()
             button.setImage(UIImage(systemName: "star.fill"), for: .normal)
@@ -52,7 +51,7 @@ class ReviewTableViewCell: UITableViewCell {
     
     let reviewImageView: UIImageView = {
         let image = UIImageView()
-        image.backgroundColor = .black
+        image.backgroundColor = .white
         
         return image
     }()

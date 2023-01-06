@@ -20,7 +20,7 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     
     let filmNameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 2
         return label
@@ -29,6 +29,8 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     let releaseDateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
+        label.lineBreakMode = .byTruncatingTail
+        label.numberOfLines = 2
         return label
     }()
 
@@ -105,7 +107,8 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
             filmNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             filmNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             releaseDateLabel.topAnchor.constraint(equalTo: filmNameLabel.bottomAnchor, constant: 5),
-            releaseDateLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            releaseDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            releaseDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             spectatorsLabel.topAnchor.constraint(equalTo: releaseDateLabel.bottomAnchor, constant: 5),
             spectatorsLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
         ])
@@ -113,17 +116,14 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     
     
     func getFilmDetailData(movieCode: String, completion: @escaping (Result<FilmDetails, Error>) -> Void) {
-//        print(movieCode)
         let url = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=635cb0b1404820f91c8a45fcdf831615&movieCd=\(movieCode)"
         NetworkManager().getData(url: url, completion: completion)
         
     }
     
     func getPosterData(movieName: String, completion: @escaping (Result<FilmPoster, Error>) -> Void) {
-//        filmEnglishName?.replacingOccurrences(of: " ", with: "+")
         let url = "https://omdbapi.com/?apikey=54346b2b&t=\(movieName.replacingOccurrences(of: " ", with: "+"))"
         NetworkManager().getData(url: url, completion: completion)
-        
     }
     
     
@@ -143,11 +143,11 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
                             self.posterImageView.image = image
                         }
                     case .failure(let failure):
-                        print(failure   )
+                        print(failure)
                     }
                 }
             case .failure(let failure):
-                print(failure   )
+                print(failure)
             }
         }
         
@@ -158,24 +158,22 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
         }
     
         if rankInten == 0 {
-            print(data.movieNm)
             rankFluctuationsButton.setTitle("-", for: .normal)
             rankFluctuationsButton.setTitleColor(.gray, for: .normal)
         } else if rankInten > 0 {
-            print(data.movieNm)
             rankFluctuationsButton.setTitle("\(rankInten)", for: .normal)
             rankFluctuationsButton.setImage(UIImage(systemName: "chevron.up"), for: .normal)
             rankFluctuationsButton.tintColor = .red
             rankFluctuationsButton.setTitleColor(.red, for: .normal)
         } else {
-            print(data.movieNm)
             rankFluctuationsButton.setTitle("\(abs(rankInten))", for: .normal)
             rankFluctuationsButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
             rankFluctuationsButton.tintColor = .blue
             rankFluctuationsButton.setTitleColor(.blue, for: .normal)
         }
         filmNameLabel.text = data.movieNm
-        releaseDateLabel.text = data.openDt
-        spectatorsLabel.text = data.audiAcc
+        releaseDateLabel.text = "개봉일: " + data.openDt
+        let spectators = numberFormatter(number: data.audiAcc)
+        spectatorsLabel.text = spectators + "명"
     }
 }

@@ -143,9 +143,9 @@
 				FBC2EDC229641474009F21C9 /* BoxOfficeCollectionViewCell.swift */,
 				AAAEB97C29658B69007E13BF /* SecondViewController.swift */,
 				FB8D94042967F5690045E298 /* ReviewViewController.swift */,
+				FB8D940C2967FAEE0045E298 /* ReviewTableViewCell.swift */,
 				FB8D94062967F58B0045E298 /* BaseView.swift */,
 				FB8D94082967F5A60045E298 /* RateView.swift */,
-				FB8D940C2967FAEE0045E298 /* ReviewTableViewCell.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
