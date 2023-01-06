@@ -15,7 +15,7 @@ class MoviePosterAPI {
     }
     
     func dataTask(by movieName: String, completion: @escaping (Result<MoviePosterInfo, Error>) -> ()) {
-        let posterURL = "http://www.omdbapi.com/?apikey=e989f669&s=\(movieName)"
+        let posterURL = "https://www.omdbapi.com/?apikey=e989f669&s=\(movieName)"
         guard let encodedPosterURL = posterURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
         guard let url = URL(string: encodedPosterURL) else { return }
         var request = URLRequest(url: url)

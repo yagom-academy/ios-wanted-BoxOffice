@@ -15,7 +15,7 @@ class BoxOfficeDetailAPI {
     }
     
     func dataTask(by selectMovie: String, completion: @escaping (Result<MovieDetailInfo, Error>) -> ()) {
-        let exampleURL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=e654b63663c57dea1f3ed2abb4fae5d2&movieCd=\(selectMovie)"
+        let exampleURL = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=e654b63663c57dea1f3ed2abb4fae5d2&movieCd=\(selectMovie)"
         guard let url = URL(string: exampleURL) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"

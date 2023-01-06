@@ -8,7 +8,8 @@
 import UIKit
 
 class SecondViewController: UIViewController {
-    
+
+    var movieCode: String
     private let boxofficeDetailAPI = BoxOfficeDetailAPI()
     private let moviePosterAPI = MoviePosterAPI()
     private var movieData: MovieDetailInfo?
@@ -37,16 +38,18 @@ class SecondViewController: UIViewController {
         configureUI()
     }
     
-    init() {
+    init(movieCode: String) {
+        self.movieCode = movieCode
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
+        self.movieCode = ""
         fatalError("init(coder:) has not been implemented")
     }
     
     private func fetchData() {
-        boxofficeDetailAPI.dataTask(by: "20225061", completion: { (response) in
+        boxofficeDetailAPI.dataTask(by: movieCode, completion: { (response) in
             switch response {
             case .success(let data):
                 self.movieData = data
