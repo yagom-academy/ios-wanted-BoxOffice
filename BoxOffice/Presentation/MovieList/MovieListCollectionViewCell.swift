@@ -9,6 +9,10 @@ import UIKit
 
 final class MovieListCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "movieListCollectionViewCell"
+
+    private let fetchMovieDetailUseCase = FetchMovieDetailUseCase()
+    private let fetchPosterImageUseCase = FetchPosterImageUseCase()
+    private var fetchMoviePosterTask: Cancellable?
     
     private var movieCode: String?
     private var dayType: DayType?
@@ -18,7 +22,7 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .systemGray4
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
         return imageView
@@ -34,7 +38,7 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
     private let rankValueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = Color.valueLabel
+        label.textColor = .white
         return label
     }()
     
@@ -84,7 +88,6 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         addViews()
         setupLayout()
     }
@@ -97,7 +100,9 @@ final class MovieListCollectionViewCell: UICollectionViewCell {
 extension MovieListCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+
+        fetchMoviePosterTask?.cancel()
+
         imageView.image = UIImage()
         titleLabel.text = ""
         rankValueLabel.text = ""
@@ -129,6 +134,33 @@ extension MovieListCollectionViewCell {
         } else {
             rankFluctuationValueLabel.text = ""
         }
+
+        fetchPosterImage()
+    }
+
+    private func fetchPosterImage() {
+        guard let movieCode = movieCode else { return }
+        fetchMoviePosterTask = fetchMovieDetailUseCase.execute(movieCode: movieCode) { [weak self] result in
+            switch result {
+            case .success(let movieDetail):
+                let englishTitle = movieDetail.englishTitle
+                let task = self?.fetchPosterImageUseCase.execute(englishMovieTitle: englishTitle) { result in
+                    switch result {
+                    case .success(let image):
+                        DispatchQueue.main.async {
+                            self?.imageView.image = image
+                        }
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+                task?.resume()
+            case .failure(let error):
+                print(error)
+            }
+        }
+
+        fetchMoviePosterTask?.resume()
     }
 }
 

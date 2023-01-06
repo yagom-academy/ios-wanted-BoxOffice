@@ -58,7 +58,7 @@ final class MovieListRepository: MovieListRepositoryInterface {
                 completion(.failure(error))
             }
         }
-        dataTask.resume()
+        dataTask?.resume()
     }
     
     private func fetchWeeklyMovieList(completion: @escaping (Result<[MovieOverview], Error>) -> Void) {
@@ -95,7 +95,7 @@ final class MovieListRepository: MovieListRepositoryInterface {
                 completion(.failure(error))
             }
         }
-        dataTask.resume()
+        dataTask?.resume()
     }
 }
 

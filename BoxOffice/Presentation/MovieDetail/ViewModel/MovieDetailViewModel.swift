@@ -38,6 +38,8 @@ final class MovieDetailViewModel {
 
     // MARK: - Private properties
     private let movieCode: String
+    private var fetchMovieDetailTask: Cancellable?
+    private var fetchPosterImageTask: Cancellable?
 
     init(movieOverview: MovieOverview) {
         self.movieCode = movieOverview.movieCode
@@ -102,7 +104,7 @@ extension MovieDetailViewModel {
 extension MovieDetailViewModel {
     private func fetchMovieDetail(movieCode: String) {
         startLoadingIndicator?()
-        fetchMovieDetailUseCase.execute(movieCode: movieCode) { [weak self] result in
+        fetchMovieDetailTask = fetchMovieDetailUseCase.execute(movieCode: movieCode) { [weak self] result in
             switch result {
             case .success(let movieDetail):
                 self?.movieDetail = movieDetail
@@ -112,6 +114,8 @@ extension MovieDetailViewModel {
             }
             self?.stopLoadingIndicator?()
         }
+
+        fetchMovieDetailTask?.resume()
     }
 
     private func fetchMovieReview(movieCode: String) {
@@ -143,15 +147,17 @@ extension MovieDetailViewModel {
     }
 
     private func fetchPosterImage() {
-        fetchPosterImageUseCase.execute(englishMovieTitle: movieDetail.englishTitle) { [weak self] result in
+        fetchPosterImageTask = fetchPosterImageUseCase.execute(englishMovieTitle: movieDetail.englishTitle) { [weak self] result in
             switch result {
             case .success(let image):
                 self?.posterImage = image
-                self?.applyDataSource?()
             case .failure(let error):
                 print(error)
             }
+            self?.applyDataSource?()
         }
+
+        fetchPosterImageTask?.resume()
     }
 }
 

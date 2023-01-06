@@ -21,14 +21,12 @@ final class MockMovieDetailRepository: MovieDetailRepositoryInterface {
         return nil
     }
 
-    func fetchMoviePoster(englishMovieName: String, completion: @escaping (Result<UIImage?, Error>) -> Void) {
-
+    func fetchMoviePoster(englishMovieName: String, completion: @escaping (Result<UIImage?, Error>) -> Void) -> Cancellable? {
+        return nil
     }
 
-    func fetchMovieDetail(movieCode: String, completion: @escaping (Result<MovieDetail, Error>) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            completion(.success(dummyMovieDetail))
-        }
+    func fetchMovieDetail(movieCode: String, completion: @escaping (Result<MovieDetail, Error>) -> Void) -> Cancellable? {
+        return nil
     }
 
     func fetchMovieReview(movieCode: String, completion: @escaping (Result<[MovieReview], Error>) -> Void) {

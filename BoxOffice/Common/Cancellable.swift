@@ -14,3 +14,4 @@ protocol Cancellable {
 }
 
 extension StorageDownloadTask: Cancellable {}
+extension URLSessionDataTask: Cancellable {}

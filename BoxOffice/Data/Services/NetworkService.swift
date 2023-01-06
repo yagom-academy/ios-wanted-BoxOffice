@@ -30,7 +30,7 @@ final class NetworkService {
     
     private init() { }
     
-    func dataTask(request: URLRequest, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionDataTask {
+    func dataTask(request: URLRequest, completion: @escaping (Result<Data, Error>) -> Void) -> Cancellable? {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if error != nil {
                 completion(.failure(error!))
