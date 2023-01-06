@@ -12,6 +12,7 @@ struct BoxOfficeListCellViewModel {
     var movieName: String
     var rank: Int
     var openDate: Date
+    var audienceCount: Int
     var rankingChange: Int
     var isNewEntryToRank: Bool
     var boxOffice: BoxOffice
@@ -34,6 +35,7 @@ extension BoxOfficeListCellViewModel {
         self.movieName = boxOffice.movieNm
         self.rank = boxOffice.rank
         self.openDate = boxOffice.openDate
+        self.audienceCount = boxOffice.audiAcc
         self.rankingChange = boxOffice.rankInten
         self.isNewEntryToRank = boxOffice.isNewRanked
     }
