@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieDetailViewController: UIViewController {
+final class MovieDetailViewController: UIViewController {
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -20,7 +20,7 @@ class MovieDetailViewController: UIViewController {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(ReviewTableViewCell.self,
-                           forCellReuseIdentifier: "ReviewTableViewCell")
+                           forCellReuseIdentifier: ReviewTableViewCell.identifier)
         return tableView
     }()
 
@@ -52,13 +52,22 @@ class MovieDetailViewController: UIViewController {
     }
     
     private func loadReview() {
-        reviewViewModel.fetch()
+        let movieKey = movieDetail.title + movieDetail.openYear
+        reviewViewModel.fetch(at: movieKey)
     }
     
     private func bind() {
         reviewViewModel.reviews.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.reviewTableView.reloadData()
+            }
+        }
+        
+        reviewViewModel.error.bind { [weak self] error in
+            DispatchQueue.main.async {
+                if let description = error {
+                    self?.showAlert(message: description)
+                }
             }
         }
     }
@@ -68,12 +77,35 @@ class MovieDetailViewController: UIViewController {
 extension MovieDetailViewController: UITableViewDataSource {
     private func setupTableView() {
         reviewTableView.dataSource = self
+        reviewTableView.rowHeight = view.bounds.height * 0.1
+        reviewTableView.isScrollEnabled = false
+        reviewTableView.allowsSelection = false
+    }
+    
+    private func setupInitialTableView() {
+        let emptyLabel = UILabel()
+        emptyLabel.frame = CGRect(x: .zero, y: .zero, width: view.bounds.width, height: view.bounds.height)
+        emptyLabel.text = "작성된 리뷰가 없습니다."
+        emptyLabel.textAlignment = .center
+        reviewTableView.backgroundView = emptyLabel
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let reviewCount = reviewViewModel.reviews.value.count
+        reviewTableView.backgroundView = .none
         
-        return reviewCount > 3 ? 3 : reviewCount
+        guard reviewCount != 0 else {
+            setupInitialTableView()
+            return 0
+        }
+        
+        if reviewCount > 3 {
+            movieReviewView.moreButtonState(isEnabled: true)
+            return 3
+        } else{
+            movieReviewView.moreButtonState(isEnabled: false)
+            return reviewCount
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -81,7 +113,9 @@ extension MovieDetailViewController: UITableViewDataSource {
                                                        for: indexPath) as? ReviewTableViewCell else { return UITableViewCell() }
         let review = reviewViewModel.reviews.value[indexPath.row]
         cell.configure(with: review)
-        
+        cell.addTargetDeleteButton(with: self,
+                                   selector: #selector(reviewDeleteButtonTapped),
+                                   tag: indexPath.row)
         return cell
     }
 }
@@ -93,8 +127,8 @@ extension MovieDetailViewController {
         movieSubInfoView.configure(with: movieDetail)
 
         addSubView()
-        setupConstraint()
         setupTableView()
+        setupConstraint()
         addTagetButton()
         view.backgroundColor = .systemBackground
     }
@@ -141,11 +175,40 @@ extension MovieDetailViewController {
     }
     
     @objc private func writeReviewButtonTapped() {
-        //TODO: 리뷰 쓰기 화면 이동
+        let writeReviewViewController = WriteReviewViewController(movie: movieDetail)
+        navigationController?.pushViewController(writeReviewViewController,
+                                                 animated: true)
     }
     
     @objc private func moreReviewButtonTapped() {
-        //TODO: 리뷰 테이블 페이지 이동
+        let reviewListViewController = ReviewListViewController(movie: movieDetail,
+                                                                 viewModel: reviewViewModel)
+        navigationController?.pushViewController(reviewListViewController,
+                                                 animated: true)
+    }
+    
+    @objc func reviewDeleteButtonTapped(button: UIButton) {
+        let review = reviewViewModel.reviews.value[button.tag]
+        let checkPasswordAlert = UIAlertController(title: "리뷰 삭제",
+                                                   message: "암호를 입력해주세요.",
+                                                   preferredStyle: .alert)
+        checkPasswordAlert.addTextField()
+        
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { [self] _ in
+            let inputPassword = checkPasswordAlert.textFields?.first?.text
+            if inputPassword == review.password {
+                reviewViewModel.delete(review,
+                                       at: movieDetail.title + movieDetail.openYear)
+            } else {
+                showAlert(title: "리뷰 삭제 실패",
+                          message: "암호가 일치하지 않습니다.")
+            }
+        }
+        
+        checkPasswordAlert.addAction(confirmAction)
+        checkPasswordAlert.addAction(UIAlertAction(title: "취소",
+                                                   style: .cancel))
+        present(checkPasswordAlert, animated: true)
     }
 }
 
@@ -162,6 +225,29 @@ extension MovieDetailViewController {
     }
     
     @objc private func shareButtonTapped() {
-        //TODO: 영화정보 공유하기
+        let shareObject: [String] = convertMovieInfo()
+        let activityViewController = UIActivityViewController(activityItems: shareObject,
+                                                              applicationActivities: nil)
+        
+        present(activityViewController, animated: true)
+    }
+    
+    private func convertMovieInfo() -> [String] {
+        let movieInfo = [movieDetail.title,
+                         movieDetail.openYear + " 개봉",
+                         movieDetail.ageLimit,
+                         movieDetail.currentRank + "위",
+                         movieDetail.directorName,
+                         movieDetail.actors.joined(separator: ","),
+                         movieDetail.genreName,
+                         movieDetail.isNewEntry ? "순위 진입" : "",
+                         movieDetail.openDate,
+                         movieDetail.rankChange + "단계 변동",
+                         movieDetail.showTime + "분"
+        ]
+        
+        return movieInfo
     }
 }
+
+

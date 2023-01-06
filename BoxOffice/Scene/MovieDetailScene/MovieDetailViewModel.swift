@@ -6,7 +6,7 @@
 //
 
 protocol MovieDetailViewModelInput {
-    func fetch()
+    func fetch(at movieKey: String)
 }
 
 protocol MovieDetailViewModelOutput {
@@ -24,8 +24,8 @@ final class MovieDetailViewModel: MovieDetailViewModelType {
     var error: Observable<String?> = Observable(nil)
     
     /// Input
-    func fetch() {
-        reviewFirebaseUseCase.fetch { [weak self] result in
+    func fetch(at movieKey: String) {
+        reviewFirebaseUseCase.fetch(at: movieKey) { [weak self] result in
             switch result {
             case .success(let reviews):
                 self?.reviews.value = reviews

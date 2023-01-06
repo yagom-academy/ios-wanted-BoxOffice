@@ -7,24 +7,19 @@
 
 import UIKit
 
-class MovieReviewView: UIView {
+final class MovieReviewView: UIView {
     private let reviewTitleLabel = MovieLabel(font: .title3, isBold: true)
     private let reviewTableView: UITableView
     
-    private let writeReviewButton: UIButton = {
-        let button = UIButton()
+    private let writeReviewButton: MoviewButton = {
+        let button = MoviewButton(title: "리뷰 작성하기")
         button.setImage(UIImage(systemName: "pencil"), for: .normal)
-        button.setTitle("리뷰 작성하기", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return button
     }()
     
-    private let moreReviewButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("더보기", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
+    private let moreReviewButton: MoviewButton = {
+        let button = MoviewButton(title: "더보기")
         button.layer.borderColor = UIColor.systemGray5.cgColor
         button.layer.borderWidth = 2
         return button
@@ -65,6 +60,10 @@ class MovieReviewView: UIView {
         moreReviewButton.addTarget(target,
                                    action: selector,
                                    for: .touchUpInside)
+    }
+    
+    func moreButtonState(isEnabled: Bool) {
+        moreReviewButton.isEnabled = isEnabled
     }
     
     private func setupView() {

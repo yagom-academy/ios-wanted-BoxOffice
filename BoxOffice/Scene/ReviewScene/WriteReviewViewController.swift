@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WriteReviewViewController: UIViewController {
+final class WriteReviewViewController: UIViewController {
     private let photoButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "photo.on.rectangle.angled"), for: .normal)
@@ -79,6 +79,16 @@ class WriteReviewViewController: UIViewController {
     private let imagePicker = UIImagePickerController()
     private var password = String()
     private var imageURL = String()
+    private let movie: MovieData
+    
+    init(movie: MovieData) {
+        self.movie = movie
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,14 +157,14 @@ extension WriteReviewViewController {
                                             action: #selector(saveBarButtonTapped))
         
         navigationItem.rightBarButtonItem = saveBarButton
-        //TODO: 영화 제목 넘겨받기
-        navigationItem.title = "영화 제목"
+        navigationItem.title = movie.title
     }
     
     @objc private func saveBarButtonTapped() {
         guard let newReview = createReview() else { return }
+        let movieKey = movie.title + movie.openYear
         
-        reviewViewModel.save(newReview)
+        reviewViewModel.save(newReview, at: movieKey)
         navigationController?.popViewController(animated: true)
     }
     
@@ -163,8 +173,17 @@ extension WriteReviewViewController {
               let rating = ratingStarView.rating,
               let content = contentTextView.text else { return nil }
         
+        guard nickName.isEmpty == false,
+              content.isEmpty == false,
+              password.isEmpty == false else {
+            showAlert(title: "저장 실패",
+                      message: "모든 항목을 작성해주세요.")
+            return nil
+        }
+        
         if validatePassword() == false {
-            //TODO: 암호 유효성 실패 얼럿 띄우기
+            showAlert(title: "암호 확인",
+                      message: "암호는 6~20자리로 숫자, 영문 소문자, 특수문자(!, @, #, $)를 포함해야 합니다.")
             return nil
         }
         

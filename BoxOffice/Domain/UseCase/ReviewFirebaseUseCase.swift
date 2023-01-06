@@ -11,21 +11,26 @@ import FirebaseFirestore
 final class ReviewFirebaseUseCase {
     private let firestoreManager = FirestoreManager.shared
     
-    func save(_ reivew: Review,
+    func save(_ review: Review,
+              at movie: String,
               completion: @escaping (Result<Void, FirebaseError>) -> Void) {
         let reviewData: [String: Any] = [
-            "nickName": reivew.nickName,
-            "password": reivew.password,
-            "rating": reivew.rating,
-            "content": reivew.content,
-            "imageURL": reivew.imageURL
+            "nickName": review.nickName,
+            "password": review.password,
+            "rating": review.rating,
+            "content": review.content,
+            "imageURL": review.imageURL
         ]
 
-        firestoreManager.save(reviewData, with: reivew.password, completion: completion)
+        firestoreManager.save(reviewData,
+                              at: movie,
+                              with: review.nickName + review.password,
+                              completion: completion)
     }
 
-    func fetch(completion: @escaping (Result<[Review], FirebaseError>) -> Void) {
-        firestoreManager.fetch { [weak self] result in
+    func fetch(at movie: String,
+               completion: @escaping (Result<[Review], FirebaseError>) -> Void) {
+        firestoreManager.fetch(at: movie) { [weak self] result in
             switch result {
             case .success(let documents):
                 let reviews = documents.compactMap {
@@ -40,8 +45,11 @@ final class ReviewFirebaseUseCase {
     }
 
     func delete(_ review: Review,
+                at movie: String,
                 completion: @escaping (Result<Void, FirebaseError>) -> Void) {
-        firestoreManager.delete(with: review.password, completion: completion)
+        firestoreManager.delete(with: review.nickName + review.password,
+                                at: movie,
+                                completion: completion)
     }
 }
 

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieSubInfoView: UIView {
+final class MovieSubInfoView: UIView {
     private let infoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
