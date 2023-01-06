@@ -134,6 +134,11 @@ private extension CreateReviewViewController {
                 self?.crateButton.isEnabled = isValid
                 self?.crateButton.backgroundColor = isValid ? .systemIndigo : .darkGray
             }).store(in: &cancellables)
+        
+        viewModel.output.rating
+            .sinkOnMainThread(receiveValue: { [weak self] rating in
+                self?.ratingView.setUp(rating: rating)
+            }).store(in: &cancellables)
     }
     
     func setUp() {
@@ -188,14 +193,6 @@ private extension CreateReviewViewController {
     }
     
     @objc func didTapStarButton(_ sender: StarButton) {
-        let state = sender.currentState
-        if state == .noon {
-            sender.changeState(.filled)
-        } else if state == .leadinghalf {
-            sender.changeState(.noon)
-        } else {
-            sender.changeState(.leadinghalf)
-        }
         viewModel.input.didTapRatingView(sender.tag + 1)
     }
     

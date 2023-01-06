@@ -15,7 +15,7 @@ final class RatingView: UIStackView {
     
     private var config = UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .largeTitle), scale: .large)
     
-    private lazy var starButtons: [UIButton] = {
+    private lazy var starButtons: [StarButton] = {
         var stars = [
             StarButton(config: config),
             StarButton(config: config),
@@ -41,6 +41,10 @@ final class RatingView: UIStackView {
         }
     }
     
+    func setUp(rating: Double) {
+        setUpStarButtons(rating: rating)
+    }
+    
 }
 
 private extension RatingView {
@@ -51,5 +55,22 @@ private extension RatingView {
         distribution = .fill
         spacing = 9
         addArrangedSubviews(starButtons)
+    }
+    
+    func setUpStarButtons(rating: Double) {
+        guard rating != 0 else {
+            starButtons.first?.changeState(.noon)
+            return
+        }
+        starButtons.enumerated().forEach { (index, button) in
+            let index = Double(index + 1)
+            if (index - 0.5) == rating {
+                button.changeState(.leadinghalf)
+            } else if index <= rating {
+                button.changeState(.filled)
+            } else {
+                button.changeState(.noon)
+            }
+        }
     }
 }

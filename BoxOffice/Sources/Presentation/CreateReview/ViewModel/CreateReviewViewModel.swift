@@ -21,6 +21,7 @@ protocol CreateReviewViewModelInput {
 protocol CreateReviewViewModelOutput {
     
     var isValid: AnyPublisher<Bool, Never> { get }
+    var rating: AnyPublisher<Double, Never> { get }
     
 }
 
@@ -37,20 +38,15 @@ final class DefaultCreateReviewViewModel: CreateReviewViewModel {
     private let firestoreManager: FirebaseManager
     private(set) var cancellables: Set<AnyCancellable> = .init()
     private var _isCurrentValid = CurrentValueSubject<Bool, Never>(false)
-    private var _currentRating = CurrentValueSubject<Int, Never>(0)
+    private var _currentRating = CurrentValueSubject<Double, Never>(0)
     
     private var _imageData: String = ""
     private var _name: String = ""
     private var _password: String = ""
     private var _review: String = ""
-    private var _rating: Int = 0 {
+    private var _rating: Double = 0 {
         didSet {
             _currentRating.send(_rating)
-        }
-    }
-    private var _isValid: Bool = false {
-        didSet {
-            _isCurrentValid.send(_isValid)
         }
     }
     
@@ -66,15 +62,16 @@ extension DefaultCreateReviewViewModel: CreateReviewViewModelInput {
     
     func nameText(_ text: String) {
         _name = text
-        _isValid = isValidUserInfo(_password)
+        _isCurrentValid.send(isValidUserInfo(_password))
     }
     
     func passwordText(_ text: String) {
-        _isValid = isValidUserInfo(text)
+        _isCurrentValid.send(isValidUserInfo(text))
     }
     
     func reviewText(_ text: String) {
         _review = text
+        print(text.count)
     }
     
     func imageData(_ encodedString: String) {
@@ -85,7 +82,14 @@ extension DefaultCreateReviewViewModel: CreateReviewViewModelInput {
     }
     
     func didTapRatingView(_ rating: Int) {
-        _rating = rating
+        let newRating = Double(rating)
+        if newRating == (_rating + 0.5) {
+            _rating -= 0.5
+        } else if newRating == _rating {
+            _rating -= 0.5
+        } else {
+            _rating = newRating
+        }
     }
     
     func didTapCreateButton() {
@@ -98,7 +102,7 @@ extension DefaultCreateReviewViewModel: CreateReviewViewModelOutput {
     var output: CreateReviewViewModelOutput { self }
     
     var isValid: AnyPublisher<Bool, Never> { return _isCurrentValid.eraseToAnyPublisher() }
-    
+    var rating: AnyPublisher<Double, Never> { return _currentRating.eraseToAnyPublisher() }
     
 }
 
