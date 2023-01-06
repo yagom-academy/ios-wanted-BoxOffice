@@ -98,6 +98,11 @@ class MovieDetailViewController: UIViewController {
         
         guard let posterURL = content.posterURL,
               let url = URL(string: posterURL) else {
+            self.movieDetailView.setPoster(
+                image: UIImage(systemName: "play")!,
+                age: age,
+                color: color
+            )
             return
         }
 

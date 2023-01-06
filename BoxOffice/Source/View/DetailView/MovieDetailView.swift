@@ -11,6 +11,8 @@ class MovieDetailView: UIView {
     // MARK: properties
     let posterView: UIView = {
         let view = UIView()
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -18,6 +20,8 @@ class MovieDetailView: UIView {
     let ageLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title3, compatibleWith: .none)
+        label.layer.cornerRadius = 5
+        label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -98,7 +102,7 @@ class MovieDetailView: UIView {
     
     let starAverageLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = .preferredFont(forTextStyle: .title3)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -121,7 +125,7 @@ class MovieDetailView: UIView {
     
     let movieRankLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = .preferredFont(forTextStyle: .title3)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -262,6 +266,7 @@ class MovieDetailView: UIView {
     
     let reviewTableView: UITableView = {
         let tableView = UITableView()
+        tableView.rowHeight = 100
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -429,13 +434,13 @@ class MovieDetailView: UIView {
                 multiplier: 0.35
             ),
             
-            ageLabel.centerYAnchor.constraint(
-                equalTo: posterView.centerYAnchor,
-                constant: -80
+            ageLabel.topAnchor.constraint(
+                equalTo: posterView.topAnchor,
+                constant: 3
             ),
-            ageLabel.centerXAnchor.constraint(
-                equalTo: posterView.centerXAnchor,
-                constant: 50
+            ageLabel.trailingAnchor.constraint(
+                equalTo: posterView.trailingAnchor,
+                constant: -3
             ),
             
             blackStackView.topAnchor.constraint(

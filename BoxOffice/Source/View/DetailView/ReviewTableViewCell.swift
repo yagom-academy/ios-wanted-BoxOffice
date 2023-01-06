@@ -53,6 +53,7 @@ class ReviewTableViewCell: UITableViewCell {
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.axis = .horizontal
+        stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -62,6 +63,7 @@ class ReviewTableViewCell: UITableViewCell {
         stackView.alignment = .leading
         stackView.distribution = .fill
         stackView.axis = .vertical
+        stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -110,8 +112,7 @@ class ReviewTableViewCell: UITableViewCell {
                 constant: 10
             ),
             
-            userImageView.widthAnchor.constraint(equalToConstant: 100),
-            contentView.heightAnchor.constraint(equalToConstant: 200)
+            userImageView.widthAnchor.constraint(equalToConstant: 50)
         ])
     }
 }
