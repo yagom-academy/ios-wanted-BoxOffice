@@ -12,7 +12,7 @@ class ReviewCell: UITableViewCell {
         let imageView = UIImageView(image: UIImage(systemName: "circle.fill"))
         imageView.tintColor = .white
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = imageView.frame.height/2
+        imageView.layer.cornerRadius = 30
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.clear.cgColor
         imageView.clipsToBounds = true
@@ -163,15 +163,19 @@ class ReviewCell: UITableViewCell {
         ])
     }
     
-    func transferData(_ reviews: [Review], _ index: Int) {
-
+    func transferData(_ reviews: [Review]?, _ index: Int, _ tableView: UITableView) {
+        guard let reviews = reviews else {
+            return
+        }
+        
         guard reviews.indices.contains(index) else {
             return
         }
+        
         userImageView.image = reviews[index].userImage.toUIImage()
         // star..
         writingLabel.text = reviews[index].review
         nicknameLabel.text = reviews[index].nickname
-        dateLabel.text = reviews[index].date?.toString(DateFormat(rawValue: "yyyy.mm.dd")!)
+        dateLabel.text = reviews[index].date?.toString(.yyyyMMddDot)
     }
 }
