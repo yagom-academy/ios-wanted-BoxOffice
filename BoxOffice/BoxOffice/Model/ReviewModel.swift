@@ -12,5 +12,4 @@ struct Review: Codable {
     let password: String
     let description: String
     let starRank: Int
-    let images: [Data]
 }

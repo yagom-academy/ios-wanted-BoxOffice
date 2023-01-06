@@ -114,8 +114,10 @@ struct BoxOfficeDetailView: View {
                         .padding(.leading, 30)
                     List {
                         ForEach(Array(boxOfficeReviewModel.reviewList.enumerated()), id: \.0) { index, data in
-                            Text(data.nickname)
-                            Text(data.description)
+                            HStack {
+                                Text("별점: " + data.starRank.description)
+                                Text(data.description)
+                            }
                         }
                     }
                     .listStyle(.plain)
@@ -127,6 +129,7 @@ struct BoxOfficeDetailView: View {
         .ignoresSafeArea()
         .onAppear {
             detailViewModel.fetchCurrentMovieDetail(movieBoxOfficeInfo: viewModel.movieList[myIndex])
+            boxOfficeReviewModel.fetchReviewData(getMoviewName: viewModel.movieList[myIndex].movieNm)
         }
     }
     func actionSheet() {
