@@ -2,7 +2,7 @@
 
 # BoxOffice
 
-> 프로젝트 기간: 2023.01.02 - 2023.01.06
+> 프로젝트 기간: 2023.01.02 - 2023.01.06 </br>
 > 영화진흥위원회 Open API, OMDb API, Firebase-FireStore 활용하여 구현하는 앱
 
 &nbsp;
