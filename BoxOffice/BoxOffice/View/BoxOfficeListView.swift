@@ -30,7 +30,7 @@ struct BoxOfficeListView: View {
                         .font(.body)
                         .lineLimit(1)
                     HStack {
-                        Text("개봉일 " + dailyBoxOfficeList.openDt.dateYearFormatter.translateToString2())
+                        Text("개봉일 " + dailyBoxOfficeList.openDt.dateYearFormatter.translateToYearString())
                             .frame(maxWidth: .infinity, alignment: .leading)
                         Text("누적 관객수 " + dailyBoxOfficeList.audiAcc.insertComma)
                             .frame(maxWidth: .infinity, alignment: .trailing)

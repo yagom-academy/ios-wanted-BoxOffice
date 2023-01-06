@@ -48,7 +48,7 @@ struct BoxOfficeDetailView: View {
                             .foregroundColor(.primary)
                             .font(.caption)
                             HStack {
-                                Text((detailViewModel.currentPageMovieDetail?.openDatDt ?? "").dateYearFormatter.translateToString2() + " 개봉")
+                                Text((detailViewModel.currentPageMovieDetail?.openDatDt ?? "").dateYearFormatter.translateToYearString() + " 개봉")
                                 Image(systemName: "clock.arrow.circlepath")
                                 Text((detailViewModel.currentPageMovieDetail?.showTm ?? "") + " 분")
                             }
@@ -115,9 +115,16 @@ struct BoxOfficeDetailView: View {
                     List {
                         ForEach(Array(boxOfficeReviewModel.reviewList.enumerated()), id: \.0) { index, data in
                             HStack {
+                                Text("닉네임: " + data.nickname)
+                                Text("|")
                                 Text("별점: " + data.starRank.description)
-                                Text(data.description)
+                                Text("|")
+                                Text("리뷰 내용: " + data.description)
+                                    .lineLimit(1)
                             }
+                            .foregroundColor(.primary)
+                            .font(.caption)
+                            .padding()
                         }
                     }
                     .listStyle(.plain)
