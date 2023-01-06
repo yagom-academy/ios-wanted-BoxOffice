@@ -76,13 +76,15 @@ struct BoxOfficeDetailView: View {
                 }
                 .font(.system(size: 15, weight: .bold))
                 .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
+                .padding(.leading, 30)
+                .padding(.trailing, 30)
                 .padding()
                 .background(Rectangle()
                     .foregroundColor(Color.black)
                     .opacity(0.5)
                     .blur(radius: 2, opaque: true)
                 )
+                .cornerRadius(16)
                 HStack(spacing: 40) {
                     Button {
                         actionSheet()
@@ -103,7 +105,7 @@ struct BoxOfficeDetailView: View {
                     }
                 }
                 .padding(.leading, 30)
-                .padding()
+                .padding(.trailing, 30)
             }
         }
         .ignoresSafeArea()
