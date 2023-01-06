@@ -41,16 +41,16 @@ class DetailViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
         ])
-
+        
         navigationItem.largeTitleDisplayMode = .never
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         viewModel.input.viewWillAppear()
     }
-
+    
     init(viewModel: MovieDetailViewModel, coordinator: BoxOfficeListCoordinatorInterface) {
         self.viewModel = viewModel
         self.coordinator = coordinator
@@ -64,14 +64,6 @@ class DetailViewController: UIViewController {
 
 private extension DetailViewController {
     func bind() {
-        viewModel.movieModel
-            .sink { [weak self] movieData in
-                guard let self = self else {
-                    return
-                }
-//                print(self.viewModel._movie)
-            }.store(in: &cancelable)
-        
         viewModel.output.shareMovieInfoPublisher
             .sink { [weak self] sharedInformation in
                 guard let self = self else { return }
@@ -86,10 +78,16 @@ private extension DetailViewController {
         viewModel.output.reviewModel
             .sink { [weak self] reviews in
                 guard let self = self else { return }
-            
+                
                 self.tableView.reloadData()
             }
             .store(in: &cancelable)
+        
+        viewModel.output.errorMessage
+            .compactMap { $0 }
+            .sinkOnMainThread(receiveValue: { [weak self] message in
+                self?.showAlert(message: message)
+            }).store(in: &cancelable)
     }
     
     func setUpReviewButton(_ cell: ThirdCell) {
@@ -105,6 +103,27 @@ private extension DetailViewController {
     }
     
     @objc func didTapDeleteButton(_ sender: UIButton) {
+        let buttonPosition:CGPoint = sender.convert(CGPoint.init(x: 5.0, y: 5.0), to: self.tableView)
+        guard let indexPath = self.tableView.indexPathForRow(at: buttonPosition) else {
+            return
+        }
+        
+        let alertVC = UIAlertController(title: nil, message: "암호를 입력해주세요.", preferredStyle: .alert)
+        
+        alertVC.addTextField()
+        let textField = alertVC.textFields?.first
+        textField?.isSecureTextEntry = true
+        
+        let confirm = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.viewModel.input.checkPassword(textField?.text ?? "", index: indexPath.row)
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        
+        alertVC.addAction(confirm)
+        alertVC.addAction(cancel)
+        self.present(alertVC, animated: true)
     }
     
     func setUpShareButton(_ cell: FirstCell) {
@@ -118,7 +137,7 @@ private extension DetailViewController {
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (viewModel._reviews?.count ?? 0) + 3
+        return viewModel._reviews.count + 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -130,7 +149,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SecondCell", for: indexPath) as! SecondCell
-            cell.transferData(viewModel._movie.boxOfficeInfo!)
+            cell.transferData(viewModel._movie.boxOfficeInfo!, viewModel.review)
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdCell", for: indexPath) as! ThirdCell
@@ -148,6 +167,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-           return UITableView.automaticDimension
-       }
+        return UITableView.automaticDimension
+    }
 }
