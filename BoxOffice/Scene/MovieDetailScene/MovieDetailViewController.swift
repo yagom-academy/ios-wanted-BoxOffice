@@ -107,13 +107,16 @@ class MovieDetailViewController: UIViewController {
     }
 }
 
+//MARK: Review TableView
 extension MovieDetailViewController: UITableViewDataSource {
     private func setupTableView() {
         reviewTableView.dataSource = self
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return reviewViewModel.reviews.value.count
+        let reviewCount = reviewViewModel.reviews.value.count
+        
+        return reviewCount > 3 ? 3 : reviewCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
