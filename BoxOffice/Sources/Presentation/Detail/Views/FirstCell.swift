@@ -149,28 +149,27 @@ class FirstCell: UITableViewCell {
         ])
     }
     
-    func transferData(_ name: String, _ detailInfo: MovieDetailInfo, _ boxOfficeInfo: BoxOfficeInfo) {
-        posterImageView.setImage(with: detailInfo.poster ?? "")
-        if boxOfficeInfo.rankOldAndNew == .new {
-            updownNumberLabel.text = boxOfficeInfo.rankOldAndNew.rawValue.capitalized
+    func transferData(_ name: String, _ movie: Movie) {
+        posterImageView.setImage(with: movie.detailInfo?.poster ?? "")
+        if movie.boxOfficeInfo?.rankOldAndNew == .new {
+            updownNumberLabel.text = movie.boxOfficeInfo?.rankOldAndNew.rawValue.capitalized
             updownImageView.isHidden = true
         } else {
-            if boxOfficeInfo.rankInten < 0 {
+            if (movie.boxOfficeInfo?.rankInten ?? 0) < 0 {
                 updownImageView.image = UIImage(systemName: "arrowtriangle.down.fill")
                 updownImageView.tintColor = .blue
-                updownNumberLabel.text = "\(boxOfficeInfo.rankInten)"
-            } else if boxOfficeInfo.rankInten == 0 {
+                updownNumberLabel.text = movie.boxOfficeInfo?.rankInten.description
+            } else if movie.boxOfficeInfo?.rankInten == 0 {
                 updownImageView.isHidden = true
                 updownNumberLabel.text = "-"
             } else {
-                updownNumberLabel.text = "\(boxOfficeInfo.rankInten)"
+                updownNumberLabel.text = movie.boxOfficeInfo?.rankInten.description
                 updownImageView.image = UIImage(systemName: "arrowtriangle.up.fill")
             }
         }
         titleLabel.text = name
-        releaseDatelabel.text = detailInfo.productionYear
-        runningTimeLabel.text =
-        "\(detailInfo.showTime)분"
-        ageLabel.text = detailInfo.audit
+        releaseDatelabel.text = movie.openDate.toString(.yyyyMMddDot)
+        runningTimeLabel.text = (movie.detailInfo?.showTime.description ?? "") + "분"
+        ageLabel.text = movie.detailInfo?.audit
     }
 }
