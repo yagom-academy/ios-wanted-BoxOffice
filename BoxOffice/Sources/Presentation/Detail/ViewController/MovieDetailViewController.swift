@@ -144,7 +144,7 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FirstCell", for: indexPath) as! FirstCell
-            cell.transferData(viewModel._movie.name, viewModel._movie.detailInfo!, viewModel._movie.boxOfficeInfo!)
+            cell.transferData(viewModel._movie.name, viewModel._movie)
             setUpShareButton(cell)
             return cell
         case 1:
