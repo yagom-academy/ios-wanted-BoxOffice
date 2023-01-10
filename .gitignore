@@ -82,9 +82,9 @@ playground.xcworkspace
 # Swift Package Manager
 #
 # Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
-# Packages/
-# Package.pins
-.build/
+Packages
+xcuserdata
+*.xcodeproj
 
 # CocoaPods
 #
@@ -144,3 +144,6 @@ bh_unicode_properties.cache
 # Sublime-github package stores a github token in this file
 # https://packagecontrol.io/packages/sublime-github
 GitHub.sublime-settings
+
+Secrets.plist
+GoogleService-Info.plist
